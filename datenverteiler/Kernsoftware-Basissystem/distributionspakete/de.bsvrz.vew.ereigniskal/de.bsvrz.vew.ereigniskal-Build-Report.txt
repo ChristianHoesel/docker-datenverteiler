@@ -1,0 +1,116 @@
+***********************************************************************************
+*  Segment 11 Verwaltung (Vew), SWE 11.3 Ereigniskalender                         *
+***********************************************************************************
+
+Version: 1.2.1 (20091112)
+
+
+Übersicht
+=========
+
+Die SW-Einheit Ereigniskalender dient zur Verwaltung von Ereignissen und beantwortet
+Anfragen von anderen Applikationen an den Ereigniskalender.
+Der Ereigniskalender überwacht zu allen Ereignissen deren Gültigkeit und publiziert
+bei Änderungen jeweils den aktuellen Zustand.
+
+
+Versionsgeschichte
+==================
+
+Stand 12.11.2009 Version 1.2.1
+Erste Version mit neuer Paketstruktur
+
+Stand 11.11.2009 Version 1.2 erstellt mit Kernsoftware Version 3.7
+Das Auftreten der NullPointerException innerhalb der Klasse ListeZustandsWechsel 
+wurde dahingehend vermieden, dass beim Setzen der Liste der Zustandswechsel das 
+übergebene Listenobjekt auf null geprüft wird. Zusätzlich wird vor jeder Verwendung 
+des Listenobjektes innerhalb der Klasse auf null geprüft. 
+Beseitigung des fehlerhaften Verhaltens bzgl. der verkehrlichen Gültigkeit beim 
+Publizieren des Ereigniszustandes. Der Grund hierfür war das Setzen des Flags, 
+bevor die verkehrliche Gültigkeit berechnet wurde. Das Setzen des Flags erfolgt 
+nun nach der Berechnung der verkehrlichen Gültigkeit. 
+
+Stand 06.03.2009 Version 1.1 erstellt mit Kernsoftware Version 3.7
+Die Verarbeitung des Aufrufparameters "-kalender=" wurde dahingehend geändert, dass
+dieser nun optional angegeben werden kann. Wird dieser Parameter nicht angegeben,
+wird die AOE verwendet. Bei Angabe des Parameters wird geprüft, ob das angegebene 
+Objekt vorhanden und vom typ.kalender ist. Ist dies nicht der Fall wird eine 
+Fehlermeldung erzeugt und die Programmausführung wird abgebrochen.
+
+Stand 13.02.2009 Version 1.0 erstellt mit Kernsoftware Version 3.7
+JUnit-Tests hinzugefügt
+
+Stand 25.11.2008 Version 0.3 erstellt mit Kernsoftware Version 3.4
+Ereigniskalender muss noch getestet werden
+
+Stand 23.11.2007 Version 0.2 erstellt mit Kernsoftware Version 3.3
+Ereigniskalender erkennt nicht das Anlegen und Umparametrieren von Ereignissen zur
+Laufzeit
+Ereigniswechsel werden in der Ereigniskalenderantwort doppelt aufgeführt, wenn
+zeitliche und
+verkehrliche Gültigkeit identisch sind
+Methoden zur Verwaltung dynamischer Objekte hinzugefuegt
+
+Stand 12.09.2007 Version 0.1 Erste Auslieferung (Testversion)
+
+
+Start der SWE
+=============
+
+Aufbau eines Startskripts
+(.bat-Datei im Verzeichnis skripte-dosshell, Unix-Skript im Verzeichnis skripte-bash
+ist analog)
+
+rem Startskript Anfang
+@echo off
+
+rem in einstellungen werden die globalen DaV-Einstellungen gemacht
+rem insbesondere werden die Umgebungsvariablen %dav1% und %java% gesetzt
+call einstellungen.bat
+
+%java% -jar ../distributionspakete/de.bsvrz.vew.ereigniskal/de.bsvrz.vew.ereigniskal-runtime.jar ^
+ %dav1% ^
+ <SWE-spezifischer Parameter 1>=... ^
+ <SWE-spezifischer Parameter 2>=... ^
+ ...
+rem Startskript Ende 
+
+SWE-spezifische Parameter
+
+-kalender=<konfigurationsobjekt>
+Es muss die Pid eines vom typ.kalender abgeleitetes Konfigurationsobjekt übergeben
+werden.
+
+Hinweis
+Die Bibliothek de.bsvrz.vew.syskal.jar muss als Distributionspaket installiert sein
+
+Disclaimer
+==========
+
+Segment 11 Verwaltung (Vew), SWE 11.3 Ereigniskalender
+Copyright (C) 2009 Dambach Werke GmbH
+
+This program is free software; you can redistribute it and/or
+modify it under the terms of the GNU General Public License
+as published by the Free Software Foundation; either version 2
+of the License, or (at your option) any later version.
+
+This program is distributed in the hope that it will be useful,
+but WITHOUT ANY WARRANTY; without even the implied warranty of
+MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+GNU General Public License for more details.
+
+You should have received a copy of the GNU General Public License
+along with this program; if not, write to the Free Software
+Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
+
+
+Kontakt
+=======
+
+Dambach-Werke GmbH
+Fritz-Minhardt-Str. 1
+76456 Kuppenheim
+Phone: +49-7222-402-0
+Fax: +49-7222-402-200
+mailto: info@els.dambach.de

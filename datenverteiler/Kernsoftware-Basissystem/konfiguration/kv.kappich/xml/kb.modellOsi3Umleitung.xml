@@ -1,0 +1,229 @@
+<?xml version="1.0" encoding="ISO-8859-1"?><!DOCTYPE konfigurationsBereich PUBLIC "-//K2S//DTD Dokument//DE" "K2S.dtd">
+<konfigurationsBereich pid="kb.modellOsi3Umleitung" name="OSI3 Umleitung" verantwortlich="kv.kappich">
+	<info>
+		<kurzinfo>Modell zur OSI3-Umleitung</kurzinfo>
+	</info>
+	<!--
+	Abhängigkeiten des Bereichs kb.modellOsi3Umleitung
+	Abhängig ab Version      Art der Abhängigkeit      Version des benötigten Bereichs      Benötigter Bereich
+	1                        notwendig                 1                                    kb.kv.kappich                      
+	1                        notwendig                 2                                    kb.tmKExTlsGlobal                  
+	1                        notwendig                 4                                    kb.fachModellGlobal                
+	1                        notwendig                 1                                    kb.metaModellGlobal                
+	1                        notwendig                 3                                    kb.tmVewBetriebGlobal              
+	2                        notwendig                 1                                    kb.systemModellGlobal              
+	-->
+	<modell>
+		<typDefinition pid="typ.osi3Umleitung" name="OSI3 Umleitung" objektNamenPermanent="nein">
+			<info>
+				<kurzinfo>Typ, über den die OSI3-Umleitung parametriert werden kann.</kurzinfo>
+			</info>
+			<erweitert pid="typ.konfigurationsObjekt" />
+			<attributgruppe pid="atg.osi3UmleitungsEigenschaften" />
+			<attributgruppe pid="atg.osi3UmleitungsParameter" />
+			<defaultParameter attributgruppe="atg.osi3UmleitungsParameter" typ="typ.osi3Umleitung">
+				<datenliste name="Urlasser">
+					<datum name="BenutzerReferenz" wert="undefiniert" />
+					<datum name="Ursache" wert="" />
+					<datum name="Veranlasser" wert="" />
+				</datenliste>
+				<datenfeld name="AnkommendeTelegramme"></datenfeld>
+				<datenfeld name="ZuVersendendeTelegramme"></datenfeld>
+			</defaultParameter>
+		</typDefinition>
+		<attributgruppenDefinition pid="atg.osi3UmleitungsEigenschaften" name="Eigenschaften OSI3 Umleitung" parametrierend="nein">
+			<info>
+				<kurzinfo>Referenz auf das Gerät, für das die OSI3 Umleitung durchgeführt werden soll.</kurzinfo>
+			</info>
+			<aspekt pid="asp.eigenschaften" konfigurationsModus="datensatzNotwendigUndÄnderbar"></aspekt>
+			<attribut pid="att.gerätReferenz" anzahl="1" anzahlIst="fest" name="TlsKnoten">
+				<info>
+					<kurzinfo>
+						Referenz auf das Gerät, für das die OSI3 Umleitung
+						durchgeführt werden soll.
+						Dazu muss ein KEx-TLS mit diesem Gerät gestartet werden.
+					</kurzinfo>
+				</info>
+			</attribut>
+		</attributgruppenDefinition>
+		<attributgruppenDefinition pid="atg.osi3UmleitungsParameter" name="OSI-3 Umleitungsparameter" parametrierend="ja">
+			<info>
+				<kurzinfo>
+					Parameter zur Spezifikation der Telegrammumleitung auf OSI3 Ebene.
+				</kurzinfo>
+			</info>
+			<attributliste pid="atl.urlasser" anzahl="1" anzahlIst="fest" name="Urlasser"></attributliste>
+			<attributliste pid="atl.spezifikationUmleitungAnkommendeTelegramme" anzahl="0" anzahlIst="variabel" name="AnkommendeTelegramme"></attributliste>
+			<attributliste pid="atl.spezifikationUmleitungZuVersendendeTelegramme"
+			               anzahl="0"
+			               anzahlIst="variabel"
+			               name="ZuVersendendeTelegramme"></attributliste>
+		</attributgruppenDefinition>
+		<attributDefinition pid="att.funktionsGruppe" name="Funktionsgruppe">
+			<info>
+				<kurzinfo>Funktionsgruppe (1-255) 255 bedeutet alle Funktionsgruppen</kurzinfo>
+			</info>
+			<ganzzahl bits="16">
+				<bereich skalierung="1" minimum="1" maximum="255"></bereich>
+			</ganzzahl>
+			<default wert="255" />
+		</attributDefinition>
+		<attributlistenDefinition pid="atl.spezifikationSucheGeräte">
+			<info>
+				<kurzinfo>Attributliste zur Auswahl von Geräten mit
+					Wildcardunterstützung.
+				</kurzinfo>
+			</info>
+			<attribut pid="att.gerätReferenz" anzahl="0" anzahlIst="variabel" name="ÜbergeordneteTlsKnoten">
+				<info>
+					<kurzinfo>
+						Angabe des oder der übergeordneten Tls-Knoten, die
+						den oder die Ausgangspunkte für die Suche in der Hierarchie
+						vorgeben.
+					</kurzinfo>
+					<beschreibung>
+						Wenn keine Angabe erfolgt (leeres Array) werden alle Knoten berücksichtigt.
+						Hiermit lassen sich beispielsweise einfach alle SM auswählen, die die FG 4
+						unterstützen, indem das Array leer bleibt und als Typ der Gesuchten Knoten SM und
+						als erforderliche Funktionsgruppe die FG 4 angegeben wird.
+					</beschreibung>
+				</info>
+			</attribut>
+			<attribut pid="att.typReferenz" anzahl="1" anzahlIst="fest" name="TypDerGesuchtenTlsKnoten">
+				<info>
+					<kurzinfo>
+						Referenz auf den Typ der zu suchenden Geräte. Wenn hier null angegeben wird,
+						bedeutet dies, dass alle untergeordneten Geräte betrachtet werden.
+					</kurzinfo>
+				</info>
+			</attribut>
+			<attribut pid="att.funktionsGruppe" anzahl="1" anzahlIst="fest" name="ErforderlicheFG">
+				<info>
+					<kurzinfo>
+						Wenn Gerätetyp=typ.steuerModul, kann durch Angabe einer FG-Nummer die Suche weiter
+						eingeschränkt werden
+					</kurzinfo>
+				</info>
+			</attribut>
+			<attribut pid="att.gerätReferenz" anzahl="0" anzahlIst="variabel" name="AuszuschließendeTlsKnoten">
+				<info>
+					<kurzinfo>(Negativ)Liste, von Tls-Knoten, die nicht
+						berücksichtigt werden sollen.
+					</kurzinfo>
+				</info>
+			</attribut>
+		</attributlistenDefinition>
+		<attributlistenDefinition pid="atl.spezifikationUmleitungAnkommendeTelegramme">
+			<info>
+				<kurzinfo>Attributliste zur Spezifikation der Behandlung der ankommenden Telegramme</kurzinfo>
+			</info>
+			<attributliste pid="atl.spezifikationUmleitungGeräteauswahl" anzahl="1" anzahlIst="fest" name="Absender"></attributliste>
+			<attributliste pid="atl.spezifikationUmleitungWeiterleitungAnkommend" anzahl="1" anzahlIst="fest" name="Weiterleitung"></attributliste>
+		</attributlistenDefinition>
+		<attributlistenDefinition pid="atl.spezifikationUmleitungGeräteauswahl">
+			<info>
+				<kurzinfo>
+					Attributliste zur Bestimmung von Geräten.
+				</kurzinfo>
+			</info>
+			<attribut pid="att.gerätReferenz" anzahl="0" anzahlIst="variabel" name="TlsKnoten">
+				<info>
+					<kurzinfo>(Positiv)Liste, von Tls-Knoten, die
+						berücksichtigt werden.
+					</kurzinfo>
+				</info>
+			</attribut>
+			<attributliste pid="atl.spezifikationSucheGeräte" anzahl="1" anzahlIst="variabel" name="Suche"></attributliste>
+		</attributlistenDefinition>
+		<attributlistenDefinition pid="atl.spezifikationUmleitungWeiterleitungAnkommend">
+			<info>
+				<kurzinfo>
+					Spezifikation der Weiterleitung für ankommende Telegramme
+				</kurzinfo>
+			</info>
+			<attribut pid="att.funktionsGruppe" anzahl="0" anzahlIst="variabel" name="Funktionsgruppen">
+				<info>
+					<kurzinfo>Leeres Array bedeutet alle Funktionsgruppen</kurzinfo>
+				</info>
+			</attribut>
+			<attribut pid="att.jaNein" anzahl="1" anzahlIst="fest" name="TelegrammLokalVerarbeiten">
+				<info>
+					<kurzinfo>
+						Gibt an, ob das Telegramm (zusätzlich) lokal verarbeitet werden soll.
+						Bei mehreren widersprüchlichen Angaben wird das Telegramm nicht lokal verarbeitet.
+					</kurzinfo>
+				</info>
+				<default wert="Ja" />
+			</attribut>
+			<attribut pid="att.gerätReferenz" anzahl="0" anzahlIst="variabel" name="ZielTlsKnoten">
+				<info>
+					<kurzinfo>
+						Zielknoten, zu denen das ankommende Telegramm weitergeleitet werden soll.
+					</kurzinfo>
+				</info>
+			</attribut>
+			<attribut pid="att.text" anzahl="1" anzahlIst="fest" name="Konverter">
+				<info>
+					<kurzinfo>
+						Vollqualifizierter Name der Klasse, die den Konverter implementiert.
+						Wenn keine Angabe erfolgt, wird keine Konvertierung durchgeführt.
+					</kurzinfo>
+				</info>
+				<default wert="" />
+			</attribut>
+		</attributlistenDefinition>
+		<attributlistenDefinition pid="atl.spezifikationUmleitungWeiterleitungAusgehend">
+			<info>
+				<kurzinfo>
+					Spezifikation der Weiterleitung für zu versendene Telegramme
+				</kurzinfo>
+			</info>
+			<attribut pid="att.funktionsGruppe" anzahl="0" anzahlIst="variabel" name="Funktionsgruppen">
+				<info>
+					<kurzinfo>Leeres Array bedeutet alle Funktionsgruppen</kurzinfo>
+				</info>
+			</attribut>
+			<attribut pid="att.jaNein" anzahl="1" anzahlIst="fest" name="TelegrammAnEmpfängerSenden">
+				<info>
+					<kurzinfo>
+						Gibt an, ob das Telegramm (zusätzlich) an den vorgesehenen Empfänger gesendet werden soll.
+						Bei mehreren widersprüchlichen Angaben wird das Telegramm nicht an den vorgesehenen Empfänger gesendet.
+					</kurzinfo>
+				</info>
+				<default wert="Ja" />
+			</attribut>
+			<attribut pid="att.gerätReferenz" anzahl="0" anzahlIst="variabel" name="ZielTlsKnoten">
+				<info>
+					<kurzinfo>
+						Zielknoten, zu denen das ankommende Telegramm weitergeleitet werden soll.
+					</kurzinfo>
+				</info>
+			</attribut>
+			<attribut pid="att.typReferenz" anzahl="1" anzahlIst="fest" name="TypDesÜbergeordnetenTlsKnoten">
+				<info>
+					<kurzinfo>
+						Referenz auf den Typ des übergeordneten Zielknotens. Wenn hier null angegeben wird,
+						bedeutet dies, dass an keinen übergeordneten Zielknoten (zusätzlich) gesendet wird.
+					</kurzinfo>
+				</info>
+			</attribut>
+			<attribut pid="att.text" anzahl="1" anzahlIst="fest" name="Konverter">
+				<info>
+					<kurzinfo>
+						Vollqualifizierter Name der Klasse, die den Konverter implementiert.
+						Wenn keine Angabe erfolgt, wird keine Konvertierung durchgeführt.
+					</kurzinfo>
+				</info>
+				<default wert="" />
+			</attribut>
+		</attributlistenDefinition>
+		<attributlistenDefinition pid="atl.spezifikationUmleitungZuVersendendeTelegramme">
+			<info>
+				<kurzinfo>Attributliste zur Spezifikation der Behandlung der zu versendenen Telegramme</kurzinfo>
+			</info>
+			<attributliste pid="atl.spezifikationUmleitungGeräteauswahl" anzahl="1" anzahlIst="fest" name="Empfänger"></attributliste>
+			<attributliste pid="atl.spezifikationUmleitungWeiterleitungAusgehend" anzahl="1" anzahlIst="fest" name="Weiterleitung"></attributliste>
+		</attributlistenDefinition>
+	</modell>
+	<objekte></objekte>
+</konfigurationsBereich>

@@ -1,0 +1,102 @@
+<?xml version="1.0" encoding="ISO-8859-1"?>
+<!DOCTYPE konfigurationsBereich PUBLIC "-//K2S//DTD Dokument//DE" "K2S.dtd">
+<konfigurationsBereich pid="kb.tmKExTlsDeAbruf" name="TeilmodellKFExTlsDeAbruf - Modell und Objekt für SWE TLSDeAbruf" verantwortlich="kv.inovat">
+	<info>
+		<kurzinfo>
+            Erweiterung um Modell und Verwaltungsobjekt für die SWE TLSDeAbruf, die parametrierbar an einzelnen DE
+            zyklisch Abfragen von DE-Blöcken durchführt.
+        </kurzinfo>
+	</info>
+	<konfigurationsAenderung stand="06.07.2012" version="1" autor="inovat, Dipl.-Ing. H. C. Kniß (HCK)" grund="Neuerstellung."></konfigurationsAenderung>
+	<!--
+	Abhängigkeiten des Bereichs kb.tmKExTlsDeAbruf
+	Abhängig ab Version      Art der Abhängigkeit      Version des benötigten Bereichs      Benötigter Bereich
+	1                        notwendig                 6                                    kb.tmKExTlsGlobal                  
+	1                        notwendig                 1                                    kb.kv.inovat                       
+	1                        notwendig                 4                                    kb.fachModellGlobal                
+	1                        notwendig                 1                                    kb.metaModellGlobal                
+	1                        notwendig                 3                                    kb.tmVewBetriebGlobal              
+	-->
+		<modell>
+		<typDefinition pid="typ.vewTlsDeAbruf" name="VewTlsDeAbruf" objektNamenPermanent="nein">
+			<info>
+				<kurzinfo>
+                    Verwaltungsobjekt für die SWE TLSDeAbruf.
+                </kurzinfo>
+			</info>
+			<erweitert pid="typ.konfigurationsObjekt"/>
+			<attributgruppe pid="atg.paramTlsDeAbruf"/>
+			<defaultParameter attributgruppe="atg.paramTlsDeAbruf" typ="typ.vewTlsDeAbruf">
+				<datenliste name="Urlasser">
+					<datum name="BenutzerReferenz" wert="undefiniert"/>
+					<datum name="Ursache" wert=""/>
+					<datum name="Veranlasser" wert=""/>
+				</datenliste>
+				<datenfeld name="DeAbrufParameter">
+				</datenfeld>
+			</defaultParameter>
+		</typDefinition>
+		<attributgruppenDefinition pid="atg.paramTlsDeAbruf" name="ParamTlsDeAbruf" parametrierend="ja">
+			<info>
+				<kurzinfo>Parametersatz für die SWE TLSAbruf</kurzinfo>
+				<beschreibung>
+                    Jeder Eintrag legt für ein DE fest, wie oft ein Abruf eines DE-Blocks erfolgen soll,
+                    für welche TLS-ID und für welchen TLS-Typ die Abfrage erfolgen soll und ob der Eintrag
+                    aktiv oder passiv ist (damit kann ein Eintrag vorübergehende deaktiviert werden, ohne ihn zu
+                    löschen).
+                </beschreibung>
+			</info>
+			<aspekt pid="asp.tlsParameterVorgabeArchiv" onlineModus="quelleUndSenke">
+			</aspekt>
+			<aspekt pid="asp.tlsVorgabeBedienung" onlineModus="quelleUndSenke">
+			</aspekt>
+			<attributliste pid="atl.urlasser" anzahl="1" anzahlIst="fest" name="Urlasser">
+			</attributliste>
+			<attributliste pid="atl.deAbrufParameter" anzahl="0" anzahlIst="variabel" name="DeAbrufParameter">
+			</attributliste>
+		</attributgruppenDefinition>
+		<attributlistenDefinition pid="atl.deAbrufParameter" name="DeAbrufParameter">
+			<info>
+				<kurzinfo>Eintrag für ein DE mit den Daten für die DE-Block-Abruf.</kurzinfo>
+			</info>
+			<attribut pid="att.deReferenz" anzahl="1" anzahlIst="fest" name="DeReferenz">
+				<info>
+					<kurzinfo>Referenz auf ein Objekt vom Typ typ.de, an an dem der DE-Block-Abruf erfolgen
+                        soll.
+                    </kurzinfo>
+				</info>
+			</attribut>
+			<attribut pid="att.tlsIDAbruf" anzahl="1" anzahlIst="fest" name="ID">
+				<info>
+					<kurzinfo>ID des Abruftelegramms.</kurzinfo>
+				</info>
+			</attribut>
+			<attribut pid="att.tlsTyp" anzahl="1" anzahlIst="fest" name="Typ">
+				<info>
+					<kurzinfo>Typ des Abruftelegramms.</kurzinfo>
+				</info>
+			</attribut>
+			<attribut pid="att.zeitDauer" anzahl="1" anzahlIst="fest" name="Intervall">
+				<info>
+					<kurzinfo>Legt die Intervalldauer fest, nach der jeweils ein DE-Block-Abruf an das DE geschickt werden
+                        soll.
+                    </kurzinfo>
+				</info>
+			</attribut>
+			<attribut pid="att.jaNein" anzahl="1" anzahlIst="fest" name="aktiviert">
+				<info>
+					<kurzinfo>Legt fest, ob der Parametereintrag aktiviert ist (Ja, Abruf wird wie eingetragen
+                        gesendet) oder passiviert ist (Nein, Eintrag wird nicht berücksichtigt.
+                    </kurzinfo>
+				</info>
+			</attribut>
+		</attributlistenDefinition>
+	</modell>
+	<objekte>
+		<konfigurationsObjekt pid="vewTlsDeAbruf.vewTlsDeAbruf" name="VewTlsDeAbruf" typ="typ.vewTlsDeAbruf">
+			<info>
+				<kurzinfo>Verwaltungsobjekt für die SWE TLSDeAbruf.</kurzinfo>
+			</info>
+		</konfigurationsObjekt>
+	</objekte>
+</konfigurationsBereich>

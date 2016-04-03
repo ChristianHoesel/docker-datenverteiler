@@ -1,0 +1,65 @@
+#340825 09.11.2011 11:09:33,219:+0100 (TID:000010) ----------------------
+INFO   : ConfigurationApp.de.bsvrz.puk.config.configFile.datamodel.ConfigDataMod
+el
+Aktivierung erfolgreich, aktivierte Bereiche:
+Konfigurationsbereich Pid kb.kv.basissystem Version 1
+Konfigurationsbereich Pid kb.default.basissystem Version 1
+Konfigurationsbereich Pid kb.basissystem.objekteBenutzer Version 1
+Konfigurationsbereich Pid kb.basissystem.objekteDatenverteiler Version 1
+Konfigurationsbereich Pid kb.kv.bea Version 1
+Konfigurationsbereich Pid kb.tmVewProtokolleGlobal Version 4
+Konfigurationsbereich Pid kb.kv.bitctrl Version 1
+Konfigurationsbereich Pid kb.tmIsis Version 2
+Konfigurationsbereich Pid kb.tmKExEmailFaxGlobal Version 1
+Konfigurationsbereich Pid kb.tmKExLMStGlobal Version 15
+Konfigurationsbereich Pid kb.tmKExLMStTMCCodes Version 8
+Konfigurationsbereich Pid kb.tmVewUdaGlobal Version 1
+Konfigurationsbereich Pid kb.bitctrlAllgemein Version 5
+Konfigurationsbereich Pid kb.bitctrlEclipse Version 3
+Konfigurationsbereich Pid kb.tmDarstellungsObjekteGlobal Version 13
+Konfigurationsbereich Pid kb.datenFlussUeberwachung Version 3
+Konfigurationsbereich Pid kb.bitctrl.allgemein Version 2
+Konfigurationsbereich Pid kb.bitctrl.bedienstelle Version 4
+Konfigurationsbereich Pid kb.bitctrl.bmv Version 3
+Konfigurationsbereich Pid kb.simParamTestModell Version 3
+Konfigurationsbereich Pid kb.tmMultimedia Version 1
+Konfigurationsbereich Pid kb.tmVizConnect Version 1
+Konfigurationsbereich Pid kb.kv.dambach Version 1
+Konfigurationsbereich Pid kb.tmRechner Version 4
+Konfigurationsbereich Pid kb.tmVewEngstellenGlobal Version 2
+Konfigurationsbereich Pid kb.tmNbaGlobal Version 31
+Konfigurationsbereich Pid kb.tmAnzeigenGlobal Version 10
+Konfigurationsbereich Pid kb.tmAnzeigenGlobalZwischenschicht Version 4
+Konfigurationsbereich Pid kb.tmAnzeigenGlobalZwischenschichtTls Version 5
+Konfigurationsbereich Pid kb.tmDarstellungAnzeigeQuerschnitt Version 3
+Konfigurationsbereich Pid kb.tmUsv Version 1
+Konfigurationsbereich Pid kb.kv.inovat Version 1
+Konfigurationsbereich Pid kb.tmEreignisKalenderGlobal Version 10
+Konfigurationsbereich Pid kb.tmGanglinienGlobal Version 10
+Konfigurationsbereich Pid kb.tmGeoReferenzierungGlobal Version 2
+Konfigurationsbereich Pid kb.tmKExTlsGlobal Version 9
+Konfigurationsbereich Pid kb.tmSystemKalenderGlobal Version 6
+Konfigurationsbereich Pid kb.tmTmcGlobal Version 4
+Konfigurationsbereich Pid kb.tmUmfeldDatenGlobal Version 21
+Konfigurationsbereich Pid kb.tmVerkehrGlobal Version 39
+Konfigurationsbereich Pid kb.kv.kappich Version 1
+Konfigurationsbereich Pid kb.fachModellGlobal Version 7
+Konfigurationsbereich Pid kb.ilse Version 5
+Konfigurationsbereich Pid kb.metaModellGlobal Version 13
+Konfigurationsbereich Pid kb.objekteIntegrationsTestTools Version 1
+Konfigurationsbereich Pid kb.objekteTestUnterzentraleK2S_10_MessQuerschnitte Ver
+sion 3
+Konfigurationsbereich Pid kb.objekteTestUnterzentraleK2S_100_MessQuerschnitte Ve
+rsion 3
+Konfigurationsbereich Pid kb.systemModellAoe Version 5
+Konfigurationsbereich Pid kb.systemModellGlobal Version 25
+Konfigurationsbereich Pid kb.tmBuVGlobal Version 5
+Konfigurationsbereich Pid kb.tmIlseTls Version 4
+Konfigurationsbereich Pid kb.tmVewBetriebGlobal Version 5
+Konfigurationsbereich Pid kb.tmVewSimulationGlobal Version 7
+Konfigurationsbereich Pid kb.kv.logos Version 1
+Konfigurationsbereich Pid kb.tmLangZeitVerkehrsDaten Version 3
+Konfigurationsbereich Pid kb.kv.ptv Version 1
+Konfigurationsbereich Pid kb.tmGeraeteEinbauOrte Version 2
+Konfigurationsbereich Pid kb.kv.bw Version 1
+Konfigurationsbereich Pid kb.MifImportObjekteTypen Version 1

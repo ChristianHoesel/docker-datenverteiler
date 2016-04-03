@@ -1,0 +1,240 @@
+<?xml version="1.0" encoding="ISO-8859-1"?>
+<!DOCTYPE konfigurationsBereich PUBLIC "-//K2S//DTD Dokument//DE" "K2S.dtd">
+<konfigurationsBereich pid="kb.tmBAStBandExportImport" name="BASt-Band Export- und Import-Steuerung" verantwortlich="kv.inovat">
+	<info>
+		<kurzinfo>Teilmodell mit Datenmodellierung für die Steuerung des BASt-Band Exports und Imports.</kurzinfo>
+		<beschreibung>A</beschreibung>
+	</info>
+	<konfigurationsAenderung stand="25.05.2010" version="1" autor="inovat, Dipl.-Ing. H. C. Kniß (HCK)" grund="Neuerstellung"></konfigurationsAenderung>
+	<konfigurationsAenderung stand="09.08.2010" version="2" autor="inovat, Dipl.-Ing. H. C. Kniß (HCK)" grund="Zusätzliche atg.bastImportVerzeichnisUeberwachung zur Verzeichnisueberwachung, Erweiterung atg.bastStatus, Erweiterung atg.bastImportSteuerung um att.bastBandAusgabeFormat"></konfigurationsAenderung>
+	<konfigurationsAenderung stand="09.08.2010" version="3" autor="inovat, Dipl.-Ing. H. C. Kniß (HCK)" grund="Korrektur atg.bastStatus und atg.bastExportSteuerung bzgl. ATT AenderungDatenstruktur"></konfigurationsAenderung>
+	<konfigurationsAenderung stand="01.08.2012" version="4" autor="inovat, Dipl.-Ing. H. C. Kniß (HCK)" grund="atg.bastExportSteuerung erweitert um Tag-genaue Eingabe des Exportzeitraums (für AXL-Export)"></konfigurationsAenderung>
+	<!--
+	Abhängigkeiten des Bereichs kb.tmBAStBandExportImport
+	Abhängig ab Version      Art der Abhängigkeit      Version des benötigten Bereichs      Benötigter Bereich
+	1                        notwendig                 1                                    kb.kv.inovat                       
+	1                        notwendig                 1                                    kb.systemModellGlobal              
+	1                        notwendig                 1                                    kb.fachModellGlobal                
+	1                        notwendig                 3                                    kb.tmLangZeitVerkehrsDaten         
+	1                        notwendig                 1                                    kb.metaModellGlobal                
+	-->
+		<modell>
+		<typDefinition pid="typ.bastExportImportSteuerung" name="BAStExportImportSteuerung" objektNamenPermanent="nein">
+			<info>
+				<kurzinfo>Systemobjekt für für die Steuerung des BASt-Band Exports und Imports.</kurzinfo>
+			</info>
+			<erweitert pid="typ.konfigurationsObjekt"/>
+			<attributgruppe pid="atg.bastExportSteuerung"/>
+			<attributgruppe pid="atg.bastImportSteuerung"/>
+			<attributgruppe pid="atg.bastImportVerzeichnisUeberwachung"/>
+			<attributgruppe pid="atg.bastStatus"/>
+		</typDefinition>
+		<attributgruppenDefinition pid="atg.bastExportSteuerung" name="BAStExportSteuerung" parametrierend="nein">
+			<info>
+				<kurzinfo>Attributgruppe zur Steuerung des BASt-Band Exports.</kurzinfo>
+			</info>
+			<aspekt pid="asp.anfrage" onlineModus="senke">
+			</aspekt>
+			<attribut pid="att.bastBandTag" anzahl="1" anzahlIst="fest" name="vonTag">
+				<info>
+					<kurzinfo>Erster Tag für den Export.</kurzinfo>
+				</info>
+			</attribut>
+			<attribut pid="att.bastBandMonat" anzahl="1" anzahlIst="fest" name="vonMonat">
+				<info>
+					<kurzinfo>Erster Monat für den Export.</kurzinfo>
+				</info>
+			</attribut>
+			<attribut pid="att.bastBandJahr" anzahl="1" anzahlIst="fest" name="vonJahr">
+				<info>
+					<kurzinfo>Jahresangabe des ersten Monats für den Export.</kurzinfo>
+				</info>
+			</attribut>
+			<attribut pid="att.bastBandTag" anzahl="1" anzahlIst="fest" name="bisTag">
+				<info>
+					<kurzinfo>Letzter Tag (einschließlich) für den Export.</kurzinfo>
+				</info>
+			</attribut>
+			<attribut pid="att.bastBandMonat" anzahl="1" anzahlIst="fest" name="bisMonat">
+				<info>
+					<kurzinfo>Letzter Monat (einschließlich) für den Export.</kurzinfo>
+				</info>
+			</attribut>
+			<attribut pid="att.bastBandJahr" anzahl="1" anzahlIst="fest" name="bisJahr">
+				<info>
+					<kurzinfo>Jahresangabe des letzten Monats für den Export.</kurzinfo>
+				</info>
+			</attribut>
+			<attribut pid="att.bastBandAusgabeFormat" anzahl="1" anzahlIst="fest" name="BastBandAusgabeFormat">
+				<info>
+					<kurzinfo>Format der Ausgabe.</kurzinfo>
+				</info>
+			</attribut>
+			<attribut pid="att.jaNein" anzahl="1" anzahlIst="fest" name="BAStBandUeberschreiben">
+				<info>
+					<kurzinfo>Legt fest, ob die eventuell vorhandene Dateien bei Namensgleichheit überschrieben werden sollen.</kurzinfo>
+				</info>
+			</attribut>
+			<attribut pid="att.jaNein" anzahl="1" anzahlIst="fest" name="AenderungDatenstruktur">
+				<info>
+					<kurzinfo>
+						Legt fest, ob im Jahresverlauf eine Änderung der Datenstruktur erfolgt ist.
+					</kurzinfo>
+				</info>
+			</attribut>
+			<attribut pid="att.text" anzahl="1" anzahlIst="fest" name="FTP-Server">
+				<info>
+					<kurzinfo>URL zum ftp Server in der Form: ftp://user:passwort@inoserv.dyndns.org/</kurzinfo>
+					<beschreibung>Die tatsächlichen Zielordner werden über die Einrichtung des FTP-Servers mittels des Users gesteuert.</beschreibung>
+				</info>
+			</attribut>
+			<attribut pid="att.langZeitZählstelleReferenz" anzahl="0" anzahlIst="variabel" name="LangZeitZählstellen">
+				<info>
+					<kurzinfo>Liste aller LangZeitZählstellen (Verkehr- oder Achslastmessstellen), für die der Export erstellt werden soll.</kurzinfo>
+				</info>
+			</attribut>
+		</attributgruppenDefinition>
+		<attributgruppenDefinition pid="atg.bastImportSteuerung" name="BAStImportSteuerung" parametrierend="nein">
+			<info>
+				<kurzinfo>Attributgruppe zur Steuerung des BASt-Band Imports.</kurzinfo>
+			</info>
+			<aspekt pid="asp.anfrage" onlineModus="senke">
+			</aspekt>
+			<attribut pid="att.text" anzahl="1" anzahlIst="fest" name="FTP-Server">
+				<info>
+					<kurzinfo>URL zum ftp Server in der Form: ftp://user:passwort@inoserv.dyndns.org/</kurzinfo>
+					<beschreibung>Die tatsächlichen Quellordner werden über die Einrichtung des FTP-Servers mittels des Users gesteuert.</beschreibung>
+				</info>
+			</attribut>
+			<attribut pid="att.text" anzahl="0" anzahlIst="variabel" name="ImportDateien">
+				<info>
+					<kurzinfo>Liste der URL aller zu importierender BASt-Dateien.</kurzinfo>
+				</info>
+			</attribut>
+			<attribut pid="att.bastBandAusgabeFormat" anzahl="1" anzahlIst="fest" name="BastBandAusgabeFormat">
+				<info>
+					<kurzinfo>Format der Ausgabe, welches jetzt importiert werden soll.</kurzinfo>
+				</info>
+			</attribut>
+		</attributgruppenDefinition>
+		<attributgruppenDefinition pid="atg.bastImportVerzeichnisUeberwachung" name="BAStImportVerzeichnisUeberwachung" parametrierend="nein">
+			<info>
+				<kurzinfo>Attributgruppe, über die dem BAStImport von der BASt-Verzeichnisüberwachung mitgeteilt wird, welche Datei importiert werden muss.</kurzinfo>
+			</info>
+			<aspekt pid="asp.zustand" onlineModus="senke">
+			</aspekt>
+			<attribut pid="att.text" anzahl="1" anzahlIst="fest" name="ImportDatei">
+				<info>
+					<kurzinfo>URL mit kompletten Pfad zur zu importierenden Datei, die vom BASt-Import verarbeitet werden muss.</kurzinfo>
+				</info>
+			</attribut>
+		</attributgruppenDefinition>
+		<attributgruppenDefinition pid="atg.bastStatus" name="BAStStatus" parametrierend="nein">
+			<info>
+				<kurzinfo>Informationen zum aktuellen Status des Export- bzw Importvorganges (Fortschritt, Status).</kurzinfo>
+			</info>
+			<aspekt pid="asp.bastExportStatus" onlineModus="quelle">
+			</aspekt>
+			<aspekt pid="asp.bastImportStatus" onlineModus="quelle">
+			</aspekt>
+			<attribut pid="att.prozent" anzahl="1" anzahlIst="fest" name="BAStBandFortschrittProzent">
+			</attribut>
+			<attribut pid="att.text" anzahl="1" anzahlIst="fest" name="StatusMeldung">
+				<info>
+					<kurzinfo>StatusMeldung gibt entweder einen leeren String, oder die Fehlermeldung zurück. Die Fehlermeldung gibt genau an, warum es zu einem Abbruch des Exportes/Importes gekommen ist. Der leere String sowie eine Statuszahl von 100 bedeutet, dass der Export/Import erfolgreich abgeschlossen wurde.</kurzinfo>
+				</info>
+			</attribut>
+		</attributgruppenDefinition>
+		<aspektDefinition pid="asp.bastExportStatus" name="BAStExportStatus">
+			<info>
+				<kurzinfo>Aspekt für den BASt-Status beim Export</kurzinfo>
+			</info>
+		</aspektDefinition>
+		<aspektDefinition pid="asp.bastImportStatus" name="BAStImportStatus">
+			<info>
+				<kurzinfo>Aspekt für den BASt-Status beim Export</kurzinfo>
+			</info>
+		</aspektDefinition>
+		<attributDefinition pid="att.bastBandAusgabeFormat" name="BAStBandAusgabeFormat">
+			<info>
+				<kurzinfo>
+					Mögliche Ausgabeformate für die BASt-Band-Erstellung.
+				</kurzinfo>
+			</info>
+			<ganzzahl bits="8">
+				<zustand name="V2004" wert="0">
+					<info>
+						<kurzinfo>Exportformat V2004 (Verkehrdaten) gemäß Spezifikation der BASt.</kurzinfo>
+					</info>
+				</zustand>
+				<zustand name="V2007" wert="1">
+					<info>
+						<kurzinfo>Exportformat V2007 (Verkehrsdaten) gemäß Spezifikation der BASt.</kurzinfo>
+					</info>
+				</zustand>
+				<zustand name="AXL2009" wert="2">
+					<info>
+						<kurzinfo>Exportformat AXL2009 (Achslastdaten) gemäß Spezifikation der BASt.</kurzinfo>
+					</info>
+				</zustand>
+			</ganzzahl>
+		</attributDefinition>
+		<attributDefinition pid="att.bastBandJahr" name="Jahr">
+			<info>
+				<kurzinfo>
+					Jahreswerte für die BASt-Band Erstellung (ab 2000).
+				</kurzinfo>
+			</info>
+			<ganzzahl bits="16">
+				<bereich skalierung="1" minimum="2000" maximum="9999">
+				</bereich>
+			</ganzzahl>
+		</attributDefinition>
+		<attributDefinition pid="att.bastBandMonat" name="Monat">
+			<info>
+				<kurzinfo>
+					Monatswerte für die BASt-Band Erstellung.
+				</kurzinfo>
+			</info>
+			<ganzzahl bits="8">
+				<zustand name="Januar" wert="1">
+				</zustand>
+				<zustand name="Februar" wert="2">
+				</zustand>
+				<zustand name="März" wert="3">
+				</zustand>
+				<zustand name="April" wert="4">
+				</zustand>
+				<zustand name="Mai" wert="5">
+				</zustand>
+				<zustand name="Juni" wert="6">
+				</zustand>
+				<zustand name="Juli" wert="7">
+				</zustand>
+				<zustand name="August" wert="8">
+				</zustand>
+				<zustand name="September" wert="9">
+				</zustand>
+				<zustand name="Oktober" wert="10">
+				</zustand>
+				<zustand name="November" wert="11">
+				</zustand>
+				<zustand name="Dezember" wert="12">
+				</zustand>
+			</ganzzahl>
+		</attributDefinition>
+		<attributDefinition pid="att.bastBandTag" name="Tag">
+			<info>
+				<kurzinfo>
+					Tageswerte für die BASt-Band Erstellung.
+				</kurzinfo>
+			</info>
+			<ganzzahl bits="8">
+				<bereich skalierung="1" minimum="1" maximum="31">
+				</bereich>
+			</ganzzahl>
+		</attributDefinition>
+	</modell>
+	<objekte>
+	</objekte>
+</konfigurationsBereich>

@@ -1,0 +1,118 @@
+<?xml version="1.0" encoding="ISO-8859-1"?>
+<!DOCTYPE konfigurationsBereich PUBLIC "-//K2S//DTD Dokument//DE" "K2S.dtd">
+<konfigurationsBereich pid="kb.tmVewEngstellenGlobal" name="TeilmodellVeWEngstellenGlobal" verantwortlich="kv.dambach">
+	<info>
+		<kurzinfo>Teilmodell mit Datenmodellierung zur Verwaltung von Engstellen.</kurzinfo>
+		<beschreibung>
+			<absatz>
+				Die Engstellenverwaltung ist für die Überwachung von Baustellen und Unfällen zuständig.
+			</absatz>
+		</beschreibung>
+	</info>
+	<konfigurationsAenderung stand="11.03.2008" version="1" autor="Dambach-Werke GmbH, Th. Drapp" grund="Änderungsdokumentation siehe &apos;ReleaseNotes kv.dambach.doc&apos;"></konfigurationsAenderung>
+	<konfigurationsAenderung stand="12.03.2008" version="2" autor="Dambach-Werke GmbH, Th. Drapp" grund="Änderungsdokumentation siehe &apos;ReleaseNotes kv.dambach.doc&apos;"></konfigurationsAenderung>
+	<!--
+	Abhängigkeiten des Bereichs kb.tmVewEngstellenGlobal
+	Abhängig ab Version      Art der Abhängigkeit      Version des benötigten Bereichs      Benötigter Bereich
+	1                        notwendig                 1                                    kb.metaModellGlobal                
+	1                        notwendig                 3                                    kb.tmVewBetriebGlobal              
+	1                        notwendig                 1                                    kb.kv.dambach                      
+	1                        notwendig                 4                                    kb.fachModellGlobal                
+	-->
+	<modell>
+		<typDefinition pid="typ.engstellenVerwaltung" name="EngstellenVerwaltung" objektNamenPermanent="nein">
+			<info>
+				<kurzinfo>Objekttyp, der die EngstellenVerwaltung repräsentiert.</kurzinfo>
+			</info>
+			<erweitert pid="typ.konfigurationsObjekt"/>
+			<attributgruppe pid="atg.engstellenVerwaltungParameter"/>
+			<defaultParameter attributgruppe="atg.engstellenVerwaltungParameter" typ="typ.engstellenVerwaltung">
+				<datum name="MaxVerkehrsStärkeGesperrteFahrStreifen" wert="3 Fz/min"/>
+				<datum name="FaktorMaxVerkehrsStärkeStromabwärts" wert="1,30"/>
+				<datum name="MaxLängeStauÜberBaustellenEnde" wert="20 m"/>
+				<datum name="WartezeitMeldungNachRäumungUnfall" wert="5 Minuten"/>
+				<datenliste name="Urlasser">
+					<datum name="BenutzerReferenz" wert="undefiniert"/>
+					<datum name="Ursache" wert=""/>
+					<datum name="Veranlasser" wert=""/>
+				</datenliste>
+			</defaultParameter>
+		</typDefinition>
+		<attributgruppenDefinition pid="atg.engstellenVerwaltungParameter" name="EngstellenVerwaltungParameter" parametrierend="ja">
+			<info>
+				<kurzinfo>Beinhaltet die Parameter für die EngstellenVerwaltung.</kurzinfo>
+				<beschreibung>
+					<absatz>Beinhaltet die Parameter für die EngstellenVerwaltung.</absatz>
+				</beschreibung>
+			</info>
+			<attribut pid="att.verkehrsStärkeMinute" anzahl="1" anzahlIst="fest" name="MaxVerkehrsStärkeGesperrteFahrStreifen">
+				<info>
+					<kurzinfo>Maximale VerkehrsStärke auf einem gesperrtem FahrStreifen.</kurzinfo>
+					<beschreibung>
+						<absatz>Gesperrt gemeldete Fahrstreifen dürfen eine parametrierbare Verkehrsstärke (z.B. 3 Fz/min) nicht überschreiten.  Wenn diese Prüfunge verletzt wurde, dann muss eine entsprechende Meldung generiert werden.</absatz>
+					</beschreibung>
+				</info>
+			</attribut>
+			<attribut pid="att.zahlPositiv2NachKommaStellen" anzahl="1" anzahlIst="fest" name="FaktorMaxVerkehrsStärkeStromabwärts">
+				<info>
+					<kurzinfo>Faktor um den die angegebene Engpasskapazität stromabwärts maximal überschritten werden darf. Bei einer höheren VerkehrsStärke wird eine BetriebsMeldung erzeugt</kurzinfo>
+					<beschreibung>
+						<absatz>Die angegebene Engpasskapazität wird mit dem Verkehrsfluss stromabwärts hinter der Baustelle verglichen. Die dort gemessene Verkehrstärke darf die Engpasskapazität maximal um einen parametrierbaren Faktor überschreiten. Dabei darf die Ermittlung nicht über Anschlussstellen oder Kreuze hinausgehen. Wenn diese Prüfunge verletzt wurde, dann muss eine entsprechende Meldung generiert werden.</absatz>
+					</beschreibung>
+				</info>
+			</attribut>
+			<attribut pid="att.streckeMeter" anzahl="1" anzahlIst="fest" name="MaxLängeStauÜberBaustellenEnde">
+				<info>
+					<kurzinfo>Erkannte Staus dürfen stromabwärts nicht über eine parametrierbare Länge über das Baustellenende hinausgehen.</kurzinfo>
+					<beschreibung>
+						<absatz>Erkannte Staus dürfen stromabwärts nicht über eine parametrierbare Länge über das Baustellenende hinausgehen. Wenn diese Prüfunge verletzt wurde, dann muss eine entsprechende Meldung generiert werden.</absatz>
+					</beschreibung>
+				</info>
+			</attribut>
+			<attribut pid="att.zeitDauer" anzahl="1" anzahlIst="fest" name="WartezeitMeldungNachRäumungUnfall">
+				<info>
+					<kurzinfo>Zeitdauer, nach der für noch nicht zurückgenommene Unfälle Meldungen generiert werden.</kurzinfo>
+					<beschreibung>
+						<absatz>Wenn die geschätzte Zeit bis zur Räumung der Unfallstelle (verkehrliche Gültigkeit) plus versorgte Wartezeit verstrichen ist, werden für noch nicht zurückgenommene Unfälle Meldungen generiert, die den Benutzer zu einer Überprüfung der eingegebenen Engstelle veranlassen sollen.</absatz>
+					</beschreibung>
+				</info>
+			</attribut>
+			<attributliste pid="atl.urlasser" anzahl="1" anzahlIst="fest" name="Urlasser">
+			</attributliste>
+		</attributgruppenDefinition>
+		<attributDefinition pid="att.verkehrsStärkeMinute" name="VerkehrsStärkeMinute">
+			<info>
+				<kurzinfo>Verkehrsstärke (Anzahl der Fahrzeuge) pro Minute (normiert auf Minute).</kurzinfo>
+			</info>
+			<ganzzahl bits="32">
+				<bereich skalierung="1" minimum="0" maximum="10000" einheit="Fz/min">
+				</bereich>
+				<zustand name="nicht ermittelbar" wert="-1">
+					<info>
+						<kurzinfo>Daten sind nicht ermittelbar (ist KEIN Fehler).</kurzinfo>
+						<beschreibung>Wird gesetzt, wenn der entsprechende Wert nicht ermittelbar ist und kein Interpolation sinnvoll möglich ist (z.B. ist die Geschwindigkeit nicht ermittelbar, wenn kein Fahrzeug erfasst wurde).</beschreibung>
+					</info>
+				</zustand>
+				<zustand name="fehlerhaft" wert="-2">
+					<info>
+						<kurzinfo>Daten sind fehlerhaft.</kurzinfo>
+						<beschreibung>Wird gesetzt, wenn die Daten als fehlerhaft erkannt wurden.</beschreibung>
+					</info>
+				</zustand>
+				<zustand name="nicht ermittelbar/fehlerhaft" wert="-3">
+					<info>
+						<kurzinfo>Daten nicht ermittelbar, da bereits Basiswerte fehlerhaft.</kurzinfo>
+						<beschreibung>Wird gesetzt, wenn Daten, die zur Berechnung dieses Werts notwendig sind, bereits als fehlerhaft gekennzeichnet sind, oder wenn die Berechnung aus anderen Gründen (z.B. Nenner = 0 in der Berechnungsformel) nicht möglich war.</beschreibung>
+					</info>
+				</zustand>
+			</ganzzahl>
+		</attributDefinition>
+	</modell>
+	<objekte>
+		<konfigurationsObjekt pid="engstellenVerwaltung.test" name="EngstellenVerwaltungTest" typ="typ.engstellenVerwaltung">
+			<info>
+				<kurzinfo>Dieses Objekt wird für Tests der EngstellenVerwaltung vor der Integration in den AOE verwendet.</kurzinfo>
+			</info>
+		</konfigurationsObjekt>
+	</objekte>
+</konfigurationsBereich>

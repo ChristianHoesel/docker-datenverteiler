@@ -1,0 +1,208 @@
+<?xml version="1.0" encoding="ISO-8859-1"?>
+<!DOCTYPE konfigurationsBereich PUBLIC "-//K2S//DTD Dokument//DE" "K2S.dtd">
+<konfigurationsBereich pid="kb.tmBuVWechseltext" name="TeilmodellBuVWechseltext" verantwortlich="kv.dambach">
+	<info>
+		<kurzinfo>Teilmodell mit Datenmodellierung zur Bedienung und Visualisierung Bereich Wechseltexte.</kurzinfo>
+		<beschreibung>
+			<absatz>Informationen zu Wechseltexten in Oberflächen.</absatz>
+			<absatz>Enthalten sind die Fonts mit den vorhandenen Zeichen (Bitmaps) und Informationen zum Aufbau bzw. Inhalt des Texteingabeeditors.</absatz>
+		</beschreibung>
+	</info>
+	<konfigurationsAenderung stand="04.03.2011" version="1" autor="Swarco Traffic Systems GmbH, Th. Drapp" grund="Änderungsdokumentation siehe &apos;ReleaseNotes kv.dambach.doc&apos;"></konfigurationsAenderung>
+	<konfigurationsAenderung stand="24.03.2011" version="2" autor="Swarco Traffic Systems GmbH, Th. Drapp" grund="Änderungsdokumentation siehe &apos;ReleaseNotes kv.dambach.doc&apos;"></konfigurationsAenderung>
+	<!--
+	Abhängigkeiten des Bereichs kb.tmBuVWechseltext
+	Abhängig ab Version      Art der Abhängigkeit      Version des benötigten Bereichs      Benötigter Bereich
+	1                        notwendig                 1                                    kb.metaModellGlobal                
+	1                        notwendig                 1                                    kb.systemModellGlobal              
+	1                        notwendig                 1                                    kb.tmAnzeigenGlobal                
+	1                        notwendig                 1                                    kb.kv.dambach                      
+	1                        notwendig                 1                                    kb.fachModellGlobal                
+	-->
+	<modell>
+		<typDefinition pid="typ.buvWechseltextFont" name="BuVWechseltextFont" objektNamenPermanent="nein">
+			<info>
+				<kurzinfo>Informationen zur Darstellung eines Fonts in der Oberfläche.</kurzinfo>
+			</info>
+			<erweitert pid="typ.konfigurationsObjekt"/>
+			<attributgruppe pid="atg.buvWechseltextFont"/>
+			<menge pid="menge.buvWechseltextZeichen" name="Zeichen" erforderlich="nein">
+				<info>
+					<kurzinfo>Menge der Zeichen, die einen Font bilden.</kurzinfo>
+				</info>
+			</menge>
+		</typDefinition>
+		<typDefinition pid="typ.buvWechseltextFontKombination" name="BuVWechseltextFontKombination" objektNamenPermanent="nein">
+			<info>
+				<kurzinfo>Objekttyp der die notwendigen Daten einer Oberfläche (BuV) für den Eingabeeditor verwaltet.</kurzinfo>
+			</info>
+			<erweitert pid="typ.konfigurationsObjekt"/>
+			<attributgruppe pid="atg.buvWechseltextFontKombination"/>
+			<menge pid="menge.buvWechseltextFont" name="Fonts" erforderlich="nein">
+				<info>
+					<kurzinfo>Menge der Fonts, die eine Font-Kombination bilden.</kurzinfo>
+				</info>
+			</menge>
+		</typDefinition>
+		<typDefinition pid="typ.buvWechseltextZeichen" name="BuVWechseltextZeichen" objektNamenPermanent="nein">
+			<info>
+				<kurzinfo>Informationen zur Darstellung eines Zeichens in der Oberfläche (Bitmap).</kurzinfo>
+			</info>
+			<erweitert pid="typ.konfigurationsObjekt"/>
+			<attributgruppe pid="atg.buvWechseltextZeichen"/>
+		</typDefinition>
+		<attributgruppenDefinition pid="atg.buvWechseltextFont" name="BuVWechseltextFont" parametrierend="nein">
+			<info>
+				<kurzinfo>
+					Informationen zur Darstellung eines Fonts in der Oberfläche (Bitmap).
+				</kurzinfo>
+			</info>
+			<aspekt pid="asp.eigenschaften" konfigurationsModus="datensatzNotwendig">
+			</aspekt>
+			<attribut pid="att.fontReferenz" anzahl="1" anzahlIst="fest" name="Font">
+				<info>
+					<kurzinfo>Referenzierung auf ein Objekt vom Typ 'typ.font' für den die Darstellung gilt.</kurzinfo>
+				</info>
+			</attribut>
+		</attributgruppenDefinition>
+		<attributgruppenDefinition pid="atg.buvWechseltextFontKombination" name="BuVWechseltextFontKombination" parametrierend="nein">
+			<info>
+				<kurzinfo>
+					Informationen zur Darstellung einer Font-Kombination in der Oberfläche.
+				</kurzinfo>
+			</info>
+			<aspekt pid="asp.eigenschaften" konfigurationsModus="datensatzNotwendig">
+			</aspekt>
+			<attributliste pid="atl.buvWechseltextFontKombinationAusrichtung" anzahl="0" anzahlIst="variabel" name="TextAusrichtung">
+			</attributliste>
+			<attributliste pid="atl.buvWechseltextFontKombinationFont" anzahl="0" anzahlIst="variabel" name="Font">
+			</attributliste>
+			<attributliste pid="atl.buvWechseltextFontKombinationTasten" anzahl="0" anzahlIst="variabel" name="TastenZeilen">
+			</attributliste>
+		</attributgruppenDefinition>
+		<attributgruppenDefinition pid="atg.buvWechseltextZeichen" name="BuVWechseltextZeichen" parametrierend="nein">
+			<info>
+				<kurzinfo>
+					Informationen zur Darstellung eines Zeichens in der Oberfläche (Bitmap).
+				</kurzinfo>
+			</info>
+			<aspekt pid="asp.eigenschaften" konfigurationsModus="datensatzNotwendig">
+			</aspekt>
+			<attribut pid="att.zeichenReferenz" anzahl="1" anzahlIst="fest" name="Zeichen">
+				<info>
+					<kurzinfo>Referenzierung auf ein Objekt vom Typ 'typ.zeichen' für den die Darstellung gilt.</kurzinfo>
+				</info>
+			</attribut>
+			<attribut pid="att.zahlPositiv" anzahl="1" anzahlIst="fest" name="AsciiCode">
+				<info>
+					<kurzinfo>ASCII-Code des Zeichens.</kurzinfo>
+				</info>
+			</attribut>
+			<attribut pid="att.zahlPositiv" anzahl="1" anzahlIst="fest" name="UniCode">
+				<info>
+					<kurzinfo>Uni-Code des Zeichens.</kurzinfo>
+				</info>
+			</attribut>
+			<attribut pid="att.zahlPositiv" anzahl="1" anzahlIst="fest" name="BitmapBreite">
+				<info>
+					<kurzinfo>Breite der Bitmap.</kurzinfo>
+				</info>
+			</attribut>
+			<attribut pid="att.zahlPositiv" anzahl="1" anzahlIst="fest" name="BitmapHöhe">
+				<info>
+					<kurzinfo>Höhe der Bitmap.</kurzinfo>
+				</info>
+			</attribut>
+			<attribut pid="att.text" anzahl="0" anzahlIst="variabel" name="BitmapZeilen">
+				<info>
+					<kurzinfo>Pro Zeile der Bitmap ein String, in dem ein ' ' (Leerzeichen) für einen nicht gesetzten und ein beliebiges anderes Zeichen für einen gesetzten Punkt verwendet wird.</kurzinfo>
+				</info>
+			</attribut>
+		</attributgruppenDefinition>
+		<attributDefinition pid="att.buvWechseltextFontReferenz" name="BuVWechseltextFontReferenz">
+			<info>
+				<kurzinfo>Attribut zur Referenzierung des Objekttyps: typ.buvWechseltextFont.</kurzinfo>
+			</info>
+			<objektReferenz typ="typ.buvWechseltextFont" undefiniert="verboten" referenzierungsart="assoziation"/>
+		</attributDefinition>
+		<attributDefinition pid="att.buvWechseltextFontReferenzOptional" name="BuVWechseltextFontReferenzOptional">
+			<info>
+				<kurzinfo>Attribut zur Referenzierung des Objekttyps: typ.buvWechseltextFont (Optionale Referenzierung erlaubt).</kurzinfo>
+			</info>
+			<objektReferenz typ="typ.buvWechseltextFont" undefiniert="erlaubt" referenzierungsart="assoziation"/>
+		</attributDefinition>
+		<attributDefinition pid="att.buvWechseltextZeichenReferenz" name="BuVWechseltextZeichenReferenz">
+			<info>
+				<kurzinfo>Attribut zur Referenzierung des Objekttyps: typ.buvWechseltextZeichen.</kurzinfo>
+			</info>
+			<objektReferenz typ="typ.buvWechseltextZeichen" undefiniert="verboten" referenzierungsart="assoziation"/>
+		</attributDefinition>
+		<attributDefinition pid="att.buvWechseltextZeichenReferenzOptional" name="BuVWechseltextZeichenReferenzOptional">
+			<info>
+				<kurzinfo>Attribut zur Referenzierung des Objekttyps: typ.buvWechseltextZeichen (Optionale Referenzierung erlaubt).</kurzinfo>
+			</info>
+			<objektReferenz typ="typ.buvWechseltextZeichen" undefiniert="erlaubt" referenzierungsart="assoziation"/>
+		</attributDefinition>
+		<attributlistenDefinition pid="atl.buvWechseltextFontKombinationAusrichtung" name="BuVWechseltextFontKombinationAusrichtung">
+			<info>
+				<kurzinfo>Beschreibung zu einer Ausrichtung.</kurzinfo>
+				<beschreibung>
+					Die Beschreibung wird für die Ausrichtung im Eingabefenster verwendet.
+				</beschreibung>
+			</info>
+			<attribut pid="att.textAusrichtung" anzahl="1" anzahlIst="fest" name="Ausrichtung">
+				<info>
+					<kurzinfo>TextAusrichtung aus Zustandsliste.</kurzinfo>
+				</info>
+			</attribut>
+			<attribut pid="att.text" anzahl="1" anzahlIst="fest" name="Beschreibung">
+				<info>
+					<kurzinfo>Beschreibung der Ausrichtung in der Oberfläche für die Anwahl.</kurzinfo>
+				</info>
+			</attribut>
+		</attributlistenDefinition>
+		<attributlistenDefinition pid="atl.buvWechseltextFontKombinationFont" name="BuVWechseltextFontKombinationFont">
+			<info>
+				<kurzinfo>Beschreibung zu einem Font.</kurzinfo>
+				<beschreibung>
+					Die Beschreibung wird für den Font im Eingabefenster verwendet.
+				</beschreibung>
+			</info>
+			<attribut pid="att.fontReferenz" anzahl="1" anzahlIst="fest" name="Font">
+				<info>
+					<kurzinfo>Font für den die Beschreibung gilt.</kurzinfo>
+				</info>
+			</attribut>
+			<attribut pid="att.text" anzahl="1" anzahlIst="fest" name="Beschreibung">
+				<info>
+					<kurzinfo>Beschreibung des Font in der Oberfläche für die Anwahl.</kurzinfo>
+				</info>
+			</attribut>
+		</attributlistenDefinition>
+		<attributlistenDefinition pid="atl.buvWechseltextFontKombinationTasten" name="BuVWechseltextFontKombinationTasten">
+			<info>
+				<kurzinfo>Beschreibung zu einer Tastenzeile.</kurzinfo>
+				<beschreibung>
+					Die Beschreibung wird für die Tastenzeile im Eingabefenster verwendet.
+				</beschreibung>
+			</info>
+			<attribut pid="att.zeichenReferenz" anzahl="0" anzahlIst="variabel" name="ZeilenZeichen">
+				<info>
+					<kurzinfo>Zeichen die in der Zeile als Bitmap auf der Taste angezeigt werden sollen.</kurzinfo>
+				</info>
+			</attribut>
+		</attributlistenDefinition>
+		<mengenDefinition pid="menge.buvWechseltextFont" elemente="typ.buvWechseltextFont" aenderbar="nein" mindestens="0" hoechstens="0" referenzierungsart="assoziation">
+			<info>
+				<kurzinfo>Menge der Fonts, die eine Font-Kombination enthält.</kurzinfo>
+			</info>
+		</mengenDefinition>
+		<mengenDefinition pid="menge.buvWechseltextZeichen" elemente="typ.buvWechseltextZeichen" aenderbar="nein" mindestens="0" hoechstens="0" referenzierungsart="assoziation">
+			<info>
+				<kurzinfo>Menge der Zeichen, die ein Font enthält.</kurzinfo>
+			</info>
+		</mengenDefinition>
+	</modell>
+	<objekte>
+	</objekte>
+</konfigurationsBereich>

@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="ISO-8859-1"?>
+<!DOCTYPE konfigurationsBereich PUBLIC "-//K2S//DTD Dokument//DE" "K2S.dtd">
+<konfigurationsBereich pid="kb.udaTestDaten" verantwortlich="kv.bitctrl">
+	<konfigurationsAenderung stand="19.02.2007" version="1" autor="Uwe Peuker, BitCtrl Systems GmbH" grund="Test">Bereich zum Test der Konfiguration erzeugt.</konfigurationsAenderung>
+	<modell>
+	</modell>
+	<objekte>
+		<konfigurationsObjekt pid="udaModul.udatest" name="UdaTest-Modul" typ="typ.udaModul">
+			<objektMenge name="SkriptLäufe" verwaltung="kv.aoe.bitctrl.tester">
+			</objektMenge>
+			<objektMenge name="Skripte" verwaltung="kv.aoe.bitctrl.tester">
+			</objektMenge>
+		</konfigurationsObjekt>
+		<konfigurationsObjekt pid="uzt.leverkusen" name="UZ LeverkusenT" typ="typ.uzt">
+			<objektMenge name="MQT" verwaltung="kv.aoe.bitctrl.tester">
+			</objektMenge>
+		</konfigurationsObjekt>
+	</objekte>
+</konfigurationsBereich>

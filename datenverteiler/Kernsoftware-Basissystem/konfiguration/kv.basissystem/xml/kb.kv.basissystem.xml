@@ -1,0 +1,44 @@
+<?xml version="1.0" encoding="ISO-8859-1"?>
+<!DOCTYPE konfigurationsBereich PUBLIC "-//K2S//DTD Dokument//DE" "K2S.dtd">
+<konfigurationsBereich pid="kb.kv.basissystem" name="Bereich KV Basissystem" verantwortlich="kv.basissystem">
+
+	<info>
+		<kurzinfo>Bereich mit dem Konfigurationsverantwortlichen für das Basissystem.</kurzinfo>
+	</info>
+
+	<konfigurationsAenderung autor="Falko Schumann (BitCtrl)" stand="25.03.2009" version="1" grund="Erstellung" />
+
+	<modell>
+	</modell>
+
+	<objekte>
+
+		<konfigurationsObjekt pid="kv.basissystem" name="Basissystem" typ="typ.autarkeOrganisationsEinheit">
+			<info>
+				<kurzinfo>Konfigurationsverantwortlicher zum Basissystem</kurzinfo>
+			</info>
+			<datensatz attributgruppe="atg.konfigurationsVerantwortlicherEigenschaften" aspekt="asp.eigenschaften">
+				<datum name="kodierung" wert="5599" />
+				<datenfeld name="defaultBereich">
+					<datum name="0" wert="kb.default.basissystem" />
+				</datenfeld>
+			</datensatz>
+			<objektMenge name="Ereignisse">
+			</objektMenge>
+			<objektMenge name="SimulationsStrecken">
+			</objektMenge>
+			<objektMenge name="PuaSkripte">
+			</objektMenge>
+			<objektMenge name="Simulationen">
+			</objektMenge>
+			<objektMenge name="Meldungen">
+			</objektMenge>
+			<objektMenge name="SystemKalenderEinträge">
+			</objektMenge>
+			<objektMenge name="EreignisTypen">
+			</objektMenge>
+		</konfigurationsObjekt>
+
+	</objekte>
+
+</konfigurationsBereich>

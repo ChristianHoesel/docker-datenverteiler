@@ -1,0 +1,21 @@
+<?xml version="1.0" encoding="ISO-8859-1"?>
+<!DOCTYPE konfigurationsBereich PUBLIC "-//K2S//DTD Dokument//DE" "K2S.dtd">
+<konfigurationsBereich pid="kb.basissystem.objekteBenutzer" name="Bereich Objekte Benutzer" verantwortlich="kv.basissystem">
+
+	<info>
+		<kurzinfo>Bereich mit den Standardbenutzern des Basissystems.</kurzinfo>
+	</info>
+
+	<konfigurationsAenderung autor="Falko Schumann (BitCtrl)" stand="25.03.2009" version="1" grund="Erstellung" />
+
+	<modell>
+	</modell>
+
+	<objekte>
+
+		<konfigurationsObjekt pid="benutzer.tester" name="Tester" typ="typ.benutzer">
+		</konfigurationsObjekt>
+
+	</objekte>
+
+</konfigurationsBereich>

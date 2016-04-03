@@ -1,0 +1,595 @@
+<?xml version="1.0" encoding="ISO-8859-1"?>
+<!DOCTYPE konfigurationsBereich PUBLIC "-//K2S//DTD Dokument//DE" "K2S.dtd">
+<konfigurationsBereich pid="kb.tmKnotenBeeinflussungsAnlage" name="Teilmodell KnotenBeeinflussungsAnlage" verantwortlich="kv.dambach">
+	<info>
+		<kurzinfo>Teilmodell mit Datenmodellierung für Knotenbeeinflussungs-Anlagen.</kurzinfo>
+	</info>
+	<konfigurationsAenderung stand="22.04.2009" version="1" autor="Dambach-Werke GmbH, Th. Drapp" grund="Änderungsdokumentation siehe &apos;ReleaseNotes kv.dambach.doc&apos;"></konfigurationsAenderung>
+	<konfigurationsAenderung stand="04.05.2009" version="2" autor="Dambach-Werke GmbH, Th. Drapp" grund="Änderungsdokumentation siehe &apos;ReleaseNotes kv.dambach.doc&apos;"></konfigurationsAenderung>
+	<konfigurationsAenderung stand="29.03.2010" version="3" autor="Dambach-Werke GmbH, Th. Drapp" grund="Änderungsdokumentation siehe &apos;ReleaseNotes kv.dambach.doc&apos;"></konfigurationsAenderung>
+	<!--
+	Abhängigkeiten des Bereichs kb.tmKnotenBeeinflussungsAnlage
+	Abhängig ab Version      Art der Abhängigkeit      Version des benötigten Bereichs      Benötigter Bereich
+	1                        notwendig                 1                                    kb.metaModellGlobal                
+	1                        notwendig                 3                                    kb.tmVewBetriebGlobal              
+	1                        notwendig                 2                                    kb.tmKExTlsGlobal                  
+	1                        notwendig                 1                                    kb.tmAnzeigenGlobal                
+	1                        notwendig                 2                                    kb.tmVerkehrGlobal                 
+	1                        notwendig                 1                                    kb.kv.dambach                      
+	1                        notwendig                 4                                    kb.fachModellGlobal                
+	3                        notwendig                 1                                    kb.systemModellGlobal              
+	-->
+	<modell>
+		<typDefinition pid="typ.knotenBeeinflussungsAnlage" name="KnotenBeeinflussungsAnlage" objektNamenPermanent="nein">
+			<info>
+				<kurzinfo>Eine KnotenBeeinflussungsAnlage führt Spurzuweisungen aus Basis von Zuflussinformationen durch.</kurzinfo>
+				<beschreibung>Eine KnotenBeeinflussungsAnlage besteht aus mindestens zwei Zuflüssen und variablen Spurzuweisungen.
+        Die Spurzuweisung erfolgt über Programme am Dirigenten. Die Zuflüsse werden auf die Verkehrsbelastung überprüft,
+        wobei es die Zustände nicht detektiert, detektiert und unbekannt gibt. 
+        Abhängig von den bestimmten Zuständen an den Zuflüssen werden prioritätsgesteuert Spurzuweisungen durch
+        Programmschaltungen am Dirigenten durchgeführt.
+        </beschreibung>
+			</info>
+			<erweitert pid="typ.konfigurationsObjekt"/>
+			<attributgruppe pid="atg.knotenBeeinflussungsAnlage"/>
+			<attributgruppe pid="atg.knotenBeeinflussungsAnlageAktuellerZustand"/>
+			<attributgruppe pid="atg.knotenBeeinflussungsAnlageManuelleSchaltung"/>
+			<attributgruppe pid="atg.knotenBeeinflussungsAnlageParameterAutomatikProgramme"/>
+			<attributgruppe pid="atg.knotenBeeinflussungsAnlageParameterManuelleProgramme"/>
+			<attributgruppe pid="atg.knotenBeeinflussungsAnlageParameterTimeoutQuittierung"/>
+			<attributgruppe pid="atg.knotenBeeinflussungsAnlageParameterVorhandeneProgramme"/>
+			<menge pid="menge.anzeigeQuerschnitte" name="AnzeigeQuerschnitte" erforderlich="nein">
+				<info>
+					<kurzinfo>Optionale Menge der beeinflussten AnzeigeQuerschnitte, der KnotenBeeinflussungsAnlage.</kurzinfo>
+				</info>
+			</menge>
+			<menge pid="menge.knotenBeeinflussungsAnlageZuflüsse" name="Zuflüsse" erforderlich="ja">
+				<info>
+					<kurzinfo>Menge der Zuflüsse, der KnotenBeeinflussungsAnlage.</kurzinfo>
+				</info>
+			</menge>
+			<defaultParameter attributgruppe="atg.knotenBeeinflussungsAnlageParameterVorhandeneProgramme" typ="typ.knotenBeeinflussungsAnlage">
+				<datenfeld name="Programm">
+				</datenfeld>
+				<datenliste name="Urlasser">
+					<datum name="BenutzerReferenz" wert="undefiniert"/>
+					<datum name="Ursache" wert=""/>
+					<datum name="Veranlasser" wert=""/>
+				</datenliste>
+			</defaultParameter>
+			<defaultParameter attributgruppe="atg.knotenBeeinflussungsAnlageParameterManuelleProgramme" typ="typ.knotenBeeinflussungsAnlage">
+				<datenfeld name="Programmnummer">
+				</datenfeld>
+				<datenliste name="Urlasser">
+					<datum name="BenutzerReferenz" wert="undefiniert"/>
+					<datum name="Ursache" wert=""/>
+					<datum name="Veranlasser" wert=""/>
+				</datenliste>
+			</defaultParameter>
+			<defaultParameter attributgruppe="atg.knotenBeeinflussungsAnlageParameterTimeoutQuittierung" typ="typ.knotenBeeinflussungsAnlage">
+				<datum name="TimeoutQuittierungStellbefehl" wert="10 Minuten"/>
+				<datenliste name="Urlasser">
+					<datum name="BenutzerReferenz" wert="undefiniert"/>
+					<datum name="Ursache" wert=""/>
+					<datum name="Veranlasser" wert=""/>
+				</datenliste>
+			</defaultParameter>
+			<defaultParameter attributgruppe="atg.knotenBeeinflussungsAnlageParameterAutomatikProgramme" typ="typ.knotenBeeinflussungsAnlage">
+				<datenfeld name="Automatikprogramm">
+				</datenfeld>
+				<datenliste name="Urlasser">
+					<datum name="BenutzerReferenz" wert="undefiniert"/>
+					<datum name="Ursache" wert=""/>
+					<datum name="Veranlasser" wert=""/>
+				</datenliste>
+			</defaultParameter>
+			<defaultParameter attributgruppe="atg.knotenBeeinflussungsAnlageManuelleSchaltung" typ="typ.knotenBeeinflussungsAnlage">
+				<datum name="Programm" wert="Automatik"/>
+				<datenliste name="Urlasser">
+					<datum name="BenutzerReferenz" wert="undefiniert"/>
+					<datum name="Ursache" wert=""/>
+					<datum name="Veranlasser" wert=""/>
+				</datenliste>
+			</defaultParameter>
+		</typDefinition>
+		<typDefinition pid="typ.knotenBeeinflussungsAnlageZufluss" name="KnotenBeeinflussungsAnlageZufluss" objektNamenPermanent="nein">
+			<info>
+				<kurzinfo>Ein KnotenBeeinflussungsAnlageZufluss stellt einen Zufluss einer KnotenBeeinflussungsAnlage dar.</kurzinfo>
+				<beschreibung>Ein KnotenBeeinflussungsAnlageZufluss stellt einen Zufluss einer KnotenBeeinflussungsAnlage dar.
+        Dem KnotenBeeinflussungsAnlageZufluss ist ein Messquerschnitt zugeordnet, der für die Bestimmung der Verkehrsbelastung verwendet wird.
+        Für die Bestimmung der Verkehrsbelastung und der Ausfallstrategie Messquerschnitt sind Parametersätze vorhanden.
+        </beschreibung>
+			</info>
+			<erweitert pid="typ.konfigurationsObjekt"/>
+			<attributgruppe pid="atg.knotenBeeinflussungsAnlageZufluss"/>
+			<attributgruppe pid="atg.knotenBeeinflussungsAnlageZuflussAktuellerZustand"/>
+			<attributgruppe pid="atg.knotenBeeinflussungsAnlageZuflussDiagnose"/>
+			<attributgruppe pid="atg.knotenBeeinflussungsAnlageZuflussParameterAusfallstrategie"/>
+			<attributgruppe pid="atg.knotenBeeinflussungsAnlageZuflussParameterVerkehrsbelastung"/>
+			<defaultParameter attributgruppe="atg.knotenBeeinflussungsAnlageZuflussParameterVerkehrsbelastung" typ="typ.knotenBeeinflussungsAnlageZufluss">
+				<datum name="k0" wert="40 Fz/km"/>
+				<datum name="v0" wert="60 km/h"/>
+				<datum name="vf" wert="100 km/h"/>
+				<datum name="fa" wert="0,80"/>
+				<datum name="fp" wert="0,80"/>
+				<datum name="alpha" wert="0,25"/>
+				<datum name="beta" wert="0,25"/>
+				<datum name="v_stau" wert="30 km/h"/>
+				<datum name="f_stau" wert="1,20"/>
+				<datum name="fv_stockend" wert="1,00"/>
+				<datum name="fk_stockend" wert="0,80"/>
+				<datum name="BelegStauEin" wert="50 %"/>
+				<datum name="BelegStauAus" wert="35 %"/>
+				<datum name="QB_Ein" wert="1800 PkwE/km"/>
+				<datum name="QB_Aus" wert="1600 PkwE/km"/>
+				<datenliste name="Urlasser">
+					<datum name="BenutzerReferenz" wert="undefiniert"/>
+					<datum name="Ursache" wert=""/>
+					<datum name="Veranlasser" wert=""/>
+				</datenliste>
+			</defaultParameter>
+			<defaultParameter attributgruppe="atg.knotenBeeinflussungsAnlageZuflussParameterAusfallstrategie" typ="typ.knotenBeeinflussungsAnlageZufluss">
+				<datum name="Dauer" wert="Sofort"/>
+				<datenliste name="Urlasser">
+					<datum name="BenutzerReferenz" wert="undefiniert"/>
+					<datum name="Ursache" wert=""/>
+					<datum name="Veranlasser" wert=""/>
+				</datenliste>
+			</defaultParameter>
+		</typDefinition>
+		<attributgruppenDefinition pid="atg.knotenBeeinflussungsAnlage" name="KnotenBeeinflussungsAnlage" parametrierend="nein">
+			<info>
+				<kurzinfo>Konfigurierende Eigenschaften der KnotenBeeinflussungsAnlage.</kurzinfo>
+			</info>
+			<aspekt pid="asp.eigenschaften" konfigurationsModus="datensatzOptionalUndÄnderbar">
+			</aspekt>
+			<attribut pid="att.deWzgReferenz" anzahl="1" anzahlIst="fest" name="Dirigent">
+				<info>
+					<kurzinfo>Referenz auf den Dirigenten für die Ansteuerung der Anzeigen der KnotenBeeinflussungsAnlage.</kurzinfo>
+				</info>
+			</attribut>
+		</attributgruppenDefinition>
+		<attributgruppenDefinition pid="atg.knotenBeeinflussungsAnlageAktuellerZustand" name="KnotenBeeinflussungsAnlageAktuellerZustand" parametrierend="nein">
+			<info>
+				<kurzinfo>Parametersatz für die Publikation des aktuellen Zustandes der KnotenBeeinflussungsAnlage.</kurzinfo>
+				<beschreibung>Parametersatz für die Publikation des aktuellen Zustandes der KnotenBeeinflussungsAnlage.
+				Es wird die aktuelle Programmnummer oder wenn diese nicht bekannt ist der Zustand undefiniert gemeldet.
+        </beschreibung>
+			</info>
+			<aspekt pid="asp.kbaZustand" onlineModus="quelleUndSenke">
+			</aspekt>
+			<attribut pid="att.kbaProgrammNummerZustand" anzahl="1" anzahlIst="fest" name="Programm">
+				<info>
+					<kurzinfo>Programmnummer das aktuell geschaltet ist oder ein Fehlerzustand.</kurzinfo>
+				</info>
+			</attribut>
+		</attributgruppenDefinition>
+		<attributgruppenDefinition pid="atg.knotenBeeinflussungsAnlageManuelleSchaltung" name="KnotenBeeinflussungsAnlageManuelleSchaltung" parametrierend="ja">
+			<info>
+				<kurzinfo>Parametersatz für die manuelle Schaltung der KnotenBeeinflussungsAnlage.</kurzinfo>
+				<beschreibung>Parametersatz für die manuelle Schaltung der KnotenBeeinflussungsAnlage.
+				Es kann eine Programmnummer festgelegt werden oder Automatik.
+        Bei Automatik bestimmt die KnotenBeeinflussungsAnlage das zu schaltende Programm über die entsprechenden Algorithmen.
+        Diese AttributGruppe wird für das Senden eines neuen Befehls, die Meldung des aktuellen manuellen Befehls und als
+        Parameter für die Speicherung des aktuellen Befehls verwendet.
+        </beschreibung>
+			</info>
+			<aspekt pid="asp.kbaVorgabe" onlineModus="quelleUndSenke">
+			</aspekt>
+			<aspekt pid="asp.kbaVorgabeZustand" onlineModus="quelleUndSenke">
+			</aspekt>
+			<attribut pid="att.kbaProgrammNummerManuell" anzahl="1" anzahlIst="fest" name="Programm">
+				<info>
+					<kurzinfo>Programmnummer des manuell zu schaltenden Programmes oder Automatikprogramm.</kurzinfo>
+				</info>
+			</attribut>
+			<attributliste pid="atl.urlasser" anzahl="1" anzahlIst="fest" name="Urlasser">
+				<info>
+					<kurzinfo>Urlasserinformation</kurzinfo>
+				</info>
+			</attributliste>
+		</attributgruppenDefinition>
+		<attributgruppenDefinition pid="atg.knotenBeeinflussungsAnlageParameterAutomatikProgramme" name="KnotenBeeinflussungsAnlageParameterAutomatikProgramme" parametrierend="ja">
+			<info>
+				<kurzinfo>Parametersatz mit dem Automatikprogrammen der KnotenBeeinflussungsAnlage.</kurzinfo>
+				<beschreibung>Parametersatz mit dem Automatikprogrammen der KnotenBeeinflussungsAnlage.
+				Pro Zufluss wird ein Automatikprogramm benötigt bei dem die Programmnummer für den Dirigenten, die Priorität und die
+        Mindeststandzeit des Programms versorgt sein müssen.
+        </beschreibung>
+			</info>
+			<attributliste pid="atl.knotenBeeinflussungsAnlageAutomatikProgramm" anzahl="0" anzahlIst="variabel" name="Automatikprogramm">
+				<info>
+					<kurzinfo>Pro vorhandenem Zufluss die Versorgung eines Automatikprogramms.</kurzinfo>
+				</info>
+			</attributliste>
+			<attributliste pid="atl.urlasser" anzahl="1" anzahlIst="fest" name="Urlasser">
+				<info>
+					<kurzinfo>Urlasserinformation</kurzinfo>
+				</info>
+			</attributliste>
+		</attributgruppenDefinition>
+		<attributgruppenDefinition pid="atg.knotenBeeinflussungsAnlageParameterManuelleProgramme" name="KnotenBeeinflussungsAnlageParameterManuelleProgramme" parametrierend="ja">
+			<info>
+				<kurzinfo>Parametersatz mit den an der KnotenBeeinflussungsAnlage möglichen manuellen Programme.</kurzinfo>
+				<beschreibung>Parametersatz mit den an der KnotenBeeinflussungsAnlage möglichen manuellen Programme.
+        Mit der Information über die manuellen Programme kann der Schaltdialog für manuelle Programmschaltung eingeschränkt werden.
+        </beschreibung>
+			</info>
+			<attribut pid="att.kbaProgrammNummer" anzahl="0" anzahlIst="variabel" name="Programmnummer">
+				<info>
+					<kurzinfo>Programmnummer eines manuell an der KnotenBeeinflussungsAnlage schaltbaren Programmes.</kurzinfo>
+				</info>
+			</attribut>
+			<attributliste pid="atl.urlasser" anzahl="1" anzahlIst="fest" name="Urlasser">
+				<info>
+					<kurzinfo>Urlasserinformation</kurzinfo>
+				</info>
+			</attributliste>
+		</attributgruppenDefinition>
+		<attributgruppenDefinition pid="atg.knotenBeeinflussungsAnlageParameterTimeoutQuittierung" name="KnotenBeeinflussungsAnlageParameterTimeoutQuittierung" parametrierend="ja">
+			<info>
+				<kurzinfo>Parametersatz mit dem Timeout für die Quittierung des Stellbefehls durch den Dirigenten.</kurzinfo>
+				<beschreibung>Parametersatz mit dem Timeout für die Quittierung des Stellbefehls durch den Dirigenten.
+				Nachdem ein Stellbefehl an den Dirigenten gesendet wurde, darf erst nach der Quittierung durch den Dirigenten oder nach Ablauf
+				der Timeoutzeit ein anderer Stellbefehl gesendet werden.
+        </beschreibung>
+			</info>
+			<attribut pid="att.zeitDauer" anzahl="1" anzahlIst="fest" name="TimeoutQuittierungStellbefehl">
+				<info>
+					<kurzinfo>Timeoutzeit, die bei nicht erfolgter Quittierung eines Stellbefehles, gewartet werden muss, bevor ein neuer Stellbefehl gesendet werden darf.</kurzinfo>
+				</info>
+			</attribut>
+			<attributliste pid="atl.urlasser" anzahl="1" anzahlIst="fest" name="Urlasser">
+				<info>
+					<kurzinfo>Urlasserinformation</kurzinfo>
+				</info>
+			</attributliste>
+		</attributgruppenDefinition>
+		<attributgruppenDefinition pid="atg.knotenBeeinflussungsAnlageParameterVorhandeneProgramme" name="KnotenBeeinflussungsAnlageParameterVorhandeneProgramme" parametrierend="ja">
+			<info>
+				<kurzinfo>Parametersatz mit den am Dirigenten vorhandenen Programme.</kurzinfo>
+				<beschreibung>Parametersatz mit den am Dirigenten vorhandenen Programme.
+				Mit der Information über die vorhandenen Programme kann ein Prüfung stattfinden, damit keine
+				nicht vorhandenen Programme an den Dirigenten gesendet werden.
+        </beschreibung>
+			</info>
+			<attributliste pid="atl.kbaProgramm" anzahl="0" anzahlIst="variabel" name="Programm">
+				<info>
+					<kurzinfo>Nummer und Name eines am Dirigenten der KnotenBeeinflussungsAnlage vorhandenen Programmes.</kurzinfo>
+				</info>
+			</attributliste>
+			<attributliste pid="atl.urlasser" anzahl="1" anzahlIst="fest" name="Urlasser">
+				<info>
+					<kurzinfo>Urlasserinformation</kurzinfo>
+				</info>
+			</attributliste>
+		</attributgruppenDefinition>
+		<attributgruppenDefinition pid="atg.knotenBeeinflussungsAnlageZufluss" name="KnotenBeeinflussungsAnlageZufluss" parametrierend="nein">
+			<info>
+				<kurzinfo>Konfigurierende Eigenschaften des KnotenBeeinflussungsAnlageZufluss.</kurzinfo>
+			</info>
+			<aspekt pid="asp.eigenschaften" konfigurationsModus="datensatzOptionalUndÄnderbar">
+			</aspekt>
+			<attribut pid="att.messQuerschnittAllgemeinReferenz" anzahl="1" anzahlIst="fest" name="Messquerschnitt">
+				<info>
+					<kurzinfo>Referenz auf den Messquerschnitt für die Bestimmung der Verkehrsbelastung am KnotenBeeinflussungsAnlageZufluss.</kurzinfo>
+				</info>
+			</attribut>
+		</attributgruppenDefinition>
+		<attributgruppenDefinition pid="atg.knotenBeeinflussungsAnlageZuflussAktuellerZustand" name="KnotenBeeinflussungsAnlageZuflussAktuellerZustand" parametrierend="nein">
+			<info>
+				<kurzinfo>Parametersatz für die Publikation des aktuellen Zustandes des KnotenBeeinflussungsAnlageZufluss.</kurzinfo>
+				<beschreibung>Parametersatz für die Publikation des aktuellen Zustandes des KnotenBeeinflussungsAnlageZufluss.
+				Es wird der aktuelle Zustand nicht detektiert bzw. detektiert oder wenn dieser nicht bekannt ist der Zustand undefiniert gemeldet.
+        </beschreibung>
+			</info>
+			<aspekt pid="asp.kbaZustand" onlineModus="quelleUndSenke">
+			</aspekt>
+			<attribut pid="att.kbaZuflussZustand" anzahl="1" anzahlIst="fest" name="Zustand">
+				<info>
+					<kurzinfo>Zustand des Zufluss oder der Fehlerzustand.</kurzinfo>
+				</info>
+			</attribut>
+		</attributgruppenDefinition>
+		<attributgruppenDefinition pid="atg.knotenBeeinflussungsAnlageZuflussDiagnose" name="KnotenBeeinflussungsAnlageZuflussDiagnose" parametrierend="nein">
+			<info>
+				<kurzinfo>Parametersatz für die Publikation von Diagnosedaten des aktuellen Zustandes des KnotenBeeinflussungsAnlageZufluss.</kurzinfo>
+				<beschreibung>Parametersatz für die Publikation von Diagnosedaten des aktuellen Zustandes des KnotenBeeinflussungsAnlageZufluss.
+				Diese AttributGruppe muss noch sinnvoll gefüllt werden, um ausreichend Diagnosedaten zu erhalten.
+        </beschreibung>
+			</info>
+			<aspekt pid="asp.kbaZustand" onlineModus="quelleUndSenke">
+			</aspekt>
+			<attribut pid="att.kbaZuflussZustand" anzahl="1" anzahlIst="fest" name="Zustand">
+				<info>
+					<kurzinfo>Zustand des Zufluss oder der Fehlerzustand.</kurzinfo>
+				</info>
+			</attribut>
+		</attributgruppenDefinition>
+		<attributgruppenDefinition pid="atg.knotenBeeinflussungsAnlageZuflussParameterAusfallstrategie" name="KnotenBeeinflussungsAnlageZuflussParameterAusfallstrategie" parametrierend="ja">
+			<info>
+				<kurzinfo>Parametersatz mit der Dauer für die Ausfallstrategie Messquerschnitt.</kurzinfo>
+				<beschreibung>Parametersatz mit der Dauer für die Ausfallstrategie Messquerschnitt.
+				Mit der Dauer für die Ausfallstrategie Messquerschnitt wird angegeben, ab wann der Zustand des Zuflusses nach einem Ausfall
+				des Messquerschnitt von unbekannt auf nicht detektiert wechselt.
+        </beschreibung>
+			</info>
+			<attribut pid="att.kbaAusfallstrategieMessquerschnittDauer" anzahl="1" anzahlIst="fest" name="Dauer">
+				<info>
+					<kurzinfo>Dauer, nach der bei Ausfall des Messquerschnitt der Zustand des Zuflusses auf nicht detektiert wechselt.</kurzinfo>
+				</info>
+			</attribut>
+			<attributliste pid="atl.urlasser" anzahl="1" anzahlIst="fest" name="Urlasser">
+				<info>
+					<kurzinfo>Urlasserinformation</kurzinfo>
+				</info>
+			</attributliste>
+		</attributgruppenDefinition>
+		<attributgruppenDefinition pid="atg.knotenBeeinflussungsAnlageZuflussParameterVerkehrsbelastung" name="KnotenBeeinflussungsAnlageZuflussParameterVerkehrsbelastung" parametrierend="ja">
+			<info>
+				<kurzinfo>Parametersatz für die Bestimmung der Verkehrsbelastung mit den Messquerschnittsdaten am Zufluss.</kurzinfo>
+				<beschreibung>Parametersatz für die Bestimmung der Verkehrsbelastung mit den Messquerschnittsdaten am Zufluss.
+				Alle Parameter die für die Bestimmung der Verkehrsbelastung mit den Messquerschnittsdaten benötigt werden.
+        </beschreibung>
+			</info>
+			<attribut pid="att.fahrzeugDichte" anzahl="1" anzahlIst="fest" name="k0">
+				<info>
+					<kurzinfo>Fahrzeugdichte pro km.</kurzinfo>
+				</info>
+			</attribut>
+			<attribut pid="att.geschwindigkeit" anzahl="1" anzahlIst="fest" name="v0">
+				<info>
+					<kurzinfo>Geschwindigkeit.</kurzinfo>
+				</info>
+			</attribut>
+			<attribut pid="att.geschwindigkeit" anzahl="1" anzahlIst="fest" name="vf">
+				<info>
+					<kurzinfo>Geschwindigkeit.</kurzinfo>
+				</info>
+			</attribut>
+			<attribut pid="att.zahlPositiv2NachKommaStellen" anzahl="1" anzahlIst="fest" name="fa">
+				<info>
+					<kurzinfo>Faktor für die Ermittlung der Analysedichte.</kurzinfo>
+				</info>
+			</attribut>
+			<attribut pid="att.zahlPositiv2NachKommaStellen" anzahl="1" anzahlIst="fest" name="fp">
+				<info>
+					<kurzinfo>Faktor für die Ermittlung der Prognosedichte.</kurzinfo>
+				</info>
+			</attribut>
+			<attribut pid="att.zahlPositiv2NachKommaStellen" anzahl="1" anzahlIst="fest" name="alpha">
+				<info>
+					<kurzinfo>Glättungsparameter für die Bestimmung des gleitenden Mittelwerts.</kurzinfo>
+				</info>
+			</attribut>
+			<attribut pid="att.zahlPositiv2NachKommaStellen" anzahl="1" anzahlIst="fest" name="beta">
+				<info>
+					<kurzinfo>Glättungsparameter für die Bestimmung des gleitenden Trendwerts.</kurzinfo>
+				</info>
+			</attribut>
+			<attribut pid="att.geschwindigkeit" anzahl="1" anzahlIst="fest" name="v_stau">
+				<info>
+					<kurzinfo>Geschwindigkeit für die Bestimmung von Stau über die Prognosewerte.</kurzinfo>
+				</info>
+			</attribut>
+			<attribut pid="att.zahlPositiv2NachKommaStellen" anzahl="1" anzahlIst="fest" name="f_stau">
+				<info>
+					<kurzinfo>Faktor für die Berechnung des Vergleichswerts der Dichte bei Stau.</kurzinfo>
+				</info>
+			</attribut>
+			<attribut pid="att.zahlPositiv2NachKommaStellen" anzahl="1" anzahlIst="fest" name="fv_stockend">
+				<info>
+					<kurzinfo>Faktor für die Berechnung des Vergleichswerts der Geschwindigkeit bei stockendem Verkehr.</kurzinfo>
+				</info>
+			</attribut>
+			<attribut pid="att.zahlPositiv2NachKommaStellen" anzahl="1" anzahlIst="fest" name="fk_stockend">
+				<info>
+					<kurzinfo>Faktor für die Berechnung des Vergleichswerts der Dichte bei stockendem Verkehr.</kurzinfo>
+				</info>
+			</attribut>
+			<attribut pid="att.prozent" anzahl="1" anzahlIst="fest" name="BelegStauEin">
+				<info>
+					<kurzinfo>Belegung in Prozent für die Erkennung von Stau.</kurzinfo>
+				</info>
+			</attribut>
+			<attribut pid="att.prozent" anzahl="1" anzahlIst="fest" name="BelegStauAus">
+				<info>
+					<kurzinfo>Belegung in Prozent für die Erkennung von nicht Stau.</kurzinfo>
+				</info>
+			</attribut>
+			<attribut pid="att.bemessungsFahrzeugDichte" anzahl="1" anzahlIst="fest" name="QB_Ein">
+				<info>
+					<kurzinfo>Bemessungsverkehrsstärke für das Einschalten.</kurzinfo>
+				</info>
+			</attribut>
+			<attribut pid="att.bemessungsFahrzeugDichte" anzahl="1" anzahlIst="fest" name="QB_Aus">
+				<info>
+					<kurzinfo>Bemessungsverkehrsstärke für das Ausschalten.</kurzinfo>
+				</info>
+			</attribut>
+			<attributliste pid="atl.urlasser" anzahl="1" anzahlIst="fest" name="Urlasser">
+				<info>
+					<kurzinfo>Urlasserinformation</kurzinfo>
+				</info>
+			</attributliste>
+		</attributgruppenDefinition>
+		<aspektDefinition pid="asp.kbaVorgabe" name="KBAVorgabe">
+			<info>
+				<kurzinfo>Vorgabe durch Benutzer (Befehl).</kurzinfo>
+			</info>
+		</aspektDefinition>
+		<aspektDefinition pid="asp.kbaVorgabeZustand" name="KBAVorgabeZustand">
+			<info>
+				<kurzinfo>Aktuell verwendete Vorgabe durch Benutzer (Rückmeldung).</kurzinfo>
+			</info>
+		</aspektDefinition>
+		<aspektDefinition pid="asp.kbaZustand" name="KBAZustand">
+			<info>
+				<kurzinfo>Aspekt für die Publikation von Zustandsinformationen.</kurzinfo>
+			</info>
+		</aspektDefinition>
+		<attributDefinition pid="att.kbaAusfallstrategieMessquerschnittDauer" name="KbaAusfallstrategieMessquerschnittDauer">
+			<info>
+				<kurzinfo>Dauer für die Abarbeitung der Ausfallstrategie Messquerschnitt.</kurzinfo>
+			</info>
+			<ganzzahl bits="16">
+				<bereich skalierung="1" minimum="1" maximum="254" einheit="Stunden">
+				</bereich>
+				<zustand name="Sofort" wert="0">
+					<info>
+						<kurzinfo>Sofort bedeutet, dass der Zufluss bei Ausfall des Messquerschnitt sofort den Zustand nicht detektiert erhält.</kurzinfo>
+					</info>
+				</zustand>
+				<zustand name="Niemals" wert="255">
+					<info>
+						<kurzinfo>Niemals bedeutet, dass der Zufluss bei Ausfall des Messquerschnitt niemals den Zustand nicht detektiert erhält.</kurzinfo>
+					</info>
+				</zustand>
+			</ganzzahl>
+		</attributDefinition>
+		<attributDefinition pid="att.kbaPriorität" name="KbaPriorität">
+			<info>
+				<kurzinfo>Priorität des Automatikprogramms (höchster Wert bedeutet höchste Priorität).</kurzinfo>
+			</info>
+			<ganzzahl bits="16">
+				<bereich skalierung="1" minimum="1" maximum="254">
+				</bereich>
+			</ganzzahl>
+		</attributDefinition>
+		<attributDefinition pid="att.kbaProgrammNummer" name="KbaProgrammNummer">
+			<info>
+				<kurzinfo>Programmnummer für den Dirigenten.</kurzinfo>
+			</info>
+			<ganzzahl bits="16">
+				<bereich skalierung="1" minimum="1" maximum="254">
+				</bereich>
+			</ganzzahl>
+		</attributDefinition>
+		<attributDefinition pid="att.kbaProgrammNummerManuell" name="KbaProgrammNummerManuell">
+			<info>
+				<kurzinfo>Programmnummer für den Dirigenten in Verwendung bei der manuellen Schaltung.</kurzinfo>
+			</info>
+			<ganzzahl bits="16">
+				<bereich skalierung="1" minimum="1" maximum="254">
+				</bereich>
+				<zustand name="Automatik" wert="0">
+					<info>
+						<kurzinfo>Automatik, zu schaltendes Programm wird durch KnotenBeeinflussungsAnlage bestimmt.</kurzinfo>
+					</info>
+				</zustand>
+			</ganzzahl>
+		</attributDefinition>
+		<attributDefinition pid="att.kbaProgrammNummerZustand" name="KbaProgrammNummerZustand">
+			<info>
+				<kurzinfo>Programmnummer für den Dirigenten in Verwendung bei der Meldung des aktuellen Zustands.</kurzinfo>
+			</info>
+			<ganzzahl bits="16">
+				<bereich skalierung="1" minimum="1" maximum="254">
+				</bereich>
+				<zustand name="Unbekannt" wert="0">
+					<info>
+						<kurzinfo>Unbekannt bedeutet, dass das aktuelle Programm nicht bekannt ist.</kurzinfo>
+					</info>
+				</zustand>
+				<zustand name="Kommunikationsstörung" wert="-1">
+					<info>
+						<kurzinfo>Kommunikationsstörung bedeutet, dass die Verbindung zur Dirigenten-DE gestört ist.</kurzinfo>
+					</info>
+				</zustand>
+			</ganzzahl>
+		</attributDefinition>
+		<attributDefinition pid="att.kbaZuflussZustand" name="KbaZuflussZustand">
+			<info>
+				<kurzinfo>Zustand des Zufluss oder der Fehlerzustand.</kurzinfo>
+			</info>
+			<ganzzahl bits="16">
+				<zustand name="Unbestimmt" wert="0">
+					<info>
+						<kurzinfo>Unbestimmt bedeutet, dass der aktuelle Zustand nicht bestimmt werden kann, z. B. wegen Ausfall des Messquerschnitts.</kurzinfo>
+					</info>
+				</zustand>
+				<zustand name="nicht detektiert" wert="1">
+					<info>
+						<kurzinfo>Am Zufluss ist die Verkehrsbelastung nicht zu gross.</kurzinfo>
+					</info>
+				</zustand>
+				<zustand name="detektiert" wert="2">
+					<info>
+						<kurzinfo>Am Zufluss ist die Verkehrsbelastung zu gross.</kurzinfo>
+					</info>
+				</zustand>
+			</ganzzahl>
+		</attributDefinition>
+		<attributDefinition pid="att.knotenBeeinflussungsAnlageReferenz" name="KnotenBeeinflussungsAnlageReferenz">
+			<info>
+				<kurzinfo>Attribut zur Referenzierung des Objekttyps: typ.knotenBeeinflussungsAnlage.</kurzinfo>
+			</info>
+			<objektReferenz typ="typ.knotenBeeinflussungsAnlage" undefiniert="verboten" referenzierungsart="assoziation"/>
+		</attributDefinition>
+		<attributDefinition pid="att.knotenBeeinflussungsAnlageReferenzOptional" name="KnotenBeeinflussungsAnlageReferenzOptional">
+			<info>
+				<kurzinfo>Attribut zur Referenzierung des Objekttyps: typ.knotenBeeinflussungsAnlage (Optionale Referenzierung erlaubt).</kurzinfo>
+			</info>
+			<objektReferenz typ="typ.knotenBeeinflussungsAnlage" undefiniert="erlaubt" referenzierungsart="assoziation"/>
+		</attributDefinition>
+		<attributDefinition pid="att.knotenBeeinflussungsAnlageZuflussReferenz" name="KnotenBeeinflussungsAnlageZuflussReferenz">
+			<info>
+				<kurzinfo>Attribut zur Referenzierung des Objekttyps: typ.knotenBeeinflussungsAnlageZufluss.</kurzinfo>
+			</info>
+			<objektReferenz typ="typ.knotenBeeinflussungsAnlageZufluss" undefiniert="verboten" referenzierungsart="assoziation"/>
+		</attributDefinition>
+		<attributDefinition pid="att.knotenBeeinflussungsAnlageZuflussReferenzOptional" name="KnotenBeeinflussungsAnlageZuflussReferenzOptional">
+			<info>
+				<kurzinfo>Attribut zur Referenzierung des Objekttyps: typ.knotenBeeinflussungsAnlageZufluss (Optionale Referenzierung erlaubt).</kurzinfo>
+			</info>
+			<objektReferenz typ="typ.knotenBeeinflussungsAnlageZufluss" undefiniert="erlaubt" referenzierungsart="assoziation"/>
+		</attributDefinition>
+		<attributlistenDefinition pid="atl.kbaProgramm" name="KbaProgramm">
+			<info>
+				<kurzinfo>Liste mit Nummer und Name eines am Dirigenten der KnotenBeeinflussungsAnlage vorhandenen Programmes.</kurzinfo>
+			</info>
+			<attribut pid="att.kbaProgrammNummer" anzahl="1" anzahlIst="fest" name="Nummer">
+				<info>
+					<kurzinfo>Programmnummer eines am Dirigenten der KnotenBeeinflussungsAnlage vorhandenen Programmes.</kurzinfo>
+				</info>
+			</attribut>
+			<attribut pid="att.text" anzahl="1" anzahlIst="fest" name="Name">
+				<info>
+					<kurzinfo>Programmname eines am Dirigenten der KnotenBeeinflussungsAnlage vorhandenen Programmes.</kurzinfo>
+				</info>
+			</attribut>
+		</attributlistenDefinition>
+		<attributlistenDefinition pid="atl.knotenBeeinflussungsAnlageAutomatikProgramm" name="KnotenBeeinflussungsAnlageAutomatikProgramm">
+			<info>
+				<kurzinfo>Parametersatz für ein Automatikprogrammen der KnotenBeeinflussungsAnlage.</kurzinfo>
+			</info>
+			<attribut pid="att.knotenBeeinflussungsAnlageZuflussReferenz" anzahl="1" anzahlIst="fest" name="Zufluss">
+				<info>
+					<kurzinfo>Referenz auf den zu verwendenden Zufluss für das Automatikprogramm.</kurzinfo>
+				</info>
+			</attribut>
+			<attribut pid="att.kbaProgrammNummer" anzahl="1" anzahlIst="fest" name="Programmnummer">
+				<info>
+					<kurzinfo>Programmnummer des an der KnotenBeeinflussungsAnlage zu schaltenden Programmes.</kurzinfo>
+				</info>
+			</attribut>
+			<attribut pid="att.kbaPriorität" anzahl="1" anzahlIst="fest" name="Priorität">
+				<info>
+					<kurzinfo>Priorität des Automatikprogramms (höchster Wert bedeutet höchste Priorität).</kurzinfo>
+				</info>
+			</attribut>
+			<attribut pid="att.zeitDauer" anzahl="1" anzahlIst="fest" name="Mindeststandzeit">
+				<info>
+					<kurzinfo>Mindeststandzeit des geschalteten Programms.</kurzinfo>
+				</info>
+			</attribut>
+		</attributlistenDefinition>
+		<mengenDefinition pid="menge.knotenBeeinflussungsAnlageZuflüsse" elemente="typ.knotenBeeinflussungsAnlageZufluss" aenderbar="nein" mindestens="2" hoechstens="0" referenzierungsart="assoziation">
+			<info>
+				<kurzinfo>Menge der Zuflüsse, der KnotenBeeinflussungsAnlage.</kurzinfo>
+			</info>
+		</mengenDefinition>
+	</modell>
+	<objekte>
+	</objekte>
+</konfigurationsBereich>

@@ -1,0 +1,35 @@
+Manifest-Version: 1.0
+Ant-Version: Apache Ant 1.8.2
+Created-By: Kappich Systemberatung
+Bundle-ManifestVersion: 2
+Bundle-Name: de.bsvrz.pat.sysbed
+Bundle-SymbolicName: de.bsvrz.pat.sysbed
+Bundle-Version: 3.6.2.v12133-20140320-1240
+Bundle-Vendor: Kappich Systemberatung
+Bundle-ActivationPolicy: lazy
+Bundle-RequiredExecutionEnvironment: JavaSE-1.6
+Bundle-ClassPath: de.bsvrz.pat.sysbed.jar
+Export-Package: de.bsvrz.pat.sysbed, de.bsvrz.pat.sysbed.dataEditor, d
+ e.bsvrz.pat.sysbed.dataview, de.bsvrz.pat.sysbed.dataview.selectionMa
+ nagement, de.bsvrz.pat.sysbed.main, de.bsvrz.pat.sysbed.plugins, de.b
+ svrz.pat.sysbed.plugins.api, de.bsvrz.pat.sysbed.plugins.api.settings
+ , de.bsvrz.pat.sysbed.plugins.archiverequest, de.bsvrz.pat.sysbed.plu
+ gins.configdata, de.bsvrz.pat.sysbed.plugins.datareceiver, de.bsvrz.p
+ at.sysbed.plugins.datasender, de.bsvrz.pat.sysbed.plugins.datgen, de.
+ bsvrz.pat.sysbed.plugins.onlinetable, de.bsvrz.pat.sysbed.plugins.onl
+ prot, de.bsvrz.pat.sysbed.plugins.parameditor, de.bsvrz.pat.sysbed.pl
+ ugins.subscriptions, de.bsvrz.pat.sysbed.plugins.sysprot, de.bsvrz.pa
+ t.sysbed.preselection, de.bsvrz.pat.sysbed.preselection.lists, de.bsv
+ rz.pat.sysbed.preselection.panel, de.bsvrz.pat.sysbed.preselection.tr
+ ee, de.bsvrz.pat.sysbed.preselection.treeFilter, de.bsvrz.pat.sysbed.
+ preselection.treeFilter.plugins, de.bsvrz.pat.sysbed.preselection.tre
+ eFilter.plugins.api, de.bsvrz.pat.sysbed.preselection.treeFilter.stan
+ dard, de.bsvrz.pat.sysbed.preselection.util
+Require-Bundle: de.bsvrz.sys.funclib.consoleProcessFrame, de.bsvrz.dav
+ .daf, de.bsvrz.sys.funclib.dataSerializer, de.bsvrz.sys.funclib.commu
+ nicationStreams, de.bsvrz.sys.funclib.application, de.bsvrz.sys.funcl
+ ib.configObjectAcquisition, de.bsvrz.sys.funclib.debug, de.bsvrz.sys.
+ funclib.commandLineArgs, de.bsvrz.sys.funclib.concurrent, de.bsvrz.pa
+ t.onlprot, de.bsvrz.pat.datgen, de.bsvrz.pat.sysprot
+Eclipse-BuddyPolicy: dependent
+

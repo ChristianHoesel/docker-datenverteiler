@@ -1,0 +1,374 @@
+<?xml version="1.0" encoding="ISO-8859-1"?>
+<!DOCTYPE konfigurationsBereich PUBLIC "-//K2S//DTD Dokument//DE" "K2S.dtd">
+<konfigurationsBereich pid="kb.tmAnzeigenGlobalZwischenschicht" name="Teilmodell AnzeigenGlobalZwischenschicht" verantwortlich="kv.dambach">
+	<info>
+		<kurzinfo>Teilmodell mit Datenmodellierung der Zwischenschicht (Umsetzung von und zu Aussenanlagen) für die Anzeigequerschnitte. Wird nicht direkt instanziert.</kurzinfo>
+	</info>
+	<konfigurationsAenderung stand="12.06.2007" version="1" autor="inovat, Dipl.-Ing. H. C. Kniß (HCK)" grund="Änderungsdokumentation siehe &apos;ReleaseNotes kv.dambach.doc&apos;"></konfigurationsAenderung>
+	<konfigurationsAenderung stand="13.06.2007" version="2" autor="inovat, Dipl.-Ing. H. C. Kniß (HCK)" grund="Änderungsdokumentation siehe &apos;ReleaseNotes kv.dambach.doc&apos;"></konfigurationsAenderung>
+	<konfigurationsAenderung stand="14.06.2007" version="3" autor="Dambach-Werke GmbH, Th. Drapp" grund="Attribut FontReferenz geändert in FontUmsetzungReferenz bei atg.anzeigeTypUmsetzungGrundFont"></konfigurationsAenderung>
+	<konfigurationsAenderung stand="16.06.2007" version="4" autor="Dambach-Werke GmbH, Th. Drapp" grund="Änderungsdokumentation siehe &apos;ReleaseNotes kv.dambach.doc&apos;"></konfigurationsAenderung>
+	<konfigurationsAenderung stand="15.06.2011" version="5" autor="Swarco Traffic Systems GmbH, Th. Drapp" grund="Änderungsdokumentation siehe &apos;ReleaseNotes kv.dambach.doc&apos;"></konfigurationsAenderung>
+	<!--
+	Abhängigkeiten des Bereichs kb.tmAnzeigenGlobalZwischenschicht
+	Abhängig ab Version      Art der Abhängigkeit      Version des benötigten Bereichs      Benötigter Bereich
+	4                        notwendig                 1                                    kb.metaModellGlobal                
+	4                        notwendig                 1                                    kb.tmAnzeigenGlobal                
+	4                        notwendig                 1                                    kb.kv.dambach                      
+	4                        notwendig                 1                                    kb.fachModellGlobal                
+	6                        notwendig                 15                                   kb.tmAnzeigenGlobal                
+	-->
+	<modell>
+		<typDefinition pid="typ.anzeigeAktor" name="AnzeigeAktor" objektNamenPermanent="nein">
+			<info>
+				<kurzinfo>Aktor einer Anzeige.</kurzinfo>
+			</info>
+			<erweitert pid="typ.konfigurationsObjekt"/>
+			<attributgruppe pid="atg.anzeigeAktor"/>
+		</typDefinition>
+		<typDefinition pid="typ.anzeigeQuerschnittAktor" name="AnzeigeQuerschnittAktor" objektNamenPermanent="nein">
+			<info>
+				<kurzinfo>Aktor eines Anzeigequerschnitts.</kurzinfo>
+			</info>
+			<erweitert pid="typ.konfigurationsObjekt"/>
+			<attributgruppe pid="atg.anzeigeQuerschnittAktor"/>
+		</typDefinition>
+		<typDefinition pid="typ.anzeigeQuerschnittTypUmsetzung" name="AnzeigeQuerschnittTypUmsetzung" objektNamenPermanent="nein">
+			<info>
+				<kurzinfo>Umsetzung für Anzeigequerschnitttyp.</kurzinfo>
+			</info>
+			<erweitert pid="typ.konfigurationsObjekt"/>
+		</typDefinition>
+		<typDefinition pid="typ.anzeigeTypUmsetzung" name="AnzeigeTypUmsetzung" objektNamenPermanent="nein">
+			<info>
+				<kurzinfo>Umsetzung für Anzeigetyp.</kurzinfo>
+			</info>
+			<erweitert pid="typ.konfigurationsObjekt"/>
+			<attributgruppe pid="atg.anzeigeTypUmsetzung"/>
+			<attributgruppe pid="atg.anzeigeTypUmsetzungGrundFont"/>
+			<attributgruppe pid="atg.anzeigeTypUmsetzungGrundTextAusrichtung"/>
+		</typDefinition>
+		<typDefinition pid="typ.dirigentAktor" name="DirigentAktor" objektNamenPermanent="nein">
+			<info>
+				<kurzinfo>Aktor eines Dirigenten.</kurzinfo>
+			</info>
+			<erweitert pid="typ.konfigurationsObjekt"/>
+			<attributgruppe pid="atg.dirigentAktor"/>
+		</typDefinition>
+		<typDefinition pid="typ.dirigentUmsetzung" name="DirigentUmsetzung" objektNamenPermanent="nein">
+			<info>
+				<kurzinfo>Umsetzung für Dirigent.</kurzinfo>
+			</info>
+			<erweitert pid="typ.konfigurationsObjekt"/>
+			<attributgruppe pid="atg.dirigentUmsetzung"/>
+		</typDefinition>
+		<typDefinition pid="typ.fontUmsetzung" name="FontUmsetzung" objektNamenPermanent="nein">
+			<info>
+				<kurzinfo>Umsetzung für Font.</kurzinfo>
+			</info>
+			<erweitert pid="typ.konfigurationsObjekt"/>
+			<attributgruppe pid="atg.fontUmsetzung"/>
+		</typDefinition>
+		<typDefinition pid="typ.textAusrichtungUmsetzung" name="TextAusrichtungUmsetzung" objektNamenPermanent="nein">
+			<info>
+				<kurzinfo>Umsetzung für Text-Ausrichtung.</kurzinfo>
+			</info>
+			<erweitert pid="typ.konfigurationsObjekt"/>
+			<attributgruppe pid="atg.textAusrichtungUmsetzung"/>
+		</typDefinition>
+		<typDefinition pid="typ.wvzInhaltUmsetzung" name="WvzInhaltUmsetzung" objektNamenPermanent="nein">
+			<info>
+				<kurzinfo>Umsetzung für WvzInhalt.</kurzinfo>
+			</info>
+			<erweitert pid="typ.konfigurationsObjekt"/>
+			<attributgruppe pid="atg.wvzInhaltUmsetzung"/>
+		</typDefinition>
+		<typDefinition pid="typ.zeichenUmsetzung" name="ZeichenUmsetzung" objektNamenPermanent="nein">
+			<info>
+				<kurzinfo>Umsetzung für Zeichen.</kurzinfo>
+			</info>
+			<erweitert pid="typ.konfigurationsObjekt"/>
+			<attributgruppe pid="atg.zeichenUmsetzung"/>
+		</typDefinition>
+		<attributgruppenDefinition pid="atg.anzeigeAktor" name="AnzeigeAktor" parametrierend="nein">
+			<info>
+				<kurzinfo>Konfigurierende Eigenschaften der Objekte des Typs.</kurzinfo>
+			</info>
+			<aspekt pid="asp.eigenschaften" konfigurationsModus="datensatzNotwendig">
+			</aspekt>
+			<attribut pid="att.anzeigeReferenz" anzahl="1" anzahlIst="fest" name="AnzeigeReferenz">
+				<info>
+					<kurzinfo>Referenz auf ein Objekt vom Typ Anzeige zur Umsetzung der Befehle und Rückmeldungen zu und von der externen Kommunikation.</kurzinfo>
+				</info>
+			</attribut>
+			<attribut pid="att.anzeigeTypUmsetzungReferenz" anzahl="1" anzahlIst="fest" name="AnzeigeTypUmsetzungReferenz">
+				<info>
+					<kurzinfo>Referenz auf ein Objekt vom Typ AnzeigeTypUmsetzung zur Umsetzung der Befehle und Rückmeldungen zu und von der externen Kommunikation.</kurzinfo>
+				</info>
+			</attribut>
+		</attributgruppenDefinition>
+		<attributgruppenDefinition pid="atg.anzeigeQuerschnittAktor" name="AnzeigeQuerschnittAktor" parametrierend="nein">
+			<info>
+				<kurzinfo>Konfigurierende Eigenschaften der Objekte des Typs.</kurzinfo>
+			</info>
+			<aspekt pid="asp.eigenschaften" konfigurationsModus="datensatzNotwendig">
+			</aspekt>
+			<attribut pid="att.anzeigeQuerschnittReferenz" anzahl="1" anzahlIst="fest" name="AnzeigeQuerschnittReferenz">
+				<info>
+					<kurzinfo>Referenz auf ein Objekt vom Typ AnzeigeQuerschnitt zur Umsetzung der Befehle und Rückmeldungen zu und von der externen Kommunikation.</kurzinfo>
+				</info>
+			</attribut>
+			<attribut pid="att.anzeigeQuerschnittTypUmsetzungReferenz" anzahl="1" anzahlIst="fest" name="AnzeigeQuerschnittTypUmsetzungReferenz">
+				<info>
+					<kurzinfo>Referenz auf ein Objekt vom Typ AnzeigeQuerschnittTypUmsetzung zur Umsetzung der Befehle und Rückmeldungen zu und von der externen Kommunikation.</kurzinfo>
+				</info>
+			</attribut>
+		</attributgruppenDefinition>
+		<attributgruppenDefinition pid="atg.anzeigeTypUmsetzung" name="AnzeigeTypUmsetzung" parametrierend="nein">
+			<info>
+				<kurzinfo>Konfigurierende Eigenschaften der Objekte des Typs.</kurzinfo>
+			</info>
+			<aspekt pid="asp.eigenschaften" konfigurationsModus="datensatzNotwendig">
+			</aspekt>
+			<attribut pid="att.fontUmsetzungReferenz" anzahl="0" anzahlIst="variabel" name="FontUmsetzungReferenz">
+			</attribut>
+			<attribut pid="att.textAusrichtungUmsetzungReferenz" anzahl="0" anzahlIst="variabel" name="TextAusrichtungUmsetzungReferenz">
+			</attribut>
+			<attribut pid="att.zeichenUmsetzungReferenz" anzahl="0" anzahlIst="variabel" name="ZeichenUmsetzungReferenz">
+			</attribut>
+			<attribut pid="att.wvzInhaltUmsetzungReferenz" anzahl="0" anzahlIst="variabel" name="WvzInhaltUmsetzungReferenz">
+			</attribut>
+		</attributgruppenDefinition>
+		<attributgruppenDefinition pid="atg.anzeigeTypUmsetzungGrundFont" name="AnzeigeTypUmsetzungGrundFont" parametrierend="nein">
+			<info>
+				<kurzinfo>Konfigurierende Eigenschaften der Objekte des Typs.</kurzinfo>
+			</info>
+			<aspekt pid="asp.eigenschaften" konfigurationsModus="datensatzOptional">
+			</aspekt>
+			<attribut pid="att.fontUmsetzungReferenz" anzahl="1" anzahlIst="fest" name="FontUmsetzungReferenz">
+			</attribut>
+		</attributgruppenDefinition>
+		<attributgruppenDefinition pid="atg.anzeigeTypUmsetzungGrundTextAusrichtung" name="AnzeigeTypUmsetzungGrundTextAusrichtung" parametrierend="nein">
+			<info>
+				<kurzinfo>Konfigurierende Eigenschaften der Objekte des Typs.</kurzinfo>
+			</info>
+			<aspekt pid="asp.eigenschaften" konfigurationsModus="datensatzOptional">
+			</aspekt>
+			<attribut pid="att.textAusrichtung" anzahl="1" anzahlIst="fest" name="TextAusrichtung">
+			</attribut>
+		</attributgruppenDefinition>
+		<attributgruppenDefinition pid="atg.dirigentAktor" name="DirigentAktor" parametrierend="nein">
+			<info>
+				<kurzinfo>Konfigurierende Eigenschaften der Objekte des Typs.</kurzinfo>
+			</info>
+			<aspekt pid="asp.eigenschaften" konfigurationsModus="datensatzNotwendig">
+			</aspekt>
+			<attribut pid="att.dirigentReferenz" anzahl="1" anzahlIst="fest" name="DirigentReferenz">
+				<info>
+					<kurzinfo>Referenz auf ein Objekt vom Typ Dirigent zur Umsetzung der Befehle und Rückmeldungen zu und von der externen Kommunikation.</kurzinfo>
+				</info>
+			</attribut>
+			<attribut pid="att.dirigentUmsetzungReferenz" anzahl="1" anzahlIst="fest" name="DirigentUmsetzungReferenz">
+				<info>
+					<kurzinfo>Referenz auf ein Objekt vom Typ DirigentUmsetzung zur Umsetzung der Befehle und Rückmeldungen zu und von der externen Kommunikation.</kurzinfo>
+				</info>
+			</attribut>
+		</attributgruppenDefinition>
+		<attributgruppenDefinition pid="atg.dirigentUmsetzung" name="DirigentUmsetzung" parametrierend="nein">
+			<info>
+				<kurzinfo>Konfigurierende Eigenschaften der Objekte des Typs.</kurzinfo>
+			</info>
+			<aspekt pid="asp.eigenschaften" konfigurationsModus="datensatzNotwendig">
+			</aspekt>
+			<attribut pid="att.wvzInhaltUmsetzungReferenz" anzahl="0" anzahlIst="variabel" name="WvzInhaltUmsetzungReferenz">
+			</attribut>
+		</attributgruppenDefinition>
+		<attributgruppenDefinition pid="atg.fontUmsetzung" name="FontUmsetzung" parametrierend="nein">
+			<info>
+				<kurzinfo>Konfigurierende Eigenschaften der Objekte des Typs.</kurzinfo>
+			</info>
+			<aspekt pid="asp.eigenschaften" konfigurationsModus="datensatzNotwendig">
+			</aspekt>
+			<attribut pid="att.fontReferenz" anzahl="1" anzahlIst="fest" name="FontReferenz">
+				<info>
+					<kurzinfo>Referenz auf ein Objekt vom Typ Font zur Umsetzung der Befehle und Rückmeldungen zu und von der externen Kommunikation.</kurzinfo>
+				</info>
+			</attribut>
+			<attribut pid="att.zeichenUmsetzungReferenz" anzahl="0" anzahlIst="variabel" name="ZeichenUmsetzungReferenz">
+			</attribut>
+		</attributgruppenDefinition>
+		<attributgruppenDefinition pid="atg.textAusrichtungUmsetzung" name="TextAusrichtungUmsetzung" parametrierend="nein">
+			<info>
+				<kurzinfo>Konfigurierende Eigenschaften der Objekte des Typs.</kurzinfo>
+			</info>
+			<aspekt pid="asp.eigenschaften" konfigurationsModus="datensatzNotwendig">
+			</aspekt>
+			<attribut pid="att.textAusrichtung" anzahl="1" anzahlIst="fest" name="TextAusrichtung">
+				<info>
+					<kurzinfo>Text-Ausrichtung zur Umsetzung der Befehle und Rückmeldungen zu und von der externen Kommunikation.</kurzinfo>
+				</info>
+			</attribut>
+		</attributgruppenDefinition>
+		<attributgruppenDefinition pid="atg.wvzInhaltUmsetzung" name="WvzInhaltUmsetzung" parametrierend="nein">
+			<info>
+				<kurzinfo>Konfigurierende Eigenschaften der Objekte des Typs.</kurzinfo>
+			</info>
+			<aspekt pid="asp.eigenschaften" konfigurationsModus="datensatzNotwendig">
+			</aspekt>
+			<attribut pid="att.wvzInhaltReferenz" anzahl="1" anzahlIst="fest" name="WvzInhaltReferenz">
+				<info>
+					<kurzinfo>Referenz auf ein Objekt vom Typ WvzInhalt zur Umsetzung der Befehle und Rückmeldungen zu und von der externen Kommunikation.</kurzinfo>
+				</info>
+			</attribut>
+		</attributgruppenDefinition>
+		<attributgruppenDefinition pid="atg.zeichenUmsetzung" name="ZeichenUmsetzung" parametrierend="nein">
+			<info>
+				<kurzinfo>Konfigurierende Eigenschaften der Objekte des Typs.</kurzinfo>
+			</info>
+			<aspekt pid="asp.eigenschaften" konfigurationsModus="datensatzNotwendig">
+			</aspekt>
+			<attribut pid="att.zeichenReferenz" anzahl="1" anzahlIst="fest" name="ZeichenReferenz">
+				<info>
+					<kurzinfo>Referenz auf ein Objekt vom Typ Zeichen zur Umsetzung der Befehle und Rückmeldungen zu und von der externen Kommunikation.</kurzinfo>
+				</info>
+			</attribut>
+		</attributgruppenDefinition>
+		<attributDefinition pid="att.anzeigeAktorReferenz" name="AnzeigeAktorReferenz">
+			<info>
+				<kurzinfo>Attribut zur Referenzierung des Objekttyps: typ.anzeigeAktor.</kurzinfo>
+			</info>
+			<objektReferenz typ="typ.anzeigeAktor" undefiniert="verboten" referenzierungsart="assoziation"/>
+		</attributDefinition>
+		<attributDefinition pid="att.anzeigeAktorReferenzOptional" name="AnzeigeAktorReferenzOptional">
+			<info>
+				<kurzinfo>Attribut zur Referenzierung des Objekttyps: typ.anzeigeAktor (Optionale Referenzierung erlaubt).</kurzinfo>
+			</info>
+			<objektReferenz typ="typ.anzeigeAktor" undefiniert="erlaubt" referenzierungsart="assoziation"/>
+		</attributDefinition>
+		<attributDefinition pid="att.anzeigeQuerschnittAktorReferenz" name="AnzeigeQuerschnittAktorReferenz">
+			<info>
+				<kurzinfo>Attribut zur Referenzierung des Objekttyps: typ.anzeigeQuerschnittAktor.</kurzinfo>
+			</info>
+			<objektReferenz typ="typ.anzeigeQuerschnittAktor" undefiniert="verboten" referenzierungsart="assoziation"/>
+		</attributDefinition>
+		<attributDefinition pid="att.anzeigeQuerschnittAktorReferenzOptional" name="AnzeigeQuerschnittAktorReferenzOptional">
+			<info>
+				<kurzinfo>Attribut zur Referenzierung des Objekttyps: typ.anzeigeQuerschnittAktor (Optionale Referenzierung erlaubt).</kurzinfo>
+			</info>
+			<objektReferenz typ="typ.anzeigeQuerschnittAktor" undefiniert="erlaubt" referenzierungsart="assoziation"/>
+		</attributDefinition>
+		<attributDefinition pid="att.anzeigeQuerschnittTypUmsetzungReferenz" name="AnzeigeQuerschnittTypUmsetzungReferenz">
+			<info>
+				<kurzinfo>Attribut zur Referenzierung des Objekttyps: typ.anzeigeQuerschnittTypUmsetzung.</kurzinfo>
+			</info>
+			<objektReferenz typ="typ.anzeigeQuerschnittTypUmsetzung" undefiniert="verboten" referenzierungsart="assoziation"/>
+		</attributDefinition>
+		<attributDefinition pid="att.anzeigeQuerschnittTypUmsetzungReferenzOptional" name="AnzeigeQuerschnittTypUmsetzungReferenzOptional">
+			<info>
+				<kurzinfo>Attribut zur Referenzierung des Objekttyps: typ.anzeigeQuerschnittTypUmsetzung (Optionale Referenzierung erlaubt).</kurzinfo>
+			</info>
+			<objektReferenz typ="typ.anzeigeQuerschnittTypUmsetzung" undefiniert="erlaubt" referenzierungsart="assoziation"/>
+		</attributDefinition>
+		<attributDefinition pid="att.anzeigeTypUmsetzungReferenz" name="AnzeigeTypUmsetzungReferenz">
+			<info>
+				<kurzinfo>Attribut zur Referenzierung des Objekttyps: typ.anzeigeTypUmsetzung.</kurzinfo>
+			</info>
+			<objektReferenz typ="typ.anzeigeTypUmsetzung" undefiniert="verboten" referenzierungsart="assoziation"/>
+		</attributDefinition>
+		<attributDefinition pid="att.anzeigeTypUmsetzungReferenzOptional" name="AnzeigeTypUmsetzungReferenzOptional">
+			<info>
+				<kurzinfo>Attribut zur Referenzierung des Objekttyps: typ.anzeigeTypUmsetzung (Optionale Referenzierung erlaubt).</kurzinfo>
+			</info>
+			<objektReferenz typ="typ.anzeigeTypUmsetzung" undefiniert="erlaubt" referenzierungsart="assoziation"/>
+		</attributDefinition>
+		<attributDefinition pid="att.dirigentAktorReferenz" name="DirigentAktorReferenz">
+			<info>
+				<kurzinfo>Attribut zur Referenzierung des Objekttyps: typ.dirigentAktor.</kurzinfo>
+			</info>
+			<objektReferenz typ="typ.dirigentAktor" undefiniert="verboten" referenzierungsart="assoziation"/>
+		</attributDefinition>
+		<attributDefinition pid="att.dirigentAktorReferenzOptional" name="DirigentAktorReferenzOptional">
+			<info>
+				<kurzinfo>Attribut zur Referenzierung des Objekttyps: typ.dirigentAktor (Optionale Referenzierung erlaubt).</kurzinfo>
+			</info>
+			<objektReferenz typ="typ.dirigentAktor" undefiniert="erlaubt" referenzierungsart="assoziation"/>
+		</attributDefinition>
+		<attributDefinition pid="att.dirigentUmsetzungReferenz" name="DirigentUmsetzungReferenz">
+			<info>
+				<kurzinfo>Attribut zur Referenzierung des Objekttyps: typ.dirigentUmsetzung.</kurzinfo>
+			</info>
+			<objektReferenz typ="typ.dirigentUmsetzung" undefiniert="verboten" referenzierungsart="assoziation"/>
+		</attributDefinition>
+		<attributDefinition pid="att.dirigentUmsetzungReferenzOptional" name="DirigentUmsetzungReferenzOptional">
+			<info>
+				<kurzinfo>Attribut zur Referenzierung des Objekttyps: typ.dirigentUmsetzung (Optionale Referenzierung erlaubt).</kurzinfo>
+			</info>
+			<objektReferenz typ="typ.dirigentUmsetzung" undefiniert="erlaubt" referenzierungsart="assoziation"/>
+		</attributDefinition>
+		<attributDefinition pid="att.fontUmsetzungReferenz" name="FontUmsetzungReferenz">
+			<info>
+				<kurzinfo>Attribut zur Referenzierung des Objekttyps: typ.fontUmsetzung.</kurzinfo>
+			</info>
+			<objektReferenz typ="typ.fontUmsetzung" undefiniert="verboten" referenzierungsart="assoziation"/>
+		</attributDefinition>
+		<attributDefinition pid="att.fontUmsetzungReferenzOptional" name="FontUmsetzungReferenzOptional">
+			<info>
+				<kurzinfo>Attribut zur Referenzierung des Objekttyps: typ.fontUmsetzung (Optionale Referenzierung erlaubt).</kurzinfo>
+			</info>
+			<objektReferenz typ="typ.fontUmsetzung" undefiniert="erlaubt" referenzierungsart="assoziation"/>
+		</attributDefinition>
+		<attributDefinition pid="att.textAusrichtungUmsetzungReferenz" name="TextAusrichtungUmsetzungReferenz">
+			<info>
+				<kurzinfo>Attribut zur Referenzierung des Objekttyps: typ.textAusrichtungUmsetzung.</kurzinfo>
+			</info>
+			<objektReferenz typ="typ.textAusrichtungUmsetzung" undefiniert="verboten" referenzierungsart="assoziation"/>
+		</attributDefinition>
+		<attributDefinition pid="att.textAusrichtungUmsetzungReferenzOptional" name="TextAusrichtungUmsetzungReferenzOptional">
+			<info>
+				<kurzinfo>Attribut zur Referenzierung des Objekttyps: typ.textAusrichtungUmsetzung (Optionale Referenzierung erlaubt).</kurzinfo>
+			</info>
+			<objektReferenz typ="typ.textAusrichtungUmsetzung" undefiniert="erlaubt" referenzierungsart="assoziation"/>
+		</attributDefinition>
+		<attributDefinition pid="att.wvzInhaltUmsetzungReferenz" name="WvzInhaltUmsetzungReferenz">
+			<info>
+				<kurzinfo>Attribut zur Referenzierung des Objekttyps: typ.wvzInhaltUmsetzung.</kurzinfo>
+			</info>
+			<objektReferenz typ="typ.wvzInhaltUmsetzung" undefiniert="verboten" referenzierungsart="assoziation"/>
+		</attributDefinition>
+		<attributDefinition pid="att.wvzInhaltUmsetzungReferenzOptional" name="WvzInhaltUmsetzungReferenzOptional">
+			<info>
+				<kurzinfo>Attribut zur Referenzierung des Objekttyps: typ.wvzInhaltUmsetzung (Optionale Referenzierung erlaubt).</kurzinfo>
+			</info>
+			<objektReferenz typ="typ.wvzInhaltUmsetzung" undefiniert="erlaubt" referenzierungsart="assoziation"/>
+		</attributDefinition>
+		<attributDefinition pid="att.zeichenUmsetzungReferenz" name="ZeichenUmsetzungReferenz">
+			<info>
+				<kurzinfo>Attribut zur Referenzierung des Objekttyps: typ.zeichenUmsetzung.</kurzinfo>
+			</info>
+			<objektReferenz typ="typ.zeichenUmsetzung" undefiniert="verboten" referenzierungsart="assoziation"/>
+		</attributDefinition>
+		<attributDefinition pid="att.zeichenUmsetzungReferenzOptional" name="ZeichenUmsetzungReferenzOptional">
+			<info>
+				<kurzinfo>Attribut zur Referenzierung des Objekttyps: typ.zeichenUmsetzung (Optionale Referenzierung erlaubt).</kurzinfo>
+			</info>
+			<objektReferenz typ="typ.zeichenUmsetzung" undefiniert="erlaubt" referenzierungsart="assoziation"/>
+		</attributDefinition>
+		<mengenDefinition pid="menge.fontUmsetzungen" elemente="typ.fontUmsetzung" aenderbar="nein" mindestens="0" hoechstens="0" referenzierungsart="assoziation">
+			<info>
+				<kurzinfo>Menge der FontUmsetzungen.</kurzinfo>
+			</info>
+		</mengenDefinition>
+		<mengenDefinition pid="menge.wvzInhaltUmsetzungen" elemente="typ.wvzInhaltUmsetzung" aenderbar="nein" mindestens="0" hoechstens="0" referenzierungsart="assoziation">
+			<info>
+				<kurzinfo>Menge der WvzInhaltUmsetzungen.</kurzinfo>
+			</info>
+		</mengenDefinition>
+		<mengenDefinition pid="menge.zeichenUmsetzungen" elemente="typ.zeichenUmsetzung" aenderbar="nein" mindestens="0" hoechstens="0" referenzierungsart="assoziation">
+			<info>
+				<kurzinfo>Menge der ZeichenUmsetzungen.</kurzinfo>
+			</info>
+		</mengenDefinition>
+	</modell>
+	<objekte>
+	</objekte>
+</konfigurationsBereich>

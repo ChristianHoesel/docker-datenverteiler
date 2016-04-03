@@ -1,0 +1,852 @@
+<?xml version="1.0" encoding="ISO-8859-1"?>
+<!DOCTYPE konfigurationsBereich PUBLIC "-//K2S//DTD Dokument//DE" "K2S.dtd">
+<konfigurationsBereich pid="kb.tmGeraeteEinbauOrte" name="TeilmodellGeraeteEinbauOrteGlobal" verantwortlich="kv.ptv">
+	<info>
+		<kurzinfo>Teilmodell mit Datenmodellierung für konkrete Geraete und deren mögliche Einbauorte.</kurzinfo>
+	</info>
+	<konfigurationsAenderung stand="12.06.2007" version="1" autor="inovat, Dipl.-Ing. H. C. Kniß (HCK)" grund="Änderungsdokumentation siehe 'ReleaseNotes kv.ptv.doc'"></konfigurationsAenderung>
+	<konfigurationsAenderung stand="13.06.2007" version="2" autor="inovat, Dipl.-Ing. H. C. Kniß (HCK)" grund="Änderungsdokumentation siehe 'ReleaseNotes kv.ptv.doc'"></konfigurationsAenderung>
+	<modell>
+		<typDefinition pid="typ.adressDatum" name="AdressDatum" objektNamenPermanent="nein">
+			<info>
+				<kurzinfo>Ein Adressdatensatz</kurzinfo>
+			</info>
+			<erweitert pid="typ.konfigurationsObjekt"/>
+			<attributgruppe pid="atg.adressDatum"/>
+		</typDefinition>
+		<typDefinition pid="typ.einbauOrt" name="EinbauOrt" objektNamenPermanent="nein">
+			<info>
+				<kurzinfo>Ein konktreter Einbauort für ein Gerät</kurzinfo>
+			</info>
+			<erweitert pid="typ.konkretesEtwas"/>
+			<attributgruppe pid="atg.einbauOrt"/>
+		</typDefinition>
+		<typDefinition pid="typ.einbauOrtTyp" name="EinbauOrtTyp" objektNamenPermanent="nein">
+			<info>
+				<kurzinfo>Ein (abstrakter) Typ von Einbauort, z.B. ein Typ von 19''-Rahmen</kurzinfo>
+			</info>
+			<erweitert pid="typ.konfigurationsObjekt"/>
+			<attributgruppe pid="atg.einbauOrtTyp"/>
+		</typDefinition>
+		<typDefinition pid="typ.geraet" name="Geraet" objektNamenPermanent="nein">
+			<info>
+				<kurzinfo>Ein konkretes Geraet</kurzinfo>
+			</info>
+			<erweitert pid="typ.konkretesEtwas"/>
+			<attributgruppe pid="atg.geraet"/>
+			<attributgruppe pid="atg.geraetEinbauOrt"/>
+		</typDefinition>
+		<typDefinition pid="typ.geraeteTyp" name="GeraeteTyp" objektNamenPermanent="nein">
+			<info>
+				<kurzinfo>Ein (abstrakter) Gerätetyp</kurzinfo>
+			</info>
+			<erweitert pid="typ.konfigurationsObjekt"/>
+			<attributgruppe pid="atg.geraeteTyp"/>
+		</typDefinition>
+		<typDefinition pid="typ.hersteller" name="Hersteller" objektNamenPermanent="nein">
+			<info>
+				<kurzinfo>Ein Hersteller</kurzinfo>
+			</info>
+			<erweitert pid="typ.konfigurationsObjekt"/>
+			<attributgruppe pid="atg.hersteller"/>
+			<menge pid="menge.adressDaten" name="Adressen" erforderlich="ja">
+				<info>
+					<kurzinfo>Adressen des Herstellers bzw. dessen Gliederung</kurzinfo>
+				</info>
+			</menge>
+		</typDefinition>
+		<typDefinition pid="typ.hochbauSchrankSchacht" name="HochbauSchrankSchacht" objektNamenPermanent="nein">
+			<info>
+				<kurzinfo>Ein konkretes Ding (Hochbau, Schrank, Schacht..., das Einbauorte und Geräte umschliesst. Die Atributgruppe PunktLiegtAufLinienobjekt referenziert auf den Strassenabschnitt, über den dieses konkrete Ding erreichbar ist.</kurzinfo>
+			</info>
+			<erweitert pid="typ.konkretesEtwas"/>
+			<attributgruppe pid="atg.hochbauSchrankSchacht"/>
+		</typDefinition>
+		<typDefinition pid="typ.hochbauSchrankSchachtTyp" name="HochbauSchrankSchachtTyp" objektNamenPermanent="nein">
+			<info>
+				<kurzinfo>Ein Typ von Hochbau, Schrank, Schacht etc, d.h. z.B. ein Typ von Streckenstationsschrank, ein Typ von Kabelschacht, ein Typ von Kabelhaus.</kurzinfo>
+			</info>
+			<erweitert pid="typ.konfigurationsObjekt"/>
+			<attributgruppe pid="atg.hochbauSchrankSchachtTyp"/>
+		</typDefinition>
+		<typDefinition pid="typ.instandhalter" name="Instandhalter" objektNamenPermanent="nein">
+			<info>
+				<kurzinfo>Ein Instandhalter</kurzinfo>
+			</info>
+			<erweitert pid="typ.konfigurationsObjekt"/>
+			<attributgruppe pid="atg.instandhalter"/>
+			<menge pid="menge.adressDaten" name="Adressen" erforderlich="ja">
+				<info>
+					<kurzinfo>Adressen des Instandhalters bzw. dessen Gliederung</kurzinfo>
+				</info>
+			</menge>
+		</typDefinition>
+		<typDefinition pid="typ.konkretesEtwas" name="KonkretesEtwas" objektNamenPermanent="nein">
+			<info>
+				<kurzinfo>Überobjekt für alle Objekte, die man konkret anfassen kann</kurzinfo>
+			</info>
+			<erweitert pid="typ.konfigurationsObjekt"/>
+			<attributgruppe pid="atg.konkretesEtwas"/>
+		</typDefinition>
+		<typDefinition pid="typ.lieferant" name="Lieferant" objektNamenPermanent="nein">
+			<info>
+				<kurzinfo>Ein Lieferant</kurzinfo>
+			</info>
+			<erweitert pid="typ.konfigurationsObjekt"/>
+			<attributgruppe pid="atg.lieferant"/>
+			<menge pid="menge.adressDaten" name="Adressen" erforderlich="ja">
+				<info>
+					<kurzinfo>Adressen des Lieferanten bzw. dessen Gliederung</kurzinfo>
+				</info>
+			</menge>
+		</typDefinition>
+		<attributgruppenDefinition pid="atg.adressDatum" name="Adressdatum" parametrierend="nein">
+			<info>
+				<kurzinfo>Eine gültige Adresse zu dem Hersteller / Lieferant / Instandhalter; Problem: es kann mehrere geben</kurzinfo>
+			</info>
+			<aspekt pid="asp.eigenschaften" konfigurationsModus="datensatzOptional">
+			</aspekt>
+			<attribut pid="att.text" anzahl="1" anzahlIst="fest" name="Name">
+				<info>
+					<kurzinfo>Der Name des Standorts</kurzinfo>
+				</info>
+			</attribut>
+			<attribut pid="att.text" anzahl="1" anzahlIst="fest" name="Ort">
+				<info>
+					<kurzinfo>Der Ort des Standorts</kurzinfo>
+				</info>
+			</attribut>
+			<attribut pid="att.text" anzahl="1" anzahlIst="fest" name="Strasse">
+				<info>
+					<kurzinfo>Die Strasse des Standorts</kurzinfo>
+				</info>
+			</attribut>
+			<attribut pid="att.text" anzahl="1" anzahlIst="fest" name="Hausnummer">
+				<info>
+					<kurzinfo>Die Hausnummer des Standorts</kurzinfo>
+				</info>
+			</attribut>
+			<attribut pid="att.zahlPositiv" anzahl="1" anzahlIst="variabel" name="Postleitzahl">
+				<info>
+					<kurzinfo>Die Postleitzahl des Standorts</kurzinfo>
+				</info>
+			</attribut>
+			<attribut pid="att.zahlPositiv" anzahl="0" anzahlIst="variabel" name="Postfach">
+				<info>
+					<kurzinfo>Postfach des Standorts</kurzinfo>
+				</info>
+			</attribut>
+			<attribut pid="att.text" anzahl="0" anzahlIst="variabel" name="Telefonnummern">
+				<info>
+					<kurzinfo>Telefonnummer des Standorts</kurzinfo>
+				</info>
+			</attribut>
+			<attribut pid="att.text" anzahl="0" anzahlIst="variabel" name="Email">
+				<info>
+					<kurzinfo>Email des Standorts</kurzinfo>
+				</info>
+			</attribut>
+			<attribut pid="att.text" anzahl="0" anzahlIst="variabel" name="Telefax">
+				<info>
+					<kurzinfo>Telefax des Standorts</kurzinfo>
+				</info>
+			</attribut>
+		</attributgruppenDefinition>
+		<attributgruppenDefinition pid="atg.einbauOrt" name="EinbauOrt" parametrierend="nein">
+			<info>
+				<kurzinfo>Daten eines konkreten Einbauorts</kurzinfo>
+			</info>
+			<aspekt pid="asp.eigenschaften" konfigurationsModus="datensatzOptional">
+			</aspekt>
+			<attribut pid="att.url" anzahl="0" anzahlIst="variabel" name="Dokumentation">
+				<info>
+					<kurzinfo>Dokumentation zum konkreten Einbauort, z.B. spezielle Schaltpläne, Zeichnungen</kurzinfo>
+				</info>
+			</attribut>
+			<attribut pid="att.url" anzahl="0" anzahlIst="variabel" name="Bilder">
+				<info>
+					<kurzinfo>Bilder zum konkreten Einbauort</kurzinfo>
+				</info>
+			</attribut>
+			<attribut pid="att.einbauOrtTypReferenzOptional" anzahl="1" anzahlIst="fest" name="EinbauOrtTyp">
+				<info>
+					<kurzinfo>Referenz auf den Typ, von dem dieser konkrete Einbauort ist</kurzinfo>
+				</info>
+			</attribut>
+			<attribut pid="att.hochbauSchrankSchachtReferenz" anzahl="1" anzahlIst="fest" name="HochbauSchrankSchacht">
+				<info>
+					<kurzinfo>Referenz auf den Ort (Hochbau,Schrank,Schacht, in dem sich der Einbauort befindet.</kurzinfo>
+				</info>
+			</attribut>
+			<attribut pid="att.einbauOrtReferenz" anzahl="0" anzahlIst="variabel" name="EnthalteneEinbauOrte">
+				<info>
+					<kurzinfo>Referenz auf weitere Einbauorte, die(direkt in diesem Einbauort enthalten sind (und die wiederum andere Einbauorte beinhalten können. Beispiel: Ein 19''-Rahmen beinhaltet mehrere Racks, die wiederum Einbauplätze für Rechner enthalten. Also 1. HierarchieebeneEinbauort 19''-Rahmen, 2. Hierarchieebene Einbauort Rack, 3.Hierarchieebene Einbauort Einschubplatz für Rechner</kurzinfo>
+				</info>
+			</attribut>
+		</attributgruppenDefinition>
+		<attributgruppenDefinition pid="atg.einbauOrtTyp" name="EinbauOrtTyp" parametrierend="nein">
+			<info>
+				<kurzinfo>Daten eines abstrakten Einbauorts</kurzinfo>
+			</info>
+			<aspekt pid="asp.eigenschaften" konfigurationsModus="datensatzOptional">
+			</aspekt>
+			<attribut pid="att.text" anzahl="1" anzahlIst="fest" name="Bezeichnung">
+				<info>
+					<kurzinfo>Bezeichnung des EinbauOrtTyps, z.B. Herstellerbezeichnung</kurzinfo>
+				</info>
+			</attribut>
+			<attribut pid="att.einbauOrtTypReferenzOptional" anzahl="0" anzahlIst="variabel" name="ZulaessigeEinbauOrtTypen">
+				<info>
+					<kurzinfo>Auflistung aller Einbauorttypen, in der dieser Einbauorttyp eingebaut werden kann, ermöglicht verfizierung der Konfiguration sowie eine Unterstützung bei zukünftigen Benutzeroberflächen. Der Einbauorttyp "Lager" sollte immer enthalten sein (sofern es sich nicht um ein Lager oder ein Lagerplatz handelt).</kurzinfo>
+				</info>
+			</attribut>
+			<attribut pid="att.url" anzahl="0" anzahlIst="variabel" name="Dokumentation">
+				<info>
+					<kurzinfo>Dokumentation zum abstrakten Einbauorttyp, z.B. Handbücher...</kurzinfo>
+				</info>
+			</attribut>
+			<attribut pid="att.url" anzahl="0" anzahlIst="variabel" name="Bilder">
+				<info>
+					<kurzinfo>Bilder zum abstrakten Einbauorttyp</kurzinfo>
+				</info>
+			</attribut>
+			<attribut pid="att.geraetLaengeMeter" anzahl="1" anzahlIst="fest" name="MaxBreite">
+				<info>
+					<kurzinfo>Maximale Breite des Einbauorttypstyps, 0 wenn keine sinnvole Angabe möglich</kurzinfo>
+				</info>
+			</attribut>
+			<attribut pid="att.geraetLaengeMeter" anzahl="1" anzahlIst="fest" name="MaxHoehe">
+				<info>
+					<kurzinfo>Maximale Höhe des Einbauorttyps, 0 wenn keine sinnvole Angabe möglich</kurzinfo>
+				</info>
+			</attribut>
+			<attribut pid="att.geraetLaengeMeter" anzahl="1" anzahlIst="fest" name="MaxTiefe">
+				<info>
+					<kurzinfo>Maximale Tiefe des Einbauorttyps, 0 wenn keine sinnvole Angabe möglich</kurzinfo>
+				</info>
+			</attribut>
+			<attribut pid="att.geraetMasse" anzahl="1" anzahlIst="fest" name="Masse">
+				<info>
+					<kurzinfo>Masse des Einbauorttyps ohne Einbauten; , 0 wenn keine sinnvole Angabe möglich</kurzinfo>
+				</info>
+			</attribut>
+			<attribut pid="att.herstellerReferenz" anzahl="0" anzahlIst="variabel" name="Hersteller">
+				<info>
+					<kurzinfo>Referenz auf den oder die Hersteller, welche diese Art von Einbauort liefern, kann leer sein, wenn diese Angabe keinen Sinn macht, z.B: bei einem Lagerplatz</kurzinfo>
+				</info>
+			</attribut>
+		</attributgruppenDefinition>
+		<attributgruppenDefinition pid="atg.geraet" name="Geraet" parametrierend="nein">
+			<info>
+				<kurzinfo>Daten eines konkreten Geräts</kurzinfo>
+			</info>
+			<aspekt pid="asp.eigenschaften" konfigurationsModus="datensatzOptional">
+			</aspekt>
+			<attribut pid="att.geraeteTypReferenz" anzahl="1" anzahlIst="fest" name="ZuGeraeteTyp">
+				<info>
+					<kurzinfo>Referenz auf den Typ, von dem dieses konkrete Gerät ist</kurzinfo>
+				</info>
+			</attribut>
+			<attribut pid="att.text" anzahl="0" anzahlIst="variabel" name="Bezeichnung">
+				<info>
+					<kurzinfo>Bezeichnung dieses konkreten Geräts (Freitext)</kurzinfo>
+				</info>
+			</attribut>
+			<attribut pid="att.geraetReferenz" anzahl="0" anzahlIst="variabel" name="Komponenten">
+				<info>
+					<kurzinfo>Referenz weitere Geraete, die Komponenten dieses Geraets sind.</kurzinfo>
+				</info>
+			</attribut>
+		</attributgruppenDefinition>
+		<attributgruppenDefinition pid="atg.geraetEinbauOrt" name="EinbauOrtGerät" parametrierend="nein">
+			<info>
+				<kurzinfo>Aktueller Einbauort eines konkreten Geräts</kurzinfo>
+			</info>
+			<aspekt pid="asp.eigenschaften" konfigurationsModus="datensatzOptional">
+			</aspekt>
+			<attribut pid="att.einbauOrtReferenz" anzahl="1" anzahlIst="fest" name="EinbauOrt">
+				<info>
+					<kurzinfo>Referenz auf den Einbauort, in dem sich das Geraet gerade befindet. Dies kann auch ein LAgerraum etc. sein.Diese Referenz sollte wenn möglich nicht konfigurierend sein Es muss auf der anderen Seite immer einen Einbauort geben.</kurzinfo>
+				</info>
+			</attribut>
+		</attributgruppenDefinition>
+		<attributgruppenDefinition pid="atg.geraeteTyp" name="GeraeteTyp" parametrierend="nein">
+			<info>
+				<kurzinfo>Daten eines abstrakten Gerätetyps</kurzinfo>
+			</info>
+			<aspekt pid="asp.eigenschaften" konfigurationsModus="datensatzOptional">
+			</aspekt>
+			<attribut pid="att.herstellerReferenz" anzahl="1" anzahlIst="fest" name="Hersteller">
+				<info>
+					<kurzinfo>Referenz auf den Herstellers dieses Gerätetyps</kurzinfo>
+				</info>
+			</attribut>
+			<attribut pid="att.text" anzahl="1" anzahlIst="fest" name="Herstellerbezeichnung">
+				<info>
+					<kurzinfo>Bezeichnung dieses Gerätetyps beim Hersteller</kurzinfo>
+				</info>
+			</attribut>
+			<attribut pid="att.geraetTemperatur" anzahl="1" anzahlIst="fest" name="MinimalTemperatur">
+				<info>
+					<kurzinfo>Minimale Temperatur, bei der dieses Gerät betrieben werden darf</kurzinfo>
+				</info>
+			</attribut>
+			<attribut pid="att.geraetTemperatur" anzahl="1" anzahlIst="fest" name="MaximalTemperatur">
+				<info>
+					<kurzinfo>Maximale Temperatur, bei der dieses Gerät betrieben werden darf</kurzinfo>
+				</info>
+			</attribut>
+			<attribut pid="att.geraetTemperatur" anzahl="1" anzahlIst="fest" name="MaximalLagerTemperatur">
+				<info>
+					<kurzinfo>Maximale Temperatur, bei der dieses Gerät gelagert werden darf</kurzinfo>
+				</info>
+			</attribut>
+			<attribut pid="att.geraetTemperatur" anzahl="1" anzahlIst="fest" name="MinimalLagerTemperatur">
+				<info>
+					<kurzinfo>Minimale Temperatur, bei der dieses Gerät gelagert werden darf</kurzinfo>
+				</info>
+			</attribut>
+			<attribut pid="att.url" anzahl="0" anzahlIst="variabel" name="Dokumentation">
+				<info>
+					<kurzinfo>Dokumentation zum abstrakten Gerätetyp, z.B. Handbücher...</kurzinfo>
+				</info>
+			</attribut>
+			<attribut pid="att.url" anzahl="0" anzahlIst="variabel" name="Bilder">
+				<info>
+					<kurzinfo>Bilder zum abstrakten Gerätetyp</kurzinfo>
+				</info>
+			</attribut>
+			<attribut pid="att.geraetLaengeMeter" anzahl="1" anzahlIst="fest" name="MaxBreite">
+				<info>
+					<kurzinfo>Maximale Breite des Gerätetyps</kurzinfo>
+				</info>
+			</attribut>
+			<attribut pid="att.geraetLaengeMeter" anzahl="1" anzahlIst="fest" name="MaxHoehe">
+				<info>
+					<kurzinfo>Maximale Höhe des Gerätetyps</kurzinfo>
+				</info>
+			</attribut>
+			<attribut pid="att.geraetLaengeMeter" anzahl="1" anzahlIst="fest" name="MaxTiefe">
+				<info>
+					<kurzinfo>Maximale Tiefe des Gerätetyps</kurzinfo>
+				</info>
+			</attribut>
+			<attribut pid="att.geraetMasse" anzahl="1" anzahlIst="fest" name="MasseOhneKomponenten">
+				<info>
+					<kurzinfo>Masse des Gerätetyps ohne eventuell dazugehörende Komponenten</kurzinfo>
+				</info>
+			</attribut>
+			<attribut pid="att.geraetLeistung" anzahl="1" anzahlIst="fest" name="LeistungTypisch">
+				<info>
+					<kurzinfo>Typische Leistungsaufnahme des Gerätetyps ohne eventuell dazugehörende Komponenten</kurzinfo>
+				</info>
+			</attribut>
+			<attribut pid="att.geraetLeistung" anzahl="1" anzahlIst="fest" name="LeistungMaximal">
+				<info>
+					<kurzinfo>Maximale Leistungsaufnahme des Gerätetyps ohne eventuell dazugehörende Komponenten</kurzinfo>
+				</info>
+			</attribut>
+			<attribut pid="att.geraetGehaeuseDichtigkeit" anzahl="1" anzahlIst="fest" name="Dichtigkeit">
+				<info>
+					<kurzinfo>Dichtigkeit des Gerätetyps</kurzinfo>
+				</info>
+			</attribut>
+			<attribut pid="att.einbauOrtTypReferenzOptional" anzahl="1" anzahlIst="variabel" name="ZulaessigeEinbauOrtTypen">
+				<info>
+					<kurzinfo>Auflistung aller Einbauorttypen, in der dieser Gerätetyp eingebaut werden kann, ermöglicht verfizierung der konfiguration sowie eine Unterstützung bei zukünftigen Benutzeroberflächen. Der Einbauorttyp "Lager" sollte immer enthalten sein.</kurzinfo>
+				</info>
+			</attribut>
+			<attribut pid="att.einbauOrtTypReferenzOptional" anzahl="0" anzahlIst="variabel" name="HatEinbauOrtTypen">
+				<info>
+					<kurzinfo>Auflistung aller Einbauorttypen, welches dieser Gerätetyp bereitstellt. Werden mehrere gleiche bereitgestellt, so sind mehrfach die gleichen Referenzen einzutragen.</kurzinfo>
+				</info>
+			</attribut>
+			<attribut pid="att.geraetSpannung" anzahl="1" anzahlIst="fest" name="NennspannungMax">
+				<info>
+					<kurzinfo>Maximalspannung für diesen Gerätetyp</kurzinfo>
+				</info>
+			</attribut>
+			<attribut pid="att.geraetSpannung" anzahl="1" anzahlIst="fest" name="NennspannungMin">
+				<info>
+					<kurzinfo>Minimalspannung für diesen Gerätetyp</kurzinfo>
+				</info>
+			</attribut>
+			<attribut pid="att.geraetSpannungsart" anzahl="1" anzahlIst="fest" name="Spannungsart">
+				<info>
+					<kurzinfo>Spannungsart für diesen Gerätetyp (Gleichstrom, Wechselstrom ...)</kurzinfo>
+				</info>
+			</attribut>
+			<attribut pid="att.geraetBeschleunigung" anzahl="1" anzahlIst="fest" name="Maximalbeschleunigung">
+				<info>
+					<kurzinfo>Maximalbeschleunigung für diesen Gerätetyp</kurzinfo>
+				</info>
+			</attribut>
+			<attribut pid="att.geraetLaengeMeter" anzahl="1" anzahlIst="fest" name="Maximalhoehe">
+				<info>
+					<kurzinfo>Maximalhöhe über NN, in der dieser Gerätetyp betrieben werden darf</kurzinfo>
+				</info>
+			</attribut>
+		</attributgruppenDefinition>
+		<attributgruppenDefinition pid="atg.hersteller" name="Hersteller" parametrierend="nein">
+			<info>
+				<kurzinfo>Daten eines Herstellers</kurzinfo>
+			</info>
+			<aspekt pid="asp.eigenschaften" konfigurationsModus="datensatzOptional">
+			</aspekt>
+			<attribut pid="att.adressDatumReferenz" anzahl="1" anzahlIst="variabel" name="Adresse">
+				<info>
+					<kurzinfo>Die Adresse(n) des Herstellers</kurzinfo>
+				</info>
+			</attribut>
+			<attribut pid="att.text" anzahl="1" anzahlIst="fest" name="Name">
+				<info>
+					<kurzinfo>Der Name des Herstellers (ggf. mit Abteilungsbezeichnung etc...)</kurzinfo>
+				</info>
+			</attribut>
+		</attributgruppenDefinition>
+		<attributgruppenDefinition pid="atg.hochbauSchrankSchacht" name="HochbauSchrankSchacht" parametrierend="nein">
+			<info>
+				<kurzinfo>Daten eines konkreten Hochbaus / Schranks / Schachts ...</kurzinfo>
+			</info>
+			<aspekt pid="asp.eigenschaften" konfigurationsModus="datensatzOptional">
+			</aspekt>
+			<attribut pid="att.hochbauSchrankSchachtTypReferenz" anzahl="1" anzahlIst="fest" name="HochbauSchrankSchachtTyp">
+				<info>
+					<kurzinfo>Referenz auf dcen Typ, von dem dieser konkrete Hochbau / Schrank / Schacht/...ist</kurzinfo>
+				</info>
+			</attribut>
+			<attribut pid="att.url" anzahl="0" anzahlIst="variabel" name="Dokumentation">
+				<info>
+					<kurzinfo>Dokumentation zum konkreten Hochbau / Schrank / Schacht, z.B. spezielle Schaltpläne, Zeichnungen</kurzinfo>
+				</info>
+			</attribut>
+			<attribut pid="att.url" anzahl="0" anzahlIst="variabel" name="Bilder">
+				<info>
+					<kurzinfo>Bilder zum konkreten Hochbau / Schrank / Schacht</kurzinfo>
+				</info>
+			</attribut>
+			<attribut pid="att.url" anzahl="0" anzahlIst="variabel" name="Lageplan">
+				<info>
+					<kurzinfo>Link auf einen Lageplan zu dem konkreten Hochbau / Schrank / Schacht</kurzinfo>
+				</info>
+			</attribut>
+			<attribut pid="att.text" anzahl="1" anzahlIst="fest" name="Bezeichnung">
+				<info>
+					<kurzinfo>Bezeichnung des Hochbau / Schrank / Schacht</kurzinfo>
+				</info>
+			</attribut>
+			<attribut pid="att.punktReferenz" anzahl="1" anzahlIst="fest" name="Standort">
+				<info>
+					<kurzinfo>Referenz auf den Punkt, an dem sich der Hochbau / Schrank / Schacht befindet. Wenn das Objekt sich an einer Strasse befindet, kann der Wert identisch mit ReferenzZuPunktLiegtAuf LinienObjekt sein.</kurzinfo>
+				</info>
+			</attribut>
+			<attribut pid="att.einbauOrtReferenz" anzahl="0" anzahlIst="variabel" name="EinbauOrte">
+				<info>
+					<kurzinfo>Referenz auf die konkreten Einbauorte, .</kurzinfo>
+					<beschreibung>Referenz auf die konkreten Einbauorte, die sich gemäss Typ des Hochbaus /Schranks/ Schachts in der ersten Hierarchieebene zwingend in diesem Hochbau / Schrank / Schacht befinden (z.B: Lagerraum, wenn ein Kabelhaus prizipiell Platz zum Lagern bietet, 19''-Rahmen im Fall eines Streckenstationsschranks...</beschreibung>
+				</info>
+			</attribut>
+			<attribut pid="att.geraetLaengeMeter" anzahl="1" anzahlIst="fest" name="HoeheUeberNN">
+				<info>
+					<kurzinfo>Hoehe dieses Standorts ueber NN, kann herangezogen werden, um die Zulässigkeit höhenempfindlicher Geraete zu prüfen</kurzinfo>
+				</info>
+			</attribut>
+			<attribut pid="att.geraetLaengeMeter" anzahl="1" anzahlIst="fest" name="AbstandStrasse">
+				<info>
+					<kurzinfo>Abstand der Standorts von der Strasse, rechtwinklig vom rechten Fahrbahnrand gemessen, negative WErte sagen also aus, dass sich der Standort links von der referenzierten Fahrbahn (PunktLiegtAufLinienObjekt) befindet, also z.B. im Mittelstreifen.</kurzinfo>
+				</info>
+			</attribut>
+			<attribut pid="att.zuPunktLiegtAufLinienObjelt" anzahl="1" anzahlIst="fest" name="ReferenzZuPunktLiegtAufLinienObjekt">
+				<info>
+					<kurzinfo>Referenz zum Punkt an der Strasse, an dem das Objekt liegt. Im Unterschied zum Standort ggf. auch nur der Punkt an der Strasse, von dem das Objekt sinnvoll erreichbar ist.</kurzinfo>
+				</info>
+			</attribut>
+		</attributgruppenDefinition>
+		<attributgruppenDefinition pid="atg.hochbauSchrankSchachtTyp" name="HochbauSchrankSchachtTyp" parametrierend="nein">
+			<info>
+				<kurzinfo>Daten eines abstrakten Typs von Hochbau, Schrank, Schacht ....</kurzinfo>
+			</info>
+			<aspekt pid="asp.eigenschaften" konfigurationsModus="datensatzOptional">
+			</aspekt>
+			<attribut pid="att.herstellerReferenz" anzahl="0" anzahlIst="variabel" name="Hersteller">
+				<info>
+					<kurzinfo>Referenz auf den / die Herstellers dieses Hochbaus / Schranks Schachttyps; leer wenn nicht sinnvoll angebbar</kurzinfo>
+				</info>
+			</attribut>
+			<attribut pid="att.url" anzahl="0" anzahlIst="variabel" name="Dokumentation">
+				<info>
+					<kurzinfo>Dokumentation zum abstrakten Hochbau / Schrank / Schachttyp, z.B. Handbücher...</kurzinfo>
+				</info>
+			</attribut>
+			<attribut pid="att.url" anzahl="0" anzahlIst="variabel" name="Bilder">
+				<info>
+					<kurzinfo>Bilder zum abstrakten Hochbau / Schrank / Schachttyp</kurzinfo>
+				</info>
+			</attribut>
+			<attribut pid="att.geraetGehaeuseDichtigkeit" anzahl="1" anzahlIst="fest" name="Dichtigkeit">
+				<info>
+					<kurzinfo>Dichtigkeit des Hochbaus / Schranks / Schachttyps</kurzinfo>
+				</info>
+			</attribut>
+			<attribut pid="att.einbauOrtTypReferenzOptional" anzahl="0" anzahlIst="variabel" name="HatEinbauOrtTypen">
+				<info>
+					<kurzinfo>Auflistung aller Einbauorttypen, welches dieser Hochbau / Schrank / Schachttyp bereitstellt. Werden mehrere gleiche bereitgestellt, so sind mehrfach die gleichen Referenzen einzutragen.</kurzinfo>
+				</info>
+			</attribut>
+			<attribut pid="att.text" anzahl="1" anzahlIst="fest" name="Bezeichnung">
+				<info>
+					<kurzinfo>Bezeichnung dieses Hochbau /Schrank / Schachttyps</kurzinfo>
+				</info>
+			</attribut>
+		</attributgruppenDefinition>
+		<attributgruppenDefinition pid="atg.instandhalter" name="Instandhalter" parametrierend="nein">
+			<info>
+				<kurzinfo>Daten eines Instandhalters</kurzinfo>
+			</info>
+			<aspekt pid="asp.eigenschaften" konfigurationsModus="datensatzOptional">
+			</aspekt>
+			<attribut pid="att.adressDatumReferenz" anzahl="1" anzahlIst="variabel" name="Adresse">
+				<info>
+					<kurzinfo>Die Adresse(n) des Instandhalters</kurzinfo>
+				</info>
+			</attribut>
+			<attribut pid="att.text" anzahl="1" anzahlIst="fest" name="Name">
+				<info>
+					<kurzinfo>Der Name des Instandhalters (ggf. mit Abteilungsbezeichnung etc...)</kurzinfo>
+				</info>
+			</attribut>
+		</attributgruppenDefinition>
+		<attributgruppenDefinition pid="atg.konkretesEtwas" name="KonkretesEtwas" parametrierend="nein">
+			<info>
+				<kurzinfo>Konfigurierende Eigenschaften der Objekte des Typs.</kurzinfo>
+			</info>
+			<aspekt pid="asp.eigenschaften" konfigurationsModus="datensatzOptional">
+			</aspekt>
+			<attribut pid="att.lieferantReferenz" anzahl="1" anzahlIst="variabel" name="Lieferant">
+				<info>
+					<kurzinfo>Referenz auf den/die Lieferanten dieses konkreten Dings.</kurzinfo>
+				</info>
+			</attribut>
+			<attribut pid="att.instandhalterReferenz" anzahl="0" anzahlIst="variabel" name="Instandhalter">
+				<info>
+					<kurzinfo>Referenz auf den/diejenigen, welche aktuell mit der Instandhaltung dieses konkreten Dings beauftragt sind.</kurzinfo>
+				</info>
+			</attribut>
+			<attribut pid="att.text" anzahl="0" anzahlIst="variabel" name="Seriennummer">
+				<info>
+					<kurzinfo>Die Seriennummer(n) des konkreten Dings, soweit vorhanden</kurzinfo>
+				</info>
+			</attribut>
+			<attribut pid="att.text" anzahl="0" anzahlIst="variabel" name="Referenznummer">
+				<info>
+					<kurzinfo>Die Referenznummer(n) des konkreten Dings, soweit vorhanden</kurzinfo>
+				</info>
+			</attribut>
+			<attribut pid="att.zeitPunkt" anzahl="1" anzahlIst="fest" name="Baujahr">
+				<info>
+					<kurzinfo>Der Erstellungszeitpunkt des konkreten Etwas</kurzinfo>
+				</info>
+			</attribut>
+		</attributgruppenDefinition>
+		<attributgruppenDefinition pid="atg.lieferant" name="Lieferant" parametrierend="nein">
+			<info>
+				<kurzinfo>Daten eines Lieferanten</kurzinfo>
+			</info>
+			<aspekt pid="asp.eigenschaften" konfigurationsModus="datensatzOptional">
+			</aspekt>
+			<attribut pid="att.text" anzahl="1" anzahlIst="fest" name="Name">
+				<info>
+					<kurzinfo>Der Name des Lieferanten (ggf. mit Abteilungsbezeichnung etc...)</kurzinfo>
+				</info>
+			</attribut>
+			<attribut pid="att.adressDatumReferenz" anzahl="1" anzahlIst="variabel" name="Adresse">
+				<info>
+					<kurzinfo>Die Adresse(n) des Lieferanten</kurzinfo>
+				</info>
+			</attribut>
+		</attributgruppenDefinition>
+		<aspektDefinition pid="asp.geraet.dummy" name="AQZustand">
+			<info>
+				<kurzinfo>Zustand durch Rückmeldung von Extern.</kurzinfo>
+			</info>
+		</aspektDefinition>
+		<attributDefinition pid="att.adressDatumReferenz" name="AdressDatumReferenz">
+			<info>
+				<kurzinfo>Attribut zur Referenzierung des Objekttyps: typ.adressDatum.</kurzinfo>
+			</info>
+			<objektReferenz typ="typ.adressDatum" undefiniert="verboten" referenzierungsart="assoziation"/>
+		</attributDefinition>
+		<attributDefinition pid="att.adressDatumReferenzOptional" name="AdressDatumReferenzOptional">
+			<info>
+				<kurzinfo>Attribut zur Referenzierung des Objekttyps: typ.adressDatum (Optionale Referenzierung erlaubt).</kurzinfo>
+			</info>
+			<objektReferenz typ="typ.adressDatum" undefiniert="erlaubt" referenzierungsart="assoziation"/>
+		</attributDefinition>
+		<attributDefinition pid="att.einbauOrtReferenz" name="EinbauOrtReferenz">
+			<info>
+				<kurzinfo>Attribut zur Referenzierung des Objekttyps: typ.einbauOrt.</kurzinfo>
+			</info>
+			<objektReferenz typ="typ.einbauOrt" undefiniert="verboten" referenzierungsart="assoziation"/>
+		</attributDefinition>
+		<attributDefinition pid="att.einbauOrtReferenzOptional" name="EinbauOrtReferenzOptional">
+			<info>
+				<kurzinfo>Attribut zur Referenzierung des Objekttyps: typ.einbauOrt (Optionale Referenzierung erlaubt).</kurzinfo>
+			</info>
+			<objektReferenz typ="typ.einbauOrt" undefiniert="erlaubt" referenzierungsart="assoziation"/>
+		</attributDefinition>
+		<attributDefinition pid="att.einbauOrtTypReferenz" name="EinbauOrtTypReferenz">
+			<info>
+				<kurzinfo>Attribut zur Referenzierung des Objekttyps: typ.einbauOrtTyp.</kurzinfo>
+			</info>
+			<objektReferenz typ="typ.einbauOrtTyp" undefiniert="verboten" referenzierungsart="assoziation"/>
+		</attributDefinition>
+		<attributDefinition pid="att.einbauOrtTypReferenzOptional" name="EinbauOrtTypReferenzOptional">
+			<info>
+				<kurzinfo>Attribut zur Referenzierung des Objekttyps: typ.einbauOrtTyp (Optionale Referenzierung erlaubt).</kurzinfo>
+			</info>
+			<objektReferenz typ="typ.einbauOrtTyp" undefiniert="erlaubt" referenzierungsart="assoziation"/>
+		</attributDefinition>
+		<attributDefinition pid="att.geraetBeschleunigung" name="Beschleunigung">
+			<info>
+				<kurzinfo>Beschleunigung in g</kurzinfo>
+			</info>
+			<ganzzahl bits="32">
+				<bereich skalierung="0,001" minimum="-2147483647" maximum="2147483640" einheit="g">
+				</bereich>
+				<zustand name="Unbestimmt" wert="2147483641">
+				</zustand>
+			</ganzzahl>
+		</attributDefinition>
+		<attributDefinition pid="att.geraeteTypReferenz" name="GeraeteTypReferenz">
+			<info>
+				<kurzinfo>Attribut zur Referenzierung des Objekttyps: typ.geraeteTyp.</kurzinfo>
+			</info>
+			<objektReferenz typ="typ.geraeteTyp" undefiniert="verboten" referenzierungsart="assoziation"/>
+		</attributDefinition>
+		<attributDefinition pid="att.geraeteTypReferenzOptional" name="GeraeteTypReferenzOptional">
+			<info>
+				<kurzinfo>Attribut zur Referenzierung des Objekttyps: typ.geraeteTyp (Optionale Referenzierung erlaubt).</kurzinfo>
+			</info>
+			<objektReferenz typ="typ.geraeteTyp" undefiniert="erlaubt" referenzierungsart="assoziation"/>
+		</attributDefinition>
+		<attributDefinition pid="att.geraetGehaeuseDichtigkeit" name="Dichtigkeit">
+			<info>
+				<kurzinfo>IP: Kennbuchstaben: Schutz gegen Berühren und gegen Eindringen von Fremdkörpern und von Wasser</kurzinfo>
+				<beschreibung>Code Buchstabe (International Protection) (IP)
+
+					Beispiel: IP 65:
+					Erste Kennziffer (Schutz gegen feste Fremdkörper) 6
+					Zweite Kennziffer (Schutz gegen Wasser) 5
+					Definitionen:
+					Erste Kennziffer
+					Schutzumfang
+					0: Kein Berührungsschutz, kein Schutz gegen feste Fremdkörper
+					1 Schutz gegen großflächige Berührung mit der Hand Schutz gegen Fremdkörper Ø &gt;50 mm
+					2 Schutz gegen Berührungen mit den Fingern Schutz gegen Fremdkörper Ø &gt;12 mm
+					3 Schutz gegen Berührungen mit Werkzeug, Drähten o.ä. mit Ø &gt;2,5 mm Schutz gegen Fremdkörper Ø &gt;2,5 mm
+					4 Schutz gegen Berührungen mit Werkzeug, Drähten o.ä. mit Ø &gt;1 mm Schutz gegen Fremdkörper Ø &gt;1 mm
+					5 Schutz gegen Berührung Schutz gegen Staubablagerungen im Inneren
+					6 Vollständiger Schutz gegen Berührung Schutz gegen Eindringen von Staub
+					Erste Kennziffer
+					Schutzumfang
+					0: Kein Wasserschutz
+					1 Schutz gegen senkrecht fallende Wassertropfen
+					2 Schutz gegen schräg fallende Wassertropfen (beliebiger Winkel bis zu 15° zur Senkrechten)
+					3 Schutz gegen Wasser aus beliebigem Winkel bis zu 60° aus der Senkrechten
+					4 Schutz gegen Spritzwasser aus allen Richtungen
+					5 Schutz gegen Wasserstrahl (Düse) aus beliebigem Winkel
+					6 Schutz gegen vorübergehende Überflutung
+					7 Schutz gegen Wassereindringung bei zeitweisem Eintauchen
+					8 Schutz gegen Druckwasser bei dauerndem Untertauchen
+
+					Darstellung in Anlehnung an DIN VDE 0470, DIN EN 60 529, IEC 60529
+				</beschreibung>
+			</info>
+			<ganzzahl bits="8">
+				<zustand name="Unbestimmt" wert="-1">
+				</zustand>
+				<zustand name="65" wert="65">
+					<info>
+						<kurzinfo>6: Erste Kennziffer: Schutz gegen Staubeintritt.
+
+							Vollständiger Schutz gegen Berührung, Schutz gegen Eindringen von Staub.
+
+							5: Zweite Kennziffer: Schutz gegen Strahlwasser.
+
+							Schutz gegen Wasserstrahl (Düse) aus beliebigem Winkel.
+						</kurzinfo>
+					</info>
+				</zustand>
+			</ganzzahl>
+		</attributDefinition>
+		<attributDefinition pid="att.geraetLaengeMeter" name="LaengeInMeter">
+			<info>
+				<kurzinfo>Eine in Meter gemessene Länge</kurzinfo>
+			</info>
+			<ganzzahl bits="32">
+				<bereich skalierung="0,001" minimum="0" maximum="2147483640" einheit="m">
+				</bereich>
+				<zustand name="Unbestimmt" wert="2147483641">
+				</zustand>
+			</ganzzahl>
+		</attributDefinition>
+		<attributDefinition pid="att.geraetLeistung" name="Leistung">
+			<info>
+				<kurzinfo>Leistung in W</kurzinfo>
+			</info>
+			<ganzzahl bits="32">
+				<bereich skalierung="0,001" minimum="-2147483647" maximum="2147483640" einheit="W">
+				</bereich>
+				<zustand name="Unbestimmt" wert="2147483641">
+				</zustand>
+			</ganzzahl>
+		</attributDefinition>
+		<attributDefinition pid="att.geraetMasse" name="Masse">
+			<info>
+				<kurzinfo>Masse in kg</kurzinfo>
+			</info>
+			<ganzzahl bits="32">
+				<bereich skalierung="0,001" minimum="0" maximum="2147483640" einheit="kg">
+				</bereich>
+				<zustand name="Unbestimmt" wert="2147483641">
+				</zustand>
+			</ganzzahl>
+		</attributDefinition>
+		<attributDefinition pid="att.geraetReferenz" name="GeraetReferenz">
+			<info>
+				<kurzinfo>Attribut zur Referenzierung des Objekttyps: typ.geraet.</kurzinfo>
+			</info>
+			<objektReferenz typ="typ.geraet" undefiniert="verboten" referenzierungsart="assoziation"/>
+		</attributDefinition>
+		<attributDefinition pid="att.geraetReferenzOptional" name="GeraetReferenzOptional">
+			<info>
+				<kurzinfo>Attribut zur Referenzierung des Objekttyps: typ.geraet (Optionale Referenzierung erlaubt).</kurzinfo>
+			</info>
+			<objektReferenz typ="typ.geraet" undefiniert="erlaubt" referenzierungsart="assoziation"/>
+		</attributDefinition>
+		<attributDefinition pid="att.geraetSpannung" name="Spannung">
+			<info>
+				<kurzinfo>Spannung in V</kurzinfo>
+			</info>
+			<ganzzahl bits="32">
+				<bereich skalierung="0,001" minimum="0" maximum="2147483640" einheit="V">
+				</bereich>
+				<zustand name="Unbestimmt" wert="2147483641">
+				</zustand>
+			</ganzzahl>
+		</attributDefinition>
+		<attributDefinition pid="att.geraetSpannungsart" name="Spannungsart">
+			<info>
+				<kurzinfo>Spannungsart (Gleichstrom, Wechselstrom enphasig, Wechselstrom dreipahsig, andere</kurzinfo>
+			</info>
+			<ganzzahl bits="8">
+				<zustand name="Unbestimmt" wert="-1">
+				</zustand>
+				<zustand name="Gleichstrom" wert="0">
+				</zustand>
+				<zustand name="Einphasenwechselstrom" wert="1">
+				</zustand>
+				<zustand name="Dreiphasenwechselstrom" wert="2">
+				</zustand>
+				<zustand name="Sonstiges" wert="100">
+				</zustand>
+			</ganzzahl>
+		</attributDefinition>
+		<attributDefinition pid="att.geraetTemperatur" name="Geraettemperatur">
+			<info>
+				<kurzinfo>Temperatur (Maximalwert, Minimalwert</kurzinfo>
+			</info>
+			<ganzzahl bits="16">
+				<bereich skalierung="0,1" minimum="-32640" maximum="32639" einheit="°C">
+				</bereich>
+				<zustand name="Unbestimmt" wert="32767">
+				</zustand>
+			</ganzzahl>
+		</attributDefinition>
+		<attributDefinition pid="att.herstellerReferenz" name="HerstellerReferenz">
+			<info>
+				<kurzinfo>Attribut zur Referenzierung des Objekttyps: typ.hersteller.</kurzinfo>
+			</info>
+			<objektReferenz typ="typ.hersteller" undefiniert="verboten" referenzierungsart="assoziation"/>
+		</attributDefinition>
+		<attributDefinition pid="att.herstellerReferenzOptional" name="HerstellerReferenzOptional">
+			<info>
+				<kurzinfo>Attribut zur Referenzierung des Objekttyps: typ.hersteller (Optionale Referenzierung erlaubt).</kurzinfo>
+			</info>
+			<objektReferenz typ="typ.hersteller" undefiniert="erlaubt" referenzierungsart="assoziation"/>
+		</attributDefinition>
+		<attributDefinition pid="att.hochbauSchrankSchachtReferenz" name="HochbauSchrankSchachtReferenz">
+			<info>
+				<kurzinfo>Attribut zur Referenzierung des Objekttyps: typ.hochbauSchrankSchacht.</kurzinfo>
+			</info>
+			<objektReferenz typ="typ.hochbauSchrankSchacht" undefiniert="verboten" referenzierungsart="assoziation"/>
+		</attributDefinition>
+		<attributDefinition pid="att.hochbauSchrankSchachtReferenzOptional" name="HochbauSchrankSchachtReferenzOptional">
+			<info>
+				<kurzinfo>Attribut zur Referenzierung des Objekttyps: typ.hochbauSchrankSchacht (Optionale Referenzierung erlaubt).</kurzinfo>
+			</info>
+			<objektReferenz typ="typ.hochbauSchrankSchacht" undefiniert="erlaubt" referenzierungsart="assoziation"/>
+		</attributDefinition>
+		<attributDefinition pid="att.hochbauSchrankSchachtTypReferenz" name="HochbauSchrankSchachtTypReferenz">
+			<info>
+				<kurzinfo>Attribut zur Referenzierung des Objekttyps: typ.hochbauSchrankSchachtTyp.</kurzinfo>
+			</info>
+			<objektReferenz typ="typ.hochbauSchrankSchachtTyp" undefiniert="verboten" referenzierungsart="assoziation"/>
+		</attributDefinition>
+		<attributDefinition pid="att.hochbauSchrankSchachtTypReferenzOptional" name="HochbauSchrankSchachtTypReferenzOptional">
+			<info>
+				<kurzinfo>Attribut zur Referenzierung des Objekttyps: typ.hochbauSchrankSchachtTyp (Optionale Referenzierung erlaubt).</kurzinfo>
+			</info>
+			<objektReferenz typ="typ.hochbauSchrankSchachtTyp" undefiniert="erlaubt" referenzierungsart="assoziation"/>
+		</attributDefinition>
+		<attributDefinition pid="att.instandhalterReferenz" name="InstandhalterReferenz">
+			<info>
+				<kurzinfo>Attribut zur Referenzierung des Objekttyps: typ.instandhalter.</kurzinfo>
+			</info>
+			<objektReferenz typ="typ.instandhalter" undefiniert="verboten" referenzierungsart="assoziation"/>
+		</attributDefinition>
+		<attributDefinition pid="att.instandhalterReferenzOptional" name="InstandhalterReferenzOptional">
+			<info>
+				<kurzinfo>Attribut zur Referenzierung des Objekttyps: typ.instandhalter (Optionale Referenzierung erlaubt).</kurzinfo>
+			</info>
+			<objektReferenz typ="typ.instandhalter" undefiniert="erlaubt" referenzierungsart="assoziation"/>
+		</attributDefinition>
+		<attributDefinition pid="att.konkretesEtwasReferenz" name="KonkretesEtwasReferenz">
+			<info>
+				<kurzinfo>Attribut zur Referenzierung des Objekttyps: typ.konkretesEtwas.</kurzinfo>
+			</info>
+			<objektReferenz typ="typ.konkretesEtwas" undefiniert="verboten" referenzierungsart="assoziation"/>
+		</attributDefinition>
+		<attributDefinition pid="att.konkretesEtwasReferenzOptional" name="KonkretesEtwasReferenzOptional">
+			<info>
+				<kurzinfo>Attribut zur Referenzierung des Objekttyps: typ.konkretesEtwas (Optionale Referenzierung erlaubt).</kurzinfo>
+			</info>
+			<objektReferenz typ="typ.konkretesEtwas" undefiniert="erlaubt" referenzierungsart="assoziation"/>
+		</attributDefinition>
+		<attributDefinition pid="att.lieferantReferenz" name="LieferantReferenz">
+			<info>
+				<kurzinfo>Attribut zur Referenzierung des Objekttyps: typ.lieferant.</kurzinfo>
+			</info>
+			<objektReferenz typ="typ.lieferant" undefiniert="verboten" referenzierungsart="assoziation"/>
+		</attributDefinition>
+		<attributDefinition pid="att.lieferantReferenzOptional" name="LieferantReferenzOptional">
+			<info>
+				<kurzinfo>Attribut zur Referenzierung des Objekttyps: typ.lieferant (Optionale Referenzierung erlaubt).</kurzinfo>
+			</info>
+			<objektReferenz typ="typ.lieferant" undefiniert="erlaubt" referenzierungsart="assoziation"/>
+		</attributDefinition>
+		<attributDefinition pid="att.zuPunktLiegtAufLinienObjelt" name="ReferenzAufEinPunktLiegtAufLinienObjekt">
+			<info>
+				<kurzinfo>Referenz auf Objekte vom Typ: typ.punktLiegtAufLinienObjekt</kurzinfo>
+			</info>
+			<objektReferenz typ="typ.punktLiegtAufLinienObjekt" undefiniert="verboten" referenzierungsart="assoziation"/>
+		</attributDefinition>
+		<mengenDefinition pid="menge.adressDaten" elemente="typ.adressDatum" aenderbar="ja" mindestens="1" hoechstens="0" referenzierungsart="assoziation">
+			<info>
+				<kurzinfo>Menge der Adressen, die ein Hersteller / Instandhalter / Lieferant, bzw. dessen Gliederung hat.</kurzinfo>
+			</info>
+		</mengenDefinition>
+	</modell>
+	<objekte>
+	</objekte>
+</konfigurationsBereich>

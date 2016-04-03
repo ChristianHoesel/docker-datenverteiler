@@ -1,0 +1,6 @@
+----------------------------------------------------------------
+2016-03-25 17:25:12.368 GMT:
+ Booting Derby version The Apache Software Foundation - Apache Derby - 10.6.1.0 - (938214): instance a816c00e-0153-aece-f4ce-000070fe4e1a 
+on database directory /home/christian/ubuntu1404datenverteiler/Kernsoftware-Basissystem/parameter/parameterDB   with class loader sun.misc.Launcher$AppClassLoader@6bc7c054
+
+Database Class Loader started - derby.database.classpath=''

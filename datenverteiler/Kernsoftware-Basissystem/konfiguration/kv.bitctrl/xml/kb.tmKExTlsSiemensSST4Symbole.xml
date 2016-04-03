@@ -1,0 +1,82 @@
+<?xml version="1.0" encoding="ISO-8859-1"?>
+<!DOCTYPE konfigurationsBereich PUBLIC "-//K2S//DTD Dokument//DE" "K2S.dtd">
+
+<konfigurationsBereich pid="kb.tmKExTlsSiemensSST4Symbole"
+	name="KB TM KEX Tls SIEMENS SST4 SYMBOLE" verantwortlich="kv.bitctrl">
+	<info>
+		<kurzinfo>KB Teilmodell KEx Tls Siemens SST4 Symbole</kurzinfo>
+		<beschreibung>
+		</beschreibung>
+	</info>
+	<konfigurationsAenderung autor="Christian Hösel (BitCtrl)"
+		stand="27.09.2012" version="1" grund="Erstellung" />
+	<modell>
+
+		<!--************************************************************************************************************** -->
+		<!-- -->
+		<!-- Definitionen einer SIEMENS-Streckenstation SST4 -->
+		<!-- -->
+		<!--************************************************************************************************************** -->
+
+		<typDefinition pid="typ.deSysSiemensSSt4" name="SystemDeSteuerModulSiemensSST4">
+			<info>
+				<kurzinfo> System DE - SIEMENS-Steuermodul SST4 </kurzinfo>
+			</info>
+			<erweitert pid="typ.deSys" />
+			<attributgruppe pid="atg.bcStoreSymbol" />
+		</typDefinition>
+
+		<typDefinition pid="typ.deWzgSymbolSiemensSSt4" name="WzgSymbolDeSteuerModulSiemensSST4">
+			<info>
+				<kurzinfo> WzgSymbol-DE - SIEMENS-Steuermodul SST4 </kurzinfo>
+			</info>
+			<erweitert pid="typ.deWzg" />
+			<attributgruppe pid="atg.bcAssignSymbol" />
+		</typDefinition>
+
+		<attributgruppenDefinition pid="atg.bcStoreSymbol"
+			name="SymbolSpeicherung" konfigurierend="nein">
+			<info>
+				<kurzinfo>Symbol an SSt senden.</kurzinfo>
+			</info>
+			<aspekt pid="asp.tlsVorgabe" onlineModus="quelleUndSenke" />
+			<aspekt pid="asp.tlsZustand" onlineModus="quelleUndSenke" />
+			<attribut pid="att.zahl" name="Status" />
+			<attribut pid="att.zahl" name="BlockNummer" />
+			<attribut pid="att.zahl" name="BlockAnzahl" />
+			<attribut pid="att.text" name="FileName" />
+			<attribut pid="att.byte" name="Data" anzahlIst="variabel" />
+		</attributgruppenDefinition>
+
+		<attributgruppenDefinition pid="atg.bcAssignSymbol"
+			name="SymbolZuordnung" konfigurierend="nein">
+			<info>
+				<kurzinfo>Symbol auf SSt zu Code zuordnen.</kurzinfo>
+			</info>
+			<aspekt pid="asp.tlsVorgabe" onlineModus="quelleUndSenke" />
+			<aspekt pid="asp.tlsZustand" onlineModus="quelleUndSenke" />
+			<attribut pid="att.zahl" name="Code" />
+			<attribut pid="att.bcWvzSymbolAssignmentStatus" name="AssignmentStatus" />
+			<attribut pid="att.text" name="FileName" />
+		</attributgruppenDefinition>
+
+		<attributDefinition pid="att.bcWvzSymbolAssignmentStatus"
+			name="Symbol-Zuweisungs-Status">
+			<info>
+				<kurzinfo> Typ des Zuweisungsstatus von Symbolen. </kurzinfo>
+			</info>
+			<ganzzahl>
+				<zustand name="undefiniert" wert="0" />
+				<zustand name="Symbol übertragen" wert="43" />
+				<zustand name="Symbol noch nicht übertragen" wert="45" />
+				<zustand name="Stellcode nicht zugewiesen" wert="47" />
+			</ganzzahl>
+		</attributDefinition>
+
+	</modell>
+
+	<objekte>
+	</objekte>
+
+</konfigurationsBereich>
+            

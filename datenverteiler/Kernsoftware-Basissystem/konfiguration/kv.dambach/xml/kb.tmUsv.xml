@@ -1,0 +1,314 @@
+<?xml version="1.0" encoding="ISO-8859-1"?>
+<!DOCTYPE konfigurationsBereich PUBLIC "-//K2S//DTD Dokument//DE" "K2S.dtd">
+<konfigurationsBereich pid="kb.tmUsv" name="Teilmodell USV" verantwortlich="kv.dambach">
+	<info>
+		<kurzinfo>Bereich mit dem Modell für die USV</kurzinfo>
+	</info>
+	<konfigurationsAenderung stand="09.01.2008" version="1" autor="Dambach-Werke GmbH, Th. Drapp" grund="Änderungsdokumentation siehe &apos;ReleaseNotes kv.dambach.doc&apos;"></konfigurationsAenderung>
+	<!--
+	Abhängigkeiten des Bereichs kb.tmUsv
+	Abhängig ab Version      Art der Abhängigkeit      Version des benötigten Bereichs      Benötigter Bereich
+	1                        notwendig                 1                                    kb.metaModellGlobal                
+	1                        notwendig                 1                                    kb.systemModellGlobal              
+	1                        notwendig                 1                                    kb.kv.dambach                      
+	1                        notwendig                 1                                    kb.fachModellGlobal                
+	-->
+	<modell>
+		<typDefinition pid="typ.usv" name="USV" objektNamenPermanent="nein">
+			<info>
+				<kurzinfo>USV</kurzinfo>
+			</info>
+			<erweitert pid="typ.konfigurationsObjekt"/>
+			<attributgruppe pid="atg.usv"/>
+			<attributgruppe pid="atg.usvBefehl"/>
+			<attributgruppe pid="atg.usvZustand"/>
+			<attributgruppe pid="atg.usvZustandKritisch"/>
+		</typDefinition>
+		<attributgruppenDefinition pid="atg.usv" name="USV" parametrierend="nein">
+			<info>
+				<kurzinfo>Konfigurierende Eigenschaften der Objekte des Typs.</kurzinfo>
+			</info>
+			<aspekt pid="asp.eigenschaften" konfigurationsModus="datensatzNotwendig">
+			</aspekt>
+			<attribut pid="att.text" anzahl="1" anzahlIst="fest" name="USV-Typ">
+				<info>
+					<kurzinfo>USV-Typ</kurzinfo>
+				</info>
+			</attribut>
+		</attributgruppenDefinition>
+		<attributgruppenDefinition pid="atg.usvBefehl" name="USV-Befehl" parametrierend="nein">
+			<info>
+				<kurzinfo>USV-Befehl</kurzinfo>
+			</info>
+			<aspekt pid="asp.vorgabe" onlineModus="quelleUndSenke">
+			</aspekt>
+			<attribut pid="att.jaNein" anzahl="1" anzahlIst="fest" name="Notstrom">
+				<info>
+					<kurzinfo>Notstrom</kurzinfo>
+				</info>
+			</attribut>
+			<attribut pid="att.jaNein" anzahl="1" anzahlIst="fest" name="UsvBetrieb">
+				<info>
+					<kurzinfo>UsvBetrieb</kurzinfo>
+				</info>
+			</attribut>
+		</attributgruppenDefinition>
+		<attributgruppenDefinition pid="atg.usvZustand" name="USV-Zustand" parametrierend="nein">
+			<info>
+				<kurzinfo>USV-Zustand</kurzinfo>
+			</info>
+			<aspekt pid="asp.zustand" onlineModus="quelleUndSenke">
+			</aspekt>
+			<attribut pid="att.usvUsvZustand" anzahl="1" anzahlIst="fest" name="UsvZustand">
+				<info>
+					<kurzinfo>UsvZustand</kurzinfo>
+				</info>
+			</attribut>
+			<attribut pid="att.usvBatterieZustand" anzahl="1" anzahlIst="fest" name="BatterieZustand">
+				<info>
+					<kurzinfo>BatterieZustand</kurzinfo>
+				</info>
+			</attribut>
+			<attribut pid="att.usvKommunikationsZustand" anzahl="1" anzahlIst="fest" name="KommunikationsZustand">
+				<info>
+					<kurzinfo>KommunikationsZustand</kurzinfo>
+				</info>
+			</attribut>
+			<attribut pid="att.usvEingangsFrequenzZustand" anzahl="1" anzahlIst="fest" name="EingangsFrequenzZustand">
+				<info>
+					<kurzinfo>EingangsFrequenzZustand</kurzinfo>
+				</info>
+			</attribut>
+			<attribut pid="att.usvWechselSpannung" anzahl="1" anzahlIst="fest" name="WechselSpannung">
+				<info>
+					<kurzinfo>WechselSpannung</kurzinfo>
+				</info>
+			</attribut>
+			<attribut pid="att.usvZustandPhase" anzahl="1" anzahlIst="fest" name="ZustandPhase1">
+				<info>
+					<kurzinfo>ZustandPhase1</kurzinfo>
+				</info>
+			</attribut>
+			<attribut pid="att.usvZustandPhase" anzahl="1" anzahlIst="fest" name="ZustandPhase2">
+				<info>
+					<kurzinfo>ZustandPhase2</kurzinfo>
+				</info>
+			</attribut>
+			<attribut pid="att.usvZustandPhase" anzahl="1" anzahlIst="fest" name="ZustandPhase3">
+				<info>
+					<kurzinfo>ZustandPhase3</kurzinfo>
+				</info>
+			</attribut>
+			<attribut pid="att.usvZustandNotStrom" anzahl="1" anzahlIst="fest" name="ZustandNotStrom">
+				<info>
+					<kurzinfo>ZustandNotStrom</kurzinfo>
+				</info>
+			</attribut>
+		</attributgruppenDefinition>
+		<attributgruppenDefinition pid="atg.usvZustandKritisch" name="USV-kritischer Zustand" parametrierend="nein">
+			<info>
+				<kurzinfo>USV-kritischer Zustand</kurzinfo>
+			</info>
+			<aspekt pid="asp.zustand" onlineModus="quelleUndSenke">
+			</aspekt>
+			<attribut pid="att.usvZustandKritisch" anzahl="1" anzahlIst="fest" name="KritischerZustand">
+				<info>
+					<kurzinfo>KritischerZustand</kurzinfo>
+				</info>
+			</attribut>
+		</attributgruppenDefinition>
+		<attributDefinition pid="att.usvBatterieZustand" name="BatterieZustand">
+			<info>
+				<kurzinfo>Ladezustand der Batterie.</kurzinfo>
+			</info>
+			<ganzzahl bits="8">
+				<bereich skalierung="1" minimum="0" maximum="100" einheit="%">
+				</bereich>
+				<zustand name="nicht ermittelbar" wert="-1">
+					<info>
+						<kurzinfo>Daten sind nicht ermittelbar (ist KEIN Fehler). </kurzinfo>
+						<beschreibung>Wird gesetzt, wenn der entsprechende Wert nicht ermittelbar ist (z.B. kein Sensor).</beschreibung>
+					</info>
+				</zustand>
+			</ganzzahl>
+		</attributDefinition>
+		<attributDefinition pid="att.usvEingangsFrequenzZustand" name="Eingangsfrequenzzustand">
+			<info>
+				<kurzinfo>Zustand der Eingangsfrequenz.</kurzinfo>
+			</info>
+			<ganzzahl bits="8">
+				<zustand name="nicht ermittelbar" wert="-1">
+					<info>
+						<kurzinfo>Daten sind nicht ermittelbar (ist KEIN Fehler). </kurzinfo>
+						<beschreibung>Wird gesetzt, wenn der entsprechende Wert nicht ermittelbar ist (z.B. kein Sensor).</beschreibung>
+					</info>
+				</zustand>
+				<zustand name="in Ordnung" wert="0">
+					<info>
+						<kurzinfo>Eingangsfrequenz ist in Ordnung.</kurzinfo>
+					</info>
+				</zustand>
+				<zustand name="Hoch" wert="1">
+					<info>
+						<kurzinfo>Eingangsfrequenz ist zu hoch.</kurzinfo>
+					</info>
+				</zustand>
+				<zustand name="Niedrig" wert="2">
+					<info>
+						<kurzinfo>Eingangsfrequenz ist zu niedrig.</kurzinfo>
+					</info>
+				</zustand>
+			</ganzzahl>
+		</attributDefinition>
+		<attributDefinition pid="att.usvKommunikationsZustand" name="Kommunikationszustand">
+			<info>
+				<kurzinfo>Zustand der Kommunikation mit der USV-Anlage.</kurzinfo>
+			</info>
+			<ganzzahl bits="8">
+				<zustand name="nicht ermittelbar" wert="-1">
+					<info>
+						<kurzinfo>Daten sind nicht ermittelbar (ist KEIN Fehler). </kurzinfo>
+						<beschreibung>Wird gesetzt, wenn der Kommunikationsstatus nicht bekannt ist.</beschreibung>
+					</info>
+				</zustand>
+				<zustand name="Kommunikationsstörung" wert="0">
+					<info>
+						<kurzinfo>Kommunikation mit USV-Anlage ist gestört.</kurzinfo>
+					</info>
+				</zustand>
+				<zustand name="in Ordnung" wert="1">
+					<info>
+						<kurzinfo>Kommunikation mit USV-Anlage ist in Ordnung.</kurzinfo>
+					</info>
+				</zustand>
+			</ganzzahl>
+		</attributDefinition>
+		<attributDefinition pid="att.usvUsvZustand" name="USV-Zustand">
+			<info>
+				<kurzinfo>Zustand der USV-Anlage.</kurzinfo>
+			</info>
+			<ganzzahl bits="8">
+				<zustand name="nicht ermittelbar" wert="-1">
+					<info>
+						<kurzinfo>Daten sind nicht ermittelbar (ist KEIN Fehler). </kurzinfo>
+						<beschreibung>Wird gesetzt, wenn der Zustand der USV nicht bekannt ist.</beschreibung>
+					</info>
+				</zustand>
+				<zustand name="Normalbetrieb" wert="0">
+					<info>
+						<kurzinfo>USV läuft im Normalbetrieb.</kurzinfo>
+					</info>
+				</zustand>
+				<zustand name="Batteriebetrieb" wert="1">
+					<info>
+						<kurzinfo>USV läuft im Batteriebetrieb.</kurzinfo>
+					</info>
+				</zustand>
+			</ganzzahl>
+		</attributDefinition>
+		<attributDefinition pid="att.usvWechselSpannung" name="WechselSpannung">
+			<info>
+				<kurzinfo>Zustand der Wechselspannung am Eingang.</kurzinfo>
+			</info>
+			<ganzzahl bits="8">
+				<zustand name="nicht ermittelbar" wert="-1">
+					<info>
+						<kurzinfo>Daten sind nicht ermittelbar (ist KEIN Fehler). </kurzinfo>
+						<beschreibung>Wird gesetzt, wenn der entsprechende Wert nicht ermittelbar ist (z.B. kein Sensor).</beschreibung>
+					</info>
+				</zustand>
+				<zustand name="in Ordnung" wert="0">
+					<info>
+						<kurzinfo>Eingangswechselspannung ist in Ordnung.</kurzinfo>
+					</info>
+				</zustand>
+				<zustand name="Überspannung" wert="1">
+					<info>
+						<kurzinfo>Eingangswechselspannung ist zu hoch.</kurzinfo>
+					</info>
+				</zustand>
+				<zustand name="Unterspannung" wert="2">
+					<info>
+						<kurzinfo>Eingangswechselspannung ist zu niedrig.</kurzinfo>
+					</info>
+				</zustand>
+			</ganzzahl>
+		</attributDefinition>
+		<attributDefinition pid="att.usvZustandKritisch" name="ZustandKritisch">
+			<info>
+				<kurzinfo>Zustand der USV bzgl. des kritischen Bereichs.</kurzinfo>
+			</info>
+			<ganzzahl bits="8">
+				<zustand name="nicht ermittelbar" wert="-1">
+					<info>
+						<kurzinfo>Daten sind nicht ermittelbar (ist KEIN Fehler). </kurzinfo>
+						<beschreibung>Wird gesetzt, wenn der entsprechende Wert nicht ermittelbar ist (z.B. kein Sensor).</beschreibung>
+					</info>
+				</zustand>
+				<zustand name="noch nicht erreicht" wert="0">
+					<info>
+						<kurzinfo>USV ist in einem nicht kritischen Zustand.</kurzinfo>
+					</info>
+				</zustand>
+				<zustand name="erreicht" wert="1">
+					<info>
+						<kurzinfo>USV ist in einem kritischen Zustand. Rechner sollte heruntergefahren werden.</kurzinfo>
+					</info>
+				</zustand>
+			</ganzzahl>
+		</attributDefinition>
+		<attributDefinition pid="att.usvZustandNotStrom" name="ZustandNotStrom">
+			<info>
+				<kurzinfo>Zustand der Notstromversorgung.</kurzinfo>
+			</info>
+			<ganzzahl bits="8">
+				<zustand name="nicht ermittelbar" wert="-1">
+					<info>
+						<kurzinfo>Daten sind nicht ermittelbar (ist KEIN Fehler). </kurzinfo>
+						<beschreibung>Wird gesetzt, wenn der entsprechende Wert nicht ermittelbar ist (z.B. kein Sensor).</beschreibung>
+					</info>
+				</zustand>
+				<zustand name="in Ordnung, passiv" wert="0">
+					<info>
+						<kurzinfo>Notstromversorgung ist in Ordnung, aber passiv.</kurzinfo>
+					</info>
+				</zustand>
+				<zustand name="in Ordnung, aktiv" wert="1">
+					<info>
+						<kurzinfo>Notstromversorgung ist in Ordnung, passiv.</kurzinfo>
+					</info>
+				</zustand>
+				<zustand name="Störung" wert="2">
+					<info>
+						<kurzinfo>Notstromversorgung ist gestört.</kurzinfo>
+					</info>
+				</zustand>
+			</ganzzahl>
+		</attributDefinition>
+		<attributDefinition pid="att.usvZustandPhase" name="ZustandPhase">
+			<info>
+				<kurzinfo>Zustand der Phasen.</kurzinfo>
+			</info>
+			<ganzzahl bits="8">
+				<zustand name="nicht ermittelbar" wert="-1">
+					<info>
+						<kurzinfo>Daten sind nicht ermittelbar (ist KEIN Fehler). </kurzinfo>
+						<beschreibung>Wird gesetzt, wenn der entsprechende Wert nicht ermittelbar ist (z.B. kein Sensor).</beschreibung>
+					</info>
+				</zustand>
+				<zustand name="in Ordnung" wert="0">
+					<info>
+						<kurzinfo>Phase ist in Ordnung.</kurzinfo>
+					</info>
+				</zustand>
+				<zustand name="Störung" wert="1">
+					<info>
+						<kurzinfo>Phasenstörung.</kurzinfo>
+					</info>
+				</zustand>
+			</ganzzahl>
+		</attributDefinition>
+	</modell>
+	<objekte>
+	</objekte>
+</konfigurationsBereich>

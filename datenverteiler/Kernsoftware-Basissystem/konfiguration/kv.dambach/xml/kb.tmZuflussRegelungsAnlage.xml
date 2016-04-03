@@ -1,0 +1,3548 @@
+<?xml version="1.0" encoding="ISO-8859-1"?>
+<!DOCTYPE konfigurationsBereich PUBLIC "-//K2S//DTD Dokument//DE" "K2S.dtd">
+<konfigurationsBereich pid="kb.tmZuflussRegelungsAnlage" name="Teilmodell ZuflussRegelungsAnlage" verantwortlich="kv.dambach">
+	<info>
+		<kurzinfo>Teilmodell mit Datenmodellierung für ZuflussRegelungsAnlagen.</kurzinfo>
+	</info>
+	<konfigurationsAenderung stand="18.05.2009" version="1" autor="Dambach-Werke GmbH, Th. Drapp" grund="Änderungsdokumentation siehe &apos;ReleaseNotes kv.dambach.doc&apos;"></konfigurationsAenderung>
+	<konfigurationsAenderung stand="18.05.2009" version="2" autor="Dambach-Werke GmbH, Th. Drapp" grund="Änderungsdokumentation siehe &apos;ReleaseNotes kv.dambach.doc&apos;"></konfigurationsAenderung>
+	<konfigurationsAenderung stand="18.05.2009" version="3" autor="Dambach-Werke GmbH, Th. Drapp" grund="Änderungsdokumentation siehe &apos;ReleaseNotes kv.dambach.doc&apos;"></konfigurationsAenderung>
+	<konfigurationsAenderung stand="08.12.2009" version="4" autor="Dambach-Werke GmbH, Th. Drapp" grund="Änderungsdokumentation siehe &apos;ReleaseNotes kv.dambach.doc&apos;"></konfigurationsAenderung>
+	<konfigurationsAenderung stand="03.08.2010" version="5" autor="Dambach-Werke GmbH, Th. Drapp" grund="Änderungsdokumentation siehe &apos;ReleaseNotes kv.dambach.doc&apos;"></konfigurationsAenderung>
+	<konfigurationsAenderung stand="08.10.2010" version="6" autor="Dambach-Werke GmbH, Th. Drapp" grund="Änderungsdokumentation siehe &apos;ReleaseNotes kv.dambach.doc&apos;"></konfigurationsAenderung>
+	<konfigurationsAenderung stand="08.10.2010" version="7" autor="Dambach-Werke GmbH, Th. Drapp" grund="Änderungsdokumentation siehe &apos;ReleaseNotes kv.dambach.doc&apos;"></konfigurationsAenderung>
+	<konfigurationsAenderung stand="11.10.2010" version="8" autor="Dambach-Werke GmbH, Th. Drapp" grund="Änderungsdokumentation siehe &apos;ReleaseNotes kv.dambach.doc&apos;"></konfigurationsAenderung>
+	<konfigurationsAenderung stand="12.10.2010" version="9" autor="Dambach-Werke GmbH, Th. Drapp" grund="Änderungsdokumentation siehe &apos;ReleaseNotes kv.dambach.doc&apos;"></konfigurationsAenderung>
+	<konfigurationsAenderung stand="14.10.2010" version="10" autor="Dambach-Werke GmbH, Th. Drapp" grund="Änderungsdokumentation siehe &apos;ReleaseNotes kv.dambach.doc&apos;"></konfigurationsAenderung>
+	<konfigurationsAenderung stand="15.10.2010" version="11" autor="Dambach-Werke GmbH, Th. Drapp" grund="Änderungsdokumentation siehe &apos;ReleaseNotes kv.dambach.doc&apos;"></konfigurationsAenderung>
+	<konfigurationsAenderung stand="10.03.2011" version="11" autor="Dambach-Werke GmbH, Th. Drapp" grund="Änderungsdokumentation siehe &apos;ReleaseNotes kv.dambach.doc&apos;"></konfigurationsAenderung>
+	<!--
+	Abhängigkeiten des Bereichs kb.tmZuflussRegelungsAnlage
+	Abhängig ab Version      Art der Abhängigkeit      Version des benötigten Bereichs      Benötigter Bereich
+	1                        notwendig                 1                                    kb.metaModellGlobal                
+	1                        notwendig                 3                                    kb.tmVewBetriebGlobal              
+	1                        notwendig                 2                                    kb.tmKExTlsGlobal                  
+	1                        notwendig                 3                                    kb.tmAnzeigenGlobal                
+	1                        notwendig                 2                                    kb.tmVerkehrGlobal                 
+	1                        notwendig                 1                                    kb.kv.dambach                      
+	1                        notwendig                 4                                    kb.fachModellGlobal                
+	5                        notwendig                 1                                    kb.systemModellGlobal              
+	8                        notwendig                 5                                    kb.tmEreignisKalenderGlobal        
+	-->
+	<modell>
+		<typDefinition pid="typ.zraBerechnungsVerfahren" name="BerechnungsVerfahren" objektNamenPermanent="nein">
+			<info>
+				<kurzinfo>BerechnungsVerfahren.</kurzinfo>
+				<beschreibung>Das BerechnungsVerfahren stellt ein BerechnungsVerfahren für die Bestimmung des Zustandes und der Parameter für einen
+				Zufluss dar. Dieser Typ wird normalerweise nicht direkt instanziiert. Er enthält die für alle BerechnungsVerfahren
+				notwendigen Attributgruppen.</beschreibung>
+			</info>
+			<erweitert pid="typ.konfigurationsObjekt"/>
+			<attributgruppe pid="atg.berechnungsVerfahrenParameter"/>
+			<attributgruppe pid="atg.berechnungsVerfahrenParameterEreignis"/>
+			<defaultParameter attributgruppe="atg.berechnungsVerfahrenParameter" typ="typ.zraBerechnungsVerfahren">
+				<datum name="Mindestschaltzeit" wert="1 Minute"/>
+				<datum name="Ausschaltzeit" wert="2 Minuten"/>
+				<datenliste name="Urlasser">
+					<datum name="BenutzerReferenz" wert="undefiniert"/>
+					<datum name="Ursache" wert=""/>
+					<datum name="Veranlasser" wert=""/>
+				</datenliste>
+			</defaultParameter>
+			<defaultParameter attributgruppe="atg.berechnungsVerfahrenParameterEreignis" typ="typ.zraBerechnungsVerfahren">
+				<datenfeld name="Parameter">
+				</datenfeld>
+				<datenliste name="Urlasser">
+					<datum name="BenutzerReferenz" wert="undefiniert"/>
+					<datum name="Ursache" wert=""/>
+					<datum name="Veranlasser" wert=""/>
+				</datenliste>
+			</defaultParameter>
+		</typDefinition>
+		<typDefinition pid="typ.zraBerechnungsVerfahrenALINEA" name="BerechnungsVerfahrenALINEA" objektNamenPermanent="nein">
+			<info>
+				<kurzinfo>BerechnungsVerfahrenALINEA.</kurzinfo>
+				<beschreibung>Das BerechnungsVerfahrenALINEA stellt ein BerechnungsVerfahren für die Bestimmung des Zustandes und der Parameter für einen
+				Zufluss unter Verwendung des ALINEA-Algorithmus dar.</beschreibung>
+			</info>
+			<erweitert pid="typ.zraBerechnungsVerfahren"/>
+			<attributgruppe pid="atg.berechnungsVerfahrenParameterALINEAHysterese"/>
+			<attributgruppe pid="atg.berechnungsVerfahrenParameterALINEAHystereseEreignis"/>
+			<defaultParameter attributgruppe="atg.berechnungsVerfahrenParameterALINEAHysterese" typ="typ.zraBerechnungsVerfahrenALINEA">
+				<datenfeld name="Programm">
+				</datenfeld>
+				<datenliste name="Urlasser">
+					<datum name="BenutzerReferenz" wert="undefiniert"/>
+					<datum name="Ursache" wert=""/>
+					<datum name="Veranlasser" wert=""/>
+				</datenliste>
+			</defaultParameter>
+			<defaultParameter attributgruppe="atg.berechnungsVerfahrenParameterALINEAHystereseEreignis" typ="typ.zraBerechnungsVerfahrenALINEA">
+				<datenfeld name="Parameter">
+				</datenfeld>
+				<datenliste name="Urlasser">
+					<datum name="BenutzerReferenz" wert="undefiniert"/>
+					<datum name="Ursache" wert=""/>
+					<datum name="Veranlasser" wert=""/>
+				</datenliste>
+			</defaultParameter>
+		</typDefinition>
+		<typDefinition pid="typ.zraBerechnungsVerfahrenPrognose" name="BerechnungsVerfahrenPrognose" objektNamenPermanent="nein">
+			<info>
+				<kurzinfo>BerechnungsVerfahrenPrognose.</kurzinfo>
+				<beschreibung>Das BerechnungsVerfahrenPrognose stellt ein BerechnungsVerfahren für die Bestimmung des Zustandes und der Parameter für einen
+				Zufluss unter Verwendung von Prognosedaten dar. Dieser Typ wird normalerweise nicht direkt instanziiert. Er enthält die für
+				alle BerechnungsVerfahrenPrognose notwendigen Attributgruppen.</beschreibung>
+			</info>
+			<erweitert pid="typ.zraBerechnungsVerfahren"/>
+			<attributgruppe pid="atg.berechnungsVerfahrenParameterPrognoseHysterese"/>
+			<attributgruppe pid="atg.berechnungsVerfahrenParameterPrognoseHystereseEreignis"/>
+			<defaultParameter attributgruppe="atg.berechnungsVerfahrenParameterPrognoseHysterese" typ="typ.zraBerechnungsVerfahrenPrognose">
+				<datenfeld name="Programm">
+				</datenfeld>
+				<datenliste name="Urlasser">
+					<datum name="BenutzerReferenz" wert="undefiniert"/>
+					<datum name="Ursache" wert=""/>
+					<datum name="Veranlasser" wert=""/>
+				</datenliste>
+			</defaultParameter>
+			<defaultParameter attributgruppe="atg.berechnungsVerfahrenParameterPrognoseHystereseEreignis" typ="typ.zraBerechnungsVerfahrenPrognose">
+				<datenfeld name="Parameter">
+				</datenfeld>
+				<datenliste name="Urlasser">
+					<datum name="BenutzerReferenz" wert="undefiniert"/>
+					<datum name="Ursache" wert=""/>
+					<datum name="Veranlasser" wert=""/>
+				</datenliste>
+			</defaultParameter>
+		</typDefinition>
+		<typDefinition pid="typ.zraBerechnungsVerfahrenPrognoseFR" name="BerechnungsVerfahrenPrognoseFR" objektNamenPermanent="nein">
+			<info>
+				<kurzinfo>BerechnungsVerfahrenPrognoseFR.</kurzinfo>
+				<beschreibung>Das BerechnungsVerfahrenPrognoseFS stellt ein BerechnungsVerfahren für die Bestimmung des Zustandes und der Parameter für einen
+				Zufluss unter Verwendung von Prognosedaten aller FahrStreifen des Erfassungsquerschnitt dar.</beschreibung>
+			</info>
+			<erweitert pid="typ.zraBerechnungsVerfahrenPrognose"/>
+		</typDefinition>
+		<typDefinition pid="typ.zraBerechnungsVerfahrenPrognoseFS" name="BerechnungsVerfahrenPrognoseFS" objektNamenPermanent="nein">
+			<info>
+				<kurzinfo>BerechnungsVerfahrenPrognoseFS.</kurzinfo>
+				<beschreibung>Das BerechnungsVerfahrenPrognoseFS stellt ein BerechnungsVerfahren für die Bestimmung des Zustandes und der Parameter für einen
+				Zufluss unter Verwendung von Prognosedaten des rechten FahrStreifen des Erfassungsquerschnitt dar.</beschreibung>
+			</info>
+			<erweitert pid="typ.zraBerechnungsVerfahrenPrognose"/>
+		</typDefinition>
+		<typDefinition pid="typ.zraHinweisSchild" name="HinweisSchild" objektNamenPermanent="nein">
+			<info>
+				<kurzinfo>HinweisSchild.</kurzinfo>
+				<beschreibung>Eine HinweisSchild stellt ein vorgelagertes HinweisSchild mit Informationen zum Betrieb der ZuflussRegelungsAnlage dar. Ohne diesen Hinweis
+				darf die ZuflussRegelungsAnlage nicht betrieben werden. HinweisSchilder werden nur auf ParallelFahrbahnen verwendet.</beschreibung>
+			</info>
+			<erweitert pid="typ.konfigurationsObjekt"/>
+			<attributgruppe pid="atg.zraHinweisSchild"/>
+			<attributgruppe pid="atg.zraHinweisSchildParameterBefehle"/>
+			<defaultParameter attributgruppe="atg.zraHinweisSchildParameterBefehle" typ="typ.zraHinweisSchild">
+				<datum name="BefehlPrismaBildZraAus" wert="Prisma Seite 1"/>
+				<datum name="BefehlPrismaBildZraEin" wert="Prisma Seite 2"/>
+				<datum name="BefehlBlinkerBildEin" wert="gelbes Blinklicht"/>
+				<datenliste name="BefehlBlinkerBildEinBlinken">
+					<datum name="Status" wert="aus"/>
+					<datum name="Dauer" wert="aus"/>
+				</datenliste>
+				<datum name="TlsTelegrammTyp" wert="Typ 48"/>
+				<datenliste name="Urlasser">
+					<datum name="BenutzerReferenz" wert="undefiniert"/>
+					<datum name="Ursache" wert=""/>
+					<datum name="Veranlasser" wert=""/>
+				</datenliste>
+			</defaultParameter>
+		</typDefinition>
+		<typDefinition pid="typ.zraLichtSignalAnlage" name="LichtSignalAnlage" objektNamenPermanent="nein">
+			<info>
+				<kurzinfo>LichtSignalAnlage.</kurzinfo>
+				<beschreibung>Eine LichtSignalAnlage stellt die Lichtsignalanlage für einen Zufluss der ZuflussRegelungsAnlage dar.</beschreibung>
+			</info>
+			<erweitert pid="typ.konfigurationsObjekt"/>
+			<attributgruppe pid="atg.zraLichtSignalAnlage"/>
+			<attributgruppe pid="atg.zraLichtSignalAnlageBefehl"/>
+			<attributgruppe pid="atg.zraLichtSignalAnlageErweitert"/>
+			<attributgruppe pid="atg.zraLichtSignalAnlageParameter"/>
+			<attributgruppe pid="atg.zraLichtSignalAnlageParameterEreignis"/>
+			<attributgruppe pid="atg.zraLichtSignalAnlageRäumprogramm"/>
+			<attributgruppe pid="atg.zraLichtSignalAnlageRäumprogrammEreignis"/>
+			<defaultParameter attributgruppe="atg.zraLichtSignalAnlageBefehl" typ="typ.zraLichtSignalAnlage">
+				<datum name="Rotschaltzeit" wert="Automatik"/>
+				<datum name="Fahrzeuganzahl" wert="1 Fahrzeuge"/>
+				<datenliste name="Urlasser">
+					<datum name="BenutzerReferenz" wert="undefiniert"/>
+					<datum name="Ursache" wert=""/>
+					<datum name="Veranlasser" wert=""/>
+				</datenliste>
+			</defaultParameter>
+			<defaultParameter attributgruppe="atg.zraLichtSignalAnlageParameter" typ="typ.zraLichtSignalAnlage">
+				<datum name="MaximaleErsteRotschaltzeit" wert="2 Sekunden"/>
+				<datum name="SchwächsteRotschaltzeit" wert="2 Sekunden"/>
+				<datum name="AnzahlIntervalleMaximaleErsteRotschaltzeit" wert="1"/>
+				<datum name="RotlichtFahrerAbfragen" wert="Nein"/>
+				<datenliste name="Urlasser">
+					<datum name="BenutzerReferenz" wert="undefiniert"/>
+					<datum name="Ursache" wert=""/>
+					<datum name="Veranlasser" wert=""/>
+				</datenliste>
+			</defaultParameter>
+			<defaultParameter attributgruppe="atg.zraLichtSignalAnlageParameterEreignis" typ="typ.zraLichtSignalAnlage">
+				<datenfeld name="Parameter">
+				</datenfeld>
+				<datenliste name="Urlasser">
+					<datum name="BenutzerReferenz" wert="undefiniert"/>
+					<datum name="Ursache" wert=""/>
+					<datum name="Veranlasser" wert=""/>
+				</datenliste>
+			</defaultParameter>
+			<defaultParameter attributgruppe="atg.zraLichtSignalAnlageRäumprogramm" typ="typ.zraLichtSignalAnlage">
+				<datum name="Rotzeit" wert="3 Sekunden"/>
+				<datum name="Umlaufzeit" wert="10 Sekunden"/>
+				<datenliste name="Urlasser">
+					<datum name="BenutzerReferenz" wert="undefiniert"/>
+					<datum name="Ursache" wert=""/>
+					<datum name="Veranlasser" wert=""/>
+				</datenliste>
+			</defaultParameter>
+			<defaultParameter attributgruppe="atg.zraLichtSignalAnlageRäumprogrammEreignis" typ="typ.zraLichtSignalAnlage">
+				<datenfeld name="Parameter">
+				</datenfeld>
+				<datenliste name="Urlasser">
+					<datum name="BenutzerReferenz" wert="undefiniert"/>
+					<datum name="Ursache" wert=""/>
+					<datum name="Veranlasser" wert=""/>
+				</datenliste>
+			</defaultParameter>
+		</typDefinition>
+		<typDefinition pid="typ.zraMessQuerschnitt" name="ZraMessQuerschnitt" objektNamenPermanent="nein">
+			<info>
+				<kurzinfo>Grundlegender MessQuerschnitt der ZRA.</kurzinfo>
+				<beschreibung>Dieser MessQuerschnitt ist die Grundlage für alle anderen MessQuerschnitte der ZuflussRegelungAnlage.</beschreibung>
+			</info>
+			<erweitert pid="typ.konfigurationsObjekt"/>
+			<attributgruppe pid="atg.zraMessQuerschnitt"/>
+		</typDefinition>
+		<typDefinition pid="typ.zraMessQuerschnittErfassung" name="MessQuerschnittErfassung" objektNamenPermanent="nein">
+			<info>
+				<kurzinfo>MessQuerschnittLockerung.</kurzinfo>
+				<beschreibung>Dieser MessQuerschnitt ist für die Erfassung der ZuflussSteuerung zuständig (in den Unterlagen zur ZuflussRegelungAnlage als S1/6 bezeichnet).</beschreibung>
+			</info>
+			<erweitert pid="typ.zraMessQuerschnitt"/>
+			<attributgruppe pid="atg.zraMessQuerschnittParameterALINEA"/>
+			<attributgruppe pid="atg.zraMessQuerschnittParameterALINEAEreignis"/>
+			<attributgruppe pid="atg.zraMessQuerschnittParameterPrognoseFR"/>
+			<attributgruppe pid="atg.zraMessQuerschnittParameterPrognoseFREreignis"/>
+			<attributgruppe pid="atg.zraMessQuerschnittParameterPrognoseFS"/>
+			<attributgruppe pid="atg.zraMessQuerschnittParameterPrognoseFSEreignis"/>
+			<defaultParameter attributgruppe="atg.zraMessQuerschnittParameterPrognoseFS" typ="typ.zraMessQuerschnittErfassung">
+				<datum name="alpha" wert="0,37"/>
+				<datum name="beta" wert="0,37"/>
+				<datum name="k1" wert="2,00"/>
+				<datum name="k2" wert="0,01"/>
+				<datenliste name="Urlasser">
+					<datum name="BenutzerReferenz" wert="undefiniert"/>
+					<datum name="Ursache" wert=""/>
+					<datum name="Veranlasser" wert=""/>
+				</datenliste>
+			</defaultParameter>
+			<defaultParameter attributgruppe="atg.zraMessQuerschnittParameterPrognoseFSEreignis" typ="typ.zraMessQuerschnittErfassung">
+				<datenfeld name="Parameter">
+				</datenfeld>
+				<datenliste name="Urlasser">
+					<datum name="BenutzerReferenz" wert="undefiniert"/>
+					<datum name="Ursache" wert=""/>
+					<datum name="Veranlasser" wert=""/>
+				</datenliste>
+			</defaultParameter>
+			<defaultParameter attributgruppe="atg.zraMessQuerschnittParameterPrognoseFR" typ="typ.zraMessQuerschnittErfassung">
+				<datum name="alpha" wert="0,37"/>
+				<datum name="beta" wert="0,37"/>
+				<datum name="k1" wert="2,00"/>
+				<datum name="k2" wert="0,01"/>
+				<datenliste name="Urlasser">
+					<datum name="BenutzerReferenz" wert="undefiniert"/>
+					<datum name="Ursache" wert=""/>
+					<datum name="Veranlasser" wert=""/>
+				</datenliste>
+			</defaultParameter>
+			<defaultParameter attributgruppe="atg.zraMessQuerschnittParameterPrognoseFREreignis" typ="typ.zraMessQuerschnittErfassung">
+				<datenfeld name="Parameter">
+				</datenfeld>
+				<datenliste name="Urlasser">
+					<datum name="BenutzerReferenz" wert="undefiniert"/>
+					<datum name="Ursache" wert=""/>
+					<datum name="Veranlasser" wert=""/>
+				</datenliste>
+			</defaultParameter>
+			<defaultParameter attributgruppe="atg.zraMessQuerschnittParameterALINEA" typ="typ.zraMessQuerschnittErfassung">
+				<datum name="bOptimal" wert="20 %"/>
+				<datum name="Korrekturfaktor" wert="80"/>
+				<datum name="BerechnungsverfahrenB" wert="BelegungHfs"/>
+				<datum name="qEinVorbedingungAktiv" wert="Ja"/>
+				<datum name="qEinVorbedingung" wert="180 PkwE/h"/>
+				<datum name="bEinVorbedingung" wert="18 %"/>
+				<datum name="qSockelwertAktiv" wert="Ja"/>
+				<datum name="qSockelwert" wert="180 PkwE/h"/>
+				<datenliste name="Urlasser">
+					<datum name="BenutzerReferenz" wert="undefiniert"/>
+					<datum name="Ursache" wert=""/>
+					<datum name="Veranlasser" wert=""/>
+				</datenliste>
+			</defaultParameter>
+			<defaultParameter attributgruppe="atg.zraMessQuerschnittParameterALINEAEreignis" typ="typ.zraMessQuerschnittErfassung">
+				<datenfeld name="Parameter">
+				</datenfeld>
+				<datenliste name="Urlasser">
+					<datum name="BenutzerReferenz" wert="undefiniert"/>
+					<datum name="Ursache" wert=""/>
+					<datum name="Veranlasser" wert=""/>
+				</datenliste>
+			</defaultParameter>
+		</typDefinition>
+		<typDefinition pid="typ.zraMessQuerschnittLockerung" name="MessQuerschnittLockerung" objektNamenPermanent="nein">
+			<info>
+				<kurzinfo>MessQuerschnittLockerung.</kurzinfo>
+				<beschreibung>Dieser MessQuerschnitt ist für die Lockerung der ZuflussSteuerung zuständig (in den Unterlagen zur ZuflussRegelungAnlage als S4 bezeichnet).</beschreibung>
+			</info>
+			<erweitert pid="typ.zraMessQuerschnitt"/>
+			<attributgruppe pid="atg.zraMessQuerschnittParameterLockerungAbschaltung"/>
+			<attributgruppe pid="atg.zraMessQuerschnittParameterLockerungAbschaltungEreignis"/>
+			<attributgruppe pid="atg.zraMessQuerschnittParameterLockerungMehrfahrzeugbetrieb"/>
+			<attributgruppe pid="atg.zraMessQuerschnittParameterLockerungMehrfahrzeugbetriebEreignis"/>
+			<attributgruppe pid="atg.zraMessQuerschnittParameterProgramme"/>
+			<attributgruppe pid="atg.zraMessQuerschnittParameterProgrammeEreignis"/>
+			<attributgruppe pid="atg.zraMessQuerschnittParameterProgrammeMehrfahrzeugbetrieb"/>
+			<attributgruppe pid="atg.zraMessQuerschnittParameterProgrammeMehrfahrzeugbetriebEreignis"/>
+			<attributgruppe pid="atg.zraMessQuerschnittParameterRäumung"/>
+			<attributgruppe pid="atg.zraMessQuerschnittParameterRäumungEreignis"/>
+			<defaultParameter attributgruppe="atg.zraMessQuerschnittParameterLockerungAbschaltung" typ="typ.zraMessQuerschnittLockerung">
+				<datum name="ZeitDauerStauFürStauerkennung" wert="0 Sekunden"/>
+				<datum name="ZeitDauerKeinStauFürKeinStauerkennung" wert="2 Minuten"/>
+				<datum name="BelegungFürStau" wert="40 %"/>
+				<datum name="BelegungFürKeinStau" wert="35 %"/>
+				<datum name="StörungMessQuerschnittBedeutetStau" wert="Ja"/>
+				<datum name="ZeitDauerStauZufahrtsbereichAbschaltung" wert="2 Minuten"/>
+				<datenliste name="Urlasser">
+					<datum name="BenutzerReferenz" wert="undefiniert"/>
+					<datum name="Ursache" wert=""/>
+					<datum name="Veranlasser" wert=""/>
+				</datenliste>
+			</defaultParameter>
+			<defaultParameter attributgruppe="atg.zraMessQuerschnittParameterRäumung" typ="typ.zraMessQuerschnittLockerung">
+				<datum name="ZeitDauerStauFürStauerkennung" wert="0 Sekunden"/>
+				<datum name="ZeitDauerKeinStauFürKeinStauerkennung" wert="2 Minuten"/>
+				<datum name="BelegungFürStau" wert="40 %"/>
+				<datum name="BelegungFürKeinStau" wert="35 %"/>
+				<datum name="StörungMessQuerschnittBedeutetStau" wert="Ja"/>
+				<datum name="ZeitDauerRäumprogrammBisAbschaltung" wert="2 Minuten"/>
+				<datenliste name="Urlasser">
+					<datum name="BenutzerReferenz" wert="undefiniert"/>
+					<datum name="Ursache" wert=""/>
+					<datum name="Veranlasser" wert=""/>
+				</datenliste>
+			</defaultParameter>
+			<defaultParameter attributgruppe="atg.zraMessQuerschnittParameterLockerungAbschaltungEreignis" typ="typ.zraMessQuerschnittLockerung">
+				<datenfeld name="Parameter">
+				</datenfeld>
+				<datenliste name="Urlasser">
+					<datum name="BenutzerReferenz" wert="undefiniert"/>
+					<datum name="Ursache" wert=""/>
+					<datum name="Veranlasser" wert=""/>
+				</datenliste>
+			</defaultParameter>
+			<defaultParameter attributgruppe="atg.zraMessQuerschnittParameterProgramme" typ="typ.zraMessQuerschnittLockerung">
+				<datenfeld name="Programm">
+				</datenfeld>
+				<datenliste name="Urlasser">
+					<datum name="BenutzerReferenz" wert="undefiniert"/>
+					<datum name="Ursache" wert=""/>
+					<datum name="Veranlasser" wert=""/>
+				</datenliste>
+			</defaultParameter>
+			<defaultParameter attributgruppe="atg.zraMessQuerschnittParameterProgrammeEreignis" typ="typ.zraMessQuerschnittLockerung">
+				<datenfeld name="Parameter">
+				</datenfeld>
+				<datenliste name="Urlasser">
+					<datum name="BenutzerReferenz" wert="undefiniert"/>
+					<datum name="Ursache" wert=""/>
+					<datum name="Veranlasser" wert=""/>
+				</datenliste>
+			</defaultParameter>
+			<defaultParameter attributgruppe="atg.zraMessQuerschnittParameterLockerungMehrfahrzeugbetrieb" typ="typ.zraMessQuerschnittLockerung">
+				<datum name="ZeitDauerStauFürStauerkennung" wert="0 Sekunden"/>
+				<datum name="ZeitDauerKeinStauFürKeinStauerkennung" wert="2 Minuten"/>
+				<datum name="BelegungFürStau" wert="40 %"/>
+				<datum name="BelegungFürKeinStau" wert="35 %"/>
+				<datum name="StörungMessQuerschnittBedeutetStau" wert="Ja"/>
+				<datenliste name="Urlasser">
+					<datum name="BenutzerReferenz" wert="undefiniert"/>
+					<datum name="Ursache" wert=""/>
+					<datum name="Veranlasser" wert=""/>
+				</datenliste>
+			</defaultParameter>
+			<defaultParameter attributgruppe="atg.zraMessQuerschnittParameterLockerungMehrfahrzeugbetriebEreignis" typ="typ.zraMessQuerschnittLockerung">
+				<datenfeld name="Parameter">
+				</datenfeld>
+				<datenliste name="Urlasser">
+					<datum name="BenutzerReferenz" wert="undefiniert"/>
+					<datum name="Ursache" wert=""/>
+					<datum name="Veranlasser" wert=""/>
+				</datenliste>
+			</defaultParameter>
+			<defaultParameter attributgruppe="atg.zraMessQuerschnittParameterProgrammeMehrfahrzeugbetrieb" typ="typ.zraMessQuerschnittLockerung">
+				<datenfeld name="Programm">
+				</datenfeld>
+				<datenliste name="Urlasser">
+					<datum name="BenutzerReferenz" wert="undefiniert"/>
+					<datum name="Ursache" wert=""/>
+					<datum name="Veranlasser" wert=""/>
+				</datenliste>
+			</defaultParameter>
+			<defaultParameter attributgruppe="atg.zraMessQuerschnittParameterProgrammeMehrfahrzeugbetriebEreignis" typ="typ.zraMessQuerschnittLockerung">
+				<datenfeld name="Parameter">
+				</datenfeld>
+				<datenliste name="Urlasser">
+					<datum name="BenutzerReferenz" wert="undefiniert"/>
+					<datum name="Ursache" wert=""/>
+					<datum name="Veranlasser" wert=""/>
+				</datenliste>
+			</defaultParameter>
+			<defaultParameter attributgruppe="atg.zraMessQuerschnittParameterRäumungEreignis" typ="typ.zraMessQuerschnittLockerung">
+				<datenfeld name="Parameter">
+				</datenfeld>
+				<datenliste name="Urlasser">
+					<datum name="BenutzerReferenz" wert="undefiniert"/>
+					<datum name="Ursache" wert=""/>
+					<datum name="Veranlasser" wert=""/>
+				</datenliste>
+			</defaultParameter>
+		</typDefinition>
+		<typDefinition pid="typ.zraMessQuerschnittLockerungStau" name="MessQuerschnittLockerungStau" objektNamenPermanent="nein">
+			<info>
+				<kurzinfo>MessQuerschnittLockerungStau.</kurzinfo>
+				<beschreibung>Dieser MessQuerschnitt ist für die Lockerung und Stauerkennung der ZuflussSteuerung zuständig (in den Unterlagen zur ZuflussRegelungAnlage als S5 bezeichnet).</beschreibung>
+			</info>
+			<erweitert pid="typ.zraMessQuerschnittLockerung"/>
+			<erweitert pid="typ.zraMessQuerschnittStau"/>
+			<attributgruppe pid="atg.zraMessQuerschnittParameterAbschaltungLZA"/>
+			<attributgruppe pid="atg.zraMessQuerschnittParameterAbschaltungLZAEreignis"/>
+			<defaultParameter attributgruppe="atg.zraMessQuerschnittParameterAbschaltungLZA" typ="typ.zraMessQuerschnittLockerungStau">
+				<datum name="ZeitDauerStauFürStauerkennung" wert="1 Minute"/>
+				<datum name="ZeitDauerKeinStauFürKeinStauerkennung" wert="1 Minute"/>
+				<datum name="BelegungFürStau" wert="100 %"/>
+				<datum name="BelegungFürKeinStau" wert="100 %"/>
+				<datenliste name="Urlasser">
+					<datum name="BenutzerReferenz" wert="undefiniert"/>
+					<datum name="Ursache" wert=""/>
+					<datum name="Veranlasser" wert=""/>
+				</datenliste>
+			</defaultParameter>
+			<defaultParameter attributgruppe="atg.zraMessQuerschnittParameterAbschaltungLZAEreignis" typ="typ.zraMessQuerschnittLockerungStau">
+				<datenfeld name="Parameter">
+				</datenfeld>
+				<datenliste name="Urlasser">
+					<datum name="BenutzerReferenz" wert="undefiniert"/>
+					<datum name="Ursache" wert=""/>
+					<datum name="Veranlasser" wert=""/>
+				</datenliste>
+			</defaultParameter>
+		</typDefinition>
+		<typDefinition pid="typ.zraMessQuerschnittStau" name="MessQuerschnittStau" objektNamenPermanent="nein">
+			<info>
+				<kurzinfo>MessQuerschnittStau.</kurzinfo>
+				<beschreibung>Dieser MessQuerschnitt ist für die Stauerkennung der ZuflussSteuerung zuständig (in den Unterlagen zur ZuflussRegelungAnlage als S2 bezeichnet).</beschreibung>
+			</info>
+			<erweitert pid="typ.zraMessQuerschnitt"/>
+			<attributgruppe pid="atg.zraMessQuerschnittParameterAbschaltungStau"/>
+			<attributgruppe pid="atg.zraMessQuerschnittParameterAbschaltungStauEreignis"/>
+			<defaultParameter attributgruppe="atg.zraMessQuerschnittParameterAbschaltungStau" typ="typ.zraMessQuerschnittStau">
+				<datum name="ZeitDauerStauFürStauerkennung" wert="1 Minute"/>
+				<datum name="ZeitDauerKeinStauFürKeinStauerkennung" wert="1 Minute"/>
+				<datum name="BelegungFürStau" wert="55 %"/>
+				<datum name="BelegungFürKeinStau" wert="30 %"/>
+				<datenliste name="Urlasser">
+					<datum name="BenutzerReferenz" wert="undefiniert"/>
+					<datum name="Ursache" wert=""/>
+					<datum name="Veranlasser" wert=""/>
+				</datenliste>
+			</defaultParameter>
+			<defaultParameter attributgruppe="atg.zraMessQuerschnittParameterAbschaltungStauEreignis" typ="typ.zraMessQuerschnittStau">
+				<datenfeld name="Parameter">
+				</datenfeld>
+				<datenliste name="Urlasser">
+					<datum name="BenutzerReferenz" wert="undefiniert"/>
+					<datum name="Ursache" wert=""/>
+					<datum name="Veranlasser" wert=""/>
+				</datenliste>
+			</defaultParameter>
+		</typDefinition>
+		<typDefinition pid="typ.zraVorWegWeiser" name="VorWegWeiser" objektNamenPermanent="nein">
+			<info>
+				<kurzinfo>VorWegWeiser.</kurzinfo>
+				<beschreibung>Eine VorWegWeiser stellt einen vorgelagerten VorWegWeiser mit Informationen zum Betrieb der ZuflussRegelungsAnlage dar. 
+				VorWegWeiser werden nur auf Zufahrten verwendet.</beschreibung>
+			</info>
+			<erweitert pid="typ.konfigurationsObjekt"/>
+			<attributgruppe pid="atg.zraVorWegWeiser"/>
+			<attributgruppe pid="atg.zraVorWegWeiserBefehl"/>
+			<attributgruppe pid="atg.zraVorWegWeiserParameterBefehle"/>
+			<defaultParameter attributgruppe="atg.zraVorWegWeiserParameterBefehle" typ="typ.zraVorWegWeiser">
+				<datum name="BefehlPrismaBildNeutral" wert="Prisma Seite 1"/>
+				<datum name="BefehlPrismaBildZraEin" wert="Prisma Seite 2"/>
+				<datum name="BefehlPrismaBildStau" wert="Prisma Seite 3"/>
+				<datum name="BefehlBlinkerBildEin" wert="gelbes Blinklicht"/>
+				<datenliste name="BefehlBlinkerBildEinBlinken">
+					<datum name="Status" wert="aus"/>
+					<datum name="Dauer" wert="aus"/>
+				</datenliste>
+				<datum name="TlsTelegrammTyp" wert="Typ 48"/>
+				<datenliste name="Urlasser">
+					<datum name="BenutzerReferenz" wert="undefiniert"/>
+					<datum name="Ursache" wert=""/>
+					<datum name="Veranlasser" wert=""/>
+				</datenliste>
+			</defaultParameter>
+			<defaultParameter attributgruppe="atg.zraVorWegWeiserBefehl" typ="typ.zraVorWegWeiser">
+				<datum name="VorWegWeiserBefehl" wert="Automatik"/>
+				<datenliste name="Urlasser">
+					<datum name="BenutzerReferenz" wert="undefiniert"/>
+					<datum name="Ursache" wert=""/>
+					<datum name="Veranlasser" wert=""/>
+				</datenliste>
+			</defaultParameter>
+		</typDefinition>
+		<typDefinition pid="typ.zraZufluss" name="Zufluss" objektNamenPermanent="nein">
+			<info>
+				<kurzinfo>Zufluss.</kurzinfo>
+				<beschreibung>Ein Zufluss stellt einen Zufluss von Fahrzeugen auf die Autobahn dar. Dieser Typ wird normalerweise nicht direkt instanziiert,
+				da ansonsten die Information, ob es sich um eine Zufahrt oder ParallelFahrbahn handelt fehlen würde. D. h. es werden die abgeleiteten Typen
+				ZuflussZufahrt bzw. ZuflussParallelFahrbahn instanziiert. Die Unterscheidung zwischen Zufahrt und ParallelFahrbahn ist notwendig, da die
+				Stauschleife bei der Detektion von Stau unterschiedliche Reaktionen erfordert</beschreibung>
+			</info>
+			<erweitert pid="typ.konfigurationsObjekt"/>
+			<attributgruppe pid="atg.zraZufluss"/>
+			<attributgruppe pid="atg.zraZuflussBefehl"/>
+			<attributgruppe pid="atg.zraZuflussParameterBerechnungsVerfahren"/>
+			<attributgruppe pid="atg.zraZuflussParameterBerechnungsVerfahrenEreignis"/>
+			<attributgruppe pid="atg.zraZuflussParameterStauerkennung"/>
+			<attributgruppe pid="atg.zraZuflussParameterStauerkennungEreignis"/>
+			<menge pid="menge.zraBerechnungsVerfahren" name="BerechnungsVerfahren" erforderlich="ja">
+				<info>
+					<kurzinfo>Menge der BerechnungsVerfahren, des Zufluss.</kurzinfo>
+				</info>
+			</menge>
+			<menge pid="menge.zraHinweisSchilder" name="HinweisSchilder" erforderlich="ja">
+				<info>
+					<kurzinfo>Menge der HinweisSchilder, des Zufluss.</kurzinfo>
+				</info>
+			</menge>
+			<menge pid="menge.zraVorWegWeiser" name="VorWegWeiser" erforderlich="ja">
+				<info>
+					<kurzinfo>Menge der VorWegWeiser, des Zufluss.</kurzinfo>
+				</info>
+			</menge>
+			<defaultParameter attributgruppe="atg.zraZuflussBefehl" typ="typ.zraZufluss">
+				<datum name="deaktiviert" wert="Nein"/>
+				<datenliste name="Urlasser">
+					<datum name="BenutzerReferenz" wert="undefiniert"/>
+					<datum name="Ursache" wert=""/>
+					<datum name="Veranlasser" wert=""/>
+				</datenliste>
+			</defaultParameter>
+			<defaultParameter attributgruppe="atg.zraZuflussParameterBerechnungsVerfahren" typ="typ.zraZufluss">
+				<datum name="SteuerndesBerechnungsVerfahren" wert="ALINEA"/>
+				<datenliste name="Urlasser">
+					<datum name="BenutzerReferenz" wert="undefiniert"/>
+					<datum name="Ursache" wert=""/>
+					<datum name="Veranlasser" wert=""/>
+				</datenliste>
+			</defaultParameter>
+			<defaultParameter attributgruppe="atg.zraZuflussParameterBerechnungsVerfahrenEreignis" typ="typ.zraZufluss">
+				<datenfeld name="Parameter">
+				</datenfeld>
+				<datenliste name="Urlasser">
+					<datum name="BenutzerReferenz" wert="undefiniert"/>
+					<datum name="Ursache" wert=""/>
+					<datum name="Veranlasser" wert=""/>
+				</datenliste>
+			</defaultParameter>
+			<defaultParameter attributgruppe="atg.zraZuflussParameterStauerkennung" typ="typ.zraZufluss">
+				<datum name="TMinVStauEin" wert="2 Minuten"/>
+				<datum name="TMinBStauEin" wert="10 Minuten"/>
+				<datum name="VStauEin" wert="20 km/h"/>
+				<datum name="VStauAus" wert="30 km/h"/>
+				<datum name="VStauEinMQ2" wert="20 km/h"/>
+				<datum name="BStauEin" wert="100 %"/>
+				<datum name="BStauAus" wert="99 %"/>
+				<datum name="BStauEinMQ2" wert="100 %"/>
+				<datum name="BerechnungsVerfahrenVKenn" wert="VKfzMQ"/>
+				<datum name="BerechnungsVerfahrenBKenn" wert="MittelwertAllerFS"/>
+				<datenliste name="Urlasser">
+					<datum name="BenutzerReferenz" wert="undefiniert"/>
+					<datum name="Ursache" wert=""/>
+					<datum name="Veranlasser" wert=""/>
+				</datenliste>
+			</defaultParameter>
+			<defaultParameter attributgruppe="atg.zraZuflussParameterStauerkennungEreignis" typ="typ.zraZufluss">
+				<datenfeld name="Parameter">
+				</datenfeld>
+				<datenliste name="Urlasser">
+					<datum name="BenutzerReferenz" wert="undefiniert"/>
+					<datum name="Ursache" wert=""/>
+					<datum name="Veranlasser" wert=""/>
+				</datenliste>
+			</defaultParameter>
+		</typDefinition>
+		<typDefinition pid="typ.zraZuflussParallelFahrbahn" name="ZuflussParallelFahrbahn" objektNamenPermanent="nein">
+			<info>
+				<kurzinfo>ZuflussParallelFahrbahn.</kurzinfo>
+				<beschreibung>Ein ZuflussParallelFahrbahn stellt einen Zufluss von Fahrzeugen über eine ParallelFahrbahn auf die Autobahn dar. Die notwendigen AttributGruppen
+				sind am Typ Zufluss vorhanden.</beschreibung>
+			</info>
+			<erweitert pid="typ.zraZufluss"/>
+		</typDefinition>
+		<typDefinition pid="typ.zraZuflussZufahrt" name="ZuflussZufahrt" objektNamenPermanent="nein">
+			<info>
+				<kurzinfo>ZuflussZufahrt.</kurzinfo>
+				<beschreibung>Ein ZuflussZufahrt stellt einen Zufluss von Fahrzeugen über eine Zufahrt auf die Autobahn dar. Die notwendigen AttributGruppen
+				sind am Typ Zufluss vorhanden.</beschreibung>
+			</info>
+			<erweitert pid="typ.zraZufluss"/>
+		</typDefinition>
+		<typDefinition pid="typ.zuflussRegelungsAnlage" name="ZuflussRegelungsAnlage" objektNamenPermanent="nein">
+			<info>
+				<kurzinfo>ZuflussRegelungsAnlage.</kurzinfo>
+				<beschreibung>Eine ZuflussRegelungsAnlage besteht aus mindestens einem Zufluss. Dieser Zufluss ist normalerweise ein ZuflussZufahrt.
+				Zusätzlich kann ein ZuflussParallelFahrbahn vorhanden sein. Ist mehr als ein Zufluss vorhanden, so darf die ZuflussRegelungsAnlage
+				immer nur für alle Zuflüsse gemeinsam in Betrieb sein.</beschreibung>
+			</info>
+			<erweitert pid="typ.konfigurationsObjekt"/>
+			<attributgruppe pid="atg.zraAbschaltungInStausituation"/>
+			<attributgruppe pid="atg.zraDiagnoseDaten"/>
+			<attributgruppe pid="atg.zuflussRegelungsAnlage"/>
+			<attributgruppe pid="atg.zuflussRegelungsAnlageBefehl"/>
+			<menge pid="menge.zraZuflüsse" name="Zuflüsse" erforderlich="ja">
+				<info>
+					<kurzinfo>Menge der Zuflüsse, der ZuflussRegelungsAnlage.</kurzinfo>
+				</info>
+			</menge>
+			<defaultParameter attributgruppe="atg.zuflussRegelungsAnlageBefehl" typ="typ.zuflussRegelungsAnlage">
+				<datum name="Befehl" wert="Automatik"/>
+				<datenliste name="Urlasser">
+					<datum name="BenutzerReferenz" wert="undefiniert"/>
+					<datum name="Ursache" wert=""/>
+					<datum name="Veranlasser" wert=""/>
+				</datenliste>
+			</defaultParameter>
+		</typDefinition>
+		<attributgruppenDefinition pid="atg.berechnungsVerfahrenParameter" name="BerechnungsVerfahrenParameter" parametrierend="ja">
+			<info>
+				<kurzinfo>Parameter für die BerechnungsVerfahren.</kurzinfo>
+			</info>
+			<attribut pid="att.zeitDauer" anzahl="1" anzahlIst="fest" name="Mindestschaltzeit">
+				<info>
+					<kurzinfo>Mindestschaltzeit für Programme.</kurzinfo>
+					<beschreibung>Mindestschaltzeit für Programme, bevor sie von einem Programm mit niedrigerer Priorität ersetzt werden können.</beschreibung>
+				</info>
+			</attribut>
+			<attribut pid="att.zeitDauer" anzahl="1" anzahlIst="fest" name="Ausschaltzeit">
+				<info>
+					<kurzinfo>Ausschaltzeit für die LichtSignalAnlage.</kurzinfo>
+					<beschreibung>Ausschaltzeit für die LichtSignalAnlage. Die LichtSignalAnlage darf erst ausgeschaltet werden, wenn nachdem an der Rückstauschleife
+					kein Stau mehr detektiert wurde, die Ausschaltzeit abgelaufen ist.</beschreibung>
+				</info>
+			</attribut>
+			<attributliste pid="atl.urlasser" anzahl="1" anzahlIst="fest" name="Urlasser">
+				<info>
+					<kurzinfo>Urlasserinformation</kurzinfo>
+				</info>
+			</attributliste>
+		</attributgruppenDefinition>
+		<attributgruppenDefinition pid="atg.berechnungsVerfahrenParameterALINEAHysterese" name="BerechnungsVerfahrenParameterALINEAHysterese" parametrierend="ja">
+			<info>
+				<kurzinfo>Parameter für die BerechnungsVerfahrenALINEAHysterese.</kurzinfo>
+			</info>
+			<attributliste pid="atl.berechnungsVerfahrenParameterALINEAHysterese" anzahl="21" anzahlIst="variabel" name="Programm">
+				<info>
+					<kurzinfo>.</kurzinfo>
+					<beschreibung>.</beschreibung>
+				</info>
+			</attributliste>
+			<attributliste pid="atl.urlasser" anzahl="1" anzahlIst="fest" name="Urlasser">
+				<info>
+					<kurzinfo>Urlasserinformation</kurzinfo>
+				</info>
+			</attributliste>
+		</attributgruppenDefinition>
+		<attributgruppenDefinition pid="atg.berechnungsVerfahrenParameterALINEAHystereseEreignis" name="BerechnungsVerfahrenParameterALINEAHystereseEreignis" parametrierend="ja">
+			<info>
+				<kurzinfo>Parameter für die BerechnungsVerfahrenALINEAHysterese in Abhängigkeit von einem Ereignis.</kurzinfo>
+			</info>
+			<attributliste pid="atl.berechnungsVerfahrenParameterALINEAHystereseEreignis" anzahl="0" anzahlIst="variabel" name="Parameter">
+				<info>
+					<kurzinfo>.</kurzinfo>
+					<beschreibung>.</beschreibung>
+				</info>
+			</attributliste>
+			<attributliste pid="atl.urlasser" anzahl="1" anzahlIst="fest" name="Urlasser">
+				<info>
+					<kurzinfo>Urlasserinformation</kurzinfo>
+				</info>
+			</attributliste>
+		</attributgruppenDefinition>
+		<attributgruppenDefinition pid="atg.berechnungsVerfahrenParameterEreignis" name="BerechnungsVerfahrenParameterEreignis" parametrierend="ja">
+			<info>
+				<kurzinfo>Parameter für die BerechnungsVerfahren in Abhängigkeit von einem Ereignis.</kurzinfo>
+			</info>
+			<attributliste pid="atl.berechnungsVerfahrenParameterEreignis" anzahl="0" anzahlIst="variabel" name="Parameter">
+				<info>
+					<kurzinfo>.</kurzinfo>
+					<beschreibung>.</beschreibung>
+				</info>
+			</attributliste>
+			<attributliste pid="atl.urlasser" anzahl="1" anzahlIst="fest" name="Urlasser">
+				<info>
+					<kurzinfo>Urlasserinformation</kurzinfo>
+				</info>
+			</attributliste>
+		</attributgruppenDefinition>
+		<attributgruppenDefinition pid="atg.berechnungsVerfahrenParameterPrognoseHysterese" name="BerechnungsVerfahrenParameterPrognoseHysterese" parametrierend="ja">
+			<info>
+				<kurzinfo>Parameter für die BerechnungsVerfahrenPrognoseHysterese.</kurzinfo>
+			</info>
+			<attributliste pid="atl.berechnungsVerfahrenParameterPrognoseHysterese" anzahl="21" anzahlIst="variabel" name="Programm">
+				<info>
+					<kurzinfo>.</kurzinfo>
+					<beschreibung>.</beschreibung>
+				</info>
+			</attributliste>
+			<attributliste pid="atl.urlasser" anzahl="1" anzahlIst="fest" name="Urlasser">
+				<info>
+					<kurzinfo>Urlasserinformation</kurzinfo>
+				</info>
+			</attributliste>
+		</attributgruppenDefinition>
+		<attributgruppenDefinition pid="atg.berechnungsVerfahrenParameterPrognoseHystereseEreignis" name="BerechnungsVerfahrenParameterPrognoseHystereseEreignis" parametrierend="ja">
+			<info>
+				<kurzinfo>Parameter für die BerechnungsVerfahrenPrognoseHysterese in Abhängigkeit von einem Ereignis.</kurzinfo>
+			</info>
+			<attributliste pid="atl.berechnungsVerfahrenParameterPrognoseHystereseEreignis" anzahl="0" anzahlIst="variabel" name="Parameter">
+				<info>
+					<kurzinfo>.</kurzinfo>
+					<beschreibung>.</beschreibung>
+				</info>
+			</attributliste>
+			<attributliste pid="atl.urlasser" anzahl="1" anzahlIst="fest" name="Urlasser">
+				<info>
+					<kurzinfo>Urlasserinformation</kurzinfo>
+				</info>
+			</attributliste>
+		</attributgruppenDefinition>
+		<attributgruppenDefinition pid="atg.zraAbschaltungInStausituation" name="AbschaltungInStausituation" parametrierend="nein">
+			<info>
+				<kurzinfo>Ergebnis ob die Zuflussregelungsanlage auf grund eines Staus auf der Hauptfahrbahn abgeschaltet worden ist</kurzinfo>
+			</info>
+			<aspekt pid="asp.zraZustand" onlineModus="quelleUndSenke">
+			</aspekt>
+			<attribut pid="att.jaNein" anzahl="1" anzahlIst="fest" name="abgeschaltet">
+				<info>
+					<kurzinfo>Wurde die Zuflussregelungsanlage abgeschaltet.</kurzinfo>
+				</info>
+			</attribut>
+			<attributliste pid="atl.zraAbschaltungInStausituationZuflüsse" anzahl="0" anzahlIst="variabel" name="Zuflüsse">
+				<info>
+					<kurzinfo>Auslösende Zuflüsse</kurzinfo>
+				</info>
+			</attributliste>
+		</attributgruppenDefinition>
+		<attributgruppenDefinition pid="atg.zraDiagnoseDaten" name="DiagnoseDaten" parametrierend="nein">
+			<info>
+				<kurzinfo>Diagnosedaten der Zuflussregelungsanlage</kurzinfo>
+			</info>
+			<aspekt pid="asp.zraDiagnoseBefehle" onlineModus="quelleUndSenke">
+			</aspekt>
+			<attribut pid="att.zuflussRegelungsAnlageBefehl" anzahl="1" anzahlIst="fest" name="ZRABefehl">
+				<info>
+					<kurzinfo>Befehl der ZuflussRegelungsAnlage.</kurzinfo>
+				</info>
+			</attribut>
+			<attributliste pid="atl.zraErgebnisALINEA" anzahl="1" anzahlIst="fest" name="ErgebnisALINEA">
+				<info>
+					<kurzinfo>Berechnete Werte ALINEA</kurzinfo>
+				</info>
+			</attributliste>
+			<attributliste pid="atl.zraErgebnisPrognose" anzahl="1" anzahlIst="fest" name="ErgebnisPrognoseFR">
+				<info>
+					<kurzinfo>Berechnete Prognosewerte FR (fahrtrichtungsbezogene Werte)</kurzinfo>
+				</info>
+			</attributliste>
+			<attributliste pid="atl.zraErgebnisPrognose" anzahl="1" anzahlIst="fest" name="ErgebnisPrognoseFSr">
+				<info>
+					<kurzinfo>Berechnete Prognosewerte FSr (rechter Fahrstreifen)</kurzinfo>
+				</info>
+			</attributliste>
+			<attributliste pid="atl.zraErgebnisZufluss" anzahl="0" anzahlIst="variabel" name="ErgebnisZuflüsse">
+				<info>
+					<kurzinfo>Berechnete Ergebnisse pro Zufluss</kurzinfo>
+				</info>
+			</attributliste>
+		</attributgruppenDefinition>
+		<attributgruppenDefinition pid="atg.zraHinweisSchild" name="HinweisSchild" parametrierend="nein">
+			<info>
+				<kurzinfo>Eigenschaften des HinweisSchildes.</kurzinfo>
+			</info>
+			<aspekt pid="asp.eigenschaften" konfigurationsModus="datensatzOptionalUndÄnderbar">
+			</aspekt>
+			<attribut pid="att.deWzgReferenz" anzahl="1" anzahlIst="fest" name="DePrisma">
+				<info>
+					<kurzinfo>Referenz auf die DeWzg des Prisma.</kurzinfo>
+				</info>
+			</attribut>
+			<attribut pid="att.deWzgReferenzOptional" anzahl="1" anzahlIst="fest" name="DeBlinker">
+				<info>
+					<kurzinfo>Referenz auf die optionale DeWzg des Blinkers.</kurzinfo>
+				</info>
+			</attribut>
+		</attributgruppenDefinition>
+		<attributgruppenDefinition pid="atg.zraHinweisSchildParameterBefehle" name="HinweisSchildParameterBefehle" parametrierend="ja">
+			<info>
+				<kurzinfo>Parameter mit den Befehlen für das Schalten der HinweisSchilder.</kurzinfo>
+			</info>
+			<attribut pid="att.tlsWzgWvzCode" anzahl="1" anzahlIst="fest" name="BefehlPrismaBildZraAus">
+				<info>
+					<kurzinfo>Befehl für das Prisma für die Stellung ZRA ausgeschaltet.</kurzinfo>
+				</info>
+			</attribut>
+			<attribut pid="att.tlsWzgWvzCode" anzahl="1" anzahlIst="fest" name="BefehlPrismaBildZraEin">
+				<info>
+					<kurzinfo>Befehl für das Prisma für die Stellung ZRA eingeschaltet.</kurzinfo>
+				</info>
+			</attribut>
+			<attribut pid="att.tlsWzgWvzCode" anzahl="1" anzahlIst="fest" name="BefehlBlinkerBildEin">
+				<info>
+					<kurzinfo>Befehl für den Blinker eingeschaltet.</kurzinfo>
+				</info>
+			</attribut>
+			<attributliste pid="atl.tlsWzgWvzBlinken" anzahl="1" anzahlIst="fest" name="BefehlBlinkerBildEinBlinken">
+				<info>
+					<kurzinfo>Blink Befehl für den Blinker eingeschaltet.</kurzinfo>
+				</info>
+			</attributliste>
+			<attribut pid="att.zraTlsTelegrammTypBefehle" anzahl="1" anzahlIst="fest" name="TlsTelegrammTyp">
+				<info>
+					<kurzinfo>TLS-Telegramm-Typ für das Versenden der Befehle.</kurzinfo>
+				</info>
+			</attribut>
+			<attributliste pid="atl.urlasser" anzahl="1" anzahlIst="fest" name="Urlasser">
+				<info>
+					<kurzinfo>Urlasserinformation</kurzinfo>
+				</info>
+			</attributliste>
+		</attributgruppenDefinition>
+		<attributgruppenDefinition pid="atg.zraLichtSignalAnlage" name="LichtSignalAnlage" parametrierend="nein">
+			<info>
+				<kurzinfo>Eigenschaften der LichtSignalAnlage.</kurzinfo>
+			</info>
+			<aspekt pid="asp.eigenschaften" konfigurationsModus="datensatzOptionalUndÄnderbar">
+			</aspekt>
+			<attribut pid="att.deReferenz" anzahl="1" anzahlIst="fest" name="DeZr">
+				<info>
+					<kurzinfo>Referenz auf die DeZr der LichtSignalAnlage.</kurzinfo>
+				</info>
+			</attribut>
+			<attribut pid="att.deReferenzOptional" anzahl="1" anzahlIst="fest" name="DeZrCluster">
+				<info>
+					<kurzinfo>Referenz auf die optionale DeZr-Cluster der LichtSignalAnlage.</kurzinfo>
+				</info>
+			</attribut>
+			<attribut pid="att.berechnungsVerfahrenALINEAUmlaufzeit" anzahl="1" anzahlIst="fest" name="RotschaltzeitDauerrot">
+				<info>
+					<kurzinfo>Rotschaltzeit für Dauerrot.</kurzinfo>
+				</info>
+			</attribut>
+			<attribut pid="att.zraLichtSignalAnlagenRotschaltzeit" anzahl="1" anzahlIst="fest" name="RotschaltzeitMin">
+				<info>
+					<kurzinfo>Minimal mögliche Rotschaltzeit.</kurzinfo>
+				</info>
+			</attribut>
+			<attribut pid="att.zraLichtSignalAnlagenRotschaltzeit" anzahl="1" anzahlIst="fest" name="RotschaltzeitMax">
+				<info>
+					<kurzinfo>Maximal mögliche Rotschaltzeit.</kurzinfo>
+				</info>
+			</attribut>
+			<attribut pid="att.zraLichtSignalAnlagenFahrzeuganzahl" anzahl="1" anzahlIst="fest" name="FahrzeuganzahlMin">
+				<info>
+					<kurzinfo>Minimal mögliche Fahrzeuganzahl.</kurzinfo>
+				</info>
+			</attribut>
+			<attribut pid="att.zraLichtSignalAnlagenFahrzeuganzahl" anzahl="1" anzahlIst="fest" name="FahrzeuganzahlMax">
+				<info>
+					<kurzinfo>Maximal mögliche Fahrzeuganzahl.</kurzinfo>
+				</info>
+			</attribut>
+			<attribut pid="att.zraTelegrammtyp" anzahl="1" anzahlIst="fest" name="Telegrammtyp">
+				<info>
+					<kurzinfo>Telegrammtyp zur Schaltung der Rotschaltzeit und/oder Fahrzeuganzahl.</kurzinfo>
+				</info>
+			</attribut>
+		</attributgruppenDefinition>
+		<attributgruppenDefinition pid="atg.zraLichtSignalAnlageBefehl" name="ZraLichtSignalAnlageBefehl" parametrierend="ja">
+			<info>
+				<kurzinfo>Befehle für die ZraLichtSignalAnlage.</kurzinfo>
+			</info>
+			<aspekt pid="asp.zraVorgabe" onlineModus="quelleUndSenke">
+			</aspekt>
+			<aspekt pid="asp.zraVorgabeZustand" onlineModus="quelleUndSenke">
+			</aspekt>
+			<aspekt pid="asp.zraZustand" onlineModus="quelleUndSenke">
+			</aspekt>
+			<attribut pid="att.zraLichtSignalAnlagenRotschaltzeitBefehl" anzahl="1" anzahlIst="fest" name="Rotschaltzeit">
+				<info>
+					<kurzinfo>Rotschaltzeit der LichtSignalAnlage für die Stufe.</kurzinfo>
+				</info>
+			</attribut>
+			<attribut pid="att.zraLichtSignalAnlagenFahrzeuganzahl" anzahl="1" anzahlIst="fest" name="Fahrzeuganzahl">
+				<info>
+					<kurzinfo>Fahrzeuganzahl der LichtSignalAnlage für die Stufe.</kurzinfo>
+				</info>
+			</attribut>
+			<attributliste pid="atl.urlasser" anzahl="1" anzahlIst="fest" name="Urlasser">
+				<info>
+					<kurzinfo>Urlasserinformation</kurzinfo>
+				</info>
+			</attributliste>
+		</attributgruppenDefinition>
+		<attributgruppenDefinition pid="atg.zraLichtSignalAnlageErweitert" name="LichtSignalAnlageErweitert" parametrierend="nein">
+			<info>
+				<kurzinfo>Eigenschaften der LichtSignalAnlage.</kurzinfo>
+			</info>
+			<aspekt pid="asp.eigenschaften" konfigurationsModus="datensatzOptional">
+			</aspekt>
+			<attribut pid="att.zraTelegrammtypRäumprogramm" anzahl="1" anzahlIst="fest" name="TelegrammtypRäumprogramm">
+				<info>
+					<kurzinfo>Telegrammtyp zur Schaltung des Räumprogramms.</kurzinfo>
+				</info>
+			</attribut>
+		</attributgruppenDefinition>
+		<attributgruppenDefinition pid="atg.zraLichtSignalAnlageParameter" name="LichtSignalAnlageParameter" parametrierend="ja">
+			<info>
+				<kurzinfo>Parameter der LichtSignalAnlage.</kurzinfo>
+			</info>
+			<attribut pid="att.zraLichtSignalAnlagenRotschaltzeit" anzahl="1" anzahlIst="fest" name="MaximaleErsteRotschaltzeit">
+				<info>
+					<kurzinfo>Maximale erste Rotschaltzeit.</kurzinfo>
+				</info>
+			</attribut>
+			<attribut pid="att.zraLichtSignalAnlagenRotschaltzeit" anzahl="1" anzahlIst="fest" name="SchwächsteRotschaltzeit">
+				<info>
+					<kurzinfo>Schwächste Rotschaltzeit.</kurzinfo>
+				</info>
+			</attribut>
+			<attribut pid="att.zahlPositiv" anzahl="1" anzahlIst="fest" name="AnzahlIntervalleMaximaleErsteRotschaltzeit">
+				<info>
+					<kurzinfo>Anzahl Intervalle für die die maximale erste Rotschaltzeit gilt.</kurzinfo>
+				</info>
+			</attribut>
+			<attribut pid="att.jaNein" anzahl="1" anzahlIst="fest" name="RotlichtFahrerAbfragen">
+				<info>
+					<kurzinfo>Attribut für die Festlegung, ob die Rotlichtfahrer abgefragt werden sollen oder spontan gemeldet werden.</kurzinfo>
+				</info>
+			</attribut>
+			<attributliste pid="atl.urlasser" anzahl="1" anzahlIst="fest" name="Urlasser">
+				<info>
+					<kurzinfo>Urlasserinformation</kurzinfo>
+				</info>
+			</attributliste>
+		</attributgruppenDefinition>
+		<attributgruppenDefinition pid="atg.zraLichtSignalAnlageParameterEreignis" name="LichtSignalAnlageParameterEreignis" parametrierend="ja">
+			<info>
+				<kurzinfo>Parameter der LichtSignalAnlage in Abhängigkeit von einem Ereignis.</kurzinfo>
+			</info>
+			<attributliste pid="atl.zraLichtSignalAnlageParameterEreignis" anzahl="0" anzahlIst="variabel" name="Parameter">
+				<info>
+					<kurzinfo>.</kurzinfo>
+					<beschreibung>.</beschreibung>
+				</info>
+			</attributliste>
+			<attributliste pid="atl.urlasser" anzahl="1" anzahlIst="fest" name="Urlasser">
+				<info>
+					<kurzinfo>Urlasserinformation</kurzinfo>
+				</info>
+			</attributliste>
+		</attributgruppenDefinition>
+		<attributgruppenDefinition pid="atg.zraLichtSignalAnlageRäumprogramm" name="ZraLichtSignalAnlageRäumprogramm" parametrierend="ja">
+			<info>
+				<kurzinfo>Parameter Räumprogramm.</kurzinfo>
+			</info>
+			<attribut pid="att.zraLichtSignalAnlagenRotzeitRäumung" anzahl="1" anzahlIst="fest" name="Rotzeit">
+				<info>
+					<kurzinfo>Rotzeit des Räumprogramms.</kurzinfo>
+				</info>
+			</attribut>
+			<attribut pid="att.zraLichtSignalAnlagenUmlaufzeitRäumung" anzahl="1" anzahlIst="fest" name="Umlaufzeit">
+				<info>
+					<kurzinfo>Umlaufzeit des Räumprogramms.</kurzinfo>
+				</info>
+			</attribut>
+			<attributliste pid="atl.urlasser" anzahl="1" anzahlIst="fest" name="Urlasser">
+				<info>
+					<kurzinfo>Urlasserinformation</kurzinfo>
+				</info>
+			</attributliste>
+		</attributgruppenDefinition>
+		<attributgruppenDefinition pid="atg.zraLichtSignalAnlageRäumprogrammEreignis" name="ZraLichtSignalAnlageRäumprogrammEreignis" parametrierend="ja">
+			<info>
+				<kurzinfo>Parameter Räumprogramm in Abhängigkeit von einem Ereignis.</kurzinfo>
+			</info>
+			<attributliste pid="atl.zraLichtSignalAnlageRäumprogrammEreignis" anzahl="0" anzahlIst="variabel" name="Parameter">
+				<info>
+					<kurzinfo>.</kurzinfo>
+					<beschreibung>.</beschreibung>
+				</info>
+			</attributliste>
+			<attributliste pid="atl.urlasser" anzahl="1" anzahlIst="fest" name="Urlasser">
+				<info>
+					<kurzinfo>Urlasserinformation</kurzinfo>
+				</info>
+			</attributliste>
+		</attributgruppenDefinition>
+		<attributgruppenDefinition pid="atg.zraMessQuerschnitt" name="MessQuerschnitt" parametrierend="nein">
+			<info>
+				<kurzinfo>Referenz auf einen Messquerschnitt für die Objekte die dies benötigen.</kurzinfo>
+			</info>
+			<aspekt pid="asp.eigenschaften" konfigurationsModus="datensatzOptionalUndÄnderbar">
+			</aspekt>
+			<attribut pid="att.messQuerschnittAllgemeinReferenz" anzahl="1" anzahlIst="fest" name="MessQuerschnitt">
+				<info>
+					<kurzinfo>Messquerschnitt.</kurzinfo>
+				</info>
+			</attribut>
+		</attributgruppenDefinition>
+		<attributgruppenDefinition pid="atg.zraMessQuerschnittParameterAbschaltungLZA" name="ZraMessQuerschnittParameterAbschaltungLZA" parametrierend="ja">
+			<info>
+				<kurzinfo>Parameter für Abschaltung der LZA.</kurzinfo>
+			</info>
+			<attribut pid="att.zeitDauer" anzahl="1" anzahlIst="fest" name="ZeitDauerStauFürStauerkennung">
+				<info>
+					<kurzinfo>Erst wenn die Belegung für die Erkennung Stau für die angegebene Zeitdauer überschritten wurde, wird Stau erkannt.</kurzinfo>
+				</info>
+			</attribut>
+			<attribut pid="att.zeitDauer" anzahl="1" anzahlIst="fest" name="ZeitDauerKeinStauFürKeinStauerkennung">
+				<info>
+					<kurzinfo>Erst wenn die Belegung für die Erkennung kein Stau für die angegebene Zeitdauer unterschritten wurde, wird kein Stau erkannt.</kurzinfo>
+				</info>
+			</attribut>
+			<attribut pid="att.prozent" anzahl="1" anzahlIst="fest" name="BelegungFürStau">
+				<info>
+					<kurzinfo>Belegung für die Erkennung Stau.</kurzinfo>
+				</info>
+			</attribut>
+			<attribut pid="att.prozent" anzahl="1" anzahlIst="fest" name="BelegungFürKeinStau">
+				<info>
+					<kurzinfo>Belegung für die Erkennung kein Stau.</kurzinfo>
+				</info>
+			</attribut>
+			<attributliste pid="atl.urlasser" anzahl="1" anzahlIst="fest" name="Urlasser">
+				<info>
+					<kurzinfo>Urlasserinformation</kurzinfo>
+				</info>
+			</attributliste>
+		</attributgruppenDefinition>
+		<attributgruppenDefinition pid="atg.zraMessQuerschnittParameterAbschaltungLZAEreignis" name="ZraMessQuerschnittParameterAbschaltungLZAEreignis" parametrierend="ja">
+			<info>
+				<kurzinfo>Parameter für Abschaltung der LZA in Abhängigkeit von einem Ereignis.</kurzinfo>
+			</info>
+			<attributliste pid="atl.zraMessQuerschnittParameterPrognoseFREreignis" anzahl="0" anzahlIst="variabel" name="Parameter">
+				<info>
+					<kurzinfo>.</kurzinfo>
+					<beschreibung>.</beschreibung>
+				</info>
+			</attributliste>
+			<attributliste pid="atl.urlasser" anzahl="1" anzahlIst="fest" name="Urlasser">
+				<info>
+					<kurzinfo>Urlasserinformation</kurzinfo>
+				</info>
+			</attributliste>
+		</attributgruppenDefinition>
+		<attributgruppenDefinition pid="atg.zraMessQuerschnittParameterAbschaltungStau" name="ZraMessQuerschnittParameterAbschaltungStau" parametrierend="ja">
+			<info>
+				<kurzinfo>Parameter für Abschaltung in Stausituationen am Messquerschnitt.</kurzinfo>
+			</info>
+			<attribut pid="att.zeitDauer" anzahl="1" anzahlIst="fest" name="ZeitDauerStauFürStauerkennung">
+				<info>
+					<kurzinfo>Erst wenn die Belegung für die Erkennung Stau für die angegebene Zeitdauer überschritten wurde, wird Stau erkannt.</kurzinfo>
+				</info>
+			</attribut>
+			<attribut pid="att.zeitDauer" anzahl="1" anzahlIst="fest" name="ZeitDauerKeinStauFürKeinStauerkennung">
+				<info>
+					<kurzinfo>Erst wenn die Belegung für die Erkennung kein Stau für die angegebene Zeitdauer unterschritten wurde, wird kein Stau erkannt.</kurzinfo>
+				</info>
+			</attribut>
+			<attribut pid="att.prozent" anzahl="1" anzahlIst="fest" name="BelegungFürStau">
+				<info>
+					<kurzinfo>Belegung für die Erkennung Stau.</kurzinfo>
+				</info>
+			</attribut>
+			<attribut pid="att.prozent" anzahl="1" anzahlIst="fest" name="BelegungFürKeinStau">
+				<info>
+					<kurzinfo>Belegung für die Erkennung kein Stau.</kurzinfo>
+				</info>
+			</attribut>
+			<attributliste pid="atl.urlasser" anzahl="1" anzahlIst="fest" name="Urlasser">
+				<info>
+					<kurzinfo>Urlasserinformation</kurzinfo>
+				</info>
+			</attributliste>
+		</attributgruppenDefinition>
+		<attributgruppenDefinition pid="atg.zraMessQuerschnittParameterAbschaltungStauEreignis" name="ZraMessQuerschnittParameterAbschaltungStauEreignis" parametrierend="ja">
+			<info>
+				<kurzinfo>Parameter für Abschaltung in Stausituationen am Messquerschnitt in Abhängigkeit von einem Ereignis.</kurzinfo>
+			</info>
+			<attributliste pid="atl.zraMessQuerschnittParameterAbschaltungStauEreignis" anzahl="0" anzahlIst="variabel" name="Parameter">
+				<info>
+					<kurzinfo>.</kurzinfo>
+					<beschreibung>.</beschreibung>
+				</info>
+			</attributliste>
+			<attributliste pid="atl.urlasser" anzahl="1" anzahlIst="fest" name="Urlasser">
+				<info>
+					<kurzinfo>Urlasserinformation</kurzinfo>
+				</info>
+			</attributliste>
+		</attributgruppenDefinition>
+		<attributgruppenDefinition pid="atg.zraMessQuerschnittParameterALINEA" name="ZraMessQuerschnittParameterALINEA" parametrierend="ja">
+			<info>
+				<kurzinfo>Parameter für ALINEA am Messquerschnitt.</kurzinfo>
+			</info>
+			<attribut pid="att.prozent" anzahl="1" anzahlIst="fest" name="bOptimal">
+				<info>
+					<kurzinfo>Optimale Belegung.</kurzinfo>
+				</info>
+			</attribut>
+			<attribut pid="att.zahlPositiv" anzahl="1" anzahlIst="fest" name="Korrekturfaktor">
+				<info>
+					<kurzinfo>Korrekturfaktor.</kurzinfo>
+				</info>
+			</attribut>
+			<attribut pid="att.zraBerechnungsVerfahrenBKenn" anzahl="1" anzahlIst="fest" name="BerechnungsverfahrenB">
+				<info>
+					<kurzinfo>BerechnungsVerfahren für die Bestimmung von B Kenn (Mittelwert der Belegung aller FS des MQ oder Belegung HFS des MQ).</kurzinfo>
+				</info>
+			</attribut>
+			<attribut pid="att.jaNein" anzahl="1" anzahlIst="fest" name="qEinVorbedingungAktiv">
+				<info>
+					<kurzinfo>Vorbedingung Bemessungsverkehrsstärke Zufluss verwenden.</kurzinfo>
+				</info>
+			</attribut>
+			<attribut pid="att.bemessungsVerkehrsStärkeStunde" anzahl="1" anzahlIst="fest" name="qEinVorbedingung">
+				<info>
+					<kurzinfo>Vorbedingung Bemessungsverkehrsstärke Zufluss.</kurzinfo>
+				</info>
+			</attribut>
+			<attribut pid="att.prozent" anzahl="1" anzahlIst="fest" name="bEinVorbedingung">
+				<info>
+					<kurzinfo>Belegung Zufluss.</kurzinfo>
+				</info>
+			</attribut>
+			<attribut pid="att.jaNein" anzahl="1" anzahlIst="fest" name="qSockelwertAktiv">
+				<info>
+					<kurzinfo>Bedingung Sockelwert verwenden.</kurzinfo>
+				</info>
+			</attribut>
+			<attribut pid="att.bemessungsVerkehrsStärkeStunde" anzahl="1" anzahlIst="fest" name="qSockelwert">
+				<info>
+					<kurzinfo>Sockel-Bemessungsverkehrsstärke.</kurzinfo>
+				</info>
+			</attribut>
+			<attributliste pid="atl.urlasser" anzahl="1" anzahlIst="fest" name="Urlasser">
+				<info>
+					<kurzinfo>Urlasserinformation</kurzinfo>
+				</info>
+			</attributliste>
+		</attributgruppenDefinition>
+		<attributgruppenDefinition pid="atg.zraMessQuerschnittParameterALINEAEreignis" name="ZraMessQuerschnittParameterALINEAEreignis" parametrierend="ja">
+			<info>
+				<kurzinfo>Parameter für ALINEA am Messquerschnitt in Abhängigkeit von einem Ereignis.</kurzinfo>
+			</info>
+			<attributliste pid="atl.zraMessQuerschnittParameterALINEAEreignis" anzahl="0" anzahlIst="variabel" name="Parameter">
+				<info>
+					<kurzinfo>.</kurzinfo>
+					<beschreibung>.</beschreibung>
+				</info>
+			</attributliste>
+			<attributliste pid="atl.urlasser" anzahl="1" anzahlIst="fest" name="Urlasser">
+				<info>
+					<kurzinfo>Urlasserinformation</kurzinfo>
+				</info>
+			</attributliste>
+		</attributgruppenDefinition>
+		<attributgruppenDefinition pid="atg.zraMessQuerschnittParameterLockerungAbschaltung" name="ZraMessQuerschnittParameterLockerungAbschaltung" parametrierend="ja">
+			<info>
+				<kurzinfo>Parameter für Lockerung bzw. Abschaltung am Messquerschnitt.</kurzinfo>
+			</info>
+			<attribut pid="att.zeitDauer" anzahl="1" anzahlIst="fest" name="ZeitDauerStauFürStauerkennung">
+				<info>
+					<kurzinfo>Erst wenn die Belegung für die Erkennung Stau für die angegebene Zeitdauer überschritten wurde, wird Stau erkannt.</kurzinfo>
+				</info>
+			</attribut>
+			<attribut pid="att.zeitDauer" anzahl="1" anzahlIst="fest" name="ZeitDauerKeinStauFürKeinStauerkennung">
+				<info>
+					<kurzinfo>Erst wenn die Belegung für die Erkennung kein Stau für die angegebene Zeitdauer unterschritten wurde, wird kein Stau erkannt.</kurzinfo>
+				</info>
+			</attribut>
+			<attribut pid="att.prozent" anzahl="1" anzahlIst="fest" name="BelegungFürStau">
+				<info>
+					<kurzinfo>Belegung für die Erkennung Stau.</kurzinfo>
+				</info>
+			</attribut>
+			<attribut pid="att.prozent" anzahl="1" anzahlIst="fest" name="BelegungFürKeinStau">
+				<info>
+					<kurzinfo>Belegung für die Erkennung kein Stau.</kurzinfo>
+				</info>
+			</attribut>
+			<attribut pid="att.jaNein" anzahl="1" anzahlIst="fest" name="StörungMessQuerschnittBedeutetStau">
+				<info>
+					<kurzinfo>Schalter, ob ein gestörter MessQuerschnitt Stau auslöst oder nicht.</kurzinfo>
+				</info>
+			</attribut>
+			<attribut pid="att.zeitDauer" anzahl="1" anzahlIst="fest" name="ZeitDauerStauZufahrtsbereichAbschaltung">
+				<info>
+					<kurzinfo>Zeitdauer, nach der bei Stau im Zufahrtsbereich eine Abschaltung erfolgt.</kurzinfo>
+				</info>
+			</attribut>
+			<attributliste pid="atl.urlasser" anzahl="1" anzahlIst="fest" name="Urlasser">
+				<info>
+					<kurzinfo>Urlasserinformation</kurzinfo>
+				</info>
+			</attributliste>
+		</attributgruppenDefinition>
+		<attributgruppenDefinition pid="atg.zraMessQuerschnittParameterLockerungAbschaltungEreignis" name="ZraMessQuerschnittParameterLockerungAbschaltungEreignis" parametrierend="ja">
+			<info>
+				<kurzinfo>Parameter für Lockerung bzw. Abschaltung am Messquerschnitt in Abhängigkeit von einem Ereignis.</kurzinfo>
+			</info>
+			<attributliste pid="atl.zraMessQuerschnittParameterLockerungAbschaltungEreignis" anzahl="0" anzahlIst="variabel" name="Parameter">
+				<info>
+					<kurzinfo>.</kurzinfo>
+					<beschreibung>.</beschreibung>
+				</info>
+			</attributliste>
+			<attributliste pid="atl.urlasser" anzahl="1" anzahlIst="fest" name="Urlasser">
+				<info>
+					<kurzinfo>Urlasserinformation</kurzinfo>
+				</info>
+			</attributliste>
+		</attributgruppenDefinition>
+		<attributgruppenDefinition pid="atg.zraMessQuerschnittParameterLockerungMehrfahrzeugbetrieb" name="ZraMessQuerschnittParameterLockerungMehrfahrzeugbetrieb" parametrierend="ja">
+			<info>
+				<kurzinfo>Parameter für Lockerung mit Mehrfahrzeugbetrieb am Messquerschnitt.</kurzinfo>
+			</info>
+			<attribut pid="att.zeitDauer" anzahl="1" anzahlIst="fest" name="ZeitDauerStauFürStauerkennung">
+				<info>
+					<kurzinfo>Erst wenn die Belegung für die Erkennung Stau für die angegebene Zeitdauer überschritten wurde, wird Stau erkannt.</kurzinfo>
+				</info>
+			</attribut>
+			<attribut pid="att.zeitDauer" anzahl="1" anzahlIst="fest" name="ZeitDauerKeinStauFürKeinStauerkennung">
+				<info>
+					<kurzinfo>Erst wenn die Belegung für die Erkennung kein Stau für die angegebene Zeitdauer unterschritten wurde, wird kein Stau erkannt.</kurzinfo>
+				</info>
+			</attribut>
+			<attribut pid="att.prozent" anzahl="1" anzahlIst="fest" name="BelegungFürStau">
+				<info>
+					<kurzinfo>Belegung für die Erkennung Stau.</kurzinfo>
+				</info>
+			</attribut>
+			<attribut pid="att.prozent" anzahl="1" anzahlIst="fest" name="BelegungFürKeinStau">
+				<info>
+					<kurzinfo>Belegung für die Erkennung kein Stau.</kurzinfo>
+				</info>
+			</attribut>
+			<attribut pid="att.jaNein" anzahl="1" anzahlIst="fest" name="StörungMessQuerschnittBedeutetStau">
+				<info>
+					<kurzinfo>Schalter, ob ein gestörter MessQuerschnitt Stau auslöst oder nicht.</kurzinfo>
+				</info>
+			</attribut>
+			<attributliste pid="atl.urlasser" anzahl="1" anzahlIst="fest" name="Urlasser">
+				<info>
+					<kurzinfo>Urlasserinformation</kurzinfo>
+				</info>
+			</attributliste>
+		</attributgruppenDefinition>
+		<attributgruppenDefinition pid="atg.zraMessQuerschnittParameterLockerungMehrfahrzeugbetriebEreignis" name="ZraMessQuerschnittParameterLockerungMehrfahrzeugbetriebEreignis" parametrierend="ja">
+			<info>
+				<kurzinfo>Parameter für Lockerung mit Mehrfahrzeugbetrieb am Messquerschnitt in Abhängigkeit von einem Ereignis.</kurzinfo>
+			</info>
+			<attributliste pid="atl.zraMessQuerschnittParameterLockerungMehrfahrzeugbetriebEreignis" anzahl="0" anzahlIst="variabel" name="Parameter">
+				<info>
+					<kurzinfo>.</kurzinfo>
+					<beschreibung>.</beschreibung>
+				</info>
+			</attributliste>
+			<attributliste pid="atl.urlasser" anzahl="1" anzahlIst="fest" name="Urlasser">
+				<info>
+					<kurzinfo>Urlasserinformation</kurzinfo>
+				</info>
+			</attributliste>
+		</attributgruppenDefinition>
+		<attributgruppenDefinition pid="atg.zraMessQuerschnittParameterPrognoseFR" name="ZraMessQuerschnittParameterPrognoseFR" parametrierend="ja">
+			<info>
+				<kurzinfo>Parameter für die PrognoseFR am Messquerschnitt.</kurzinfo>
+			</info>
+			<attribut pid="att.zahlPositiv2NachKommaStellenVon0Bis1" anzahl="1" anzahlIst="fest" name="alpha">
+				<info>
+					<kurzinfo>Glättungsparameter.</kurzinfo>
+				</info>
+			</attribut>
+			<attribut pid="att.zahlPositiv2NachKommaStellenVon0Bis1" anzahl="1" anzahlIst="fest" name="beta">
+				<info>
+					<kurzinfo>Prognoseparameter.</kurzinfo>
+				</info>
+			</attribut>
+			<attribut pid="att.zahlPositiv2NachKommaStellen" anzahl="1" anzahlIst="fest" name="k1">
+				<info>
+					<kurzinfo>Parameter für die Analysewertberechnung des	Aquivalenzfaktors für Lkw.</kurzinfo>
+				</info>
+			</attribut>
+			<attribut pid="att.zahlPositiv2NachKommaStellen" anzahl="1" anzahlIst="fest" name="k2">
+				<info>
+					<kurzinfo>Parameter für die Analysewertberechnung des	Aquivalenzfaktors für Lkw.</kurzinfo>
+				</info>
+			</attribut>
+			<attributliste pid="atl.urlasser" anzahl="1" anzahlIst="fest" name="Urlasser">
+				<info>
+					<kurzinfo>Urlasserinformation</kurzinfo>
+				</info>
+			</attributliste>
+		</attributgruppenDefinition>
+		<attributgruppenDefinition pid="atg.zraMessQuerschnittParameterPrognoseFREreignis" name="ZraMessQuerschnittParameterPrognoseFREreignis" parametrierend="ja">
+			<info>
+				<kurzinfo>Parameter für die PrognoseFR am Messquerschnitt in Abhängigkeit von einem Ereignis.</kurzinfo>
+			</info>
+			<attributliste pid="atl.zraMessQuerschnittParameterPrognoseFREreignis" anzahl="0" anzahlIst="variabel" name="Parameter">
+				<info>
+					<kurzinfo>.</kurzinfo>
+					<beschreibung>.</beschreibung>
+				</info>
+			</attributliste>
+			<attributliste pid="atl.urlasser" anzahl="1" anzahlIst="fest" name="Urlasser">
+				<info>
+					<kurzinfo>Urlasserinformation</kurzinfo>
+				</info>
+			</attributliste>
+		</attributgruppenDefinition>
+		<attributgruppenDefinition pid="atg.zraMessQuerschnittParameterPrognoseFS" name="ZraMessQuerschnittParameterPrognoseFS" parametrierend="ja">
+			<info>
+				<kurzinfo>Parameter für die PrognoseFS am Messquerschnitt.</kurzinfo>
+			</info>
+			<attribut pid="att.zahlPositiv2NachKommaStellenVon0Bis1" anzahl="1" anzahlIst="fest" name="alpha">
+				<info>
+					<kurzinfo>Glättungsparameter.</kurzinfo>
+				</info>
+			</attribut>
+			<attribut pid="att.zahlPositiv2NachKommaStellenVon0Bis1" anzahl="1" anzahlIst="fest" name="beta">
+				<info>
+					<kurzinfo>Prognoseparameter.</kurzinfo>
+				</info>
+			</attribut>
+			<attribut pid="att.zahlPositiv2NachKommaStellen" anzahl="1" anzahlIst="fest" name="k1">
+				<info>
+					<kurzinfo>Parameter für die Analysewertberechnung des	Aquivalenzfaktors für Lkw.</kurzinfo>
+				</info>
+			</attribut>
+			<attribut pid="att.zahlPositiv2NachKommaStellen" anzahl="1" anzahlIst="fest" name="k2">
+				<info>
+					<kurzinfo>Parameter für die Analysewertberechnung des	Aquivalenzfaktors für Lkw.</kurzinfo>
+				</info>
+			</attribut>
+			<attributliste pid="atl.urlasser" anzahl="1" anzahlIst="fest" name="Urlasser">
+				<info>
+					<kurzinfo>Urlasserinformation</kurzinfo>
+				</info>
+			</attributliste>
+		</attributgruppenDefinition>
+		<attributgruppenDefinition pid="atg.zraMessQuerschnittParameterPrognoseFSEreignis" name="ZraMessQuerschnittParameterPrognoseFSEreignis" parametrierend="ja">
+			<info>
+				<kurzinfo>Parameter für die PrognoseFS am Messquerschnitt in Abhängigkeit von einem Ereignis.</kurzinfo>
+			</info>
+			<attributliste pid="atl.zraMessQuerschnittParameterPrognoseFSEreignis" anzahl="0" anzahlIst="variabel" name="Parameter">
+				<info>
+					<kurzinfo>.</kurzinfo>
+					<beschreibung>.</beschreibung>
+				</info>
+			</attributliste>
+			<attributliste pid="atl.urlasser" anzahl="1" anzahlIst="fest" name="Urlasser">
+				<info>
+					<kurzinfo>Urlasserinformation</kurzinfo>
+				</info>
+			</attributliste>
+		</attributgruppenDefinition>
+		<attributgruppenDefinition pid="atg.zraMessQuerschnittParameterProgramme" name="ZraMessQuerschnittParameterProgramme" parametrierend="ja">
+			<info>
+				<kurzinfo>Parameter für die Lockerung der Rotschaltzeit/Fahrzeuganzahl.</kurzinfo>
+			</info>
+			<attributliste pid="atl.zraMessQuerschnittParameterProgramme" anzahl="21" anzahlIst="variabel" name="Programm">
+				<info>
+					<kurzinfo>.</kurzinfo>
+					<beschreibung>.</beschreibung>
+				</info>
+			</attributliste>
+			<attributliste pid="atl.urlasser" anzahl="1" anzahlIst="fest" name="Urlasser">
+				<info>
+					<kurzinfo>Urlasserinformation</kurzinfo>
+				</info>
+			</attributliste>
+		</attributgruppenDefinition>
+		<attributgruppenDefinition pid="atg.zraMessQuerschnittParameterProgrammeEreignis" name="ZraMessQuerschnittParameterProgrammeEreignis" parametrierend="ja">
+			<info>
+				<kurzinfo>Parameter für die Lockerung der Rotschaltzeit/Fahrzeuganzahl in Abhängigkeit von einem Ereignis.</kurzinfo>
+			</info>
+			<attributliste pid="atl.zraMessQuerschnittParameterLockerungAbschaltungEreignis" anzahl="0" anzahlIst="variabel" name="Parameter">
+				<info>
+					<kurzinfo>.</kurzinfo>
+					<beschreibung>.</beschreibung>
+				</info>
+			</attributliste>
+			<attributliste pid="atl.urlasser" anzahl="1" anzahlIst="fest" name="Urlasser">
+				<info>
+					<kurzinfo>Urlasserinformation</kurzinfo>
+				</info>
+			</attributliste>
+		</attributgruppenDefinition>
+		<attributgruppenDefinition pid="atg.zraMessQuerschnittParameterProgrammeMehrfahrzeugbetrieb" name="ZraMessQuerschnittParameterProgrammeMehrfahrzeugbetrieb" parametrierend="ja">
+			<info>
+				<kurzinfo>Parameter für die Lockerung mit Mehrfahrzeugbetrieb am Messquerschnitt.</kurzinfo>
+			</info>
+			<attributliste pid="atl.zraMessQuerschnittParameterProgramme" anzahl="21" anzahlIst="variabel" name="Programm">
+				<info>
+					<kurzinfo>.</kurzinfo>
+					<beschreibung>.</beschreibung>
+				</info>
+			</attributliste>
+			<attributliste pid="atl.urlasser" anzahl="1" anzahlIst="fest" name="Urlasser">
+				<info>
+					<kurzinfo>Urlasserinformation</kurzinfo>
+				</info>
+			</attributliste>
+		</attributgruppenDefinition>
+		<attributgruppenDefinition pid="atg.zraMessQuerschnittParameterProgrammeMehrfahrzeugbetriebEreignis" name="ZraMessQuerschnittParameterProgrammeMehrfahrzeugbetriebEreignis" parametrierend="ja">
+			<info>
+				<kurzinfo>Parameter für die Lockerung mit Mehrfahrzeugbetrieb am Messquerschnitt in Abhängigkeit von einem Ereignis.</kurzinfo>
+			</info>
+			<attributliste pid="atl.zraMessQuerschnittParameterLockerungAbschaltungEreignis" anzahl="0" anzahlIst="variabel" name="Parameter">
+				<info>
+					<kurzinfo>.</kurzinfo>
+					<beschreibung>.</beschreibung>
+				</info>
+			</attributliste>
+			<attributliste pid="atl.urlasser" anzahl="1" anzahlIst="fest" name="Urlasser">
+				<info>
+					<kurzinfo>Urlasserinformation</kurzinfo>
+				</info>
+			</attributliste>
+		</attributgruppenDefinition>
+		<attributgruppenDefinition pid="atg.zraMessQuerschnittParameterRäumung" name="ZraMessQuerschnittParameterRäumung" parametrierend="ja">
+			<info>
+				<kurzinfo>Parameter für das Schalten des Räumprogramms.</kurzinfo>
+			</info>
+			<attribut pid="att.zeitDauer" anzahl="1" anzahlIst="fest" name="ZeitDauerStauFürStauerkennung">
+				<info>
+					<kurzinfo>Erst wenn die Belegung für die Erkennung Stau für die angegebene Zeitdauer überschritten wurde, wird Stau erkannt.</kurzinfo>
+				</info>
+			</attribut>
+			<attribut pid="att.zeitDauer" anzahl="1" anzahlIst="fest" name="ZeitDauerKeinStauFürKeinStauerkennung">
+				<info>
+					<kurzinfo>Erst wenn die Belegung für die Erkennung kein Stau für die angegebene Zeitdauer unterschritten wurde, wird kein Stau erkannt.</kurzinfo>
+				</info>
+			</attribut>
+			<attribut pid="att.prozent" anzahl="1" anzahlIst="fest" name="BelegungFürStau">
+				<info>
+					<kurzinfo>Belegung für die Erkennung Stau.</kurzinfo>
+				</info>
+			</attribut>
+			<attribut pid="att.prozent" anzahl="1" anzahlIst="fest" name="BelegungFürKeinStau">
+				<info>
+					<kurzinfo>Belegung für die Erkennung kein Stau.</kurzinfo>
+				</info>
+			</attribut>
+			<attribut pid="att.jaNein" anzahl="1" anzahlIst="fest" name="StörungMessQuerschnittBedeutetStau">
+				<info>
+					<kurzinfo>Schalter, ob ein gestörter MessQuerschnitt Stau auslöst oder nicht.</kurzinfo>
+				</info>
+			</attribut>
+			<attribut pid="att.zeitDauer" anzahl="1" anzahlIst="fest" name="ZeitDauerRäumprogrammBisAbschaltung">
+				<info>
+					<kurzinfo>Zeitdauer, nach der das Räumprogramm beendet und die Anlage in Zwangsaus geschaltet wird.</kurzinfo>
+				</info>
+			</attribut>
+			<attributliste pid="atl.urlasser" anzahl="1" anzahlIst="fest" name="Urlasser">
+				<info>
+					<kurzinfo>Urlasserinformation</kurzinfo>
+				</info>
+			</attributliste>
+		</attributgruppenDefinition>
+		<attributgruppenDefinition pid="atg.zraMessQuerschnittParameterRäumungEreignis" name="ZraMessQuerschnittParameterRäumungEreignis" parametrierend="ja">
+			<info>
+				<kurzinfo>Parameter für das Schalten des Räumprogramms in Abhängigkeit von einem Ereignis.</kurzinfo>
+			</info>
+			<attributliste pid="atl.zraMessQuerschnittParameterRäumungEreignis" anzahl="0" anzahlIst="variabel" name="Parameter">
+				<info>
+					<kurzinfo>.</kurzinfo>
+					<beschreibung>.</beschreibung>
+				</info>
+			</attributliste>
+			<attributliste pid="atl.urlasser" anzahl="1" anzahlIst="fest" name="Urlasser">
+				<info>
+					<kurzinfo>Urlasserinformation</kurzinfo>
+				</info>
+			</attributliste>
+		</attributgruppenDefinition>
+		<attributgruppenDefinition pid="atg.zraVorWegWeiser" name="VorWegWeiser" parametrierend="nein">
+			<info>
+				<kurzinfo>Eigenschaften des VorWegWeisers.</kurzinfo>
+			</info>
+			<aspekt pid="asp.eigenschaften" konfigurationsModus="datensatzOptionalUndÄnderbar">
+			</aspekt>
+			<attribut pid="att.deWzgReferenz" anzahl="1" anzahlIst="fest" name="DePrisma">
+				<info>
+					<kurzinfo>Referenz auf die DeWzg des Prisma.</kurzinfo>
+				</info>
+			</attribut>
+			<attribut pid="att.deWzgReferenzOptional" anzahl="1" anzahlIst="fest" name="DeBlinker">
+				<info>
+					<kurzinfo>Referenz auf die optionale DeWzg des Blinkers.</kurzinfo>
+				</info>
+			</attribut>
+			<attribut pid="att.deVltReferenzOptional" anzahl="1" anzahlIst="fest" name="DeStrom">
+				<info>
+					<kurzinfo>Referenz auf die optionale DeVlt für die Stromüberwachung.</kurzinfo>
+				</info>
+			</attribut>
+		</attributgruppenDefinition>
+		<attributgruppenDefinition pid="atg.zraVorWegWeiserBefehl" name="ZraVorWegWeiserBefehl" parametrierend="ja">
+			<info>
+				<kurzinfo>Befehl für den VorWegWeiser.</kurzinfo>
+			</info>
+			<aspekt pid="asp.zraVorgabe" onlineModus="quelleUndSenke">
+			</aspekt>
+			<aspekt pid="asp.zraVorgabeZustand" onlineModus="quelleUndSenke">
+			</aspekt>
+			<aspekt pid="asp.zraZustand" onlineModus="quelleUndSenke">
+			</aspekt>
+			<attribut pid="att.zraVorWegWeiserBefehl" anzahl="1" anzahlIst="fest" name="VorWegWeiserBefehl">
+				<info>
+					<kurzinfo>Befehl für den VorWegWeiser.</kurzinfo>
+				</info>
+			</attribut>
+			<attributliste pid="atl.urlasser" anzahl="1" anzahlIst="fest" name="Urlasser">
+				<info>
+					<kurzinfo>Urlasserinformation</kurzinfo>
+				</info>
+			</attributliste>
+		</attributgruppenDefinition>
+		<attributgruppenDefinition pid="atg.zraVorWegWeiserParameterBefehle" name="VorWegWeiserParameterBefehle" parametrierend="ja">
+			<info>
+				<kurzinfo>Parameter mit den Befehlen für das Schalten der VorWegWeiser.</kurzinfo>
+			</info>
+			<attribut pid="att.tlsWzgWvzCode" anzahl="1" anzahlIst="fest" name="BefehlPrismaBildNeutral">
+				<info>
+					<kurzinfo>Befehl für das Prisma für die Stellung Neutral.</kurzinfo>
+				</info>
+			</attribut>
+			<attribut pid="att.tlsWzgWvzCode" anzahl="1" anzahlIst="fest" name="BefehlPrismaBildZraEin">
+				<info>
+					<kurzinfo>Befehl für das Prisma für die Stellung ZRA eingeschaltet.</kurzinfo>
+				</info>
+			</attribut>
+			<attribut pid="att.tlsWzgWvzCode" anzahl="1" anzahlIst="fest" name="BefehlPrismaBildStau">
+				<info>
+					<kurzinfo>Befehl für das Prisma für die Stellung Stau.</kurzinfo>
+				</info>
+			</attribut>
+			<attribut pid="att.tlsWzgWvzCode" anzahl="1" anzahlIst="fest" name="BefehlBlinkerBildEin">
+				<info>
+					<kurzinfo>Befehl für den Blinker eingeschaltet.</kurzinfo>
+				</info>
+			</attribut>
+			<attributliste pid="atl.tlsWzgWvzBlinken" anzahl="1" anzahlIst="fest" name="BefehlBlinkerBildEinBlinken">
+				<info>
+					<kurzinfo>Blink Befehl für den Blinker eingeschaltet.</kurzinfo>
+				</info>
+			</attributliste>
+			<attribut pid="att.zraTlsTelegrammTypBefehle" anzahl="1" anzahlIst="fest" name="TlsTelegrammTyp">
+				<info>
+					<kurzinfo>TLS-Telegramm-Typ für das Versenden der Befehle.</kurzinfo>
+				</info>
+			</attribut>
+			<attributliste pid="atl.urlasser" anzahl="1" anzahlIst="fest" name="Urlasser">
+				<info>
+					<kurzinfo>Urlasserinformation</kurzinfo>
+				</info>
+			</attributliste>
+		</attributgruppenDefinition>
+		<attributgruppenDefinition pid="atg.zraZufluss" name="Zufluss" parametrierend="nein">
+			<info>
+				<kurzinfo>Eigenschaften des Zufluss.</kurzinfo>
+			</info>
+			<aspekt pid="asp.eigenschaften" konfigurationsModus="datensatzOptionalUndÄnderbar">
+			</aspekt>
+			<attribut pid="att.zraLichtSignalAnlageReferenz" anzahl="1" anzahlIst="fest" name="LichtSignalAnlage">
+				<info>
+					<kurzinfo>Dem Zufluss zugeordnete LichtSignalAnlage.</kurzinfo>
+				</info>
+			</attribut>
+			<attribut pid="att.zraMessQuerschnittStauReferenz" anzahl="1" anzahlIst="fest" name="MessQuerschnittGelbanforderung">
+				<info>
+					<kurzinfo>Gelbanforderung (S2).</kurzinfo>
+				</info>
+			</attribut>
+			<attribut pid="att.messQuerschnittAllgemeinReferenzOptional" anzahl="1" anzahlIst="fest" name="MessQuerschnittGrünanforderung">
+				<info>
+					<kurzinfo>Grünanforderung (S3) optional.</kurzinfo>
+				</info>
+			</attribut>
+			<attribut pid="att.zraMessQuerschnittLockerungReferenzOptional" anzahl="1" anzahlIst="fest" name="MessQuerschnittGrünfrühanforderung">
+				<info>
+					<kurzinfo>Grünfrühanforderung (S4) optional.</kurzinfo>
+				</info>
+			</attribut>
+			<attribut pid="att.zraMessQuerschnittLockerungStauReferenz" anzahl="1" anzahlIst="fest" name="MessQuerschnittRückstaumeldung">
+				<info>
+					<kurzinfo>Rückstaumeldung (S5).</kurzinfo>
+				</info>
+			</attribut>
+			<attribut pid="att.messQuerschnittAllgemeinReferenz" anzahl="2" anzahlIst="variabel" name="MessQuerschnitteVww">
+				<info>
+					<kurzinfo>MessQuerschnitte auf der Autobahn für die Steuerung der VorWegWeiser.</kurzinfo>
+				</info>
+			</attribut>
+		</attributgruppenDefinition>
+		<attributgruppenDefinition pid="atg.zraZuflussBefehl" name="ZuflussBefehl" parametrierend="ja">
+			<info>
+				<kurzinfo>Befehle für den Zufluss.</kurzinfo>
+			</info>
+			<aspekt pid="asp.zraVorgabe" onlineModus="quelleUndSenke">
+			</aspekt>
+			<aspekt pid="asp.zraVorgabeZustand" onlineModus="quelleUndSenke">
+			</aspekt>
+			<aspekt pid="asp.zraZustand" onlineModus="quelleUndSenke">
+			</aspekt>
+			<attribut pid="att.jaNein" anzahl="1" anzahlIst="fest" name="deaktiviert">
+				<info>
+					<kurzinfo>Attribut für das Deaktivieren der ZuflussRegelungsAnlage des Zufluss.</kurzinfo>
+				</info>
+			</attribut>
+			<attributliste pid="atl.urlasser" anzahl="1" anzahlIst="fest" name="Urlasser">
+				<info>
+					<kurzinfo>Urlasserinformation</kurzinfo>
+				</info>
+			</attributliste>
+		</attributgruppenDefinition>
+		<attributgruppenDefinition pid="atg.zraZuflussParameterBerechnungsVerfahren" name="ZuflussParameterBerechnungsVerfahren" parametrierend="ja">
+			<info>
+				<kurzinfo>Parameter für das steuernde BerechnungsVerfahren des Zufluss.</kurzinfo>
+			</info>
+			<attribut pid="att.zraBerechnungsVerfahren" anzahl="1" anzahlIst="fest" name="SteuerndesBerechnungsVerfahren">
+				<info>
+					<kurzinfo>Steuerndes BerechnungsVerfahren des Zufluss.</kurzinfo>
+				</info>
+			</attribut>
+			<attributliste pid="atl.urlasser" anzahl="1" anzahlIst="fest" name="Urlasser">
+				<info>
+					<kurzinfo>Urlasserinformation</kurzinfo>
+				</info>
+			</attributliste>
+		</attributgruppenDefinition>
+		<attributgruppenDefinition pid="atg.zraZuflussParameterBerechnungsVerfahrenEreignis" name="ZuflussParameterBerechnungsVerfahrenEreignis" parametrierend="ja">
+			<info>
+				<kurzinfo>Parameter für das steuernde BerechnungsVerfahren des Zufluss in Abhängigkeit von einem Ereignis.</kurzinfo>
+			</info>
+			<attributliste pid="atl.zraZuflussParameterBerechnungsVerfahrenEreignis" anzahl="0" anzahlIst="variabel" name="Parameter">
+				<info>
+					<kurzinfo>.</kurzinfo>
+					<beschreibung>.</beschreibung>
+				</info>
+			</attributliste>
+			<attributliste pid="atl.urlasser" anzahl="1" anzahlIst="fest" name="Urlasser">
+				<info>
+					<kurzinfo>Urlasserinformation</kurzinfo>
+				</info>
+			</attributliste>
+		</attributgruppenDefinition>
+		<attributgruppenDefinition pid="atg.zraZuflussParameterStauerkennung" name="ZuflussParameterStauerkennung" parametrierend="ja">
+			<info>
+				<kurzinfo>Parameter für die Stauerkennung des Zufluss.</kurzinfo>
+			</info>
+			<attribut pid="att.zeitDauer" anzahl="1" anzahlIst="fest" name="TMinVStauEin">
+				<info>
+					<kurzinfo>Zeitbremse beim Einschalten v-Kriterium.</kurzinfo>
+				</info>
+			</attribut>
+			<attribut pid="att.zeitDauer" anzahl="1" anzahlIst="fest" name="TMinBStauEin">
+				<info>
+					<kurzinfo>Zeitbremse beim Einschalten Beleg-Kriterium.</kurzinfo>
+				</info>
+			</attribut>
+			<attribut pid="att.geschwindigkeit" anzahl="1" anzahlIst="fest" name="VStauEin">
+				<info>
+					<kurzinfo>Einschaltgrenzwert für die Geschwindigkeit am ersten MQ.</kurzinfo>
+				</info>
+			</attribut>
+			<attribut pid="att.geschwindigkeit" anzahl="1" anzahlIst="fest" name="VStauAus">
+				<info>
+					<kurzinfo>Ausschaltgrenzwert für die Geschwindigkeit am ersten MQ.</kurzinfo>
+				</info>
+			</attribut>
+			<attribut pid="att.geschwindigkeit" anzahl="1" anzahlIst="fest" name="VStauEinMQ2">
+				<info>
+					<kurzinfo>Einschaltgrenzwert für die Geschwindigkeit am zweiten MQ.</kurzinfo>
+				</info>
+			</attribut>
+			<attribut pid="att.prozent" anzahl="1" anzahlIst="fest" name="BStauEin">
+				<info>
+					<kurzinfo>Einschaltgrenzwert für den Belegtgrad am ersten MQ.</kurzinfo>
+				</info>
+			</attribut>
+			<attribut pid="att.prozent" anzahl="1" anzahlIst="fest" name="BStauAus">
+				<info>
+					<kurzinfo>Ausschaltgrenzwert für den Belegtgrad am ersten MQ.</kurzinfo>
+				</info>
+			</attribut>
+			<attribut pid="att.prozent" anzahl="1" anzahlIst="fest" name="BStauEinMQ2">
+				<info>
+					<kurzinfo>Einschaltgrenzwert für den Belegtgrad am zweiten MQ.</kurzinfo>
+				</info>
+			</attribut>
+			<attribut pid="att.zraBerechnungsVerfahrenVKenn" anzahl="1" anzahlIst="fest" name="BerechnungsVerfahrenVKenn">
+				<info>
+					<kurzinfo>BerechnungsVerfahren für die Bestimmung von V Kenn (V Kfz MQ oder minimales v expo der einzelnen FS des MQ).</kurzinfo>
+				</info>
+			</attribut>
+			<attribut pid="att.zraBerechnungsVerfahrenBKenn" anzahl="1" anzahlIst="fest" name="BerechnungsVerfahrenBKenn">
+				<info>
+					<kurzinfo>BerechnungsVerfahren für die Bestimmung von B Kenn (Mittelwert der Belegung aller FS des MQ oder Belegung HFS des MQ).</kurzinfo>
+				</info>
+			</attribut>
+			<attributliste pid="atl.urlasser" anzahl="1" anzahlIst="fest" name="Urlasser">
+				<info>
+					<kurzinfo>Urlasserinformation</kurzinfo>
+				</info>
+			</attributliste>
+		</attributgruppenDefinition>
+		<attributgruppenDefinition pid="atg.zraZuflussParameterStauerkennungEreignis" name="ZuflussParameterStauerkennungEreignis" parametrierend="ja">
+			<info>
+				<kurzinfo>Parameter für die Stauerkennung des Zufluss in Abhängigkeit von einem Ereignis.</kurzinfo>
+			</info>
+			<attributliste pid="atl.zraZuflussParameterStauerkennungEreignis" anzahl="0" anzahlIst="variabel" name="Parameter">
+				<info>
+					<kurzinfo>.</kurzinfo>
+					<beschreibung>.</beschreibung>
+				</info>
+			</attributliste>
+			<attributliste pid="atl.urlasser" anzahl="1" anzahlIst="fest" name="Urlasser">
+				<info>
+					<kurzinfo>Urlasserinformation</kurzinfo>
+				</info>
+			</attributliste>
+		</attributgruppenDefinition>
+		<attributgruppenDefinition pid="atg.zuflussRegelungsAnlage" name="ZuflussRegelungsAnlage" parametrierend="nein">
+			<info>
+				<kurzinfo>Eigenschaften der ZuflussRegelungsAnlage.</kurzinfo>
+			</info>
+			<aspekt pid="asp.eigenschaften" konfigurationsModus="datensatzOptionalUndÄnderbar">
+			</aspekt>
+			<attribut pid="att.zraMessQuerschnittErfassungReferenz" anzahl="1" anzahlIst="fest" name="ErfassungsQuerschnittHfb">
+				<info>
+					<kurzinfo>ErfassungsQuerschnitt auf der Autobahn (S1 oder S6).</kurzinfo>
+				</info>
+			</attribut>
+			<attribut pid="att.zraLageErfassungsQuerschnitt" anzahl="1" anzahlIst="fest" name="LageErfassungsQuerschnittHfb">
+				<info>
+					<kurzinfo>Lage des ErfassungsQuerschnitt auf der Autobahn (S1 (unterhalb) oder S6(oberhalb)).</kurzinfo>
+				</info>
+			</attribut>
+			<attribut pid="att.jaNein" anzahl="1" anzahlIst="fest" name="ZeitsteuerungVorhanden">
+				<info>
+					<kurzinfo>Attribut für die Information, ob eine Zeitsteuerung vorhanden ist.</kurzinfo>
+				</info>
+			</attribut>
+		</attributgruppenDefinition>
+		<attributgruppenDefinition pid="atg.zuflussRegelungsAnlageBefehl" name="ZuflussRegelungsAnlageBefehl" parametrierend="ja">
+			<info>
+				<kurzinfo>Befehle für die ZuflussRegelungsAnlage.</kurzinfo>
+			</info>
+			<aspekt pid="asp.zraVorgabe" onlineModus="quelleUndSenke">
+			</aspekt>
+			<aspekt pid="asp.zraVorgabeZustand" onlineModus="quelleUndSenke">
+			</aspekt>
+			<aspekt pid="asp.zraZustand" onlineModus="quelleUndSenke">
+			</aspekt>
+			<attribut pid="att.zuflussRegelungsAnlageBefehl" anzahl="1" anzahlIst="fest" name="Befehl">
+				<info>
+					<kurzinfo>Attribut für das Schalten der ZuflussRegelungsAnlage.</kurzinfo>
+				</info>
+			</attribut>
+			<attributliste pid="atl.urlasser" anzahl="1" anzahlIst="fest" name="Urlasser">
+				<info>
+					<kurzinfo>Urlasserinformation</kurzinfo>
+				</info>
+			</attributliste>
+		</attributgruppenDefinition>
+		<aspektDefinition pid="asp.zraALINEA" name="ALINEA">
+			<info>
+				<kurzinfo>Aspekt für die Ergebnisse des BerechnungsVerfahrenALINEA.</kurzinfo>
+			</info>
+		</aspektDefinition>
+		<aspektDefinition pid="asp.zraDiagnoseBefehle" name="DiagnoseBefehle">
+			<info>
+				<kurzinfo>Für den Versand der Diagnosedaten Befehle (Ergebnis der Zuflussregelung).</kurzinfo>
+			</info>
+		</aspektDefinition>
+		<aspektDefinition pid="asp.zraPrognoseFR" name="PrognoseFR">
+			<info>
+				<kurzinfo>Aspekt für die Ergebnisse des BerechnungsVerfahrenPrognoseFR.</kurzinfo>
+			</info>
+		</aspektDefinition>
+		<aspektDefinition pid="asp.zraPrognoseFS" name="PrognoseFS">
+			<info>
+				<kurzinfo>Aspekt für die Ergebnisse des BerechnungsVerfahrenPrognoseFS.</kurzinfo>
+			</info>
+		</aspektDefinition>
+		<aspektDefinition pid="asp.zraVorgabe" name="ZRAVorgabe">
+			<info>
+				<kurzinfo>Vorgabe durch Benutzer.</kurzinfo>
+			</info>
+		</aspektDefinition>
+		<aspektDefinition pid="asp.zraVorgabeZustand" name="ZRAVorgabeZustand">
+			<info>
+				<kurzinfo>Aktuelle Vorgabe durch Benutzer.</kurzinfo>
+			</info>
+		</aspektDefinition>
+		<aspektDefinition pid="asp.zraZustand" name="ZRAZustand">
+			<info>
+				<kurzinfo>Zustand der ZuflussRegelungsAnlage.</kurzinfo>
+			</info>
+		</aspektDefinition>
+		<attributDefinition pid="att.berechnungsVerfahrenALINEAUmlaufzeit" name="BerechnungsVerfahrenALINEAUmlaufzeit">
+			<info>
+				<kurzinfo>Attribut für die ALINEA Umlaufzeit.</kurzinfo>
+			</info>
+			<ganzzahl bits="32">
+				<bereich skalierung="0,1" minimum="-99990" maximum="99990" einheit="Sekunden">
+				</bereich>
+			</ganzzahl>
+		</attributDefinition>
+		<attributDefinition pid="att.zraBerechnungsVerfahren" name="BerechnungsVerfahren">
+			<info>
+				<kurzinfo>Attribut für mögliche BerechnungsVerfahren.</kurzinfo>
+			</info>
+			<ganzzahl bits="8">
+				<zustand name="PrognoseFS" wert="0">
+				</zustand>
+				<zustand name="PrognoseFR" wert="1">
+				</zustand>
+				<zustand name="ALINEA" wert="2">
+				</zustand>
+			</ganzzahl>
+		</attributDefinition>
+		<attributDefinition pid="att.zraBerechnungsVerfahrenALINEAReferenz" name="BerechnungsVerfahrenALINEAReferenz">
+			<info>
+				<kurzinfo>Attribut zur Referenzierung des Objekttyps: typ.zraBerechnungsVerfahrenALINEA.</kurzinfo>
+			</info>
+			<objektReferenz typ="typ.zraBerechnungsVerfahrenALINEA" undefiniert="verboten" referenzierungsart="assoziation"/>
+		</attributDefinition>
+		<attributDefinition pid="att.zraBerechnungsVerfahrenALINEAReferenzOptional" name="BerechnungsVerfahrenALINEAReferenzOptional">
+			<info>
+				<kurzinfo>Attribut zur Referenzierung des Objekttyps: typ.zraBerechnungsVerfahrenALINEA (Optionale Referenzierung erlaubt).</kurzinfo>
+			</info>
+			<objektReferenz typ="typ.zraBerechnungsVerfahrenALINEA" undefiniert="erlaubt" referenzierungsart="assoziation"/>
+		</attributDefinition>
+		<attributDefinition pid="att.zraBerechnungsVerfahrenBKenn" name="BerechnungsVerfahrenBKenn">
+			<info>
+				<kurzinfo>Attribut für mögliche BerechnungsVerfahren von B Kenn.</kurzinfo>
+			</info>
+			<ganzzahl bits="8">
+				<zustand name="MittelwertAllerFS" wert="0">
+				</zustand>
+				<zustand name="BelegungHfs" wert="1">
+				</zustand>
+			</ganzzahl>
+		</attributDefinition>
+		<attributDefinition pid="att.zraBerechnungsVerfahrenPrognoseFRReferenz" name="BerechnungsVerfahrenPrognoseFRReferenz">
+			<info>
+				<kurzinfo>Attribut zur Referenzierung des Objekttyps: typ.zraBerechnungsVerfahrenPrognoseFR.</kurzinfo>
+			</info>
+			<objektReferenz typ="typ.zraBerechnungsVerfahrenPrognoseFR" undefiniert="verboten" referenzierungsart="assoziation"/>
+		</attributDefinition>
+		<attributDefinition pid="att.zraBerechnungsVerfahrenPrognoseFRReferenzOptional" name="BerechnungsVerfahrenPrognoseFRReferenzOptional">
+			<info>
+				<kurzinfo>Attribut zur Referenzierung des Objekttyps: typ.zraBerechnungsVerfahrenPrognoseFR (Optionale Referenzierung erlaubt).</kurzinfo>
+			</info>
+			<objektReferenz typ="typ.zraBerechnungsVerfahrenPrognoseFR" undefiniert="erlaubt" referenzierungsart="assoziation"/>
+		</attributDefinition>
+		<attributDefinition pid="att.zraBerechnungsVerfahrenPrognoseFSReferenz" name="BerechnungsVerfahrenPrognoseFSReferenz">
+			<info>
+				<kurzinfo>Attribut zur Referenzierung des Objekttyps: typ.zraBerechnungsVerfahrenPrognoseFS.</kurzinfo>
+			</info>
+			<objektReferenz typ="typ.zraBerechnungsVerfahrenPrognoseFS" undefiniert="verboten" referenzierungsart="assoziation"/>
+		</attributDefinition>
+		<attributDefinition pid="att.zraBerechnungsVerfahrenPrognoseFSReferenzOptional" name="BerechnungsVerfahrenPrognoseFSReferenzOptional">
+			<info>
+				<kurzinfo>Attribut zur Referenzierung des Objekttyps: typ.zraBerechnungsVerfahrenPrognoseFS (Optionale Referenzierung erlaubt).</kurzinfo>
+			</info>
+			<objektReferenz typ="typ.zraBerechnungsVerfahrenPrognoseFS" undefiniert="erlaubt" referenzierungsart="assoziation"/>
+		</attributDefinition>
+		<attributDefinition pid="att.zraBerechnungsVerfahrenPrognoseReferenz" name="BerechnungsVerfahrenPrognoseReferenz">
+			<info>
+				<kurzinfo>Attribut zur Referenzierung des Objekttyps: typ.zraBerechnungsVerfahrenPrognose.</kurzinfo>
+			</info>
+			<objektReferenz typ="typ.zraBerechnungsVerfahrenPrognose" undefiniert="verboten" referenzierungsart="assoziation"/>
+		</attributDefinition>
+		<attributDefinition pid="att.zraBerechnungsVerfahrenPrognoseReferenzOptional" name="BerechnungsVerfahrenPrognoseReferenzOptional">
+			<info>
+				<kurzinfo>Attribut zur Referenzierung des Objekttyps: typ.zraBerechnungsVerfahrenPrognose (Optionale Referenzierung erlaubt).</kurzinfo>
+			</info>
+			<objektReferenz typ="typ.zraBerechnungsVerfahrenPrognose" undefiniert="erlaubt" referenzierungsart="assoziation"/>
+		</attributDefinition>
+		<attributDefinition pid="att.zraBerechnungsVerfahrenReferenz" name="BerechnungsVerfahrenReferenz">
+			<info>
+				<kurzinfo>Attribut zur Referenzierung des Objekttyps: typ.zraBerechnungsVerfahren.</kurzinfo>
+			</info>
+			<objektReferenz typ="typ.zraBerechnungsVerfahren" undefiniert="verboten" referenzierungsart="assoziation"/>
+		</attributDefinition>
+		<attributDefinition pid="att.zraBerechnungsVerfahrenReferenzOptional" name="BerechnungsVerfahrenReferenzOptional">
+			<info>
+				<kurzinfo>Attribut zur Referenzierung des Objekttyps: typ.zraBerechnungsVerfahren (Optionale Referenzierung erlaubt).</kurzinfo>
+			</info>
+			<objektReferenz typ="typ.zraBerechnungsVerfahren" undefiniert="erlaubt" referenzierungsart="assoziation"/>
+		</attributDefinition>
+		<attributDefinition pid="att.zraBerechnungsVerfahrenVKenn" name="BerechnungsVerfahrenVKenn">
+			<info>
+				<kurzinfo>Attribut für mögliche BerechnungsVerfahren von V Kenn.</kurzinfo>
+			</info>
+			<ganzzahl bits="8">
+				<zustand name="VKfzMQ" wert="0">
+				</zustand>
+				<zustand name="MinimalesVExpoAllerFS" wert="1">
+				</zustand>
+			</ganzzahl>
+		</attributDefinition>
+		<attributDefinition pid="att.zraErgebnisGlättung" name="ErgebnisGlättung">
+			<info>
+				<kurzinfo>Ergebnis der Glättung als Float-Wert</kurzinfo>
+			</info>
+			<ganzzahl bits="64">
+				<bereich skalierung="0,0001" minimum="-10000000000" maximum="10000000000">
+				</bereich>
+			</ganzzahl>
+		</attributDefinition>
+		<attributDefinition pid="att.zraErgebnisStufe" name="ErgebnisStufe">
+			<info>
+				<kurzinfo>Stufe die als Ergebnis ermittelt wurde</kurzinfo>
+			</info>
+			<ganzzahl bits="32">
+				<bereich skalierung="1" minimum="0" maximum="20">
+				</bereich>
+				<zustand name="keine Regelung" wert="-1">
+				</zustand>
+			</ganzzahl>
+		</attributDefinition>
+		<attributDefinition pid="att.zraHinweisSchildReferenz" name="HinweisSchildReferenz">
+			<info>
+				<kurzinfo>Attribut zur Referenzierung des Objekttyps: typ.zraHinweisSchild.</kurzinfo>
+			</info>
+			<objektReferenz typ="typ.zraHinweisSchild" undefiniert="verboten" referenzierungsart="assoziation"/>
+		</attributDefinition>
+		<attributDefinition pid="att.zraHinweisSchildReferenzOptional" name="HinweisSchildReferenzOptional">
+			<info>
+				<kurzinfo>Attribut zur Referenzierung des Objekttyps: typ.zraHinweisSchild (Optionale Referenzierung erlaubt).</kurzinfo>
+			</info>
+			<objektReferenz typ="typ.zraHinweisSchild" undefiniert="erlaubt" referenzierungsart="assoziation"/>
+		</attributDefinition>
+		<attributDefinition pid="att.zraLageErfassungsQuerschnitt" name="LageErfassungsQuerschnitt">
+			<info>
+				<kurzinfo>Attribut für mögliche Lage des ErfassungsQuerschnitt.</kurzinfo>
+			</info>
+			<ganzzahl bits="8">
+				<zustand name="Unterhalb" wert="0">
+				</zustand>
+				<zustand name="Oberhalb" wert="1">
+				</zustand>
+			</ganzzahl>
+		</attributDefinition>
+		<attributDefinition pid="att.zraLichtSignalAnlagenFahrzeuganzahl" name="LichtSignalAnlagenFahrzeuganzahl">
+			<info>
+				<kurzinfo>Attribut für die Fahrzeuganzahl der LichtSignalAnlage.</kurzinfo>
+			</info>
+			<ganzzahl bits="8">
+				<bereich skalierung="1" minimum="1" maximum="32" einheit="Fahrzeuge">
+				</bereich>
+			</ganzzahl>
+		</attributDefinition>
+		<attributDefinition pid="att.zraLichtSignalAnlagenRotschaltzeit" name="LichtSignalAnlagenRotschaltzeit">
+			<info>
+				<kurzinfo>Attribut für die Rotschaltzeit der LichtSignalAnlage.</kurzinfo>
+			</info>
+			<ganzzahl bits="16">
+				<bereich skalierung="1" minimum="2" maximum="240" einheit="Sekunden">
+				</bereich>
+				<zustand name="aus" wert="0">
+					<info>
+						<kurzinfo>LichtSignalAnlage ausschalten.</kurzinfo>
+					</info>
+				</zustand>
+				<zustand name="Dauerrot" wert="241">
+					<info>
+						<kurzinfo>LichtSignalAnlage hat Dauerrot für die Sperrung der Zufahrt.</kurzinfo>
+					</info>
+				</zustand>
+			</ganzzahl>
+		</attributDefinition>
+		<attributDefinition pid="att.zraLichtSignalAnlagenRotschaltzeitBefehl" name="LichtSignalAnlagenRotschaltzeitBefehl">
+			<info>
+				<kurzinfo>Attribut für den Befehl der Rotschaltzeit der LichtSignalAnlage.</kurzinfo>
+			</info>
+			<ganzzahl bits="16">
+				<bereich skalierung="1" minimum="2" maximum="240" einheit="Sekunden">
+				</bereich>
+				<zustand name="Automatik" wert="-1">
+					<info>
+						<kurzinfo>Befehl LichtSignalAnlage in Automatik.</kurzinfo>
+					</info>
+				</zustand>
+				<zustand name="aus" wert="0">
+					<info>
+						<kurzinfo>Befehl LichtSignalAnlage ausschalten.</kurzinfo>
+					</info>
+				</zustand>
+				<zustand name="Dauerrot" wert="241">
+					<info>
+						<kurzinfo>Befehl LichtSignalAnlage in Dauerrot für die Sperrung der Zufahrt.</kurzinfo>
+					</info>
+				</zustand>
+			</ganzzahl>
+		</attributDefinition>
+		<attributDefinition pid="att.zraLichtSignalAnlagenRotzeitRäumung" name="LichtSignalAnlagenRotzeitRäumung">
+			<info>
+				<kurzinfo>Attribut für die Rotzeit des Räumprogramms.</kurzinfo>
+			</info>
+			<ganzzahl bits="16">
+				<bereich skalierung="1" minimum="1" maximum="240" einheit="Sekunden">
+				</bereich>
+			</ganzzahl>
+		</attributDefinition>
+		<attributDefinition pid="att.zraLichtSignalAnlagenUmlaufzeitRäumung" name="LichtSignalAnlagenUmlaufzeitRäumung">
+			<info>
+				<kurzinfo>Attribut für die Umlaufzeit des Räumprogramms.</kurzinfo>
+			</info>
+			<ganzzahl bits="16">
+				<bereich skalierung="1" minimum="3" maximum="240" einheit="Sekunden">
+				</bereich>
+			</ganzzahl>
+		</attributDefinition>
+		<attributDefinition pid="att.zraLichtSignalAnlageReferenz" name="LichtSignalAnlageReferenz">
+			<info>
+				<kurzinfo>Attribut zur Referenzierung des Objekttyps: typ.zraLichtSignalAnlage.</kurzinfo>
+			</info>
+			<objektReferenz typ="typ.zraLichtSignalAnlage" undefiniert="verboten" referenzierungsart="assoziation"/>
+		</attributDefinition>
+		<attributDefinition pid="att.zraLichtSignalAnlageReferenzOptional" name="LichtSignalAnlageReferenzOptional">
+			<info>
+				<kurzinfo>Attribut zur Referenzierung des Objekttyps: typ.zraLichtSignalAnlage (Optionale Referenzierung erlaubt).</kurzinfo>
+			</info>
+			<objektReferenz typ="typ.zraLichtSignalAnlage" undefiniert="erlaubt" referenzierungsart="assoziation"/>
+		</attributDefinition>
+		<attributDefinition pid="att.zraMessQuerschnittErfassungReferenz" name="MessQuerschnittErfassungReferenz">
+			<info>
+				<kurzinfo>Attribut zur Referenzierung des Objekttyps: typ.zraMessQuerschnittErfassung.</kurzinfo>
+			</info>
+			<objektReferenz typ="typ.zraMessQuerschnittErfassung" undefiniert="verboten" referenzierungsart="assoziation"/>
+		</attributDefinition>
+		<attributDefinition pid="att.zraMessQuerschnittErfassungReferenzOptional" name="MessQuerschnittErfassungReferenzOptional">
+			<info>
+				<kurzinfo>Attribut zur Referenzierung des Objekttyps: typ.zraMessQuerschnittErfassung (Optionale Referenzierung erlaubt).</kurzinfo>
+			</info>
+			<objektReferenz typ="typ.zraMessQuerschnittErfassung" undefiniert="erlaubt" referenzierungsart="assoziation"/>
+		</attributDefinition>
+		<attributDefinition pid="att.zraMessQuerschnittLockerungReferenz" name="MessQuerschnittLockerungReferenz">
+			<info>
+				<kurzinfo>Attribut zur Referenzierung des Objekttyps: typ.zraMessQuerschnittLockerung.</kurzinfo>
+			</info>
+			<objektReferenz typ="typ.zraMessQuerschnittLockerung" undefiniert="verboten" referenzierungsart="assoziation"/>
+		</attributDefinition>
+		<attributDefinition pid="att.zraMessQuerschnittLockerungReferenzOptional" name="MessQuerschnittLockerungReferenzOptional">
+			<info>
+				<kurzinfo>Attribut zur Referenzierung des Objekttyps: typ.zraMessQuerschnittLockerung (Optionale Referenzierung erlaubt).</kurzinfo>
+			</info>
+			<objektReferenz typ="typ.zraMessQuerschnittLockerung" undefiniert="erlaubt" referenzierungsart="assoziation"/>
+		</attributDefinition>
+		<attributDefinition pid="att.zraMessQuerschnittLockerungStauReferenz" name="MessQuerschnittLockerungStauReferenz">
+			<info>
+				<kurzinfo>Attribut zur Referenzierung des Objekttyps: typ.zraMessQuerschnittLockerungStau.</kurzinfo>
+			</info>
+			<objektReferenz typ="typ.zraMessQuerschnittLockerungStau" undefiniert="verboten" referenzierungsart="assoziation"/>
+		</attributDefinition>
+		<attributDefinition pid="att.zraMessQuerschnittLockerungStauReferenzOptional" name="MessQuerschnittLockerungStauReferenzOptional">
+			<info>
+				<kurzinfo>Attribut zur Referenzierung des Objekttyps: typ.zraMessQuerschnittLockerungStau (Optionale Referenzierung erlaubt).</kurzinfo>
+			</info>
+			<objektReferenz typ="typ.zraMessQuerschnittLockerungStau" undefiniert="erlaubt" referenzierungsart="assoziation"/>
+		</attributDefinition>
+		<attributDefinition pid="att.zraMessQuerschnittStauReferenz" name="MessQuerschnittStauReferenz">
+			<info>
+				<kurzinfo>Attribut zur Referenzierung des Objekttyps: typ.zraMessQuerschnittStau.</kurzinfo>
+			</info>
+			<objektReferenz typ="typ.zraMessQuerschnittStau" undefiniert="verboten" referenzierungsart="assoziation"/>
+		</attributDefinition>
+		<attributDefinition pid="att.zraMessQuerschnittStauReferenzOptional" name="MessQuerschnittStauReferenzOptional">
+			<info>
+				<kurzinfo>Attribut zur Referenzierung des Objekttyps: typ.zraMessQuerschnittStau (Optionale Referenzierung erlaubt).</kurzinfo>
+			</info>
+			<objektReferenz typ="typ.zraMessQuerschnittStau" undefiniert="erlaubt" referenzierungsart="assoziation"/>
+		</attributDefinition>
+		<attributDefinition pid="att.zraPriorität" name="Priorität">
+			<info>
+				<kurzinfo>Definition einer Priorität für die Ereignistypen.</kurzinfo>
+				<beschreibung>
+					<absatz>
+						Es wird festgelegt, in welchem Wertebereich die Priorität 
+						für die Ereignistypen versorgt werden kann.
+					</absatz>
+				</beschreibung>
+			</info>
+			<ganzzahl bits="32">
+				<bereich skalierung="1" minimum="0" maximum="60000">
+				</bereich>
+				<zustand name="undefiniert" wert="-1">
+				</zustand>
+			</ganzzahl>
+		</attributDefinition>
+		<attributDefinition pid="att.zraTelegrammtyp" name="Telegrammtyp">
+			<info>
+				<kurzinfo>Attribut für den Telegrammtyp zur Schaltung der Rotschaltzeit und/oder Fahrzeuganzahl.</kurzinfo>
+			</info>
+			<ganzzahl bits="8">
+				<zustand name="Signalplan" wert="0">
+					<info>
+						<kurzinfo>Signalplan TLS-Typ 48.</kurzinfo>
+					</info>
+				</zustand>
+				<zustand name="SignalplanTyp2" wert="1">
+					<info>
+						<kurzinfo>Signalplan Typ 2 TLS-Typ 58.</kurzinfo>
+					</info>
+				</zustand>
+			</ganzzahl>
+		</attributDefinition>
+		<attributDefinition pid="att.zraTelegrammtypRäumprogramm" name="TelegrammtypRäumprogramm">
+			<info>
+				<kurzinfo>Attribut für den Telegrammtyp zur Schaltung des Räumprogrammes.</kurzinfo>
+			</info>
+			<ganzzahl bits="8">
+				<zustand name="nichtSenden" wert="0">
+					<info>
+						<kurzinfo>Räumprogramm nicht senden</kurzinfo>
+					</info>
+				</zustand>
+				<zustand name="RäumprogrammTyp49" wert="1">
+					<info>
+						<kurzinfo>Räumprogramm TLS-Typ 49.</kurzinfo>
+					</info>
+				</zustand>
+			</ganzzahl>
+		</attributDefinition>
+		<attributDefinition pid="att.zraTlsTelegrammTypBefehle" name="TLSTelegrammTypBefehle">
+			<info>
+				<kurzinfo>TLS-Telegramm-Typ für das Versenden der Befehle.</kurzinfo>
+			</info>
+			<ganzzahl bits="8">
+				<zustand name="Typ 55" wert="55">
+				</zustand>
+				<zustand name="Typ 48" wert="48">
+				</zustand>
+			</ganzzahl>
+		</attributDefinition>
+		<attributDefinition pid="att.zraVorWegWeiserBefehl" name="VorWegWeiserBefehl">
+			<info>
+				<kurzinfo>Attribut für den Befehl für den VorWegWeiser.</kurzinfo>
+			</info>
+			<ganzzahl bits="8">
+				<zustand name="Automatik" wert="-1">
+					<info>
+						<kurzinfo>Befehl VorWegWeiser in Automatik.</kurzinfo>
+					</info>
+				</zustand>
+				<zustand name="Neutral" wert="0">
+					<info>
+						<kurzinfo>Befehl VorWegWeiser in Stellung Neutral.</kurzinfo>
+					</info>
+				</zustand>
+				<zustand name="ZraEin" wert="1">
+					<info>
+						<kurzinfo>Befehl VorWegWeiser in Stellung Zuflussregelungsanlage ein.</kurzinfo>
+					</info>
+				</zustand>
+				<zustand name="Stau" wert="2">
+					<info>
+						<kurzinfo>Befehl VorWegWeiser in Stellung Stau.</kurzinfo>
+					</info>
+				</zustand>
+			</ganzzahl>
+		</attributDefinition>
+		<attributDefinition pid="att.zraVorWegWeiserReferenz" name="VorWegWeiserReferenz">
+			<info>
+				<kurzinfo>Attribut zur Referenzierung des Objekttyps: typ.zraVorWegWeiser.</kurzinfo>
+			</info>
+			<objektReferenz typ="typ.zraVorWegWeiser" undefiniert="verboten" referenzierungsart="assoziation"/>
+		</attributDefinition>
+		<attributDefinition pid="att.zraVorWegWeiserReferenzOptional" name="VorWegWeiserReferenzOptional">
+			<info>
+				<kurzinfo>Attribut zur Referenzierung des Objekttyps: typ.zraVorWegWeiser (Optionale Referenzierung erlaubt).</kurzinfo>
+			</info>
+			<objektReferenz typ="typ.zraVorWegWeiser" undefiniert="erlaubt" referenzierungsart="assoziation"/>
+		</attributDefinition>
+		<attributDefinition pid="att.zraZahl2NachKommaStellen" name="Zahl2NachKommaStellen">
+			<info>
+				<kurzinfo>Positve oder negative Zahl mit 2 Nachkommastellen</kurzinfo>
+			</info>
+			<ganzzahl bits="64">
+				<bereich skalierung="0,01" minimum="-10000000" maximum="10000000">
+				</bereich>
+			</ganzzahl>
+		</attributDefinition>
+		<attributDefinition pid="att.zraZuflussParallelFahrbahnReferenz" name="ZuflussParallelFahrbahnReferenz">
+			<info>
+				<kurzinfo>Attribut zur Referenzierung des Objekttyps: typ.zraZuflussParallelFahrbahn.</kurzinfo>
+			</info>
+			<objektReferenz typ="typ.zraZuflussParallelFahrbahn" undefiniert="verboten" referenzierungsart="assoziation"/>
+		</attributDefinition>
+		<attributDefinition pid="att.zraZuflussParallelFahrbahnReferenzOptional" name="ZuflussParallelFahrbahnReferenzOptional">
+			<info>
+				<kurzinfo>Attribut zur Referenzierung des Objekttyps: typ.zuflussParallelFahrbahn (Optionale Referenzierung erlaubt).</kurzinfo>
+			</info>
+			<objektReferenz typ="typ.zraZuflussParallelFahrbahn" undefiniert="erlaubt" referenzierungsart="assoziation"/>
+		</attributDefinition>
+		<attributDefinition pid="att.zraZuflussReferenz" name="ZuflussReferenz">
+			<info>
+				<kurzinfo>Attribut zur Referenzierung des Objekttyps: typ.zraZufluss.</kurzinfo>
+			</info>
+			<objektReferenz typ="typ.zraZufluss" undefiniert="verboten" referenzierungsart="assoziation"/>
+		</attributDefinition>
+		<attributDefinition pid="att.zraZuflussReferenzOptional" name="ZuflussReferenzOptional">
+			<info>
+				<kurzinfo>Attribut zur Referenzierung des Objekttyps: typ.zufluss (Optionale Referenzierung erlaubt).</kurzinfo>
+			</info>
+			<objektReferenz typ="typ.zraZufluss" undefiniert="erlaubt" referenzierungsart="assoziation"/>
+		</attributDefinition>
+		<attributDefinition pid="att.zraZuflussZufahrtReferenz" name="ZuflussZufahrtReferenz">
+			<info>
+				<kurzinfo>Attribut zur Referenzierung des Objekttyps: typ.zraZuflussZufahrt.</kurzinfo>
+			</info>
+			<objektReferenz typ="typ.zraZuflussZufahrt" undefiniert="verboten" referenzierungsart="assoziation"/>
+		</attributDefinition>
+		<attributDefinition pid="att.zraZuflussZufahrtReferenzOptional" name="ZuflussZufahrtReferenzOptional">
+			<info>
+				<kurzinfo>Attribut zur Referenzierung des Objekttyps: typ.zuflussZufahrt (Optionale Referenzierung erlaubt).</kurzinfo>
+			</info>
+			<objektReferenz typ="typ.zraZuflussZufahrt" undefiniert="erlaubt" referenzierungsart="assoziation"/>
+		</attributDefinition>
+		<attributDefinition pid="att.zuflussRegelungsAnlageBefehl" name="zuflussRegelungsAnlageBefehl">
+			<info>
+				<kurzinfo>Attribut für die Befehle der ZuflussRegelungsAnlage.</kurzinfo>
+			</info>
+			<ganzzahl bits="8">
+				<zustand name="deaktiviert" wert="0">
+				</zustand>
+				<zustand name="Automatik" wert="1">
+				</zustand>
+				<zustand name="Zeitsteuerung" wert="2">
+				</zustand>
+			</ganzzahl>
+		</attributDefinition>
+		<attributDefinition pid="att.zuflussRegelungsAnlageReferenz" name="ZuflussRegelungsAnlageReferenz">
+			<info>
+				<kurzinfo>Attribut zur Referenzierung des Objekttyps: typ.zuflussRegelungsAnlage.</kurzinfo>
+			</info>
+			<objektReferenz typ="typ.zuflussRegelungsAnlage" undefiniert="verboten" referenzierungsart="assoziation"/>
+		</attributDefinition>
+		<attributDefinition pid="att.zuflussRegelungsAnlageReferenzOptional" name="ZuflussRegelungsAnlageReferenzOptional">
+			<info>
+				<kurzinfo>Attribut zur Referenzierung des Objekttyps: typ.zuflussRegelungsAnlage (Optionale Referenzierung erlaubt).</kurzinfo>
+			</info>
+			<objektReferenz typ="typ.zuflussRegelungsAnlage" undefiniert="erlaubt" referenzierungsart="assoziation"/>
+		</attributDefinition>
+		<attributlistenDefinition pid="atl.berechnungsVerfahrenParameterALINEAHysterese" name="BerechnungsVerfahrenParameterALINEAHysterese">
+			<info>
+				<kurzinfo>Parameter für die ALINEA Hysterese.</kurzinfo>
+			</info>
+			<attribut pid="att.berechnungsVerfahrenALINEAUmlaufzeit" anzahl="1" anzahlIst="fest" name="UmlaufzeitEin">
+				<info>
+					<kurzinfo>Einschaltschwellwert der ALINEA Umlaufzeit für die Stufe.</kurzinfo>
+				</info>
+			</attribut>
+			<attribut pid="att.berechnungsVerfahrenALINEAUmlaufzeit" anzahl="1" anzahlIst="fest" name="UmlaufzeitAus">
+				<info>
+					<kurzinfo>Ausschaltschwellwert der ALINEA Umlaufzeit für die Stufe.</kurzinfo>
+				</info>
+			</attribut>
+			<attribut pid="att.zraLichtSignalAnlagenRotschaltzeit" anzahl="1" anzahlIst="fest" name="Rotschaltzeit">
+				<info>
+					<kurzinfo>Rotschaltzeit der LichtSignalAnlage für die Stufe.</kurzinfo>
+				</info>
+			</attribut>
+			<attribut pid="att.zraLichtSignalAnlagenFahrzeuganzahl" anzahl="1" anzahlIst="fest" name="Fahrzeuganzahl">
+				<info>
+					<kurzinfo>Fahrzeuganzahl der LichtSignalAnlage für die Stufe.</kurzinfo>
+				</info>
+			</attribut>
+		</attributlistenDefinition>
+		<attributlistenDefinition pid="atl.berechnungsVerfahrenParameterALINEAHystereseEreignis" name="BerechnungsVerfahrenParameterALINEAHystereseEreignis">
+			<info>
+				<kurzinfo>Parameter für die BerechnungsVerfahrenALINEAHysterese für ein Ereignis.</kurzinfo>
+			</info>
+			<attribut pid="att.ereignisTypReferenz" anzahl="1" anzahlIst="fest" name="Ereignistyp">
+				<info>
+					<kurzinfo>Referenz auf einen Ereignistyp.</kurzinfo>
+				</info>
+			</attribut>
+			<attribut pid="att.zraPriorität" anzahl="1" anzahlIst="fest" name="Priorität">
+				<info>
+					<kurzinfo>Priorität für diesen Ereignistyp.</kurzinfo>
+				</info>
+			</attribut>
+			<attributliste pid="atl.berechnungsVerfahrenParameterALINEAHysterese" anzahl="21" anzahlIst="variabel" name="Programm">
+				<info>
+					<kurzinfo>.</kurzinfo>
+					<beschreibung>.</beschreibung>
+				</info>
+			</attributliste>
+		</attributlistenDefinition>
+		<attributlistenDefinition pid="atl.berechnungsVerfahrenParameterEreignis" name="BerechnungsVerfahrenParameterEreignis">
+			<info>
+				<kurzinfo>Parameter BerechnungsVerfahren für ein Ereignis.</kurzinfo>
+			</info>
+			<attribut pid="att.ereignisTypReferenz" anzahl="1" anzahlIst="fest" name="Ereignistyp">
+				<info>
+					<kurzinfo>Referenz auf einen Ereignistyp.</kurzinfo>
+				</info>
+			</attribut>
+			<attribut pid="att.zraPriorität" anzahl="1" anzahlIst="fest" name="Priorität">
+				<info>
+					<kurzinfo>Priorität für diesen Ereignistyp.</kurzinfo>
+				</info>
+			</attribut>
+			<attribut pid="att.zeitDauer" anzahl="1" anzahlIst="fest" name="Mindestschaltzeit">
+				<info>
+					<kurzinfo>Mindestschaltzeit für Programme.</kurzinfo>
+					<beschreibung>Mindestschaltzeit für Programme, bevor sie von einem Programm mit niedrigerer Priorität ersetzt werden können.</beschreibung>
+				</info>
+			</attribut>
+			<attribut pid="att.zeitDauer" anzahl="1" anzahlIst="fest" name="Ausschaltzeit">
+				<info>
+					<kurzinfo>Ausschaltzeit für die LichtSignalAnlage.</kurzinfo>
+					<beschreibung>Ausschaltzeit für die LichtSignalAnlage. Die LichtSignalAnlage darf erst ausgeschaltet werden, wenn nachdem an der Rückstauschleife
+					kein Stau mehr detektiert wurde, die Ausschaltzeit abgelaufen ist.</beschreibung>
+				</info>
+			</attribut>
+		</attributlistenDefinition>
+		<attributlistenDefinition pid="atl.berechnungsVerfahrenParameterPrognoseHysterese" name="BerechnungsVerfahrenParameterPrognoseHysterese">
+			<info>
+				<kurzinfo>Parameter für die Prognose Hysterese.</kurzinfo>
+			</info>
+			<attribut pid="att.bemessungsVerkehrsStärkeStunde" anzahl="1" anzahlIst="fest" name="VerkehrsStärkeEin">
+				<info>
+					<kurzinfo>Einschaltschwellwert der BemessungsVerkehrsStärke für die Stufe.</kurzinfo>
+				</info>
+			</attribut>
+			<attribut pid="att.bemessungsVerkehrsStärkeStunde" anzahl="1" anzahlIst="fest" name="VerkehrsStärkeAus">
+				<info>
+					<kurzinfo>Ausschaltschwellwert der BemessungsVerkehrsStärke für die Stufe.</kurzinfo>
+				</info>
+			</attribut>
+			<attribut pid="att.zraLichtSignalAnlagenRotschaltzeit" anzahl="1" anzahlIst="fest" name="VerkehrsStärkeRotschaltzeit">
+				<info>
+					<kurzinfo>Rotschaltzeit der LichtSignalAnlage für die Stufe.</kurzinfo>
+				</info>
+			</attribut>
+			<attribut pid="att.zraLichtSignalAnlagenFahrzeuganzahl" anzahl="1" anzahlIst="fest" name="VerkehrsStärkeFahrzeuganzahl">
+				<info>
+					<kurzinfo>Fahrzeuganzahl der LichtSignalAnlage für die Stufe.</kurzinfo>
+				</info>
+			</attribut>
+			<attribut pid="att.bemessungsFahrzeugDichte" anzahl="1" anzahlIst="fest" name="FahrzeugDichteEin">
+				<info>
+					<kurzinfo>Einschaltschwellwert der BemessungsFahrzeugDichte für die Stufe.</kurzinfo>
+				</info>
+			</attribut>
+			<attribut pid="att.bemessungsFahrzeugDichte" anzahl="1" anzahlIst="fest" name="FahrzeugDichteAus">
+				<info>
+					<kurzinfo>Ausschaltschwellwert der BemessungsFahrzeugDichte für die Stufe.</kurzinfo>
+				</info>
+			</attribut>
+			<attribut pid="att.zraLichtSignalAnlagenRotschaltzeit" anzahl="1" anzahlIst="fest" name="FahrzeugDichteRotschaltzeit">
+				<info>
+					<kurzinfo>Rotschaltzeit der LichtSignalAnlage für die Stufe.</kurzinfo>
+				</info>
+			</attribut>
+			<attribut pid="att.zraLichtSignalAnlagenFahrzeuganzahl" anzahl="1" anzahlIst="fest" name="FahrzeugDichteFahrzeuganzahl">
+				<info>
+					<kurzinfo>Fahrzeuganzahl der LichtSignalAnlage für die Stufe.</kurzinfo>
+				</info>
+			</attribut>
+		</attributlistenDefinition>
+		<attributlistenDefinition pid="atl.berechnungsVerfahrenParameterPrognoseHystereseEreignis" name="BerechnungsVerfahrenParameterPrognoseHystereseEreignis">
+			<info>
+				<kurzinfo>Parameter für die BerechnungsVerfahrenPrognoseHysterese für ein Ereignis.</kurzinfo>
+			</info>
+			<attribut pid="att.ereignisTypReferenz" anzahl="1" anzahlIst="fest" name="Ereignistyp">
+				<info>
+					<kurzinfo>Referenz auf einen Ereignistyp.</kurzinfo>
+				</info>
+			</attribut>
+			<attribut pid="att.zraPriorität" anzahl="1" anzahlIst="fest" name="Priorität">
+				<info>
+					<kurzinfo>Priorität für diesen Ereignistyp.</kurzinfo>
+				</info>
+			</attribut>
+			<attributliste pid="atl.berechnungsVerfahrenParameterPrognoseHysterese" anzahl="21" anzahlIst="variabel" name="Programm">
+				<info>
+					<kurzinfo>.</kurzinfo>
+					<beschreibung>.</beschreibung>
+				</info>
+			</attributliste>
+		</attributlistenDefinition>
+		<attributlistenDefinition pid="atl.zraAbschaltungInStausituationZuflüsse" name="AbschaltungInStausituationZuflüsse">
+			<info>
+				<kurzinfo>Auslösender Zufluss für die Abschaltung in Stausituationen.</kurzinfo>
+			</info>
+			<attribut pid="att.zraZuflussReferenz" anzahl="1" anzahlIst="fest" name="Zufluss">
+				<info>
+					<kurzinfo>Referenz auf einen Zufluss.</kurzinfo>
+				</info>
+			</attribut>
+		</attributlistenDefinition>
+		<attributlistenDefinition pid="atl.zraBerechneterBefehl" name="BerechneteBefehle">
+			<info>
+				<kurzinfo>Berechneter Befehl auf Grund des eingestellten Berechnungsverfahrens</kurzinfo>
+			</info>
+			<attribut pid="att.zraBerechnungsVerfahren" anzahl="1" anzahlIst="fest" name="Berechnungsverfahren">
+				<info>
+					<kurzinfo>Verwendetes Berechnungsverfahren</kurzinfo>
+				</info>
+			</attribut>
+			<attribut pid="att.zahlPositiv" anzahl="1" anzahlIst="fest" name="Rotschaltzeit">
+				<info>
+					<kurzinfo>Berechnete Rotschaltzeit</kurzinfo>
+				</info>
+			</attribut>
+			<attribut pid="att.zahlPositiv" anzahl="1" anzahlIst="fest" name="Fahrzeuganzahl">
+				<info>
+					<kurzinfo>Berechnete Fahrzeuganzahl</kurzinfo>
+				</info>
+			</attribut>
+		</attributlistenDefinition>
+		<attributlistenDefinition pid="atl.zraDiagnoseAbschalten" name="DiagnoseAbschalten">
+			<info>
+				<kurzinfo>Information welche Situationen zum Abschalten geführt haben</kurzinfo>
+			</info>
+			<attribut pid="att.jaNein" anzahl="1" anzahlIst="fest" name="ALINEAStrategie">
+				<info>
+					<kurzinfo>Abschalten auf Grund der ALINEA Strategie.</kurzinfo>
+				</info>
+			</attribut>
+			<attribut pid="att.jaNein" anzahl="1" anzahlIst="fest" name="Lockerung">
+				<info>
+					<kurzinfo>Abschalten auf Grund von Lockerung der Rotschaltzeit.</kurzinfo>
+				</info>
+			</attribut>
+			<attribut pid="att.jaNein" anzahl="1" anzahlIst="fest" name="StauHFB">
+				<info>
+					<kurzinfo>Abschalten auf Grund von Stau auf der HFB und in mindestens einem Zufluss.</kurzinfo>
+				</info>
+			</attribut>
+			<attribut pid="att.jaNein" anzahl="1" anzahlIst="fest" name="InfraStruktur">
+				<info>
+					<kurzinfo>Abschalten auf Grund von Fehlern in der Infrastruktur.</kurzinfo>
+				</info>
+			</attribut>
+			<attribut pid="att.jaNein" anzahl="1" anzahlIst="fest" name="ManuelleSchaltung">
+				<info>
+					<kurzinfo>Abschalten auf Grund von manuellen Schaltungen.</kurzinfo>
+				</info>
+			</attribut>
+			<attribut pid="att.jaNein" anzahl="1" anzahlIst="fest" name="StörungPrisma">
+				<info>
+					<kurzinfo>Abschalten auf Grund von einer Prismenstörung.</kurzinfo>
+				</info>
+			</attribut>
+			<attribut pid="att.jaNein" anzahl="1" anzahlIst="fest" name="SofortAbschalten">
+				<info>
+					<kurzinfo>Information ob das Kriterium 'sofort abschalten' erfüllt ist.</kurzinfo>
+				</info>
+			</attribut>
+		</attributlistenDefinition>
+		<attributlistenDefinition pid="atl.zraDurchgeführteAlgorithmen" name="Algorithmen">
+			<info>
+				<kurzinfo>Von der LZA durchgeführte Algorithmen</kurzinfo>
+			</info>
+			<attribut pid="att.text" anzahl="1" anzahlIst="fest" name="Algorithmus">
+				<info>
+					<kurzinfo> Bezeichnung des Algorithmus</kurzinfo>
+				</info>
+			</attribut>
+		</attributlistenDefinition>
+		<attributlistenDefinition pid="atl.zraErfassungsDatenALINEA" name="ErfassungsDaten">
+			<info>
+				<kurzinfo>Erfassungsdaten für die ALINE Berechnung</kurzinfo>
+			</info>
+			<attribut pid="att.zraMessQuerschnittErfassungReferenzOptional" anzahl="1" anzahlIst="fest" name="ErfassungsQuerschnitt">
+				<info>
+					<kurzinfo>
+             Erfassungsquerschnitt auf der Autobahn. 
+          </kurzinfo>
+				</info>
+			</attribut>
+			<attributliste pid="atl.zraErfassungsDatenFahrstreifenALINEA" anzahl="0" anzahlIst="variabel" name="ErfassungsDatenFahrstreifen">
+				<info>
+					<kurzinfo>Erfassungsdaten für die ALINE Berechnung  (Fahrstreifen)</kurzinfo>
+				</info>
+			</attributliste>
+		</attributlistenDefinition>
+		<attributlistenDefinition pid="atl.zraErfassungsDatenFahrstreifenALINEA" name="ErfassungsDatenFahrstreifen">
+			<info>
+				<kurzinfo>Erfassungsdaten für die ALINE Berechnung (Fahrstreifen)</kurzinfo>
+			</info>
+			<attribut pid="att.fahrStreifenLage" anzahl="1" anzahlIst="fest" name="LageFahrstreifen">
+				<info>
+					<kurzinfo>
+             Lage des Fahrstreifens . 
+          </kurzinfo>
+				</info>
+			</attribut>
+			<attribut pid="att.prozent" anzahl="1" anzahlIst="fest" name="Belegung">
+				<info>
+					<kurzinfo>
+             Belegung des Fahrstreifens. 
+          </kurzinfo>
+				</info>
+			</attribut>
+		</attributlistenDefinition>
+		<attributlistenDefinition pid="atl.zraErfassungsDatenFahrstreifenPrognose" name="ErfassungsDatenFahrstreifen">
+			<info>
+				<kurzinfo>Erfassungsdaten für die Prognose Berechnung (Fahrstreifen)</kurzinfo>
+			</info>
+			<attribut pid="att.fahrStreifenLage" anzahl="1" anzahlIst="fest" name="LageFahrstreifen">
+				<info>
+					<kurzinfo>
+             Lage des Fahrstreifens . 
+          </kurzinfo>
+				</info>
+			</attribut>
+			<attribut pid="att.verkehrsStärkeIntervall" anzahl="1" anzahlIst="fest" name="qPkw">
+				<info>
+					<kurzinfo>Fahrzeugmenge Pkw.</kurzinfo>
+				</info>
+			</attribut>
+			<attribut pid="att.verkehrsStärkeIntervall" anzahl="1" anzahlIst="fest" name="qLkw">
+				<info>
+					<kurzinfo>Fahrzeugmenge Lkw.</kurzinfo>
+				</info>
+			</attribut>
+			<attribut pid="att.geschwindigkeit" anzahl="1" anzahlIst="fest" name="vKfz">
+				<info>
+					<kurzinfo>Geschwindigkeit Kfz.</kurzinfo>
+				</info>
+			</attribut>
+			<attribut pid="att.geschwindigkeit" anzahl="1" anzahlIst="fest" name="vPkw">
+				<info>
+					<kurzinfo>Geschwindigkeit Pkw.</kurzinfo>
+				</info>
+			</attribut>
+			<attribut pid="att.geschwindigkeit" anzahl="1" anzahlIst="fest" name="vLkw">
+				<info>
+					<kurzinfo>Geschwindigkeit Lkw.</kurzinfo>
+				</info>
+			</attribut>
+		</attributlistenDefinition>
+		<attributlistenDefinition pid="atl.zraErfassungsDatenPrognose" name="ErfassungsDaten">
+			<info>
+				<kurzinfo>Erfassungsdaten für die ALINE Berechnung</kurzinfo>
+			</info>
+			<attribut pid="att.zraMessQuerschnittErfassungReferenzOptional" anzahl="1" anzahlIst="fest" name="ErfassungsQuerschnitt">
+				<info>
+					<kurzinfo>
+             Erfassungsquerschnitt auf der Autobahn. 
+          </kurzinfo>
+				</info>
+			</attribut>
+			<attributliste pid="atl.zraErfassungsDatenFahrstreifenPrognose" anzahl="0" anzahlIst="variabel" name="ErfassungsDatenFahrstreifen">
+				<info>
+					<kurzinfo>Erfassungsdaten für die ALINE Berechnung  (Fahrstreifen)</kurzinfo>
+				</info>
+			</attributliste>
+		</attributlistenDefinition>
+		<attributlistenDefinition pid="atl.zraErgebnisALINEA" name="ErgebnisALINEA">
+			<info>
+				<kurzinfo>Berechnete Werte ALINEA</kurzinfo>
+			</info>
+			<attributliste pid="atl.zraErfassungsDatenALINEA" anzahl="1" anzahlIst="fest" name="ErfassungsDaten">
+				<info>
+					<kurzinfo>Erfassungsdaten für die ALINE Berechnung</kurzinfo>
+				</info>
+			</attributliste>
+			<attribut pid="att.prozent" anzahl="1" anzahlIst="fest" name="BelegungsgradHauptfahrbahn">
+				<info>
+					<kurzinfo>
+             auf der Hauptfahrbahn gemessender Belegungsgrad b unterhalb des Zuflusses. 
+          </kurzinfo>
+				</info>
+			</attribut>
+			<attribut pid="att.zahlPositiv" anzahl="1" anzahlIst="fest" name="QZufluss">
+				<info>
+					<kurzinfo>
+             in der Zufahrt gemessene Verkehrsmenge. 
+          </kurzinfo>
+				</info>
+			</attribut>
+			<attribut pid="att.zahlPositiv" anzahl="1" anzahlIst="fest" name="QZuflussVerwendet">
+				<info>
+					<kurzinfo>
+             Zuflusswert der für die Berechung verwendet wurde (unter Berückischtigung des Sockelwerts)
+          </kurzinfo>
+				</info>
+			</attribut>
+			<attribut pid="att.berechnungsVerfahrenALINEAUmlaufzeit" anzahl="1" anzahlIst="fest" name="Umlaufzeit">
+				<info>
+					<kurzinfo>
+             Umlaufzeit t. 
+          </kurzinfo>
+				</info>
+			</attribut>
+			<attribut pid="att.jaNein" anzahl="1" anzahlIst="fest" name="VorbedingungErfüllt">
+				<info>
+					<kurzinfo>
+             Merker ob die Vorbedingung qEin erfüllt ist.
+          </kurzinfo>
+				</info>
+			</attribut>
+			<attribut pid="att.jaNein" anzahl="1" anzahlIst="fest" name="SockelwertVerwendet">
+				<info>
+					<kurzinfo>
+             Merker ob der Sockelwert verwendet wurde
+          </kurzinfo>
+				</info>
+			</attribut>
+		</attributlistenDefinition>
+		<attributlistenDefinition pid="atl.zraErgebnisGesamt" name="ErgebnisGesamt">
+			<info>
+				<kurzinfo>Tatsächliches Ergebnis für einen Zufluss</kurzinfo>
+			</info>
+			<attributliste pid="atl.zraBerechneterBefehl" anzahl="1" anzahlIst="fest" name="BerechneterBefehl">
+				<info>
+					<kurzinfo>Berechnete Befehle auf Grund des eingestellten Berechnungsverfahrens</kurzinfo>
+				</info>
+			</attributliste>
+			<attributliste pid="atl.zraModifizierterBefehl" anzahl="1" anzahlIst="fest" name="ModifizierterBefehl">
+				<info>
+					<kurzinfo>U.U. modifizierte Befehle durch die LZA</kurzinfo>
+				</info>
+			</attributliste>
+			<attributliste pid="atl.zraDiagnoseAbschalten" anzahl="1" anzahlIst="fest" name="AbschaltenDerZFR">
+				<info>
+					<kurzinfo>Ergebnis 'Abschalten der ZFR'.</kurzinfo>
+				</info>
+			</attributliste>
+			<attributliste pid="atl.zraGeschalteterBefehl" anzahl="1" anzahlIst="fest" name="GeschalteterBefehl">
+				<info>
+					<kurzinfo>Tatsächlich geschaltete Befehle an der LZA</kurzinfo>
+				</info>
+			</attributliste>
+		</attributlistenDefinition>
+		<attributlistenDefinition pid="atl.zraErgebnisPrognose" name="ErgebnisPrognose">
+			<info>
+				<kurzinfo>Berechnete Prognosewerte</kurzinfo>
+			</info>
+			<attributliste pid="atl.zraErfassungsDatenPrognose" anzahl="1" anzahlIst="fest" name="ErfassungsDaten">
+				<info>
+					<kurzinfo>Erfassungsdaten für die Prognose Berechnung</kurzinfo>
+				</info>
+			</attributliste>
+			<attribut pid="att.verkehrsStärkeIntervall" anzahl="1" anzahlIst="fest" name="qPkw">
+				<info>
+					<kurzinfo>Fahrzeugmenge Pkw.</kurzinfo>
+				</info>
+			</attribut>
+			<attribut pid="att.verkehrsStärkeIntervall" anzahl="1" anzahlIst="fest" name="qLkw">
+				<info>
+					<kurzinfo>Fahrzeugmenge Lkw.</kurzinfo>
+				</info>
+			</attribut>
+			<attribut pid="att.geschwindigkeit" anzahl="1" anzahlIst="fest" name="vKfz">
+				<info>
+					<kurzinfo>Geschwindigkeit Kfz.</kurzinfo>
+				</info>
+			</attribut>
+			<attribut pid="att.geschwindigkeit" anzahl="1" anzahlIst="fest" name="vPkw">
+				<info>
+					<kurzinfo>Geschwindigkeit Pkw.</kurzinfo>
+				</info>
+			</attribut>
+			<attribut pid="att.geschwindigkeit" anzahl="1" anzahlIst="fest" name="vLkw">
+				<info>
+					<kurzinfo>Geschwindigkeit Lkw.</kurzinfo>
+				</info>
+			</attribut>
+			<attributliste pid="atl.zraGlättung" anzahl="1" anzahlIst="fest" name="GlättungQPkw">
+				<info>
+					<kurzinfo>Geglätteter bzw. trendextrapolierter Wert qPkw</kurzinfo>
+				</info>
+			</attributliste>
+			<attributliste pid="atl.zraGlättung" anzahl="1" anzahlIst="fest" name="GlättungQLkw">
+				<info>
+					<kurzinfo>Geglätteter bzw. trendextrapolierter Wert qLkw</kurzinfo>
+				</info>
+			</attributliste>
+			<attributliste pid="atl.zraGlättung" anzahl="1" anzahlIst="fest" name="GlättungVPkw">
+				<info>
+					<kurzinfo>Geglätteter bzw. trendextrapolierter Wert vPkw</kurzinfo>
+				</info>
+			</attributliste>
+			<attributliste pid="atl.zraGlättung" anzahl="1" anzahlIst="fest" name="GlättungVLkw">
+				<info>
+					<kurzinfo>Geglätteter bzw. trendextrapolierter Wert vLkw</kurzinfo>
+				</info>
+			</attributliste>
+			<attribut pid="att.zraZahl2NachKommaStellen" anzahl="1" anzahlIst="fest" name="Äquivalenzfaktor">
+				<info>
+					<kurzinfo>Äquivalenzfaktor fl</kurzinfo>
+				</info>
+			</attribut>
+			<attribut pid="att.zahlPositiv" anzahl="1" anzahlIst="fest" name="Bemessungsverkehrsstärke">
+				<info>
+					<kurzinfo>Bemessungsverkehrsstärke QB</kurzinfo>
+				</info>
+			</attribut>
+			<attribut pid="att.zraZahl2NachKommaStellen" anzahl="1" anzahlIst="fest" name="Verkehrsdichte">
+				<info>
+					<kurzinfo>Verkehrsdichte k</kurzinfo>
+				</info>
+			</attribut>
+		</attributlistenDefinition>
+		<attributlistenDefinition pid="atl.zraErgebnisZufluss" name="ErgebnisZufluss">
+			<info>
+				<kurzinfo>Berechnete Ergebnisse für einen Zufluss</kurzinfo>
+			</info>
+			<attribut pid="att.text" anzahl="1" anzahlIst="fest" name="Name">
+				<info>
+					<kurzinfo> Name des Zuflusses</kurzinfo>
+				</info>
+			</attribut>
+			<attribut pid="att.jaNein" anzahl="1" anzahlIst="fest" name="ZuflussDeaktiviert">
+				<info>
+					<kurzinfo>Information ob der Zufluss deaktiviert ist.</kurzinfo>
+				</info>
+			</attribut>
+			<attributliste pid="atl.zraErgebnisZuflussPrognose" anzahl="1" anzahlIst="fest" name="ErgebnisZuflussPrognoseFR">
+				<info>
+					<kurzinfo>Berechnete Ergebnisse für einen Zufluss (PrognoseFR)</kurzinfo>
+				</info>
+			</attributliste>
+			<attributliste pid="atl.zraErgebnisZuflussPrognose" anzahl="1" anzahlIst="fest" name="ErgebnisZuflussPrognoseFSr">
+				<info>
+					<kurzinfo>Berechnete Ergebnisse für einen Zufluss (PrognoseFSr)</kurzinfo>
+				</info>
+			</attributliste>
+			<attributliste pid="atl.zraErgebnisZuflussALINEA" anzahl="1" anzahlIst="fest" name="ErgebnisZuflussALINEA">
+				<info>
+					<kurzinfo>Berechnete Ergebnisse für einen Zufluss (ALINEA)</kurzinfo>
+				</info>
+			</attributliste>
+			<attributliste pid="atl.zraErgebnisGesamt" anzahl="1" anzahlIst="fest" name="ErgebnisGesamt">
+				<info>
+					<kurzinfo>Endergebnis für einen Zufluss</kurzinfo>
+				</info>
+			</attributliste>
+		</attributlistenDefinition>
+		<attributlistenDefinition pid="atl.zraErgebnisZuflussALINEA" name="ErgebnisZuflussALINEA">
+			<info>
+				<kurzinfo>Berechnete Ergebnisse für einen Zufluss (ALINEA)</kurzinfo>
+			</info>
+			<attribut pid="att.berechnungsVerfahrenALINEAUmlaufzeit" anzahl="1" anzahlIst="fest" name="Umlaufzeit">
+				<info>
+					<kurzinfo>Umlaufzeit t</kurzinfo>
+				</info>
+			</attribut>
+			<attribut pid="att.zraErgebnisStufe" anzahl="1" anzahlIst="fest" name="Stufe">
+				<info>
+					<kurzinfo>Berechnete Stufe für Umlaufzeit t</kurzinfo>
+				</info>
+			</attribut>
+			<attribut pid="att.zahlPositiv" anzahl="1" anzahlIst="fest" name="Rotschaltzeit">
+				<info>
+					<kurzinfo>Berechnete Rotschaltzeit</kurzinfo>
+				</info>
+			</attribut>
+			<attribut pid="att.zahlPositiv" anzahl="1" anzahlIst="fest" name="Fahrzeuganzahl">
+				<info>
+					<kurzinfo>Berechnete Fahrzeuganzahl</kurzinfo>
+				</info>
+			</attribut>
+		</attributlistenDefinition>
+		<attributlistenDefinition pid="atl.zraErgebnisZuflussPrognose" name="ErgebnisZuflussPrognose">
+			<info>
+				<kurzinfo>Berechnete Ergebnisse für einen Zufluss (Prognose)</kurzinfo>
+			</info>
+			<attribut pid="att.zahlPositiv" anzahl="1" anzahlIst="fest" name="QB">
+				<info>
+					<kurzinfo>Bemessungsverkehrsstärke QB</kurzinfo>
+				</info>
+			</attribut>
+			<attribut pid="att.zahlPositiv" anzahl="1" anzahlIst="fest" name="k">
+				<info>
+					<kurzinfo>Verkehrsdichte k</kurzinfo>
+				</info>
+			</attribut>
+			<attribut pid="att.zraErgebnisStufe" anzahl="1" anzahlIst="fest" name="StufeQB">
+				<info>
+					<kurzinfo>Berechnete Stufe für Verkehrsstärke QB</kurzinfo>
+				</info>
+			</attribut>
+			<attribut pid="att.zraErgebnisStufe" anzahl="1" anzahlIst="fest" name="StufeK">
+				<info>
+					<kurzinfo>Berechnete Stufe für Verkehrsdichte k</kurzinfo>
+				</info>
+			</attribut>
+			<attribut pid="att.zahlPositiv" anzahl="1" anzahlIst="fest" name="Rotschaltzeit">
+				<info>
+					<kurzinfo>Berechnete Rotschaltzeit</kurzinfo>
+				</info>
+			</attribut>
+			<attribut pid="att.zahlPositiv" anzahl="1" anzahlIst="fest" name="Fahrzeuganzahl">
+				<info>
+					<kurzinfo>Berechnete Fahrzeuganzahl</kurzinfo>
+				</info>
+			</attribut>
+		</attributlistenDefinition>
+		<attributlistenDefinition pid="atl.zraGeschalteterBefehl" name="GeschalteterBefehl">
+			<info>
+				<kurzinfo>Tatsächlich an die LZA geschalteter Befehl</kurzinfo>
+			</info>
+			<attribut pid="att.jaNein" anzahl="1" anzahlIst="fest" name="EinschaltenÜberSchwächsteRotschaltzeit">
+				<info>
+					<kurzinfo>Information ob das Kriterium 'Einschalten über schwächste Rotschaltzeit' erfüllt ist.</kurzinfo>
+				</info>
+			</attribut>
+			<attribut pid="att.jaNein" anzahl="1" anzahlIst="fest" name="HandschaltungLZA">
+				<info>
+					<kurzinfo>Information ob das Kriterium 'Handschaltung an LZA' erfüllt ist.</kurzinfo>
+				</info>
+			</attribut>
+			<attribut pid="att.zraLichtSignalAnlagenRotschaltzeitBefehl" anzahl="1" anzahlIst="fest" name="VorgabeRotschaltzeit">
+				<info>
+					<kurzinfo>Manuelle Vorgabe (Handschaltung)) Rotschaltzeit der LZA.</kurzinfo>
+				</info>
+			</attribut>
+			<attribut pid="att.zraLichtSignalAnlagenFahrzeuganzahl" anzahl="1" anzahlIst="fest" name="VorgabeFahrzeuganzahl">
+				<info>
+					<kurzinfo>Manuelle Vorgabe (Handschaltung) Fahrzeuganzahl der LZA.</kurzinfo>
+				</info>
+			</attribut>
+			<attribut pid="att.zahlPositiv" anzahl="1" anzahlIst="fest" name="Rotschaltzeit">
+				<info>
+					<kurzinfo>Geschaltete Rotschaltzeit an LZA</kurzinfo>
+				</info>
+			</attribut>
+			<attribut pid="att.zahlPositiv" anzahl="1" anzahlIst="fest" name="Fahrzeuganzahl">
+				<info>
+					<kurzinfo>Geschaltete Fahrzeuganzahl an LZA</kurzinfo>
+				</info>
+			</attribut>
+		</attributlistenDefinition>
+		<attributlistenDefinition pid="atl.zraGlättung" name="Glättung">
+			<info>
+				<kurzinfo>geglätteter und trendextrapolierter Wert</kurzinfo>
+			</info>
+			<attribut pid="att.zraErgebnisGlättung" anzahl="1" anzahlIst="fest" name="WAlt">
+				<info>
+					<kurzinfo>
+            Alter Wert (w'alt)
+          </kurzinfo>
+				</info>
+			</attribut>
+			<attribut pid="att.zraErgebnisGlättung" anzahl="1" anzahlIst="fest" name="DeltaWAlt">
+				<info>
+					<kurzinfo>
+            Alter Wert (delta w'alt)
+          </kurzinfo>
+				</info>
+			</attribut>
+			<attribut pid="att.zraErgebnisGlättung" anzahl="1" anzahlIst="fest" name="WNeu">
+				<info>
+					<kurzinfo>
+            Ergebnis Glättung (w'neu)
+          </kurzinfo>
+				</info>
+			</attribut>
+			<attribut pid="att.zraErgebnisGlättung" anzahl="1" anzahlIst="fest" name="DeltaWNeu">
+				<info>
+					<kurzinfo>
+            Ergebnis Glättung (delta w'neu)
+          </kurzinfo>
+				</info>
+			</attribut>
+			<attribut pid="att.zraErgebnisGlättung" anzahl="1" anzahlIst="fest" name="wSchlange">
+				<info>
+					<kurzinfo>
+            Ergebnis Trendextrapolation (w Schlange)
+          </kurzinfo>
+				</info>
+			</attribut>
+		</attributlistenDefinition>
+		<attributlistenDefinition pid="atl.zraLichtSignalAnlageParameterEreignis" name="LichtSignalAnlageParameterEreignis">
+			<info>
+				<kurzinfo>Parameter für die BerechnungsVerfahrenPrognoseHysterese für ein Ereignis.</kurzinfo>
+			</info>
+			<attribut pid="att.ereignisTypReferenz" anzahl="1" anzahlIst="fest" name="Ereignistyp">
+				<info>
+					<kurzinfo>Referenz auf einen Ereignistyp.</kurzinfo>
+				</info>
+			</attribut>
+			<attribut pid="att.zraPriorität" anzahl="1" anzahlIst="fest" name="Priorität">
+				<info>
+					<kurzinfo>Priorität für diesen Ereignistyp.</kurzinfo>
+				</info>
+			</attribut>
+			<attribut pid="att.zraLichtSignalAnlagenRotschaltzeit" anzahl="1" anzahlIst="fest" name="MaximaleErsteRotschaltzeit">
+				<info>
+					<kurzinfo>Maximale erste Rotschaltzeit.</kurzinfo>
+				</info>
+			</attribut>
+			<attribut pid="att.zraLichtSignalAnlagenRotschaltzeit" anzahl="1" anzahlIst="fest" name="SchwächsteRotschaltzeit">
+				<info>
+					<kurzinfo>Schwächste Rotschaltzeit.</kurzinfo>
+				</info>
+			</attribut>
+			<attribut pid="att.zahlPositiv" anzahl="1" anzahlIst="fest" name="AnzahlIntervalleMaximaleErsteRotschaltzeit">
+				<info>
+					<kurzinfo>Anzahl Intervalle für die die maximale erste Rotschaltzeit gilt.</kurzinfo>
+				</info>
+			</attribut>
+			<attribut pid="att.jaNein" anzahl="1" anzahlIst="fest" name="RotlichtFahrerAbfragen">
+				<info>
+					<kurzinfo>Attribut für die Festlegung, ob die Rotlichtfahrer abgefragt werden sollen oder spontan gemeldet werden.</kurzinfo>
+				</info>
+			</attribut>
+		</attributlistenDefinition>
+		<attributlistenDefinition pid="atl.zraLichtSignalAnlageRäumprogrammEreignis" name="ZraLichtSignalAnlageRäumprogrammEreignis">
+			<info>
+				<kurzinfo>Parameter Räumprogramm für ein Ereignis.</kurzinfo>
+			</info>
+			<attribut pid="att.ereignisTypReferenz" anzahl="1" anzahlIst="fest" name="Ereignistyp">
+				<info>
+					<kurzinfo>Referenz auf einen Ereignistyp.</kurzinfo>
+				</info>
+			</attribut>
+			<attribut pid="att.zraPriorität" anzahl="1" anzahlIst="fest" name="Priorität">
+				<info>
+					<kurzinfo>Priorität für diesen Ereignistyp.</kurzinfo>
+				</info>
+			</attribut>
+			<attribut pid="att.zraLichtSignalAnlagenRotzeitRäumung" anzahl="1" anzahlIst="fest" name="Rotzeit">
+				<info>
+					<kurzinfo>Rotzeit des Räumprogramms.</kurzinfo>
+				</info>
+			</attribut>
+			<attribut pid="att.zraLichtSignalAnlagenUmlaufzeitRäumung" anzahl="1" anzahlIst="fest" name="Umlaufzeit">
+				<info>
+					<kurzinfo>Umlaufzeit des Räumprogramms.</kurzinfo>
+				</info>
+			</attribut>
+		</attributlistenDefinition>
+		<attributlistenDefinition pid="atl.zraMessQuerschnittParameterAbschaltungLZAEreignis" name="ZraMessQuerschnittParameterAbschaltungLZAEreignis">
+			<info>
+				<kurzinfo>Parameter für Abschaltung der LZA in Abhängigkeit von einem Ereignis.</kurzinfo>
+			</info>
+			<attribut pid="att.ereignisTypReferenz" anzahl="1" anzahlIst="fest" name="Ereignistyp">
+				<info>
+					<kurzinfo>Referenz auf einen Ereignistyp.</kurzinfo>
+				</info>
+			</attribut>
+			<attribut pid="att.zraPriorität" anzahl="1" anzahlIst="fest" name="Priorität">
+				<info>
+					<kurzinfo>Priorität für diesen Ereignistyp.</kurzinfo>
+				</info>
+			</attribut>
+			<attribut pid="att.zeitDauer" anzahl="1" anzahlIst="fest" name="ZeitDauerStauFürStauerkennung">
+				<info>
+					<kurzinfo>Erst wenn die Belegung für die Erkennung Stau für die angegebene Zeitdauer überschritten wurde, wird Stau erkannt.</kurzinfo>
+				</info>
+			</attribut>
+			<attribut pid="att.zeitDauer" anzahl="1" anzahlIst="fest" name="ZeitDauerKeinStauFürKeinStauerkennung">
+				<info>
+					<kurzinfo>Erst wenn die Belegung für die Erkennung kein Stau für die angegebene Zeitdauer unterschritten wurde, wird kein Stau erkannt.</kurzinfo>
+				</info>
+			</attribut>
+			<attribut pid="att.prozent" anzahl="1" anzahlIst="fest" name="BelegungFürStau">
+				<info>
+					<kurzinfo>Belegung für die Erkennung Stau.</kurzinfo>
+				</info>
+			</attribut>
+			<attribut pid="att.prozent" anzahl="1" anzahlIst="fest" name="BelegungFürKeinStau">
+				<info>
+					<kurzinfo>Belegung für die Erkennung kein Stau.</kurzinfo>
+				</info>
+			</attribut>
+		</attributlistenDefinition>
+		<attributlistenDefinition pid="atl.zraMessQuerschnittParameterAbschaltungStauEreignis" name="ZraMessQuerschnittParameterAbschaltungStauEreignis">
+			<info>
+				<kurzinfo>Parameter für Abschaltung in Stausituationen am Messquerschnitt in Abhängigkeit von einem Ereignis.</kurzinfo>
+			</info>
+			<attribut pid="att.ereignisTypReferenz" anzahl="1" anzahlIst="fest" name="Ereignistyp">
+				<info>
+					<kurzinfo>Referenz auf einen Ereignistyp.</kurzinfo>
+				</info>
+			</attribut>
+			<attribut pid="att.zraPriorität" anzahl="1" anzahlIst="fest" name="Priorität">
+				<info>
+					<kurzinfo>Priorität für diesen Ereignistyp.</kurzinfo>
+				</info>
+			</attribut>
+			<attribut pid="att.zeitDauer" anzahl="1" anzahlIst="fest" name="ZeitDauerStauFürStauerkennung">
+				<info>
+					<kurzinfo>Erst wenn die Belegung für die Erkennung Stau für die angegebene Zeitdauer überschritten wurde, wird Stau erkannt.</kurzinfo>
+				</info>
+			</attribut>
+			<attribut pid="att.zeitDauer" anzahl="1" anzahlIst="fest" name="ZeitDauerKeinStauFürKeinStauerkennung">
+				<info>
+					<kurzinfo>Erst wenn die Belegung für die Erkennung kein Stau für die angegebene Zeitdauer unterschritten wurde, wird kein Stau erkannt.</kurzinfo>
+				</info>
+			</attribut>
+			<attribut pid="att.prozent" anzahl="1" anzahlIst="fest" name="BelegungFürStau">
+				<info>
+					<kurzinfo>Belegung für die Erkennung Stau.</kurzinfo>
+				</info>
+			</attribut>
+			<attribut pid="att.prozent" anzahl="1" anzahlIst="fest" name="BelegungFürKeinStau">
+				<info>
+					<kurzinfo>Belegung für die Erkennung kein Stau.</kurzinfo>
+				</info>
+			</attribut>
+		</attributlistenDefinition>
+		<attributlistenDefinition pid="atl.zraMessQuerschnittParameterALINEAEreignis" name="ZraMessQuerschnittParameterALINEAEreignis">
+			<info>
+				<kurzinfo>Parameter für ALINEA am Messquerschnitt für ein Ereignis.</kurzinfo>
+			</info>
+			<attribut pid="att.ereignisTypReferenz" anzahl="1" anzahlIst="fest" name="Ereignistyp">
+				<info>
+					<kurzinfo>Referenz auf einen Ereignistyp.</kurzinfo>
+				</info>
+			</attribut>
+			<attribut pid="att.zraPriorität" anzahl="1" anzahlIst="fest" name="Priorität">
+				<info>
+					<kurzinfo>Priorität für diesen Ereignistyp.</kurzinfo>
+				</info>
+			</attribut>
+			<attribut pid="att.prozent" anzahl="1" anzahlIst="fest" name="bOptimal">
+				<info>
+					<kurzinfo>Optimale Belegung.</kurzinfo>
+				</info>
+			</attribut>
+			<attribut pid="att.zahlPositiv" anzahl="1" anzahlIst="fest" name="Korrekturfaktor">
+				<info>
+					<kurzinfo>Korrekturfaktor.</kurzinfo>
+				</info>
+			</attribut>
+			<attribut pid="att.zraBerechnungsVerfahrenBKenn" anzahl="1" anzahlIst="fest" name="BerechnungsverfahrenB">
+				<info>
+					<kurzinfo>BerechnungsVerfahren für die Bestimmung von B Kenn (Mittelwert der Belegung aller FS des MQ oder Belegung HFS des MQ).</kurzinfo>
+				</info>
+			</attribut>
+			<attribut pid="att.jaNein" anzahl="1" anzahlIst="fest" name="qEinVorbedingungAktiv">
+				<info>
+					<kurzinfo>Vorbedingung Bemessungsverkehrsstärke Zufluss verwenden.</kurzinfo>
+				</info>
+			</attribut>
+			<attribut pid="att.bemessungsVerkehrsStärkeStunde" anzahl="1" anzahlIst="fest" name="qEinVorbedingung">
+				<info>
+					<kurzinfo>Vorbedingung Bemessungsverkehrsstärke Zufluss.</kurzinfo>
+				</info>
+			</attribut>
+			<attribut pid="att.prozent" anzahl="1" anzahlIst="fest" name="bEinVorbedingung">
+				<info>
+					<kurzinfo>Belegung Zufluss.</kurzinfo>
+				</info>
+			</attribut>
+			<attribut pid="att.jaNein" anzahl="1" anzahlIst="fest" name="qSockelwertAktiv">
+				<info>
+					<kurzinfo>Bedingung Sockelwert verwenden.</kurzinfo>
+				</info>
+			</attribut>
+			<attribut pid="att.bemessungsVerkehrsStärkeStunde" anzahl="1" anzahlIst="fest" name="qSockelwert">
+				<info>
+					<kurzinfo>Sockel-Bemessungsverkehrsstärke.</kurzinfo>
+				</info>
+			</attribut>
+		</attributlistenDefinition>
+		<attributlistenDefinition pid="atl.zraMessQuerschnittParameterLockerungAbschaltungEreignis" name="ZraMessQuerschnittParameterLockerungAbschaltungEreignis">
+			<info>
+				<kurzinfo>Parameter für Lockerung bzw. Abschaltung am Messquerschnitt für ein Ereignis.</kurzinfo>
+			</info>
+			<attribut pid="att.ereignisTypReferenz" anzahl="1" anzahlIst="fest" name="Ereignistyp">
+				<info>
+					<kurzinfo>Referenz auf einen Ereignistyp.</kurzinfo>
+				</info>
+			</attribut>
+			<attribut pid="att.zraPriorität" anzahl="1" anzahlIst="fest" name="Priorität">
+				<info>
+					<kurzinfo>Priorität für diesen Ereignistyp.</kurzinfo>
+				</info>
+			</attribut>
+			<attribut pid="att.zeitDauer" anzahl="1" anzahlIst="fest" name="ZeitDauerStauFürStauerkennung">
+				<info>
+					<kurzinfo>Erst wenn die Belegung für die Erkennung Stau für die angegebene Zeitdauer überschritten wurde, wird Stau erkannt.</kurzinfo>
+				</info>
+			</attribut>
+			<attribut pid="att.zeitDauer" anzahl="1" anzahlIst="fest" name="ZeitDauerKeinStauFürKeinStauerkennung">
+				<info>
+					<kurzinfo>Erst wenn die Belegung für die Erkennung kein Stau für die angegebene Zeitdauer unterschritten wurde, wird kein Stau erkannt.</kurzinfo>
+				</info>
+			</attribut>
+			<attribut pid="att.prozent" anzahl="1" anzahlIst="fest" name="BelegungFürStau">
+				<info>
+					<kurzinfo>Belegung für die Erkennung Stau.</kurzinfo>
+				</info>
+			</attribut>
+			<attribut pid="att.prozent" anzahl="1" anzahlIst="fest" name="BelegungFürKeinStau">
+				<info>
+					<kurzinfo>Belegung für die Erkennung kein Stau.</kurzinfo>
+				</info>
+			</attribut>
+			<attribut pid="att.jaNein" anzahl="1" anzahlIst="fest" name="StörungMessQuerschnittBedeutetStau">
+				<info>
+					<kurzinfo>Schalter, ob ein gestörter MessQuerschnitt Stau auslöst oder nicht.</kurzinfo>
+				</info>
+			</attribut>
+			<attribut pid="att.zeitDauer" anzahl="1" anzahlIst="fest" name="ZeitDauerStauZufahrtsbereichAbschaltung">
+				<info>
+					<kurzinfo>Zeitdauer, nach der bei Stau im Zufahrtsbereich eine Abschaltung erfolgt.</kurzinfo>
+				</info>
+			</attribut>
+		</attributlistenDefinition>
+		<attributlistenDefinition pid="atl.zraMessQuerschnittParameterLockerungMehrfahrzeugbetriebEreignis" name="ZraMessQuerschnittParameterLockerungAbschaltungEreignis">
+			<info>
+				<kurzinfo>Parameter für Lockerung mit Mehrfahrzeugbetrieb am Messquerschnitt für ein Ereignis.</kurzinfo>
+			</info>
+			<attribut pid="att.ereignisTypReferenz" anzahl="1" anzahlIst="fest" name="Ereignistyp">
+				<info>
+					<kurzinfo>Referenz auf einen Ereignistyp.</kurzinfo>
+				</info>
+			</attribut>
+			<attribut pid="att.zraPriorität" anzahl="1" anzahlIst="fest" name="Priorität">
+				<info>
+					<kurzinfo>Priorität für diesen Ereignistyp.</kurzinfo>
+				</info>
+			</attribut>
+			<attribut pid="att.zeitDauer" anzahl="1" anzahlIst="fest" name="ZeitDauerStauFürStauerkennung">
+				<info>
+					<kurzinfo>Erst wenn die Belegung für die Erkennung Stau für die angegebene Zeitdauer überschritten wurde, wird Stau erkannt.</kurzinfo>
+				</info>
+			</attribut>
+			<attribut pid="att.zeitDauer" anzahl="1" anzahlIst="fest" name="ZeitDauerKeinStauFürKeinStauerkennung">
+				<info>
+					<kurzinfo>Erst wenn die Belegung für die Erkennung kein Stau für die angegebene Zeitdauer unterschritten wurde, wird kein Stau erkannt.</kurzinfo>
+				</info>
+			</attribut>
+			<attribut pid="att.prozent" anzahl="1" anzahlIst="fest" name="BelegungFürStau">
+				<info>
+					<kurzinfo>Belegung für die Erkennung Stau.</kurzinfo>
+				</info>
+			</attribut>
+			<attribut pid="att.prozent" anzahl="1" anzahlIst="fest" name="BelegungFürKeinStau">
+				<info>
+					<kurzinfo>Belegung für die Erkennung kein Stau.</kurzinfo>
+				</info>
+			</attribut>
+			<attribut pid="att.jaNein" anzahl="1" anzahlIst="fest" name="StörungMessQuerschnittBedeutetStau">
+				<info>
+					<kurzinfo>Schalter, ob ein gestörter MessQuerschnitt Stau auslöst oder nicht.</kurzinfo>
+				</info>
+			</attribut>
+		</attributlistenDefinition>
+		<attributlistenDefinition pid="atl.zraMessQuerschnittParameterPrognoseFREreignis" name="ZraMessQuerschnittParameterPrognoseFREreignis">
+			<info>
+				<kurzinfo>Parameter für die PrognoseFR am Messquerschnitt für ein Ereignis.</kurzinfo>
+			</info>
+			<attribut pid="att.ereignisTypReferenz" anzahl="1" anzahlIst="fest" name="Ereignistyp">
+				<info>
+					<kurzinfo>Referenz auf einen Ereignistyp.</kurzinfo>
+				</info>
+			</attribut>
+			<attribut pid="att.zraPriorität" anzahl="1" anzahlIst="fest" name="Priorität">
+				<info>
+					<kurzinfo>Priorität für diesen Ereignistyp.</kurzinfo>
+				</info>
+			</attribut>
+			<attribut pid="att.zahlPositiv2NachKommaStellenVon0Bis1" anzahl="1" anzahlIst="fest" name="alpha">
+				<info>
+					<kurzinfo>Glättungsparameter.</kurzinfo>
+				</info>
+			</attribut>
+			<attribut pid="att.zahlPositiv2NachKommaStellenVon0Bis1" anzahl="1" anzahlIst="fest" name="beta">
+				<info>
+					<kurzinfo>Prognoseparameter.</kurzinfo>
+				</info>
+			</attribut>
+			<attribut pid="att.zahlPositiv2NachKommaStellen" anzahl="1" anzahlIst="fest" name="k1">
+				<info>
+					<kurzinfo>Parameter für die Analysewertberechnung des	Aquivalenzfaktors für Lkw.</kurzinfo>
+				</info>
+			</attribut>
+			<attribut pid="att.zahlPositiv2NachKommaStellen" anzahl="1" anzahlIst="fest" name="k2">
+				<info>
+					<kurzinfo>Parameter für die Analysewertberechnung des	Aquivalenzfaktors für Lkw.</kurzinfo>
+				</info>
+			</attribut>
+		</attributlistenDefinition>
+		<attributlistenDefinition pid="atl.zraMessQuerschnittParameterPrognoseFSEreignis" name="ZraMessQuerschnittParameterPrognoseFSEreignis">
+			<info>
+				<kurzinfo>Parameter für die PrognoseFS am Messquerschnitt für ein Ereignis.</kurzinfo>
+			</info>
+			<attribut pid="att.ereignisTypReferenz" anzahl="1" anzahlIst="fest" name="Ereignistyp">
+				<info>
+					<kurzinfo>Referenz auf einen Ereignistyp.</kurzinfo>
+				</info>
+			</attribut>
+			<attribut pid="att.zraPriorität" anzahl="1" anzahlIst="fest" name="Priorität">
+				<info>
+					<kurzinfo>Priorität für diesen Ereignistyp.</kurzinfo>
+				</info>
+			</attribut>
+			<attribut pid="att.zahlPositiv2NachKommaStellenVon0Bis1" anzahl="1" anzahlIst="fest" name="alpha">
+				<info>
+					<kurzinfo>Glättungsparameter.</kurzinfo>
+				</info>
+			</attribut>
+			<attribut pid="att.zahlPositiv2NachKommaStellenVon0Bis1" anzahl="1" anzahlIst="fest" name="beta">
+				<info>
+					<kurzinfo>Prognoseparameter.</kurzinfo>
+				</info>
+			</attribut>
+			<attribut pid="att.zahlPositiv2NachKommaStellen" anzahl="1" anzahlIst="fest" name="k1">
+				<info>
+					<kurzinfo>Parameter für die Analysewertberechnung des	Aquivalenzfaktors für Lkw.</kurzinfo>
+				</info>
+			</attribut>
+			<attribut pid="att.zahlPositiv2NachKommaStellen" anzahl="1" anzahlIst="fest" name="k2">
+				<info>
+					<kurzinfo>Parameter für die Analysewertberechnung des	Aquivalenzfaktors für Lkw.</kurzinfo>
+				</info>
+			</attribut>
+		</attributlistenDefinition>
+		<attributlistenDefinition pid="atl.zraMessQuerschnittParameterProgramme" name="ZraMessQuerschnittParameterProgramme">
+			<info>
+				<kurzinfo>Parameter für die Lockerung der Rotschaltzeit/Fahrzeuganzahl.</kurzinfo>
+			</info>
+			<attribut pid="att.zraLichtSignalAnlagenRotschaltzeit" anzahl="1" anzahlIst="fest" name="VonRotschaltzeit">
+				<info>
+					<kurzinfo>Von Rotschaltzeit (kleiner/gleich) für die Stufe.</kurzinfo>
+				</info>
+			</attribut>
+			<attribut pid="att.zraLichtSignalAnlagenFahrzeuganzahl" anzahl="1" anzahlIst="fest" name="VonFahrzeuganzahl">
+				<info>
+					<kurzinfo>Von Fahrzeuganzahl (kleiner/gleich) für die Stufe.</kurzinfo>
+				</info>
+			</attribut>
+			<attribut pid="att.zraLichtSignalAnlagenRotschaltzeit" anzahl="1" anzahlIst="fest" name="BisRotschaltzeit">
+				<info>
+					<kurzinfo>Bis Rotschaltzeit (kleiner) für die Stufe.</kurzinfo>
+				</info>
+			</attribut>
+			<attribut pid="att.zraLichtSignalAnlagenFahrzeuganzahl" anzahl="1" anzahlIst="fest" name="BisFahrzeuganzahl">
+				<info>
+					<kurzinfo>Bis Fahrzeuganzahl (kleiner) für die Stufe.</kurzinfo>
+				</info>
+			</attribut>
+			<attribut pid="att.zraLichtSignalAnlagenRotschaltzeit" anzahl="1" anzahlIst="fest" name="FahrzeugDichteRotschaltzeit">
+				<info>
+					<kurzinfo>Rotschaltzeit der LichtSignalAnlage für die Stufe.</kurzinfo>
+				</info>
+			</attribut>
+			<attribut pid="att.zraLichtSignalAnlagenFahrzeuganzahl" anzahl="1" anzahlIst="fest" name="FahrzeugDichteFahrzeuganzahl">
+				<info>
+					<kurzinfo>Fahrzeuganzahl der LichtSignalAnlage für die Stufe.</kurzinfo>
+				</info>
+			</attribut>
+		</attributlistenDefinition>
+		<attributlistenDefinition pid="atl.zraMessQuerschnittParameterProgrammeEreignis" name="ZraMessQuerschnittParameterProgrammeEreignis">
+			<info>
+				<kurzinfo>Parameter für Lockerung bzw. Abschaltung am Messquerschnitt für ein Ereignis.</kurzinfo>
+			</info>
+			<attribut pid="att.ereignisTypReferenz" anzahl="1" anzahlIst="fest" name="Ereignistyp">
+				<info>
+					<kurzinfo>Referenz auf einen Ereignistyp.</kurzinfo>
+				</info>
+			</attribut>
+			<attribut pid="att.zraPriorität" anzahl="1" anzahlIst="fest" name="Priorität">
+				<info>
+					<kurzinfo>Priorität für diesen Ereignistyp.</kurzinfo>
+				</info>
+			</attribut>
+			<attributliste pid="atl.zraMessQuerschnittParameterProgramme" anzahl="21" anzahlIst="variabel" name="Programm">
+				<info>
+					<kurzinfo>.</kurzinfo>
+					<beschreibung>.</beschreibung>
+				</info>
+			</attributliste>
+		</attributlistenDefinition>
+		<attributlistenDefinition pid="atl.zraMessQuerschnittParameterProgrammeMehrfahrzeugbetriebEreignis" name="ZraMessQuerschnittParameterProgrammeMehrfahrzeugbetriebEreignis">
+			<info>
+				<kurzinfo>Parameter für die Lockerung mit Mehrfahrzeugbetrieb am Messquerschnitt in Abhängigkeit von einem Ereignis.</kurzinfo>
+			</info>
+			<attribut pid="att.ereignisTypReferenz" anzahl="1" anzahlIst="fest" name="Ereignistyp">
+				<info>
+					<kurzinfo>Referenz auf einen Ereignistyp.</kurzinfo>
+				</info>
+			</attribut>
+			<attribut pid="att.zraPriorität" anzahl="1" anzahlIst="fest" name="Priorität">
+				<info>
+					<kurzinfo>Priorität für diesen Ereignistyp.</kurzinfo>
+				</info>
+			</attribut>
+			<attributliste pid="atl.zraMessQuerschnittParameterProgramme" anzahl="21" anzahlIst="variabel" name="Programm">
+				<info>
+					<kurzinfo>.</kurzinfo>
+					<beschreibung>.</beschreibung>
+				</info>
+			</attributliste>
+		</attributlistenDefinition>
+		<attributlistenDefinition pid="atl.zraMessQuerschnittParameterRäumungEreignis" name="ZraMessQuerschnittParameterRäumungEreignis">
+			<info>
+				<kurzinfo>Parameter für das Schalten des Räumprogramms für ein Ereignis.</kurzinfo>
+			</info>
+			<attribut pid="att.ereignisTypReferenz" anzahl="1" anzahlIst="fest" name="Ereignistyp">
+				<info>
+					<kurzinfo>Referenz auf einen Ereignistyp.</kurzinfo>
+				</info>
+			</attribut>
+			<attribut pid="att.zraPriorität" anzahl="1" anzahlIst="fest" name="Priorität">
+				<info>
+					<kurzinfo>Priorität für diesen Ereignistyp.</kurzinfo>
+				</info>
+			</attribut>
+			<attribut pid="att.zeitDauer" anzahl="1" anzahlIst="fest" name="ZeitDauerStauFürStauerkennung">
+				<info>
+					<kurzinfo>Erst wenn die Belegung für die Erkennung Stau für die angegebene Zeitdauer überschritten wurde, wird Stau erkannt.</kurzinfo>
+				</info>
+			</attribut>
+			<attribut pid="att.zeitDauer" anzahl="1" anzahlIst="fest" name="ZeitDauerKeinStauFürKeinStauerkennung">
+				<info>
+					<kurzinfo>Erst wenn die Belegung für die Erkennung kein Stau für die angegebene Zeitdauer unterschritten wurde, wird kein Stau erkannt.</kurzinfo>
+				</info>
+			</attribut>
+			<attribut pid="att.prozent" anzahl="1" anzahlIst="fest" name="BelegungFürStau">
+				<info>
+					<kurzinfo>Belegung für die Erkennung Stau.</kurzinfo>
+				</info>
+			</attribut>
+			<attribut pid="att.prozent" anzahl="1" anzahlIst="fest" name="BelegungFürKeinStau">
+				<info>
+					<kurzinfo>Belegung für die Erkennung kein Stau.</kurzinfo>
+				</info>
+			</attribut>
+			<attribut pid="att.jaNein" anzahl="1" anzahlIst="fest" name="StörungMessQuerschnittBedeutetStau">
+				<info>
+					<kurzinfo>Schalter, ob ein gestörter MessQuerschnitt Stau auslöst oder nicht.</kurzinfo>
+				</info>
+			</attribut>
+			<attribut pid="att.zeitDauer" anzahl="1" anzahlIst="fest" name="ZeitDauerRäumprogrammBisAbschaltung">
+				<info>
+					<kurzinfo>Zeitdauer, nach der das Räumprogramm beendet und die Anlage in Zwangsaus geschaltet wird.</kurzinfo>
+				</info>
+			</attribut>
+		</attributlistenDefinition>
+		<attributlistenDefinition pid="atl.zraModifizierterBefehl" name="ModifizierteBefehle">
+			<info>
+				<kurzinfo>U.U. modifizierter Befehl durch LZA</kurzinfo>
+			</info>
+			<attributliste pid="atl.zraDurchgeführteAlgorithmen" anzahl="0" anzahlIst="variabel" name="AngewendeteAlgorithmen">
+				<info>
+					<kurzinfo>Von der LZA durchgeführte Algorithmen, die den berechneten Befehl u.U. modifiziert haben.</kurzinfo>
+				</info>
+			</attributliste>
+			<attribut pid="att.zahlPositiv" anzahl="1" anzahlIst="fest" name="Rotschaltzeit">
+				<info>
+					<kurzinfo>Modifizierte Rotschaltzeit</kurzinfo>
+				</info>
+			</attribut>
+			<attribut pid="att.zahlPositiv" anzahl="1" anzahlIst="fest" name="Fahrzeuganzahl">
+				<info>
+					<kurzinfo>Modifizierte Fahrzeuganzahl</kurzinfo>
+				</info>
+			</attribut>
+		</attributlistenDefinition>
+		<attributlistenDefinition pid="atl.zraZuflussParameterBerechnungsVerfahrenEreignis" name="ZuflussParameterBerechnungsVerfahrenEreignis">
+			<info>
+				<kurzinfo>Parameter für das steuernde BerechnungsVerfahren des Zufluss für ein Ereignis.</kurzinfo>
+			</info>
+			<attribut pid="att.ereignisTypReferenz" anzahl="1" anzahlIst="fest" name="Ereignistyp">
+				<info>
+					<kurzinfo>Referenz auf einen Ereignistyp.</kurzinfo>
+				</info>
+			</attribut>
+			<attribut pid="att.zraPriorität" anzahl="1" anzahlIst="fest" name="Priorität">
+				<info>
+					<kurzinfo>Priorität für diesen Ereignistyp.</kurzinfo>
+				</info>
+			</attribut>
+			<attribut pid="att.zraBerechnungsVerfahren" anzahl="1" anzahlIst="fest" name="SteuerndesBerechnungsVerfahren">
+				<info>
+					<kurzinfo>Steuerndes BerechnungsVerfahren des Zufluss.</kurzinfo>
+				</info>
+			</attribut>
+		</attributlistenDefinition>
+		<attributlistenDefinition pid="atl.zraZuflussParameterStauerkennungEreignis" name="ZuflussParameterStauerkennungEreignis">
+			<info>
+				<kurzinfo>Parameter für die Stauerkennung des Zufluss für ein Ereignis.</kurzinfo>
+			</info>
+			<attribut pid="att.ereignisTypReferenz" anzahl="1" anzahlIst="fest" name="Ereignistyp">
+				<info>
+					<kurzinfo>Referenz auf einen Ereignistyp.</kurzinfo>
+				</info>
+			</attribut>
+			<attribut pid="att.zraPriorität" anzahl="1" anzahlIst="fest" name="Priorität">
+				<info>
+					<kurzinfo>Priorität für diesen Ereignistyp.</kurzinfo>
+				</info>
+			</attribut>
+			<attribut pid="att.zeitDauer" anzahl="1" anzahlIst="fest" name="TMinVStauEin">
+				<info>
+					<kurzinfo>Zeitbremse beim Einschalten v-Kriterium.</kurzinfo>
+				</info>
+			</attribut>
+			<attribut pid="att.zeitDauer" anzahl="1" anzahlIst="fest" name="TMinBStauEin">
+				<info>
+					<kurzinfo>Zeitbremse beim Einschalten Beleg-Kriterium.</kurzinfo>
+				</info>
+			</attribut>
+			<attribut pid="att.geschwindigkeit" anzahl="1" anzahlIst="fest" name="VStauEin">
+				<info>
+					<kurzinfo>Einschaltgrenzwert für die Geschwindigkeit am ersten MQ.</kurzinfo>
+				</info>
+			</attribut>
+			<attribut pid="att.geschwindigkeit" anzahl="1" anzahlIst="fest" name="VStauAus">
+				<info>
+					<kurzinfo>Ausschaltgrenzwert für die Geschwindigkeit am ersten MQ.</kurzinfo>
+				</info>
+			</attribut>
+			<attribut pid="att.geschwindigkeit" anzahl="1" anzahlIst="fest" name="VStauEinMQ2">
+				<info>
+					<kurzinfo>Einschaltgrenzwert für die Geschwindigkeit am zweiten MQ.</kurzinfo>
+				</info>
+			</attribut>
+			<attribut pid="att.prozent" anzahl="1" anzahlIst="fest" name="BStauEin">
+				<info>
+					<kurzinfo>Einschaltgrenzwert für den Belegtgrad am ersten MQ.</kurzinfo>
+				</info>
+			</attribut>
+			<attribut pid="att.prozent" anzahl="1" anzahlIst="fest" name="BStauAus">
+				<info>
+					<kurzinfo>Ausschaltgrenzwert für den Belegtgrad am ersten MQ.</kurzinfo>
+				</info>
+			</attribut>
+			<attribut pid="att.prozent" anzahl="1" anzahlIst="fest" name="BStauEinMQ2">
+				<info>
+					<kurzinfo>Einschaltgrenzwert für den Belegtgrad am zweiten MQ.</kurzinfo>
+				</info>
+			</attribut>
+			<attribut pid="att.zraBerechnungsVerfahrenVKenn" anzahl="1" anzahlIst="fest" name="BerechnungsVerfahrenVKenn">
+				<info>
+					<kurzinfo>BerechnungsVerfahren für die Bestimmung von V Kenn (V Kfz MQ oder minimales v expo der einzelnen FS des MQ).</kurzinfo>
+				</info>
+			</attribut>
+			<attribut pid="att.zraBerechnungsVerfahrenBKenn" anzahl="1" anzahlIst="fest" name="BerechnungsVerfahrenBKenn">
+				<info>
+					<kurzinfo>BerechnungsVerfahren für die Bestimmung von B Kenn (Mittelwert der Belegung aller FS des MQ oder Belegung HFS des MQ).</kurzinfo>
+				</info>
+			</attribut>
+		</attributlistenDefinition>
+		<mengenDefinition pid="menge.zraBerechnungsVerfahren" elemente="typ.zraBerechnungsVerfahren" aenderbar="nein" mindestens="0" hoechstens="0" referenzierungsart="assoziation">
+			<info>
+				<kurzinfo>Menge der BerechnungsVerfahren.</kurzinfo>
+			</info>
+		</mengenDefinition>
+		<mengenDefinition pid="menge.zraBerechnungsVerfahrenALINEA" elemente="typ.zraBerechnungsVerfahrenALINEA" aenderbar="nein" mindestens="0" hoechstens="0" referenzierungsart="assoziation">
+			<info>
+				<kurzinfo>Menge der BerechnungsVerfahrenALINEA.</kurzinfo>
+			</info>
+		</mengenDefinition>
+		<mengenDefinition pid="menge.zraBerechnungsVerfahrenPrognose" elemente="typ.zraBerechnungsVerfahrenPrognose" aenderbar="nein" mindestens="0" hoechstens="0" referenzierungsart="assoziation">
+			<info>
+				<kurzinfo>Menge der BerechnungsVerfahrenPrognose.</kurzinfo>
+			</info>
+		</mengenDefinition>
+		<mengenDefinition pid="menge.zraBerechnungsVerfahrenPrognoseFR" elemente="typ.zraBerechnungsVerfahrenPrognoseFR" aenderbar="nein" mindestens="0" hoechstens="0" referenzierungsart="assoziation">
+			<info>
+				<kurzinfo>Menge der BerechnungsVerfahrenPrognoseFR.</kurzinfo>
+			</info>
+		</mengenDefinition>
+		<mengenDefinition pid="menge.zraBerechnungsVerfahrenPrognoseFS" elemente="typ.zraBerechnungsVerfahrenPrognoseFS" aenderbar="nein" mindestens="0" hoechstens="0" referenzierungsart="assoziation">
+			<info>
+				<kurzinfo>Menge der BerechnungsVerfahrenPrognoseFS.</kurzinfo>
+			</info>
+		</mengenDefinition>
+		<mengenDefinition pid="menge.zraHinweisSchilder" elemente="typ.zraHinweisSchild" aenderbar="nein" mindestens="0" hoechstens="0" referenzierungsart="assoziation">
+			<info>
+				<kurzinfo>Menge der HinweisSchilder.</kurzinfo>
+			</info>
+		</mengenDefinition>
+		<mengenDefinition pid="menge.zraLichtSignalAnlagen" elemente="typ.zraLichtSignalAnlage" aenderbar="nein" mindestens="0" hoechstens="0" referenzierungsart="assoziation">
+			<info>
+				<kurzinfo>Menge der LichtSignalAnlagen.</kurzinfo>
+			</info>
+		</mengenDefinition>
+		<mengenDefinition pid="menge.zraMessQuerschnittErfassung" elemente="typ.zraMessQuerschnittErfassung" aenderbar="nein" mindestens="0" hoechstens="0" referenzierungsart="assoziation">
+			<info>
+				<kurzinfo>Menge der MessQuerschnittErfassung.</kurzinfo>
+			</info>
+		</mengenDefinition>
+		<mengenDefinition pid="menge.zraMessQuerschnittLockerung" elemente="typ.zraMessQuerschnittLockerung" aenderbar="nein" mindestens="0" hoechstens="0" referenzierungsart="assoziation">
+			<info>
+				<kurzinfo>Menge der MessQuerschnittLockerung.</kurzinfo>
+			</info>
+		</mengenDefinition>
+		<mengenDefinition pid="menge.zraMessQuerschnittLockerungStau" elemente="typ.zraMessQuerschnittLockerungStau" aenderbar="nein" mindestens="0" hoechstens="0" referenzierungsart="assoziation">
+			<info>
+				<kurzinfo>Menge der MessQuerschnittLockerungStau.</kurzinfo>
+			</info>
+		</mengenDefinition>
+		<mengenDefinition pid="menge.zraMessQuerschnittStau" elemente="typ.zraMessQuerschnittStau" aenderbar="nein" mindestens="0" hoechstens="0" referenzierungsart="assoziation">
+			<info>
+				<kurzinfo>Menge der MessQuerschnittStau.</kurzinfo>
+			</info>
+		</mengenDefinition>
+		<mengenDefinition pid="menge.zraVorWegWeiser" elemente="typ.zraVorWegWeiser" aenderbar="nein" mindestens="0" hoechstens="0" referenzierungsart="assoziation">
+			<info>
+				<kurzinfo>Menge der VorWegWeiser.</kurzinfo>
+			</info>
+		</mengenDefinition>
+		<mengenDefinition pid="menge.zraZuflssParallelFahrbahnen" elemente="typ.zraZuflussParallelFahrbahn" aenderbar="nein" mindestens="0" hoechstens="0" referenzierungsart="assoziation">
+			<info>
+				<kurzinfo>Menge der ZuflussParallelFahrbahnen.</kurzinfo>
+			</info>
+		</mengenDefinition>
+		<mengenDefinition pid="menge.zraZuflssZufahrten" elemente="typ.zraZuflussZufahrt" aenderbar="nein" mindestens="0" hoechstens="0" referenzierungsart="assoziation">
+			<info>
+				<kurzinfo>Menge der ZuflussZufahrten.</kurzinfo>
+			</info>
+		</mengenDefinition>
+		<mengenDefinition pid="menge.zraZuflüsse" elemente="typ.zraZufluss" aenderbar="nein" mindestens="0" hoechstens="0" referenzierungsart="assoziation">
+			<info>
+				<kurzinfo>Menge der Zuflüsse, die zur ZuflussRegelungsAnlage gehören.</kurzinfo>
+			</info>
+		</mengenDefinition>
+	</modell>
+	<objekte>
+	</objekte>
+</konfigurationsBereich>

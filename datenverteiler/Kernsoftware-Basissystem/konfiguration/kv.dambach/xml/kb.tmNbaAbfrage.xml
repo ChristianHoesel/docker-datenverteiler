@@ -1,0 +1,497 @@
+<?xml version="1.0" encoding="ISO-8859-1"?>
+<!DOCTYPE konfigurationsBereich PUBLIC "-//K2S//DTD Dokument//DE" "K2S.dtd">
+<konfigurationsBereich pid="kb.tmNbaAbfrage" name="Teilmodell NBA-Abfrage" verantwortlich="kv.dambach">
+	<info>
+		<kurzinfo>Bereich mit dem Modell für die Abfrageschnittstelle der NBA</kurzinfo>
+	</info>
+	<konfigurationsAenderung stand="25.02.2010" version="1" autor="Dambach-Werke GmbH, Th. Drapp" grund="Änderungsdokumentation siehe &apos;ReleaseNotes kv.dambach.doc&apos;"></konfigurationsAenderung>
+	<!--
+	Abhängigkeiten des Bereichs kb.tmNbaAbfrage
+	Abhängig ab Version      Art der Abhängigkeit      Version des benötigten Bereichs      Benötigter Bereich
+	1                        notwendig                 1                                    kb.metaModellGlobal                
+	1                        notwendig                 1                                    kb.systemModellGlobal              
+	1                        notwendig                 19                                   kb.tmVerkehrGlobal                 
+	1                        notwendig                 1                                    kb.kv.dambach                      
+	1                        notwendig                 1                                    kb.fachModellGlobal                
+	-->
+	<modell>
+		<typDefinition pid="typ.applikationNbaAbfrageGanglinie" name="ApplikationNbaAbfrageGanglinie" objektNamenPermanent="nein" persistenzModus="transient">
+			<info>
+				<kurzinfo>ApplikationNbaAbfrageGanglinie</kurzinfo>
+			</info>
+			<erweitert pid="typ.applikation"/>
+			<attributgruppe pid="atg.nbaAbfrageGanglinieAntwort"/>
+		</typDefinition>
+		<typDefinition pid="typ.applikationNbaAbfrageGesamt" name="ApplikationNbaAbfrageGesamt" objektNamenPermanent="nein" persistenzModus="transient">
+			<info>
+				<kurzinfo>ApplikationNbaAbfrageGesamt</kurzinfo>
+			</info>
+			<erweitert pid="typ.applikationNbaAbfrageGanglinie"/>
+			<erweitert pid="typ.applikationNbaAbfrageMessQuerschnitte"/>
+		</typDefinition>
+		<typDefinition pid="typ.applikationNbaAbfrageMessQuerschnitte" name="ApplikationNbaAbfrageMessQuerschnitte" objektNamenPermanent="nein" persistenzModus="transient">
+			<info>
+				<kurzinfo>ApplikationNbaAbfrageMessQuerschnitte</kurzinfo>
+			</info>
+			<erweitert pid="typ.applikation"/>
+			<attributgruppe pid="atg.nbaAbfrageMessQuerschnitteAntwort"/>
+		</typDefinition>
+		<typDefinition pid="typ.nbaAbfrageGanglinie" name="NbaAbfrageGanglinie" objektNamenPermanent="nein">
+			<info>
+				<kurzinfo>NbaAbfrageGanglinie</kurzinfo>
+			</info>
+			<erweitert pid="typ.konfigurationsObjekt"/>
+			<attributgruppe pid="atg.nbaAbfrageGanglinieAnfrage"/>
+		</typDefinition>
+		<typDefinition pid="typ.nbaAbfrageGesamt" name="NbaAbfrageGesamt" objektNamenPermanent="nein">
+			<info>
+				<kurzinfo>NbaObjektAbfrageGesamt</kurzinfo>
+			</info>
+			<erweitert pid="typ.nbaAbfrageGanglinie"/>
+			<erweitert pid="typ.nbaAbfrageMessQuerschnitte"/>
+		</typDefinition>
+		<typDefinition pid="typ.nbaAbfrageMessQuerschnitte" name="NbaAbfrageMessQuerschnitte" objektNamenPermanent="nein">
+			<info>
+				<kurzinfo>NbaAbfrageMessQuerschnitte</kurzinfo>
+			</info>
+			<erweitert pid="typ.konfigurationsObjekt"/>
+			<attributgruppe pid="atg.nbaAbfrageMessQuerschnitteAnfrage"/>
+		</typDefinition>
+		<attributgruppenDefinition pid="atg.nbaAbfrageGanglinieAnfrage" name="AbfrageGanglinieAnfrage" parametrierend="nein">
+			<info>
+				<kurzinfo>Zur Übermittlung von Ganglinien-Anfragen an NbaAbfrageGanglinie.</kurzinfo>
+			</info>
+			<aspekt pid="asp.anfrage" onlineModus="quelleUndSenke">
+			</aspekt>
+			<attribut pid="att.applikationsReferenz" anzahl="1" anzahlIst="fest" name="absenderId">
+				<info>
+					<kurzinfo>Objekt-ID der anfragenden Applikation.</kurzinfo>
+					<beschreibung>
+						<absatz>Die Antworten der bearbeitenden Applikation werden mit dieser Objekt-ID über den Datenverteiler versendet.</absatz>
+					</beschreibung>
+				</info>
+			</attribut>
+			<attribut pid="att.text" anzahl="1" anzahlIst="fest" name="absenderZeichen">
+				<info>
+					<kurzinfo>Kennzeichnung, die von der anfragenden Applikation beliebig vergeben wird.</kurzinfo>
+					<beschreibung>
+						<absatz>
+							Der angegebene Wert wird von der bearbeitenden Applikation in die Antwort zu dieser Anfrage kopiert.
+							Die Bedeutung des Attributs wird von der anfragenden Applikation beliebig festgelegt
+							und kann zum Beispiel dazu benutzt werden, um eine empfangene Antwort der ursprünglichen
+							Anfrage zuzuordnen.
+						</absatz>
+					</beschreibung>
+				</info>
+			</attribut>
+			<attribut pid="att.text" anzahl="1" anzahlIst="fest" name="MessQuerschnitt">
+				<info>
+					<kurzinfo>Pid des MessQuerschnitt für den die Ganglinie bestimmt werden soll.</kurzinfo>
+					<beschreibung>
+						<absatz>
+							Für den angegebenen MessQuerschnitt wird die Ganglinie für das angegebene Datum bestimmt.
+						</absatz>
+					</beschreibung>
+				</info>
+			</attribut>
+			<attribut pid="att.nbaAbfrageGanglinieDatenArt" anzahl="1" anzahlIst="fest" name="DatenArt">
+				<info>
+					<kurzinfo>Kennung, welche Art von Daten bestimmt werden soll.</kurzinfo>
+				</info>
+				<default wert="QB"/>
+			</attribut>
+			<attribut pid="att.zeitPunkt" anzahl="1" anzahlIst="fest" name="Datum">
+				<info>
+					<kurzinfo>Datum für das die Ganglinie für den angegebenen MessQuerschnitt bestimmt werden soll.</kurzinfo>
+				</info>
+			</attribut>
+		</attributgruppenDefinition>
+		<attributgruppenDefinition pid="atg.nbaAbfrageGanglinieAntwort" name="AbfrageGanglinieAntwort" parametrierend="nein">
+			<info>
+				<kurzinfo>Zur Übermittlung der Antwort auf eine AbfrageGanglinieAnfrage.</kurzinfo>
+			</info>
+			<aspekt pid="asp.antwort" onlineModus="quelleUndSenke">
+			</aspekt>
+			<attribut pid="att.text" anzahl="1" anzahlIst="fest" name="absenderZeichen">
+				<info>
+					<kurzinfo>Kennzeichnung, die von der anfragenden Applikation beliebig vergeben wird.</kurzinfo>
+					<beschreibung>
+						<absatz>
+							Der angegebene Wert wird von der bearbeitenden Applikation in die Antwort zu dieser Anfrage kopiert.
+							Die Bedeutung des Attributs wird von der anfragenden Applikation beliebig festgelegt
+							und kann zum Beispiel dazu benutzt werden, um eine empfangene Antwort der ursprnglichen
+							Anfrage zuzuordnen.
+						</absatz>
+					</beschreibung>
+				</info>
+			</attribut>
+			<attribut pid="att.text" anzahl="1" anzahlIst="fest" name="MessQuerschnitt">
+				<info>
+					<kurzinfo>Pid des MessQuerschnitt für den die Ganglinie bestimmt wurde.</kurzinfo>
+					<beschreibung>
+						<absatz>
+							Für den angegebenen MessQuerschnitt wurde die Ganglinie für das angegebene Datum bestimmt.
+						</absatz>
+					</beschreibung>
+				</info>
+			</attribut>
+			<attribut pid="att.nbaAbfrageGanglinieDatenArt" anzahl="1" anzahlIst="fest" name="DatenArt">
+				<info>
+					<kurzinfo>Kennung, welche Art von Daten in der Ganglinie enthalten sind.</kurzinfo>
+				</info>
+			</attribut>
+			<attribut pid="att.zeitPunkt" anzahl="1" anzahlIst="fest" name="Datum">
+				<info>
+					<kurzinfo>Datum für das die Ganglinie für den angegebenen MessQuerschnitt bestimmt wurde.</kurzinfo>
+				</info>
+			</attribut>
+			<attributliste pid="atl.nbaAbfrageGanglinieStützstelle" anzahl="0" anzahlIst="variabel" name="Stützstelle">
+				<info>
+					<kurzinfo>Liste mit Stützstellen der ganglinie.</kurzinfo>
+				</info>
+			</attributliste>
+			<attribut pid="att.nbaAbfrageGanglinieFehler" anzahl="1" anzahlIst="fest" name="Fehler">
+				<info>
+					<kurzinfo>Fehler der bei der Bestimmung der Ganglinie für den MessQuerschnitt auftrat.</kurzinfo>
+				</info>
+			</attribut>
+		</attributgruppenDefinition>
+		<attributgruppenDefinition pid="atg.nbaAbfrageMessQuerschnitteAnfrage" name="AbfrageMessQuerschnitteAnfrage" parametrierend="nein">
+			<info>
+				<kurzinfo>Zur Übermittlung von MessQuerschnitt-Anfragen an NbaAbfrageMessQuerschnitte.</kurzinfo>
+			</info>
+			<aspekt pid="asp.anfrage" onlineModus="quelleUndSenke">
+			</aspekt>
+			<attribut pid="att.applikationsReferenz" anzahl="1" anzahlIst="fest" name="absenderId">
+				<info>
+					<kurzinfo>Objekt-ID der anfragenden Applikation.</kurzinfo>
+					<beschreibung>
+						<absatz>Die Antworten der bearbeitenden Applikation werden mit dieser Objekt-ID über den Datenverteiler versendet.</absatz>
+					</beschreibung>
+				</info>
+			</attribut>
+			<attribut pid="att.text" anzahl="1" anzahlIst="fest" name="absenderZeichen">
+				<info>
+					<kurzinfo>Kennzeichnung, die von der anfragenden Applikation beliebig vergeben wird.</kurzinfo>
+					<beschreibung>
+						<absatz>
+							Der angegebene Wert wird von der bearbeitenden Applikation in die Antwort zu dieser Anfrage kopiert.
+							Die Bedeutung des Attributs wird von der anfragenden Applikation beliebig festgelegt
+							und kann zum Beispiel dazu benutzt werden, um eine empfangene Antwort der ursprünglichen
+							Anfrage zuzuordnen.
+						</absatz>
+					</beschreibung>
+				</info>
+			</attribut>
+			<attribut pid="att.text" anzahl="1" anzahlIst="fest" name="StraßenSegment">
+				<info>
+					<kurzinfo>StraßenSegment das als Bezug für die Suche nach dem/den MessQuerschnitt(en) verwendet werden soll.</kurzinfo>
+					<beschreibung>
+						<absatz>
+							Das StraßenSegment in Verbindung mit dem Offset bildet den Startpunkt für die Suche nach den MessQuerschnitten.
+						</absatz>
+					</beschreibung>
+				</info>
+			</attribut>
+			<attribut pid="att.streckeMeter" anzahl="1" anzahlIst="fest" name="Offset">
+				<info>
+					<kurzinfo>Offset der auf dem StraßenSegment das als Bezug für die Suche nach dem/den MessQuerschnitt(en) verwendet werden soll.</kurzinfo>
+					<beschreibung>
+						<absatz>
+							Der Offset in Verbindung mit dem StraßenSegment bildet den Startpunkt für die Suche nach den MessQuerschnitten.
+						</absatz>
+					</beschreibung>
+				</info>
+			</attribut>
+			<attribut pid="att.nbaAbfrageMessQuerschnitteRichtung" anzahl="1" anzahlIst="fest" name="SuchRichtung">
+				<info>
+					<kurzinfo>SuchRichtung in Bezug auf den Startpunkt</kurzinfo>
+				</info>
+				<default wert="vor"/>
+			</attribut>
+			<attribut pid="att.jaNein" anzahl="1" anzahlIst="fest" name="AlleZufließendenMessQuerschnitte">
+				<info>
+					<kurzinfo>Kennung, ob nach allen zufließenden oder nur nach dem Durchfahrts-MessQuerschnitt gesucht werden soll.</kurzinfo>
+				</info>
+				<default wert="Nein"/>
+			</attribut>
+		</attributgruppenDefinition>
+		<attributgruppenDefinition pid="atg.nbaAbfrageMessQuerschnitteAntwort" name="AbfrageMessQuerschnitteAntwort" parametrierend="nein">
+			<info>
+				<kurzinfo>Zur Übermittlung der Antwort auf eine AbfrageMessQuerschnitteAnfrage.</kurzinfo>
+			</info>
+			<aspekt pid="asp.antwort" onlineModus="quelleUndSenke">
+			</aspekt>
+			<attribut pid="att.text" anzahl="1" anzahlIst="fest" name="absenderZeichen">
+				<info>
+					<kurzinfo>Kennzeichnung, die von der anfragenden Applikation beliebig vergeben wird.</kurzinfo>
+					<beschreibung>
+						<absatz>
+							Der angegebene Wert wird von der bearbeitenden Applikation in die Antwort zu dieser Anfrage kopiert.
+							Die Bedeutung des Attributs wird von der anfragenden Applikation beliebig festgelegt
+							und kann zum Beispiel dazu benutzt werden, um eine empfangene Antwort der ursprünglichen
+							Anfrage zuzuordnen.
+						</absatz>
+					</beschreibung>
+				</info>
+			</attribut>
+			<attributliste pid="atl.nbaAbfrageMessQuerschnittInformationen" anzahl="0" anzahlIst="variabel" name="MessQuerschnitt">
+				<info>
+					<kurzinfo>Liste mit Informationen zu den gefundenen MessQuerschnitten.</kurzinfo>
+				</info>
+			</attributliste>
+			<attribut pid="att.nbaAbfrageMessQuerschnitteRichtung" anzahl="1" anzahlIst="fest" name="SuchRichtung">
+				<info>
+					<kurzinfo>SuchRichtung in Bezug auf den Startpunkt in der gesucht wurde</kurzinfo>
+				</info>
+			</attribut>
+			<attribut pid="att.nbaAbfrageMessQuerschnittFehler" anzahl="1" anzahlIst="fest" name="Fehler">
+				<info>
+					<kurzinfo>Fehler die bei der Bestimmung des/der MessQuerschnitt(e) auftrat.</kurzinfo>
+				</info>
+			</attribut>
+		</attributgruppenDefinition>
+		<attributDefinition pid="att.applikationNbaAbfrageGanglinieReferenz" name="ApplikationNbaAbfrageGanglinieReferenz">
+			<info>
+				<kurzinfo>Attribut zur Referenzierung des Objekttyps: typ.applikationNbaAbfrageGanglinie</kurzinfo>
+			</info>
+			<objektReferenz typ="typ.applikationNbaAbfrageGanglinie" undefiniert="verboten" referenzierungsart="assoziation"/>
+		</attributDefinition>
+		<attributDefinition pid="att.applikationNbaAbfrageGanglinieReferenzOptional" name="ApplikationNbaAbfrageGanglinieReferenzOptional">
+			<info>
+				<kurzinfo>Attribut zur Referenzierung des Objekttyps: typ.applikationNbaAbfrageGanglinie (Optionale Referenzierung erlaubt).</kurzinfo>
+			</info>
+			<objektReferenz typ="typ.applikationNbaAbfrageGanglinie" undefiniert="erlaubt" referenzierungsart="assoziation"/>
+		</attributDefinition>
+		<attributDefinition pid="att.applikationNbaAbfrageGesamtReferenz" name="ApplikationNbaAbfrageGesamtReferenz">
+			<info>
+				<kurzinfo>Attribut zur Referenzierung des Objekttyps: typ.applikationNbaAbfrageGesamt</kurzinfo>
+			</info>
+			<objektReferenz typ="typ.applikationNbaAbfrageGesamt" undefiniert="verboten" referenzierungsart="assoziation"/>
+		</attributDefinition>
+		<attributDefinition pid="att.applikationNbaAbfrageGesamtReferenzOptional" name="ApplikationNbaAbfrageGesamtReferenzOptional">
+			<info>
+				<kurzinfo>Attribut zur Referenzierung des Objekttyps: typ.applikationNbaAbfrageGesamt (Optionale Referenzierung erlaubt).</kurzinfo>
+			</info>
+			<objektReferenz typ="typ.applikationNbaAbfrageGesamt" undefiniert="erlaubt" referenzierungsart="assoziation"/>
+		</attributDefinition>
+		<attributDefinition pid="att.applikationNbaAbfrageMessQuerschnitteReferenz" name="ApplikationNbaAbfrageMessQuerschnitteReferenz">
+			<info>
+				<kurzinfo>Attribut zur Referenzierung des Objekttyps: typ.applikationNbaAbfrageMessQuerschnitte</kurzinfo>
+			</info>
+			<objektReferenz typ="typ.applikationNbaAbfrageMessQuerschnitte" undefiniert="verboten" referenzierungsart="assoziation"/>
+		</attributDefinition>
+		<attributDefinition pid="att.applikationNbaAbfrageMessQuerschnitteReferenzOptional" name="ApplikationNbaAbfrageMessQuerschnitteReferenzOptional">
+			<info>
+				<kurzinfo>Attribut zur Referenzierung des Objekttyps: typ.applikationNbaAbfrageMessQuerschnitte (Optionale Referenzierung erlaubt).</kurzinfo>
+			</info>
+			<objektReferenz typ="typ.applikationNbaAbfrageMessQuerschnitte" undefiniert="erlaubt" referenzierungsart="assoziation"/>
+		</attributDefinition>
+		<attributDefinition pid="att.nbaAbfrageGanglinieDatenArt" name="AbfrageGanglinieDatenArt">
+			<info>
+				<kurzinfo>
+					Attribut das die Art der zu bestimmenden Daten festlegt
+				</kurzinfo>
+			</info>
+			<ganzzahl bits="8">
+				<zustand name="QB" wert="0">
+					<info>
+						<kurzinfo>Bestimmung von QB</kurzinfo>
+					</info>
+				</zustand>
+				<zustand name="QKfz" wert="1">
+					<info>
+						<kurzinfo>Bestimmung von QKfz</kurzinfo>
+					</info>
+				</zustand>
+				<zustand name="QPkw" wert="2">
+					<info>
+						<kurzinfo>Bestimmung von QPkw</kurzinfo>
+					</info>
+				</zustand>
+				<zustand name="QLkw" wert="3">
+					<info>
+						<kurzinfo>Bestimmung von QLkw</kurzinfo>
+					</info>
+				</zustand>
+				<zustand name="VKfz" wert="4">
+					<info>
+						<kurzinfo>Bestimmung von VKfz</kurzinfo>
+					</info>
+				</zustand>
+				<zustand name="VPkw" wert="5">
+					<info>
+						<kurzinfo>Bestimmung von VPkw</kurzinfo>
+					</info>
+				</zustand>
+				<zustand name="VLkw" wert="6">
+					<info>
+						<kurzinfo>Bestimmung von VLkw</kurzinfo>
+					</info>
+				</zustand>
+			</ganzzahl>
+		</attributDefinition>
+		<attributDefinition pid="att.nbaAbfrageGanglinieFehler" name="AbfrageGanglinieFehler">
+			<info>
+				<kurzinfo>
+					Fehler der bei der Bestimmung der Ganglinie für den MessQuerschnitt auftrat.
+				</kurzinfo>
+			</info>
+			<ganzzahl bits="8">
+				<zustand name="kein Fehler" wert="0">
+					<info>
+						<kurzinfo>Es trat kein Fehler auf, die Bestimmung konnte durchgeführt werden</kurzinfo>
+					</info>
+				</zustand>
+				<zustand name="Fehler Pid MessQuerschnitt" wert="1">
+					<info>
+						<kurzinfo>Die Pid des MessQuerschnitt ist fehlerhaft</kurzinfo>
+					</info>
+				</zustand>
+				<zustand name="Fehler Datum" wert="2">
+					<info>
+						<kurzinfo>Der Datum ist Fehlerhaft</kurzinfo>
+					</info>
+				</zustand>
+				<zustand name="Keine Ganglinie vorhanden" wert="3">
+					<info>
+						<kurzinfo>Es wurde keine Ganglinie für den MessQuerschnitt gefunden</kurzinfo>
+					</info>
+				</zustand>
+			</ganzzahl>
+		</attributDefinition>
+		<attributDefinition pid="att.nbaAbfrageGanglinieReferenz" name="NbaAbfrageGanglinieReferenz">
+			<info>
+				<kurzinfo>Attribut zur Referenzierung des Objekttyps: typ.nbaAbfrageGanglinie</kurzinfo>
+			</info>
+			<objektReferenz typ="typ.nbaAbfrageGanglinie" undefiniert="verboten" referenzierungsart="assoziation"/>
+		</attributDefinition>
+		<attributDefinition pid="att.nbaAbfrageGanglinieReferenzOptional" name="NbaAbfrageGanglinieReferenzOptional">
+			<info>
+				<kurzinfo>Attribut zur Referenzierung des Objekttyps: typ.nbaAbfrageGanglinie (Optionale Referenzierung erlaubt).</kurzinfo>
+			</info>
+			<objektReferenz typ="typ.nbaAbfrageGanglinie" undefiniert="erlaubt" referenzierungsart="assoziation"/>
+		</attributDefinition>
+		<attributDefinition pid="att.nbaAbfrageGesamtReferenz" name="NbaAbfrageGesamtReferenz">
+			<info>
+				<kurzinfo>Attribut zur Referenzierung des Objekttyps: typ.nbaAbfrageGesamt</kurzinfo>
+			</info>
+			<objektReferenz typ="typ.nbaAbfrageGesamt" undefiniert="verboten" referenzierungsart="assoziation"/>
+		</attributDefinition>
+		<attributDefinition pid="att.nbaAbfrageGesamtReferenzOptional" name="NbaAbfrageGesamtReferenzOptional">
+			<info>
+				<kurzinfo>Attribut zur Referenzierung des Objekttyps: typ.nbaAbfrageGesamt (Optionale Referenzierung erlaubt).</kurzinfo>
+			</info>
+			<objektReferenz typ="typ.nbaAbfrageGesamt" undefiniert="erlaubt" referenzierungsart="assoziation"/>
+		</attributDefinition>
+		<attributDefinition pid="att.nbaAbfrageMessQuerschnitteReferenz" name="NbaAbfrageMessQuerschnitteReferenz">
+			<info>
+				<kurzinfo>Attribut zur Referenzierung des Objekttyps: typ.nbaAbfrageMessQuerschnitte</kurzinfo>
+			</info>
+			<objektReferenz typ="typ.nbaAbfrageMessQuerschnitte" undefiniert="verboten" referenzierungsart="assoziation"/>
+		</attributDefinition>
+		<attributDefinition pid="att.nbaAbfrageMessQuerschnitteReferenzOptional" name="NbaAbfrageMessQuerschnitteReferenzOptional">
+			<info>
+				<kurzinfo>Attribut zur Referenzierung des Objekttyps: typ.nbaAbfrageMessQuerschnitte (Optionale Referenzierung erlaubt).</kurzinfo>
+			</info>
+			<objektReferenz typ="typ.nbaAbfrageMessQuerschnitte" undefiniert="erlaubt" referenzierungsart="assoziation"/>
+		</attributDefinition>
+		<attributDefinition pid="att.nbaAbfrageMessQuerschnitteRichtung" name="AbfrageMessQuerschnitteRichtung">
+			<info>
+				<kurzinfo>
+					Attribut das die Suchrichtung bestimmt
+				</kurzinfo>
+			</info>
+			<ganzzahl bits="8">
+				<zustand name="vor" wert="0">
+					<info>
+						<kurzinfo>Suchen in Fahrtrichtung vor der Referenz</kurzinfo>
+					</info>
+				</zustand>
+				<zustand name="hinter" wert="1">
+					<info>
+						<kurzinfo>Suchen in Fahrtrichtung hinter der Referenz</kurzinfo>
+					</info>
+				</zustand>
+			</ganzzahl>
+		</attributDefinition>
+		<attributDefinition pid="att.nbaAbfrageMessQuerschnittFehler" name="AbfrageMessQuerschnittFehler">
+			<info>
+				<kurzinfo>
+					Fehler die bei der Bestimmung des/der MessQuerschnitt(e) auftrat.
+				</kurzinfo>
+			</info>
+			<ganzzahl bits="8">
+				<zustand name="kein Fehler" wert="0">
+					<info>
+						<kurzinfo>Es trat kein Fehler auf, die Bestimmung konnte durchgeführt werden</kurzinfo>
+					</info>
+				</zustand>
+				<zustand name="Fehler Pid StraßenSegment" wert="1">
+					<info>
+						<kurzinfo>Die Pid des StraßenSegment ist fehlerhaft</kurzinfo>
+					</info>
+				</zustand>
+				<zustand name="Fehler Offset" wert="2">
+					<info>
+						<kurzinfo>Der Offset ist Fehlerhaft (liegt nicht auf StraßenSegment)</kurzinfo>
+					</info>
+				</zustand>
+				<zustand name="Kein MessQuerschnitt vorhanden" wert="3">
+					<info>
+						<kurzinfo>Es wurde kein MessQuerschnitt gefunden (z. B. Netzrand)</kurzinfo>
+					</info>
+				</zustand>
+			</ganzzahl>
+		</attributDefinition>
+		<attributlistenDefinition pid="atl.nbaAbfrageGanglinieStützstelle" name="AbfrageGanglinieStützstelle">
+			<info>
+				<kurzinfo>
+					Definition einer Stützstelle für die Ganglinie
+				</kurzinfo>
+				<beschreibung>
+					<absatz>
+						Die Definition umfasst eine Zuordnung von
+						Attributen zu einer Stützstelle der Ganglinie.
+					</absatz>
+				</beschreibung>
+			</info>
+			<attribut pid="att.zeitPunkt" anzahl="1" anzahlIst="fest" name="Zeit">
+				<info>
+					<kurzinfo>Zeitpunkt der Stützstelle.</kurzinfo>
+				</info>
+			</attribut>
+			<attribut pid="att.nbaGanglinienWert" anzahl="1" anzahlIst="fest" name="Wert">
+				<info>
+					<kurzinfo>
+						Wert entsprechend der DatenArt.
+					</kurzinfo>
+				</info>
+			</attribut>
+		</attributlistenDefinition>
+		<attributlistenDefinition pid="atl.nbaAbfrageMessQuerschnittInformationen" name="AbfrageMessQuerschnittInformationen">
+			<info>
+				<kurzinfo>Enthält die Informationen zu einem MessQuerschnitt</kurzinfo>
+			</info>
+			<attribut pid="att.text" anzahl="1" anzahlIst="fest" name="Pid">
+				<info>
+					<kurzinfo>Pid des MessQuerschnitt.</kurzinfo>
+				</info>
+			</attribut>
+			<attribut pid="att.text" anzahl="1" anzahlIst="fest" name="Name">
+				<info>
+					<kurzinfo>Name des MessQuerschnitt.</kurzinfo>
+				</info>
+			</attribut>
+			<attribut pid="att.messQuerschnittTyp" anzahl="1" anzahlIst="fest" name="Typ">
+				<info>
+					<kurzinfo>
+						Typ des MessQuerschnitts (Hauptfahrbahn, Nebenfahrbahn, Einfahrt, Ausfahrt,...).
+					</kurzinfo>
+				</info>
+			</attribut>
+		</attributlistenDefinition>
+	</modell>
+	<objekte>
+	</objekte>
+</konfigurationsBereich>

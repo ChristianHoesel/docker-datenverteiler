@@ -1,0 +1,284 @@
+<?xml version="1.0" encoding="ISO-8859-1"?>
+<!DOCTYPE konfigurationsBereich SYSTEM "K2S.dtd">
+<konfigurationsBereich pid="kb.tmZykExp" name="TeilmodellZykExp"
+	verantwortlich="kv.bitctrl">
+	<info>
+		<kurzinfo>Modell und Objekte für die SWE Zyklischer Export'.
+		</kurzinfo>
+		<beschreibung />
+	</info>
+	<konfigurationsAenderung autor="Uwe Peuker"
+		stand="15.10.2013">Anpassungen Intervallbildung korrigiert, Auswahl mehrerer
+		Objekte ermöglicht, Attributgruppe mit Name versorgt.
+	</konfigurationsAenderung>
+	<modell>
+		<typDefinition pid="typ.arsZykExp" name="Applikation ArsZykExp">
+			<info>
+				<kurzinfo>Standardapplikation Zyklischer Export.</kurzinfo>
+			</info>
+			<erweitert pid="typ.konfigurationsObjekt" />
+			<attributgruppe pid="atg.arsZykExp" />
+			<attributgruppe pid="atg.arsZykExpMeldung" />
+		</typDefinition>
+
+
+		<attributgruppenDefinition pid="atg.arsZykExp"
+			parametrierend="ja" name="Auftraege für zyklischen Export">
+			<info>
+				<kurzinfo>Parameter für die Applikation Zyklischer Export.
+				</kurzinfo>
+			</info>
+			<attribut pid="atl.arsZykExpAuftrag" name="Auftraege"
+				anzahl="0" anzahlIst="variabel">
+				<info>
+					<kurzinfo>die Liste der parametrierten Aufträge</kurzinfo>
+				</info>
+			</attribut>
+		</attributgruppenDefinition>
+
+		<attributlistenDefinition pid="atl.arsZykExpAuftrag"
+			name="Zyklischer Export Auftrag">
+			<info>
+				<kurzinfo>Parameter für die Applikation Zyklischer Export.
+				</kurzinfo>
+			</info>
+			<attribut pid="att.text" name="ExportFormat">
+				<info>
+					<kurzinfo>Definiert, das zu verwendende Formatierungs-Plug-in
+						(vollständiger Klassenname).
+						Erfolgt keine Angabe wird das
+						eingebaute CSV-Export-Format verwendet.
+					</kurzinfo>
+				</info>
+				<default wert="" />
+			</attribut>
+			<attribut pid="att.konfigurationsBereichReferenz" anzahl="0"
+				anzahlIst="variabel" name="Bereich">
+				<info>
+					<kurzinfo>Die in der folgenden Attributliste "Datenspezifikation"
+						befindlichen Objekte beziehen sich auf einen in diesem Feld
+						angegebenen Konfigurationsbereich (Kein Eintrag: Alle
+						Konfigurationsbereiche).
+					</kurzinfo>
+				</info>
+			</attribut>
+
+			<attributliste pid="atl.datenSpezifikationZykExp"
+				anzahl="1" anzahlIst="fest" name="DatenSpezifikation" />
+			<attributliste pid="atl.einstellungenZyklischerExport"
+				anzahl="1" anzahlIst="fest" name="Einstellungen" />
+		</attributlistenDefinition>
+
+		<attributlistenDefinition pid="atl.datenSpezifikationZykExp"
+			name="Datenspezifikation Zyklischer Export">
+			<info>
+				<kurzinfo>Datenspezifikation für einen Exportauftrag</kurzinfo>
+			</info>
+			<attribut pid="att.objektReferenz" name="Objekt" anzahl="0"
+				anzahlIst="variabel" />
+			<attribut pid="att.attributgruppeReferenz" name="Attributgruppe"
+				anzahl="1" anzahlIst="fest" />
+			<attribut pid="att.aspektReferenz" name="Aspekt" anzahl="1"
+				anzahlIst="fest" />
+		</attributlistenDefinition>
+
+		<attributlistenDefinition pid="atl.einstellungenZyklischerExport">
+			<info>
+				<kurzinfo>Einstellungen fuer einen Exportauftrag</kurzinfo>
+			</info>
+			<attribut pid="att.text" name="AuftragsKennung">
+				<info>
+					<kurzinfo>vom Nutzer vergebene (möglichst) eindeutige ID für den
+						Auftrag, damit dieser beim Hinzufügen, Entfernen oder Ändern eines
+						anderes Auftrags aus der Auftragsliste identifiziert werden kann
+						und nicht beendet werden muss.
+					</kurzinfo>
+				</info>
+			</attribut>
+			<attribut pid="att.text" name="ExportFormat">
+				<info>
+					<kurzinfo>Definiert, das zu verwendende Formatierungs-Plug-in
+						(vollständiger Klassenname). Erfolgt keine Angabe wird das
+						eingebaute CSV-Export-Format verwendet.
+					</kurzinfo>
+				</info>
+				<default wert="" />
+			</attribut>
+			<attribut pid="att.jaNein" name="Online">
+				<info>
+					<kurzinfo>Definiert, ob Onlinedaten oder Daten aus dem Archiv
+						exportiert werden sollen.
+					</kurzinfo>
+				</info>
+				<default wert="Ja" />
+			</attribut>
+			<attribut pid="att.relativeSekunden" name="Verzoegerung">
+				<info>
+					<kurzinfo>Verzögerung bevor Daten aus dem Archiv für einen
+						angeforderten Bereich abgefragt werden (in Sekunden).
+					</kurzinfo>
+				</info>
+				<default wert="3600 Sekunden" />
+			</attribut>
+			<attribut pid="att.jaNein" name="Zusammenfassen">
+				<info>
+					<kurzinfo>Definiert, ob Daten mit gleicher Datenspezifikation für
+						Objekte zusammengelegt werden sollen oder ob für jedes Objekt eine
+						Datei anzulegen ist.
+					</kurzinfo>
+				</info>
+				<default wert="Ja" />
+			</attribut>
+			<attribut pid="att.text" name="DateinameZusatz">
+				<info>
+					<kurzinfo>
+						Erweiterung des automatisch gebildeten Dateinamens.
+						Die
+						Erweiterung ist ein zusätzlicher Text, der im Dateiname an die
+						Zeitangaben angehangen wird. Da werden die folgenden Platzhalter
+						unterstützt: {ATG} die PID der Attributgruppe der in der Datei
+						enthaltenen Daten, {ASP} der Aspekt der in der Datei enthaltenen
+						Daten, {OT} die Pid des Objekttyps und optional {OPID} die PID des
+						Objekts, wenn für Objekte Einzeldateien gebildet werden
+					</kurzinfo>
+				</info>
+				<default wert="{*}" />
+			</attribut>
+			<attribut pid="att.relativeSekunden" name="CSVIntervall">
+				<info>
+					<kurzinfo>Zeitintervall, für das Daten in die Ausgabedateien
+						(CSV-Dateien)
+						abgelegt werden sollen.
+					</kurzinfo>
+				</info>
+				<default wert="1 Stunde" />
+			</attribut>
+			<attribut pid="att.zahl" name="CSVAnzahlDatensaetze">
+				<info>
+					<kurzinfo>maximale Anzahl von Datensätzen, die in einer CSV-Datei
+						abgelegt werden sollen. Standard ist 0, d.h. die erstellte
+						CSV-Datei enthält alle Daten des für den jeweiligen Auftrag zu
+						exportierenden Zeitbereiches.
+					</kurzinfo>
+				</info>
+				<default wert="0" />
+			</attribut>
+			<attribut pid="att.zahl" name="CSVBytes">
+				<info>
+					<kurzinfo>maximale Größe einer CSV-Datei in Byte. Standard ist 0,
+						d.h. die erstellte
+						CSV-Datei enthält alle Daten des für den
+						jeweiligen Auftrag zu
+						exportierenden Zeitbereiches.
+					</kurzinfo>
+				</info>
+				<default wert="0" />
+			</attribut>
+			<attribut pid="att.relativeSekunden" name="ZIP-Intervall">
+				<info>
+					<kurzinfo>Intervall in dem die Daten einzelner Exportaufträge als
+						ZIP-Datei verpackt und ausgeliefert werden sollen. Standardwert
+						ist 0, d.h. es wird nicht gezippt.
+					</kurzinfo>
+				</info>
+				<default wert="0 Sekunden" />
+			</attribut>
+			<attribut pid="att.jaNein" name="EinzelDateienSenden">
+				<info>
+					<kurzinfo>Definiert, ob bei aktivierter ZIP-Datei-Auslieferung auch
+						die Einzeldateien ausgeliefert werden sollen.
+					</kurzinfo>
+				</info>
+				<default wert="Nein" />
+			</attribut>
+			<attribut pid="att.relativeSekunden" name="LoeschIntervall">
+				<info>
+					<kurzinfo>Vorhaltezeit der exportierten Daten auf dem Zielsystem.
+						Standardwert ist 0. d.h. auf dem Zielsystem werden keine Dateien
+						gelöscht.
+					</kurzinfo>
+				</info>
+				<default wert="0 Sekunden" />
+			</attribut>
+			<attribut pid="att.text" name="ZielVerzeichnis">
+				<info>
+					<kurzinfo>das Zielverzeichnis für die exportierten Dateien.
+					</kurzinfo>
+				</info>
+			</attribut>
+			<attribut pid="att.jaNein" name="FtpExport">
+				<info>
+					<kurzinfo>Definiert, ob die Dateien per FTP ausgeliefert werden
+						müssen.
+					</kurzinfo>
+				</info>
+				<default wert="Nein" />
+			</attribut>
+			<attribut pid="att.text" name="FtpHostName">
+				<info>
+					<kurzinfo>der Hostname bei FTP-Export</kurzinfo>
+				</info>
+			</attribut>
+			<attribut pid="att.zahl" name="FtpPort">
+				<info>
+					<kurzinfo>der Port beim FTP-Export</kurzinfo>
+				</info>
+			</attribut>
+			<attribut pid="att.jaNein" name="FtpPassiveMode">
+				<info>
+					<kurzinfo>definiert, ob der passive Modus beim FTP-Export verwendet
+						werden soll
+					</kurzinfo>
+				</info>
+			</attribut>
+			<attribut pid="att.text" name="FtpUserName">
+				<info>
+					<kurzinfo>der Username bei FTP-Export</kurzinfo>
+				</info>
+			</attribut>
+			<attribut pid="att.text" name="FtpPasswd">
+				<info>
+					<kurzinfo>das Passwort bei FTP-Export</kurzinfo>
+				</info>
+			</attribut>
+			<attribut pid="att.jaNein" name="Aktiv">
+				<info>
+					<kurzinfo>Definiert, ob der Auftrag im Moment ausgeführt wird oder
+						nicht. Bei deaktivierten Aufträgen wird trotzdem die Vorhaltezeit
+						der Exportdateien auf dem Zielsystem betrachtet und gegebenenfalls
+						Dateien gelöscht.
+					</kurzinfo>
+				</info>
+				<default wert="Ja" />
+			</attribut>
+			<attribut pid="att.zahl" name="Feldtiefe">
+				<info>
+					<kurzinfo>die Tiefe mit der Datensätze mit Felder variabler Länge
+						ausgegeben werden.
+					</kurzinfo>
+				</info>
+			</attribut>
+		</attributlistenDefinition>
+		<attributgruppenDefinition pid="atg.arsZykExpMeldung" name="Meldungen der SWE Zyklischer Export">
+			<info>
+				<kurzinfo>Attributgruppe zur Ausgabe aktueller Meldungen der SWE.
+				</kurzinfo>
+			</info>
+			<aspekt pid="asp.information" onlineModus="quelle"/>
+			<attribut pid="att.text" name="Text">
+				<info>
+					<kurzinfo>der auszugebende Meldungstext
+					</kurzinfo>
+				</info>
+			</attribut>
+		</attributgruppenDefinition>
+	</modell>
+	<objekte>
+		<konfigurationsObjekt typ="typ.arsZykExp" pid="zykExp.vewStandard"
+			name="StandardVerwaltungsObjektZykExpt">
+			<info>
+				<kurzinfo>Standardobjekt für die Applikation.</kurzinfo>
+			</info>
+		</konfigurationsObjekt>
+	</objekte>
+</konfigurationsBereich>

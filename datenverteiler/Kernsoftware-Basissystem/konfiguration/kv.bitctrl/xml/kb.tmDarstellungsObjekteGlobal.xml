@@ -1,0 +1,42 @@
+<?xml version="1.0" encoding="ISO-8859-1"?>
+<!DOCTYPE konfigurationsBereich PUBLIC "-//K2S//DTD Dokument//DE" "K2S.dtd">
+<konfigurationsBereich pid="kb.tmDarstellungsObjekteGlobal"
+	name="TeilmodellDarstellungsObjekteGlobal" verantwortlich="kv.bitctrl">
+	<info>
+		<kurzinfo>Teilmodell mit Datenmodellierung für Darstellungsobjekte.
+		</kurzinfo>
+	</info>
+	<konfigurationsAenderung autor="BitCtrl Systems GmbH, Falko Schumann"
+		stand="1.12.2009" grund="Ersterstellung" />
+	<konfigurationsAenderung autor="BitCtrl Systems GmbH, Uwe Peuker"
+		stand="24.02.2010" grund="Füllmuster ergänzt" />
+	<konfigurationsAenderung autor="BitCtrl Systems GmbH, Uwe Peuker"
+		stand="08.03.2010" grund="Z-Index für eingebettete Objekte ergänzt" />
+	<konfigurationsAenderung autor="BitCtrl Systems GmbH, Uwe Peuker"
+		stand="18.08.2010" grund="DOT werden als XML-serialisiert und gespeichert" />
+	<modell>
+
+		<!-- Typdefinitionen -->
+		<typDefinition pid="typ.darstellungsObjektTyp" name="DarstellungsObjektTyp"
+			persistenzModus="persistent">
+			<info>
+				<kurzinfo>Ein Darstellungsobjekttyp beschreibt wie
+					Darstellungsobjekte dieses Typs ausehen.</kurzinfo>
+				<beschreibung>TODO</beschreibung>
+			</info>
+			<erweitert pid="typ.dynamischesObjekt" />
+			<attributgruppe pid="atg.darstellungsObjektTyp" />
+		</typDefinition>
+
+		<!-- Attributgruppen -->
+		<attributgruppenDefinition pid="atg.darstellungsObjektTyp"
+			name="DarstellungsObjektTyp" konfigurierend="ja">
+			<info>
+				<kurzinfo>Eigenschaften eines Darstellungsobjekttyps.</kurzinfo>
+				<beschreibung>TODO</beschreibung>
+			</info>
+			<aspekt pid="asp.eigenschaften" konfigurationsModus="datensatzNotwendigUndÄnderbar" />
+			<attribut pid="att.text" name="Definition" anzahlIst="variabel" />
+		</attributgruppenDefinition>
+	</modell>
+</konfigurationsBereich>

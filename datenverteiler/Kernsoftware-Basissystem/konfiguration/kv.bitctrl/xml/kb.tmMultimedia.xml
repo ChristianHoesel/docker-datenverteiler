@@ -1,0 +1,34 @@
+<?xml version="1.0" encoding="ISO-8859-1"?>
+<!DOCTYPE konfigurationsBereich SYSTEM "K2S.dtd">
+<konfigurationsBereich pid="kb.tmMultimedia"
+	name="BitCtrl Multimedia-Modell" verantwortlich="kv.bitctrl">
+
+	<info>
+		<kurzinfo>Definitionen für Modellobjekte für Multimediainhalte
+		</kurzinfo>
+	</info>
+
+	<modell>
+		<typDefinition pid="typ.kameraAllgemein" name="Kamera allgemein">
+			<info>
+				<kurzinfo>Allgemeines Objekt, das eine Kamera repräsentiert.
+				</kurzinfo>
+			</info>
+			<erweitert pid="typ.punktXY" />
+			<attributgruppe pid="atg.kameraAllgemein" />
+		</typDefinition>
+
+		<attributgruppenDefinition pid="atg.kameraAllgemein"
+			name="KameraAllgemein" konfigurierend="ja">
+			<info>
+				<kurzinfo>Eigenschaften einer Kamera.
+				</kurzinfo>
+				<beschreibung></beschreibung>
+			</info>
+			<aspekt pid="asp.eigenschaften" konfigurationsModus="datensatzNotwendigUndÄnderbar" />
+			<attribut pid="att.text" name="KameraID" />
+			<attribut pid="att.text" name="Bezeichnung" />
+		</attributgruppenDefinition>
+	</modell>
+
+</konfigurationsBereich>

@@ -1,0 +1,508 @@
+<?xml version="1.0" encoding="ISO-8859-1"?>
+<!DOCTYPE konfigurationsBereich PUBLIC "-//K2S//DTD Dokument//DE" "K2S.dtd">
+<konfigurationsBereich pid="kb.tmVewUdaGlobal" name="TeilmodellVewUdaGlobal" verantwortlich="kv.bitctrl">
+	<info>
+		<kurzinfo>Teilmodell mit Datenmodellierung zur Verwaltung der Umfassenden Datenanalyse.</kurzinfo>
+		<beschreibung>
+			<absatz>
+				Die folgende Abbildung skizziert die Zusammenhänge und Attributgruppen der verschiedenen Objekttypen
+				imTeilmodell zur Verwaltung der Umfassenden Datenanalyse.
+			</absatz>
+			<abbildung src="abbildungen/TeilmodelVewUdaGlobal.jpg">
+				<titel>Übersicht Teilmodell Verwaltung zur Verwaltung der Umfassenden Datenanalyse (global)</titel>
+			</abbildung>
+		</beschreibung>
+	</info>
+	<modell>
+		<typDefinition pid="typ.udaModul" name="UdaModul" objektNamenPermanent="nein">
+			<info>
+				<kurzinfo>Die Definiton eines UdaModuls.</kurzinfo>
+				<beschreibung>
+					Ein UdaModul repräsentiert eine Sammelstelle für alle von der Umfassenden Datenanalyse verwalteten
+					Skripte und der dazugehörigen Skriptläufe. Das Objekt kann entweder als Stand-Alone-Objekt
+					konfiguriert werden bzw. ist das Basisobjekt einer Autarken Organisationseinheit.
+				</beschreibung>
+			</info>
+			<erweitert pid="typ.konfigurationsObjekt"/>
+			<attributgruppe pid="atg.udaModulKey"/>
+			<menge pid="menge.udaSkripte" name="Skripte" erforderlich="ja">
+			</menge>
+			<menge pid="menge.udaSkriptLaeufe" name="SkriptLäufe" erforderlich="ja">
+			</menge>
+		</typDefinition>
+		<typDefinition pid="typ.udaSkript" name="UdaSkript" objektNamenPermanent="nein" persistenzModus="persistent">
+			<info>
+				<kurzinfo>Die Definition eines UdaSkripts.</kurzinfo>
+				<beschreibung>
+					Ein Objekt, das ein Skript zur Ausführung innerhalb der "Umfassenden Datenanalyse"
+					repräsentiert
+				</beschreibung>
+			</info>
+			<erweitert pid="typ.dynamischesObjekt"/>
+			<attributgruppe pid="atg.udaSkript"/>
+		</typDefinition>
+		<typDefinition pid="typ.udaSkriptLauf" name="UdaSkriptLauf" objektNamenPermanent="nein" persistenzModus="persistent">
+			<info>
+				<kurzinfo>ein Objekt zur Beschreibung der Ausführungsumgebung eines UDA-Skripts</kurzinfo>
+			</info>
+			<erweitert pid="typ.dynamischesObjekt"/>
+			<attributgruppe pid="atg.udaSkriptLauf"/>
+			<attributgruppe pid="atg.udaSkriptLaufErgebnis"/>
+			<attributgruppe pid="atg.udaSkriptLaufKommando"/>
+			<attributgruppe pid="atg.udaSkriptLaufLogger"/>
+			<attributgruppe pid="atg.udaSkriptLaufStatus"/>
+		</typDefinition>
+		<attributgruppenDefinition pid="atg.udaModulKey" name="UdamodulKey" parametrierend="nein">
+			<info>
+				<kurzinfo>Öffentlicher Schlüssel für Passwortverschlüsselung des Udamoduls</kurzinfo>
+			</info>
+			<aspekt pid="asp.udaIst" onlineModus="quelle">
+			</aspekt>
+			<attribut pid="att.byte" anzahl="0" anzahlIst="variabel" name="Modulus">
+			</attribut>
+			<attribut pid="att.byte" anzahl="0" anzahlIst="variabel" name="Exponent">
+			</attribut>
+		</attributgruppenDefinition>
+		<attributgruppenDefinition pid="atg.udaSkript" name="UdaSkript" parametrierend="nein">
+			<info>
+				<kurzinfo>beschreibt die konfigurierenden Eigenschaften eines Skripts</kurzinfo>
+			</info>
+			<aspekt pid="asp.udaIst" onlineModus="quelle">
+			</aspekt>
+			<aspekt pid="asp.udaVorgabe" onlineModus="senke">
+			</aspekt>
+			<attribut pid="att.text" anzahl="1" anzahlIst="fest" name="Name">
+				<info>
+					<kurzinfo>Der Name des Skripts</kurzinfo>
+				</info>
+			</attribut>
+			<attribut pid="att.text" anzahl="1" anzahlIst="fest" name="Beschreibung">
+				<info>
+					<kurzinfo>die erklärende Beschreibung der Funktion des Skripts</kurzinfo>
+				</info>
+			</attribut>
+			<attribut pid="att.zeitstempel" anzahl="1" anzahlIst="fest" name="ErstelltAm">
+				<info>
+					<kurzinfo>der Erstellungszeitpunkt des Skripts</kurzinfo>
+				</info>
+			</attribut>
+			<attribut pid="att.text" anzahl="1" anzahlIst="fest" name="ErstelltDurch">
+				<info>
+					<kurzinfo>Der Name des Nutzers, der das Skript erstellt hat</kurzinfo>
+				</info>
+			</attribut>
+			<attributliste pid="atl.udaHistorie" anzahl="0" anzahlIst="variabel" name="Versionshistorie">
+				<info>
+					<kurzinfo>eine Liste mit Einträgen zur Historie des Skripts</kurzinfo>
+				</info>
+			</attributliste>
+			<attribut pid="att.udaSkriptZustand" anzahl="1" anzahlIst="fest" name="Zustand">
+				<info>
+					<kurzinfo>der aktuelle Bearbeitungszustand des Skripts</kurzinfo>
+				</info>
+				<default wert="InBearbeitung"/>
+			</attribut>
+			<attribut pid="att.text" anzahl="0" anzahlIst="variabel" name="Quelltext">
+			</attribut>
+		</attributgruppenDefinition>
+		<attributgruppenDefinition pid="atg.udaSkriptLauf" name="UdaSkriptLauf" parametrierend="nein">
+			<info>
+				<kurzinfo>die konfigurierenden Eigenschaften eines Skriptlaufs</kurzinfo>
+			</info>
+			<aspekt pid="asp.udaIst" onlineModus="quelle">
+			</aspekt>
+			<aspekt pid="asp.udaVorgabe" onlineModus="senke">
+			</aspekt>
+			<attribut pid="att.text" anzahl="1" anzahlIst="fest" name="Name">
+				<info>
+					<kurzinfo>der Name des Skriptlaufs.</kurzinfo>
+				</info>
+			</attribut>
+			<attribut pid="att.text" anzahl="1" anzahlIst="fest" name="Beschreibung">
+				<info>
+					<kurzinfo>die Beschreibung des Skriptlaufs.</kurzinfo>
+				</info>
+			</attribut>
+			<attribut pid="att.udaSkriptReferenz" anzahl="1" anzahlIst="fest" name="Skript">
+				<info>
+					<kurzinfo>das Skript, das ausgeführt werden soll.</kurzinfo>
+				</info>
+			</attribut>
+			<attributliste pid="atl.udaSkriptParameter" anzahl="0" anzahlIst="variabel" name="Parameter">
+				<info>
+					<kurzinfo>die Parameter, die beim Start an des Skript übergeben werden sollen</kurzinfo>
+				</info>
+			</attributliste>
+			<attribut pid="att.text" anzahl="1" anzahlIst="fest" name="Benutzer">
+				<info>
+					<kurzinfo>der Name des Benutzers mit dessen Anmeldung das Skript ausgeführt werden soll.</kurzinfo>
+				</info>
+			</attribut>
+			<attribut pid="att.byte" anzahl="0" anzahlIst="variabel" name="Passwort">
+				<info>
+					<kurzinfo>der Name des Benutzers mit dessen Anmeldung das Skript ausgeführt werden soll.</kurzinfo>
+				</info>
+			</attribut>
+			<attribut pid="att.udaStartTyp" anzahl="1" anzahlIst="fest" name="Starttyp">
+				<info>
+					<kurzinfo>die Art der Ausführung (des Starts) des Skripts</kurzinfo>
+				</info>
+			</attribut>
+			<attributliste pid="atl.udaZyklus" anzahl="1" anzahlIst="fest" name="Startzyklus">
+				<info>
+					<kurzinfo>die Beschreibung des Ausführungszyklus</kurzinfo>
+				</info>
+			</attributliste>
+			<attributliste pid="atl.udaProtokoll" anzahl="0" anzahlIst="variabel" name="Protokoll">
+			</attributliste>
+			<attributliste pid="atl.udaHistorie" anzahl="0" anzahlIst="variabel" name="Versionshistorie">
+				<info>
+					<kurzinfo>eine Liste mit Einträgen zur Historie des Skriptlaufs</kurzinfo>
+				</info>
+			</attributliste>
+		</attributgruppenDefinition>
+		<attributgruppenDefinition pid="atg.udaSkriptLaufErgebnis" parametrierend="nein">
+			<info>
+				<kurzinfo>das Ergebnis einer Skriptlaufausführung</kurzinfo>
+			</info>
+			<aspekt pid="asp.udaIst" onlineModus="quelle">
+			</aspekt>
+			<attribut pid="att.jaNein" anzahl="1" anzahlIst="fest" name="Abgeschlossen">
+				<info>
+					<kurzinfo>Markiert, ob der Skriptlauf ordnungsgemäß abgeschlossen wurde</kurzinfo>
+				</info>
+			</attribut>
+			<attribut pid="att.text" anzahl="0" anzahlIst="variabel" name="Meldung">
+				<info>
+					<kurzinfo>die letzte Meldung</kurzinfo>
+				</info>
+			</attribut>
+		</attributgruppenDefinition>
+		<attributgruppenDefinition pid="atg.udaSkriptLaufKommando" name="UdaSkriptLaufKommando" parametrierend="nein">
+			<info>
+				<kurzinfo>Kommando</kurzinfo>
+			</info>
+			<aspekt pid="asp.udaAnforderung" onlineModus="senke">
+			</aspekt>
+			<aspekt pid="asp.udaAntwort" onlineModus="quelle">
+			</aspekt>
+			<attribut pid="att.zahl" anzahl="1" anzahlIst="fest" name="Anwendung">
+				<info>
+					<kurzinfo>die ID zur Identifikation der anfragenden Anwendung</kurzinfo>
+				</info>
+			</attribut>
+			<attribut pid="att.zahl" anzahl="1" anzahlIst="fest" name="Id">
+				<info>
+					<kurzinfo>die ID zur Identifikation der Antwort</kurzinfo>
+				</info>
+			</attribut>
+			<attribut pid="att.udaSkriptLaufKommandoTyp" anzahl="1" anzahlIst="fest" name="Kommando">
+				<info>
+					<kurzinfo>das auszuführende Kommando</kurzinfo>
+				</info>
+			</attribut>
+			<attribut pid="att.text" anzahl="0" anzahlIst="variabel" name="Meldung">
+				<info>
+					<kurzinfo>eine mit dem Kommando versendete Nachricht</kurzinfo>
+				</info>
+			</attribut>
+		</attributgruppenDefinition>
+		<attributgruppenDefinition pid="atg.udaSkriptLaufLogger" parametrierend="nein">
+			<info>
+				<kurzinfo>der aktuelle Status der Ausführung eines Skriptslaufs</kurzinfo>
+			</info>
+			<aspekt pid="asp.udaIst" onlineModus="quelle">
+			</aspekt>
+			<attribut pid="att.text" anzahl="0" anzahlIst="variabel" name="Meldung">
+				<info>
+					<kurzinfo>die letzte Meldung</kurzinfo>
+				</info>
+			</attribut>
+		</attributgruppenDefinition>
+		<attributgruppenDefinition pid="atg.udaSkriptLaufStatus" parametrierend="nein">
+			<info>
+				<kurzinfo>der aktuelle Status der Ausführung eines Skriptslaufs</kurzinfo>
+			</info>
+			<aspekt pid="asp.udaIst" onlineModus="quelle">
+			</aspekt>
+			<attribut pid="att.udaSkriptLaufStatus" anzahl="1" anzahlIst="fest" name="Status">
+				<info>
+					<kurzinfo>der aktuelle Ausführungsstatus</kurzinfo>
+				</info>
+			</attribut>
+		</attributgruppenDefinition>
+		<aspektDefinition pid="asp.udaAnforderung" name="UdaAnforderung">
+			<info>
+				<kurzinfo>
+					Aspekt zur Beschreibung eines Anforderung an die "Umfassende Datenanalyse"
+				</kurzinfo>
+			</info>
+		</aspektDefinition>
+		<aspektDefinition pid="asp.udaAntwort" name="UdaAntwort">
+			<info>
+				<kurzinfo>
+					Aspekt zur Beschreibung einer Antwort auf eine Anforderung an die "Umfassende
+					Datenanalyse"
+				</kurzinfo>
+			</info>
+		</aspektDefinition>
+		<aspektDefinition pid="asp.udaIst" name="UdaIst">
+			<info>
+				<kurzinfo>Aspekt zur Beschreibung einer Vorgabe für Daten eines UdaObjekts</kurzinfo>
+			</info>
+		</aspektDefinition>
+		<aspektDefinition pid="asp.udaVorgabe" name="UdaVorgabe">
+			<info>
+				<kurzinfo>Aspekt zur Beschreibung einer Vorgabe für Daten eines UdaObjekts</kurzinfo>
+			</info>
+		</aspektDefinition>
+		<attributDefinition pid="att.udaProtokollTyp" name="UdaProtokollTyp">
+			<info>
+				<kurzinfo>der Typ des Protokolls eines Uda-Skriptlaufs</kurzinfo>
+			</info>
+			<ganzzahl bits="16">
+				<zustand name="Konsole" wert="0">
+					<info>
+						<kurzinfo>Ausgabe auf Stdout</kurzinfo>
+					</info>
+				</zustand>
+				<zustand name="Datei" wert="1">
+					<info>
+						<kurzinfo>Ausgabe des Protokolls in eine Datei</kurzinfo>
+					</info>
+				</zustand>
+				<zustand name="Logging" wert="2">
+					<info>
+						<kurzinfo>Ausgabe in zirkuläre Logdateien</kurzinfo>
+					</info>
+				</zustand>
+				<zustand name="Dav" wert="3">
+					<info>
+						<kurzinfo>Ausgabe in eine Attributgruppe des Skriptlaufs</kurzinfo>
+					</info>
+				</zustand>
+			</ganzzahl>
+		</attributDefinition>
+		<attributDefinition pid="att.udaSkriptLaufKommandoTyp" name="UdaSkriptLaufKommandoTyp">
+			<info>
+				<kurzinfo>ein Kommando an die Uda inklusive der Codes für die Antworten</kurzinfo>
+			</info>
+			<ganzzahl bits="8">
+				<zustand name="OK" wert="0">
+					<info>
+						<kurzinfo>Ausführung des Kommandos erfolgreich abgeschlossen</kurzinfo>
+					</info>
+				</zustand>
+				<zustand name="SchonAktiv" wert="-1">
+					<info>
+						<kurzinfo>der Skriptlauf kann nicht gestartet werden, weil er bereits aktiv ist</kurzinfo>
+					</info>
+				</zustand>
+				<zustand name="NichtAktiv" wert="-2">
+					<info>
+						<kurzinfo>der Skriptlauf ist nicht aktiv</kurzinfo>
+					</info>
+				</zustand>
+				<zustand name="AllgemeinerFehler" wert="-3">
+				</zustand>
+				<zustand name="Starten" wert="1">
+					<info>
+						<kurzinfo>Skriptlauf starten</kurzinfo>
+					</info>
+				</zustand>
+				<zustand name="Anhalten" wert="2">
+					<info>
+						<kurzinfo>Skriptausführung anhalten</kurzinfo>
+					</info>
+				</zustand>
+				<zustand name="Fortsetzen" wert="3">
+					<info>
+						<kurzinfo>Skriptausführung fortsetzen</kurzinfo>
+					</info>
+				</zustand>
+				<zustand name="Beenden" wert="4">
+					<info>
+						<kurzinfo>Skriptausführung beenden</kurzinfo>
+					</info>
+				</zustand>
+			</ganzzahl>
+		</attributDefinition>
+		<attributDefinition pid="att.udaSkriptLaufStatus">
+			<info>
+				<kurzinfo>der Status eines Skriptlaufs</kurzinfo>
+			</info>
+			<ganzzahl bits="8">
+				<zustand name="aktiv" wert="1">
+					<info>
+						<kurzinfo>der Skriptlauf ist aktiv</kurzinfo>
+					</info>
+				</zustand>
+				<zustand name="angehalten" wert="2">
+					<info>
+						<kurzinfo>der Skriptlauf ist aktiv, aber im Moment angehalten</kurzinfo>
+					</info>
+				</zustand>
+				<zustand name="passiv" wert="3">
+					<info>
+						<kurzinfo>der Skriptlauf ist nicht aktiv</kurzinfo>
+					</info>
+				</zustand>
+				<zustand name="beendet" wert="4">
+					<info>
+						<kurzinfo>der Skriptlauf ist nicht aktiv</kurzinfo>
+					</info>
+				</zustand>
+			</ganzzahl>
+		</attributDefinition>
+		<attributDefinition pid="att.udaSkriptReferenz" name="UdaSkriptReferenz">
+			<info>
+				<kurzinfo>eine referenz auf ein Objekt vom Typ typ.udaSkript</kurzinfo>
+			</info>
+			<objektReferenz typ="typ.udaSkript" undefiniert="erlaubt" referenzierungsart="assoziation"/>
+		</attributDefinition>
+		<attributDefinition pid="att.udaSkriptZustand" name="UdaSkriptZustand">
+			<info>
+				<kurzinfo>der Zustand der Bearbeitung eines Skripts</kurzinfo>
+			</info>
+			<ganzzahl bits="8">
+				<zustand name="Angelegt" wert="0">
+					<info>
+						<kurzinfo>das Skript wird noch bearbeitet</kurzinfo>
+					</info>
+				</zustand>
+				<zustand name="InBearbeitung" wert="1">
+					<info>
+						<kurzinfo>das Skript wird noch bearbeitet</kurzinfo>
+					</info>
+				</zustand>
+				<zustand name="Freigegeben" wert="2">
+					<info>
+						<kurzinfo>das Skript ist zur Ausführung freigegeben</kurzinfo>
+					</info>
+				</zustand>
+			</ganzzahl>
+		</attributDefinition>
+		<attributDefinition pid="att.udaStartTyp" name="UdaStartTyp">
+			<info>
+				<kurzinfo>die Art der Ausführungs (des Starts) eines Uda-Skript-Laufs</kurzinfo>
+			</info>
+			<ganzzahl bits="8">
+				<zustand name="sofort" wert="1">
+					<info>
+						<kurzinfo>Skriptlauf wird sofort ausgeführt, wenn das Skript freigegeben ist</kurzinfo>
+					</info>
+				</zustand>
+				<zustand name="explizit" wert="2">
+					<info>
+						<kurzinfo>
+							der Skriptlauf wird ausgeführt, wenn eine entsprechende Anforderung durch einen Nutzer
+							erfolgt ist.
+						</kurzinfo>
+					</info>
+				</zustand>
+				<zustand name="zyklisch" wert="3">
+					<info>
+						<kurzinfo>das Skript wird zyklisch ausgeführt</kurzinfo>
+					</info>
+				</zustand>
+			</ganzzahl>
+		</attributDefinition>
+		<attributlistenDefinition pid="atl.udaHistorie" name="UdaHistorie">
+			<info>
+				<kurzinfo>beschreibt einen Eintrag des historischen Ablaufs der Skriptbearbeitung</kurzinfo>
+			</info>
+			<attribut pid="att.zeitstempel" anzahl="1" anzahlIst="fest" name="Änderungsdatum">
+				<info>
+					<kurzinfo>der Zeitstempel der Änderung</kurzinfo>
+				</info>
+			</attribut>
+			<attribut pid="att.text" anzahl="1" anzahlIst="fest" name="Name">
+				<info>
+					<kurzinfo>der Name des Nutzers, der die Änderung vorgenommen hat</kurzinfo>
+				</info>
+			</attribut>
+			<attribut pid="att.text" anzahl="1" anzahlIst="fest" name="Grund">
+				<info>
+					<kurzinfo>die Beschreibung des Änderungsgrundes</kurzinfo>
+				</info>
+			</attribut>
+		</attributlistenDefinition>
+		<attributlistenDefinition pid="atl.udaProtokoll" name="UdaProtokoll">
+			<info>
+				<kurzinfo>die Beschreibung des Protokolls für die Ausführung eines Skriptlaufs</kurzinfo>
+			</info>
+			<attribut pid="att.udaProtokollTyp" anzahl="1" anzahlIst="fest" name="Typ">
+				<info>
+					<kurzinfo>der Typ des Protokolls</kurzinfo>
+				</info>
+			</attribut>
+			<attribut pid="att.text" anzahl="1" anzahlIst="fest" name="Name">
+				<info>
+					<kurzinfo>der Name des Protokolls (z.B. Dateiname)</kurzinfo>
+				</info>
+			</attribut>
+			<attribut pid="att.zahl" anzahl="1" anzahlIst="fest" name="Anzahl">
+				<info>
+					<kurzinfo>
+						die Anzahl der Protokolldateien (z.B. bei Verwendung von Logging), wird nicht von allen Typen
+						berücksichtigt
+					</kurzinfo>
+				</info>
+			</attribut>
+			<attribut pid="att.zahl" anzahl="1" anzahlIst="fest" name="MaxGroesse">
+				<info>
+					<kurzinfo>
+						die maximale Größe der Protokollausgabe (wird nicht von allen Typen berücksichtigt)
+					</kurzinfo>
+				</info>
+			</attribut>
+		</attributlistenDefinition>
+		<attributlistenDefinition pid="atl.udaSkriptParameter" name="UdaSkriptParameter">
+			<info>
+				<kurzinfo>ein Parameter, der beim Start eines Skripts übergeben wird</kurzinfo>
+			</info>
+			<attribut pid="att.text" anzahl="1" anzahlIst="fest" name="Name">
+				<info>
+					<kurzinfo>der Name des Parameters</kurzinfo>
+				</info>
+			</attribut>
+			<attribut pid="att.text" anzahl="1" anzahlIst="fest" name="Wert">
+				<info>
+					<kurzinfo>der Wert des Parameters</kurzinfo>
+				</info>
+			</attribut>
+		</attributlistenDefinition>
+		<attributlistenDefinition pid="atl.udaZyklus" name="UdaZyklus">
+			<info>
+				<kurzinfo>die Daten für die zyklische Ausführung eines Skriptlaufs</kurzinfo>
+			</info>
+			<attribut pid="att.zeitstempel" anzahl="1" anzahlIst="fest" name="Startzeitpunkt">
+				<info>
+					<kurzinfo>der Startzeitpunkt für die Ausführung des Skripts</kurzinfo>
+					<beschreibung>
+						Der Startzeitpunkt kann ein konkreter Zeitstempel sein, z.B. bei einer einmaligen Ausführung.
+						Für eine zyklische Ausführung kann der Wert auf 0 gesetzt werden, damit wird die Ausführung
+						ausgehend von = Uhr des aktuellen Tages im angegebenen Intervall ausgeführt.
+					</beschreibung>
+				</info>
+			</attribut>
+			<attribut pid="att.zahl" anzahl="1" anzahlIst="fest" name="Intervall">
+				<info>
+					<kurzinfo>das Intervall für die zyklische Ausführung, 0 bei einmaliger Ausführung</kurzinfo>
+				</info>
+			</attribut>
+		</attributlistenDefinition>
+		<mengenDefinition pid="menge.udaSkripte" elemente="typ.udaSkript" aenderbar="ja" mindestens="0" hoechstens="0" referenzierungsart="assoziation">
+			<info>
+				<kurzinfo>eine Menge von UdaSkriptobjekten</kurzinfo>
+			</info>
+		</mengenDefinition>
+		<mengenDefinition pid="menge.udaSkriptLaeufe" elemente="typ.udaSkriptLauf" aenderbar="ja" mindestens="0" hoechstens="0" referenzierungsart="assoziation">
+			<info>
+				<kurzinfo>eine Menge von UdaSkriptLaufobjekten</kurzinfo>
+			</info>
+		</mengenDefinition>
+	</modell>
+	<objekte>
+	</objekte>
+</konfigurationsBereich>

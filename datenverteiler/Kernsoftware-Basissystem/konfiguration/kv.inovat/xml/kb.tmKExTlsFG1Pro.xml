@@ -1,0 +1,616 @@
+<?xml version="1.0" encoding="ISO-8859-1"?>
+<!DOCTYPE konfigurationsBereich PUBLIC "-//K2S//DTD Dokument//DE" "K2S.dtd">
+<konfigurationsBereich pid="kb.tmKExTlsFG1Pro" name="TeilmodellKFExTls - FG 1 - Erweiterung für ZRAPro-Algorithmus" verantwortlich="kv.inovat">
+	<info>
+		<kurzinfo>
+            Erweiterung der FG1 um spezifische Daten für den ZRAPro Algorithmus (Dr. Trapp)
+            sind.
+        </kurzinfo>
+	</info>
+	<konfigurationsAenderung stand="29.04.2012" version="1" autor="inovat, Dipl.-Ing. H. C. Kniß (HCK)" grund="Neuerstellung."></konfigurationsAenderung>
+	<!--
+	Abhängigkeiten des Bereichs kb.tmKExTlsFG1Pro
+	Abhängig ab Version      Art der Abhängigkeit      Version des benötigten Bereichs      Benötigter Bereich
+	1                        notwendig                 6                                    kb.tmKExTlsGlobal                  
+	1                        notwendig                 1                                    kb.kv.inovat                       
+	1                        notwendig                 4                                    kb.fachModellGlobal                
+	1                        notwendig                 1                                    kb.metaModellGlobal                
+	1                        notwendig                 3                                    kb.tmVewBetriebGlobal              
+	-->
+		<modell>
+		<typDefinition pid="typ.deLvePro" name="DeLvePro" objektNamenPermanent="nein">
+			<info>
+				<kurzinfo>
+                    Datenendgerätekanal der Funktionsgruppe 1  erweitert für den Pro-Algorithmus.
+                </kurzinfo>
+			</info>
+			<erweitert pid="typ.deLve"/>
+			<attributgruppe pid="atg.tlsLveParamProRichtungsBezogeneKenndaten"/>
+			<attributgruppe pid="atg.tlsLveParamProVerkehrsStufen"/>
+			<attributgruppe pid="atg.tlsLveProVerkehrsStufen"/>
+			<defaultParameter attributgruppe="atg.tlsLveParamProRichtungsBezogeneKenndaten" typ="typ.deLvePro">
+				<datenliste name="Urlasser">
+					<datum name="BenutzerReferenz" wert="undefiniert"/>
+					<datum name="Ursache" wert=""/>
+					<datum name="Veranlasser" wert=""/>
+				</datenliste>
+				<datum name="Hersteller" wert="48"/>
+				<datum name="KanalMaske01Bis08" wert="13 Kanal-Bits"/>
+				<datum name="KanalMaske09Bis16" wert="0 Kanal-Bits"/>
+				<datum name="KanalMaske17Bis24" wert="0 Kanal-Bits"/>
+				<datum name="KanalMaske25Bis32" wert="0 Kanal-Bits"/>
+				<datum name="Reserve01" wert="0"/>
+				<datum name="Reserve02" wert="0"/>
+				<datum name="Reserve03" wert="0"/>
+				<datum name="Reserve04" wert="0"/>
+				<datum name="Qx" wert="1 Fz/Erfassungintervall"/>
+				<datum name="VKfz" wert="90 km/h"/>
+				<datum name="VPkw" wert="100 km/h"/>
+				<datum name="VLkw" wert="80 km/h"/>
+				<datum name="Reserve05" wert="0"/>
+				<datum name="alpha1" wert="0,25"/>
+				<datum name="beta1" wert="TrendAus"/>
+				<datum name="alpha2" wert="0,25"/>
+				<datum name="beta2" wert="TrendAus"/>
+				<datum name="k1" wert="2,00"/>
+				<datum name="k2" wert="0,01"/>
+				<datum name="ZTtimo" wert="4 Zyklen"/>
+				<datum name="Reserve06" wert="0"/>
+				<datum name="DMax" wert="150 Fz/km"/>
+				<datum name="DGrenz" wert="100 Fz/km"/>
+				<datum name="Reserve07" wert="0"/>
+				<datum name="Reserve08" wert="0"/>
+				<datum name="Reserve09" wert="0"/>
+				<datum name="Reserve10" wert="0"/>
+			</defaultParameter>
+			<defaultParameter attributgruppe="atg.tlsLveParamProVerkehrsStufen" typ="typ.deLvePro">
+				<datenliste name="Urlasser">
+					<datum name="BenutzerReferenz" wert="undefiniert"/>
+					<datum name="Ursache" wert=""/>
+					<datum name="Veranlasser" wert=""/>
+				</datenliste>
+				<datum name="Hersteller" wert="48"/>
+				<datum name="DP2Ein" wert="30 Fz/km"/>
+				<datum name="DP4Ein" wert="60 Fz/km"/>
+				<datum name="VKfzP3Ein" wert="80 km/h"/>
+				<datum name="VKfzP4Ein" wert="30 km/h"/>
+				<datum name="Reserve01" wert="0"/>
+				<datum name="Reserve02" wert="0"/>
+				<datum name="Reserve03" wert="0"/>
+				<datum name="Reserve04" wert="0"/>
+				<datum name="Reserve05" wert="0"/>
+				<datum name="Reserve06" wert="0"/>
+			</defaultParameter>
+		</typDefinition>
+		<attributgruppenDefinition pid="atg.tlsLveParamProRichtungsBezogeneKenndaten" name="TlsLveParamProRichtungsBezogeneKenndaten" parametrierend="ja">
+			<info>
+				<kurzinfo>Parameter für richtungsbezogene Kenndaten bei Zuflussregelung (FG 1 / Typ 162 - Dürr)</kurzinfo>
+				<beschreibung>
+                    <sektion>
+                        <titel>FG 1: DE-Block-Struktur im Typ 162 "Parameter für richtungsbezogene Kenndaten"</titel>
+                        <absatz>Wird verwendet mit ID 3 (Parameter) in Abruf- und Antwortrichtung oder mit ID 35
+                            (Parametermeldung aus Puffer) in Antwortrichtung.
+                        </absatz>
+                        <absatz>Die Nachricht überträgt Parameter für richtungsbezogene Kenndaten.
+                        </absatz>
+                    </sektion>
+                </beschreibung>
+			</info>
+			<aspekt pid="asp.tlsParameterVorgabeArchiv" onlineModus="quelleUndSenke">
+			</aspekt>
+			<aspekt pid="asp.tlsVorgabeBedienung" onlineModus="quelleUndSenke">
+			</aspekt>
+			<attributliste pid="atl.urlasser" anzahl="1" anzahlIst="fest" name="Urlasser">
+			</attributliste>
+			<attribut pid="att.tlsHersteller" anzahl="1" anzahlIst="fest" name="Hersteller">
+				<info>
+					<kurzinfo>Herstellercode: Dürr = 48</kurzinfo>
+				</info>
+			</attribut>
+			<attribut pid="att.tlsLveProKanalMaske" anzahl="1" anzahlIst="fest" name="KanalMaske01Bis08">
+				<info>
+					<kurzinfo>Die richtungsbezogenen Kenngrößen beziehen sich auf Daten mehrerer Fahrstreifen. Die Einzelfahrstreifen müssen sich im gleichen Cluster (also auf dem gleichen EAK) befinden. Die Nummer der einzelen Bits in der Maske bezeichnet den physikalischen Kanal der Fahrstreifen die für die richtungsbezogenen Kenngrößen verarbeitet werden: gesetzt bedeutet der Kanal wird bearbeitet</kurzinfo>
+				</info>
+			</attribut>
+			<attribut pid="att.tlsLveProKanalMaske" anzahl="1" anzahlIst="fest" name="KanalMaske09Bis16">
+				<info>
+					<kurzinfo>Die richtungsbezogenen Kenngrößen beziehen sich auf Daten mehrerer Fahrstreifen. Die Einzelfahrstreifen müssen sich im gleichen Cluster (also auf dem gleichen EAK) befinden. Die Nummer der einzelen Bits in der Maske bezeichnet den physikalischen Kanal der Fahrstreifen die für die richtungsbezogenen Kenngrößen verarbeitet werden: gesetzt bedeutet der Kanal wird bearbeitet</kurzinfo>
+				</info>
+			</attribut>
+			<attribut pid="att.tlsLveProKanalMaske" anzahl="1" anzahlIst="fest" name="KanalMaske17Bis24">
+				<info>
+					<kurzinfo>Die richtungsbezogenen Kenngrößen beziehen sich auf Daten mehrerer Fahrstreifen. Die Einzelfahrstreifen müssen sich im gleichen Cluster (also auf dem gleichen EAK) befinden. Die Nummer der einzelen Bits in der Maske bezeichnet den physikalischen Kanal der Fahrstreifen die für die richtungsbezogenen Kenngrößen verarbeitet werden: gesetzt bedeutet der Kanal wird bearbeitet</kurzinfo>
+				</info>
+			</attribut>
+			<attribut pid="att.tlsLveProKanalMaske" anzahl="1" anzahlIst="fest" name="KanalMaske25Bis32">
+				<info>
+					<kurzinfo>Die richtungsbezogenen Kenngrößen beziehen sich auf Daten mehrerer Fahrstreifen. Die Einzelfahrstreifen müssen sich im gleichen Cluster (also auf dem gleichen EAK) befinden. Die Nummer der einzelen Bits in der Maske bezeichnet den physikalischen Kanal der Fahrstreifen die für die richtungsbezogenen Kenngrößen verarbeitet werden: gesetzt bedeutet der Kanal wird bearbeitet</kurzinfo>
+				</info>
+			</attribut>
+			<attribut pid="att.tlsLveProReserve" anzahl="1" anzahlIst="fest" name="Reserve01">
+				<info>
+					<kurzinfo>ReserveByte für Erweiterungen</kurzinfo>
+				</info>
+			</attribut>
+			<attribut pid="att.tlsLveProReserve" anzahl="1" anzahlIst="fest" name="Reserve02">
+				<info>
+					<kurzinfo>ReserveByte für Erweiterungen</kurzinfo>
+				</info>
+			</attribut>
+			<attribut pid="att.tlsLveProReserve" anzahl="1" anzahlIst="fest" name="Reserve03">
+				<info>
+					<kurzinfo>ReserveByte für Erweiterungen</kurzinfo>
+				</info>
+			</attribut>
+			<attribut pid="att.tlsLveProReserve" anzahl="1" anzahlIst="fest" name="Reserve04">
+				<info>
+					<kurzinfo>ReserveByte für Erweiterungen</kurzinfo>
+				</info>
+			</attribut>
+			<attribut pid="att.tlsLveVerkehrsstärke" anzahl="1" anzahlIst="fest" name="Qx">
+				<info>
+					<kurzinfo>Startwert für Qx, siehe MARZ Kapitel 2.3.2.1.3.</kurzinfo>
+				</info>
+			</attribut>
+			<attribut pid="att.tlsLveGeschwindigkeit" anzahl="1" anzahlIst="fest" name="VKfz">
+				<info>
+					<kurzinfo>Startwert für VKfz</kurzinfo>
+				</info>
+			</attribut>
+			<attribut pid="att.tlsLveGeschwindigkeit" anzahl="1" anzahlIst="fest" name="VPkw">
+				<info>
+					<kurzinfo>Startwert für VPkw</kurzinfo>
+				</info>
+			</attribut>
+			<attribut pid="att.tlsLveGeschwindigkeit" anzahl="1" anzahlIst="fest" name="VLkw">
+				<info>
+					<kurzinfo>Startwert für VLkw</kurzinfo>
+				</info>
+			</attribut>
+			<attribut pid="att.tlsLveProReserve" anzahl="1" anzahlIst="fest" name="Reserve05">
+				<info>
+					<kurzinfo>ReserveByte für Erweiterungen</kurzinfo>
+				</info>
+			</attribut>
+			<attribut pid="att.tlsLveProAlpha" anzahl="1" anzahlIst="fest" name="alpha1">
+				<info>
+					<kurzinfo>Prognoseglättungsfaktor Mittelwert alpha1</kurzinfo>
+				</info>
+			</attribut>
+			<attribut pid="att.tlsLveProBeta" anzahl="1" anzahlIst="fest" name="beta1">
+				<info>
+					<kurzinfo>Prognoseglättungsfaktor Trend beta1</kurzinfo>
+				</info>
+			</attribut>
+			<attribut pid="att.tlsLveProAlpha" anzahl="1" anzahlIst="fest" name="alpha2">
+				<info>
+					<kurzinfo>Prognoseglättungsfaktor Mittelwert alpha2</kurzinfo>
+				</info>
+			</attribut>
+			<attribut pid="att.tlsLveProBeta" anzahl="1" anzahlIst="fest" name="beta2">
+				<info>
+					<kurzinfo>Prognoseglättungsfaktor Trend beta2</kurzinfo>
+				</info>
+			</attribut>
+			<attribut pid="att.tlsLveProGewichtung" anzahl="1" anzahlIst="fest" name="k1">
+				<info>
+					<kurzinfo>Gewichtungsfaktor k1</kurzinfo>
+				</info>
+			</attribut>
+			<attribut pid="att.tlsLveProGewichtung" anzahl="1" anzahlIst="fest" name="k2">
+				<info>
+					<kurzinfo>Gewichtungsfaktor k2</kurzinfo>
+				</info>
+			</attribut>
+			<attribut pid="att.tlsLveProAnzahlZyklen" anzahl="1" anzahlIst="fest" name="ZTtimo">
+				<info>
+					<kurzinfo>Anzahl der Zyklen (LVE-Erfassungsintervalldauer/Kurzzeitdaten), in denen ein ausgefallener Istwert ersetzt werden soll.</kurzinfo>
+				</info>
+			</attribut>
+			<attribut pid="att.tlsLveProReserve" anzahl="1" anzahlIst="fest" name="Reserve06">
+				<info>
+					<kurzinfo>ReserveByte für Erweiterungen</kurzinfo>
+				</info>
+			</attribut>
+			<attribut pid="att.tlsLveDichte" anzahl="1" anzahlIst="fest" name="DMax">
+				<info>
+					<kurzinfo>Dichte Maximal</kurzinfo>
+				</info>
+			</attribut>
+			<attribut pid="att.tlsLveDichte" anzahl="1" anzahlIst="fest" name="DGrenz">
+				<info>
+					<kurzinfo>Dichte Grenzwert</kurzinfo>
+				</info>
+			</attribut>
+			<attribut pid="att.tlsLveProReserve" anzahl="1" anzahlIst="fest" name="Reserve07">
+				<info>
+					<kurzinfo>ReserveByte für Erweiterungen</kurzinfo>
+				</info>
+			</attribut>
+			<attribut pid="att.tlsLveProReserve" anzahl="1" anzahlIst="fest" name="Reserve08">
+				<info>
+					<kurzinfo>ReserveByte für Erweiterungen</kurzinfo>
+				</info>
+			</attribut>
+			<attribut pid="att.tlsLveProReserve" anzahl="1" anzahlIst="fest" name="Reserve09">
+				<info>
+					<kurzinfo>ReserveByte für Erweiterungen</kurzinfo>
+				</info>
+			</attribut>
+			<attribut pid="att.tlsLveProReserve" anzahl="1" anzahlIst="fest" name="Reserve10">
+				<info>
+					<kurzinfo>ReserveByte für Erweiterungen</kurzinfo>
+				</info>
+			</attribut>
+		</attributgruppenDefinition>
+		<attributgruppenDefinition pid="atg.tlsLveParamProVerkehrsStufen" name="TlsLveParamProVerkehrsStufen" parametrierend="ja">
+			<info>
+				<kurzinfo>Parameter für Verkehrsstufen bei Zuflussregelung (FG 1 / Typ 165 - Dürr)</kurzinfo>
+				<beschreibung>
+                    <sektion>
+                        <titel>FG 1: DE-Block-Struktur im Typ 165 "Parameter Verkehrsstufen"</titel>
+                        <absatz>Wird verwendet mit ID 3 (Parameter) in Abruf- und Antwortrichtung oder mit ID 35
+                            (Parametermeldung aus Puffer) in Antwortrichtung.
+                        </absatz>
+                        <absatz>Die Nachricht überträgt Parameter für Verkehrsstufen.
+                        </absatz>
+                    </sektion>
+                </beschreibung>
+			</info>
+			<aspekt pid="asp.tlsParameterVorgabeArchiv" onlineModus="quelleUndSenke">
+			</aspekt>
+			<aspekt pid="asp.tlsVorgabeBedienung" onlineModus="quelleUndSenke">
+			</aspekt>
+			<attributliste pid="atl.urlasser" anzahl="1" anzahlIst="fest" name="Urlasser">
+			</attributliste>
+			<attribut pid="att.tlsHersteller" anzahl="1" anzahlIst="fest" name="Hersteller">
+				<info>
+					<kurzinfo>Herstellercode: Dürr = 48</kurzinfo>
+				</info>
+			</attribut>
+			<attribut pid="att.tlsLveDichte" anzahl="1" anzahlIst="fest" name="DP2Ein">
+				<info>
+					<kurzinfo>Einschaltschwellwert</kurzinfo>
+				</info>
+			</attribut>
+			<attribut pid="att.tlsLveDichte" anzahl="1" anzahlIst="fest" name="DP4Ein">
+				<info>
+					<kurzinfo>Einschaltschwellwert</kurzinfo>
+				</info>
+			</attribut>
+			<attribut pid="att.tlsLveGeschwindigkeit" anzahl="1" anzahlIst="fest" name="VKfzP3Ein">
+				<info>
+					<kurzinfo>Einschaltschwellwert</kurzinfo>
+				</info>
+			</attribut>
+			<attribut pid="att.tlsLveGeschwindigkeit" anzahl="1" anzahlIst="fest" name="VKfzP4Ein">
+				<info>
+					<kurzinfo>Einschaltschwellwert</kurzinfo>
+				</info>
+			</attribut>
+			<attribut pid="att.tlsLveProReserve" anzahl="1" anzahlIst="fest" name="Reserve01">
+				<info>
+					<kurzinfo>ReserveByte für Erweiterungen</kurzinfo>
+				</info>
+			</attribut>
+			<attribut pid="att.tlsLveProReserve" anzahl="1" anzahlIst="fest" name="Reserve02">
+				<info>
+					<kurzinfo>ReserveByte für Erweiterungen</kurzinfo>
+				</info>
+			</attribut>
+			<attribut pid="att.tlsLveProReserve" anzahl="1" anzahlIst="fest" name="Reserve03">
+				<info>
+					<kurzinfo>ReserveByte für Erweiterungen</kurzinfo>
+				</info>
+			</attribut>
+			<attribut pid="att.tlsLveProReserve" anzahl="1" anzahlIst="fest" name="Reserve04">
+				<info>
+					<kurzinfo>ReserveByte für Erweiterungen</kurzinfo>
+				</info>
+			</attribut>
+			<attribut pid="att.tlsLveProReserve" anzahl="1" anzahlIst="fest" name="Reserve05">
+				<info>
+					<kurzinfo>ReserveByte für Erweiterungen</kurzinfo>
+				</info>
+			</attribut>
+			<attribut pid="att.tlsLveProReserve" anzahl="1" anzahlIst="fest" name="Reserve06">
+				<info>
+					<kurzinfo>ReserveByte für Erweiterungen</kurzinfo>
+				</info>
+			</attribut>
+		</attributgruppenDefinition>
+		<attributgruppenDefinition pid="atg.tlsLveProVerkehrsStufen" name="TlsLveProVerkehrsStufen" parametrierend="nein">
+			<info>
+				<kurzinfo>ZRA Pro Verkehrsstufen (FG 1 / Typ 224 Hersteller Dürr).</kurzinfo>
+				<beschreibung>
+					<sektion>
+						<titel>FG 1: DE-Block-Struktur im Typ 224 "Verkehrsstufen"</titel>
+						<absatz>Die Nachricht überträgt die aktuell errechneten Verkehrsstufen.
+							Wird versendet mit Zeitstempel Typ 48 der FG 1.
+						</absatz>
+					</sektion>
+				</beschreibung>
+			</info>
+			<aspekt pid="asp.tlsAntwort" onlineModus="quelleUndSenke">
+			</aspekt>
+			<attribut pid="att.tlsHersteller" anzahl="1" anzahlIst="fest" name="Hersteller">
+				<info>
+					<kurzinfo>Herstellercode: Dürr = 48</kurzinfo>
+				</info>
+			</attribut>
+			<attribut pid="att.tlsLveProVerkehrsStufeMARZ" anzahl="1" anzahlIst="fest" name="VerkehrsStufeMARZ">
+				<info>
+					<kurzinfo>Verkehrsstufe nach MARZ</kurzinfo>
+				</info>
+			</attribut>
+			<attribut pid="att.tlsLveProVerkehrsStufeInfoDP" anzahl="1" anzahlIst="fest" name="VerkehrsStufeInfoDP">
+				<info>
+					<kurzinfo>Zusatzinformationen zum Bereich DP</kurzinfo>
+				</info>
+			</attribut>
+			<attribut pid="att.tlsLveProVerkehrsStufeInfoVKfzP" anzahl="1" anzahlIst="fest" name="VerkehrsStufeInfoVKfzP">
+				<info>
+					<kurzinfo>Zusatzinformationen zum Bereich VKfzP</kurzinfo>
+				</info>
+			</attribut>
+			<attribut pid="att.tlsLveProReserve" anzahl="1" anzahlIst="fest" name="Reserve01">
+				<info>
+					<kurzinfo>ReserveByte für Erweiterungen</kurzinfo>
+				</info>
+			</attribut>
+			<attribut pid="att.tlsLveProReserve" anzahl="1" anzahlIst="fest" name="Reserve02">
+				<info>
+					<kurzinfo>ReserveByte für Erweiterungen</kurzinfo>
+				</info>
+			</attribut>
+			<attribut pid="att.tlsLveProReserve" anzahl="1" anzahlIst="fest" name="Reserve03">
+				<info>
+					<kurzinfo>ReserveByte für Erweiterungen</kurzinfo>
+				</info>
+			</attribut>
+			<attribut pid="att.tlsLveDichte" anzahl="1" anzahlIst="fest" name="DP">
+				<info>
+					<kurzinfo>Prognoseverkehrsdichte</kurzinfo>
+				</info>
+			</attribut>
+			<attribut pid="att.tlsLveVerkehrsstärke" anzahl="1" anzahlIst="fest" name="QBP">
+				<info>
+					<kurzinfo>Prognose Bemessungsverkehrsstärke</kurzinfo>
+				</info>
+			</attribut>
+			<attribut pid="att.tlsLveVerkehrsstärke" anzahl="1" anzahlIst="fest" name="QKfzP">
+				<info>
+					<kurzinfo>Prognose Verkehrsstärke für Kfz</kurzinfo>
+				</info>
+			</attribut>
+			<attribut pid="att.tlsLveVerkehrsstärke" anzahl="1" anzahlIst="fest" name="QKfzNeu">
+				<info>
+					<kurzinfo>Prognose Verkehrsstärke für KfzNeu</kurzinfo>
+				</info>
+			</attribut>
+			<attribut pid="att.tlsLveGeschwindigkeit" anzahl="1" anzahlIst="fest" name="VKfzP">
+				<info>
+					<kurzinfo>Prognose Geschwindigkeit für Kfz</kurzinfo>
+				</info>
+			</attribut>
+			<attribut pid="att.tlsLveGeschwindigkeit" anzahl="1" anzahlIst="fest" name="VKfzNeu">
+				<info>
+					<kurzinfo>Geglättete mittlere Reisegeschwindigkeit für Kfz</kurzinfo>
+				</info>
+			</attribut>
+			<attribut pid="att.tlsLveVerkehrsstärke" anzahl="1" anzahlIst="fest" name="QPkwP">
+				<info>
+					<kurzinfo>Prognose Verkehrsstärke für Pkw</kurzinfo>
+				</info>
+			</attribut>
+			<attribut pid="att.tlsLveVerkehrsstärke" anzahl="1" anzahlIst="fest" name="QPkwNeu">
+				<info>
+					<kurzinfo>Prognose Verkehrsstärke für PkwNeu</kurzinfo>
+				</info>
+			</attribut>
+			<attribut pid="att.tlsLveVerkehrsstärke" anzahl="1" anzahlIst="fest" name="QLkwP">
+				<info>
+					<kurzinfo>Prognose Verkehrsstärke für Lkw</kurzinfo>
+				</info>
+			</attribut>
+			<attribut pid="att.tlsLveVerkehrsstärke" anzahl="1" anzahlIst="fest" name="QLkwNeu">
+				<info>
+					<kurzinfo>Prognose Verkehrsstärke für LkwNeu</kurzinfo>
+				</info>
+			</attribut>
+			<attribut pid="att.tlsLveGeschwindigkeit" anzahl="1" anzahlIst="fest" name="VPkwP">
+				<info>
+					<kurzinfo>Prognose Geschwindigkeit für Pkw</kurzinfo>
+				</info>
+			</attribut>
+			<attribut pid="att.tlsLveGeschwindigkeit" anzahl="1" anzahlIst="fest" name="VPkwNeu">
+				<info>
+					<kurzinfo>Geglättete mittlere Reisegeschwindigkeit für Pkw</kurzinfo>
+				</info>
+			</attribut>
+			<attribut pid="att.tlsLveGeschwindigkeit" anzahl="1" anzahlIst="fest" name="VLkwP">
+				<info>
+					<kurzinfo>Prognose Geschwindigkeit für Lkw</kurzinfo>
+				</info>
+			</attribut>
+			<attribut pid="att.tlsLveGeschwindigkeit" anzahl="1" anzahlIst="fest" name="VLkwNeu">
+				<info>
+					<kurzinfo>Geglättete mittlere Reisegeschwindigkeit für Lkw</kurzinfo>
+				</info>
+			</attribut>
+			<attribut pid="att.tlsLveProReserve" anzahl="1" anzahlIst="fest" name="Reserve04">
+				<info>
+					<kurzinfo>ReserveByte für Erweiterungen</kurzinfo>
+				</info>
+			</attribut>
+			<attribut pid="att.tlsLveProReserve" anzahl="1" anzahlIst="fest" name="Reserve05">
+				<info>
+					<kurzinfo>ReserveByte für Erweiterungen</kurzinfo>
+				</info>
+			</attribut>
+			<attribut pid="att.tlsLveProReserve" anzahl="1" anzahlIst="fest" name="Reserve06">
+				<info>
+					<kurzinfo>ReserveByte für Erweiterungen</kurzinfo>
+				</info>
+			</attribut>
+			<attribut pid="att.tlsLveProReserve" anzahl="1" anzahlIst="fest" name="Reserve07">
+				<info>
+					<kurzinfo>ReserveByte für Erweiterungen</kurzinfo>
+				</info>
+			</attribut>
+		</attributgruppenDefinition>
+		<attributDefinition pid="att.tlsLveProAlpha" name="tlsLveProAlpha">
+			<info>
+				<kurzinfo>Prognoseglättungsfaktor Mittelwert alphaX.</kurzinfo>
+			</info>
+			<ganzzahl bits="16">
+				<bereich skalierung="0,01" minimum="1" maximum="100">
+				</bereich>
+				<zustand name="GlättungAus" wert="100">
+					<info>
+						<kurzinfo>Glättung ist abgeschaltet.</kurzinfo>
+					</info>
+				</zustand>
+			</ganzzahl>
+		</attributDefinition>
+		<attributDefinition pid="att.tlsLveProAnzahlZyklen" name="tlsLveProAnzahlZyklen">
+			<info>
+				<kurzinfo>Anzahl der Zyklen (LVE-Erfassungsintervalldauer/Kurzzeitdaten), in denen ein ausgefallener Istwert ersetzt werden soll.</kurzinfo>
+			</info>
+			<ganzzahl bits="16">
+				<bereich skalierung="1" minimum="0" maximum="255" einheit="Zyklen">
+				</bereich>
+			</ganzzahl>
+		</attributDefinition>
+		<attributDefinition pid="att.tlsLveProBeta" name="tlsLveProBeta">
+			<info>
+				<kurzinfo>Prognoseglättungsfaktor Trend beta.</kurzinfo>
+			</info>
+			<ganzzahl bits="16">
+				<bereich skalierung="1" minimum="0" maximum="100">
+				</bereich>
+				<zustand name="TrendAus" wert="0">
+					<info>
+						<kurzinfo>Trendberechnung ist abgeschaltet.</kurzinfo>
+					</info>
+				</zustand>
+				<zustand name="TrendUngeglättet" wert="100">
+					<info>
+						<kurzinfo>Keine Glättung bei der Trendberechnung.</kurzinfo>
+					</info>
+				</zustand>
+			</ganzzahl>
+		</attributDefinition>
+		<attributDefinition pid="att.tlsLveProGewichtung" name="tlsLveProGewichtung">
+			<info>
+				<kurzinfo>Gewichtungsfaktor.</kurzinfo>
+			</info>
+			<ganzzahl bits="16">
+				<bereich skalierung="0,01" minimum="0" maximum="255">
+				</bereich>
+			</ganzzahl>
+		</attributDefinition>
+		<attributDefinition pid="att.tlsLveProKanalMaske" name="tlsLveProKanalMaske">
+			<info>
+				<kurzinfo>Die richtungsbezogenen Kenngrößen beziehen sich auf Daten mehrerer Fahrstreifen. Die Einzelfahrstreifen müssen sich im gleichen Cluster (also auf dem gleichen EAK) befinden. Die Nummer der einzelen Bits in der Maske bezeichnet den physikalischen Kanal der Fahrstreifen die für die richtungsbezogenen Kenngrößen verarbeitet werden: gesetzt bedeutet der Kanal wird bearbeitet</kurzinfo>
+			</info>
+			<ganzzahl bits="16">
+				<bereich skalierung="1" minimum="0" maximum="255" einheit="Kanal-Bits">
+				</bereich>
+			</ganzzahl>
+		</attributDefinition>
+		<attributDefinition pid="att.tlsLveProReserve" name="tlsLveProReserve">
+			<info>
+				<kurzinfo>ReserveByte für Erweiterungen.</kurzinfo>
+			</info>
+			<ganzzahl bits="16">
+				<bereich skalierung="1" minimum="0" maximum="255">
+				</bereich>
+			</ganzzahl>
+		</attributDefinition>
+		<attributDefinition pid="att.tlsLveProVerkehrsStufeInfoDP" name="TlsLveProVerkehrsStufeInfoDP">
+			<info>
+				<kurzinfo>Zusatzinformationen zum Bereich DP</kurzinfo>
+			</info>
+			<ganzzahl bits="8">
+				<bereich skalierung="1" minimum="0" maximum="2">
+				</bereich>
+				<zustand name="D kleiner DP2Ein" wert="0">
+					<info>
+						<kurzinfo>D kleiner DP2Ein</kurzinfo>
+					</info>
+				</zustand>
+				<zustand name="D größer DP2Ein UND D kleinerGleich DP4Ein" wert="1">
+					<info>
+						<kurzinfo>D größer DP2Ein UND D kleinerGleich DP4Ein</kurzinfo>
+					</info>
+				</zustand>
+				<zustand name="D größer DP4Ein" wert="2">
+					<info>
+						<kurzinfo>D größer DP4Ein</kurzinfo>
+					</info>
+				</zustand>
+			</ganzzahl>
+		</attributDefinition>
+		<attributDefinition pid="att.tlsLveProVerkehrsStufeInfoVKfzP" name="TlsLveProVerkehrsStufeInfoVKfzP">
+			<info>
+				<kurzinfo>Zusatzinformationen zum Bereich VKfzP</kurzinfo>
+			</info>
+			<ganzzahl bits="8">
+				<bereich skalierung="1" minimum="0" maximum="2">
+				</bereich>
+				<zustand name="VKfzP größerGleich VKfzP3Ein" wert="0">
+					<info>
+						<kurzinfo>VKfzP größerGleich VKfzP3Ein</kurzinfo>
+					</info>
+				</zustand>
+				<zustand name="VKfzP kleiner VKfzP3Ein UND VKfzP größerGlleich VKfzP4Ein" wert="1">
+					<info>
+						<kurzinfo>VKfzP kleiner VKfzP3Ein UND VKfzP größerGlleich VKfzP4Ein</kurzinfo>
+					</info>
+				</zustand>
+				<zustand name="VKfzP kleiner VKfzP4Ein" wert="2">
+					<info>
+						<kurzinfo>VKfzP kleiner VKfzP4Ein</kurzinfo>
+					</info>
+				</zustand>
+			</ganzzahl>
+		</attributDefinition>
+		<attributDefinition pid="att.tlsLveProVerkehrsStufeMARZ" name="TlsLveProVerkehrsStufeMARZ">
+			<info>
+				<kurzinfo>Verkehrsstufe nach MARZ.</kurzinfo>
+			</info>
+			<ganzzahl bits="8">
+				<bereich skalierung="1" minimum="0" maximum="4">
+				</bereich>
+				<zustand name="nicht ermittelbar" wert="0">
+					<info>
+						<kurzinfo>Verkehrsstufe ist nicht ermittelbar</kurzinfo>
+					</info>
+				</zustand>
+				<zustand name="frei" wert="1">
+					<info>
+						<kurzinfo>freier Verkehr</kurzinfo>
+					</info>
+				</zustand>
+				<zustand name="dicht" wert="2">
+					<info>
+						<kurzinfo>dichter Verkehr</kurzinfo>
+					</info>
+				</zustand>
+				<zustand name="zähfließend" wert="3">
+					<info>
+						<kurzinfo>zähfließender Verkehr</kurzinfo>
+					</info>
+				</zustand>
+				<zustand name="Stau" wert="4">
+					<info>
+						<kurzinfo>Stau</kurzinfo>
+					</info>
+				</zustand>
+			</ganzzahl>
+		</attributDefinition>
+	</modell>
+	<objekte>
+	</objekte>
+</konfigurationsBereich>

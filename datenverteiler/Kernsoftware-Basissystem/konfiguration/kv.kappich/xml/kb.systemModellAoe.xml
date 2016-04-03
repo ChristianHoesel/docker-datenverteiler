@@ -1,0 +1,65 @@
+<?xml version="1.0" encoding="ISO-8859-1"?>
+<!DOCTYPE konfigurationsBereich PUBLIC "-//K2S//DTD Dokument//DE" "K2S.dtd">
+<konfigurationsBereich pid="kb.systemModellAoe" name="SystemdatenmodellAoeErweiterung" verantwortlich="kv.kappich">
+	<info>
+		<kurzinfo>Erweiterung des globalen Systemmodells um Autarke OrganisationsEinheiten.</kurzinfo>
+		<beschreibung>
+			<absatz>
+				Dieses Datenmodell erweitert das globale Systemmodell um den Typ für autarke OrganisationsEinheiten. Dieser Typ wird in einem eigenen
+				Konfigurationsbereich zur Verfügung gestellt, um die notwendigen Abhängigkeiten zu verschiedenen anderen Datenmodellen vom globalen
+				Systemmodell zu entkoppeln.
+			</absatz>
+		</beschreibung>
+	</info>
+	<konfigurationsAenderung stand="27.04.2008" version="3" autor="Roland Schmitz" grund="Erweiterungen für die Engstellenverwaltun"><absatz>Der typ.autarkeOrganisationsEinheit wurde zusätzlich von typ.engstellenVerwaltung abgeleitet.</absatz></konfigurationsAenderung>
+	<konfigurationsAenderung stand="16.07.2008" version="4" autor="Christoph Westermann" grund="SWE Rahmenwerk Berechtigungskonzept"><absatz>Die AOE erweitert den Typ Oberfläche</absatz></konfigurationsAenderung>
+	<konfigurationsAenderung stand="11.09.2009" version="5" autor="Roland Schmitz" grund="Erweiterung des AOE um neuen Parameter zur Zuordnung von neuen dynamischen Objekten zu Konfigurationsbereichen, (Vorschlag von Herrn Kniss übernommen)"><absatz>
+			Im Los E wird eine Funktionsbibliothek erstellt, die für die Verwaltung der dynamischen Objekte und die Zuordnung zu den Konfigurationsbereichen zur Laufzeit über einen Parametersatz zuständig ist.
+		</absatz>
+		<absatz>
+			kb.systemModellGlobal: Erweiterung um den typ.verwaltungDynamischerObjekte mit der neuen atg.verwaltungDynamischerObjekte und der neuen atl.zuordnungDynamischerObjektTypZuKB
+		</absatz>
+		<absatz>
+			kb.systemModellAoe: Erweiterung des typ.autarkeOrganisationsEinheit um den typ.verwaltungDynamischerObjekte
+		</absatz></konfigurationsAenderung>
+	<!--
+	Abhängigkeiten des Bereichs kb.systemModellAoe
+	Abhängig ab Version      Art der Abhängigkeit      Version des benötigten Bereichs      Benötigter Bereich
+	2                        notwendig                 1                                    kb.metaModellGlobal                
+	2                        notwendig                 1                                    kb.tmVewBetriebGlobal              
+	2                        notwendig                 1                                    kb.systemModellGlobal              
+	2                        notwendig                 6                                    kb.tmGanglinienGlobal              
+	2                        notwendig                 1                                    kb.tmSystemKalenderGlobal          
+	2                        notwendig                 1                                    kb.kv.kappich                      
+	2                        notwendig                 1                                    kb.tmVewProtokolleGlobal
+	2                        notwendig                 1                                    kb.tmVewSimulationGlobal           
+	3                        notwendig                 1                                    kb.tmVewEngstellenGlobal           
+	4                        notwendig                 5                                    kb.tmBuVGlobal                     
+	5                        notwendig                 22                                   kb.systemModellGlobal              
+	6                        notwendig                 1                                    kb.systemModellKExDaV              
+	-->
+	<modell>
+		<typDefinition pid="typ.autarkeOrganisationsEinheit" name="AutarkeOrganisationsEinheit" objektNamenPermanent="nein">
+			<info>
+				<kurzinfo>Definiert eine autarke Organisationseinheit als Zusammenfassung der Typen für Parametrierung, Archivierung und
+					Konfigurationsverantwortliche.
+				</kurzinfo>
+			</info>
+			<erweitert pid="typ.konfigurationsVerantwortlicher"/>
+			<erweitert pid="typ.archiv"/>
+			<erweitert pid="typ.parametrierung"/>
+			<erweitert pid="typ.plausibilitätsPrüfungFormal"/>
+			<erweitert pid="typ.betriebsMeldungsVerwaltung"/>
+			<erweitert pid="typ.protokolleUndAuswertungen"/>
+			<erweitert pid="typ.kalender"/>
+			<erweitert pid="typ.simulationsVerwaltung"/>
+			<erweitert pid="typ.applikationGanglinienPrognose"/>
+			<erweitert pid="typ.engstellenVerwaltung"/>
+			<erweitert pid="typ.oberfläche"/>
+			<erweitert pid="typ.verwaltungDynamischerObjekte"/>
+			<erweitert pid="typ.kexdav"/>
+		</typDefinition>
+	</modell>
+	<objekte>
+	</objekte>
+</konfigurationsBereich>

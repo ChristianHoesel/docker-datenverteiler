@@ -1,0 +1,39 @@
+<?xml version="1.0" encoding="ISO-8859-1"?>
+<!DOCTYPE konfigurationsBereich SYSTEM "K2S.dtd">
+<konfigurationsBereich pid="kb.tmVizConnect"
+	name="BitCtrl Modell zur Kopplung der VRZ an das VIZ-System Baden-Württemberg" verantwortlich="kv.bitctrl">
+
+	<info>
+		<kurzinfo>Definitionen für Modellobjekte für die VRZ-VIZ-Kopplung Baden-Württemberg
+		</kurzinfo>
+	</info>
+
+	<modell>
+		<typDefinition pid="typ.vizKamera" name="Kamera VIZ">
+			<info>
+				<kurzinfo>eine im VIZ-System definierte Kamera.
+				</kurzinfo>
+			</info>
+			<erweitert pid="typ.kameraAllgemein" />
+			<attributgruppe pid="atg.vizKamera" />
+		</typDefinition>
+
+		<attributgruppenDefinition pid="atg.vizKamera"
+			name="VizKamera" konfigurierend="ja">
+			<info>
+				<kurzinfo>Eigenschaften einer VIZ-Kamera.
+				</kurzinfo>
+				<beschreibung></beschreibung>
+			</info>
+			<aspekt pid="asp.eigenschaften" konfigurationsModus="datensatzNotwendigUndÄnderbar" />
+			<attribut pid="att.text" name="VorschauURI" />
+			<attribut pid="att.text" name="BildURI" />
+			<attribut pid="att.straßeReferenz" name="Straße" />
+			<attribut pid="att.text" name="Blickrichtung" />
+			<attribut pid="att.text" name="Bereich" />
+			<attribut pid="att.zahl" name="Winkel" />
+			<attribut pid="att.zahl" name="Index" />
+		</attributgruppenDefinition>
+	</modell>
+
+</konfigurationsBereich>

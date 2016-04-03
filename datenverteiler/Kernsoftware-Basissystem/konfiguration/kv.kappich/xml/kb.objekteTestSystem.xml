@@ -1,0 +1,219 @@
+<?xml version="1.0" encoding="ISO-8859-1"?>
+<!DOCTYPE konfigurationsBereich PUBLIC "-//K2S//DTD Dokument//DE" "K2S.dtd">
+<konfigurationsBereich pid="kb.objekteTestSystem" name="ObjekteTestSystem" verantwortlich="kv.kappich">
+	<info>
+		<kurzinfo>Teilmodell mit Testkonfiguration zum Teilmodell "SystemmodellGlobal" mit Datenverteilern, Benutzern etc..</kurzinfo>
+		<beschreibung>Teilmodell mit Testkonfiguration zum Teilmodell "SystemmodellGlobal" mit Datenverteilern, Benutzern etc. (keinerlei Relevanz für das
+			System).</beschreibung>
+	</info>
+	<konfigurationsAenderung stand="30.07.2013" version="3" autor="Roland Schmitz" grund="Menge Applikationen an neuem Datenverteiler-Objekt dav.test5 mit Verwaltung an kv.testKonfiguration"></konfigurationsAenderung>
+	<!--
+	Abhängigkeiten des Bereichs kb.objekteTestSystem
+	Abhängig ab Version      Art der Abhängigkeit      Version des benötigten Bereichs      Benötigter Bereich
+	2                        notwendig                 1                                    kb.metaModellGlobal                
+	2                        notwendig                 1                                    kb.systemModellGlobal              
+	2                        notwendig                 1                                    kb.kv.kappich                      
+	-->
+	<modell>
+	</modell>
+	<objekte>
+		<konfigurationsObjekt pid="benutzer.testDatenverteiler" name="TestDatenverteilerBenutzer" typ="typ.benutzer">
+		</konfigurationsObjekt>
+		<konfigurationsObjekt pid="benutzer.tester" name="Tester" typ="typ.benutzer">
+		</konfigurationsObjekt>
+		<konfigurationsObjekt pid="berechtigungsklasse.operator" name="Operator" typ="typ.berechtigungsklasse">
+		</konfigurationsObjekt>
+		<konfigurationsObjekt pid="dav.test0" name="TestDatenverteiler0" typ="typ.datenverteiler">
+			<datensatz attributgruppe="atg.datenverteilerEigenschaften" aspekt="asp.eigenschaften">
+				<datum name="adresse" wert="localhost"/>
+				<datum name="subAdresse" wert="8080"/>
+			</datensatz>
+			<objektMenge name="Applikationen">
+			</objektMenge>
+		</konfigurationsObjekt>
+		<konfigurationsObjekt pid="dav.test1" name="TestDatenverteiler1" typ="typ.datenverteiler">
+			<datensatz attributgruppe="atg.datenverteilerEigenschaften" aspekt="asp.eigenschaften">
+				<datum name="adresse" wert="localhost"/>
+				<datum name="subAdresse" wert="8082"/>
+			</datensatz>
+			<objektMenge name="Applikationen">
+			</objektMenge>
+		</konfigurationsObjekt>
+		<konfigurationsObjekt pid="dav.test2" name="TestDatenverteiler2" typ="typ.datenverteiler">
+			<datensatz attributgruppe="atg.datenverteilerEigenschaften" aspekt="asp.eigenschaften">
+				<datum name="adresse" wert="localhost"/>
+				<datum name="subAdresse" wert="8084"/>
+			</datensatz>
+			<objektMenge name="Applikationen">
+			</objektMenge>
+		</konfigurationsObjekt>
+		<konfigurationsObjekt pid="dav.test3" name="TestDatenverteiler3" typ="typ.datenverteiler">
+			<datensatz attributgruppe="atg.datenverteilerEigenschaften" aspekt="asp.eigenschaften">
+				<datum name="adresse" wert="localhost"/>
+				<datum name="subAdresse" wert="8086"/>
+			</datensatz>
+			<objektMenge name="Applikationen">
+			</objektMenge>
+		</konfigurationsObjekt>
+		<konfigurationsObjekt pid="dav.test4" name="TestDatenverteiler4" typ="typ.datenverteiler">
+			<datensatz attributgruppe="atg.datenverteilerEigenschaften" aspekt="asp.eigenschaften">
+				<datum name="adresse" wert="localhost"/>
+				<datum name="subAdresse" wert="8088"/>
+			</datensatz>
+			<objektMenge name="Applikationen">
+			</objektMenge>
+		</konfigurationsObjekt>
+		<konfigurationsObjekt pid="dav.test5" name="TestDatenverteiler5" typ="typ.datenverteiler">
+			<datensatz attributgruppe="atg.datenverteilerEigenschaften" aspekt="asp.eigenschaften">
+				<datum name="adresse" wert="localhost"/>
+				<datum name="subAdresse" wert="8080"/>
+			</datensatz>
+			<objektMenge name="Applikationen" verwaltung="kv.testKonfiguration">
+			</objektMenge>
+		</konfigurationsObjekt>
+		<konfigurationsObjekt pid="davVerbindung.test0-1" typ="typ.datenverteilerVerbindung">
+			<datensatz attributgruppe="atg.datenverteilerTopologie" aspekt="asp.eigenschaften">
+				<datum name="datenverteilerA" wert="dav.test0"/>
+				<datum name="datenverteilerB" wert="dav.test1"/>
+				<datum name="wichtung" wert="1"/>
+				<datum name="aktiverDatenverteiler" wert="-"/>
+				<datum name="ersatzverbindungsWartezeit" wert="1 Minute"/>
+				<datum name="benutzer1" wert="TestDatenverteilerBenutzer"/>
+				<datum name="benutzer2" wert="TestDatenverteilerBenutzer"/>
+				<datenliste name="durchsatzPrüfung">
+					<datum name="pufferFüllgrad" wert="75 %"/>
+					<datum name="prüfIntervall" wert="3 Minuten"/>
+					<datum name="mindestDurchsatz" wert="3000 Byte/s"/>
+				</datenliste>
+			</datensatz>
+			<objektMenge name="Ersatzverbindungen">
+				<element pid="davVerbindung.test0-2"/>
+			</objektMenge>
+		</konfigurationsObjekt>
+		<konfigurationsObjekt pid="davVerbindung.test0-2" typ="typ.datenverteilerVerbindung">
+			<datensatz attributgruppe="atg.datenverteilerTopologie" aspekt="asp.eigenschaften">
+				<datum name="datenverteilerA" wert="dav.test0"/>
+				<datum name="datenverteilerB" wert="dav.test2"/>
+				<datum name="wichtung" wert="3"/>
+				<datum name="aktiverDatenverteiler" wert="-"/>
+				<datum name="ersatzverbindungsWartezeit" wert="1 Minute"/>
+				<datum name="benutzer1" wert="TestDatenverteilerBenutzer"/>
+				<datum name="benutzer2" wert="TestDatenverteilerBenutzer"/>
+				<datenliste name="durchsatzPrüfung">
+					<datum name="pufferFüllgrad" wert="75 %"/>
+					<datum name="prüfIntervall" wert="3 Minuten"/>
+					<datum name="mindestDurchsatz" wert="3000 Byte/s"/>
+				</datenliste>
+			</datensatz>
+			<objektMenge name="Ersatzverbindungen">
+			</objektMenge>
+		</konfigurationsObjekt>
+		<konfigurationsObjekt pid="davVerbindung.test1-2" typ="typ.datenverteilerVerbindung">
+			<datensatz attributgruppe="atg.datenverteilerTopologie" aspekt="asp.eigenschaften">
+				<datum name="datenverteilerA" wert="dav.test1"/>
+				<datum name="datenverteilerB" wert="dav.test2"/>
+				<datum name="wichtung" wert="1"/>
+				<datum name="aktiverDatenverteiler" wert="-"/>
+				<datum name="ersatzverbindungsWartezeit" wert="1 Minute"/>
+				<datum name="benutzer1" wert="TestDatenverteilerBenutzer"/>
+				<datum name="benutzer2" wert="TestDatenverteilerBenutzer"/>
+				<datenliste name="durchsatzPrüfung">
+					<datum name="pufferFüllgrad" wert="75 %"/>
+					<datum name="prüfIntervall" wert="3 Minuten"/>
+					<datum name="mindestDurchsatz" wert="3000 Byte/s"/>
+				</datenliste>
+			</datensatz>
+			<objektMenge name="Ersatzverbindungen">
+				<element pid="davVerbindung.test0-2"/>
+			</objektMenge>
+		</konfigurationsObjekt>
+		<konfigurationsObjekt pid="davVerbindung.test1-3" typ="typ.datenverteilerVerbindung">
+			<datensatz attributgruppe="atg.datenverteilerTopologie" aspekt="asp.eigenschaften">
+				<datum name="datenverteilerA" wert="dav.test1"/>
+				<datum name="datenverteilerB" wert="dav.test3"/>
+				<datum name="wichtung" wert="1"/>
+				<datum name="aktiverDatenverteiler" wert="-"/>
+				<datum name="ersatzverbindungsWartezeit" wert="1 Minute"/>
+				<datum name="benutzer1" wert="TestDatenverteilerBenutzer"/>
+				<datum name="benutzer2" wert="TestDatenverteilerBenutzer"/>
+				<datenliste name="durchsatzPrüfung">
+					<datum name="pufferFüllgrad" wert="75 %"/>
+					<datum name="prüfIntervall" wert="3 Minuten"/>
+					<datum name="mindestDurchsatz" wert="3000 Byte/s"/>
+				</datenliste>
+			</datensatz>
+			<objektMenge name="Ersatzverbindungen">
+			</objektMenge>
+		</konfigurationsObjekt>
+		<konfigurationsObjekt pid="davVerbindung.test3-2" typ="typ.datenverteilerVerbindung">
+			<datensatz attributgruppe="atg.datenverteilerTopologie" aspekt="asp.eigenschaften">
+				<datum name="datenverteilerA" wert="dav.test3"/>
+				<datum name="datenverteilerB" wert="dav.test2"/>
+				<datum name="wichtung" wert="1"/>
+				<datum name="aktiverDatenverteiler" wert="-"/>
+				<datum name="ersatzverbindungsWartezeit" wert="1 Minute"/>
+				<datum name="benutzer1" wert="TestDatenverteilerBenutzer"/>
+				<datum name="benutzer2" wert="TestDatenverteilerBenutzer"/>
+				<datenliste name="durchsatzPrüfung">
+					<datum name="pufferFüllgrad" wert="75 %"/>
+					<datum name="prüfIntervall" wert="3 Minuten"/>
+					<datum name="mindestDurchsatz" wert="3000 Byte/s"/>
+				</datenliste>
+			</datensatz>
+			<objektMenge name="Ersatzverbindungen">
+			</objektMenge>
+		</konfigurationsObjekt>
+		<konfigurationsObjekt pid="davVerbindung.test4-1" typ="typ.datenverteilerVerbindung">
+			<datensatz attributgruppe="atg.datenverteilerTopologie" aspekt="asp.eigenschaften">
+				<datum name="datenverteilerA" wert="dav.test4"/>
+				<datum name="datenverteilerB" wert="dav.test1"/>
+				<datum name="wichtung" wert="3"/>
+				<datum name="aktiverDatenverteiler" wert="-"/>
+				<datum name="ersatzverbindungsWartezeit" wert="1 Minute"/>
+				<datum name="benutzer1" wert="TestDatenverteilerBenutzer"/>
+				<datum name="benutzer2" wert="TestDatenverteilerBenutzer"/>
+				<datenliste name="durchsatzPrüfung">
+					<datum name="pufferFüllgrad" wert="75 %"/>
+					<datum name="prüfIntervall" wert="3 Minuten"/>
+					<datum name="mindestDurchsatz" wert="3000 Byte/s"/>
+				</datenliste>
+			</datensatz>
+			<objektMenge name="Ersatzverbindungen">
+			</objektMenge>
+		</konfigurationsObjekt>
+		<konfigurationsObjekt pid="davVerbindung.test4-2" typ="typ.datenverteilerVerbindung">
+			<datensatz attributgruppe="atg.datenverteilerTopologie" aspekt="asp.eigenschaften">
+				<datum name="datenverteilerA" wert="dav.test4"/>
+				<datum name="datenverteilerB" wert="dav.test2"/>
+				<datum name="wichtung" wert="3"/>
+				<datum name="aktiverDatenverteiler" wert="-"/>
+				<datum name="ersatzverbindungsWartezeit" wert="1 Minute"/>
+				<datum name="benutzer1" wert="TestDatenverteilerBenutzer"/>
+				<datum name="benutzer2" wert="TestDatenverteilerBenutzer"/>
+				<datenliste name="durchsatzPrüfung">
+					<datum name="pufferFüllgrad" wert="75 %"/>
+					<datum name="prüfIntervall" wert="3 Minuten"/>
+					<datum name="mindestDurchsatz" wert="3000 Byte/s"/>
+				</datenliste>
+			</datensatz>
+			<objektMenge name="Ersatzverbindungen">
+			</objektMenge>
+		</konfigurationsObjekt>
+		<konfigurationsObjekt pid="davVerbindung.test4-3" typ="typ.datenverteilerVerbindung">
+			<datensatz attributgruppe="atg.datenverteilerTopologie" aspekt="asp.eigenschaften">
+				<datum name="datenverteilerA" wert="dav.test4"/>
+				<datum name="datenverteilerB" wert="dav.test3"/>
+				<datum name="wichtung" wert="1"/>
+				<datum name="aktiverDatenverteiler" wert="-"/>
+				<datum name="ersatzverbindungsWartezeit" wert="1 Minute"/>
+				<datum name="benutzer1" wert="TestDatenverteilerBenutzer"/>
+				<datum name="benutzer2" wert="TestDatenverteilerBenutzer"/>
+				<datenliste name="durchsatzPrüfung">
+					<datum name="pufferFüllgrad" wert="75 %"/>
+					<datum name="prüfIntervall" wert="3 Minuten"/>
+					<datum name="mindestDurchsatz" wert="3000 Byte/s"/>
+				</datenliste>
+			</datensatz>
+		</konfigurationsObjekt>
+	</objekte>
+</konfigurationsBereich>

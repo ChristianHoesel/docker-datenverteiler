@@ -1,0 +1,216 @@
+<?xml version="1.0" encoding="ISO-8859-1"?>
+<!DOCTYPE konfigurationsBereich PUBLIC "-//K2S//DTD Dokument//DE" "K2S.dtd">
+<konfigurationsBereich pid="kb.tmDatenAbgabeUeberwachung" name="DatenAbgabeUeberwachung" verantwortlich="kv.inovat">
+	<info>
+		<kurzinfo>Teilmodell mit Datenmodellierung für Anfrage-/Antwortschnittstelle zum Datenabgabeüberwachungsprozess.</kurzinfo>
+	</info>
+	<konfigurationsAenderung stand="05.05.2011" version="1" autor="inovat, Dipl.-Ing. H. C. Kniß (HCK)" grund="Neuerstellung"></konfigurationsAenderung>
+	<konfigurationsAenderung stand="05.05.2011" version="1" autor="inovat, Dipl.-Ing. H. C. Kniß (HCK)" grund="Ergänzungen"></konfigurationsAenderung>
+	<konfigurationsAenderung stand="11.08.2011" version="3" autor="inovat, Dipl.-Ing. H. C. Kniß (HCK)" grund="StandardObjekte für DatenAbgabeUeberwachung gelöscht, müssen jetzt projektspezifisch angelegt werden."></konfigurationsAenderung>
+	<!--
+	Abhängigkeiten des Bereichs kb.tmDatenAbgabeUeberwachung
+	Abhängig ab Version      Art der Abhängigkeit      Version des benötigten Bereichs      Benötigter Bereich
+	1                        notwendig                 1                                    kb.kv.inovat                       
+	1                        notwendig                 1                                    kb.systemModellGlobal              
+	1                        notwendig                 1                                    kb.fachModellGlobal                
+	1                        notwendig                 1                                    kb.metaModellGlobal                
+	-->
+		<modell>
+		<typDefinition pid="typ.datenAbgabeUeberwachung" name="DatenAbgabeUeberwachung" objektNamenPermanent="nein">
+			<info>
+				<kurzinfo>Systemobjekt für für Anfrage-/Antwortschnittstelle zum Datenabgabeüberwachungsprozess.</kurzinfo>
+			</info>
+			<erweitert pid="typ.konfigurationsObjekt"/>
+			<attributgruppe pid="atg.datenAbgabeUeberwachungAnfrage"/>
+			<attributgruppe pid="atg.datenAbgabeUeberwachungAntwort"/>
+		</typDefinition>
+		<attributgruppenDefinition pid="atg.datenAbgabeUeberwachungAnfrage" name="DatenAbgabeUeberwachungAnfrage" parametrierend="nein">
+			<info>
+				<kurzinfo>Attributgruppe zur Anfrage von Statistikdaten an die DatenAbgabeUeberwachung.</kurzinfo>
+			</info>
+			<aspekt pid="asp.anfrage" onlineModus="senke">
+			</aspekt>
+			<attribut pid="att.applikationsReferenz" anzahl="1" anzahlIst="fest" name="absenderId">
+				<info>
+					<kurzinfo>Objekt-ID der anfragenden Applikation.</kurzinfo>
+					<beschreibung>
+						<absatz>Die Antworten der DatenAbgabeUeberwachung werden mit dieser Objekt-ID gekennzeichnet und MUSS dazu verwendet werden, dass die Antwort auch nur von der anfragenden Applikation ausgewertet wird. .</absatz>
+					</beschreibung>
+				</info>
+			</attribut>
+			<attribut pid="att.text" anzahl="1" anzahlIst="fest" name="absenderZeichen">
+				<info>
+					<kurzinfo>Kennzeichnung, die von der anfragenden Applikation beliebig vergeben wird.</kurzinfo>
+					<beschreibung>
+						<absatz>
+							Der angegebene Wert wird von der DatenAbgabeUeberwachung in die Antwort zu dieser Anfrage kopiert. Die Bedeutung des Attributs wird von der anfragenden Applikation beliebig festgelegt und kann zum Beispiel dazu benutzt werden, um eine empfangene Antwort der ursprünglichen Anfrage zuzuordnen.
+						</absatz>
+					</beschreibung>
+				</info>
+			</attribut>
+			<attribut pid="att.zahl" anzahl="1" anzahlIst="fest" name="Jahr">
+				<info>
+					<kurzinfo>Jahr, für welches die Statistik angefragt wird (z. B. '2011').</kurzinfo>
+					<beschreibung>
+						<absatz>
+							Der angegebene Wert wird von der DatenAbgabeUeberwachung in die Antwort zu dieser Anfrage kopiert. Die Bedeutung des Attributs wird von der anfragenden Applikation beliebig festgelegt und kann zum Beispiel dazu benutzt werden, um eine empfangene Antwort der ursprünglichen Anfrage zuzuordnen.
+						</absatz>
+					</beschreibung>
+				</info>
+			</attribut>
+			<attribut pid="att.zahl" anzahl="1" anzahlIst="fest" name="Monat">
+				<info>
+					<kurzinfo>Monat, für welches die Statistik angefragt wird (z. B. '5' für den Mai).</kurzinfo>
+					<beschreibung>
+						<absatz>
+							Der angegebene Wert wird von der DatenAbgabeUeberwachung in die Antwort zu dieser Anfrage kopiert. Die Bedeutung des Attributs wird von der anfragenden Applikation beliebig festgelegt und kann zum Beispiel dazu benutzt werden, um eine empfangene Antwort der ursprünglichen Anfrage zuzuordnen.
+						</absatz>
+					</beschreibung>
+				</info>
+			</attribut>
+			<attribut pid="att.zahl" anzahl="1" anzahlIst="fest" name="Tag">
+				<info>
+					<kurzinfo>Tag, für welches die Statistik angefragt wird (z. B. '27'). Wird nicht ausgewertet, wenn eine Monatsstatistik angefragt wird.</kurzinfo>
+					<beschreibung>
+						<absatz>
+							Der angegebene Wert wird von der DatenAbgabeUeberwachung in die Antwort zu dieser Anfrage kopiert. Die Bedeutung des Attributs wird von der anfragenden Applikation beliebig festgelegt und kann zum Beispiel dazu benutzt werden, um eine empfangene Antwort der ursprünglichen Anfrage zuzuordnen.
+						</absatz>
+					</beschreibung>
+				</info>
+			</attribut>
+			<attribut pid="att.statistikTyp" anzahl="1" anzahlIst="fest" name="StatistikTyp">
+				<info>
+					<kurzinfo>Typ der angefragten Statistik: MonatsStatistik oder TagesStatistik.</kurzinfo>
+					<beschreibung>
+						<absatz>
+							Der angegebene Wert wird von der DatenAbgabeUeberwachung in die Antwort zu dieser Anfrage kopiert. Die Bedeutung des Attributs wird von der anfragenden Applikation beliebig festgelegt und kann zum Beispiel dazu benutzt werden, um eine empfangene Antwort der ursprünglichen Anfrage zuzuordnen.
+						</absatz>
+					</beschreibung>
+				</info>
+			</attribut>
+		</attributgruppenDefinition>
+		<attributgruppenDefinition pid="atg.datenAbgabeUeberwachungAntwort" name="DatenAbgabeUeberwachungAntwort" parametrierend="nein">
+			<info>
+				<kurzinfo>Attributgruppe zur Übermittlung der Antworten der DatenAbgabeUeberwachung an die anfragende Applikation.</kurzinfo>
+			</info>
+			<aspekt pid="asp.antwort" onlineModus="quelle">
+			</aspekt>
+			<attribut pid="att.applikationsReferenz" anzahl="1" anzahlIst="fest" name="absenderId">
+				<info>
+					<kurzinfo>Objekt-ID der anfragenden Applikation.</kurzinfo>
+					<beschreibung>
+						<absatz>Die Antworten der DatenAbgabeUeberwachung werden mit dieser Objekt-ID gekennzeichnet und MUSS dazu verwendet werden, dass die Antwort auch nur von der anfragenden Applikation ausgewertet wird. .</absatz>
+					</beschreibung>
+				</info>
+			</attribut>
+			<attribut pid="att.text" anzahl="1" anzahlIst="fest" name="absenderZeichen">
+				<info>
+					<kurzinfo>Kennzeichnung, die von der anfragenden Applikation vergeben wurde.</kurzinfo>
+				</info>
+			</attribut>
+			<attribut pid="att.statistikTyp" anzahl="1" anzahlIst="fest" name="StatistikTyp">
+				<info>
+					<kurzinfo>Typ der angefragten Statistik: TagesStatistik oder MonatsStatistik.</kurzinfo>
+					<beschreibung>
+						<absatz>
+							Der angegebene Wert wird von der DatenAbgabeUeberwachung in die Antwort zu dieser Anfrage kopiert. Die Bedeutung des Attributs wird von der anfragenden Applikation beliebig festgelegt und kann zum Beispiel dazu benutzt werden, um eine empfangene Antwort der ursprünglichen Anfrage zuzuordnen.
+						</absatz>
+					</beschreibung>
+				</info>
+			</attribut>
+			<attributliste pid="atl.statistikDaten" anzahl="0" anzahlIst="variabel" name="StatistikDaten">
+				<info>
+					<kurzinfo>
+						Statistikdaten zu den Datenidentifikationen als Monats- oder Tagesstatistik.
+					</kurzinfo>
+				</info>
+			</attributliste>
+		</attributgruppenDefinition>
+		<attributDefinition pid="att.statistikTyp" name="StatistikTyp">
+			<info>
+				<kurzinfo>Typ der angefragten Statistik: TagesStatistik oder MonatsStatistik.</kurzinfo>
+			</info>
+			<ganzzahl bits="8">
+				<bereich skalierung="1" minimum="0" maximum="1">
+				</bereich>
+				<zustand name="TagesStatistik" wert="0">
+					<info>
+						<kurzinfo>Tagesstatistik</kurzinfo>
+					</info>
+				</zustand>
+				<zustand name="MonatsStatistik" wert="1">
+					<info>
+						<kurzinfo>MonatsStatistik</kurzinfo>
+					</info>
+				</zustand>
+			</ganzzahl>
+		</attributDefinition>
+		<attributlistenDefinition pid="atl.statistikDaten" name="StatistikDaten">
+			<info>
+				<kurzinfo>Statistikdaten zu den Datenidentifikationen als Monats- oder Tagesstatistik</kurzinfo>
+			</info>
+			<attribut pid="att.text" anzahl="1" anzahlIst="fest" name="Datum">
+				<info>
+					<kurzinfo>Datum für den dieser Eintrag gilt. Bei Tagesstatistiken in der Form "D-2011-05-27", bei Monatsstatistiken in der Form "D-2011-05""</kurzinfo>
+				</info>
+			</attribut>
+			<attribut pid="att.text" anzahl="1" anzahlIst="fest" name="ATG">
+				<info>
+					<kurzinfo>Pid der Attributgruppe des überwachten Datums</kurzinfo>
+				</info>
+			</attribut>
+			<attribut pid="att.text" anzahl="1" anzahlIst="fest" name="ASP">
+				<info>
+					<kurzinfo>Pid des Aspekts des überwachten Datums</kurzinfo>
+				</info>
+			</attribut>
+			<attribut pid="att.text" anzahl="1" anzahlIst="fest" name="Objekt">
+				<info>
+					<kurzinfo>Pid des Objekts des überwachten Datums</kurzinfo>
+				</info>
+			</attribut>
+			<attributliste pid="atl.statistikZustandsDaten" anzahl="1" anzahlIst="fest" name="Daten">
+				<info>
+					<kurzinfo>Daten fur den Zustand "Daten vorhanden"</kurzinfo>
+				</info>
+			</attributliste>
+			<attributliste pid="atl.statistikZustandsDaten" anzahl="1" anzahlIst="fest" name="KeineDaten">
+				<info>
+					<kurzinfo>Daten fur den Zustand "Keine Daten vorhanden"</kurzinfo>
+				</info>
+			</attributliste>
+			<attributliste pid="atl.statistikZustandsDaten" anzahl="1" anzahlIst="fest" name="KeineQuelle">
+				<info>
+					<kurzinfo>Daten fur den Zustand "Keine Quelle vorhanden"</kurzinfo>
+				</info>
+			</attributliste>
+			<attributliste pid="atl.statistikZustandsDaten" anzahl="1" anzahlIst="fest" name="KeineAussage">
+				<info>
+					<kurzinfo>Daten fur den Zustand "Alles sonstigen Zustände: Es ist keine Aussage möglich."</kurzinfo>
+				</info>
+			</attributliste>
+		</attributlistenDefinition>
+		<attributlistenDefinition pid="atl.statistikZustandsDaten" name="StatistikZustandsDaten">
+			<info>
+				<kurzinfo>Eigenschaften eines Datenzustands (Daten vorhanden, keine Daten vorhanden, keine Quelle, keine Aussage)</kurzinfo>
+			</info>
+			<attribut pid="att.zahl" anzahl="1" anzahlIst="fest" name="DauerSekunden">
+				<info>
+					<kurzinfo>Dauer in Sekunden, an dem der Zustand vorlag.</kurzinfo>
+				</info>
+			</attribut>
+			<attribut pid="att.zahl" anzahl="1" anzahlIst="fest" name="Anzahl">
+				<info>
+					<kurzinfo>Anzahl der Datensätze, die für diesen Zustand empfangen wurden.</kurzinfo>
+				</info>
+			</attribut>
+			<attribut pid="att.prozent" anzahl="1" anzahlIst="fest" name="AnteilProzent">
+				<info>
+					<kurzinfo>Prozentualer Anteil des Zustandes bezogen auf den Tag (bei Tagesstatistik) oder den Monat (bei Monatsstatistik)</kurzinfo>
+				</info>
+			</attribut>
+		</attributlistenDefinition>
+	</modell>
+	<objekte>
+	</objekte>
+</konfigurationsBereich>

@@ -1,0 +1,49 @@
+<?xml version="1.0" encoding="ISO-8859-1"?>
+<!DOCTYPE konfigurationsBereich SYSTEM "K2S.dtd">
+<konfigurationsBereich pid="kb.bitctrl.bedienstelle" name="BitCtrl Bedienstelle" verantwortlich="kv.bitctrl">
+	<info>
+		<kurzinfo>Definitionen für BitCtrl-Nutzerverwaltung</kurzinfo>
+		<beschreibung />
+	</info>
+	<modell>
+
+		<!--**************************************************************************************************************-->
+		<!--                                                                                                              -->
+		<!--  Definitionen zur Nutzerverwaltung                                                                 		  -->
+		<!--                                                                                                              -->
+		<!--**************************************************************************************************************-->
+
+		<typDefinition pid="typ.bcBedienStelle" name="BitCtrl Bedienerstelle">
+			<info>
+				<kurzinfo>Definition einer Bedienerstelle</kurzinfo>
+				<beschreibung>
+					<absatz>Eine Bedienerstelle beschreibt einen virtuellen Ort, an eine Anzahl von Nutzern aktiv ist. Objekte dieser Klasse werden beispielsweise benutzt, um die Zustimmung zu Schaltungsvorgängen bei der Bedienung von Wechselverkehrszeichen zu organisieren.</absatz>
+				</beschreibung>
+			</info>
+			<erweitert pid="typ.konfigurationsObjekt" />
+			<attributgruppe pid="atg.bcBedienStellenBelegung" />
+		</typDefinition>
+
+		<attributDefinition pid="att.bcBedienStellenReferenz">
+			<info>
+				<kurzinfo>Referenz auf ein Bedienstellenobjekt.</kurzinfo>
+			</info>
+			<objektReferenz typ="typ.bcBedienStelle" />
+		</attributDefinition>
+
+		<attributDefinition pid="att.bcBedienStellenReferenzOptional">
+			<info>
+				<kurzinfo>Referenz auf ein Bedienstellenobjekt.</kurzinfo>
+			</info>
+			<objektReferenz typ="typ.bcBedienStelle" undefiniert="erlaubt" />
+		</attributDefinition>
+
+		<attributgruppenDefinition pid="atg.bcBedienStellenBelegung" parametrierend="ja">
+			<info>
+				<kurzinfo>die Liste der Nutzer, die dieser Bedienstelle zugeordnet sind, als Referenzen auf Nutzerobjekte.</kurzinfo>
+			</info>
+			<attribut pid="att.benutzerReferenz" name="Mitglieder" anzahlIst="variabel" />
+		</attributgruppenDefinition>
+
+	</modell>
+</konfigurationsBereich>

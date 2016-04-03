@@ -1,0 +1,551 @@
+<?xml version="1.0" encoding="ISO-8859-1"?>
+<!DOCTYPE konfigurationsBereich PUBLIC "-//K2S//DTD Dokument//DE" "K2S.dtd">
+<konfigurationsBereich pid="kb.tmVewProtokolleGlobal" name="TeilmodellVewProtokolleGlobal" verantwortlich="kv.bea">
+	<info>
+		<kurzinfo>Teilmodell mit Datenmodellierung zur Verwaltung der Protokolle und Auswertungen.</kurzinfo>
+		<beschreibung>
+			<absatz>Die folgende Abbildung skizziert die Zusammenhänge und Attributgruppen der verschiedenen Objekttypen imTeilmodell zur Verwaltung der Protokolle und Auswertungen.</absatz>
+			<abbildung src="abbildungen/TeilmodelVewProtokolleGlobal.jpg">
+				<titel>Übersicht Teilmodell zur Verwaltung der Protokolle und Auswertungen (global)</titel>
+			</abbildung>
+		</beschreibung>
+	</info>
+	<konfigurationsAenderung stand="19.03.2007" version="2" autor="inovat, Dipl.-Ing. H. C. Kniß (HCK)" grund="A:Überarbeitung des Datenkatalogs für Veröffentlichung Kernsoftware. Änderungsdokumentation siehe &apos;inovat: Datenkatalog DaV-Release Notes&apos;."></konfigurationsAenderung>
+	<konfigurationsAenderung stand="07.01.2011" version="3" autor="Kappich Systemberatung, Roland Schmitz" grund="Erweiterung von Protokolle und Auswertungen (PuA) um neue Funktionalitäten, PuA Version 2.2"></konfigurationsAenderung>
+	<konfigurationsAenderung stand="10.03.2011" version="4" autor="Kappich Systemberatung, Roland Schmitz" grund="Erweiterung von Protokolle und Auswertungen (PuA) um neue Funktionalitäten, PuA Version 2.4"></konfigurationsAenderung>
+	<!--
+	Abhängigkeiten des Bereichs kb.tmVewProtokolleGlobal
+	Abhängig ab Version      Art der Abhängigkeit      Version des benötigten Bereichs      Benötigter Bereich
+	3                        notwendig                 1                                    kb.kv.bea                          
+	3                        notwendig                 1                                    kb.systemModellGlobal              
+	3                        notwendig                 4                                    kb.metaModellGlobal                
+	-->
+	<modell>
+		<typDefinition pid="typ.protokolleUndAuswertungen" name="ProtokolleUndAuswertungen" objektNamenPermanent="nein">
+			<info>
+				<kurzinfo>Muss als Konfigurationsverantwortlicher verwendet werden, wenn die Dienste von 'Protokolle und Auswertungen' genutzt werden sollen.</kurzinfo>
+			</info>
+			<erweitert pid="typ.konfigurationsObjekt"/>
+			<attributgruppe pid="atg.puaProtokollAnfrageSchnittstelle"/>
+			<menge pid="menge.puaSkripte" name="PuaSkripte" erforderlich="ja">
+				<info>
+					<kurzinfo>Menge aller von PuA verwalteten Skriptobjekte</kurzinfo>
+				</info>
+			</menge>
+		</typDefinition>
+		<typDefinition pid="typ.puaSkript" name="Skript" objektNamenPermanent="nein" persistenzModus="persistent">
+			<info>
+				<kurzinfo>Objekttyp, der ein Skript repraesentiert</kurzinfo>
+			</info>
+			<erweitert pid="typ.dynamischesObjekt"/>
+			<attributgruppe pid="atg.skriptAnfrageSchnittstelle"/>
+			<attributgruppe pid="atg.skriptAntwortSchnittstelle"/>
+		</typDefinition>
+		<attributgruppenDefinition pid="atg.puaProtokollAnfrageSchnittstelle" name="puaProtokollAnfrageSchnittstelle" parametrierend="nein">
+			<info>
+				<kurzinfo>
+					Attributgruppe zur Uebertragung von Nachrichten die zur Abwicklung von PuA Anfragen dienen.
+				</kurzinfo>
+			</info>
+			<aspekt pid="asp.anfrage" onlineModus="quelleUndSenke">
+			</aspekt>
+			<aspekt pid="asp.antwort" onlineModus="quelleUndSenke">
+			</aspekt>
+			<attribut pid="att.objektReferenz" anzahl="1" anzahlIst="fest" name="Absender">
+				<info>
+					<kurzinfo>Referenz auf den Absender des Datensatzes.</kurzinfo>
+					<beschreibung>Die anfragende Applikation traegt in diesem Attribut das vom Datenverteiler dynamisch erzeugte Applikations-Objekt ein.Das Archiv adressiert entsprechende Antworten an dieses Applikationsobjekt. In den Antworten von PUA ist in diesem Attribut eine Referenz auf den Konfigurationsverantwortlichen enthalten.
+					</beschreibung>
+				</info>
+			</attribut>
+			<attribut pid="att.zahl" anzahl="1" anzahlIst="fest" name="Protokoll-Id">
+				<info>
+					<kurzinfo>Kennzeichnung, die von der anfragenden Applikation zur Unterscheidung mehrerer paralleler Anfragen fortlaufend vergeben wird.</kurzinfo>
+					<beschreibung>In allen zu einer PUA Anfrage gehoerenden Nachrichten wird diese Identifikation eingetragen, damit der jeweilige Empfaenger die Nachricht zu der richtigen Anfrage zuordnen kann.</beschreibung>
+				</info>
+			</attribut>
+			<attribut pid="att.puaProtokollOperationsCode" anzahl="1" anzahlIst="fest" name="Operationscode">
+				<info>
+					<kurzinfo>Typ der Nachricht.</kurzinfo>
+				</info>
+			</attribut>
+			<attribut pid="att.byte" anzahl="0" anzahlIst="variabel" name="Daten">
+				<info>
+					<kurzinfo>Datenbytes der Nachricht.</kurzinfo>
+				</info>
+			</attribut>
+		</attributgruppenDefinition>
+		<attributgruppenDefinition pid="atg.skriptAnfrageSchnittstelle" name="SkriptAnfrageSchnittstelle" parametrierend="nein">
+			<info>
+				<kurzinfo>Die Anfragenschnittstelle fuer Skriptoperationen</kurzinfo>
+			</info>
+			<aspekt pid="asp.ist" onlineModus="quelleUndSenke">
+			</aspekt>
+			<aspekt pid="asp.soll" onlineModus="quelleUndSenke">
+			</aspekt>
+			<attributliste pid="atl.skriptErweiterteinformation" anzahl="1" anzahlIst="fest" name="Erweiterteinformation">
+				<info>
+					<kurzinfo>Wichtige Parameter der Anfrage</kurzinfo>
+				</info>
+			</attributliste>
+			<attributliste pid="atl.skriptGrundinformation" anzahl="1" anzahlIst="fest" name="Grundinformation">
+				<info>
+					<kurzinfo>Grundlegende Informationen ueber das Skript</kurzinfo>
+				</info>
+			</attributliste>
+		</attributgruppenDefinition>
+		<attributgruppenDefinition pid="atg.skriptAntwortSchnittstelle" name="SkriptAntwortSchnittstelle" parametrierend="nein">
+			<info>
+				<kurzinfo>Die Antwortschnittstelle fuer Skriptoperationen</kurzinfo>
+			</info>
+			<aspekt pid="asp.ist" onlineModus="quelleUndSenke">
+			</aspekt>
+			<attribut pid="att.text" anzahl="1" anzahlIst="fest" name="Meldung">
+				<info>
+					<kurzinfo>Enthaelt Fehlermeldungen, falls Anfrage nicht ausgefuehrt werden konnte</kurzinfo>
+				</info>
+			</attribut>
+			<attributliste pid="atl.skriptMetainformation" anzahl="1" anzahlIst="fest" name="Metainformation">
+				<info>
+					<kurzinfo>Informationen ueber das Skript, die in der Konfiguration gespeichert werden</kurzinfo>
+				</info>
+			</attributliste>
+			<attributliste pid="atl.skriptErweiterteinformation" anzahl="1" anzahlIst="fest" name="Erweiterteinformation">
+				<info>
+					<kurzinfo>Enthalten weitere Informationen ueber das Skript und die Kommunikation</kurzinfo>
+				</info>
+			</attributliste>
+		</attributgruppenDefinition>
+		<attributDefinition pid="att.protokollart">
+			<info>
+				<kurzinfo>
+					Definiert eine Protokollart
+				</kurzinfo>
+			</info>
+			<ganzzahl bits="8">
+				<zustand name="Änderungsprotokoll" wert="0">
+					<info>
+						<kurzinfo>
+							Gibt an, dass das Protokoll ein Änderungsprotokoll ist
+						</kurzinfo>
+					</info>
+				</zustand>
+				<zustand name="Zustandsprotokoll" wert="1">
+					<info>
+						<kurzinfo>
+							Gibt an, dass das Protokoll ein Zustandsprotokoll ist
+						</kurzinfo>
+					</info>
+				</zustand>
+			</ganzzahl>
+		</attributDefinition>
+		<attributDefinition pid="att.protokolleUndAuswertungenReferenz" name="ProtokolleUndAuswertungenReferenz">
+			<info>
+				<kurzinfo>Attribut zur Referenzierung des Objekttyps: typ.protokolleUndAuswertungen.</kurzinfo>
+			</info>
+			<objektReferenz typ="typ.protokolleUndAuswertungen" undefiniert="verboten" referenzierungsart="assoziation"/>
+		</attributDefinition>
+		<attributDefinition pid="att.protokolleUndAuswertungenReferenzOptional" name="ProtokolleUndAuswertungenReferenzOptional">
+			<info>
+				<kurzinfo>Attribut zur Referenzierung des Objekttyps: typ.protokolleUndAuswertungen (Optionale Referenzierung erlaubt).</kurzinfo>
+			</info>
+			<objektReferenz typ="typ.protokolleUndAuswertungen" undefiniert="erlaubt" referenzierungsart="assoziation"/>
+		</attributDefinition>
+		<attributDefinition pid="att.puaProtokollOperationsCode" name="Operationscode">
+			<info>
+				<kurzinfo>Attributtyp, der zur Unterscheidung der verschiedenen Nachrichten bei der Abwicklung von PUA-Anfragen dient.</kurzinfo>
+			</info>
+			<ganzzahl bits="16">
+				<zustand name="Protokollerstellung" wert="1">
+					<info>
+						<kurzinfo>Erstellen eines Protokolls</kurzinfo>
+					</info>
+				</zustand>
+				<zustand name="Abbrechen" wert="2">
+					<info>
+						<kurzinfo>Protokollerstellung abbrechen</kurzinfo>
+					</info>
+				</zustand>
+				<zustand name="ProtokollLoeschen" wert="3">
+					<info>
+						<kurzinfo>Protokoll loeschen</kurzinfo>
+					</info>
+				</zustand>
+				<zustand name="ProtokollListe" wert="4">
+					<info>
+						<kurzinfo>Liste der gespeicherten Protokolle abrufen</kurzinfo>
+					</info>
+				</zustand>
+				<zustand name="Status" wert="5">
+					<info>
+						<kurzinfo>Status der Protokollerstellung</kurzinfo>
+					</info>
+				</zustand>
+				<zustand name="ProtokollAbrufen" wert="6">
+					<info>
+						<kurzinfo>Gespeichertes Protokoll abrufen</kurzinfo>
+					</info>
+				</zustand>
+				<zustand name="ProtokollAnhalten" wert="7">
+					<info>
+						<kurzinfo>Protokollerstellung anhalten</kurzinfo>
+					</info>
+				</zustand>
+				<zustand name="ProtokollFortsetzen" wert="8">
+					<info>
+						<kurzinfo>Protokollerstellung wieder aufnehmen</kurzinfo>
+					</info>
+				</zustand>
+				<zustand name="UngelesenesProtokollAbrufen" wert="9">
+					<info>
+						<kurzinfo>Noch nicht abgerufenes Protokoll abrufen.</kurzinfo>
+					</info>
+				</zustand>
+				<zustand name="ListeUngeleseneProtokolle" wert="10">
+					<info>
+						<kurzinfo>Liefert eine Liste mit noch nicht abgerufenen Protokollen zurück.</kurzinfo>
+					</info>
+				</zustand>
+				<zustand name="PuaArsStatus" wert="11">
+					<info>
+						<kurzinfo>Liefert zurück ob PuA läuft und das Archivsystem verfügbar ist.</kurzinfo>
+					</info>
+				</zustand>
+				<zustand name="ProtokollFertigmeldung" wert="12">
+					<info>
+						<kurzinfo>Dient zur Anmeldung bzw. zum Versand von Protokoll-Fertigmeldungen</kurzinfo>
+					</info>
+				</zustand>
+				<zustand name="Fehler" wert="100">
+					<info>
+						<kurzinfo>Diese Nachricht dient der Uebertragung einer Fehlermeldung</kurzinfo>
+					</info>
+				</zustand>
+				<zustand name="Quittung" wert="200">
+					<info>
+						<kurzinfo>Eine positive Quittungsmeldung</kurzinfo>
+					</info>
+				</zustand>
+			</ganzzahl>
+		</attributDefinition>
+		<attributDefinition pid="att.puaSkriptOperationsCode" name="OperationsCode">
+			<info>
+				<kurzinfo>
+					Attributtyp, der zur Unterscheidung der verschiedenen Nachrichten bei der Abwicklung von
+					PUA-Anfragen dient.
+				</kurzinfo>
+			</info>
+			<ganzzahl bits="16">
+				<zustand name="Anlegen" wert="1">
+					<info>
+						<kurzinfo>Erstellen / Editieren eines Skriptes</kurzinfo>
+					</info>
+				</zustand>
+				<zustand name="Quelltext" wert="2">
+					<info>
+						<kurzinfo>Quelltext eines Skriptes abrufen</kurzinfo>
+					</info>
+				</zustand>
+				<zustand name="Standard-Werte" wert="3">
+					<info>
+						<kurzinfo>Standard-Werte eines Skriptes abrufen</kurzinfo>
+					</info>
+				</zustand>
+				<zustand name="Fehler" wert="100">
+					<info>
+						<kurzinfo>Zeigt an, das eine Fehlermeldung uebertragen wird</kurzinfo>
+					</info>
+				</zustand>
+				<zustand name="Quittung" wert="200">
+					<info>
+						<kurzinfo>Eine positive Quittungsmeldung</kurzinfo>
+					</info>
+				</zustand>
+			</ganzzahl>
+		</attributDefinition>
+		<attributDefinition pid="att.puaSkriptReferenz" name="PuaSkriptReferenz">
+			<info>
+				<kurzinfo>Attribut zur Referenzierung des Objekttyps: typ.puaSkript.</kurzinfo>
+			</info>
+			<objektReferenz typ="typ.puaSkript" undefiniert="verboten" referenzierungsart="assoziation"/>
+		</attributDefinition>
+		<attributDefinition pid="att.puaSkriptReferenzOptional" name="PuaSkriptReferenzOptional">
+			<info>
+				<kurzinfo>Attribut zur Referenzierung des Objekttyps: typ.puaSkript (Optionale Referenzierung erlaubt).</kurzinfo>
+			</info>
+			<objektReferenz typ="typ.puaSkript" undefiniert="erlaubt" referenzierungsart="assoziation"/>
+		</attributDefinition>
+		<attributlistenDefinition pid="atl.aliase">
+			<info>
+				<kurzinfo>Definiert einen Alias</kurzinfo>
+			</info>
+			<attribut pid="att.text" anzahl="1" anzahlIst="fest" name="Name">
+				<info>
+					<kurzinfo>
+						Name
+					</kurzinfo>
+				</info>
+			</attribut>
+			<attribut pid="att.typReferenz" anzahl="1" anzahlIst="fest" name="Objekttyp">
+				<info>
+					<kurzinfo>
+						Objekttyp
+					</kurzinfo>
+				</info>
+			</attribut>
+		</attributlistenDefinition>
+		<attributlistenDefinition pid="atl.aspektBindung">
+			<info>
+				<kurzinfo>Definiert eine Aspekt-Bindung von ungebundenen Aspekten</kurzinfo>
+			</info>
+			<attribut pid="att.text" anzahl="1" anzahlIst="fest" name="Alias">
+				<info>
+					<kurzinfo>
+						Alias
+					</kurzinfo>
+				</info>
+			</attribut>
+			<attribut pid="att.aspektReferenzOptional" anzahl="1" anzahlIst="fest" name="Aspekt">
+				<info>
+					<kurzinfo>
+						Aspekt
+					</kurzinfo>
+				</info>
+			</attribut>
+		</attributlistenDefinition>
+		<attributlistenDefinition pid="atl.pseudoObjektDefinition">
+			<info>
+				<kurzinfo>Definiert ein Alias mit zugehörigen Pseudoobjekten</kurzinfo>
+			</info>
+			<attribut pid="att.text" anzahl="1" anzahlIst="fest" name="Alias">
+				<info>
+					<kurzinfo>
+						Alias
+					</kurzinfo>
+				</info>
+			</attribut>
+			<attribut pid="att.objektReferenzOptional" anzahl="0" anzahlIst="variabel" name="Objekte">
+				<info>
+					<kurzinfo>
+						Objekte, undefiniert für leere Platzhalter bei unvollständigen Pseudoobjekten
+					</kurzinfo>
+				</info>
+			</attribut>
+		</attributlistenDefinition>
+		<attributlistenDefinition pid="atl.puaSkriptStandardWerte">
+			<info>
+				<kurzinfo>Standardwerte eines Skripts</kurzinfo>
+			</info>
+			<attribut pid="att.objektReferenzOptional" anzahl="0" anzahlIst="variabel" name="Objekte">
+				<info>
+					<kurzinfo>Objekte</kurzinfo>
+				</info>
+			</attribut>
+			<attributliste pid="atl.aliase" anzahl="0" anzahlIst="variabel" name="Aliase">
+				<info>
+					<kurzinfo>Aliase</kurzinfo>
+				</info>
+			</attributliste>
+			<attributliste pid="atl.pseudoObjektDefinition" anzahl="0" anzahlIst="variabel" name="PseudoObjekte">
+				<info>
+					<kurzinfo>Pseudoobjekte</kurzinfo>
+				</info>
+			</attributliste>
+			<attribut pid="att.text" anzahl="0" anzahlIst="variabel" name="Aspekte">
+				<info>
+					<kurzinfo>Aspekte</kurzinfo>
+				</info>
+			</attribut>
+			<attributliste pid="atl.aspektBindung" anzahl="0" anzahlIst="variabel" name="Bindungen">
+				<info>
+					<kurzinfo>Aspekt-Bindungen</kurzinfo>
+				</info>
+			</attributliste>
+			<attributliste pid="atl.zeitbereich" anzahl="0" anzahlIst="variabel" name="Zeitbereiche">
+				<info>
+					<kurzinfo>Zeitbereiche</kurzinfo>
+				</info>
+			</attributliste>
+			<attribut pid="att.protokollart" anzahl="1" anzahlIst="fest" name="Protokollart">
+				<info>
+					<kurzinfo>Protokollart</kurzinfo>
+				</info>
+			</attribut>
+		</attributlistenDefinition>
+		<attributlistenDefinition pid="atl.skriptDetailinformation">
+			<info>
+				<kurzinfo>Detailinformationen ueber das Skript</kurzinfo>
+			</info>
+			<attribut pid="att.zahl" anzahl="1" anzahlIst="fest" name="Version">
+				<info>
+					<kurzinfo>Version des Skripts</kurzinfo>
+				</info>
+			</attribut>
+			<attribut pid="att.text" anzahl="1" anzahlIst="fest" name="Dateiname">
+				<info>
+					<kurzinfo>Dateiname des Skripts</kurzinfo>
+				</info>
+			</attribut>
+			<attribut pid="att.byte" anzahl="0" anzahlIst="variabel" name="Pruefsumme">
+				<info>
+					<kurzinfo>Pruefsumme des Skripts</kurzinfo>
+				</info>
+			</attribut>
+		</attributlistenDefinition>
+		<attributlistenDefinition pid="atl.skriptErweiterteinformation">
+			<info>
+				<kurzinfo>Wichtige Parameter der Anfrage</kurzinfo>
+			</info>
+			<attribut pid="att.objektReferenz" anzahl="1" anzahlIst="fest" name="Absender">
+				<info>
+					<kurzinfo>Referenz auf den Absender des Datensatzes.</kurzinfo>
+					<beschreibung>Die anfragende Applikation traegt in diesem Attribut das vom Datenverteiler dynamisch erzeugte Applikations-Objekt ein</beschreibung>
+				</info>
+			</attribut>
+			<attribut pid="att.zahl" anzahl="1" anzahlIst="fest" name="AnfrageId">
+				<info>
+					<kurzinfo>Identifikationsnummer der Anfrage</kurzinfo>
+				</info>
+			</attribut>
+			<attribut pid="att.puaSkriptOperationsCode" anzahl="1" anzahlIst="fest" name="OperationsCode">
+				<info>
+					<kurzinfo>Typ der Anfrage / Antwort</kurzinfo>
+				</info>
+			</attribut>
+			<attribut pid="att.text" anzahl="1" anzahlIst="fest" name="Quellcode">
+				<info>
+					<kurzinfo>Quellcode des Skripts</kurzinfo>
+				</info>
+			</attribut>
+			<attributliste pid="atl.puaSkriptStandardWerte" anzahl="1" anzahlIst="variabel" name="Standardwerte">
+				<info>
+					<kurzinfo>Standardwerte des Skripts</kurzinfo>
+				</info>
+			</attributliste>
+		</attributlistenDefinition>
+		<attributlistenDefinition pid="atl.skriptGrundinformation">
+			<info>
+				<kurzinfo>Grundlegende Informationen ueber das Skript</kurzinfo>
+			</info>
+			<attribut pid="att.text" anzahl="1" anzahlIst="fest" name="Name">
+				<info>
+					<kurzinfo>Name des Skripts</kurzinfo>
+				</info>
+			</attribut>
+			<attribut pid="att.text" anzahl="1" anzahlIst="fest" name="Beschreibung">
+				<info>
+					<kurzinfo>Beschreibung des Skripts</kurzinfo>
+				</info>
+			</attribut>
+			<attribut pid="att.text" anzahl="1" anzahlIst="fest" name="Autor">
+				<info>
+					<kurzinfo>Urheber</kurzinfo>
+				</info>
+			</attribut>
+			<attribut pid="att.text" anzahl="1" anzahlIst="fest" name="Status">
+				<info>
+					<kurzinfo>Status</kurzinfo>
+				</info>
+			</attribut>
+			<attribut pid="att.text" anzahl="1" anzahlIst="fest" name="Datum">
+				<info>
+					<kurzinfo>Erstellungsdatum</kurzinfo>
+				</info>
+			</attribut>
+		</attributlistenDefinition>
+		<attributlistenDefinition pid="atl.skriptMetainformation">
+			<info>
+				<kurzinfo>Variable Elemente eines Skripts (Tripel aus Objekttyp, Attributgruppe und Aspekt)</kurzinfo>
+			</info>
+			<attributliste pid="atl.skriptVariableElemente" anzahl="0" anzahlIst="variabel" name="VariableElemente">
+				<info>
+					<kurzinfo>Variable Elemente des Skripts</kurzinfo>
+				</info>
+			</attributliste>
+			<attributliste pid="atl.skriptVersionsHistorie" anzahl="0" anzahlIst="variabel" name="VersionsHistorie">
+				<info>
+					<kurzinfo>Versionshistorie des Skripts</kurzinfo>
+				</info>
+			</attributliste>
+			<attributliste pid="atl.skriptGrundinformation" anzahl="1" anzahlIst="fest" name="Grundinformation">
+				<info>
+					<kurzinfo>Grundlegende Informationen ueber das Skript</kurzinfo>
+				</info>
+			</attributliste>
+			<attributliste pid="atl.skriptDetailinformation" anzahl="1" anzahlIst="fest" name="Detailinformation">
+				<info>
+					<kurzinfo>Detailinformationen ueber das Skript</kurzinfo>
+				</info>
+			</attributliste>
+		</attributlistenDefinition>
+		<attributlistenDefinition pid="atl.skriptVariableElemente">
+			<info>
+				<kurzinfo>Variable Elemente eines Skripts (Tripel aus Objekttyp, Attributgruppe und Aspekt)</kurzinfo>
+			</info>
+			<attribut pid="att.text" anzahl="1" anzahlIst="fest" name="Objekttyp">
+				<info>
+					<kurzinfo>PID des Objekts</kurzinfo>
+				</info>
+			</attribut>
+			<attribut pid="att.text" anzahl="1" anzahlIst="fest" name="Attributgruppe">
+				<info>
+					<kurzinfo>PID der Attributgruppe</kurzinfo>
+				</info>
+			</attribut>
+			<attribut pid="att.text" anzahl="1" anzahlIst="fest" name="Aspekt">
+				<info>
+					<kurzinfo>Aspekts oder ungebundener Aspekt</kurzinfo>
+				</info>
+			</attribut>
+		</attributlistenDefinition>
+		<attributlistenDefinition pid="atl.skriptVersionsHistorie">
+			<info>
+				<kurzinfo>Versionshistorie des Skripts</kurzinfo>
+			</info>
+			<attribut pid="att.zahl" anzahl="1" anzahlIst="fest" name="Version">
+				<info>
+					<kurzinfo>Version des Skripts</kurzinfo>
+				</info>
+			</attribut>
+			<attribut pid="att.text" anzahl="1" anzahlIst="fest" name="Aenderungsdatum">
+				<info>
+					<kurzinfo>Erstellungsdatum dieser Version</kurzinfo>
+				</info>
+			</attribut>
+			<attribut pid="att.text" anzahl="1" anzahlIst="fest" name="Beschreibung">
+				<info>
+					<kurzinfo>Beschreibung</kurzinfo>
+				</info>
+			</attribut>
+			<attribut pid="att.text" anzahl="1" anzahlIst="fest" name="Urheber">
+				<info>
+					<kurzinfo>Name des Autors</kurzinfo>
+				</info>
+			</attribut>
+		</attributlistenDefinition>
+		<attributlistenDefinition pid="atl.zeitbereich">
+			<info>
+				<kurzinfo>
+				Stellt einen Zeitbereich dar
+			</kurzinfo>
+			</info>
+			<attribut pid="att.zeit" anzahl="1" anzahlIst="fest" name="Startzeit">
+				<info>
+					<kurzinfo>Startzeitpunkt des Bereichs</kurzinfo>
+				</info>
+			</attribut>
+			<attribut pid="att.zeit" anzahl="1" anzahlIst="fest" name="Endzeit">
+				<info>
+					<kurzinfo>Endzeitpunkt des Bereichs</kurzinfo>
+				</info>
+			</attribut>
+		</attributlistenDefinition>
+		<mengenDefinition pid="menge.puaSkripte" elemente="typ.puaSkript" aenderbar="ja" mindestens="0" hoechstens="0" referenzierungsart="assoziation">
+			<info>
+				<kurzinfo>Menge aller Skriptobjekte</kurzinfo>
+			</info>
+		</mengenDefinition>
+	</modell>
+	<objekte>
+	</objekte>
+</konfigurationsBereich>

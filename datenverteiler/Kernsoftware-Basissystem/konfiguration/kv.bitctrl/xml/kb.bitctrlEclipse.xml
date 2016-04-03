@@ -1,0 +1,115 @@
+<?xml version="1.0" encoding="ISO-8859-1"?>
+<!DOCTYPE konfigurationsBereich PUBLIC "-//K2S//DTD Dokument//DE" "K2S.dtd">
+<konfigurationsBereich pid="kb.bitctrlEclipse" name="BitCtrlEclipse" verantwortlich="kv.bitctrl">
+	<info>
+		<kurzinfo>Allgemeine Eclipse-spezifische Definitionen.</kurzinfo>
+	</info>
+	<konfigurationsAenderung autor="BitCtrl Systems GmbH, Falko Schumann" stand="1.12.2009" grund="Ersterstellung" />
+	<modell>
+
+		<!-- Typdefinitionen -->
+
+		<!-- Attributgruppen -->
+
+		<!-- Allgemeine Attributlisten -->
+		<attributlistenDefinition pid="atl.rgb" name="RGB">
+			<info>
+				<kurzinfo>Definiert eine Farbe aus den Grundfarben Rot, Grün und Blau.</kurzinfo>
+				<beschreibung>Die Farbdefinition hält sich an das übliche RGB-Schema, die resultierende Farbe wird aus den
+					Grundfarben Rot, Grün und Blau zusammengesetzt. Jede Grundfarbe kann einen Anteil von 0 bis 255 annehmen.
+					Entspricht org.eclipse.swt.graphics.RGB</beschreibung>
+			</info>
+			<attribut pid="att.unsignedByte" name="Rot" />
+			<attribut pid="att.unsignedByte" name="Grün" />
+			<attribut pid="att.unsignedByte" name="Blau" />
+		</attributlistenDefinition>
+		<attributlistenDefinition pid="atl.linienEigenschaften" name="LinienEigenschaften">
+			<info>
+				<kurzinfo>Beschreibt die Eigenschaften einer Linie wie ihre Stärke und den Stil.</kurzinfo>
+				<beschreibung>Entspricht org.eclipse.swt.graphics.LineAttributes</beschreibung>
+			</info>
+			<attribut pid="att.linienStärke" name="LinienStärke" />
+			<attribut pid="att.linienStil" name="LinienStil" />
+		</attributlistenDefinition>
+		<attributlistenDefinition pid="atl.schrift" name="Schrift">
+			<info>
+				<kurzinfo>Beschreibt eine Schrift mit Art, Größe und Stil.</kurzinfo>
+				<beschreibung>Entspricht org.eclipse.swt.graphics.FontData</beschreibung>
+			</info>
+			<attribut pid="att.text" name="SchriftArt" />
+			<attribut pid="att.zahlPositiv" name="SchriftGröße" />
+			<attribut pid="att.schriftStil" name="SchriftStil" />
+		</attributlistenDefinition>
+		<attributlistenDefinition pid="att.draw2DAusrichtung" name="Draw2DAusrichtung">
+			<info>
+				<kurzinfo>Horizontale und vertikale Ausrichtung im Draw2D.</kurzinfo>
+			</info>
+			<attribut pid="att.draw2DAusrichtungHorizontal" name="Horizontal" />
+			<attribut pid="att.draw2DAusrichtungVertikal" name="Vertikal" />
+		</attributlistenDefinition>
+
+		<!-- Attributdefinitionen -->
+		<attributDefinition pid="att.linienStärke" name="LinienStärke">
+			<info>
+				<kurzinfo>Beschreibt die Stärke einer Linie.</kurzinfo>
+				<beschreibung>Die Liniendicke lässt sich in Eclipse als float beschreiben.</beschreibung>
+			</info>
+			<ganzzahl bits="32">
+				<bereich minimum="0" skalierung="0,01" />
+			</ganzzahl>
+		</attributDefinition>
+		<attributDefinition pid="att.linienStil" name="LinienStil">
+			<info>
+				<kurzinfo>Beschreibt einen Linienstil.</kurzinfo>
+				<beschreibung>Die Zahlenwerte der Linienstile sind so gewählt, dass sie den SWT-Konstanten in Eclipse 3.5
+					entsprechen.</beschreibung>
+			</info>
+			<ganzzahl bits="32">
+				<bereich minimum="1" maximum="5" />
+				<zustand name="Durchgezogen" wert="1" />
+				<zustand name="Gestrichelt" wert="2" />
+				<zustand name="Gepunkted" wert="3" />
+				<zustand name="Strich-Punkt" wert="4" />
+				<zustand name="Strich-Punkt-Punkt" wert="5" />
+			</ganzzahl>
+			<default wert="1" />
+		</attributDefinition>
+		<attributDefinition pid="att.schriftStil" name="SchriftStil">
+			<info>
+				<kurzinfo>Beschreibt einen Schriftstil.</kurzinfo>
+				<beschreibung>Die Zahlenwerte der Schriftstile sind so gewählt, dass sie den SWT-Konstanten in Eclipse 3.5
+					entsprechen.</beschreibung>
+			</info>
+			<ganzzahl bits="32">
+				<bereich minimum="0" maximum="3" />
+				<zustand name="Normal" wert="0" />
+				<zustand name="Fett" wert="1" />
+				<zustand name="Kursiv" wert="2" />
+				<zustand name="Fett und Kursiv" wert="3" />
+			</ganzzahl>
+			<default wert="0" />
+		</attributDefinition>
+		<attributDefinition pid="att.draw2DAusrichtungHorizontal" name="Draw2DAusrichtungHorizontal">
+			<info>
+				<kurzinfo>Horizontale Ausrichtung in Draw2D/GEF.</kurzinfo>
+			</info>
+			<ganzzahl>
+				<zustand name="Links" wert="1" />
+				<zustand name="Zentriert" wert="2" />
+				<zustand name="Rechts" wert="4" />
+			</ganzzahl>
+			<default wert="Links" />
+		</attributDefinition>
+		<attributDefinition pid="att.draw2DAusrichtungVertikal" name="Draw2DAusrichtungVertikal">
+			<info>
+				<kurzinfo>Vertikal Ausrichtung in Draw2D/GEF.</kurzinfo>
+			</info>
+			<ganzzahl>
+				<zustand name="Oben" wert="8" />
+				<zustand name="Mitte" wert="16" />
+				<zustand name="Unten" wert="32" />
+			</ganzzahl>
+			<default wert="Oben" />
+		</attributDefinition>
+	</modell>
+</konfigurationsBereich>

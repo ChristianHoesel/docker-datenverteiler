@@ -1,0 +1,369 @@
+<?xml version="1.0" encoding="ISO-8859-1"?>
+<!DOCTYPE konfigurationsBereich PUBLIC "-//K2S//DTD Dokument//DE" "K2S.dtd">
+<konfigurationsBereich pid="kb.objekteTestUnterzentraleK2S_10_MessQuerschnitte" name="ObjekteTest: UnterzentraleK2S_10_MessQuerschnitte" verantwortlich="kv.kappich">
+	<info>
+		<kurzinfo>Teilmodell mit Testkonfiguration zum Teilmodell "VekehrGlobal" mit einer UZ-Versorgung.</kurzinfo>
+		<beschreibung>Teilmodell mit Testkonfiguration zum Teilmodell "VekehrGlobal" mit einer UZ-Versorgung (keinerlei Relevanz für das System).</beschreibung>
+	</info>
+	<!--
+	Abhängigkeiten des Bereichs kb.objekteTestUnterzentraleK2S_10_MessQuerschnitte
+	Abhängig ab Version      Art der Abhängigkeit      Version des benötigten Bereichs      Benötigter Bereich
+	3                        notwendig                 1                                    kb.metaModellGlobal                
+	3                        notwendig                 1                                    kb.tmVerkehrGlobal                 
+	3                        notwendig                 1                                    kb.kv.kappich                      
+	-->
+	<modell>
+	</modell>
+	<objekte>
+		<konfigurationsObjekt pid="fs.mq.a10.0000.1üfs" name="FS.MQ.A10.0000.1ÜFS" typ="typ.fahrStreifen">
+			<datensatz attributgruppe="atg.fahrStreifen" aspekt="asp.eigenschaften">
+				<datum name="Typ" wert="ÜberholFahrStreifen"/>
+				<datum name="Lage" wert="1ÜFS"/>
+				<datum name="FahrStreifenQuelle" wert="fs.mq.a10.0000.1üfs"/>
+				<datum name="ErsatzFahrStreifen" wert="fs.mq.a10.0000.1üfs"/>
+			</datensatz>
+		</konfigurationsObjekt>
+		<konfigurationsObjekt pid="fs.mq.a10.0000.2üfs" name="FS.MQ.A10.0000.2ÜFS" typ="typ.fahrStreifen">
+			<datensatz attributgruppe="atg.fahrStreifen" aspekt="asp.eigenschaften">
+				<datum name="Typ" wert="ÜberholFahrStreifen"/>
+				<datum name="Lage" wert="2ÜFS"/>
+				<datum name="FahrStreifenQuelle" wert="fs.mq.a10.0000.2üfs"/>
+				<datum name="ErsatzFahrStreifen" wert="fs.mq.a10.0000.2üfs"/>
+			</datensatz>
+		</konfigurationsObjekt>
+		<konfigurationsObjekt pid="fs.mq.a10.0000.hfs" name="FS.MQ.A10.0000.HFS" typ="typ.fahrStreifen">
+			<datensatz attributgruppe="atg.fahrStreifen" aspekt="asp.eigenschaften">
+				<datum name="Typ" wert="HauptFahrStreifen"/>
+				<datum name="Lage" wert="HFS"/>
+				<datum name="FahrStreifenQuelle" wert="fs.mq.a10.0000.hfs"/>
+				<datum name="ErsatzFahrStreifen" wert="fs.mq.a10.0000.hfs"/>
+			</datensatz>
+		</konfigurationsObjekt>
+		<konfigurationsObjekt pid="fs.mq.a10.0001.1üfs" name="FS.MQ.A10.0001.1ÜFS" typ="typ.fahrStreifen">
+			<datensatz attributgruppe="atg.fahrStreifen" aspekt="asp.eigenschaften">
+				<datum name="Typ" wert="ÜberholFahrStreifen"/>
+				<datum name="Lage" wert="1ÜFS"/>
+				<datum name="FahrStreifenQuelle" wert="fs.mq.a10.0001.1üfs"/>
+				<datum name="ErsatzFahrStreifen" wert="fs.mq.a10.0001.1üfs"/>
+			</datensatz>
+		</konfigurationsObjekt>
+		<konfigurationsObjekt pid="fs.mq.a10.0001.2üfs" name="FS.MQ.A10.0001.2ÜFS" typ="typ.fahrStreifen">
+			<datensatz attributgruppe="atg.fahrStreifen" aspekt="asp.eigenschaften">
+				<datum name="Typ" wert="ÜberholFahrStreifen"/>
+				<datum name="Lage" wert="2ÜFS"/>
+				<datum name="FahrStreifenQuelle" wert="fs.mq.a10.0001.2üfs"/>
+				<datum name="ErsatzFahrStreifen" wert="fs.mq.a10.0001.2üfs"/>
+			</datensatz>
+		</konfigurationsObjekt>
+		<konfigurationsObjekt pid="fs.mq.a10.0001.hfs" name="FS.MQ.A10.0001.HFS" typ="typ.fahrStreifen">
+			<datensatz attributgruppe="atg.fahrStreifen" aspekt="asp.eigenschaften">
+				<datum name="Typ" wert="HauptFahrStreifen"/>
+				<datum name="Lage" wert="HFS"/>
+				<datum name="FahrStreifenQuelle" wert="fs.mq.a10.0001.hfs"/>
+				<datum name="ErsatzFahrStreifen" wert="fs.mq.a10.0001.hfs"/>
+			</datensatz>
+		</konfigurationsObjekt>
+		<konfigurationsObjekt pid="fs.mq.a10.0002.1üfs" name="FS.MQ.A10.0002.1ÜFS" typ="typ.fahrStreifen">
+			<datensatz attributgruppe="atg.fahrStreifen" aspekt="asp.eigenschaften">
+				<datum name="Typ" wert="ÜberholFahrStreifen"/>
+				<datum name="Lage" wert="1ÜFS"/>
+				<datum name="FahrStreifenQuelle" wert="fs.mq.a10.0002.1üfs"/>
+				<datum name="ErsatzFahrStreifen" wert="fs.mq.a10.0002.1üfs"/>
+			</datensatz>
+		</konfigurationsObjekt>
+		<konfigurationsObjekt pid="fs.mq.a10.0002.2üfs" name="FS.MQ.A10.0002.2ÜFS" typ="typ.fahrStreifen">
+			<datensatz attributgruppe="atg.fahrStreifen" aspekt="asp.eigenschaften">
+				<datum name="Typ" wert="ÜberholFahrStreifen"/>
+				<datum name="Lage" wert="2ÜFS"/>
+				<datum name="FahrStreifenQuelle" wert="fs.mq.a10.0002.2üfs"/>
+				<datum name="ErsatzFahrStreifen" wert="fs.mq.a10.0002.2üfs"/>
+			</datensatz>
+		</konfigurationsObjekt>
+		<konfigurationsObjekt pid="fs.mq.a10.0002.hfs" name="FS.MQ.A10.0002.HFS" typ="typ.fahrStreifen">
+			<datensatz attributgruppe="atg.fahrStreifen" aspekt="asp.eigenschaften">
+				<datum name="Typ" wert="HauptFahrStreifen"/>
+				<datum name="Lage" wert="HFS"/>
+				<datum name="FahrStreifenQuelle" wert="fs.mq.a10.0002.hfs"/>
+				<datum name="ErsatzFahrStreifen" wert="fs.mq.a10.0002.hfs"/>
+			</datensatz>
+		</konfigurationsObjekt>
+		<konfigurationsObjekt pid="fs.mq.a10.0003.1üfs" name="FS.MQ.A10.0003.1ÜFS" typ="typ.fahrStreifen">
+			<datensatz attributgruppe="atg.fahrStreifen" aspekt="asp.eigenschaften">
+				<datum name="Typ" wert="ÜberholFahrStreifen"/>
+				<datum name="Lage" wert="1ÜFS"/>
+				<datum name="FahrStreifenQuelle" wert="fs.mq.a10.0003.1üfs"/>
+				<datum name="ErsatzFahrStreifen" wert="fs.mq.a10.0003.1üfs"/>
+			</datensatz>
+		</konfigurationsObjekt>
+		<konfigurationsObjekt pid="fs.mq.a10.0003.2üfs" name="FS.MQ.A10.0003.2ÜFS" typ="typ.fahrStreifen">
+			<datensatz attributgruppe="atg.fahrStreifen" aspekt="asp.eigenschaften">
+				<datum name="Typ" wert="ÜberholFahrStreifen"/>
+				<datum name="Lage" wert="2ÜFS"/>
+				<datum name="FahrStreifenQuelle" wert="fs.mq.a10.0003.2üfs"/>
+				<datum name="ErsatzFahrStreifen" wert="fs.mq.a10.0003.2üfs"/>
+			</datensatz>
+		</konfigurationsObjekt>
+		<konfigurationsObjekt pid="fs.mq.a10.0003.hfs" name="FS.MQ.A10.0003.HFS" typ="typ.fahrStreifen">
+			<datensatz attributgruppe="atg.fahrStreifen" aspekt="asp.eigenschaften">
+				<datum name="Typ" wert="HauptFahrStreifen"/>
+				<datum name="Lage" wert="HFS"/>
+				<datum name="FahrStreifenQuelle" wert="fs.mq.a10.0003.hfs"/>
+				<datum name="ErsatzFahrStreifen" wert="fs.mq.a10.0003.hfs"/>
+			</datensatz>
+		</konfigurationsObjekt>
+		<konfigurationsObjekt pid="fs.mq.a10.0004.1üfs" name="FS.MQ.A10.0004.1ÜFS" typ="typ.fahrStreifen">
+			<datensatz attributgruppe="atg.fahrStreifen" aspekt="asp.eigenschaften">
+				<datum name="Typ" wert="ÜberholFahrStreifen"/>
+				<datum name="Lage" wert="1ÜFS"/>
+				<datum name="FahrStreifenQuelle" wert="fs.mq.a10.0004.1üfs"/>
+				<datum name="ErsatzFahrStreifen" wert="fs.mq.a10.0004.1üfs"/>
+			</datensatz>
+		</konfigurationsObjekt>
+		<konfigurationsObjekt pid="fs.mq.a10.0004.2üfs" name="FS.MQ.A10.0004.2ÜFS" typ="typ.fahrStreifen">
+			<datensatz attributgruppe="atg.fahrStreifen" aspekt="asp.eigenschaften">
+				<datum name="Typ" wert="ÜberholFahrStreifen"/>
+				<datum name="Lage" wert="2ÜFS"/>
+				<datum name="FahrStreifenQuelle" wert="fs.mq.a10.0004.2üfs"/>
+				<datum name="ErsatzFahrStreifen" wert="fs.mq.a10.0004.2üfs"/>
+			</datensatz>
+		</konfigurationsObjekt>
+		<konfigurationsObjekt pid="fs.mq.a10.0004.hfs" name="FS.MQ.A10.0004.HFS" typ="typ.fahrStreifen">
+			<datensatz attributgruppe="atg.fahrStreifen" aspekt="asp.eigenschaften">
+				<datum name="Typ" wert="HauptFahrStreifen"/>
+				<datum name="Lage" wert="HFS"/>
+				<datum name="FahrStreifenQuelle" wert="fs.mq.a10.0004.hfs"/>
+				<datum name="ErsatzFahrStreifen" wert="fs.mq.a10.0004.hfs"/>
+			</datensatz>
+		</konfigurationsObjekt>
+		<konfigurationsObjekt pid="fs.mq.a10.0005.1üfs" name="FS.MQ.A10.0005.1ÜFS" typ="typ.fahrStreifen">
+			<datensatz attributgruppe="atg.fahrStreifen" aspekt="asp.eigenschaften">
+				<datum name="Typ" wert="ÜberholFahrStreifen"/>
+				<datum name="Lage" wert="1ÜFS"/>
+				<datum name="FahrStreifenQuelle" wert="fs.mq.a10.0005.1üfs"/>
+				<datum name="ErsatzFahrStreifen" wert="fs.mq.a10.0005.1üfs"/>
+			</datensatz>
+		</konfigurationsObjekt>
+		<konfigurationsObjekt pid="fs.mq.a10.0005.2üfs" name="FS.MQ.A10.0005.2ÜFS" typ="typ.fahrStreifen">
+			<datensatz attributgruppe="atg.fahrStreifen" aspekt="asp.eigenschaften">
+				<datum name="Typ" wert="ÜberholFahrStreifen"/>
+				<datum name="Lage" wert="2ÜFS"/>
+				<datum name="FahrStreifenQuelle" wert="fs.mq.a10.0005.2üfs"/>
+				<datum name="ErsatzFahrStreifen" wert="fs.mq.a10.0005.2üfs"/>
+			</datensatz>
+		</konfigurationsObjekt>
+		<konfigurationsObjekt pid="fs.mq.a10.0005.hfs" name="FS.MQ.A10.0005.HFS" typ="typ.fahrStreifen">
+			<datensatz attributgruppe="atg.fahrStreifen" aspekt="asp.eigenschaften">
+				<datum name="Typ" wert="HauptFahrStreifen"/>
+				<datum name="Lage" wert="HFS"/>
+				<datum name="FahrStreifenQuelle" wert="fs.mq.a10.0005.hfs"/>
+				<datum name="ErsatzFahrStreifen" wert="fs.mq.a10.0005.hfs"/>
+			</datensatz>
+		</konfigurationsObjekt>
+		<konfigurationsObjekt pid="fs.mq.a10.0006.1üfs" name="FS.MQ.A10.0006.1ÜFS" typ="typ.fahrStreifen">
+			<datensatz attributgruppe="atg.fahrStreifen" aspekt="asp.eigenschaften">
+				<datum name="Typ" wert="ÜberholFahrStreifen"/>
+				<datum name="Lage" wert="1ÜFS"/>
+				<datum name="FahrStreifenQuelle" wert="fs.mq.a10.0006.1üfs"/>
+				<datum name="ErsatzFahrStreifen" wert="fs.mq.a10.0006.1üfs"/>
+			</datensatz>
+		</konfigurationsObjekt>
+		<konfigurationsObjekt pid="fs.mq.a10.0006.2üfs" name="FS.MQ.A10.0006.2ÜFS" typ="typ.fahrStreifen">
+			<datensatz attributgruppe="atg.fahrStreifen" aspekt="asp.eigenschaften">
+				<datum name="Typ" wert="ÜberholFahrStreifen"/>
+				<datum name="Lage" wert="2ÜFS"/>
+				<datum name="FahrStreifenQuelle" wert="fs.mq.a10.0006.2üfs"/>
+				<datum name="ErsatzFahrStreifen" wert="fs.mq.a10.0006.2üfs"/>
+			</datensatz>
+		</konfigurationsObjekt>
+		<konfigurationsObjekt pid="fs.mq.a10.0006.hfs" name="FS.MQ.A10.0006.HFS" typ="typ.fahrStreifen">
+			<datensatz attributgruppe="atg.fahrStreifen" aspekt="asp.eigenschaften">
+				<datum name="Typ" wert="HauptFahrStreifen"/>
+				<datum name="Lage" wert="HFS"/>
+				<datum name="FahrStreifenQuelle" wert="fs.mq.a10.0006.hfs"/>
+				<datum name="ErsatzFahrStreifen" wert="fs.mq.a10.0006.hfs"/>
+			</datensatz>
+		</konfigurationsObjekt>
+		<konfigurationsObjekt pid="fs.mq.a10.0007.1üfs" name="FS.MQ.A10.0007.1ÜFS" typ="typ.fahrStreifen">
+			<datensatz attributgruppe="atg.fahrStreifen" aspekt="asp.eigenschaften">
+				<datum name="Typ" wert="ÜberholFahrStreifen"/>
+				<datum name="Lage" wert="1ÜFS"/>
+				<datum name="FahrStreifenQuelle" wert="fs.mq.a10.0007.1üfs"/>
+				<datum name="ErsatzFahrStreifen" wert="fs.mq.a10.0007.1üfs"/>
+			</datensatz>
+		</konfigurationsObjekt>
+		<konfigurationsObjekt pid="fs.mq.a10.0007.2üfs" name="FS.MQ.A10.0007.2ÜFS" typ="typ.fahrStreifen">
+			<datensatz attributgruppe="atg.fahrStreifen" aspekt="asp.eigenschaften">
+				<datum name="Typ" wert="ÜberholFahrStreifen"/>
+				<datum name="Lage" wert="2ÜFS"/>
+				<datum name="FahrStreifenQuelle" wert="fs.mq.a10.0007.2üfs"/>
+				<datum name="ErsatzFahrStreifen" wert="fs.mq.a10.0007.2üfs"/>
+			</datensatz>
+		</konfigurationsObjekt>
+		<konfigurationsObjekt pid="fs.mq.a10.0007.hfs" name="FS.MQ.A10.0007.HFS" typ="typ.fahrStreifen">
+			<datensatz attributgruppe="atg.fahrStreifen" aspekt="asp.eigenschaften">
+				<datum name="Typ" wert="HauptFahrStreifen"/>
+				<datum name="Lage" wert="HFS"/>
+				<datum name="FahrStreifenQuelle" wert="fs.mq.a10.0007.hfs"/>
+				<datum name="ErsatzFahrStreifen" wert="fs.mq.a10.0007.hfs"/>
+			</datensatz>
+		</konfigurationsObjekt>
+		<konfigurationsObjekt pid="fs.mq.a10.0008.1üfs" name="FS.MQ.A10.0008.1ÜFS" typ="typ.fahrStreifen">
+			<datensatz attributgruppe="atg.fahrStreifen" aspekt="asp.eigenschaften">
+				<datum name="Typ" wert="ÜberholFahrStreifen"/>
+				<datum name="Lage" wert="1ÜFS"/>
+				<datum name="FahrStreifenQuelle" wert="fs.mq.a10.0008.1üfs"/>
+				<datum name="ErsatzFahrStreifen" wert="fs.mq.a10.0008.1üfs"/>
+			</datensatz>
+		</konfigurationsObjekt>
+		<konfigurationsObjekt pid="fs.mq.a10.0008.2üfs" name="FS.MQ.A10.0008.2ÜFS" typ="typ.fahrStreifen">
+			<datensatz attributgruppe="atg.fahrStreifen" aspekt="asp.eigenschaften">
+				<datum name="Typ" wert="ÜberholFahrStreifen"/>
+				<datum name="Lage" wert="2ÜFS"/>
+				<datum name="FahrStreifenQuelle" wert="fs.mq.a10.0008.2üfs"/>
+				<datum name="ErsatzFahrStreifen" wert="fs.mq.a10.0008.2üfs"/>
+			</datensatz>
+		</konfigurationsObjekt>
+		<konfigurationsObjekt pid="fs.mq.a10.0008.hfs" name="FS.MQ.A10.0008.HFS" typ="typ.fahrStreifen">
+			<datensatz attributgruppe="atg.fahrStreifen" aspekt="asp.eigenschaften">
+				<datum name="Typ" wert="HauptFahrStreifen"/>
+				<datum name="Lage" wert="HFS"/>
+				<datum name="FahrStreifenQuelle" wert="fs.mq.a10.0008.hfs"/>
+				<datum name="ErsatzFahrStreifen" wert="fs.mq.a10.0008.hfs"/>
+			</datensatz>
+		</konfigurationsObjekt>
+		<konfigurationsObjekt pid="fs.mq.a10.0009.1üfs" name="FS.MQ.A10.0009.1ÜFS" typ="typ.fahrStreifen">
+			<datensatz attributgruppe="atg.fahrStreifen" aspekt="asp.eigenschaften">
+				<datum name="Typ" wert="ÜberholFahrStreifen"/>
+				<datum name="Lage" wert="1ÜFS"/>
+				<datum name="FahrStreifenQuelle" wert="fs.mq.a10.0009.1üfs"/>
+				<datum name="ErsatzFahrStreifen" wert="fs.mq.a10.0009.1üfs"/>
+			</datensatz>
+		</konfigurationsObjekt>
+		<konfigurationsObjekt pid="fs.mq.a10.0009.2üfs" name="FS.MQ.A10.0009.2ÜFS" typ="typ.fahrStreifen">
+			<datensatz attributgruppe="atg.fahrStreifen" aspekt="asp.eigenschaften">
+				<datum name="Typ" wert="ÜberholFahrStreifen"/>
+				<datum name="Lage" wert="2ÜFS"/>
+				<datum name="FahrStreifenQuelle" wert="fs.mq.a10.0009.2üfs"/>
+				<datum name="ErsatzFahrStreifen" wert="fs.mq.a10.0009.2üfs"/>
+			</datensatz>
+		</konfigurationsObjekt>
+		<konfigurationsObjekt pid="fs.mq.a10.0009.hfs" name="FS.MQ.A10.0009.HFS" typ="typ.fahrStreifen">
+			<datensatz attributgruppe="atg.fahrStreifen" aspekt="asp.eigenschaften">
+				<datum name="Typ" wert="HauptFahrStreifen"/>
+				<datum name="Lage" wert="HFS"/>
+				<datum name="FahrStreifenQuelle" wert="fs.mq.a10.0009.hfs"/>
+				<datum name="ErsatzFahrStreifen" wert="fs.mq.a10.0009.hfs"/>
+			</datensatz>
+		</konfigurationsObjekt>
+		<konfigurationsObjekt pid="mq.a10.0000" name="MQ.A10.0000" typ="typ.messQuerschnitt">
+			<datensatz attributgruppe="atg.messQuerschnittAllgemein" aspekt="asp.eigenschaften">
+				<datum name="Typ" wert="HauptFahrbahn"/>
+				<datum name="ErsatzMessQuerschnitt" wert="mq.a10.0000"/>
+			</datensatz>
+			<objektMenge name="FahrStreifen">
+				<element pid="fs.mq.a10.0000.hfs"/>
+				<element pid="fs.mq.a10.0000.1üfs"/>
+				<element pid="fs.mq.a10.0000.2üfs"/>
+			</objektMenge>
+		</konfigurationsObjekt>
+		<konfigurationsObjekt pid="mq.a10.0001" name="MQ.A10.0001" typ="typ.messQuerschnitt">
+			<datensatz attributgruppe="atg.messQuerschnittAllgemein" aspekt="asp.eigenschaften">
+				<datum name="Typ" wert="HauptFahrbahn"/>
+				<datum name="ErsatzMessQuerschnitt" wert="mq.a10.0001"/>
+			</datensatz>
+			<objektMenge name="FahrStreifen">
+				<element pid="fs.mq.a10.0001.hfs"/>
+				<element pid="fs.mq.a10.0001.2üfs"/>
+				<element pid="fs.mq.a10.0001.1üfs"/>
+			</objektMenge>
+		</konfigurationsObjekt>
+		<konfigurationsObjekt pid="mq.a10.0002" name="MQ.A10.0002" typ="typ.messQuerschnitt">
+			<datensatz attributgruppe="atg.messQuerschnittAllgemein" aspekt="asp.eigenschaften">
+				<datum name="Typ" wert="HauptFahrbahn"/>
+				<datum name="ErsatzMessQuerschnitt" wert="mq.a10.0002"/>
+			</datensatz>
+			<objektMenge name="FahrStreifen">
+				<element pid="fs.mq.a10.0002.2üfs"/>
+				<element pid="fs.mq.a10.0002.1üfs"/>
+				<element pid="fs.mq.a10.0002.hfs"/>
+			</objektMenge>
+		</konfigurationsObjekt>
+		<konfigurationsObjekt pid="mq.a10.0003" name="MQ.A10.0003" typ="typ.messQuerschnitt">
+			<datensatz attributgruppe="atg.messQuerschnittAllgemein" aspekt="asp.eigenschaften">
+				<datum name="Typ" wert="HauptFahrbahn"/>
+				<datum name="ErsatzMessQuerschnitt" wert="mq.a10.0003"/>
+			</datensatz>
+			<objektMenge name="FahrStreifen">
+				<element pid="fs.mq.a10.0003.1üfs"/>
+				<element pid="fs.mq.a10.0003.2üfs"/>
+				<element pid="fs.mq.a10.0003.hfs"/>
+			</objektMenge>
+		</konfigurationsObjekt>
+		<konfigurationsObjekt pid="mq.a10.0004" name="MQ.A10.0004" typ="typ.messQuerschnitt">
+			<datensatz attributgruppe="atg.messQuerschnittAllgemein" aspekt="asp.eigenschaften">
+				<datum name="Typ" wert="HauptFahrbahn"/>
+				<datum name="ErsatzMessQuerschnitt" wert="mq.a10.0004"/>
+			</datensatz>
+			<objektMenge name="FahrStreifen">
+				<element pid="fs.mq.a10.0004.2üfs"/>
+				<element pid="fs.mq.a10.0004.hfs"/>
+				<element pid="fs.mq.a10.0004.1üfs"/>
+			</objektMenge>
+		</konfigurationsObjekt>
+		<konfigurationsObjekt pid="mq.a10.0005" name="MQ.A10.0005" typ="typ.messQuerschnitt">
+			<datensatz attributgruppe="atg.messQuerschnittAllgemein" aspekt="asp.eigenschaften">
+				<datum name="Typ" wert="HauptFahrbahn"/>
+				<datum name="ErsatzMessQuerschnitt" wert="mq.a10.0005"/>
+			</datensatz>
+			<objektMenge name="FahrStreifen">
+				<element pid="fs.mq.a10.0005.hfs"/>
+				<element pid="fs.mq.a10.0005.2üfs"/>
+				<element pid="fs.mq.a10.0005.1üfs"/>
+			</objektMenge>
+		</konfigurationsObjekt>
+		<konfigurationsObjekt pid="mq.a10.0006" name="MQ.A10.0006" typ="typ.messQuerschnitt">
+			<datensatz attributgruppe="atg.messQuerschnittAllgemein" aspekt="asp.eigenschaften">
+				<datum name="Typ" wert="HauptFahrbahn"/>
+				<datum name="ErsatzMessQuerschnitt" wert="mq.a10.0006"/>
+			</datensatz>
+			<objektMenge name="FahrStreifen">
+				<element pid="fs.mq.a10.0006.hfs"/>
+				<element pid="fs.mq.a10.0006.2üfs"/>
+				<element pid="fs.mq.a10.0006.1üfs"/>
+			</objektMenge>
+		</konfigurationsObjekt>
+		<konfigurationsObjekt pid="mq.a10.0007" name="MQ.A10.0007" typ="typ.messQuerschnitt">
+			<datensatz attributgruppe="atg.messQuerschnittAllgemein" aspekt="asp.eigenschaften">
+				<datum name="Typ" wert="HauptFahrbahn"/>
+				<datum name="ErsatzMessQuerschnitt" wert="mq.a10.0007"/>
+			</datensatz>
+			<objektMenge name="FahrStreifen">
+				<element pid="fs.mq.a10.0007.2üfs"/>
+				<element pid="fs.mq.a10.0007.hfs"/>
+				<element pid="fs.mq.a10.0007.1üfs"/>
+			</objektMenge>
+		</konfigurationsObjekt>
+		<konfigurationsObjekt pid="mq.a10.0008" name="MQ.A10.0008" typ="typ.messQuerschnitt">
+			<datensatz attributgruppe="atg.messQuerschnittAllgemein" aspekt="asp.eigenschaften">
+				<datum name="Typ" wert="HauptFahrbahn"/>
+				<datum name="ErsatzMessQuerschnitt" wert="mq.a10.0008"/>
+			</datensatz>
+			<objektMenge name="FahrStreifen">
+				<element pid="fs.mq.a10.0008.2üfs"/>
+				<element pid="fs.mq.a10.0008.1üfs"/>
+				<element pid="fs.mq.a10.0008.hfs"/>
+			</objektMenge>
+		</konfigurationsObjekt>
+		<konfigurationsObjekt pid="mq.a10.0009" name="MQ.A10.0009" typ="typ.messQuerschnitt">
+			<datensatz attributgruppe="atg.messQuerschnittAllgemein" aspekt="asp.eigenschaften">
+				<datum name="Typ" wert="HauptFahrbahn"/>
+				<datum name="ErsatzMessQuerschnitt" wert="mq.a10.0009"/>
+			</datensatz>
+			<objektMenge name="FahrStreifen">
+				<element pid="fs.mq.a10.0009.hfs"/>
+				<element pid="fs.mq.a10.0009.2üfs"/>
+				<element pid="fs.mq.a10.0009.1üfs"/>
+			</objektMenge>
+		</konfigurationsObjekt>
+	</objekte>
+</konfigurationsBereich>

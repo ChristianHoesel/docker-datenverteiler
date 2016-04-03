@@ -1,0 +1,3047 @@
+
+  Kernsoftware
+
+
+    Release Notes
+
+
+      Stand "15.04.2012" Version 3.5.0
+
+  *
+
+
+            Neue Features
+
+    Folgende Erweiterungen gegenüber vorhergehenden Versionen wurden
+    durchgeführt:
+
+      o Alle Distributionspakete können jetzt direkt als Eclipse-Plugins
+        verwendet werden. Sie können beispielsweise einfach in das
+        "dropins"-Verzeichnis einer Eclipse-Installation abgelegt werden
+        oder mit Import in einen Workspace importiert werden. Der
+        Quellcode der Pakete ist wie bisher in den Distributionspaketen
+        in einer ZIP-Datei (de.bsvrz.x.y-src.zip) enthalten. Diese
+        ZIP-Datei kann in Eclipse bei Bedarf mit Attach Source mit dem
+        Code des Plugins verbunden werden.
+      o Alle Distributionspakete wurden mit Java 1.6 übersetzt.
+      o Neues Distributionspaket für SW-Einheit KExDaV zum Austausch von
+        Daten zwischen zwei ansonsten nicht gekoppelten DAV-Systemen
+      o Die Tabellendarstellung in der Systembedienung (GTM) wurde um
+        ein Menü und Funktionen zum Selektieren, Drucken, Exportieren
+        und Löschen erweitert.
+      o Implementierung einer Möglichkeit zur Sicherung der
+        Konfigurationsdateien im laufenden Betrieb der Konfiguration mit
+        Hilfe der Methode DataModel.backupConfigurationFiles().
+      o Implementierung einer Möglichkeit zur Terminierung von
+        Datenverteilerverbindungen mit Hilfe eines Onlinedatensatzes der
+        Attributgruppe "atg.terminierung" bei Objekten des
+        "typ.datenverteiler".
+      o Implementierung von Transaktionen im Datenverteiler, die
+        ermöglichen, mehrere Datensätze zusammenhängend zu versenden und
+        zu empfangen. Dazu meldet sich die Quelle oder die Senke nicht
+        auf einzelne Datenidentifikationen an, sondern auf eine
+        Transaktionsdatenidentifikation, bestehend aus einem
+        Transaktionsobjekt, einer Transaktionsattributgruppe und einem
+        (Transaktions-)Aspekt.
+      o Neue Implementierung der Rechteprüfung im Datenverteiler. Über
+        einen Aufrufparameter kann beim Start des Datenverteilers
+        festgelegt werden, welche Implementierung der Rechteprüfung
+        verwendet werden soll. Der bisherige Aufrufparameter
+        -rechtePrüfung=ja|nein wurde dazu um weitere Zustände "alt" und
+        "neu" erweitert.
+      o Der Zugriff auf dynamische Objekte mit der Methode mit Hilfe der
+        Methode DataModel.getObject(long id) wurde dahingehend
+        erweitert, dass die lokale Konfiguration bei Bedarf versucht
+        eine entsprechende Anfrage an die Konfiguration zu stellen, die
+        das Objekt ursprünglich erzeugt hat. Wenn die andere
+        Konfiguration erreichbar ist und das Objekt zurückliefern kann,
+        dann wird das Objekt an die anfragende Applikation
+        zurückgeliefert. Außerdem werden dynamische Objekte, die über
+        diesen Mechanismus übertragen wurden von der lokalen
+        Konfiguration persistent gespeichert und bei nächsten Neustart
+        wieder verwendet, wenn die Fremdkonfiguration dann nicht mehr
+        erreichbar ist. Zur Zwischenspeicherung wird eine Datei
+        eingesetzt, die sich im gleichen Verzeichnis wie die lokale
+        Verwaltungsdatei der Konfiguration befindet und den Namen
+        "fremdObjekte-kv..." hat, wobei "kv..." durch die Pid des
+        lokalen Konfigurationsverantwortlichen zu ersetzen ist.
+      o API-Erweiterung der Datenverteiler-Applikationsfunktionen zum
+        gezielten Zugriff auf andere Konfigurationen mit Hilfe der
+        Methoden ClientDavInterface.getDataModel(SystemObject),
+        ClientDavInterface.getDataModel(String) und
+        ClientDavInterface.getDataModel(long)
+      o In der KEx-TLS Implementierung gibt es auf OSI-2 und OSI-3-Ebene
+        neue Möglichkeiten zur Unterstützung von älteren TLS-Geräten.
+        Diese können über die Parameter
+        atg.protokollEinstellungenStandard und
+        atg.protokollEinstellungenPrimary an den in der TLS-Versorgung
+        definierten Anschlußpunkten bzw.
+        Anschlußpunkt-Kommunikationspartnern online verändert werden.
+        Dabei sind folgende Werte zu verwenden:
+          + OSI3-Routing unterdrücken.
+            Mit der Einstellung "osi3.reduzierungAufSteuerbyte" auf den
+            Wert "ja" kann der OSI-3-Header beim Versand von Telegrammen
+            auf das Steuerbyte reduziert werden. Defaultwert ist "nein".
+          + OSI3-Pointer inkrementieren.
+            Mit der Einstellung "osi3.pointerInkrementieren" auf den
+            Wert "nein" besteht die Möglichkeit, festzulegen, dass der
+            OSI-3 Pointer vor dem Versand nicht inkrementiert wird.
+            Defaultwert ist "ja".
+          + OSI3-Routing beim Empfang spiegeln.
+            Mit der Einstellung "osi3.adressenSpiegeln" auf den Wert
+            "ja" besteht die Möglichkeit, festzulegen, dass die
+            OSI-3-Adresse eines vom KRI empfangenen Telegramms vor der
+            weiteren Verarbeitung gespiegelt wird. Defaultwert ist "nein".
+          + Unterstützung von OSI-2 Adressen außerhalb des Bereichs von
+            1-199.
+            Mit der Einstellung "secondary.adressen200-254Akzeptieren"
+            auf den Wert "ja" (nur am Anschlusspunkt in der
+            Attributgruppe atg.protokollEinstellungenStandard) kann die
+            (nach TLS vorgesehene) Einschränkung auf Secondary-Adressen
+            im Bereich 1-199 außer Kraft gesetzt werden kann, d.h. dass
+            Secondary-Adressen außerhalb des bisher vorgesehen Bereichs
+            also auch Werte von 200 bis 254 verwendet werden können und
+            dass das OSI-3 Routing entsprechend korrekt aufgelöst und
+            zugeordnet wird. Defaultwert ist "nein".
+      o NERZ-Problem 8
+        <http://www.nerz-ev.de/nerz-fehlerverwaltung/view.php?id=8>
+        Der Datenverteiler unterstützt ein neues Aufrufargument
+        -warteAufParametrierung=... mit dem erreicht werden kann, dass
+        der Datenverteiler erst dann Verbindungen zu anderen
+        Datenverteilern aufbaut bzw. zulässt, wenn die lokale
+        Parametrierung ihre Applikationsfertigmeldung versendet hat.
+        Dadurch wird erreicht, dass der Datenverteiler die notwendigen
+        Zugriffsrechte aus der Parametrierung abrufen kann, wenn Daten
+        (und insbesondere dynamische Objekte) zwischen zwei gekoppelten
+        Systemen ausgetauscht werden sollen.
+        Folgende Möglichkeiten zur Verwendung des neuen Aufrufarguments
+        sind vorgesehen:
+          + Bei |-warteAufParametrierung=ja| wartet der Datenverteiler
+            auf die Applikationsfertigmeldung einer lokalen
+            Parametrierung (Default).
+          + Bei |-warteAufParametrierung=nein| wartet der Datenverteiler
+            nicht auf die Applikationsfertigmeldung einer lokalen
+            Parametrierung (bisheriges Verhalten).
+          + Bei |-warteAufParametrierung=inkarnationsname| wartet der
+            Datenverteiler auf die Applikationsfertigmeldung einer
+            lokalen Parametrierung mit dem angegebenen Inkarnationsnamen.
+      o NERZ-Problem 7, Lösungsvorschlag c)
+        <http://www.nerz-ev.de/nerz-fehlerverwaltung/view.php?id=8>
+        Der Datenverteiler unterstützt ein neues Aufrufargument
+        |-konfigurationsBereichFuerApplikationsobjekte=bereichsPid| mit
+        dem bewirkt werden kann, dass die dynamischen
+        Konfigurationsobjekte, die der Datenverteiler für jede
+        verbundene Applikation erzeugt, nicht mehr im Default-Bereich
+        der Konfiguration, sondern im angegebenen Konfigurationsbereich
+        gespeichert werden. Wird kein Wert angegeben, dann wird wie
+        bisher der Default-Bereich der Konfiguration verwendet.
+      o In der KEx-TLS Implementierung gibt es in der Implementierung
+        des TC57-Primary-Protokolls eine neue Einstellungsmöglichkeit,
+        mit der erreicht werden kann, dass vor dem Setzen des
+        RTS-Signals vor dem Versand eines Telegramms abgewartet werden
+        kann, bis das DCD-Signal des Modems nicht mehr gesetzt ist.
+        Damit kann sichergestellt werden, dass bei langen
+        Sendernachlaufzeiten der Kommunikationspartner keine
+        Sendekonflikte entstehen. Der Name der Einstellung ist
+        "seriell.dcd", mögliche Werte sind "ja" und "nein", Defaultwert
+        ist "ja". Die Einstellung kann über die Parameter
+        atg.protokollEinstellungenStandard und
+        atg.protokollEinstellungenPrimary an den in der TLS-Versorgung
+        definierten Anschlußpunkten bzw.
+        Anschlußpunkt-Kommunikationspartnern online verändert werden.
+  *
+
+
+            Änderungen
+
+    Folgende Änderungen zu vorhergehenden Versionen wurden durchgeführt:
+
+      o Debugausgaben bzgl. des Zustands von Kommunikationsverbindungen
+        zwischen Applikation und Datenverteiler bzw. zwischen zwei
+        Datenverteilern enthalten jetzt grundsätzlich Name, Adresse und
+        Portnummer des Kommunikationspartners.
+      o Automatische Selektion des Knoten "Alles" in der Baumdarstellung
+        beim Start der Systembedienung (GTM)
+      o In den Datenverteiler-Applikationsfunktionen wurden die
+        verschiedenen Varianten der Methode
+        DataModel.getConfigurationData(...) dahingehend optimiert, dass
+        bereits im Zwischenspeicher vorliegende Datensätze
+        berücksichtigt werden und eine Konfigurationsanfrage nur noch
+        für diejenigen Datensätze erzeugt wird, die noch nicht im
+        Zwischenspeicher vorliegen.
+      o In den Datenverteiler-Applikationsfunktionen kann beim
+        Aufrufargument -lokaleSpeicherungKonfiguration=pfadname
+        zusätzlich mit Doppelpunkt getrennt ein Name angegeben werden,
+        der im Dateinamen der lokalen Cache-Datei für
+        Konfigurationsdaten anstelle des Applikationsnamens verwendet
+        werden soll.
+  *
+
+
+            Bugfixes
+
+    Folgende Probleme vorhergehender Versionen wurden behoben:
+
+      o Im Login-Dialog der Systembedienung (GTM) wurde bei mehr als 20
+        gespeicherten Einträgen im Menü zur Auswahl des Datenverteilers
+        der falsche Eintrag gelöscht. Neben der Korrektur des Problems
+        wurde die maximale Anzahl Einträge auf 100 erhöht.
+      o Im Haupt-Dialog der Systembedienung (GTM) wurde nach Selektion
+        einer automatisch gespeicherten Einstellung und Start eines
+        GTM-Moduls die Objekte eines anderen gespeicherten Eintrags
+        selektiert, wenn bereits 20 Einträgen gespeichert waren. Neben
+        der Korrektur des Problems wurde eine Performance-Optimierung
+        bei der Initialisierung der Liste durchgeführt.
+      o In der Konfiguration konnte es in seltenen Fällen bei internen
+        Benachrichtigungen bzgl. Änderungen von dynamischen Objekten zu
+        Verklemmungen von einzelnen Threads kommen.
+      o In der Konfiguration konnte es in seltenen Fällen beim Löschen
+        von dynamischen Objekten zu einem Deadlock kommen.
+      o TC-57 Implementierung im KEx-TLS konnte sich in seltenen Fällen
+        verklemmen, wenn die Modemsteuerungssignale ein unerwartetes
+        Verhalten aufzeigten.
+      o Bei der Ausgabe von Archivdatensätzen im Systemprotokollierer
+        wurden Datensatzindex und Nachgeliefert-Kennung nicht korrekt
+        angezeigt.
+      o Zugriff auf eine nicht vorhandene Menge mit den Methoden
+        getMutableSet() und getNonMutableSet() im Interface
+        ConfigurationObject der Datenverteiler-Applikationsfunktionen
+        führten zu einer NullPointerException.
+      o In den Datenverteiler-Applikationsfunktionen konnte es in
+        seltenen Fällen zu einer Blockierung beim Zugriff auf die Liste
+        mit registrierten ConnectionListener kommen.
+      o Im Datenverteiler konnte es in speziellen Anwendungsfällen zu
+        einer NullPointerException bei der Verarbeitung von
+        Datentelegrammen kommen, die von einem anderen Datenverteiler
+        versendet wurden.
+      o Im Datenverteiler konnte es in speziellen Anwendungsfällen zu
+        einer NullPointerException bei der Verarbeitung von
+        Anmeldetelegrammen kommen, die an einem anderen Datenverteiler
+        weitergeleitet wurden.
+      o In den Datenverteiler-Applikationsfunktionen wurde der aktuelle
+        Datensatz nicht erneut an den Empfänger weitergegeben, wenn
+        dieser an einem Datenverteiler als Empfänger und an einem
+        anderen gekoppelten Datenverteiler als Quelle angemeldet war und
+        die Kommunikation zwischen den Datenverteilern unterbrochen und
+        wiederhergestellt wurde und der aktuelle Datensatz sich während
+        des Kommunikationsausfalls nicht verändert hatte.
+      o Im Datenverteiler wurde nach Ausfall der Kopplung zu einem
+        anderen Datenverteiler in speziellen Anwendungsfällen keine
+        erneute Anmeldung beim Kommunikationspartner durchgeführt, was
+        beim Neustart von Datenverteilern in diesen Fällen
+        empfangsseitig zu einem leeren Datensatz "keine Quelle" führen
+        konnte, obwohl sich eine Quelle am neugestarteten Datenverteiler
+        angemeldet hatte.
+      o Im Datenverteiler wurde kein leerer Datensatz an einen
+        angemeldeten Empfänger gesendet, wenn keine lokale Quelle
+        vorhanden war aber ein anderer Datenverteiler als potentielle
+        Quelle in Frage kam, aber dort auch keine Quelle für die Daten
+        angemeldet war.
+      o Im GTM funktionierte der Export und Import von
+        Einstellungsdateien nicht, wenn die beiden Aktionen an
+        unterschiedlichen Konfiguration durchgeführt wurden.
+      o Wenn beim Sichern der Verwaltungsdatei in der Konfiguration ein
+        Fehler aufgetreten ist, wurde eine temporäre Datei nicht gelöscht.
+      o Die Methode Data.createModifiableCopy hat innerhalb der
+        Konfiguration bei nicht auflösbaren Referenzen mit Assoziation
+        die Pid des referenzierten Objekts nicht kopiert.
+      o Bei der Konsistenzprüfung kam es bei unvollständig modellierten
+        Typen bzw. Default-Parametern zu Exceptions statt zu hilfreichen
+        Fehlermeldungen.
+      o TCP-Portnummern in den Aufrufparametern des Datenverteilers mit
+        Werten oberhalb von 32767 wurden nicht akzeptiert.
+      o Beim Invalidieren von dynamischen Objekten wurde der Zeitpunkt
+        der letzten Änderung von dynamischen Objekten des zugeordneten
+        Konfigurationsbereichs nicht aktualisiert, was dazu führte, dass
+        die applikationsseitige lokale Zwischenspeicherung von
+        Konfigurationsdaten beim nächsten Start der Applikation nicht
+        aktualisiert wurde und das betroffene Objekt aus Sicht der
+        Applikation scheinbar noch gültig war.
+      o Der Aufrufparameter
+        -lokaleSpeicherungKonfiguration=pfadname:[applikationsname]
+        wurde nicht wie gewünscht interpretiert, wenn er mit einem
+        absoluten Pfadnamen unter Windows verwendet wurde, der mit
+        Laufwerksbuchstaben und Doppelpunkt begonnen hat. Doppelpunkte
+        in den ersten zwei Zeichen des Argumentwerts werden nicht mehr
+        als Trennzeichen für den optionalen Applikationsnamen verwendet.
+      o NERZ-Problem 10
+        <http://www.nerz-ev.de/nerz-fehlerverwaltung/view.php?id=10>
+        Beim Erzeugen des ersten dynamischen Objekts eines Typs nach dem
+        Start der Konfiguration konnte es dazu kommen, dass das neu
+        erzeugte Objekt in nachfolgenden Anfragen nach allen Objekten
+        des Typs doppelt zurückgeliefert wurde.
+      o NERZ-Problem 7, Lösungsvorschlag b)
+        <http://www.nerz-ev.de/nerz-fehlerverwaltung/view.php?id=7>
+        Beim persistenten Zwischenspeichern von dynamischen Objekten,
+        die die Konfiguration von anderen Konfigurationen abgefragt hat
+        und deren Konfigurationsbereich nicht lokal bekannt ist, konnte
+        es zu einer NullPointerException kommen. Die betroffenen Objekte
+        werden nicht mehr zwischengespeichert.
+
+
+    Release Notes
+
+
+      Stand 05.06.2009 Version 3.4.10
+
+  *
+
+
+            Neue Features
+
+    Folgende Erweiterungen gegenüber vorhergehenden Versionen wurden
+    durchgeführt:
+
+  *
+
+
+            Änderungen
+
+    Folgende Änderungen zu vorhergehenden Versionen wurden durchgeführt:
+
+      o Überflüssige Debug-Meldungen bei der Aktualisierung von
+        dynamischen Objekten in dynamischen Mengen, die von einer
+        anderen Konfiguration verwaltet werden, wurden entfernt.
+      o Fehlerausgaben der verschiedenen Anmeldemethoden der
+        Datenverteiler-Applikationsfunktionen wurden verbessert und
+        überarbeitet.
+      o Fehlerhafte Archivantworten führen jetzt in den DAF nicht mehr
+        zu NullPointerExceptions sondern zu entsprechenden Debug-Warnungen.
+      o Stacktraces in Debugausgaben, die als zweites Argument eine
+        Exception haben werden jetzt auf Wunsch mit dem Aufrufparameter
+        -debugStdErrTextStacktraces=ja|nein auf den StandardError-Kanal
+        ausgegeben. Ohne dieses Aufrufargument werden sie automatisch
+        auf den StandardError-Kanal ausgegeben, falls Debug-Ausgaben in
+        Dateien ausgeschaltet sind (-debugLevelFileText=OFF).
+  *
+
+
+            Bugfixes
+
+    Folgende Probleme vorhergehender Versionen wurden behoben:
+
+      o Eine Applikation konnte beim Zugriff auf die zweite dynamische
+        Menge, die von einer nicht erreichbaren fremden Konfiguration
+        verwaltet wird, hängen bleiben, weil die Konfiguration in
+        bestimmten Fällen keine Antwort auf entsprechende
+        Konfigurationsanfragen gesendet hat.
+      o Nach dem Abbruch der Verbindung zwischen zwei gekoppelten
+        Datenverteilern und dem erneuten Aufbau der Verbindung konnte es
+        in seltenen Fällen zu Problemen in der internen Verwaltung des
+        Datenverteilers kommen, wenn die neue Verbindung schon aktiviert
+        wurde, bevor die Abmeldungen, die durch den Verbindungsabbruch
+        der ursprünglichen Verbindung ausgelöst wurden, vollständig
+        durchgeführt worden sind.
+  *
+
+
+            Datenmodelländerungen
+
+    Folgende Änderungen an Konfigurationsbereichen wurden durchgeführt:
+
+
+      Stand 02.03.2009 Version 3.4.9
+
+  *
+
+
+            Neue Features
+
+    Folgende Erweiterungen gegenüber vorhergehenden Versionen wurden
+    durchgeführt:
+
+  *
+
+
+            Änderungen
+
+    Folgende Änderungen zu vorhergehenden Versionen wurden durchgeführt:
+
+      o Fehlerausgaben und Warnungen in Ausnahmesituationen wurde
+        verbessert und überarbeitet.
+  *
+
+
+            Bugfixes
+
+    Folgende Probleme vorhergehender Versionen wurden behoben:
+
+      o Beim Erzeugen von dynamischen Objekten mit der Methode
+        ConfigurationArea.createDynamicObject wurde nicht überprüft, ob
+        alle Attribute der übergebenen Datensätze definiert sind.
+      o Bei Empfangsanmeldungen einer Applikation mit der Delta-Option
+        wurden Datensätze vom Datenverteiler auch dann an die
+        Applikation weitergeleitet, wenn sie sich inhaltlich nicht
+        geänderten hatten.
+      o Bei Empfangsanmeldungen einer Applikation mit der Delta-Option
+        wurden große Datensätze (mehr als ca. 3000 Byte) vom
+        Datenverteiler nicht an die angemeldeten Applikation
+        weitergeleitet.
+      o In der Konfiguration konnte unter manchen JVM-Implementierungen
+        ein OutOfMemory-Error entstehen, wenn der Applikation zu viel
+        Speicher zugeteilt wurde. Das Problem wurde durch außerhalb des
+        Java-Heaps befindliche Systemressourcen ausgelöst, die erst bei
+        einem Garbage-Collector Aufruf freigegeben wurden, der aber
+        nicht automatisch stattfand, wenn auf dem Heap noch genügend
+        Platz verfügbar war.
+      o Verursacht durch einen Bug in der JVM (für den ein Workaround
+        gefunden wurde) konnte die Konfiguration in bestimmten
+        Situationen beim Systemstart hängen bleiben.
+      o Bei der Publikation von dynamischen Objekten über dynamische
+        Mengen zwischen Konfigurationen, die über
+        Datenverteiler-Kopplung miteinander verbunden sind, wurden
+        Aktualisierungen von dynamischen Objekten (Löschen bzw. Ungültig
+        setzen mit invalidate() und Namensänderungen mit setName())
+        nicht an die Applikationen von Remote-Konfigurationen
+        weitergegeben.
+  *
+
+
+            Datenmodelländerungen
+
+    Folgende Änderungen an Konfigurationsbereichen wurden durchgeführt:
+
+      o kb.objekteZugriffsrechteBasis Version 2: Bei der Aktivität
+        aktivität.basis.anfrage wurde der Aspekt asp.information
+        ergänzt, um den Versand von Betriebsmeldungen zu ermöglichen.
+
+
+      Stand 08.12.2008 Version 3.4.8
+
+  *
+
+
+            Neue Features
+
+    Folgende Erweiterungen gegenüber vorhergehenden Versionen wurden
+    durchgeführt:
+
+      o Das WanCom-Client OSI-2 Modul von KEx-TLS unterstützt den
+        zusätzlichen Eintrag wancom.waitForInitialReceive im
+        Parametersatz für die OSI-2 Kommunikation. Wenn dieser Wert
+        explizit auf den Wert "ja" gesetzt wird, dann wird nach einem
+        TCP-Verbindungsaufbau gewartet, bis ein KeepAlive- oder
+        Datentelegramm empfangen wurde, bevor der Verbindungsstatus
+        "Verbunden" an die OSI-3 und OSI-7 Schichten gemeldet. Dadurch
+        diese Möglichkeit können bei Verwendung eines zwischen Client-
+        und Server geschalteten Application Level Gateway bei
+        Verbindungsproblemen überflüssige Statuswechsel in der
+        Kommunikation vermieden werden.
+      o Der Datenverteiler publiziert die Release-Informationen seines
+        eigenen Distributionspaket in der neuen Attributgruppe
+        'atg.distributionspaketReleaseInfo'.
+  *
+
+
+            Änderungen
+
+    Folgende Änderungen zu vorhergehenden Versionen wurden durchgeführt:
+
+      o Die Parametrierung nutzt zur Authentifizierung jetzt den via
+        Aufrufparameter -benutzer=... vorgegebenen Wert.
+      o Die Rechteprüfung im Datenverteiler wurde so erweitert, dass sie
+        neben dem bisherigen falsch geschriebenem Mengennamen
+        "Zusammmenstellungen" (mit drei 'm') einer Region der
+        Rechteverwaltung auch den richtig geschriebenen Mengennamen
+        "Zusammenstellungen" verwenden kann.
+      o Im GTM werden in den Tooltips zu Konfigurationsobjekten jetzt
+        sowohl Pid als auch Id angezeigt.
+  *
+
+
+            Bugfixes
+
+    Folgende Probleme vorhergehender Versionen wurden behoben:
+
+      o Beim gleichzeitigen Löschen von vielen Simulationsobjekten wurde
+        in der Konfiguration für jede zu löschende Simulation, ein
+        eigener Thread erzeugt. Dies konnte zu Speicherproblemen führen.
+        In der geänderten Version wird für alle Simulationsobjekte nur
+        noch ein einziger Thread benutzt.
+      o Beim Start des GTM konnte es in bestimmten Fällen sporadisch zu
+        einer NullPointerException kommen.
+      o Beim Start des Systemprotokollierers über den GTM wurde die
+        eingestellte Simulationsvariante nicht an die resultierende
+        Archivanfrage weitergegeben.
+      o In den Datenverteiler-Applikationsfunktionen war der Zugriff auf
+        die Zeitsteuerung einer Simulation fehlerhaft.
+      o Bei der Rechteverwaltung des Datenverteilers wurde Regionen, die
+        über einen oder mehrere Konfigurationsbereiche definiert waren,
+        nicht korrekt ausgewertet.
+      o Bei der Rechteverwaltung des Datenverteilers wurden die
+        Benutzerrechte "Lesen aber nicht als Senke" und "Senden aber
+        nicht als Quelle" bei Anmeldungen als Senke bzw. Quelle nicht
+        korrekt ausgewertet.
+      o Beim Ändern der Zugriffsrechte eines Benutzers konnte im
+        Datenverteiler ein Deadlock entstehen.
+      o Es war nicht möglich, einen Import einer Versorgungsdatei mit
+        Änderungen an konfigurierenden Datensätzen durchzuführen, die
+        laut Datenmodell nicht änderbar sind. (Der Import wurde
+        dahingehend erweitert, dass in diesen Fällen ein neues
+        dynamisches Objekt mit den geänderten Datensätzen erzeugt wird
+        und das bisherige Objekt auf ungültig gesetzt wird.) (ZID-95)
+      o Beim Import von dynamischen Objekten mit Datensätzen deren
+        Konfigurationsmodus im Datenmodell als "optional" gekennzeichnet
+        war, wurden die Datensätze vom Import erzeugt aber in bestimmten
+        Fällen kurz danach wieder gelöscht. (ZID-95)
+      o In den verschiedenen KEx-TLS-OSI-2 Modulen konnte ein Deadlock
+        beim gleichzeitigen Versand von sehr vielen Telegrammen entstehen.
+  *
+
+
+            Datenmodelländerungen
+
+    Folgende Änderungen an Konfigurationsbereichen wurden durchgeführt:
+
+      o kb.systemModellGlobal Version 20: Tippfehler im Mengennamen
+        "Zusammenstellungen" von Objekten des "typ.zugriffsRegion"
+        korrigiert (vorher "Zusammmenstellungen" mit 3 'm'). Um eine
+        einfache Migration zu ermöglichen, wurde das Datenmodell vorerst
+        so geändert, dass beide Mengennamen verwendet werden können.
+      o kb.objekteZugriffsrechteBasis Version 1: Neuer Bereich mit der
+        Versorgung der (Basis)Zugriffsrechte.
+      o kb.systemModellGlobal Version 21: Neue Attributgruppe
+        atg.distributionspaketReleaseInfo, die der Datenverteiler nutzt,
+        um seine eigene Release-Informationen zu publizieren.
+
+
+      Stand 23.09.2008 Version 3.4.7
+
+  *
+
+
+            Neue Features
+
+    Folgende Erweiterungen gegenüber vorhergehenden Versionen wurden
+    durchgeführt:
+
+      o Das WanCom-Client OSI-2 Modul von KEx-TLS unterstützt den
+        zusätzlichen Eintrag wancom.tlsTypeReceive im Parametersatz für
+        die OSI-2 Kommunikation. Mit diesem Wert kann der
+        WanCom-Telegrammtyp von empfangenen TLS-Telegrammen vorgegeben
+        werden, wenn er sich vom WanCom-Telegrammtyp von gesendeten
+        TLS-Telegrammen unterscheidet. Wenn wie bisher nur
+        wancom.tlsType angegeben wird, dann wird dieser Wert beim
+        Versand und beim Empfang verwendet (Default 600). Wenn beide
+        angegeben werden, dann wird wancom.tlsType zum Versand und
+        wancom.tlsTypeReceive zum Empfang verwendet.
+      o Das WanCom-Server Modul wurde als neues OSI-2-Modul für KEx-TLS
+        in die Kernsoftware aufgenommen. Es kann analog zu anderen OSI-2
+        Modulen durch Eintrag des Klassennamen
+        de.bsvrz.kex.tls.osi2osi3.osi2.wancom.Server im Attribut
+        "ProtokollTyp" der Attributgruppen atg.anschlussPunkt und
+        atg.anschlussPunktKommunikationsPartner der TLS-Versorgung
+        verwendet werden.
+      o Es wurden neue Varianten der Methoden
+        |StandardApplicationRunner.run(...)| ergänzt, mit denen der
+        Applikationstyp vorgegeben werden kann.
+  *
+
+
+            Änderungen
+
+    Folgende Änderungen zu vorhergehenden Versionen wurden durchgeführt:
+
+      o Das passive TC57-Mithör-OSI-2 Modul von KEx-TLS wurde so
+        modifiziert, dass es Telegrammwiederholungen der TC-57-Primary
+        toleriert, wenn im vorhergegangen Abfragezyklus der gleichen
+        Secondary keine Antwort empfangen wurde. Dies führt beim Einsatz
+        des Mithörmodul auf Seiten des TC57-Primary zu einem robusteren
+        Verhalten bei Kommunikationsstörungen.
+      o Die Einstellungen des GenericTestMonitor (GTM) werden jetzt je
+        verwendetem KV separat gespeichert.
+  *
+
+
+            Bugfixes
+
+    Folgende Probleme vorhergehender Versionen wurden behoben:
+
+      o Bei der Konsistenzprüfung der Konfiguration wurde bei der
+        Prüfung der Typen von referenzierten Objekten nicht die evtl.
+        neuere aktivierbare Version des Datenmodells sondern die
+        aktuelle Version betrachtet. Dies konnte bei der erstmaligen
+        Übernahme und Aktivierung eines Datenmodells und der
+        gleichzeitigen Übernahme und Aktivierung von Bereichen zu
+        lokalen Fehlern führen.
+      o Der Zugriff auf dynamische Objekte einer dynamischen Menge, die
+        von einer fremden Konfiguration verwaltet wurde, funktionierte
+        nicht, wenn der Konfigurationsbereich des dynamischen Objekts in
+        der lokalen Konfiguration nicht bekannt war.
+      o Bei der Rechteprüfung durch den Datenverteiler wurden
+        Einschränkungen auf bestimmte Attributgruppen ignoriert.
+      o Beim Hinzufügen bzw. Löschen von Objekten in dynamischen Mengen,
+        der Elementzugehörigkeit nicht in der Konfigurationsdatei selbst
+        gespeichert werden, wurde der Zeitstempel der letzten
+        Datensatzänderung erneut geschrieben und damit die
+        Konfigurationsdatei geändert.
+      o Bei der Konsistenzprüfung der Konfiguration kam es beim
+        gleichzeitigen und erstmaligen Import einer Hierarchiedefinition
+        für die Parametrierung und dort referenzierten Typen zu
+        Interferenzfehlern.
+      o Wenn eine Applikation unter Simulation gestartet wurde, dann
+        wurden in den Datenverteiler-Applikationsfunktionen die
+        Simulationsobjekte nicht richtig identifiziert, was dazu führte,
+        dass die Simulationszeit nicht korrekt ausgewertet wurde.
+  *
+
+
+            Datenmodelländerungen
+
+    Folgende Änderungen an Konfigurationsbereichen wurden durchgeführt:
+
+      o kb.systemModellAoe und kb.tmBuVGlobal: Berechtigungskonzept für
+        SWE Rahmenwerk im Segment BuV nach einer Vorlage der Firma
+        Dambach ergänzt.
+      o kb.tmVewSimulationGlobal, kb.tmVewBetriebGlobal, kb.tmBuVGlobal:
+        Fehlende Default-Parameterdatensätze wurden ergänzt.
+      o kb.tmVewSimulationGlobal: In dem Attributtyp
+        "att.simulationsZustand" wurde der Befehl "Einzelschritt" nach
+        einer Vorlage der Firma Dambach ergänzt.
+      o Übernahme der aktuellen Konfigurationsbereiche des kv.inovat vom
+        13.08.2008: Alle KB des kv.inovat wurden vollständig mit
+        Default-Parametern versehen. Sofern möglich, wurden die
+        Default-Parameter auch auf fachlich sinnvolle, allgemeingültige
+        Werte voreingestellt.
+  *
+
+
+            Update Releasenotes
+
+    Folgende Änderungen an älteren Releasenotes wurden durchgeführt:
+
+      o Zum Thema Austausch von dynamischen Objekten in dynamischen
+        Mengen zwischen Konfigurationen wurde in den Releasenotes der
+        Version 3.4.5 ein Hinweis ergänzt <#update03072008>
+
+
+      Stand 06.06.2008 Version 3.4.6
+
+  *
+
+
+            Neue Features
+
+    Folgende Erweiterungen gegenüber vorhergehenden Versionen wurden
+    durchgeführt:
+
+      o Die Zugriffsrechte des alternativen Konstruktors im
+        SettingsManager wurden auf |public| gesetzt. Der Konstruktor hat
+        einen zusätzlichen Parameter für die Simulationsvariante, die
+        für die Abfrage und Anmeldung auf dynamische Typen und
+        dynamische Mengen benutzt werden soll. (Eine entsprechend
+        angepasste Parametrierung muss mit dieser Variante nicht mehr
+        für jede Simulation eine eigene Verbindung zum Datenverteiler
+        aufbauen.)
+      o Neue Methode |Debug.reinstallConsoleHandler()|, mit der der
+        Ausgabekanal für Debug-Meldungen nach einer Umleitung von
+        |System.err| neu initialisiert werden kann.
+  *
+
+
+            Änderungen
+
+    Folgende Änderungen zu vorhergehenden Versionen wurden durchgeführt:
+
+      o In den Datenverteiler-Applikationsfunktionen wurde die
+        Zwischenspeicherung bestimmter Konfigurationsdaten optimiert.
+  *
+
+
+            Bugfixes
+
+    Folgende Probleme vorhergehender Versionen wurden behoben:
+
+      o Beim Import von Konfigurationsbereichen konnte eine Exception
+        auftreten, wenn in einem konfigurierenden Datensatz der Wert
+        eines Attributs ursprünglich ein Aufzählungswert (außerhalb des
+        definierten Wertebereichs) war und dieser durch einen erneuten
+        Import der Versorgungsdatei in einen Zahlwert (innerhalb des
+        Wertebereichs) geändert wurde.
+      o Bei Verwendung des Aufrufparameters -debugGui kam es zu einer
+        Exception mit neueren Versionen der JVM.
+      o Beim Import konnte nach einer versionierten Änderung eines
+        Konfigurationsverantwortlichen oder einer autarken
+        Organisationseinheit die Kodierung des Konfigurationsbereichs
+        manchmal nicht ermittelt werden, was eine IllegalStateException
+        zur Folge hatte.
+      o Die Methode SystemObjectType.inheritsFrom(SystemObjectType)
+        lieferte fälschlicherweise |false| zurück, wenn der Typ
+        indirekt, d.h. über einen oder mehrere Zwischentypen vom
+        angegebenen Typ abgeleitet war.
+      o In den Datenverteiler-Applikationsfunktionen konnten folgende
+        Methoden falsche Ergebnisse oder Exceptions generieren, wenn sie
+        gleichzeitig und erstmalig am selben Objekt durch mehrere
+        Threads aufgerufen wurden:
+        AttributeListDefinition.getAttributes,
+        AttributeListDefinition.getAttribute,
+        AttributeSet.getAttributes, AttributeSet.getAttribute,
+        ConfigurationObject.getObjectSets,
+        IntegerAttributeType.getStates, NonMutableSet.getElements,
+        ObjectSetType.getObjectTypes.
+  *
+
+
+            Datenmodelländerungen
+
+    Folgende Änderungen an Konfigurationsbereichen wurden durchgeführt:
+
+      o kb.tmVewBetriebGlobal Version 5: Notwendige Änderungen der
+        Attributgruppe atg.betriebsMeldungsVerwaltungRegel für die
+        Betriebsmeldungsverwaltung, basierend auf einem Vorschlag der
+        Firma Dambach.
+
+
+      Stand 16.05.2008 Version 3.4.5
+
+  *
+
+
+            Neue Features
+
+    Folgende Erweiterungen gegenüber vorhergehenden Versionen wurden
+    durchgeführt:
+
+      o Mit den Methoden MutableSet.getElements(),
+        MutableSet.addChangeListener() kann auf die Elemente eine
+        dynamischen Menge zugegriffen werden, die von einer fremden
+        Konfiguration verwaltet werden, vorausgesetzt es besteht über
+        eine entsprechend eingerichtete Datenverteiler-Kopplung eine
+        Verbindung zwischen der lokalen und der fremden Konfiguration.
+        Auf den Kommunikationsstatus kann mit den Methoden
+        isConfigurationCommunicationActive() und
+        addConfigurationCommunicationChangeListener() zugegriffen werden.
+        [Update 3.7.2008:] Damit der Austausch funktioniert müssen die
+        KV- bzw. AOE-Objekte der beteiligten Konfigurationen gegenseitig
+        bekannt sein.
+      o Bei der Konsistenzprüfung und bei der Aktivierung werden die
+        Abhängigkeiten der zu prüfenden bzw. zu aktivierenden Versionen
+        überprüft und es werden, wenn nicht alle Abhängigkeiten
+        aufgelöst werden können, entsprechende Fehlermeldungen mit den
+        fehlenden oder noch nicht in der richtigen Version vorliegenden
+        Bereichen ausgegeben. Diese Prüfung kann bei Bedarf mit dem
+        Aufrufargument
+        |-ignoriereFehlerDerAbhängigkeitenBeiKonsistenzprüfung|
+        abgeschaltet werden.
+  *
+
+
+            Änderungen
+
+    Folgende Änderungen zu vorhergehenden Versionen wurden durchgeführt:
+
+      o Der Generische Test Monitor (GTM) zeigt im Fenstertitel jetzt
+        die Parameter (Adresse und Portnummer) des verbundenen
+        Datenverteilers
+      o Bei der Unterstützung der Simulation durch die Konfiguration
+        wird eine Simulation nicht mehr berücksichtigt, wenn sie nicht
+        mehr gültig ist oder wenn die Simulationsstrecke nicht vorhanden
+        bzw. nicht mehr gültig ist.
+      o Wenn bei der Konsistenzprüfung von Konfigurationsbereichen nur
+        Warnungen aufgetreten, dann werden diese nicht mehr unterdrückt.
+        Interferenzfehler und lokale Fehler jetzt nach den Warnungen
+        ausgegeben. Die Formatierung der Ausgaben der Konsistenzprüfung
+        wurde überarbeitet.
+  *
+
+
+            Bugfixes
+
+    Folgende Probleme vorhergehender Versionen wurden behoben:
+
+      o Beim Import wurden nach einer versionierten Änderung eines
+        Konvigurationsverantwortlichen oder einer autarken
+        Organisationseinheit die in den zugehörigen Bereichen
+        enthaltenen Referenzen nicht aktualisiert, was zur Folge hatte,
+        dass die Konsistenzprüfung entsprechende Fehler ausgegeben hat.
+      o Im Onlineprotokollierer wurden bei der Ausgabe in XML-Dateien
+        die XML-Sonderzeichen (< & > ' ") nicht durch die entsprechenden
+        vordefinierten Entities (&lt; &amp; &gt; &apos; &quot;) ersetzt.
+      o Beim Export von Konfigurationsbereichen wurden XML-Sonderzeichen
+        (< & > ' ") nicht durch die entsprechenden vordefinierten
+        Entities (&lt; &amp; &gt; &apos; &quot;) ersetzt.
+      o Die Methoden getAttributeGroups(), getDirectAttributeGroups(),
+        getObjectSetUses() und getDirectObjectSetUses() waren nicht
+        multi-thread-sicher.
+      o Bei einer mehrfachen Empfangsanmeldung einer Applikation auf die
+        gleichen Daten konnte ein Deadlock entstehen, wenn die zweite
+        Anmeldung während der Verarbeitung eines empfangenen Datensatzes
+        entstanden ist.
+      o Bei der Abfrage der Elemente einer dynamischen Menge mit
+        Simulationsvariante konnte es zu einer ClassCastException kommen.
+      o Beim Löschen von dynamischen Objekten, wurden die in der
+        Konfiguration zwischengespeicherten Elementlisten der Supertypen
+        nicht aktualisiert, was dazu führte, dass anschließend
+        gestartete Applikationen bei der Abfrage nach den Objekten eines
+        Typs auch bereits gelöschte Objekte geliefert bekamen.
+      o Beim Terminieren einer Datenverteilerverbindung durch einen
+        Kommunikationsfehler, konnte ein Deadlock entstehen.
+      o Bei der Unterstützung der Simulation in der Konfiguration
+        führten Simulationsobjekte, die einen falschen Typ hatten, zu
+        einem Fehlverhalten.
+  *
+
+
+            Datenmodelländerungen
+
+    Folgende Änderungen an Konfigurationsbereichen wurden durchgeführt:
+
+      o Erweiterung der Schnittstelle für Konfigurationsanfragen um An-
+        und Abmeldungen auf den Kommunikationszustand von dynamische
+        Mengen und dynamische Objekten die potentiell von einer fremden
+        Konfiguration verwaltet werden.
+      o Übernahme der Bereiche kb.kv.dambach, kb.tmVewEngstellenGlobal
+        und kb.tmRechner.config des kv.dambach vom 14.04.2008. Diese
+        Bereiche werden von den aktuellen Konfigurationsbereichen des
+        kv.kappich benötigt. *Zur erstmaligen Übernahme der neuen
+        Bereiche ist es erforderlich, die folgenden Zeilen in der
+        Verwaltungsdatei zu ergänzen und anschließend eine Aktivierung
+        durchzuführen:*
+
+            |<konfigurationsbereich pid="kb.tmVewEngstellenGlobal"
+            verzeichnis=""> </konfigurationsbereich>
+            <konfigurationsbereich pid="kb.tmRechner" verzeichnis="">
+            </konfigurationsbereich> |
+
+      o Notwendige Erweiterungen für die Betriebsmeldungsverwaltung
+        basierend auf einem Vorschlag der Firma Dambach: Erweiterung der
+        Attributgruppen und Mengen am Typ typ.betriebsMeldungVerwaltung
+        (atg.betriebsMeldungsVerwaltungRegel, atg.meldungsBearbeitung,
+        atg.meldungsGruppeZuordnung, menge.meldungen). Neue Typen
+        typ.meldung und typ.meldungsGruppe. Neue Attributgruppen für
+        typ.meldung und typ.meldungsGruppe. Neue Attribute und
+        Attributlisten für typ.meldung und typ.meldungsGruppe. Neue
+        Menge für typ.betriebsMeldungsVerwaltung. *Zu beachten ist, das
+        mit diesen Änderungen an jeder autarken Organisationseinheit
+        eine Menge "Meldungen" ergänzt werden sollte, diese wird für den
+        korrekten Betrieb der Betriebsmeldungsverwaltung benötigt.* Im
+        Datenmodell ist diese Menge vorerst optional, allerdings wird
+        sie mit einer der nächsten Aktualisierungen des Datenmodells
+        zwingend erforderlich.
+      o Notwendige Erweiterungen der Simulationsverwaltung basierend auf
+        einem Vorschlag der Firma Dambach: Neue Attributgruppe
+        atg.simulationStartInfo am typ.simulation ergänzt. Neue
+        Attributgruppe atg.simulationVerwaltungAnfrage am
+        typ.simulationsVerwaltung ergänzt. Attributgruppe
+        atg.simulationsStreckenBeschreibung um die neue Attributliste
+        atl.startInfo erweitert.
+      o Notwendige Erweiterungen für die Simulationsverwaltung und
+        Start/Stopp basierend auf einem Vorschlag der Firma Dambach: Der
+        typ.applikation wurde um die Attributgruppen
+        atg.simulationVerwaltungAntwort und atg.startStoppAntwort ergänzt.
+      o Notwendige Erweiterungen des Bereichs kb.systemModellAoe
+        basierend auf einem Vorschlag der Firma Dambach: Neuer Basistyp
+        typ.engstellenVerwaltung am typ.autarkeOrganisationsEinheit
+        ergänzt.
+      o Die zu Testzwecken vorhandene autarke Organisationseinheit
+        kv.testKonfiguration wurde um die neue Menge "Meldungen"
+        erweitert und alle zugehörigen Bereiche wurden aktualisiert.
+      o Übernahme der aktuellen Konfigurationsbereiche des kv.inovat vom
+        02.05.2008.
+
+
+      Stand 07.04.2008 Version 3.4.4
+
+  *
+
+
+            Neue Features
+
+    Folgende Erweiterungen gegenüber vorhergehenden Versionen wurden
+    durchgeführt:
+
+      o Bei dynamischen Mengen und dynamischen Typen wurde das Interface
+        MutableCollection ergänzt, mit dem eine Applikation auf die
+        Elemente der dynamischen Menge bzw. des dynamischen Typs
+        zugreifen und sich auf entsprechende Änderungen anmelden kann.
+        Die Simulationsvariante, auf die sich diese Zugriffe beziehen,
+        kann vorgegeben werden.
+      o Der in der Parametrierung eingesetzte SettingsManager wurde so
+        erweitert, dass er zur Auflösung von WildCards bei dynamischen
+        Mengen und dynamischen Typen die oben erwähnten neuen
+        Möglichkeiten unter Berücksichtigung der durch die Applikation
+        vorgegebenen Simulationsvariante benutzt.
+  *
+
+
+            Änderungen
+
+    Folgende Änderungen zu vorhergehenden Versionen wurden durchgeführt:
+
+      o Der Datenverteiler beendet sich, wenn ein Thread durch einen
+        Error (insbesondere OutOfMemoryError) beendet wird.
+      o In den Datenverteiler-Applikationsfunktionen wird kein
+        zyklischer Aufruf des Garbage-Collectors mehr durchgeführt.
+      o Deutliche Performance-Verbesserung der Konfiguration beim Start
+        und bei der Beantwortung der ersten Konfigurationsanfragen.
+      o Zur Unterstützung der Simulation wird innerhalb der
+        Konfiguration nach einem Systemstart für vorhandene Simulationen
+        ein Übergang in den Zustand "Stop" erzwungen. In diesem Fall
+        meldet sich die Konfiguration auf lesende Konfigurationsanfragen
+        der entsprechenden Simulation an.
+      o Beim Hinzufügen oder Entfernen von Elementen einer Menge wird
+        jetzt schon seitens der Applikationsfunktionen geprüft, ob ein
+        angegebenes Element eine Nullreferenz ist und dann
+        gegebenenfalls eine entsprechende Exception generiert, mit der
+        derartige Anwendungsfehler einfacher lokalisiert werden können.
+  *
+
+
+            Bugfixes
+
+    Folgende Probleme vorhergehender Versionen wurden behoben:
+
+      o de.bsvrz.kex.tls.osi2osi3: Bei Verwendung des TLS OSI-2 Moduls
+        (TC57) ohne Modems mit abgeschalteter Prüfung des DSR-Signals
+        funktionierte der Verbindungsaufbau nicht.
+      o In den Datenverteiler-Appliaktionsfunktionen führte das Anlegen
+        oder Abfragen von noch nicht gültigen Objekten, die die gleiche
+        Pid wie ein noch gültiges Objekt hatten, zum Überschreiben der
+        gültigen Objekte in den HashMaps. Anschließende Abfragen via Pid
+        lieferten dann das falsche Objekt zurück.
+      o Die Konfiguration hat in bestimmten Fällen die Anfragen mit
+        historischen Zeitangaben zur Ermittlung der Elemente eines Typs
+        mit den Methoden getElements(long time),
+        getElementsInPeriod(long startTime, long endTime) und
+        getElementsDuringPeriod(long startTime, long endTime) falsch
+        beantwortet.
+      o Beim Versuch ein dynamisches Objekt mit einer bereits für ein
+        anderes aktives Objekt vergebenen Pid anzulegen, wurde keine
+        Exception generiert.
+  *
+
+
+            Datenmodelländerungen
+
+    Folgende Änderungen an Konfigurationsbereichen wurden durchgeführt:
+
+      o Zur Reduktion der Abhängigkeiten der Bereiche untereinander
+        wurde der Bereich kb.ilse in zwei Bereiche unterteilt.
+      o Neue Schnittstelle zur Parametrierung nach Diskussion mit Herrn
+        Peuker, BitCtrl. Es wurden die neuen Attributgruppen
+        atg.parametrierungsAnfrage und atg.parametrierungsAntwort mit
+        spezifischeren Einschränkungen für die Kommunikation einer
+        Applikation mit der Parametrierung ergänzt. Geänderte Bereiche:
+        kb.systemModellGlobal (Version 17), kb.metaModellGlobal (Version
+        11).
+      o Erweiterung der Schnittstelle für Konfigurationsanfragen um An-
+        und Abmeldungen auf dynamische Mengen und dynamische Typen mit
+        Simulationsvariante. Im Attributtyp
+        att.konfigurationsAnfrageNachrichtenTypLesend wurden die neuen
+        Telegrammtypen DynamischeKollektionAnmeldung,
+        DynamischeKollektionElemente, DynamischeKollektionAktualisierung
+        und DynamischeKollektionAbmeldung ergänzt. Geänderte Bereiche:
+        kb.systemModellGlobal (Version 17), kb.metaModellGlobal (Version
+        11).
+      o Übernahme der aktuellen Konfigurationsbereiche des kv.inovat vom
+        25.03.2008.
+
+
+      Stand 22.02.2008 Version 3.4.3
+
+  *
+
+
+            Änderungen
+
+    Folgende Änderungen zu vorhergehenden Versionen wurden durchgeführt:
+
+      o Im Datenverteiler wurde eine Performance-Optimierung
+        durchgeführt, die bewirkt, dass die Verarbeitung von vielen An-
+        und Abmeldungen durch Applikationen deutlich schneller
+        abgewickelt wird.
+      o Der in der Parametrierung verwendete Settingsmanager wurde so
+        erweitert, dass er Aktualisierungen asynchrone und leicht
+        verzögert verarbeitet. Dadurch werden mehrere Aktualisierungen
+        zusammen in einem Durchlauf verarbeitet.
+      o Der in der Parametrierung verwendete Settingsmanager wurde so
+        erweitert, dass er nur noch die notwendigen dynamischen Typen
+        auf neue oder gelöschte Objekte anmeldet.
+      o Die von den Datenverteiler-Applikationsfunktionen automatisch
+        versendete Applikationsfertigmeldung wird jetzt immer mit
+        Simulationsvariante 0 versendet.
+      o Die Konfiguration verwendet bei den Anmeldungen, die zur
+        Unterstützung der Simulation dienen, jetzt fest die
+        Simulationsvariante 0
+        (atg.simulationsStreckenBeschreibung:asp.parameterSoll,
+        atg.simulationsSteuerungOnline:asp.zustand,
+        atg.simulationsSteuerungOffline:asp.zustand,
+        atg.simulationsStatusKonfiguration:asp.zustand)
+      o Die Datenverteiler-Applikationsfunktionen verwenden bei den
+        Anmeldungen, die zur Unterstützung der Simulation dienen, jetzt
+        fest die Simulationsvariante 0 (atg.simulationsZeit:asp.standard)
+  *
+
+
+            Bugfixes
+
+    Folgende Probleme vorhergehender Versionen wurden behoben:
+
+      o Wenn in einer Versorgungsdatei bei einer Typdefinition eine
+        zusätzliche Mengenverwendung angegeben wurde, dann kam es beim
+        Import zu einer NullPointerException.
+      o Beim Publizieren der atg.angemeldeteApplikationen wurden vom
+        Datenverteiler nicht alle verbundenen Applikationen in den
+        Datensatz eingetragen.
+      o Bei der Anmeldung auf die atg.angemeldeteApplikationen durch
+        eine Applikation kam es unter bestimmten Umständen zu einem
+        Deadlock im Datenverteiler.
+      o In der Konfiguration kam es zu einer Exception, wenn eine
+        Simulation die Zustandswechsel "Vorstart", "Stop" und erneut
+        "Vorstart" durchlaufen hat.
+      o In der Konfiguration und den
+        Datenverteiler-Applikationsfunktionen wurden kurzfristige
+        initiale negative Sendesteuerungen falsch berücksichtigt. Dies
+        konnte zum Hängen von Applikationen beim Start führen.
+      o Wenn sich bei der Aktivierung oder Freigabe von
+        Konfigurationsbereichen neue oder geänderte Abhängigkeiten eines
+        Konfigurationsbereichs zu anderen ergeben haben, wurden diese
+        auch gespeichert, wenn sich der Bereich selbst nicht geändert
+        hatte.
+  *
+
+
+            Datenmodelländerungen
+
+    Folgende Änderungen an Konfigurationsbereichen wurden durchgeführt:
+
+      o kb.systemModellGlobal: Erweiterung der
+        Archivanfrageschnittstelle, Übernahme der Änderungen von Martin
+        Hilgers, beck et al. projects GmbH: Der Nachrichtentyp für die
+        Archivanfrage unterstützt nun auch manuelles Nachfordern (neue
+        Nachrichtentypen mit den Nummern 17-20).
+
+
+      Stand 21.01.2008 Version 3.4.2
+
+  *
+
+
+            Neue Features
+
+    Folgende Erweiterungen gegenüber vorhergehenden Versionen wurden
+    durchgeführt:
+
+      o
+  *
+
+
+            Änderungen
+
+    Folgende Änderungen zu vorhergehenden Versionen wurden durchgeführt:
+
+      o Bei überflüssigen Aufrufargumenten beim Start der Konfiguration
+        wird jetzt eine entsprechende Fehlermeldung ausgegeben.
+      o Das überflüssige Interface SystemConfigurationAuthority wurde
+        geöscht.
+      o Wenn in der Verwaltungsdatei der Konfiguration ein Tippfehler
+        bzgl. Groß-/Kleinschreibung enthalten ist, wird jetzt beim Start
+        der Konfiguration statt einer NullPointerException eine
+        hilfreiche Fehlermeldung ausgegeben.
+      o Beim Versuch der Authentifizierung eines nicht in der
+        Benutzerverwaltung der Konfiguration enthaltenen Benutzers wird
+        jetzt eine bessere Fehlermeldung ausgegeben.
+      o Der in der Parametrierung eingesetzte SettingsManager ignoriert
+        erzeugte und gelöschte dynamische Objekte vom "typ.applikation".
+      o Der Datengenerator benutzt zum Parsen einer XML-Datei mit zu
+        versendenden Daten jetzt die in der Software (JAR-Datei)
+        enthaltene DTD "protokollV3.dtd" zur XML-Validierung
+      o Der Datengenerator interpretiert die in einer XML-Datei mit zu
+        versendenden Daten enthaltenen Aufrufparameter -rolle=empfaenger
+        so wie -rolle=quelle und -rolle=senke wie -rolle=sender. Damit
+        können Dateien, die mit dem Onlineprotokollierer mitgeschnitten
+        wurden ohne Änderung als Input für den Datengenerator verwendet
+        werden.
+  *
+
+
+            Bugfixes
+
+    Folgende Probleme vorhergehender Versionen wurden behoben:
+
+      o Im Datenverteiler gab es bei Verwendung der Rechteprüfung im
+        Zusammenhang mit den um Urlasser erweiterten
+        Parameterattributgruppen eine Exception wenn ein
+        Parameterdatensatz mit der Zuordnung eines Benutzers zu einer
+        Berechtigungsklasse empfangen wurde.
+      o Beim Aufruf der Methode ClientDavConnection.getLocalDav() kam es
+        zu einer ClassCastException.
+      o Die Methode MutableSet.getElements hat bei Verteilung der
+        Applikation und der Konfiguration auf verschiedene Systeme mit
+        nicht synchronisierten Uhren unter Umständen historische Inhalte
+        der jeweiligen Menge zurückgegeben.
+      o Beim Import wurden nach einer versionierten Änderung eines
+        Konfigurationsverantwortlichen oder einer autarken
+        Organisationseinheit die in den zugehörigen Bereichen
+        enthaltenen Referenzen nicht aktualisiert was zur Folge hatte,
+        dass die Konsistenzprüfung entsprechende Fehler ausgegeben hat.
+  *
+
+
+            Datenmodelländerungen
+
+    Folgende Änderungen an Konfigurationsbereichen wurden durchgeführt:
+
+      o Anpassung der Modellbereiche kb.tmVewBetriebGlobal,
+        kb.tmVewSimulationGlobal, kb.systemModellGlobal und
+        kb.systemModellAoe nach entsprechenden Vorschlägen der Firma
+        Dambach zur Unterstützung der Software-Einheiten
+        Betriebsmeldungsverwaltung, Simulationsverwaltung und
+        Start/Stopp. (Details in den Änderungseinträgen der einzelnen
+        Bereiche). Durch die Änderungen entstehen neue Abhängigkeiten zu
+        den Bereichen kb.tmVewEngstellenGlobal.config und
+        kb.tmRechner.config die unter kv.dambach der Firma Dambach
+        verwaltet werden. Zum korrekten Betrieb der
+        Betriebsmeldungsverwaltung ist es zwingend erforderlich die
+        jeweils eingesetzten Objekte vom typ.autarkeOrganisationsEinheit
+        um eine Menge mit dem Namen "Meldungen" zu erweitern. Als
+        Migrationshilfe wurde die Existenz dieser Menge vorerst nicht
+        durch das Datenmodell erzwungen, allerdings ist geplant, dies
+        nach einer Umstellungsphase von ca. 6 Monaten zu tun.
+      o kv.testKonfiguration wurde um die Menge "Meldungen" erweitert
+        und alle zugehörigen Bereiche aktualisiert.
+
+
+      Stand 17.12.2007 Version 3.4.1
+
+  *
+
+
+            Neue Features
+
+    Folgende Erweiterungen gegenüber vorhergehenden Versionen wurden
+    durchgeführt:
+
+      o Die Definition der Syntax von Versorgungsdateien wurde in der
+        K2S.dtd um die Möglichkeit erweitert, an Mengen ein XML-Attribut
+        verwaltung="pid" anzugeben. Damit kann an jeder dynamischen
+        Menge angegeben werden, welche Konfiguration für die
+        Elementzugehörigkeit der Menge verantwortlich ist. Die
+        Elementzugehörigkeit von diesen dynamischen Mengen wird dann von
+        der angegebenen Konfiguration in separaten Dateien verwaltet.
+        Dazu wird in dem Verzeichnis, in dem die Verwaltungsdatei der
+        Konfiguration steht, ein Unterverzeichnis "mengen.kv..."
+        gepflegt, in dem für jede Menge eine entsprechende Datei mit der
+        Elementzugehörigkeit angelegt wird.
+      o Das Interface ClientDavInterface und die zugehörige
+        Implementierung ClientDavConnection wurden um die Methode
+        |boolean checkLoggedUserNameAndPassword(String userName, String
+        password)| erweitert. Die neue Methode liefert |true| zurück,
+        wenn der angegebene Benutzername und das angegebene Passwort mit
+        den entsprechenden Werten übereinstimmen, die beim
+        Verbindungsaufbau zum Datenverteiler benutzt wurden.
+  *
+
+
+            Änderungen
+
+    Folgende Änderungen zu vorhergehenden Versionen wurden durchgeführt:
+
+      o Die Konsistenzprüfung wertet doppelt vergebene Pids jetzt als
+        Interferenzfehler. Um das bisherige Verhalten zu erreichen, kann
+        beim Start von der Konfiguration in den Modi in denen eine
+        Konsistenzprüfung durchgeführt wird (Aktivierung,
+        Konsistenzprüfung, Freigabe zur Übernahme, Freigabe zur
+        Aktivierung ohne lokale Aktivierung) der neue Aufrufparameter
+        -doppeltePidsZulassen angegeben werden.
+      o Beim Disconnect einer Applikation, die mit mit dem
+        Aufrufparameter -lokaleSpeicherungKonfiguration=verzeichnis
+        gestartet wurde, werden jetzt nicht nur die
+        Konfigurationsobjekte selbst, sondern zusätzlich auch die
+        konfigurierenden Datensätze, die von der Applikation zur
+        Laufzeit benötigt wurden, in einer Datei im angegebenen
+        Verzeichnis zwischengespeichert und beim nächsten Start wieder
+        eingelesen.
+      o Wenn die für die Konfiguration selbst notwendigen
+        Konfigurationsbereiche in älteren Version aktiviert sind, dann
+        werden beim Start der Konfiguration entsprechende Warnungen
+        ausgegeben. Wenn einzelne dieser Bereiche gar nicht aktiviert
+        sind, dann wird eine Exception mit einer entsprechenden
+        Fehlermeldung generiert. Für die Konfiguration selbst notwendig
+        sind kb.systemModellGlobal, kb.metaModellGlobal und
+        kb.fachModellGlobal.
+  *
+
+
+            Bugfixes
+
+    Folgende Probleme vorhergehender Versionen wurden behoben:
+
+      o In der Parametrierung entstanden Laufzeitfehler, wenn
+        Parameterdatensätze von Objekten gespeichert werden sollten, in
+        deren Pid bestimmte Sonderzeichen wie z.B. '/' enthalten waren.
+      o Wenn die Verbindung zum Datenverteiler wegen unterschiedlicher
+        Datenverteilerprotokollversionen nicht initialisiert werden
+        konnte, dann wurde die TCP-Verbindung nicht freigegeben.
+  *
+
+
+            Datenmodelländerungen
+
+    Folgende Änderungen an Konfigurationsbereichen wurden durchgeführt:
+
+      o Der Konfigurationsbereich kb.metaModellGlobal wurde mit der
+        Version 10 um die Attributgruppe atg.dynamischeMenge am
+        typ.dynamischeMenge ergänzt. Damit kann an jeder dynamischen
+        Menge gespeichert werden, welche Konfiguration für die
+        Elementzugehörigkeit der Menge verantwortlich ist.
+
+
+      Stand 18.11.2007 Version 3.4
+
+  *
+
+
+            Neue Features
+
+    Folgende Erweiterungen gegenüber vorhergehenden Versionen wurden
+    durchgeführt:
+
+      o Lose Kopplung von Konfigurationsbereichen: Unterstützung der
+        Anwendungsfälle durch die SW-Einheit Konfiguration, bei denen
+        mit nicht erfüllten Abhängigkeiten zwischen
+        Konfigurationsbereichen unter bestimmten Bedingungen umgegangen
+        werden kann. Dazu wurde der Umgang mit optionalen, assoziative
+        Referenzen, die mit Hilfe der Pid des referenzierten Objekts in
+        konfigurierenden Datensätzen gespeichert werden, überarbeitet.
+        Wenn ein referenziertes Objekt beim Import nicht bekannt ist,
+        dann wird die Pid des referenzierten Objekts gespeichert und bei
+        einem späteren Export wieder ausgegeben. Das System verhält sich
+        in diesen Fällen gegenüber Applikationen so, als ob die Referenz
+        undefiniert wäre. Wenn zu einem späteren Zeitpunkt ein Bereich
+        mit dem refernzierten Objekt übernommen und aktiviert wird, dann
+        wird die Referenz ohne erneuten Import des referenzierenden
+        Bereichs korrekt aufgelöst.
+      o Automatische Ergänzung von Urlasserattributen: Bei allen
+        Parameterattributgruppen wird beim Import sichergestellt, dass
+        eine Attributliste mit den Urlasser-Attributen enthalten ist. In
+        jeder Attributgruppe, die als Parameterattributgruppe markiert
+        ist, wird vom Import automatisch eine Attributliste mit dem
+        Namen 'Urlasser' und dem Typ 'atl.urlasser' vor allen anderen
+        Attributen ergänzt werden, falls diese noch nicht vorhanden ist.
+      o Fertigmeldung von Applikationen für SWE Start/Stopp: In die
+        Datenverteiler-Applikationsfunktionen wurden Funktionen
+        eingebaut, die dafür sorgen, dass eine Applikation auf jeden
+        Fall eine Applikations-Fertigmeldung erzeugt und über den
+        Datenverteiler versendet. Auf die Fertigmeldung kann die
+        SW-Einheit Start/Stopp reagieren, um abhängige Applikationen zum
+        richtigen Zeitpunkt zu starten. Für alle bisherigen
+        Applikationen und zukünftigen Applikationen, die sich nicht
+        explizit um die eine 'Fertigmeldung' für die SW-Einheit
+        Start/Stopp kümmern, wird automatisch nach dem Verbindungsaufbau
+        zum Datenverteiler eine Fertigmeldung erzeugt und versendet.
+        Applikationen, die sich explizit um die Fertigmeldung kümmern
+        möchten, müssen dies vor dem Verbindungsaufbau zum
+        Datenverteiler durch Aufruf der Methode
+        |ClientDavInterface.enableExplicitApplicationReadyMessage()|
+        bekannt geben. In diesem Fall wird nach dem Verbindungsaufbau
+        automatisch eine 'Noch-Nicht-Fertig-Meldung' versendet. Durch
+        Aufruf der Methode
+        |ClientDavInterface.sendApplicationReadyMessage| durch die
+        Applikation kann dann zu einem späteren Zeitpunkt der Versand
+        einer 'Fertigmeldung' veranlasst werden.
+      o Neues optionales Aufrufargument -inkarnationsName=... für alle
+        Applikationen ergänzt. Der Aufrufparameter wird von der
+        SW-Einheit Start/Stopp vorgegeben, um eine eindeutige Zuordnung
+        zwischen gestartetem Prozeß und dem entsprechenden
+        Applikationsobjekt herzustellen. Der Inkarnationsname wird im
+        Objektnamen des Applikationsobjekts ergänzt und in der, von den
+        Applikationsfunktionen erzeugten Applikations-Fertigmeldung,
+        eingetragen.
+  *
+
+
+            Änderungen
+
+    Folgende Änderungen zu vorhergehenden Versionen wurden durchgeführt:
+
+      o Performanceverbesserungen: Es wurden Performanceanalysen von
+        Import und Aktivierung durchgeführt und dadurch zwei Stellen
+        lokalisiert, bei denen gezielte Optimierungen mit deutlich
+        spürbaren Ergebnissen durchgeführt wurden. Eine Optimierung
+        beschleunigt den Import von Konfigurationsmengen (insbesondere
+        nach mehreren Durchläufen). Die zweite Optimierung beschleunigt
+        Import, Konsistenzprüfung, Aktivierung und Export beim Zugriff
+        via Pid auf noch nicht aktivierte neue Objekte.
+      o Einige Debugausgaben der Konfiguration und des Imports wurden
+        überarbeitet.
+      o Die Speicherung und Überprüfung der Abhängigkeiten zwischen
+        Konfigurationsbereichen wird jetzt nur noch durchgeführt, wenn
+        mindestens Version 9 des Konfigurationsbereichs
+        kb.metaModellGlobal vorliegt. Diese Prüfung verhindert Probleme,
+        die bei Verwendung der Konfiguration mit zu alten
+        Konfigurationsbereichen auftreten können.
+      o Bei der Speicherung von Default-Parameterdatensätzen wird jetzt
+        Version 3 des Serialisierers benutzt, um die Datensätze in ein
+        Byte-Array zu verwandeln. Dadurch werden evtl. in
+        Default-Parametersätzen vorhandene Referenzen mit
+        Referenzierungsart Assoziation durch Speicherung der Pid
+        realisiert. Ältere Konfigurationsbereiche, deren
+        Default-Parameterdatensätze mit Version 2 des Serialisierers
+        erzeugt wurden, bleiben weiterhin lesbar.
+  *
+
+
+            Bugfixes
+
+    Folgende Probleme vorhergehender Versionen wurden behoben:
+
+      o Eine geänderte Definition einer Attributgruppe wurde beim Import
+        eines Default-Parameterdatensatzes nicht erkannt. Folge war ein
+        Fehlschlagen der Aktivierung.
+      o Das Löschen eines Default-Parameterdatensatzes wurde vom Import
+        nicht erkannt.
+      o Der Import eines geänderten Default-Parameterdatensatzes in
+        dessen Attributgruppe eine Attributliste enthalten war, die sich
+        auch geändert hatte, konnte dazu führen, dass fehlerhafte
+        Datensätze in die Konfiguration geschrieben wurden, die in
+        nachfolgenden Aufrufen der Konfiguration (z.B. bei einem Export)
+        nicht mehr gelesen werden konnten und zu einer Exception führten.
+      o Beim Export wurde in bestimmten Fällen keine Fehlermeldung
+        ausgegeben, wenn ein Vorgang sich mit einer Exception beendete.
+      o Im Datenmodell spezifizierte Defaultwerte für Attribute einer
+        Attributgruppe wurden bei einem erneuten Import eines nicht
+        veränderten Defaultparameters nicht berücksichtigt, sodass
+        fälschlicherweise eine Änderung festgestellt wurde.
+      o In seltenen Fällen konnte beim Laden von nicht mehr gültigen
+        Objekten ein DeadLock in der Konfiguration entstehen.
+      o In der Methode |ClientDavInterface.getData()| konnte es zu einer
+        NullPointerException kommen, wenn bereits vorher eine explizite
+        Anmeldung auf die gewünschten Daten gemacht wurde und bereits
+        ein Ergebnis des Datenverteilers vorlag.
+      o Bei der Speicherung der Abhängigkeiten zwischen
+        Konfigurationsbereichen kam es zu einer NullPointerException,
+        wenn ein neuer Konfigurationsverantwortlicher importiert und
+        anschließend aktiviert werden sollte.
+      o Bei der Speicherung der Abhängigkeiten zwischen
+        Konfigurationsbereichen kam es zu einer ClassCastException, wenn
+        eine Abhängigkeit durch eine Referenz auf ein dynamisches Objekt
+        in einem anderen Konfigurationsbereich entstanden ist.
+  *
+
+
+            Datenmodelländerungen
+
+    Folgende Änderungen an Konfigurationsbereichen wurden durchgeführt:
+
+      o Urlasser in Parameterattributgruppen in Bereichen des
+        kv.kappich: In allen Parameter-Attributgruppen wurde eine
+        Attributliste "Urlasser" vom Typ "atl.urlasser" eingefügt. Die
+        Default-Parameterdatensätze bei Objekttypen wurden entsprechend
+        erweitert.
+      o Die atl.urlasser wurde für Default-Parameterdatensätze
+        überarbeitet: Bei dem Attribut "BenutzerReferenz" der
+        Attributliste atl.urlasser wurde "undefiniert" zugelassen, um
+        die Verwendung von Default-Parameterdatensätzen zu ermöglichen.
+        Für alle Attribute der Attributliste wurden
+        Default-Attributwerte festgelegt.
+      o Fertigmeldung von Applikationen für SWE Start/Stop": Neue
+        Attributgruppe atg.applikationsFertigmeldung für die
+        Fertigmeldung von Applikationen wurde angelegt. Die
+        Attributgruppe enthält ein Attribut mit dem Inkarnationsname des
+        Prozesses und ein Flag das die Bereitschaft der Applikation
+        signalisiert.
+      o In den Konfigurationsbereichen des kv.kappich wurden die
+        Abhängigkeiten zu anderen Konfigurationsbereichen gespeichert.
+      o Aktuelle auf der ZID veröffentlichte Versionen der
+        Konfigurationsbereiche von inovat übernommen und aktiviert:
+        konfiguration-kv.inovat-D2007-09-28T193706.zip
+
+
+      Stand 03.09.2007 Version 3.3
+
+  *
+
+
+            Neue Features
+
+    Folgende Erweiterungen gegenüber vorhergehenden Versionen wurden
+    durchgeführt:
+
+      o Speicherung und Überprüfung der Abhängigkeiten zwischen
+        Konfigurationsbereichen
+  *
+
+
+            Bugfixes
+
+    Folgende Probleme vorhergehender Versionen wurden behoben:
+
+      o Konfigurationsseitige Implementierung der toString Methode für
+        Konfigurationsobjekte war nicht konform zur entsprechenden
+        DAF-seitigen Implementierung
+      o Implementierung der ArchivRequestManager.requestInfo(...)
+        Methoden lieferten keine IllegalStateException, wenn die
+        Verbindung zum Archivsystem noch nicht hergestellt werden konnte.
+      o Das Anlegen von Objekten mit Namen bzw. Pids mit einer Länge von
+        mehr als 127 Zeichen führte zu Fehlern beim Neustart der
+        Konfiguration
+  *
+
+
+            Änderungen
+
+    Folgende Änderungen zu vorhergehenden Versionen wurden durchgeführt:
+
+      o Die Packagestruktur der Kernsoftware wurde entsprechend den
+        Vorgaben des AK-VRZ überarbeitet, sodass entsprechende
+        Anpassungen bei allen Software-Entwicklern erforderlich werden.
+        Die Zuordnung aller bisherigen Sourcefiles zu den neuen Packages
+        ist in einer separaten Datei (PDF <NeuePackageStruktur.pdf>/XLS
+        <NeuePackageStruktur.xls>) dokumentiert.
+      o Die Software wurde entsprechend den Vorgaben des AK-VRZ in
+        einzelne Distributionspakete zerlegt, die einzeln über die ZID
+        bereitgestellt werden. Die Zuordnung aller bisherigen
+        Sourcefiles zu den neuen Distributionspaketen ist ebenfalls ist
+        der oben genannten Datei (PDF <NeuePackageStruktur.pdf>/XLS
+        <NeuePackageStruktur.xls>) dokumentiert. Die Distributionspakete
+        haben folgenden Inhalt:
+          + build.xml:
+            Ant-Builddatei zum Erzeugen des Pakets
+          + paketname-doc-api.zip:
+            Java-Doc auf Public- und Protected-Ebene
+          + paketname-doc-design.zip:
+            Java-Doc auf Private-Ebene
+          + paketname-info.xml:
+            Info Datei enthält Informationen zum Distributionspaket und
+            die Abhängigkeiten zu anderen Distributionspaketen
+          + paketname-lizenz.txt:
+            Lizenz des Distributionspakets
+          + paketname-notes.html:
+            Enthält zukünftig spezifische Releasenotes des
+            Distributionspakets
+          + paketname-src.zip:
+            Quellcode des Distributionspakets
+          + paketname.jar:
+            Jar-Datei mit dem übersetzten Quellcode
+          + paketname-runtime.jar:
+            Jar-Datei, die den CLASSPATH erweitert und alle JAR-Dateien
+            referenziert, von denen dieses Distributionspaket abhängig ist
+          + lib:
+            Unterordner mit evtl. notwendigen externen Bibliotheken
+      o Namen und Pids mit einer Länge von mehr als 255 Zeichen werden
+        nicht mehr zugelassen.
+      o Die update-Methode des MutableSetChangeListener wurde so
+        geändert, dass nicht mehr null als Parameter für addedObjects
+        und removedObjects übergeben wird, wenn keine Objekte
+        hinzugefügt bzw. entfernt wurden, sondern stattdessen ein leeres
+        Array
+      o Verbesserte Fehlerausgabe in den
+        Datenverteiler-Applikationsfunktionen, wenn kein Benutzer oder
+        keine Authentifizierungsdatei angegeben wurde bzw. das Passwort
+        des Benutzers nicht enthalten ist.
+  *
+
+
+            Datenmodelländerungen
+
+    Folgende Änderungen an Konfigurationsbereichen wurden durchgeführt:
+
+
+      Stand 12.08.2007 Version 3.2b4
+
+  *
+
+
+            Neue Features
+
+    Folgende Erweiterungen gegenüber vorhergehenden Versionen wurden
+    durchgeführt:
+
+      o Button zum "Aktualisieren" der Auswahllisten im GTM. Der Button
+        wird automatisch aktiviert, wenn in der Konfiguration dynamische
+        Objekte erzeugt oder gelöscht werden.
+  *
+
+
+            Bugfixes
+
+    Folgende Probleme vorhergehender Versionen wurden behoben:
+
+      o Bei der mehrfachen Angabe des allgemeinen Aufrufparameters zur
+        Aspektumleitung "-aspekt=..." beim Start von Applikationen wurde
+        nur der jeweils erste Aufrufparameter interpretiert.
+      o Im Datenverteiler konnte es nach Terminierung einer Applikation
+        beim Löschen des zur Applikation gehörenden dynamischen
+        Applikationsobjekts aus der Konfiguration in bestimmten Fällen
+        zu Blockierungen kommen.
+      o Die Größe des GTM-Fensters war nicht auf allen
+        Betriebssystemplattformen korrekt.
+      o Die Debug-Ausgaben bei erfolgreicher "Freigabe zu Aktivierung
+        ohne lokale Aktivierung beim Konfigurationsverantwortlichen"
+        waren fehlerhaft.
+      o Prüfung der Hierarchiedefinition für die PArametrierung
+        ignoriert jetzt die Definition der Blattknoten bei denen
+        Mengenname und Nachfolgertyp leer bzw. null sind.Prüfung der
+        Typ-Hierarchiedefinition für die Parametrierung auf sinnvolle
+        Werte und Zykelfreiheit.
+  *
+
+
+            Datenmodelländerungen
+
+    Folgende Änderungen an Konfigurationsbereichen wurden durchgeführt:
+
+      o kb.metaModellGlobal Version 9: Attributgruppe
+        atg.konfigurationsBereichAbhängigkeiten am
+        typ.konfigurationsBereich zur Speicherung der Abhängigkeiten zu
+        anderen Bereichen ergänzt.
+      o Neue Bereiche von kv.inovat übernommen und aktiviert.
+        (konfiguration-kv.inovat-D2007-07-19T111811.zip).
+
+
+      Stand 30.06.2007 Version 3.2b3
+
+  *
+
+
+            Neue Features
+
+    Folgende Erweiterungen gegenüber vorhergehenden Versionen wurden
+    durchgeführt:
+
+      o Neue Methode ConfigurationArea.createDynamicObject(...) zum
+        Erzeugen von dynamischen Objekten und gleichzeitiger Übergabe
+        von konfigurierenden Datensätzen. Diese Methode stellt sicher,
+        dass alle für das neu zu erstellende Objekt notwendigen
+        konfigurierenden Datensätze beim Aufruf angegeben worden sind.
+      o Automatische Aktualisierung der Objektliste im GTM wenn
+        dynamische Objekte erzeugt oder gelöscht werden.
+      o Prüfung der Typ-Hierarchiedefinition für die Parametrierung auf
+        sinnvolle Werte und Zykelfreiheit.
+  *
+
+
+            Bugfixes
+
+    Folgende Probleme vorhergehender Versionen wurden behoben:
+
+      o Bei der gegenseitigen Authentifizierung gekoppelter
+        Datenverteiler wurde in der Rückrichtung nicht immer der in der
+        Topologie vorgegebene Benutzername verwendet.
+  *
+
+
+            Datenmodelländerungen
+
+    Folgende Änderungen an Konfigurationsbereichen wurden durchgeführt:
+
+      o Erweiterung zum Erzeugen von dynamischen Objekten mit
+        konfigurierenden Datensätzen. Es wurde ein neuer Anfragetyp für
+        Konfigurationsanfragen ergänzt, der von der neuen Methode zum
+        Erzeugen von dynamischen Objekten und gleichzeitigem Anlegen von
+        konfigurierenden Datensätzen benutzt wird.
+          + Konfigurationsbereich kb.metaModellGlobal, Version 7
+          + Konfigurationsbereich kb.systemModellGlobal, Version 12
+      o Aktualisierung der Bereiche von kv.inovat (geändert,
+        kb.tmKexTlsGlobal (V 4) und kb.tmTmcGlobal (V 4), siehe
+        Releasenotes)
+
+
+      Stand 25.06.2007 Version 3.2b2
+
+  *
+
+
+            Neue Features
+
+    Folgende Erweiterungen gegenüber vorhergehenden Versionen wurden
+    durchgeführt:
+
+      o Konsistenzprüfung prüft jetzt, ob an jedem Typ für alle
+        Parameterattributgruppen, die an diesem Typ verwendbar sind, ein
+        Defaultparameterdatensatz angegeben ist und gibt vorerst nur
+        entsprechende Warnungen aus, wenn die Prüfung fehlschlägt.
+        Später, nach Änderung aller Datenmodelle wird ein Fehlschlag der
+        Prüfung zu einem Fehler führen.
+      o Konsistenzprüfung prüft jetzt, ob die Namen und Werte von
+        Aufzählungszuständen eines Ganzzahlattributtyps eindeutig sind
+        und gibt vorerst nur entsprechende Warnungen aus, wenn die
+        Prüfung fehlschlägt. Später, nach Änderung aller betroffenen
+        Datenmodelle wird ein Fehlschlag der Prüfung zu einem Fehler
+        führen.
+      o Neue Schnittstelle ExtendedProtocollerInterface, die das
+        |ClientProtocollerInterface| erweitert. Sie wird vom
+        XmlProtocoller implementiert und kann benutzt werden, um
+        Protokolle von empfangenen Telegrammen zu erzeugen und dabei die
+        im erstellten Protokoll zu verwendenden Zeitstempel zu
+        beeinflussen.
+      o Settingsmanager ignoriert jetzt die Attributgruppen mit
+        Zustandsinformationen des Datenverteilers.
+  *
+
+
+            Bugfixes
+
+    Folgende Probleme vorhergehender Versionen wurden behoben:
+
+      o Nur Version 3.2b1: Beim wiederholten Import von
+        Versorgungsdateien kam es beim Einlesen von
+        Default-Parameterdatensätzen an Typen ohne explizite Angabe des
+        Typs zu einer Exception.
+      o Nur Version 3.2b1: Beim Export von Versorgungsdateien wurde bei
+        der Ausgabe eines Defaultparameterdatensatzes Typ und
+        Attributgruppe vertauscht.
+      o Die Änderung des Namens einer Attributgruppe wurde vom Import
+        ignoriert, wenn nicht gleichzeitig andere Eigenschaften der
+        Attributgruppe geändert wurden.
+      o Blockierung im Datenverteiler, wenn während der Messung der
+        Telegrammlaufzeiten beim Publizieren der Statusinformationen die
+        in Messung befindliche Applikation terminiert wurde.
+  *
+
+
+            Datenmodelländerungen
+
+    Folgende Änderungen an Konfigurationsbereichen wurden durchgeführt:
+
+      o Versorgung der Defaultparameterdatensätze für alle
+        Parameterattributgruppen an allen Typdefinitionen der Bereiche
+        des kv.kappich:
+          + Konfigurationsbereich kb.tmVewSimulationGlobal, Version 4
+            (keine neue Versionsnummer, weil nur unversionierte
+            Änderungen durchgeführt wurden)
+          + Konfigurationsbereich kb.tmBuVGlobal, Version 3 (keine neue
+            Versionsnummer, weil nur unversionierte Änderungen
+            durchgeführt wurden)
+          + Konfigurationsbereich kb.ilse, Version 3 (keine neue
+            Versionsnummer, weil nur unversionierte Änderungen
+            durchgeführt wurden)
+          + Konfigurationsbereich kb.systemModellGlobal, Version 11
+          + Konfigurationsbereich kb.tmIlseTls, Version 3 (keine neue
+            Versionsnummer, weil nur unversionierte Änderungen
+            durchgeführt wurden)
+
+
+      Stand 17.06.2007 Version 3.2b1
+
+  *
+
+
+            Neue Features
+
+    Folgende Erweiterungen gegenüber vorhergehenden Versionen wurden
+    durchgeführt:
+
+      o Beim Import und Export von Versorgungsdateien werden jetzt
+        Default-Parameterdatensätze an Typen und Konfigurationsobjekten
+        unterstützt. Dazu kann unterhalb der XML-Elemente
+        |typDefinition| und |konfigurationsObjekt| das neue XML-Element
+        |defaultParameter| mit den XML-Attributen |attributgruppe| und
+        |typ| benutzt werden, dass die gleiche Struktur wie das
+        XML-Element |datensatz| zur Definition von normalen
+        konfigurierenden Datensätzen aufweist.
+  *
+
+
+            Bugfixes
+
+    Folgende Probleme vorhergehender Versionen wurden behoben:
+
+      o Es kam zu einer Nullpointerexception, wenn eine
+        Empfangsanmeldung doppelt, d.h. mit gleicher Datenidentifikation
+        und dem selben ClientReceiverInterface durchgeführt wurde.
+  *
+
+
+            Datenmodelländerungen
+
+    Folgende Änderungen an Konfigurationsbereichen wurden durchgeführt:
+
+      o Datenmodellaktualisierungen des kv.inovat vom 14.6.2007 wurden
+        übernommen und aktiviert.
+      o kb.systemModellAoe Version 2: typ.applikationGanglinienPrognose
+        wurde am typ.autarkeOrganisationsEinheit ergänzt
+      o kb.systemModellGlobal Version 10: -
+        atg.prognoseGanglinienAntwort und atg.ereignisKalenderAntwort
+        wurden am typ.applikation ergänzt
+
+
+      Stand 08.06.2007 Version 3.1.1
+
+  *
+
+
+            Bugfixes
+
+    Folgende Probleme vorhergehender Versionen wurden behoben:
+
+      o Wenn in der Callback-Methode einer Applikation zur Entgegennahme
+        von Online-Daten eine Konfigurationsanfrage gestellt wurde,
+        konnte es in einigen Fällen zu einer Blockierung der Applikation
+        kommen.
+      o Wenn in der Callback-Methode einer Applikation, die über
+        Änderungen an dynamischen Objekten eines Typs oder Änderungen
+        von dynamischen Mengen informiert, An- oder Abmeldungen auf
+        Änderungen am gleichen Typ bzw. der gleichen Menge durchgeführt
+        wurden, konnte es zu einer ConcurrentModificationException kommen.
+      o Fehler beim Übersetzen der Klasse TreeNodeObject durch ein
+        überflüssiges Import-Statement.
+  *
+
+
+            Neue Features
+
+    Folgende Erweiterungen gegenüber vorhergehenden Versionen wurden
+    durchgeführt:
+
+      o Die in der Kernsoftware enthaltene Prototyp-Implementierung der
+        Parametrierung registriert jetzt mit einem erweiterten
+        SettingsManager, wenn dynamische Mengen verändert werden und
+        überprüft und aktualisiert daraufhin die Anmeldungen. Außerdem
+        werden neue und gelöschte dynamische Objekte auch dann
+        registriert, wenn keine Objekte angegeben wurden (Wildcard für
+        alle Objekte).
+  *
+
+
+            Datenmodelländerungen
+
+    Folgende Änderungen an Konfigurationsbereichen wurden durchgeführt:
+
+      o kb.tmVewSimulationGlobal Version 4: Die Attribute der
+        Attributgruppe atg.simulationsStreckenBeschreibung wurden nach
+        Vorlage von BitCtrl so angepasst, dass die für die
+        Parametrierung relevanten Attribute mit denen der Attributgruppe
+        atg.parametrierung übereinstimmen.
+  *
+
+
+            Whitebox-Tests zur Kernsoftware
+
+    Diese Version wurde mit automatisierten Whitebox-Tests erfolgreich
+    geprüft. Die Whitebox-Test wurden dem Auftraggeber "Landesbetrieb
+    Straßenbau NRW" übergeben und befinden sich zur Zeit im Abnahmetest.
+
+
+      Stand 31.05.2007 Version 3.1
+
+  *
+
+
+            Neue Features
+
+    Folgende Erweiterungen gegenüber vorhergehenden Versionen wurden
+    durchgeführt:
+
+      o Neuer Aufrufparameter für Applikationen zur Einstellung der
+        Puffergrößen der Datenverteiler-Applikationsfunktionen. Mit
+        diesem Aufrufargument müssen drei durch Doppelpunkt getrennte
+        Zahlen angegeben werden:
+        |-puffer=sendepuffer:empfangspuffer:auslieferungspuffer| Alle
+        Angaben sind als Anzahl von Bytes zu verstehen. |sendepuffer|
+        und |empfangspuffer| spezifizieren die Größe der Puffer, die bei
+        der Datenverteilerkommunikation zur Zwischenspeicherung von zu
+        sendenden bzw. empfangenen Telegrammen verwendet werden.
+        |auslieferungspuffer| spezifiziert die Größe des
+        Auslieferungspuffers, der zur Zwischenspeicherung von an die
+        Applikation auszuliefernden Datensätzen verwendet wird.
+      o Der Datenverteiler stellt jetzt interne Statusinformationen
+        (verbundene Applikationen, angemeldete Daten etc.) über
+        entsprechende Datensätze zu Debug-Zwecken zur Verfügung.
+      o Die in der Kernsoftware enthaltene Prototyp-Implementierung der
+        Parametrierung registriert jetzt mit einem erweiterten
+        SettingsManager, wenn neue dynamische Objekte angelegt und
+        gelöscht werden und überprüft und aktualisiert daraufhin die
+        Anmeldungen.
+  *
+
+
+            Bugfixes
+
+    Folgende Probleme vorhergehender Versionen wurden behoben:
+
+      o In bestimmten Fällen konnte es in der Tabellendarstellung des
+        GTM zu Darstellungsfehlern kommen.
+      o Die DataModel.getObject Methoden hatte ein
+        Synchronisationsproblem, das in seltenen Fällen dazu führen
+        konnte, dass applikationsseitig mehrere Java-Objekte für das
+        selbe SystemObjekt erzeugt wurden.
+      o Die gegenseitige Authentifizierung zwischen zwei gekoppelten
+        Datenverteilern nutzte nicht die Benutzernamen, die in der
+        versorgten Datenverteiler-Topologie vorgegebenen sind.
+      o Die optionale applikationsseitige Zwischenspeicherung von
+        Konfigurationsdaten (z.B. für abgesetzte Bedienstationen) war
+        noch nicht passend zur neuen Konfiguration umgestellt worden.
+      o Bei der Weitergabe der Sendesteuerung an die Applikation mit
+        Hilfe der Methode ClientSenderInterface.dataRequest() wurde die
+        bei der Anmeldung angegebene Simulationsvariante nicht
+        berücksichtigt.
+      o Bei der Weitergabe der Sendesteuerung an die Applikation mit
+        Hilfe der Methode ClientSenderInterface.dataRequest() konnte es
+        zu einem Deadlock kommen, wenn aus der Callback-Funktion ein
+        synchroner Aufruf wie beispeilsweise eine Konfigurationsanfrage
+        gestellt wurde.
+      o In der Kommunikation zwischen Datenverteiler und Applikation gab
+        es Synchronisationsprobleme, die beim Beenden oder beim Abbruch
+        von Applikation zu Verklemmungen, sporadischen EOFExceptions und
+        falschen Fehlermeldungen führen konnten.
+      o Wenn beim Start eines Datenverteilers mit Remote-Konfiguration
+        eine falsche Datenverteiler-Id angegeben wurde, dann wurde keine
+        brauchbare Fehlermeldung (Liste von gültigen Datenverteiler-Ids)
+        ausgegeben.
+      o Wenn in einer Archivanfrage ein Objekt der Datenidentifikation
+        null war, wurde keine IllegalArgumentException geworfen.
+      o Bei der Benachrichtigung eines angemeldeten Listeners für
+        Änderungen an dynamischen Objekten konnte es zu
+        Synchronisationsproblemen kommen.
+      o Die Flußkontrolle beim Empfang von Datensätzen funktionierte
+        seitens der Datenverteiler-Applikationsfunktionen nicht wie
+        gewünscht. Das konnte bei Überlastung einer Applikation zu einem
+        OutOfMemoryError der betroffenen Applikation führen.
+      o Auf Windows-Systemen kam es beim Start der Konfiguration mit
+        großen Konfigurationsbereichen unter Umständen zu einer
+        Fehlermeldung der JVM, die besagte, dass nicht genügen Speicher
+        verfügbar war.
+      o Beim Einsatz einer Firewall mit Proxy-Funktion für Verbindungen
+        zwischen Datenverteilern, wurde durch den Proxy bedingte
+        Verbindungsabbrüche während des Verbindungsaufbau erst nach
+        einem sehr langen Timeout registriert.
+      o Wurde die Auswahl (ATG und Objekt) im ParameterEditor geändert,
+        so wurden nicht die DataDescriptions zum Empfangen und Senden
+        aktualisiert.
+      o Die Methoden DataModel.createConfigurationObject() und
+        DataModel.createDynamicObject() der
+        Datenverteiler-Appliaktionsfunktionen erzeugten keine
+        ConfigurationChangeException, wenn das entsprechende Objekt
+        konfigurationsseitig nicht erzeugt werden konnte.
+      o Beim Zugriff auf gelöschte dynamische Objekte, die kurz vor dem
+        Löschvorgang erzeugt oder verändert wurden, konnte es einige
+        Minten nach dem Löschvorgang in bestimmten Situationen zu
+        Fehlermeldungen kommen.
+      o In einer seltenen Situation konnte in der Konfiguration wegen
+        eines Synchronisationsfehlers ein Deadlock entstehen.
+      o Der Import von Versorgungsdateien hat Namensänderungen von
+        Konfigurationsobjekten und Änderungen an Referenzen in
+        Attributlisten und -arrays nicht korrekt erkannt.
+      o Bei der Kopplung von Datenverteilern an denen bereits sehr viele
+        Objekte angemeldet waren, wurden einzelne Datensätze nicht
+        zwischen den Datenverteilern ausgetauscht.
+      o Datenverteiler-Applikationsfunktionen: Durch ein Laufzeitproblem
+        konnte in seltenen Fällen auf bestimmten Systemen der erste
+        empfangene Datensatz nach einer Empfangsanmeldung verloren gehen.
+  *
+
+
+            Datenmodelländerungen
+
+    Folgende Änderungen an Konfigurationsbereichen wurden durchgeführt:
+
+      o kb.metaModellGlobal: Das Datenmodell wurde so erweitert, dass an
+        beliebigen Konfigurationsobjekten ein Datensatz der
+        Attributgruppe atg.defaultParameterdatensätze gespeichert werden
+        kann, der Default-Parameterdatensätze enthält, die für die
+        Parametrierung als Rückfallebene dienen, falls nicht anderweitig
+        ein Parameterdatensatz für ein bestimmtes Objekt vorgegeben wurde.
+      o kb.systemModellGlobal: Der Typ typ.applikation wurde um die
+        Attributgruppe atg.parametrierungSchnittstelle erweitert, damit
+        Anfragen einer Applikation an die Parametrierung beantwortet
+        werden können. Außerdem wurde Anfrageschnittstelle für die
+        Parametrierung im Attributtyp att.parametrierungsAnfrageTyp um
+        vier weitere Anfragen erweitert.
+      o kb.systemModellGlobal: Am typ.datenverteiler wurde die
+        Attributgruppe atg.angemeldeteApplikationen ergänzt. Der Typ
+        typ.applikation wurde um die Attributgruppe
+        atg.angemeldeteDatenidentifikationen erweitert.
+      o kb.systemModellGlobal und kb.objekteTestSystem: Im SystemModell
+        wurden in der Attributgruppe mit Eigenschaften von
+        Datenverteilerverbindungen die Attributtypen für "benutzer1" und
+        "benutzer2" von att.benutzerReferenz auf att.text geändert. Die
+        Werte werden jetzt vom Datenverteiler als Benutzernamen
+        interpretiert. Bei der Versorgung einer Topologie muss jetzt
+        statt der Pid eines Benutzers der Name des Benutzers eingetragen
+        werden. Dies wurde im kb.objekteTestSystem entsprechend angepasst.
+  *
+
+
+            Whitebox-Tests zur Kernsoftware 3.1
+
+    Diese Version wurde mit automatisierten Whitebox-Tests erfolgreich
+    geprüft. Die Whitebox-Test wurden dem Auftraggeber "Landesbetrieb
+    Straßenbau NRW" übergeben und befinden sich zur Zeit im Abnahmetest.
+
+
+      Stand 15.04.2007 Version 3.0
+
+  *
+
+
+            Bugfixes
+
+    Folgende Probleme vorhergehender Versionen wurden behoben:
+
+      o Die im Datenverteiler integrierte Durchsatzprüfung, die
+        blockierte Applikationen terminieren soll, funktionierte in
+        speziellen Situationen nicht zuverlässig.
+      o Die Methode isOfType für Systemobjekte lieferte bei ungültig
+        gewordenen Typen fehlerhafte Ergebnisse.
+      o Der Erfolg der Methode invalidate für dynamische Objekte war
+        manchmal nicht sofort durch die Methode isValid überprüfbar.
+      o Beim Ungültigsetzen von dynamischen Objekten mit der Methode
+        invalidate() und anschließendem Aufruf von isValid() bzw.
+        getNotValidSince() wurden nicht immer sofort die aktualisierten
+        Werte zurückgeliefert.
+      o Die Angabe einer Verwaltungsdatei ohne Angabe eines
+        Verzeichnisses beim Start der Konfiguration führte zu einem Fehler.
+  *
+
+
+            Neue Features
+
+    Folgende Erweiterungen gegenüber vorhergehenden Versionen wurden
+    durchgeführt:
+
+      o Die Performance der Kommunikation über den Datenverteiler wurde
+        deutlich verbessert.
+      o Die Prüfungen in der Konsistenzprüfung der Konfiguration wurden
+        erweitert (Prüfungen auf doppelte PIDs, doppelte IDs, mehrfach
+        Referenzierte Komponenten, etc.).
+      o Neue Funktion der Konfiguration um Änderungen in
+        Konfigurationsbereichen zur Übernahme und Aktivierung
+        freizugeben, ohne dass diese lokal beim
+        Konfigurationsverantwortlichen aktiviert worden sind. Die
+        Funktion kann über das Aufrufargument
+        |-freigabeZurAktivierungOhneLokaleAktivierungDurchDenKV=bereiche| gestartet
+        werden, |bereiche| ist dabei eine mit Komma getrennte Liste mit
+        den Bereichen, die zur Übernahme und Aktivierung freigegeben
+        werden sollen. Es wird eine Konsistenzprüfung durchgeführt, die
+        die angegebenen Bereiche in der jeweils neusten Version und alle
+        nicht angegebenen Bereiche in der zur Aktivierung freigegebenen
+        Version betrachtet. Dabei dürfen keine lokalen Fehler auftreten.
+      o Die Fehlerausgaben in der Konfiguration für den Fall, dass der
+        Datenverteiler sich mit einer falschen oder ungültigen Objekt-Id
+        anmeldet (Aufrufparameter |-datenverteilerId=id|) wurde
+        erweitert; eine Liste der Versorgten Datenverteiler mit den
+        entsprechenden IDs wird ausgegeben.
+  *
+
+
+            Bekannte Probleme
+
+    Folgende Probleme werden in einem anschließenden Release behoben:
+
+      o Die Flußkontrolle beim Empfang von Datensätzen funktioniert
+        seitens der Datenverteiler-Applikationsfunktionen nicht wie
+        gewünscht. Das kann bei Überlastung einer Applikation zu einem
+        OutOfMemoryError der betroffenen Applikation führen
+      o Der Datenverteiler stellt interne Statusinformationen
+        (verbundene Applikationen, angemeldete Daten etc.) nicht Online
+        zur Verfügung.
+      o Die gegenseitige Authentifizierung zwischen zwei gekoppelten
+        Datenverteilern nutzt nicht die Benutzer, die in der versorgten
+        Datenverteiler-Topologie vorgegebenen sind.
+      o Die optionale applikationsseitige Zwischenspeicherung von
+        Konfigurationsdaten (z.B. für abgesetzte Bedienstationen) ist
+        noch nicht passend zur neuen Konfiguration umgestellt worden.
+
+
+      Stand 21.03.2007 Version 3.0b9
+
+  *
+
+
+            Bugfixes
+
+    Folgende Probleme vorhergehender Versionen wurden behoben:
+
+      o Wenn im GTM eine Onlinetabelle mit Darstellung "Nur aktuellste
+        Daten anzeigen" geöffnet wurde, dann wurden bei der
+        Aktualisierung von bereits vorhandenen Datensätzen bestimmte
+        interne Datenstrukturen nicht freigegeben, was nach einiger Zeit
+        einen OutOfMemoryError zur Folge hatte.
+      o Beim wiederholten Import von Änderungen der Position von
+        Attributen einer Attributgruppendefinition ohne
+        zwischenzeitliche Aktivierung kam es fehlerhaften
+        Positionsangaben der Attribute (die von der Konsistenzprüfung
+        beim Versuch der Aktivierung erkannt wurden).
+      o Wenn beim Start des GTM der Logindialog verwendet wurde und dort
+        bei der Datenverteileradresse oder bei der Portnummer oder beim
+        Benutzer eine vom Defaultwert abweichende Einstellung gemacht
+        wurde, dann wurden diese beim Start von Onlineprotokollierer und
+        Datengenerator etc. nicht über entsprechende Aufrufparameter an
+        die Applikationen weitergegeben.
+      o Die Einschränkungen von Attributgruppenverwendungen bzgl. des
+        Online-Modus wurden von den
+        Datenverteiler-Applikationsfunktionen bei den Anmeldungen zum
+        Empfang und Versand nicht geprüft.
+      o Im GTM gab es keine Möglichkeit, um auf konfigurierende
+        Datensätze mit einem von "asp.eigenschaften" abweichenden Aspekt
+        zuzugreifen.
+      o Im GTM wurden Fehleingaben bezüglich des Zeitbereichs (von <
+        bis) beim Aufruf des Systemprotokollierers nicht verhindert.
+      o Im GTM wurden die Attributgruppenverwendungen nicht ausgewertet
+        um die Buttons der GTM-Module entsprechend ihren Möglichkeiten
+        zu deaktivieren.
+      o Beim Start des Systemprotokollierers wurde fälchlicherweise
+        bestimmte Aufrufargumente des GTM weitergegeben, was dann
+        entsprechende Fehlermeldungen im Systemprotokollierer zur Folge
+        hatte.
+      o Der automatische Eintrag der Versionsnummer bei
+        Änderungsvermerken in Versorgungsdateien mit
+        <konfigurationsAenderung ... > war eins zu groß, wenn sich durch
+        den Import keine neue Version des betroffenen Bereichs ergeben
+        haben.
+      o Bei der Konsistenzprüfung und Aktivierung von
+        Konfigurationsbereichen wurden bereits aktivierte vorher
+        aktivierte Objekte in bestimmten Situationen nicht erneut auf
+        Interferenzfehler geprüft.
+      o Beim Export von Versorgungsdateien von noch nicht aktivierten
+        Versionen wurden zur Auflösung von Referenzen der
+        Referenzierungsart Assoziation nicht auf den neusten Stand der
+        entsprechenden Konfigurationsbereiche zugegriffen, was zu
+        Fehlern bei der Deserialisierung der Datensätze führen konnte.
+      o Nach dem Aufruf der Methode SystemObjekt.invalidate() für ein
+        bereits ungültiges Konfigurationsobjekt konnte es in bestimmten
+        Situationen vorkommen, dass die betroffene Konfigurationsdatei
+        nicht mehr lesbar war.
+      o Die Methoden ConfigurationArea.getNewObjects(),
+        ConfigurationObject.addSet(), ConfigurationObject.removeSet()
+        und die verschiedenen Varianten des historischen Zugriffs auf
+        Elemente eines Typs bzw. einer Menge waren seitens der
+        Datenverteiler-Applikationsfunktionen nicht implementiert.
+      o Die Methode ConfigurationObject.isValid seitens der
+        Datenverteiler-Applikationsfunktionen lieferte in bestimmten
+        Fällen falsche Ergebnisse.
+      o Der Import von Versorgungsdateien erkannte in bestimmten Fällen
+        fälschlicherweise Unterschiede in konfigurierenden Datensätzen.
+      o Der Wechsel des Konfigurationsverantwortlichen eines Bereichs
+        wurde beim Aktivieren erst dann berücksichtigt, wenn sich
+        weitere Änderungen am Bereich ergeben haben, die zu einem
+        Versionswechsel führen würden.
+      o Beim Wechsel des Konfigurationsverantwortlichen eines Bereichs
+        wurde in bestimmten Situation fälschlicherweise zweimal versucht
+        die Konfigurationsdatei zu reorganisieren, was eine
+        Fehlermeldung und den Abbruch der Applikation zur Folge hatte.
+      o Das Entfernen von bereits auf ungültig gesetzten dynamischen
+        Objekten aus einer dynamischen Menge hatte keinen Effekt.
+      o Beim Anlegen von neuen Objekten und beim Aufruf der Methode
+        SystemObject.setName() wurde als Wert für den Namen des Objekts
+        der Wert null anstelle des Leerstrings (für Objekte ohne Namen)
+        nicht toleriert.
+      o Zeilenumbrüche in Versorgungsdateien innerhalb der XML-Tags
+        "kurzinfo" und "beschreibung" wurden beim Import und
+        nachfolgendem Export unter bestimmten Umständen gelöscht.
+      o Es kam zu einer Exception bei wiederholtem Import ohne
+        zwischenzeitliche Aktivierung eines geänderten dynamischen Typs.
+      o Beim Wechsel der Vererbung eines Typs von
+        typ.konfigurationsObjekt zu typ.dynamischesObjekt oder umgekehrt
+        wurden die Menge mit den Supertypen des Typs nicht korrekt
+        aktualisiert.
+      o Applikationsseitige Anmeldungen auf Änderungen der Konfiguration
+        bzgl. dynamischen Objekten (Neue Objekte, gelöschte Objekte und
+        Namensänderungen) waren nicht möglich. Außerdem war der von der
+        Methode getNotValidSince zurückgegebene Zeitpunkt an dem ein
+        Objekt ungültig wurde, war nicht korrekt.
+      o Bei den Methoden für Sende- und Empfangsanmeldungen in den
+        Datenverteiler-Applikationsfunktionen wurden nicht sinnvollen
+        Kombinationen von Quelle, Empfänger, Senke und Sender nicht
+        immer mit einer entsprechenden Exception quittiert.
+      o Im Datenverteiler kam es zu einer ClassCastException bei
+        Konfiguration des Rechtemanagements im Datenverteiler
+  *
+
+
+            Neue Features
+
+    Folgende Erweiterungen gegenüber vorhergehenden Versionen wurden
+    durchgeführt:
+
+      o Wenn nach dem Import einer Versorgungsdatei ein erneuter Import
+        mit der ursprünglichen Versorgungsdatei durchgeführt wird, um
+        die Änderungen des ersten Imports wieder rückgängig zu machen,
+        dann werden die Original-Objekte jetzt wiederhergestellt. Vorher
+        wurden in dieser Situation neue Objekte angelegt, die den
+        gleichen Inhalt wie die alten Objekte hatten.
+      o Die Attributgruppenverwendungen von Parameter-Attributgruppen
+        werden beim Import automatisch um des Aspekt
+        asp.parameterDefault mit Konfigurationsmodus ergänzt.
+      o Die Reihenfolge, mit der Aspekte innerhalb von Attributgruppen
+        in Versorgungsdateien vom Export ausgegeben wurden, war nicht
+        deterministisch und konnte sich von Export zu Export ändern.
+        Dies hat einen Vergleich von zwei Versorgungsdateien erschwert.
+        (Ausgabe ist jetzt sortiert nach der PID der Aspekte.)
+      o Die Reihenfolge, mit der Attributgruppen und Mengen innerhalb
+        von Typdefinitionen in Versorgungsdateien vom Export ausgegeben
+        wurden, war nicht deterministisch und konnte sich von Export zu
+        Export ändern. Dies hat einen Vergleich von zwei
+        Versorgungsdateien erschwert. (Ausgabe ist jetzt sortiert nach
+        der PID der Attributgruppen bzw. Mengentypen.)
+      o Methoden zum Duplizieren und Löschen von Konfigurationsobjekten
+        einschließlich aller via Referenzierungsart Komposition
+        verbundenen Objekte wurden ergänzt.
+      o Die Prüfung der Einschränkungen von Attributgruppenverwendungen
+        bzgl. des Online-Modus in den
+        Datenverteiler-Applikationsfunktionen bei den Anmeldemethoden
+        zum Empfang und Versand können für Testzwecke mit dem
+        Aufrufargument |-anmeldungFuerTestzwecke=ja| abgeschaltet werden.
+  *
+
+
+            Geänderte Konfigurationsbereiche
+
+    Folgende Konfigurationsbereiche wurden aktualisiert:
+
+      o kb.systemModellGlobal wurde in drei Bereiche zerlegt, um
+        Abhängigkeiten der Bereiche untereinander zu minimieren
+      o kb.systemModellGlobal wurde um weitere Typen für neue
+        Konfigurationsanfragen erweitert.
+      o kb.fachModellGlobal wurde um den Aspekt asp.parameterDefault für
+        konfigurierende Default-Parameterdatensätze ergänzt
+      o kb.tmIlseTls: Abhängigkeit von kb.tmKExLMStGlobal durch
+        Ersetzung des bereichsfremden Aspekts asp.empfangen beseitigt.
+      o alle Bereiche: Aktualisierung durch inovat, siehe separates
+        Dokument "Datenkatalog DaV-Release Notes.pdf" auf der ZID.
+  *
+
+
+            Bekannte Probleme
+
+    Folgende Probleme werden in einem anschließenden Release behoben:
+
+      o Die Flußkontrolle beim Empfang von Datensätzen funktioniert
+        seitens der Datenverteiler-Applikationsfunktionen nicht wie
+        gewünscht. Das kann bei Überlastung einer Applikation zu einem
+        OutOfMemoryError der betroffenen Applikation führen
+      o Die im Datenverteiler integrierte Durchsatzprüfung, die
+        blockierte Applikationen terminieren soll, funktioniert in
+        speziellen Situationen nicht zuverlässig.
+      o Der Datenverteiler stellt interne Statusinformationen
+        (verbundene Applikationen, angemeldete Daten etc.) nicht Online
+        zur Verfügung.
+      o Die gegenseitige Authentifizierung zwischen zwei gekoppelten
+        Datenverteilern nutzt nicht die Benutzer, die in der versorgten
+        Datenverteiler-Topologie vorgegebenen sind.
+      o Die optionale applikationsseitige Zwischenspeicherung von
+        Konfigurationsdaten (z.B. für abgesetzte Bedienstationen) ist
+        noch nicht passend zur neuen Konfiguration umgestellt worden.
+
+
+      Stand 18.02.2007 Version 3.0.b6
+
+  *
+
+
+            Bugfixes
+
+    Folgende Probleme vorhergehender Versionen wurden behoben:
+
+      o Die von der Konfiguration angelegten Lock-Dateien die einen
+        mehrfachen Zugriff auf die Konfigurationsdateien etc. verhindern
+        wurden in bestimmten Fehlerfällen nicht freigegeben.
+      o Die Vorgaben im Datenmodell zur Größe von Arrays wurden beim
+        Setzen der Größe eines Arrays in einem Datensatz mit der Methode
+        setLength() nicht geprüft.
+      o Das Wiederbeleben von bereits als ungültig vorgemerkten Objekten
+        mit der Methode revalidate in den
+        Datenverteiler-Applikationsfunktionen wurde von der
+        Konfiguration mit einer Fehlermeldung quittiert.
+      o Die Implementierung von einzelnen Methoden zum
+        applikationsseitigen Zugriff auf bestimmte Konfigurationsdaten
+        fehlte.
+      o Die Änderung von Namen von Objekten über die
+        DatenverteilerApplikationsfunktionen führte zu einem
+        Fehlverhalten der Konfiguration.
+      o Es wurde keine Fehlermeldung generiert, wenn innerhalb einer
+        Applikation zu einem Empfänger gleichzeitig eine Senke
+        angemeldet wurde.
+      o Bei der Unterstützung der Simulation in der Konfiguration fehlte
+        die Möglichkeit bei einer Simulationsstrecke die zu
+        berücksichtigenden dynamischen Mengen und Typen für dynamische
+        Objekte anzugeben.
+      o Attribute deren Attributtyp als relativer Zeitstempel definiert
+        war konnten nicht negativ sein.
+      o Beim Import haben die aus den MengenDefinitionen mit dem
+        Attribut aenderbar=ja hervorgehenden Mengentypen eine falsche
+        Zuordnung in der Vererbungshierarchie erhalten.
+      o Die Ausgabe der Data.toString Methode war nicht richtig
+        formatiert und es fehlten die Attributnamen.
+      o Es konnten Datensätze einer Attributgruppe, die nicht zur
+        DataDescription passte über den Datenverteiler versendet werden.
+      o Bei der Konsistenzprüfung und Aktivierung von
+        Konfigurationsbereichen wurde nicht die neuste Version
+        betrachtet, wenn sich nur in Mengen mit Referenzierungsart
+        Assoziation Änderungen ergeben haben.
+      o Die Methode setConfigurationData in den
+        Datenverteiler-Applikationsfunktionen zum Schreiben von
+        konfigurierenden Datensätzen funktionierte in bestimmten
+        Situationen nicht.
+      o Wenn zweimal hintereinander ein Bereich importiert wurde, in dem
+        ein neuer Konfigurationsverantwortliche definiert wird, der
+        gleichzeitig der Konfigurationsverantwortliche der Konfiguration
+        ist, dann kam es zu einer IllegalArgumentException.
+      o Die Konsistenzprüfung meldete in bestimmten Situationen
+        fälschlicherweise ein Problem mit nicht erlaubten
+        Attributgruppenverwendungen.
+      o Berücksichtigung von bestimmten Objekten und dynamischen Mengen
+        im zeitlichen Kontext der Simulation funktionierte nicht.
+      o Beim Anlegen von neuen Objekten wurde als Wert für die PID des
+        neuen Objekts der Wert null anstelle des Leerstrings (für
+        Objekte ohne PID) nicht toleriert
+      o Die Angabe der benötigten Bits eines Ganzzahl Attributtyps in
+        einer Versorgungsdatei wurde nicht auf erlaubten Werte geprüft.
+      o Der Import von Versorgungsdateien hat sich bei bestimmten
+        Fehlern in den zu importierenden Versorgungsdateien nicht beendet.
+      o Bei Verwendung der Methode SystemObject.setConfigurationData
+        seitens der Applikation wurde der lokale Zwischenspeicher nicht
+        aktualisiert.
+      o In konfigurierenden Datensätzen wurden Null-Referenzen bei der
+        Verwendung der Referenzierungsart Assoziation nicht unterstützt.
+      o Die Fehlerausgaben beim Setzen von Zeitstempelattributen mit
+        fehlerhaften Texten, waren nicht hilfreich.
+      o Die für verschiedene Hersteller vordefinierten
+        Konfigurationsverantwortlichen hatten als Typ
+        typ.autarkeOrganisationsEinheit und nicht
+        typ.konfigurationsVerantwortlicher.
+      o Die DataModel.getObjects-Methode hat bei Angabe einer Wildcard
+        für die Typen nicht die gewünschten Objekte zurückgegeben.
+      o Bei ObjektTypen haben die getElements-Methoden mit Zeitangaben
+        nur Objekte im gleichen Konfigurationsbereich zurückgeliefert.
+      o Bei der Konsistenzprüfung konnten alte konfigurierende
+        Datensätze fälschlicherweise zu Interferenzfehlern führen.
+      o In der Methode ClientDavConnection.subscribeSource wurde die
+        Sendeanmeldung nicht wieder zurückgenommen, falls das Schreiben
+        des initialen Datensatzes nicht funktionierte und ein Exception
+        hervorrief.
+      o Das Systemmodell im Bereich kb.systemModellGlobal war nicht
+        passend zur Implementierung einer speziellen
+        Konfigurationsabfrage aktualisiert worden.
+  *
+
+
+            Bekannte Probleme
+
+    Folgende Probleme werden in einem anschließenden Release behoben:
+
+      o Die Flußkontrolle beim Empfang von Datensätzen funktioniert
+        seitens der Datenverteiler-Applikationsfunktionen nicht wie
+        gewünscht. Das kann bei Überlastung einer Applikation zu einem
+        OutOfMemoryError der betroffenen Applikation führen
+      o Die im Datenverteiler integrierte Durchsatzprüfung, die
+        blockierte Applikationen terminieren soll, funktioniert in
+        speziellen Situationen nicht zuverlässig.
+      o Applikationsseitige Anmeldungen auf Änderungen der Konfiguration
+        bzgl. dynamischen Objekten (Neue Objekte, gelöschte Objekte und
+        Namensänderungen) sind nicht möglich. Der von der Methode
+        getNotValidSince zurückgegebene Zeitpunkt an dem ein Objekt
+        ungültig wurde, ist nicht korrekt.
+      o Methoden zum Duplizieren und Löschen von Konfigurationsobjekten
+        einschließlich aller via Referenzierungsart Komposition
+        verbundenen Objekte fehlen in der Konfiguration.
+      o Der Datenverteiler stellt interne Statusinformationen
+        (verbundene Applikationen, angemeldete Daten etc.) nicht Online
+        zur Verfügung.
+      o Konfigurierende Datensätze mit einem von "asp.eigenschaften"
+        abweichenden Aspekt können im GTM nicht dargestellt werden.
+      o Die Einschränkungen von Attributgruppenverwendungen bzgl. des
+        Online-Modus werden von den
+        Datenverteiler-Appliaktionsfunktionen nicht geprüft.
+      o Die gegenseitige Authentifizierung zwischen zwei gekoppelten
+        Datenverteilern nutzt nicht die Benutzer, die in der versorgten
+        Datenverteiler-Topologie vorgegebenen sind.
+      o Die optionale applikationsseitige Zwischenspeicherung von
+        Konfigurationsdaten (z.B. für abgesetzte Bedienstationen) ist
+        noch nicht passend zur neuen Konfiguration umgestellt worden.
+
+
+      Stand 10.12.2006 Version 3.0.b5
+
+  *
+
+
+            Bugfixes
+
+    Folgende Probleme vorhergehender Versionen wurden behoben:
+
+      o NullpointerException beim Import im Zusammenhang mit Bereichen,
+        die von anderen übernommen wurde und nicht in der Version 1
+        Aktiviert wurden.
+
+
+      Stand 10.12.2006 Version 3.0.b4
+
+  *
+
+
+            Bugfixes
+
+    Folgende Probleme vorhergehender Versionen wurden behoben:
+
+      o NullpointerException bei wiederholtem Import, wenn ein
+        konfigurierender Datensatz eine noch nicht aktivierte
+        Attributgruppe verwendet hat und der Datensatz geändert und
+        erneut importiert wurde.
+      o Bei der Konsistenzprüfung wurde die falsche Version eines
+        Bereichs betrachtet, wenn dieser noch nie aktiviert wurde.
+      o Bei der Konsistenzprüfung haben die Prüfungen zur Gültigkeit von
+        referenzierten Objekten nicht in allen Fällen funktioniert.
+      o Bei der Konsistenzprüfung ohne Aktivierung wurde nicht die zur
+        Übernahme freigegebene Version sondern die zur Aktivierung
+        freigegebene Version für übernommene Bereiche betrachtet.
+      o Import von Versorgungsdateien: Widersprüchliche Angaben bei
+        Ganzzahlattributtypen bezüglich der angegebenen Anzahl von Bits
+        und den benötigten Bits führten nicht zu einer entsprechenden
+        Fehlermeldung.
+      o Konsistenzprüfung: Fehlerhafte Angaben in nicht benutzten
+        Defaultwerten von Attributtypen führten nicht zu einer
+        entsprechenden Fehlermeldung
+      o Lock-Dateien wurden beim Beenden des
+        Offline-Konfigurationsbrowser nicht gelöscht.
+      o Konfigurationsverantwortliche der Bereiche wurden neu definiert
+        und zugeordnet.
+  *
+
+
+            Neue Features
+
+      o Export von allen der Konfiguration bekannten
+        Konfigurationsbereichen ist jetzt mit dem Aufrufparameter
+        |-export=|
+        ohne explizite Angabe der Bereiche möglich.
+
+
+      Stand 07.12.2006 Version 3.0.b3
+
+  *
+
+
+            Neue Features
+
+      o Locking-Mechanismus zum Schutz der Konfigurations- und
+        Verwaltungsdateien vor mehrfachem Zugriff durch verschiedene
+        Instanzen der Konfiguration.
+      o Unterstützung der Simulation.
+  *
+
+
+            Bugfixes
+
+    Folgende Probleme vorhergehender Version wurden behoben:
+
+      o Die von einem Konfigurationsverantwortlichen zuletzt vergebene
+        laufende Nummer für die Vergabe von Objekt-IDs wurde nicht
+        unabhängig von den einzelnen Konfigurationsbereichen dieses
+        Konfigurationsbereichen gespeichert. Als weitere
+        Vorsichtsmaßnahme um eindeutige Pids auch bei manueller
+        Modifikation der Verwaltungsdatei sicherzustellen wird diese
+        Nummer jetzt am Konfigurationsverantwortlichen selbst in einem
+        konfigurierenden Datensatz gespeichert, sofern entsprechende
+        Zugriffsrechte bestehen.
+      o Bei Referenzen mit Referenzierungsart Assoziation werden in der
+        Konfigurationsdateien jetzt die Pids der Referenzierten Objekte
+        gespeichert.
+      o Der Konfigurationsverantwortliche eines Bereichs kann jetzt
+        gewechselt werden.
+      o Die Definition eines neuen Konfigurationsverantwortliche kann
+        jetzt durch einen einfachen Import in einem einzelnen neuen
+        Bereich durchgeführt werden.
+      o Der Defaultbereich eines Konfigurationsverantwortlichen ist
+        jetzt als Text modelliert, um das erzeugen eines neuen
+        Konfigurationsverantwortlichen zu vereinfachen.
+      o NullpointerException beim Import nach dem Ergänzen eines Aspekts
+        an einer Attributgruppe. (Issue 0000039)
+      o Bei Versand von Datensätzen mit Ganzzahlattributen wurde der
+        Wertebereich für gültige Werte nicht geprüft. (Issue 0000032)
+      o Fehler bei der Berechnung von Undefined-Werten führte dazu, dass
+        in bestimmten Situationen gültige Attributwerte als Undefiniert
+        interpretierte wurden. (Issue 0000038 und 0000035)
+      o Die Fehlermeldung bei falschen oder gelöschten
+        Aktivierungszeitpunkten in der Verwaltungsdatei war nicht
+        hilfreich für die Behebung des Problems. Die Fehlermeldung wurde
+        überarbeitet und die Zeitstempel in lesbarer Form ausgeben.
+      o Der Import berücksichtigte zur Auflösung von Referenzen nur neue
+        (d.h. noch nicht aktivierte) Versionen von den
+        Konfigurationsbereichen die zusammen importiert werden und von
+        allen anderen Bereichen die jeweils aktivierte Version. Der
+        Import wurde dahingehend erweitert, dass von eigenen Bereichen
+        die neuste Version und von übernommenen Konfigurationsbereichen
+        die jeweils freigegebenen Versionen berücksichtigt werden, um
+        Referenzen aufzulösen.
+      o Die Konsistenzprüfung der Konfiguration berücksichtigte die
+        Mengenverwendungen von noch nicht aktivierten Objekttypen nicht
+        richtig. (Issue 0000024)
+      o Übergebene DataDescription-Objekte wurden von vielen Methoden in
+        der ClientDavConnection modifiziert, wenn die
+        Simulationsvariante nicht explizit vorgegeben wurde. In der
+        Datadescription wurde die tatsächlich verwendete
+        Simulationsvariante eingetragen. Die Methoden der
+        ClientDavConnection modifizieren eine übergebene DataDescription
+        jetzt nicht mehr. Probleme mit Maps, in denen die
+        DataDescription als Key benutzt wurden, sind damit gelöst. Die
+        Parametrierung funktioniert jetzt wieder. (Issue 0000021 und
+        Issue 0000029)
+      o Beim Import wurden statt den neusten Versionen von Bereichen,
+        die nicht importiert wurden, die zuletzt Aktivierten Version
+        berücksichtigt.
+      o Die automatische Vergabe der Versionsnummer in den
+        |konfigurationsAenderung|s-Tags funktionierte bei mehrfachem
+        Import und Aktivierung ohne zwischenzeitlichen Export nicht wie
+        erwartet.
+      o Eine NullpointerException beim Start der Konfiguration konnte
+        auftreten, wenn durch einen Import mit anschließender
+        Aktivierung ausschließlich neue Objekte entstanden sind und kein
+        Objekt ungültig gesetzt wurde.
+      o Nach dem Start der Konfiguration konnte es zu Exceptions kommen,
+        weil mehrfach versucht wurde, dynamische Objekte ungültig zu setzen.
+      o Dynamischen Objekte wurden gespeichert auch wenn der
+        Persistenzmodus |transient| war.
+      o Das Ungültigsetzen von dynamischen Objekte mit einem
+        entsprechenden Persistenzmodus beim Start der Konfiguration
+        funktionierte nicht wie gewünscht.
+  *
+
+
+            Kompatibilität
+
+    Das Dateiformat von Konfigurationsdateien hat sich bezüglich
+    Referenzen mit Referenzierungsart Assoziation geändert. Vorhandene
+    Konfigurationsdateien aus älteren Beta-Versionen sollten gelöscht
+    und durch einen erneuten Import neu erzeugt werden.
+
+
+      Stand 27.10.2006 Version 3.0b2
+
+  *
+
+
+            Bugfixes
+
+    Folgende Probleme der Version 3.0b1 wurden behoben:
+
+      o Die automatische Vergabe der Versionsnummer in den
+        |konfigurationsAenderung|s-Tags funktionierte bei mehrfachem
+        Import und Aktivierung ohne zwischenzeitlichen Export nicht wie
+        erwartet.
+      o Eine NullpointerException beim Start der Konfiguration konnte
+        auftreten, wenn durch einen Import mit anschließender
+        Aktivierung ausschließlich neue Objekte entstanden sind und kein
+        Objekt ungültig gesetzt wurde.
+      o Nach dem Start der Konfiguration konnte es zu Exceptions kommen,
+        weil mehrfach versucht wurde, dynamische Objekte ungültig zu setzen.
+  *
+
+
+            Bekannte Probleme
+
+      o Parametrierung funktioniert wegen einer noch fehlerhaften
+        Umstellung der Anmeldefunktionen in den
+        Datenverteiler-Applikationsfunktionen bzgl. der
+        Simulationsvariante nicht richtig.
+      o Berücksichtigung des Persistenzmodus bei dynamischen Objekten
+        funktioniert nicht wie gefordert.
+      o Weitere Punkte unter Version 3.0b1
+
+
+      Stand 15.10.2006 Version 3.0b1
+
+Um allen Interessierten und im speziellen den Teilnehmern der Schulungen
+am 23.10.2006 und am 30.10.2006 eine Möglichkeit zu geben, sich schon
+vorab mit den neuen Funktionen der Kernsoftware und insbesondere der
+Konfiguration vertraut zu machen, wird dieses Beta-Release der
+Kernsoftware zur Verfügung gestellt. Die Versionsnummer 3.0 signalisiert
+ein größeres Update mit neuen Features (s.u.) und dient zur
+Unterscheidung von den bisherigen Releases da es in Kürze auch noch ein
+reines Bugfix-Release zur Kernsoftware vom 20.03.2006 (Version 2.14)
+geben wird. Das vorliegende Release ist ein Beta-Release, weil die
+Software-Tests noch nicht abgeschlossen sind und weil noch nicht alle
+bei den bisherigen Tests gefundenen Probleme korrigiert worden sind (s.u.).
+
+  *
+
+
+            Neue Features
+
+    Folgende Punkte betreffen im wesentlichen die Möglichkeiten der
+    neuen Konfiguration:
+
+      o Verwaltung der Konfigurationsdaten je Konfigurationsbereich in
+        eigenen Konfigurationsdateien
+      o Versionierung von Konfigurationsänderungen je Konfigurationsbereich
+      o Koordinierung von Änderungen mit Hilfe von
+        Konfigurationsverantwortlichen je Konfigurationsbereich
+      o Export von einzelnen und mehreren Konfigurationsbereichen in
+        Versorgungsdateien
+      o Import von einzelnen und mehreren Konfigurationsbereichen aus
+        Versorgungsdateien mit automatischer Versionierung der Änderungen
+      o Konsistenzprüfung und Aktivierung von Konfigurationsänderungen
+      o Freigabe zur Übernahme und Freigabe zur Aktivierung von
+        Konfigurationsbereichen in andere Instanzen der Konfigurationen
+      o Unterstützung von verschiedenen Referenzierungsarten bei Mengen
+        und Referenzattributen
+      o Unterstützung von Attributgruppenverwendungen, die für jedes
+        verwendete Paar von Attributgruppe und Aspekt Optionen für die
+        Verwendung in Onlinedatensätzen bzw. Konfigurationsdatensätzen
+        verwaltet
+      o Unterstützung der verschiedenen Persistenzmodi bei dynamischen
+        Objekten
+      o Authentifizierung der Benutzer und Verwaltung der Passwörter (zu
+        Testzwecken ist der Benutzer "Tester" mit dem Passwort "geheim"
+        versorgt).
+      o Unterstützung von Default- und Undefined-Werten für
+        Attributtypen und Attribute. Neu erzeugte Datensätze werden
+        seitens der Applikationfunktionen automatisch mit den
+        Defaultwerten bzw. mit Undefined-Werten gefüllt.
+      o Unterstützung und Darstellung von Default- und Undefined-Werten
+        im GTM bei Dateneingabedialogen insbesondere im Parametereditor.
+  *
+
+
+            Bugfixes
+
+    Folgende Probleme der Kernsoftware vom 20.03.2006 (Version 2) wurden
+    behoben:
+
+      o Zur Identifikation von Datensätzen beim Versand via
+        Datenverteiler werden jetzt nicht mehr die Kodierungen von
+        Attributgruppen und Aspekten benutzt, sondern die Objekt-ID der
+        entsprechenden Attributgruppenverwendung.
+      o Durch ein Threadsynchronisationsproblem konnte es in speziellen
+        Situation dazu kommen, das die Reihenfolge von Datensätzen im
+        Datenverteiler vertauscht wurde und empfangsseitig von den
+        Applikationsfunktionen entsprechende Fehlermeldungen ausgegeben
+        wurden.
+      o Eine DataDescription die von einer Applikation ohne explizite
+        Vorgabe einer Simulationsvariante zur Anmeldung mit Hilfe der
+        Applikationsfunktionen benutzt wurde, wurde von den
+        Applikationsfunktionen intern modifiziert (es wurde die
+        tatsächliche Simulationsvariante eingetragen). Dies führte
+        insbesondere dann zu Problemen, wenn diese DataDescription als
+        Schlüssel für Maps benutzt wurde, z.B. um später empfangene
+        Datensätze innerhalb der Applikation richtig zuzuordnen.
+  *
+
+
+            Kompatibilität
+
+      o Das Protokoll zwischen Datenverteiler und Applikationsfunktionen
+        hat sich geändert (s.o.). Die bisherige Version der Kernsoftware
+        kann deshalb nicht mit der neuen Version der Kernsoftware
+        gekoppelt werden. Beim Versuch eine Applikation unter Verwendung
+        der alten Applikationsfunktionen mit dem neuen Datenverteiler zu
+        verbinden oder eine Applikation unter Verwendung der neuen
+        Applikationsfunktionen mit dem alten Datenverteiler zu verbinden
+        wird eine entsprechende Fehlermeldung ausgegeben.
+      o Die Schnittstelle der Applikationsfunktionen wurde überarbeitet,
+        allerdings haben sich an bisherigen Methoden nur geringe
+        Änderungen ergeben. Je nach verwendeter Methode ist es
+        erforderlich die Applikationen neu zu übersetzen.
+  *
+
+
+            Bekannte Probleme
+
+      o Lockingmechanismus für Verwaltungs- und Konfigurationsdateien,
+        um ein gegenseitiges Überschreiben der Dateien bei mehreren
+        gestarteten Instanzen zu verhindern, funktioniert noch nicht.
+      o Die Unterstützung der Online- und Offline-Simulation
+        funktioniert noch nicht.
+      o Referenzen in konfigurierenden Datensätzen, die im Datenmodell
+        mit der Referenzierungsart "Assoziation" spezifiziert sind,
+        werden noch nicht so gespeichert, dass bei Änderung des
+        referenzierten Objekts automatisch die neue Version referenziert
+        wird.
+      o Der Import berücksichtigt momentan zur Auflösung von Referenzen
+        nur neue (d.h. noch nicht aktivierte) Versionen von den
+        Konfigurationsbereichen die zusammen importiert werden und von
+        allen anderen Bereichen jeweils aktivierte Version. Der Import
+        muss noch dahingehend erweitert werden, dass auch von
+        übernommenen Konfigurationsbereichen die jeweils freigegebenen
+        Versionen berücksichtigt werden, um Referenzen aufzulösen.
+      o Defaultwerte für Referenzattributwerte in konfigurierenden
+        Datensätzen werden von der Konsistenzprüfung und der Aktivierung
+        momentan nur dann korrekt berücksichtigt, wenn die jeweils
+        referenzierten Objekte bereits vorher aktiviert wurden.
+  *
+
+
+            Beispielskripte
+
+      o
+
+
+                  tk1-import
+
+        Importiert zwei neue Konfigurationsbereiche aus den
+        entsprechenden Versorgungsdateien im Verzeichnis
+        "versorgungsdateien"
+
+      o
+
+
+                  tk2-konsistenzpruefung
+
+        Optionaler Schritt, der den neusten Stand der Konfiguration auf
+        Konsistenz prüft
+
+      o
+
+
+                  tk3-freigabe-uebernahme
+
+        Optionaler Schritt, der den neusten Stand von lokalen
+        Konfigurationsbereichen zur Übernahme in andere Konfigurationen
+        freigibt.
+
+      o
+
+
+                  tk4-aktivieren
+
+        Aktiviert den neusten Stand der vorliegenden
+        Konfigurationsbereiche nach einer erfolgreichen Konsistenzprüfung
+
+      o
+
+
+                  tk5-freigabe-aktivierung
+
+        Gibt den zuletzt aktivierten Stand von lokalen
+        Konfigurationsbereichen zur Übernahme und Aktivierung in anderen
+        Konfigurationen frei
+
+      o
+
+
+                  tk6-export
+
+        Exportiert die oben importierten Konfigurationsbereiche, d.h.
+        die entsprechenden Versorgungsdateien werden aus der
+        Konfiguration wieder erzeugt.
+
+
+      Stand 17.08.2006
+
+  * Neue Konfiguration
+  * Im Datenkatalog Bereich kb.tmVerkehrGlobal wurde ein Tippfehler
+    korrigiert: In der Attributgruppe
+    atg.verkehrsDatenKurzZeitTrendExtraPolationMq wurde das Attribut
+    "QqLkwP" umbenannt in "QLkwP"
+  * Wenn in einer Applikationsseitigen Implementierung der
+    update-Methode aus dem ClientReceiverInterface eine RuntimeException
+    geworfen wird, beendet sich das Programm nicht mehr via
+    System.exit() sondern mit dem normalen Terminierungsmechanismus den
+    man sich mit ClientDavInterface.setCloseHandler() beeinflussen kann.
+    Außerdem wird in dieser Situation eine entsprechende Debugausgabe
+    mit dem Stacktrace gemacht, damit die Ursache für den
+    Applikationsseitigen Fehler schneller gefunden werden kann.
+
+
+      Stand 20.03.2006
+
+  * Bug bei der Deserialisierung von Datensätzen mit der Implementierung
+    des dav.data.Deserializer Interfaces behoben, der zu fehlerhaften
+    Datensätzen bzw. Exceptions führen konnte. Von dem Fehler betroffen
+    waren Attributgruppen mit Arrays fester (nicht variabler) Größe.
+    Zusätzlich wurde im Serializer eine Überprüfung eingebaut, die
+    Arrays nicht variabler Größe auf die richtige Größe überprüft.
+  * Debug-Level für die Ausgabe der Speicherbelegung bei der Ausgabe
+    eines empfangenen Datensatzes im Online-Protokollierer (bzw. im
+    Standard-Protokoll-Modul des Online-Protokollierers) von Level INFO
+    auf Level FINEST geändert.
+  * Der Konfigurationsbereich kb.tmVerkehrGlobal
+    (TeilmodellVerkehrGlobal) wurde überarbeitet. Die Attributgruppe
+    VerkehrsDatenKurzZeitAnalyseMq erhält als weiteres Attribut das
+    Array "wichtung", mit dem die Gewichtungsfaktoren zur Bestimmung der
+    gewichteten Differenzgeschwindigkeit im Messquerschnitt ermittelt
+    werden. Außerdem wurde die fehlerhaften Zuordnung der Attributtypen
+    der Fahrzeugdichte und der Bemessungsdichte in den Attributlisten
+    atl.grenzMaxBemessungsFahrzeugDichte und atl.grenzMaxFahrzeugDichte
+    korrigiert.
+  * Die Konvertierung der Umlaute in Dateinamen im
+    PersistenceHandlerManager der Parametrierung verwendet jetzt
+    Unicode-Quotes, damit die Konvertierung auch dann funktioniert, wenn
+    beim Compilieren ein von ISO-8859-1 abweichendes Encoding verwendet
+    wird.
+  * Bei Verlust der Datenverteilerverbindung wird in Applikationen
+    wieder der CloseHandler (und damit im Default-Fall System.exit)
+    aufgerufen.
+  * Die Methode ClientDavConnection.setName(String name) wurde zur
+    Namensänderung von dynamischen Objekten implementiert.
+
+
+      Stand 15.03.2006
+
+  * Memory-Leak behoben, das bei der Generierung von Daten aus einer
+    XML-Datei im Datengenerator aufgetreten ist.
+  * Memory-Leak behoben, das bei wiederholtem Auf- und Abbau von
+    Datenverterteilerverbindungen aufgetreten ist.
+  * Fehler im GenericTestMonitor behoben, der beim Rollen in der
+    Tabellendarstellung von Datensätzen zu Exceptions und zu einer nicht
+    mehr aktualisierten Darstellung führen konnte.
+  * Fehlerausgaben in der Konfiguration überarbeitet, die auftraten wenn
+    eine Applikation kurz nach Anmeldung auf Änderungen einer
+    dynamischen Menge die Verbindung zum Datenverteiler geschlossen hat.
+
+
+      Stand 09.03.2006
+
+  * Beim Hinzufügen von Elementen zu dynamischen Mengen wird jetzt
+    geprüft, ob der Typ der Elemente für die Menge erlaubt ist. Hierbei
+    werden jetzt auch Elemente von abgeleiteten Typen richtig
+    berücksichtigt.
+  * Im Datenmodell für die Simulation wurden definiert, dass die Mengen
+    der Typen "menge.simulationsStrecken" und "menge.simulationen"
+    dynamische Mengen sind.
+  * GTM: Weil der Aufrufparameter -autologin kein allgemeiner
+    Aufrufparameter ist, wird dieser vom GenericTestMonitor jetzt nicht
+    mehr an gestartete Applikationen (wie zum Beispiel an den
+    Datengenerator) weitergeleitet.
+
+
+      Nachtrag zum Stand 07.03.2006
+
+  * K2S.dtd wurde überarbeitet: Attribut "pid" in Element "verweis"
+    wurde von IDREF auf NMTOKEN geändert um Verweise auf Kapitel
+    außerhalb des Konfigurationsbereichs zu ermöglichen. Außerdem wurde
+    das Attribut "name" in Element "attribut" und "attributliste" von
+    CDATA auf NMTOKEN geändert um eine entsprechende Einschränkung der
+    Attributnamen zu erreichen.
+  * Implementierung des Systemprotokollierers um Anfragen an das
+    Archivsystem zu stellen wurde in der Klasse
+    pat.sysProt.SystemProtocoller in das Release aufgenommen.
+
+
+      Stand 07.03.2006
+
+  * Streambasierte Archivanfrage für mehreren Objekte parallel
+    funktioniert im GenericTestMonitor (GTM) jetzt wieder.
+  * Erweiterung des Metadatenmodells um weitere Möglichkeiten
+    entsprechend TAnf-PuK
+  * Ausgabe von hilfreichen Fehlermeldungen beim Konvertieren des
+    Datenkatalogs, wenn undefinierte Objekte referenziert werden.
+  * Kurzinfo und Beschreibung von Attributen, Wertebereichen und
+    Zuständen (von Ganzzahlattributtypen) werden bei der Konvertierung
+    des Datenkatalogs nicht mehr ignoriert
+  * Abfrage von konfigurierenden Datensätzen mit einem leeren Array
+    funktioniert jetzt wie erwartet.
+  * GenericTestMonitor wurde um einen Login-Dialog erweitert. Ein
+    automatisches Anmelden wie bisher erreicht man mit dem
+    Aufrufargument -autologin
+  * Beim Editieren von Parameterdatensätzen im GenericTestMonitor wird
+    jetzt Copy&Paste von ganzen Datensätzen unterstützt.
+  * Beschreibung des Attributtyps att.intervallCron für Cron-ähnliche
+    Zeitspezifikationen im Datenkatalog korrigiert.
+  * Überarbeitung und Vervollständigung der Datenmodelle
+    kb.tmSystemKalenderGlobal, kb.tmEreignisKalenderGlobal
+  * Definition des Datenmodells kb.tmGanglinienGlobal
+  * Korrektur eines Fehlers, der beim Löschen von dynamischen Objekten
+    mit Persistenzmodus "transient" zu einer Exception in der
+    Konfiguration führte.
+  * Kurzinfo und Beschreibung von Systemobjekten werden in der
+    Konfiguration nicht mehr als HTML sondern als XML gespeichert und
+    erst durch die Zugriffsmethoden in der Klasse SystemObjectInfo in
+    entsprechenden HTML-Code konvertiert.
+
+
+      Stand 31.01.2006
+
+  * Überarbeitung der Interfaces zum Zugriff auf Konfigurationsobjekte.
+      o Einsatz von Generics zur typsicheren Verwendung von Containern
+        in Rückgabewerten und Parametern von Methoden durch entsprechend
+        parametrisierte Typen.
+      o ConfigurationException wurde eliminiert und zur Vermeidung von
+        Übersetzungsproblemen von RuntimeException abgeleitet.
+      o Fehlgeschlagene Konfigurationsänderungsversuche werden
+        konsequent durch eine ConfigurationChangeException quittiert.
+      o Bei Systemobjekten geben die Methoden getName() und getPid()
+        jetzt nicht mehr Null zurück, sondern einen leeren String wenn
+        der Name bzw. die Pid nicht definiert ist.
+      o Neue Methoden getPidOrId etc.
+  * Bei der Konvertierung des Datenkatalogs werden jetzt entsprechend
+    den Technischen Anforderungen zur Konfiguration (TAnf-PuK)
+    Attributgruppenverwendungen als Konfigurationsobjekte mit
+    entsprechenden konfigurierenden Datensätzen erzeugt.
+  * Korrektur eines Fehlers in den
+    Datenverteiler-Applikationsfunktionen, der bei Verwendung von
+    mehreren Datenverteilerverbindungen dazu führen konnte, dass die
+    Systemobjekte der verschiedenen Verbindungen nicht mehr unabhängig
+    verwaltet wurden, sondern bei Objektreferenzen in empfangenen
+    Datensätzen der zweiten Verbindung Objekte der ersten Verbindung
+    benutzt wurden.
+  * Workaround im Settingsmanager um doppelte Datensätze zu ignorieren,
+    die bei mehrfachen Anmeldungen mit verschiedenen Optionen auftreten
+    können.
+  * In den Serializer und Deserializer Interfaces und in den zugehörigen
+    Implementierungen wurden neue Methoden zum Setzen der zu
+    verwendenden Streams ergänzt.
+  * In den Serializer und Deserializer Interfaces und in den zugehörigen
+    Implementierungen wurden neue Methoden zum Schreiben und Lesen von
+    Byte-Folgen mit Offset und Länge aus Byte-Arrays ergänzt.
+  * In der Attributgruppe atg.archivEinstellung zur Parametrierung des
+    Archivsystems wurde Wertebereichseinschränkung für einige Attribute
+    ergänzt.
+  * In der Parametrierung wurde eine Fehlerbehandlung bei nicht mehr
+    korrekt deserialisierbaren Parameterdatensätzen ergänzt.
+  * In der Bibliothek für streambasierte Archivanfragen verhalten sich
+    die Methoden im ArchiveQueryResult-Interface jetzt bezüglich der
+    InterruptedException so wie in der
+    JavaDoc-Schnittstellenbeschreibung beschrieben.
+  * Streambasierte Verarbeitung von Archivantworten wurde durch
+    gepufferte Zugriffe beim Dekomprimieren beschleunigt.
+  * In Dateinamen von Parameterdateien werden Umlaute jetzt durch
+    entsprechende ASCII-Zeichen ersetzt. Eventuell vorhandene
+    Parameterdateien mit Umlauten werden umbenannt.
+  * Bei Parameterdateien mit nicht interpretierbaren Inhalten wird eine
+    entsprechende Warnung ausgegeben, die fehlerhafte Datei wird
+    umbenannt und eine neue erzeugt.
+
+
+      Stand 22.12.2005
+
+  * Archivanfrageschnittstelle ArchiveRequestManager um Methoden ergänzt
+    um den Verbindungsstatus des Archivsystems zu prüfen und sich auf
+    Änderungen des Status anzumelden.
+  * Nicht für Applikationszwecke benötigte interne Methoden der
+    Datenverteiler-Applikationsfunktionen aus den
+    Konfigurationsanfrageinterfaces entfernt.
+  * Bug im Datenverteiler behoben, der bei Abmeldung einer
+    Quell-Applikation im Zusammenhang mit nachgelieferten Datensätzen zu
+    einem fehlerhaften leeren Datensatz führen konnte.
+  * Aussagekräftige Fehlermeldung bei der Konvertierung des
+    Datenkatalogs wenn ein Typ sowohl von dynamischen als auch
+    konfigurierenden Typen abgeleitet ist.
+  * Typ und Name der Menge mit Skripten für Protokolle und Auswertungen
+    umbenannt in "menge.puaSkripte" bzw. "PuaSkripte" und konkrekte
+    Menge am Objekt "kv.system" ergänzt.
+
+
+      Stand 09.12.2005
+
+  * Ausgabe einer hilfreichen Fehlermeldung, wenn bei der Konvertierung
+    des Datenkatalogs bei einem Konfigurationsbereich eine unbekannte
+    Pid angegeben wurde.
+  * Ausgabe einer hilfreichen Fehlermeldung, wenn bei der Konvertierung
+    des Datenkatalogs ein Konfigurationsobjekt mit einem unbekanntem Typ
+    angegeben wurde.
+  * Fehler in der Konvertierung des Datenkatalogs behoben, der zu einer
+    ClassCastException führen konnte, wenn als
+    Konfigurationsverantwortlicher eines Konfigurationsbereichs ein
+    Objekt eines von typ.konfigurationsVerantwortlicher abgeleiteten
+    Typs angegeben wurde.
+
+
+      Stand 23.11.2005
+
+  * Fehler in der Priorisierung von Datenverteiler-Telegrammen behoben,
+    der zu Fehlverhalten beim Abmelden und sofortigen wieder Anmelden
+    einer Applikation als Sender führen konnte.
+
+
+      Stand 17.11.2005
+
+  * Ausgabe einer hilfreichen Fehlermeldung, wenn bei der Konvertierung
+    des Datenkatalogs in einer Menge ein Element mit einer unbekannten
+    Pid referenziert wird.
+
+
+      Stand 15.11.2005
+
+  * Kernsoftware-System wird jetzt mit Quellcode unter der General
+    Public License (GPL) veröffentlicht
+  * Kernsoftware-Bibliothek wird jetzt mit Quellcode unter der Lesser
+    General Public License (LGPL)veröffentlicht
+  * Bei der Definition eines dynamischen Objekttyps im Datenkatalog kann
+    jetzt mit dem Attribut persistenzModus festgelegt werden, ob
+    dynamische Objekte persistent gespeichert werden sollen
+  * Der eingestellte Persistenzmodus eines dynamischen Objekttyps kann
+    über DynamicObjectType.getPersistenceMode() zur Laufzeit abgefragt
+    werden.
+  * Dynamische Objekte werden bei entsprechend eingestelltem
+    PersistenzModus persistent gespeichert.
+  * Interface von dynamischen Mengen wurde überarbeitet und
+    implementiert. Eine Applikation kann sich jetzt auf Änderungen an
+    dynamische Mengen anmelden und wird entsprechend benachrichtigt,
+    wenn sich eine Menge ändert.
+  * Die Elemente von dynamischen Mengen werden persistent gespeichert.
+  * Erweiterung der Funktionsbibliothek um die Klasse
+    sys.funclib.operatingMessage.MessageSender, die zum Versand von
+    Betriebsmeldungen verwendet werden kann.
+  * Implementierung einer rudimentären Version der
+    Betriebsmeldungsverwaltung, die alle empfangenen Meldungen als
+    Quelle publiziert.
+  * Debug- und Fehlerausgaben bzgl. der Verbindung zwischen
+    Datenverteiler und Datenverteiler-Applikationsfunktionen überarbeitet.
+  * Objekte vom Typ "typ.autarkeOrganisationsEinheit" und von davon
+    abgeleiteten Typen werden bei der Konvertierung des Datenkatalogs
+    korrekt umgesetzt.
+  * Die Methode ClientDavConnection.sendData() so erweitert, dass beim
+    Versand eines Datensatzes direkt nach einer Anmeldung als einfacher
+    Sender jetzt automatisch die Sendesteuerung abgewartet wird, bevor
+    der Datensatz versendet wird (positive SendeSteuerung) bzw. eine
+    Exception geworfen wird (negative SendeSteuerung).
+  * DatenkatalogGesamt wurde so zerlegt, dass für jeden
+    Konfigurationsbereich eine eigene Versorgungsdatei zur Verfügung steht.
+  * Bei der Konvertierung des Datenkalogs wird jetzt vorher eine
+    XML-Validierung durchgeführt.
+  * Neue Methode ClientDavInterface.getArchive().subscribeReceiver() zur
+    Abfrage von Archivdaten und anschließendem nahtlosem Übergang in den
+    Online-Datenstrom.
+  * Neue Methode ClientDavInterface.getLocalUser() zur Abfrage des
+    eingeloggten Benutzers.
+  * Neue Methode ClientDavInterface.getClientDavParameters() zur Abfrage
+    der eingestellten Verbindungsparameter.
+  * Verallgemeinerung von ResultData und ArchivData durch gemeinsames
+    Interface Dataset in dem alle wesentlichen Methoden zum Zugriff auf
+    einen Datensatz enthalten sind.
+  * Bei den subscribe- und unsubscribe- Methoden im
+    ClientReceiverInterface können jetzt auch anstelle von Listen bzw.
+    Arrays einzelne SystemObjekte genutzt werden.
+  * In dem Interface ClientReceiverInterface wurden neue Varianten der
+    unsubscribe-Methode ergänzt, die keinen Parameter für
+    Attribut-Teilmengen besitzen. Die bisherigen Varianten wurden auf
+    deprecated gesetzt.
+  * Korrektur eines Fehlers im Settingsmanager, der zum Blockieren
+    führte, wenn bei der Spezifikation der zu Archivierenden Datensätze
+    überall Wildcards angegeben wurden.
+  * Die DataNotSubscribedException ist jetzt von RuntimeException
+    abgeleitet und muss folglich nicht mehr Zwangsweise behandelt
+    werden. Bei subscribeReceiver-Anmeldemethoden ohne Historie wurde
+    die Exception eliminiert.
+
+
+      Stand 13.08.2005
+
+  * Korrektur eines Fehlers der in konfigurierenden Datensätzen zu
+    falsch sortierten Einträgen in Arrays mit mehr als 10 Elementen
+    führen konnte.
+  * Korrektur eines Fehlers, der bei gleichzeitiger Anmeldung als
+    "Senke" und als "Sender" in einer Applikation zu Problemen führen
+    konnte.
+
+
+      Stand 14.07.2005
+
+  * Korrektur eines Fehlers, der auf Multiprozessorsystemen zu
+    NullPointerExceptions beim Verbindungsaufbau führen konnte.
+  * Empfangsanmeldung mit Historie berücksichtigt END_OF_ARCHIVE
+    Datensätze vom Archivsystem jetzt korrekt.
+  * Die interne Kommunikationsverbindung im Datenverteiler wird jetzt
+    über das loopback-Interface mit der IP-Adresse 127.0.0.1 aufgebaut.
+    Damit ist diese Verbindung auch unter Windows unabhängig vom realen
+    Netzwerkinterface.
+  * Korrektur eines Fehlers, der bei der Kommunikation über mehrere
+    Datenverteiler zum Ausbleiben eines "keine Quelle" Datensatzes bzw.
+    einer negativen Sendesteuerung nach Abmeldung einer entfernten
+    Quelle führen konnte.
+  * Parameter für die Zugriffsrechte auf neueren Aspekt
+    asp.parameterSoll umgestellt und das automatische Erzeugen von
+    Parameterdatensätzen durch die Parametrierung für alle Benutzer
+    wurde abgestellt. Dies war das Hauptproblem beim Einsatz von
+    mehreren Parametrierungen, da dadurch mehrere Quellen für die
+    gleichen Daten vorhanden waren. Je Benutzer sollte nur höchstens
+    eine Parametrierung für die Parameterdatensätze zuständig sein.
+    Ähnliches gilt für die BenutzerKlassen. D.h. für jede UZ etc. die
+    unabhängig von anderen laufen können soll, sollten eigene
+    Benutzerobjekte und eine eigene Berechtigungsklasse existieren für
+    die sich die lokale Parametrierung anmeldet. Falls keine Prüfung der
+    Benutzerrechte durch den Datenverteiler durchgeführt werden soll,
+    kann Sie einfach mit dem Aufrufparameter -rechtePruefung=nein beim
+    Start des Datenverteilers abgestellt werden. Das System läuft dann
+    auch ohne Parametrierung der Benutzerrechte. Der in der Kernsoftware
+    enthaltene Datenkatalog enthält ein paar notwendige Anpassungen
+    damit das ganze funktioniert.
+  * Neuer Aufrufparameter -rechtePruefung=ja/nein beim Datenverteiler
+    zum Abschalten der Rechteprüfungen für Empfangs- und Sendeanmeldungen.
+  * Verhandlung von KeepAlive-Timeoutparametern überarbeitet.
+    Zeitmessung beim Versand und ausbleibendem Empfang von
+    KeepAlive-Telegrammen korrigiert. Timeouts können beim Start von
+    Applikationen durch -timeoutSendeKeepAlive=... und
+    -timeoutEmpfangeKeepAlive=... in Sekunden vorgegeben werden.
+    Defaultwerte sind 40 Sekunden bzw. 60 Sekunden. Angegebene Werte
+    werden vom Datenverteiler auf 5 bzw. 6 Sekunden nach unten
+    beschränkt. Nach zweimaligen Ausbleiben des Empfangs innerhalb des
+    Empfangs-Timeouts wird die Verbindung terminiert.
+  * Eindeutige Vergabe von dynamischen Objekt-Ids und Kommunikation der
+    Konfigurationen untereinander bei Anfrage von Objekten, die von
+    anderen Konfigurationen dynamisch erzeugt wurden.
+  * Fehlverhalten bei Sendeanmeldungen mit dem lokalen
+    Konfigurationsverantwortlichen als Objekt korrigiert.
+  * Bei der Konvertierung des Datenkatalogs werden in konfigurierenden
+    Datensätzen auch Kommas (neben Punkten) als Dezimaltrenner
+    zugelassen und es wird geprüft, ob Werte innerhalb der vorgegebenen
+    Wertebereiche liegen. Bei ungültigen Werten wird die Konvertierung
+    mit entsprechenden Fehlermeldungen abgebrochen.
+  * Eine Anmeldung als Quelle mit Sendesteuerung führt jetzt nicht mehr
+    fälschlicherweise zu Exceptions. Eine Quelle kann jetzt auch bei
+    fehlender oder negativer Sendesteuerung senden.
+  * Datengenerator kann jetzt auch Daten für dynamische Objekte erzeugen.
+
+
+      Stand 31.01.2005
+
+  * Deutliche Performance-Steigerung beim Konvertieren des Datenkatalogs.
+
+
+      Stand 15.01.2005
+
+  * Beim Erzeugen von dynamischen Objekten wird jetzt geprüft ob die
+    eventuell angegebene Pid des neuen Objekts bereits vergeben ist.
+  * Dynamische Objekte können mit der Methode SystemObject.invalidate()
+    gelöscht werden.
+  * Mit der Methode SystemObject.setConfigurationData(...) können jetzt
+    konfigurierende Datensätze für dynamische Objekte erzeugt werden.
+  * Fehler, der zu fehlerhaften Usage-Ausgaben im Aufrufargument
+    "-option=" des Onlineprotokollierers führte, behoben.
+  * Fehler korrigiert, der zu Problemen führte, wenn eine Applikation
+    zwei Empfangsanmeldungen mit gleicher Datenidentifikation aber
+    unterschiedlichen Optionen bezüglich nachgelieferten Datensätzen
+    gemacht hat.
+
+
+      Stand 23.12.2004
+
+  * In den Datenverteiler-Applikationsfunktionen, der Konfiguration und
+    im Datenkatalog wurde die Unterstützung von Konfigurationsbereichen
+    und die Zuordnung eines Objekts zu seinem Konfigurationsbereich
+    ergänzt.
+  * Die Methoden getValue und getValues in den Interfaces
+    Data.TextArray, Data.ReferenceArray und Data.TimeArray wurden aus
+    implementierungstechnischen Gründen (gleiche Methodennamen aber
+    unterschiedliche Rückgabewerte) umbenannt in getTextValue,
+    getTextValues, getReferenceValue, getReferenceValues, getTimeValue
+    und getTimeValues.
+  * Neue Byte-Array-basierte Implementierung des generischen
+    Data-Interfaces zum Zugriff auf Datensätze ist wesentlicher
+    schneller und braucht wesentlich weniger Speicher, da direkt auf ein
+    Byte-Array mit den Telegrammdaten zugegriffen wird. Die
+    Implementierung ist nur für den lesenden Zugriff verwendbar.
+  * Neue Methode Data.createModifiableCopy() zum Erzeugen einer
+    modifizierbaren Kopie eines Datensatzes.
+  * Einsatz der neuen Implementierung des generischen Data-Interfaces
+    bei der Abfrage von Archivdaten mit der Methode
+    ClientDavConnection.getArchiveData().
+  * Einsatz der neuen Implementierung des generischen Data-Interfaces
+    beim Empfang von Online-Daten für die Übergabe empfangener
+    Datensätze an die Applikation mittels ClientReceiverInterface.update().
+  * Einsatz der neuen Implementierung des generischen Data-Interfaces
+    zum Zwischenspeichern von empfangenen Daten (innerhalb des
+    gewünschten Vorhaltezeitraums).
+  * Default-Einstellung des Vorhaltezeitraums zum Zwischenspeichern
+    empfangener Daten auf 0 statt auf bisher 10 Sekunden geändert.
+  * Folgender Fehler wurde behoben: Array-Attribute wurden von der
+    cloneObject() Methode nicht dupliziert, sodass bestimmte
+    Modifikationen auf empfangenen Datensätzen auch die
+    Original-Datensätze im Cache modifiziert haben.
+  * Einsatz der neuen Implementierung des generischen Data-Interfaces
+    zum Zwischenspeichern versendeter Daten zwecks Vergleich für
+    Deltaanmeldungen. Korrektur von Bugs, die zu Deadlocks beim Start
+    von Applikationen, bei Archiv- und Konfigurationsanfragen und bei
+    parallelen Anfragen durch verschiedene Threads führen konnten.
+  * Debug-Methoden mit der Möglichkeit zusätzliche Objekte bzw.
+    Exceptions zu übergeben.
+  * Korrektur eines Fehlers der beim Versand von Datensätzen mit
+    Attributlisten-Arrays der Länge 0 zu Exceptions führte.
+  * Fehler der zum Überschreiben von Zwischengespeicherten
+    Konfigurationsobjekten und damit auch zum Löschen der bei den
+    Objekten jeweils gespeicherten Daten führte.
+  * Überflüssige Verwendungen von BufferedOutputStream und
+    BufferedInputStream entfernt.
+  * Korrektur eines Fehlers beim Empfang von leeren Archivantworten.
+  * Korrektur eines Fehlers der zum Deadlock führte, wenn bei Verwendung
+    der ClientDavConnection.getData() Methode in einem Thread parallel
+    ein Datensatz empfangen wurde und in der jeweiligen update() Methode
+    die sendData Methode aufgerufen wurde.
+  * Korrektur eines Fehlers bei der Kodierung von Umlauten
+  * Ein Fehler, der in seltenen Fällen zu Exceptions beim Start der
+    Konfiguration führen konnte, wurde behoben.
+  * Debugausgaben insbesondere in der Konfiguration überarbeitet.
+

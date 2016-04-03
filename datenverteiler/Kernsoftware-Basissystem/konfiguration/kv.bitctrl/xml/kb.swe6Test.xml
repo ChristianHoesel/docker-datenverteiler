@@ -1,0 +1,530 @@
+<?xml version="1.0" encoding="ISO-8859-1"?>
+<!DOCTYPE konfigurationsBereich PUBLIC "-//K2S//DTD Dokument//DE" "K2S.dtd">
+<konfigurationsBereich pid="kb.swe6Test"
+	verantwortlich="kv.bitctrl">
+	<konfigurationsAenderung stand="08.05.2006"
+		autor="Uwe Peuker, BitCtrl Systems GmbH" grund="Test">
+		Bereich zum Test der Konfiguration erzeugt.
+	</konfigurationsAenderung>
+	<modell></modell>
+	<objekte>
+		<konfigurationsObjekt pid="netz.swe6Test"
+			typ="typ.verkehrsModellNetz">
+			<objektMenge name="NetzBestandTeile">
+				<element pid="ass.ass1" />
+				<element pid="ass.ass2" />
+				<element pid="ass.ass3" />
+				<element pid="ass.ass4" />
+				<element pid="ass.ass5" />
+				<element pid="ass.ass6" />
+			</objektMenge>
+			<objektMenge name="Aktionen" verwaltung="kv.aoe.bitctrl.tester"></objektMenge>
+			<objektMenge name="Baustellen" verwaltung="kv.aoe.bitctrl.tester"></objektMenge>
+			<objektMenge name="Situationen" verwaltung="kv.aoe.bitctrl.tester"></objektMenge>
+			<objektMenge name="Staus" verwaltung="kv.aoe.bitctrl.tester"></objektMenge>
+			<objektMenge name="Unfälle" verwaltung="kv.aoe.bitctrl.tester"></objektMenge>
+		</konfigurationsObjekt>
+
+
+		<!--  Anschlusstellen und Autobahnkreuze -->
+
+		<konfigurationsObjekt pid="sk.ak" name="AK"
+			typ="typ.straßenKnoten">
+			<datensatz attributgruppe="atg.straßenKnoten">
+				<datum name="Typ" wert="AutobahnKreuz" />
+			</datensatz>
+			<objektMenge name="InnereStraßenSegmente">
+				<element pid="iss.ass1_ass2" />
+				<element pid="iss.ass5_ass6" />
+			</objektMenge>
+		</konfigurationsObjekt>
+
+
+		<konfigurationsObjekt pid="sk.as1" name="AS1"
+			typ="typ.straßenKnoten">
+			<datensatz attributgruppe="atg.straßenKnoten">
+				<datum name="Typ" wert="AutobahnAnschlussStelle" />
+			</datensatz>
+			<objektMenge name="InnereStraßenSegmente">
+				<element pid="iss.ass2_ass3" />
+				<element pid="iss.as1_ab" />
+				<element pid="iss.as1_zu" />
+			</objektMenge>
+		</konfigurationsObjekt>
+
+		<konfigurationsObjekt pid="sk.as2" name="AS2"
+			typ="typ.straßenKnoten">
+			<datensatz attributgruppe="atg.straßenKnoten">
+				<datum name="Typ" wert="AutobahnAnschlussStelle" />
+			</datensatz>
+			<objektMenge name="InnereStraßenSegmente">
+				<element pid="iss.ass3_ass4" />
+				<element pid="iss.as2_ab" />
+				<element pid="iss.as2_zu" />
+			</objektMenge>
+		</konfigurationsObjekt>
+
+		<!--  Auessere Straßensegment -->
+
+		<konfigurationsObjekt pid="ass.ass1" name="ASS1"
+			typ="typ.äußeresStraßenSegment">
+			<datensatz attributgruppe="atg.bestehtAusLinienObjekten">
+				<datenfeld name="LinienReferenz">
+					<datum name="-" wert="sts.ass1.sts1" />
+				</datenfeld>
+			</datensatz>
+			<datensatz attributgruppe="atg.straßenSegment">
+				<datum name="gehörtZuStraße" wert="strasse.waagerecht" />
+				<datum name="Länge" wert="600" />
+			</datensatz>
+			<datensatz attributgruppe="atg.äußeresStraßenSegment">
+				<datum name="vonKnoten" wert="null" />
+				<datum name="nachKnoten" wert="sk.ak" />
+				<datum name="TmcPrimärOrt" wert="null" />
+				<datum name="TmcRichtung" wert="0" />
+			</datensatz>
+		</konfigurationsObjekt>
+
+		<konfigurationsObjekt pid="ass.ass2" name="ASS2"
+			typ="typ.äußeresStraßenSegment">
+			<datensatz attributgruppe="atg.bestehtAusLinienObjekten">
+				<datenfeld name="LinienReferenz">
+					<datum name="-" wert="sts.ass2.sts1" />
+				</datenfeld>
+			</datensatz>
+			<datensatz attributgruppe="atg.straßenSegment">
+				<datum name="gehörtZuStraße" wert="strasse.waagerecht" />
+				<datum name="Länge" wert="2900" />
+			</datensatz>
+			<datensatz attributgruppe="atg.äußeresStraßenSegment">
+				<datum name="vonKnoten" wert="sk.ak" />
+				<datum name="nachKnoten" wert="sk.as1" />
+				<datum name="TmcPrimärOrt" wert="null" />
+				<datum name="TmcRichtung" wert="0" />
+			</datensatz>
+		</konfigurationsObjekt>
+
+		<konfigurationsObjekt pid="ass.ass3" name="ASS3"
+			typ="typ.äußeresStraßenSegment">
+			<datensatz attributgruppe="atg.bestehtAusLinienObjekten">
+				<datenfeld name="LinienReferenz">
+					<datum name="-" wert="sts.ass3.sts1" />
+				</datenfeld>
+			</datensatz>
+			<datensatz attributgruppe="atg.straßenSegment">
+				<datum name="gehörtZuStraße" wert="strasse.waagerecht" />
+				<datum name="Länge" wert="2900" />
+			</datensatz>
+			<datensatz attributgruppe="atg.äußeresStraßenSegment">
+				<datum name="vonKnoten" wert="sk.as1" />
+				<datum name="nachKnoten" wert="sk.as2" />
+				<datum name="TmcPrimärOrt" wert="null" />
+				<datum name="TmcRichtung" wert="0" />
+			</datensatz>
+		</konfigurationsObjekt>
+
+		<konfigurationsObjekt pid="ass.ass4" name="ASS4"
+			typ="typ.äußeresStraßenSegment">
+			<datensatz attributgruppe="atg.bestehtAusLinienObjekten">
+				<datenfeld name="LinienReferenz">
+					<datum name="-" wert="sts.ass4.sts1" />
+					<datum name="-" wert="sts.ass4.sts2" />
+					<datum name="-" wert="sts.ass4.sts3" />
+				</datenfeld>
+			</datensatz>
+			<datensatz attributgruppe="atg.straßenSegment">
+				<datum name="gehörtZuStraße" wert="strasse.waagerecht" />
+				<datum name="Länge" wert="13600" />
+			</datensatz>
+			<datensatz attributgruppe="atg.äußeresStraßenSegment">
+				<datum name="vonKnoten" wert="sk.as2" />
+				<datum name="nachKnoten" wert="null" />
+				<datum name="TmcPrimärOrt" wert="null" />
+				<datum name="TmcRichtung" wert="0" />
+			</datensatz>
+		</konfigurationsObjekt>
+
+		<konfigurationsObjekt pid="ass.ass5" name="ASS5"
+			typ="typ.äußeresStraßenSegment">
+			<datensatz attributgruppe="atg.bestehtAusLinienObjekten">
+				<datenfeld name="LinienReferenz">
+					<datum name="-" wert="sts.ass5.sts1" />
+				</datenfeld>
+			</datensatz>
+			<datensatz attributgruppe="atg.straßenSegment">
+				<datum name="gehörtZuStraße" wert="strasse.senkrecht" />
+				<datum name="Länge" wert="1" />
+			</datensatz>
+			<datensatz attributgruppe="atg.äußeresStraßenSegment">
+				<datum name="vonKnoten" wert="null" />
+				<datum name="nachKnoten" wert="sk.ak" />
+				<datum name="TmcPrimärOrt" wert="null" />
+				<datum name="TmcRichtung" wert="0" />
+			</datensatz>
+		</konfigurationsObjekt>
+
+		<konfigurationsObjekt pid="ass.ass6" name="ASS6"
+			typ="typ.äußeresStraßenSegment">
+			<datensatz attributgruppe="atg.bestehtAusLinienObjekten">
+				<datenfeld name="LinienReferenz">
+					<datum name="-" wert="sts.ass6.sts1" />
+				</datenfeld>
+			</datensatz>
+			<datensatz attributgruppe="atg.straßenSegment">
+				<datum name="gehörtZuStraße" wert="strasse.senkrecht" />
+				<datum name="Länge" wert="1" />
+			</datensatz>
+			<datensatz attributgruppe="atg.äußeresStraßenSegment">
+				<datum name="vonKnoten" wert="sk.ak" />
+				<datum name="nachKnoten" wert="null" />
+				<datum name="TmcPrimärOrt" wert="null" />
+				<datum name="TmcRichtung" wert="0" />
+			</datensatz>
+		</konfigurationsObjekt>
+
+		<!-- Innere Straßensegmente -->
+
+		<konfigurationsObjekt pid="iss.ass1_ass2" name="AK von ASS1 nach ASS2"
+			typ="typ.inneresStraßenSegment">
+			<datensatz attributgruppe="atg.bestehtAusLinienObjekten">
+				<datenfeld name="LinienReferenz">
+					<datum name="-" wert="sts.iss.ass1_ass2.sts1" />
+				</datenfeld>
+			</datensatz>
+			<datensatz attributgruppe="atg.inneresStraßenSegment">
+				<datum name="vonStraßenSegment" wert="ass.ass1" />
+				<datum name="nachStraßenSegment" wert="ass.ass2" />
+			</datensatz>
+			<datensatz attributgruppe="atg.straßenSegment">
+				<datum name="gehörtZuStraße" wert="strasse.waagerecht" />
+				<datum name="Länge" wert="0" />
+			</datensatz>
+		</konfigurationsObjekt>
+		
+		<konfigurationsObjekt pid="iss.ass5_ass6" name="AK von ASS5 nach ASS6"
+			typ="typ.inneresStraßenSegment">
+			<datensatz attributgruppe="atg.bestehtAusLinienObjekten">
+				<datenfeld name="LinienReferenz">
+					<datum name="-" wert="sts.iss.ass5_ass6.sts1" />
+				</datenfeld>
+			</datensatz>
+			<datensatz attributgruppe="atg.inneresStraßenSegment">
+				<datum name="vonStraßenSegment" wert="ass.ass5" />
+				<datum name="nachStraßenSegment" wert="ass.ass6" />
+			</datensatz>
+			<datensatz attributgruppe="atg.straßenSegment">
+				<datum name="gehörtZuStraße" wert="strasse.senkrecht" />
+				<datum name="Länge" wert="0" />
+			</datensatz>
+		</konfigurationsObjekt>
+
+		<konfigurationsObjekt pid="iss.ass2_ass3" name="AS1 von ASS2 nach ASS2"
+			typ="typ.inneresStraßenSegment">
+			<datensatz attributgruppe="atg.bestehtAusLinienObjekten">
+				<datenfeld name="LinienReferenz">
+					<datum name="-" wert="sts.iss.ass2_ass3.sts1" />
+				</datenfeld>
+			</datensatz>
+			<datensatz attributgruppe="atg.inneresStraßenSegment">
+				<datum name="vonStraßenSegment" wert="ass.ass2" />
+				<datum name="nachStraßenSegment" wert="ass.ass3" />
+			</datensatz>
+			<datensatz attributgruppe="atg.straßenSegment">
+				<datum name="gehörtZuStraße" wert="strasse.waagerecht" />
+				<datum name="Länge" wert="0" />
+			</datensatz>
+		</konfigurationsObjekt>
+		<konfigurationsObjekt pid="iss.as1_ab" name="AS1 Abfahrt von ASS2"
+			typ="typ.inneresStraßenSegment">
+			<datensatz attributgruppe="atg.inneresStraßenSegment">
+				<datum name="vonStraßenSegment" wert="ass.ass2" />
+				<datum name="nachStraßenSegment" wert="null" />
+			</datensatz>
+			<datensatz attributgruppe="atg.straßenSegment">
+				<datum name="gehörtZuStraße" wert="strasse.waagerecht" />
+				<datum name="Länge" wert="0" />
+			</datensatz>
+		</konfigurationsObjekt>
+		<konfigurationsObjekt pid="iss.as1_zu" name="AS1 Zufahrt auf ASS3"
+			typ="typ.inneresStraßenSegment">
+			<datensatz attributgruppe="atg.inneresStraßenSegment">
+				<datum name="vonStraßenSegment" wert="null" />
+				<datum name="nachStraßenSegment" wert="ass.ass3" />
+			</datensatz>
+			<datensatz attributgruppe="atg.straßenSegment">
+				<datum name="gehörtZuStraße" wert="strasse.waagerecht" />
+				<datum name="Länge" wert="0" />
+			</datensatz>
+		</konfigurationsObjekt>
+
+		<konfigurationsObjekt pid="iss.ass3_ass4" name="AS2 von ASS3 nach ASS4"
+			typ="typ.inneresStraßenSegment">
+			<datensatz attributgruppe="atg.bestehtAusLinienObjekten">
+				<datenfeld name="LinienReferenz">
+					<datum name="-" wert="sts.iss.ass3_ass4.sts1" />
+				</datenfeld>
+			</datensatz>
+			<datensatz attributgruppe="atg.inneresStraßenSegment">
+				<datum name="vonStraßenSegment" wert="ass.ass3" />
+				<datum name="nachStraßenSegment" wert="ass.ass4" />
+			</datensatz>
+			<datensatz attributgruppe="atg.straßenSegment">
+				<datum name="gehörtZuStraße" wert="strasse.waagerecht" />
+				<datum name="Länge" wert="0" />
+			</datensatz>
+		</konfigurationsObjekt>
+		<konfigurationsObjekt pid="iss.as2_ab" name="AS2 Abfahrt von ASS3"
+			typ="typ.inneresStraßenSegment">
+			<datensatz attributgruppe="atg.inneresStraßenSegment">
+				<datum name="vonStraßenSegment" wert="ass.ass3" />
+				<datum name="nachStraßenSegment" wert="null" />
+			</datensatz>
+			<datensatz attributgruppe="atg.straßenSegment">
+				<datum name="gehörtZuStraße" wert="strasse.waagerecht" />
+				<datum name="Länge" wert="0" />
+			</datensatz>
+		</konfigurationsObjekt>
+		<konfigurationsObjekt pid="iss.as2_zu" name="AS2 Zufahrt auf ASS4"
+			typ="typ.inneresStraßenSegment">
+			<datensatz attributgruppe="atg.inneresStraßenSegment">
+				<datum name="vonStraßenSegment" wert="null" />
+				<datum name="nachStraßenSegment" wert="ass.ass4" />
+			</datensatz>
+			<datensatz attributgruppe="atg.straßenSegment">
+				<datum name="gehörtZuStraße" wert="strasse.waagerecht" />
+				<datum name="Länge" wert="0" />
+			</datensatz>
+		</konfigurationsObjekt>
+
+		<!-- Straßenteilsegmente -->
+
+		<konfigurationsObjekt pid="sts.ass1.sts1"
+			typ="typ.straßenTeilSegment">
+			<datensatz attributgruppe="atg.straßenTeilSegment">
+				<datum name="Länge" wert="600" />
+				<datum name="AnzahlFahrStreifen" wert="unbekannt" />
+				<datum name="SteigungGefälle" wert="0" />
+			</datensatz>
+		</konfigurationsObjekt>
+		<konfigurationsObjekt pid="sts.ass2.sts1"
+			typ="typ.straßenTeilSegment">
+			<datensatz attributgruppe="atg.straßenTeilSegment">
+				<datum name="Länge" wert="2900" />
+				<datum name="AnzahlFahrStreifen" wert="unbekannt" />
+				<datum name="SteigungGefälle" wert="0" />
+			</datensatz>
+		</konfigurationsObjekt>
+		<konfigurationsObjekt pid="sts.ass3.sts1"
+			typ="typ.straßenTeilSegment">
+			<datensatz attributgruppe="atg.straßenTeilSegment">
+				<datum name="Länge" wert="2900" />
+				<datum name="AnzahlFahrStreifen" wert="unbekannt" />
+				<datum name="SteigungGefälle" wert="0" />
+			</datensatz>
+		</konfigurationsObjekt>
+		<konfigurationsObjekt pid="sts.ass4.sts1"
+			typ="typ.straßenTeilSegment">
+			<datensatz attributgruppe="atg.straßenTeilSegment">
+				<datum name="Länge" wert="3600" />
+				<datum name="AnzahlFahrStreifen" wert="unbekannt" />
+				<datum name="SteigungGefälle" wert="0" />
+			</datensatz>
+		</konfigurationsObjekt>
+		<konfigurationsObjekt pid="sts.ass4.sts2"
+			typ="typ.straßenTeilSegment">
+			<datensatz attributgruppe="atg.straßenTeilSegment">
+				<datum name="Länge" wert="1000" />
+				<datum name="AnzahlFahrStreifen" wert="unbekannt" />
+				<datum name="SteigungGefälle" wert="0" />
+			</datensatz>
+		</konfigurationsObjekt>
+		<konfigurationsObjekt pid="sts.ass4.sts3"
+			typ="typ.straßenTeilSegment">
+			<datensatz attributgruppe="atg.straßenTeilSegment">
+				<datum name="Länge" wert="9000" />
+				<datum name="AnzahlFahrStreifen" wert="unbekannt" />
+				<datum name="SteigungGefälle" wert="0" />
+			</datensatz>
+		</konfigurationsObjekt>
+		<konfigurationsObjekt pid="sts.ass5.sts1"
+			typ="typ.straßenTeilSegment">
+			<datensatz attributgruppe="atg.straßenTeilSegment">
+				<datum name="Länge" wert="100" />
+				<datum name="AnzahlFahrStreifen" wert="unbekannt" />
+				<datum name="SteigungGefälle" wert="0" />
+			</datensatz>
+		</konfigurationsObjekt>
+		<konfigurationsObjekt pid="sts.ass6.sts1"
+			typ="typ.straßenTeilSegment">
+			<datensatz attributgruppe="atg.straßenTeilSegment">
+				<datum name="Länge" wert="100" />
+				<datum name="AnzahlFahrStreifen" wert="unbekannt" />
+				<datum name="SteigungGefälle" wert="0" />
+			</datensatz>
+		</konfigurationsObjekt>
+		<konfigurationsObjekt pid="sts.iss.ass1_ass2.sts1"
+			typ="typ.straßenTeilSegment">
+			<datensatz attributgruppe="atg.straßenTeilSegment">
+				<datum name="Länge" wert="0" />
+				<datum name="AnzahlFahrStreifen" wert="unbekannt" />
+				<datum name="SteigungGefälle" wert="0" />
+			</datensatz>
+		</konfigurationsObjekt>
+		<konfigurationsObjekt pid="sts.iss.ass2_ass3.sts1"
+			typ="typ.straßenTeilSegment">
+			<datensatz attributgruppe="atg.straßenTeilSegment">
+				<datum name="Länge" wert="0" />
+				<datum name="AnzahlFahrStreifen" wert="unbekannt" />
+				<datum name="SteigungGefälle" wert="0" />
+			</datensatz>
+		</konfigurationsObjekt>
+		<konfigurationsObjekt pid="sts.iss.ass3_ass4.sts1"
+			typ="typ.straßenTeilSegment">
+			<datensatz attributgruppe="atg.straßenTeilSegment">
+				<datum name="Länge" wert="0" />
+				<datum name="AnzahlFahrStreifen" wert="unbekannt" />
+				<datum name="SteigungGefälle" wert="0" />
+			</datensatz>
+		</konfigurationsObjekt>
+		<konfigurationsObjekt pid="sts.iss.ass5_ass6.sts1"
+			typ="typ.straßenTeilSegment">
+			<datensatz attributgruppe="atg.straßenTeilSegment">
+				<datum name="Länge" wert="0" />
+				<datum name="AnzahlFahrStreifen" wert="unbekannt" />
+				<datum name="SteigungGefälle" wert="0" />
+			</datensatz>
+		</konfigurationsObjekt>
+
+		<konfigurationsObjekt pid="mq.MQ1" typ="typ.messQuerschnitt">
+			<datensatz attributgruppe="atg.punktLiegtAufLinienObjekt">
+				<datum name="LinienReferenz" wert="ass.ass2" />
+				<datum name="Offset" wert="1400" />
+			</datensatz>
+			<objektMenge name="FahrStreifen">
+				<element pid="fs.fs1" />
+			</objektMenge>
+		</konfigurationsObjekt>
+		<konfigurationsObjekt pid="mq.MQ2" typ="typ.messQuerschnitt">
+			<datensatz attributgruppe="atg.punktLiegtAufLinienObjekt">
+				<datum name="LinienReferenz" wert="ass.ass3" />
+				<datum name="Offset" wert="1500" />
+			</datensatz>
+			<objektMenge name="FahrStreifen">
+				<element pid="fs.fs2" />
+			</objektMenge>
+		</konfigurationsObjekt>
+		<konfigurationsObjekt pid="mq.MQ3" typ="typ.messQuerschnitt">
+			<datensatz attributgruppe="atg.punktLiegtAufLinienObjekt">
+				<datum name="LinienReferenz" wert="ass.ass4" />
+				<datum name="Offset" wert="2600" />
+			</datensatz>
+			<objektMenge name="FahrStreifen">
+				<element pid="fs.fs3" />
+			</objektMenge>
+		</konfigurationsObjekt>
+		<konfigurationsObjekt pid="mq.MQ4" typ="typ.messQuerschnitt">
+			<datensatz attributgruppe="atg.punktLiegtAufLinienObjekt">
+				<datum name="LinienReferenz" wert="ass.ass4" />
+				<datum name="Offset" wert="5600" />
+			</datensatz>
+			<objektMenge name="FahrStreifen">
+				<element pid="fs.fs4" />
+			</objektMenge>
+		</konfigurationsObjekt>
+		<konfigurationsObjekt pid="mq.MQ5" typ="typ.messQuerschnitt">
+			<datensatz attributgruppe="atg.punktLiegtAufLinienObjekt">
+				<datum name="LinienReferenz" wert="ass.ass5" />
+				<datum name="Offset" wert="0" />
+			</datensatz>
+			<objektMenge name="FahrStreifen">
+				<element pid="fs.fs5" />
+			</objektMenge>
+		</konfigurationsObjekt>
+		<konfigurationsObjekt pid="mq.MQ6" typ="typ.messQuerschnitt">
+			<datensatz attributgruppe="atg.punktLiegtAufLinienObjekt">
+				<datum name="LinienReferenz" wert="ass.ass6" />
+				<datum name="Offset" wert="0" />
+			</datensatz>
+			<objektMenge name="FahrStreifen">
+				<element pid="fs.fs6" />
+			</objektMenge>
+		</konfigurationsObjekt>
+
+		<konfigurationsObjekt pid="mq.MQ_AS1Ab" typ="typ.messQuerschnitt">
+			<datensatz attributgruppe="atg.punktLiegtAufLinienObjekt">
+				<datum name="LinienReferenz" wert="iss.as1_ab" />
+				<datum name="Offset" wert="0" />
+			</datensatz>
+			<objektMenge name="FahrStreifen">
+				<element pid="fs.as1_ab" />
+			</objektMenge>
+		</konfigurationsObjekt>
+
+		<konfigurationsObjekt pid="mq.MQ_AS1Zu" typ="typ.messQuerschnitt">
+			<datensatz attributgruppe="atg.punktLiegtAufLinienObjekt">
+				<datum name="LinienReferenz" wert="iss.as1_zu" />
+				<datum name="Offset" wert="0" />
+			</datensatz>
+			<objektMenge name="FahrStreifen">
+				<element pid="fs.as1_zu" />
+			</objektMenge>
+		</konfigurationsObjekt>
+
+		<konfigurationsObjekt pid="mq.MQ_AS2Ab" typ="typ.messQuerschnitt">
+			<datensatz attributgruppe="atg.punktLiegtAufLinienObjekt">
+				<datum name="LinienReferenz" wert="iss.as2_ab" />
+				<datum name="Offset" wert="0" />
+			</datensatz>
+			<objektMenge name="FahrStreifen">
+				<element pid="fs.as2_ab" />
+			</objektMenge>
+		</konfigurationsObjekt>
+
+		<konfigurationsObjekt pid="mq.MQ_AS2Zu" typ="typ.messQuerschnitt">
+			<datensatz attributgruppe="atg.punktLiegtAufLinienObjekt">
+				<datum name="LinienReferenz" wert="iss.as2_zu" />
+				<datum name="Offset" wert="0" />
+			</datensatz>
+			<objektMenge name="FahrStreifen">
+				<element pid="fs.as2_zu" />
+			</objektMenge>
+		</konfigurationsObjekt>
+
+		<konfigurationsObjekt pid="fs.fs1" typ="typ.fahrStreifen"></konfigurationsObjekt>
+		<konfigurationsObjekt pid="fs.fs2" typ="typ.fahrStreifen"></konfigurationsObjekt>
+		<konfigurationsObjekt pid="fs.fs3" typ="typ.fahrStreifen"></konfigurationsObjekt>
+		<konfigurationsObjekt pid="fs.fs4" typ="typ.fahrStreifen"></konfigurationsObjekt>
+		<konfigurationsObjekt pid="fs.fs5" typ="typ.fahrStreifen"></konfigurationsObjekt>
+		<konfigurationsObjekt pid="fs.fs6" typ="typ.fahrStreifen"></konfigurationsObjekt>
+		<konfigurationsObjekt pid="fs.as1_ab" typ="typ.fahrStreifen"></konfigurationsObjekt>
+		<konfigurationsObjekt pid="fs.as1_zu" typ="typ.fahrStreifen"></konfigurationsObjekt>
+		<konfigurationsObjekt pid="fs.as2_ab" typ="typ.fahrStreifen"></konfigurationsObjekt>
+		<konfigurationsObjekt pid="fs.as2_zu" typ="typ.fahrStreifen"></konfigurationsObjekt>
+
+		<konfigurationsObjekt pid="strasse.waagerecht"
+			typ="typ.straße">
+			<datensatz attributgruppe="atg.straße">
+				<datum name="Typ" wert="Autobahn" />
+				<datum name="Nummer" wert="9999" />
+				<datum name="Zusatz" wert="" />
+			</datensatz>
+		</konfigurationsObjekt>
+
+		<konfigurationsObjekt pid="strasse.senkrecht"
+			typ="typ.straße">
+			<datensatz attributgruppe="atg.straße">
+				<datum name="Typ" wert="Bundesstraße" />
+				<datum name="Nummer" wert="8888" />
+				<datum name="Zusatz" wert="" />
+			</datensatz>
+		</konfigurationsObjekt>
+
+		<konfigurationsObjekt typ="typ.udaModul" pid="udaModul.swe6Test" name="Uda-Modul SWE6-Test">
+			<objektMenge name="Skripte" verwaltung="kv.aoe.bitctrl.tester">
+			</objektMenge>
+			<objektMenge name="SkriptLäufe" verwaltung="kv.aoe.bitctrl.tester">
+			</objektMenge>
+		</konfigurationsObjekt>
+
+	</objekte>
+</konfigurationsBereich>

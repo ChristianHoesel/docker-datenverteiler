@@ -1,0 +1,20 @@
+Manifest-Version: 1.0
+Ant-Version: Apache Ant 1.8.2
+Created-By: Kappich Systemberatung
+Bundle-ManifestVersion: 2
+Bundle-Name: de.bsvrz.pat.datgen
+Bundle-SymbolicName: de.bsvrz.pat.datgen
+Bundle-Version: 3.6.2.v12133-20140320-1240
+Bundle-Vendor: Kappich Systemberatung
+Bundle-ActivationPolicy: lazy
+Bundle-RequiredExecutionEnvironment: JavaSE-1.6
+Bundle-ClassPath: de.bsvrz.pat.datgen.jar
+Export-Package: de.bsvrz.pat.datgen, de.bsvrz.pat.datgen.generator, de
+ .bsvrz.pat.datgen.generator.main, de.bsvrz.pat.datgen.generator.xmlPa
+ rser
+Require-Bundle: de.bsvrz.dav.daf, de.bsvrz.sys.funclib.dataSerializer,
+  de.bsvrz.sys.funclib.communicationStreams, de.bsvrz.pat.onlprot, de.
+ bsvrz.sys.funclib.configObjectAcquisition, de.bsvrz.sys.funclib.debug
+ , de.bsvrz.sys.funclib.commandLineArgs
+Eclipse-BuddyPolicy: dependent
+

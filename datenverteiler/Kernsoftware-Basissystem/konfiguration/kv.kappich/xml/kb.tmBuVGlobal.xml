@@ -1,0 +1,342 @@
+<?xml version="1.0" encoding="ISO-8859-1"?>
+<!DOCTYPE konfigurationsBereich PUBLIC "-//K2S//DTD Dokument//DE" "K2S.dtd">
+<konfigurationsBereich pid="kb.tmBuVGlobal" name="TeilmodellBuVGlobal" verantwortlich="kv.kappich">
+	<info>
+		<kurzinfo>Teilmodell mit Datenmodellierung zur Bedienung und Visualisierung.</kurzinfo>
+		<beschreibung>
+			<absatz>Die folgende Abbildung skizziert die Zusammenhänge und Attributgruppen der verschiedenen Objekttypen imTeilmodell Bedienung und Visualisierung.</absatz>
+			<abbildung src="abbildungen/TeilmodelVewBuVGlobal.jpg">
+				<titel>Übersicht Teilmodell Bedienung und Visualisierung (global)</titel>
+			</abbildung>
+		</beschreibung>
+	</info>
+	<konfigurationsAenderung stand="19.03.2007" version="3" autor="inovat, Dipl.-Ing. H. C. Kniß (HCK)" grund="A:Überarbeitung des Datenkatalogs für Veröffentlichung Kernsoftware. Änderungsdokumentation siehe &apos;inovat: Datenkatalog DaV-Release Notes&apos;."></konfigurationsAenderung>
+	<konfigurationsAenderung stand="25.06.2007" version="3" autor="Roland Schmitz" grund="Anpassungen für Parametrierung">Versorgung der Defaultparameterdatensätze an Typdefinitionen.</konfigurationsAenderung>
+	<konfigurationsAenderung stand="16.11.2007" version="4" autor="Roland Schmitz" grund="Urlasser in Parameterattributgruppen"><absatz>In allen Parameter-Attributgruppen wurde eine Attributliste "Urlasser" vom Typ "atl.urlasser" eingefügt. Die Default-Parameterdatensätze wurden entsprechend erweitert.
+		</absatz></konfigurationsAenderung>
+	<konfigurationsAenderung stand="16.07.2008" version="5" autor="Christoph Westermann" grund="SWE Rahmenwerk Berechtigungskonzept"><absatz>Erweiterung um den Typ Oberfläche</absatz></konfigurationsAenderung>
+	<!--
+	Abhängigkeiten des Bereichs kb.tmBuVGlobal
+	Abhängig ab Version      Art der Abhängigkeit      Version des benötigten Bereichs      Benötigter Bereich
+	4                        notwendig                 1                                    kb.metaModellGlobal                
+	4                        notwendig                 3                                    kb.tmVewBetriebGlobal              
+	4                        notwendig                 1                                    kb.systemModellGlobal              
+	4                        notwendig                 1                                    kb.kv.kappich                      
+	4                        notwendig                 4                                    kb.fachModellGlobal                
+	5                        notwendig                 2                                    kb.systemModellGlobal              
+	5                        optional                  1                                    kb.systemModellAoe                 
+	-->
+	<modell>
+		<typDefinition pid="typ.datenAuswahl" name="DatenAuswahl" objektNamenPermanent="nein">
+			<info>
+				<kurzinfo>Objekttyp, an dem Parameter für ein Auswahlmenü mit Filterfunktionen für einen generischen Datenidentifikationsauswahldialog verwaltet werden.</kurzinfo>
+			</info>
+			<erweitert pid="typ.konfigurationsObjekt"/>
+			<attributgruppe pid="atg.datenAuswahlMenü"/>
+			<defaultParameter attributgruppe="atg.datenAuswahlMenü" typ="typ.datenAuswahl">
+				<datenliste name="Urlasser">
+					<datum name="BenutzerReferenz" wert="undefiniert"/>
+					<datum name="Ursache" wert=""/>
+					<datum name="Veranlasser" wert=""/>
+				</datenliste>
+				<datenfeld name="Menü">
+				</datenfeld>
+			</defaultParameter>
+		</typDefinition>
+		<typDefinition pid="typ.oberfläche" name="Oberfläche" objektNamenPermanent="nein">
+			<info>
+				<kurzinfo>Objekttyp der die notwendigen Daten einer Oberfläche (BuV) verwaltet.</kurzinfo>
+			</info>
+			<erweitert pid="typ.konfigurationsObjekt"/>
+			<attributgruppe pid="atg.benutzerEinstellungenOberflächeNetzweit"/>
+			<attributgruppe pid="atg.globaleEinstellungenOberflächeNetzweit"/>
+			<attributgruppe pid="atg.oberflächenBerechtigung"/>
+			<defaultParameter attributgruppe="atg.oberflächenBerechtigung" typ="typ.oberfläche">
+				<datenfeld name="OberflächenBerechtigung">
+				</datenfeld>
+				<datenliste name="Urlasser">
+					<datum name="BenutzerReferenz" wert="undefiniert"/>
+					<datum name="Ursache" wert=""/>
+					<datum name="Veranlasser" wert=""/>
+				</datenliste>
+			</defaultParameter>
+			<defaultParameter attributgruppe="atg.benutzerEinstellungenOberflächeNetzweit" typ="typ.oberfläche">
+				<datenfeld name="Benutzereinstellungen">
+				</datenfeld>
+				<datenliste name="Urlasser">
+					<datum name="BenutzerReferenz" wert="undefiniert"/>
+					<datum name="Ursache" wert=""/>
+					<datum name="Veranlasser" wert=""/>
+				</datenliste>
+			</defaultParameter>
+			<defaultParameter attributgruppe="atg.globaleEinstellungenOberflächeNetzweit" typ="typ.oberfläche">
+				<datenliste name="BenutzereinstellungenGlobal">
+					<datenfeld name="Voreinstellungen">
+					</datenfeld>
+				</datenliste>
+				<datenliste name="Urlasser">
+					<datum name="BenutzerReferenz" wert="undefiniert"/>
+					<datum name="Ursache" wert=""/>
+					<datum name="Veranlasser" wert=""/>
+				</datenliste>
+			</defaultParameter>
+		</typDefinition>
+		<attributgruppenDefinition pid="atg.benutzerEinstellungenOberflächeNetzweit" name="BenutzerEinstellungenOberflächeNetzweit" parametrierend="ja">
+			<info>
+				<kurzinfo>
+					Repräsentiert die netzweiten Einstellungen für einen Benutzer.
+				</kurzinfo>
+				<beschreibung>
+					Erfüllt TBuV-30.
+				</beschreibung>
+			</info>
+			<attributliste pid="atl.benutzerEinstellungen" anzahl="0" anzahlIst="variabel" name="Benutzereinstellungen">
+			</attributliste>
+			<attributliste pid="atl.urlasser" anzahl="1" anzahlIst="fest" name="Urlasser">
+			</attributliste>
+		</attributgruppenDefinition>
+		<attributgruppenDefinition pid="atg.datenAuswahlMenü" name="DatenAuswahlMenü" parametrierend="ja">
+			<info>
+				<kurzinfo>Beschreibung eines kompletten Menüs zur Datenauswahl.</kurzinfo>
+			</info>
+			<attributliste pid="atl.urlasser" anzahl="1" anzahlIst="fest" name="Urlasser">
+			</attributliste>
+			<attributliste pid="atl.menüEintrag" anzahl="0" anzahlIst="variabel" name="Menü">
+			</attributliste>
+		</attributgruppenDefinition>
+		<attributgruppenDefinition pid="atg.globaleEinstellungenOberflächeNetzweit" name="GlobaleEinstellungenOberflächeNetzweit" parametrierend="ja">
+			<info>
+				<kurzinfo>
+					Repräsentiert die globalen, netzweiten Einstellungen für alle Benutzer.
+				</kurzinfo>
+				<beschreibung>
+					Erfüllt TBuV-30.
+				</beschreibung>
+			</info>
+			<attributliste pid="atl.benutzerEinstellungenGlobal" anzahl="1" anzahlIst="fest" name="BenutzereinstellungenGlobal">
+			</attributliste>
+			<attributliste pid="atl.urlasser" anzahl="1" anzahlIst="fest" name="Urlasser">
+			</attributliste>
+		</attributgruppenDefinition>
+		<attributgruppenDefinition pid="atg.oberflächenBerechtigung" name="OberflächenBerechtigung" parametrierend="ja">
+			<info>
+				<kurzinfo>
+					Repräsentiert die Oberfächenberechtigung, wie sie vom Rahmenwerk gemäß TBuV 103 - TBuV 105 benötigt wird.
+				</kurzinfo>
+			</info>
+			<attributliste pid="atl.oberflächenBerechtigung" anzahl="0" anzahlIst="variabel" name="OberflächenBerechtigung">
+			</attributliste>
+			<attributliste pid="atl.urlasser" anzahl="1" anzahlIst="fest" name="Urlasser">
+			</attributliste>
+		</attributgruppenDefinition>
+		<attributDefinition pid="att.datenAuswahlReferenz" name="DatenAuswahlReferenz">
+			<info>
+				<kurzinfo>Attribut zur Referenzierung des Objekttyps: typ.datenAuswahl.</kurzinfo>
+			</info>
+			<objektReferenz typ="typ.datenAuswahl" undefiniert="verboten" referenzierungsart="assoziation"/>
+		</attributDefinition>
+		<attributDefinition pid="att.datenAuswahlReferenzOptional" name="DatenAuswahlReferenzOptional">
+			<info>
+				<kurzinfo>Attribut zur Referenzierung des Objekttyps: typ.datenAuswahl (Optionale Referenzierung erlaubt).</kurzinfo>
+			</info>
+			<objektReferenz typ="typ.datenAuswahl" undefiniert="erlaubt" referenzierungsart="assoziation"/>
+		</attributDefinition>
+		<attributDefinition pid="att.filterKriterium" name="FilterKriterium">
+			<info>
+				<kurzinfo>Filterkriterium zur Einschränkung der Objektmenge.</kurzinfo>
+			</info>
+			<ganzzahl bits="16">
+				<zustand name="Konfigurationsbereich" wert="0">
+					<info>
+						<kurzinfo>Einschränkung über Konfigurationsbereiche. Die zugehörigen FilterWerte sind die Pid oder Id von Konfigurationsbereichen.</kurzinfo>
+					</info>
+				</zustand>
+				<zustand name="Objekttyp" wert="2">
+					<info>
+						<kurzinfo>Einschränkung über Objekttypen. Die zugehörigen FilterWerte sind die Pid oder Id von Objekttypen.</kurzinfo>
+					</info>
+				</zustand>
+				<zustand name="Attributgruppe" wert="3">
+					<info>
+						<kurzinfo>Einschränkung über Attributgruppen. Die zugehörigen FilterWerte sind die Pid oder Id von Attributgruppentypen.</kurzinfo>
+					</info>
+				</zustand>
+				<zustand name="Aspekt" wert="4">
+					<info>
+						<kurzinfo>Einschränkung über Aspekten Die zugehörigen FilterWerte sind die Pid oder Id von Aspekttypen.</kurzinfo>
+					</info>
+				</zustand>
+				<zustand name="Objekt" wert="5">
+					<info>
+						<kurzinfo>Einschränkung über konkrete Objekte. Die zugehörigen FilterWerte sind die Pid oder Id von Objekten. Optional können hinter Pid bzw. Id mit Doppelpunkt getrennt Mengennamen angegeben werden, wodurch über die in der spezifizierten Menge enthaltenen Objekte eingeschränkt wird.</kurzinfo>
+					</info>
+				</zustand>
+				<zustand name="Erweitert" wert="32767">
+					<info>
+						<kurzinfo>Einschränkung über spezielle Filter-Plugins. Der erste zugehörigen FilterWert ist der Klassenname des zu verwendenden Plugins. Weitere Werte sind abhängig vom jeweiligen Filter-Plugin.</kurzinfo>
+					</info>
+				</zustand>
+			</ganzzahl>
+		</attributDefinition>
+		<attributDefinition pid="att.oberflächenBerechtigung" name="OberflächenBerechtigung">
+			<info>
+				<kurzinfo>
+					Berechtigungen in der Oberfläche. Gibt die Logik der Definition an: Sperrung bedeutet, dass den im
+					vorigen Feld angegebenen Berechtigungsklassen die folgend definierten Funktionen auf den festgelegten
+					Objekten nicht erlaubt werden. Freigabe heißt hingegen, dass die Berechtigungsklassen das Recht erhalten,
+					diese Funktionen auszuführen.				
+				</kurzinfo>
+			</info>
+			<ganzzahl bits="16">
+				<zustand name="Sperrung" wert="0">
+					<info>
+						<kurzinfo>Sperrung der Funktion für die jeweilige Berechtigungsklasse.</kurzinfo>
+					</info>
+				</zustand>
+				<zustand name="Freigabe" wert="1">
+					<info>
+						<kurzinfo>Freigabe der Funktion für die jeweilige Berechtigungsklasse.</kurzinfo>
+					</info>
+				</zustand>
+			</ganzzahl>
+		</attributDefinition>
+		<attributlistenDefinition pid="atl.benutzerEinstellungen" name="Benutzereinstellungen">
+			<info>
+				<kurzinfo>Benutzereinstellungen.</kurzinfo>
+			</info>
+			<attribut pid="att.text" anzahl="0" anzahlIst="variabel" name="Voreinstellungen">
+				<info>
+					<kurzinfo>Voreinstellungen</kurzinfo>
+					<beschreibung>
+						Nimmt den Inhalt der XML-Struktur auf, welche die Voreinstellungen für einen Benutzer beschreibt.
+					</beschreibung>
+				</info>
+			</attribut>
+			<attribut pid="att.benutzerReferenzOptional" anzahl="1" anzahlIst="fest" name="benutzer">
+				<info>
+					<kurzinfo>
+						Referenz auf den Benutzer, der die Applikation angemeldet hat.
+					</kurzinfo>
+				</info>
+			</attribut>
+		</attributlistenDefinition>
+		<attributlistenDefinition pid="atl.benutzerEinstellungenGlobal" name="BenutzereinstellungenGlobal">
+			<info>
+				<kurzinfo>Globale Benutzereinstellungen.</kurzinfo>
+			</info>
+			<attribut pid="att.text" anzahl="0" anzahlIst="variabel" name="Voreinstellungen">
+				<info>
+					<kurzinfo>Globale Voreinstellungen</kurzinfo>
+					<beschreibung>
+						Nimmt den Inhalt der XML-Struktur auf, welche die Voreinstellungen für alle Benutzer beschreibt.
+					</beschreibung>
+				</info>
+			</attribut>
+		</attributlistenDefinition>
+		<attributlistenDefinition pid="atl.filter" name="Filter">
+			<info>
+				<kurzinfo>Beschreibung eins Filters zur Datenauswahl.</kurzinfo>
+			</info>
+			<attribut pid="att.filterKriterium" anzahl="1" anzahlIst="fest" name="Kriterium">
+				<info>
+					<kurzinfo>Filterkriterium zur Einschränkung der Objektmenge.</kurzinfo>
+					<beschreibung>Über das Filterkriterium lassen sich die zulässigen Objekte einschränken. Die Einschränkung ist derzeit möglich über Konfigurationsbereich, Mengen, Objekttypen, Attributgruppen, Aspekte und Objekte. Die Kriterien werden mit UND verknüpft.</beschreibung>
+				</info>
+			</attribut>
+			<attribut pid="att.text" anzahl="0" anzahlIst="variabel" name="Wert">
+				<info>
+					<kurzinfo>Wert (Objekt) des Filterkriterium zur Einschränkung der Objektmenge. Die Werte werden mit ODER verknüpft.</kurzinfo>
+				</info>
+			</attribut>
+		</attributlistenDefinition>
+		<attributlistenDefinition pid="atl.menüEintrag" name="MenüEintrag">
+			<info>
+				<kurzinfo>Beschreibung eines Menüeintrags.</kurzinfo>
+			</info>
+			<attribut pid="att.text" anzahl="1" anzahlIst="fest" name="Pid">
+				<info>
+					<kurzinfo>Eindeutige Pid eines Menüeintrags. Wird zur Referenzierung bei der Beschreibung des Gesamtmenüs erwendet.</kurzinfo>
+				</info>
+			</attribut>
+			<attribut pid="att.text" anzahl="1" anzahlIst="fest" name="Name">
+				<info>
+					<kurzinfo>Name eines Menüeintrags. Wird zur Darstellung verwendet.</kurzinfo>
+				</info>
+			</attribut>
+			<attribut pid="att.text" anzahl="0" anzahlIst="variabel" name="UnterMenü">
+				<info>
+					<kurzinfo>Verweis auf einen definierten Menüeintrag über die Pid eines Menüeintrags.</kurzinfo>
+				</info>
+			</attribut>
+			<attributliste pid="atl.filter" anzahl="0" anzahlIst="variabel" name="Filter">
+			</attributliste>
+		</attributlistenDefinition>
+		<attributlistenDefinition pid="atl.oberflächenBerechtigung" name="OberflächenBerechtigung">
+			<info>
+				<kurzinfo>Beschreibung der OberflächenBerechtigung.</kurzinfo>
+				<beschreibung>
+					Hier wird die Oberflächenberechtigung beschrieben.
+				</beschreibung>
+			</info>
+			<attribut pid="att.text" anzahl="0" anzahlIst="variabel" name="Berechtigungsklasse">
+				<info>
+					<kurzinfo>Berechtigungsklasse der Definition (Wer)</kurzinfo>
+					<beschreibung>
+						Dieses Feld gibt an, für welche Berechtigungsklasse die Definition gilt.
+						Hier können eine oder mehrere Berechtigungsklassen angegeben werden, der Stern
+						wird stellvertretend für alle Berechtigungsklassen verwendet.
+					</beschreibung>
+				</info>
+			</attribut>
+			<attribut pid="att.text" anzahl="0" anzahlIst="variabel" name="Funktion">
+				<info>
+					<kurzinfo>Funktion (Was)</kurzinfo>
+					<beschreibung>
+						In diesem Feld wird die Funktion definiert, für die die Berechtigung vergeben wird.
+						Ein * kann stellvertretend für alle Funktionen verwendet werden.
+					</beschreibung>
+				</info>
+			</attribut>
+			<attribut pid="att.oberflächenBerechtigung" anzahl="1" anzahlIst="fest" name="Berechtigung">
+				<info>
+					<kurzinfo>Freigabe oder Sperrung (Wie)</kurzinfo>
+					<beschreibung>
+						In diesem Feld wird die Logik der Definition angegeben. Sperrung bedeutet, das den im 
+						vorigen	Feld angegebenen Berechtigungsklassen die folgend definierten Funktionen auf
+						den festgelegten Objekten nicht erlaubt werden. Freigabe heißt hingegen, dass die
+						Berechtigungsklassen das Recht erhalten, diese Funktion auszuführen.
+					</beschreibung>
+				</info>
+			</attribut>
+			<attribut pid="att.text" anzahl="0" anzahlIst="variabel" name="ObjektMenge">
+				<info>
+					<kurzinfo>Objekte, auf welche diese Berechtigungsdefinition angewendet wird. (Worauf)</kurzinfo>
+					<beschreibung>
+						Dieses Feld dient der Spezifikation der betroffenen Objekte und/oder Mengen auf denen
+						die Funktion arbeitet. Der * kann stellvertretend für alle Objekte verwendet werden.
+					</beschreibung>
+				</info>
+			</attribut>
+			<attribut pid="att.zahlPositiv" anzahl="1" anzahlIst="fest" name="AusnahmeDefinition">
+				<info>
+					<kurzinfo>Index der Definition der Ausnahmen</kurzinfo>
+					<beschreibung>
+						In diesem Feld wird eine Definition angegeben, die einschränkend gelesen wird. Die Definition wird durch den Feldindex unterhalb von Oberflächenberechtigung angegeben.
+					</beschreibung>
+				</info>
+			</attribut>
+			<attribut pid="att.zahlPositiv" anzahl="1" anzahlIst="fest" name="Ebene">
+				<info>
+					<kurzinfo>Gibt die Tiefe der Ausnahmenrekursion an.</kurzinfo>
+					<beschreibung>
+						Mit diesem Attribut wird die geparste Tiefe der Ausnahmen angegeben. Ebene 0 entspricht
+						einer einfachen Ausnahme. Hat diese Ausnahme eine Ausnahme, dann befindet diese sich auf
+						Ebene 1. Hat diese Ausnahme wiederum eine Ausnahme, befindet diese sich auf Ebene 2 u.s.w.
+					</beschreibung>
+				</info>
+			</attribut>
+		</attributlistenDefinition>
+	</modell>
+	<objekte>
+	</objekte>
+</konfigurationsBereich>

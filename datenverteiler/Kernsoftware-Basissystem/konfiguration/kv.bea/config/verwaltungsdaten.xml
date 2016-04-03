@@ -1,0 +1,67 @@
+<?xml version="1.0" encoding="ISO-8859-1" standalone="no"?>
+<!DOCTYPE verwaltungsdaten PUBLIC "-//K2S//DTD Verwaltung//DE" "verwaltungsdaten.dtd">
+<verwaltungsdaten>
+	<konfigurationsverantwortlicher pid="kv.bea"/>
+	<konfigurationsbereich pid="kb.kv.bea" verzeichnis="../../kv.bea/config/">
+		<version nr="1" zeitpunkt="03.03.2007 16:55:16,000"/>
+	</konfigurationsbereich>
+	<konfigurationsbereich pid="kb.tmVewProtokolleGlobal" verzeichnis="../../kv.bea/config/">
+		<version nr="1" zeitpunkt="03.03.2007 16:55:16,000"/>
+		<version nr="2" zeitpunkt="08.03.2007 15:04:10,906"/>
+	</konfigurationsbereich>
+	<konfigurationsbereich pid="kb.fachModellGlobal" verzeichnis="../../kv.kappich/config/">
+		<version nr="1" zeitpunkt="03.03.2007 16:55:16,000"/>
+		<version nr="2" zeitpunkt="08.03.2007 14:20:32,501"/>
+		<version nr="6" zeitpunkt="19.03.2007 07:42:10,097"/>
+		<version nr="7" zeitpunkt="20.03.2007 23:03:52,127"/>
+	</konfigurationsbereich>
+	<konfigurationsbereich pid="kb.kv.kappich" verzeichnis="../../kv.kappich/config/">
+		<version nr="1" zeitpunkt="03.03.2007 16:55:16,000"/>
+	</konfigurationsbereich>
+	<konfigurationsbereich pid="kb.metaModellGlobal" verzeichnis="../../kv.kappich/config/">
+		<version nr="1" zeitpunkt="03.03.2007 16:55:16,000"/>
+		<version nr="4" zeitpunkt="19.03.2007 07:42:10,097"/>
+		<version nr="6" zeitpunkt="13.06.2007 11:02:20,140"/>
+	</konfigurationsbereich>
+	<konfigurationsbereich pid="kb.systemModellGlobal" verzeichnis="../../kv.kappich/config/">
+		<version nr="1" zeitpunkt="03.03.2007 16:55:16,000"/>
+		<version nr="3" zeitpunkt="19.03.2007 07:42:10,097"/>
+		<version nr="4" zeitpunkt="20.03.2007 23:03:52,127"/>
+		<version nr="10" zeitpunkt="13.06.2007 11:02:20,140"/>
+	</konfigurationsbereich>
+	<konfigurationsbereich pid="kb.tmVewBetriebGlobal" verzeichnis="../../kv.kappich/config/">
+		<version nr="1" zeitpunkt="03.03.2007 16:55:16,000"/>
+		<version nr="2" zeitpunkt="19.03.2007 07:42:10,097"/>
+	</konfigurationsbereich>
+	<konfigurationsbereich pid="kb.tmVewSimulationGlobal" verzeichnis="../../kv.kappich/config/">
+		<version nr="1" zeitpunkt="03.03.2007 16:55:16,000"/>
+		<version nr="3" zeitpunkt="19.03.2007 07:42:10,097"/>
+	</konfigurationsbereich>
+	<konfigurationsbereich pid="kb.kv.inovat" verzeichnis="../../kv.inovat/config/">
+		<version nr="1" zeitpunkt="13.06.2007 11:02:20,140"/>
+	</konfigurationsbereich>
+	<konfigurationsbereich pid="kb.tmEreignisKalenderGlobal" verzeichnis="../../kv.inovat/config/">
+		<version nr="7" zeitpunkt="13.06.2007 11:02:20,140"/>
+	</konfigurationsbereich>
+	<konfigurationsbereich pid="kb.tmGanglinienGlobal" verzeichnis="../../kv.inovat/config/">
+		<version nr="7" zeitpunkt="13.06.2007 11:02:20,140"/>
+	</konfigurationsbereich>
+	<konfigurationsbereich pid="kb.tmGeoReferenzierungGlobal" verzeichnis="../../kv.inovat/config/">
+		<version nr="2" zeitpunkt="13.06.2007 11:02:20,140"/>
+	</konfigurationsbereich>
+	<konfigurationsbereich pid="kb.tmKExTlsGlobal" verzeichnis="../../kv.inovat/config/">
+		<version nr="3" zeitpunkt="13.06.2007 11:02:20,140"/>
+	</konfigurationsbereich>
+	<konfigurationsbereich pid="kb.tmSystemKalenderGlobal" verzeichnis="../../kv.inovat/config/">
+		<version nr="5" zeitpunkt="13.06.2007 11:02:20,140"/>
+	</konfigurationsbereich>
+	<konfigurationsbereich pid="kb.tmTmcGlobal" verzeichnis="../../kv.inovat/config/">
+		<version nr="3" zeitpunkt="13.06.2007 11:02:20,140"/>
+	</konfigurationsbereich>
+	<konfigurationsbereich pid="kb.tmVerkehrGlobal" verzeichnis="../../kv.inovat/config/">
+		<version nr="13" zeitpunkt="13.06.2007 11:02:20,140"/>
+	</konfigurationsbereich>
+	<konfigurationsbereich pid="kb.tmIlseTls" verzeichnis="../../kv.kappich/config/">
+		<version nr="3" zeitpunkt="13.06.2007 11:02:20,140"/>
+	</konfigurationsbereich>
+</verwaltungsdaten>

@@ -1,0 +1,169 @@
+<?xml version="1.0" encoding="ISO-8859-1"?>
+<!DOCTYPE konfigurationsBereich PUBLIC "-//K2S//DTD Dokument//DE" "K2S.dtd">
+<konfigurationsBereich pid="kb.ilse" name="ILSE" verantwortlich="kv.kappich">
+	<info>
+		<kurzinfo>Modell für Insel- und Lokalbus Service Equipment (ILSE).</kurzinfo>
+	</info>
+	<konfigurationsAenderung stand="19.03.2007" version="3" autor="inovat, Dipl.-Ing. H. C. Kniß (HCK)" grund="A:Überarbeitung des Datenkatalogs für Veröffentlichung Kernsoftware. Änderungsdokumentation siehe &apos;inovat: Datenkatalog DaV-Release Notes&apos;."></konfigurationsAenderung>
+	<konfigurationsAenderung stand="25.06.2007" version="3" autor="Roland Schmitz" grund="Anpassungen für Parametrierung">Versorgung der Defaultparameterdatensätze an Typdefinitionen.</konfigurationsAenderung>
+	<konfigurationsAenderung stand="16.11.2007" version="4" autor="Roland Schmitz" grund="Urlasser in Parameterattributgruppen"><absatz>In allen Parameter-Attributgruppen wurde eine Attributliste "Urlasser" vom Typ "atl.urlasser" eingefügt. Die Default-Parameterdatensätze wurden entsprechend erweitert.
+		</absatz></konfigurationsAenderung>
+	<!--
+	Abhängigkeiten des Bereichs kb.ilse
+	Abhängig ab Version      Art der Abhängigkeit      Version des benötigten Bereichs      Benötigter Bereich
+	4                        notwendig                 1                                    kb.metaModellGlobal                
+	4                        notwendig                 1                                    kb.systemModellAoe                 
+	4                        notwendig                 3                                    kb.tmVewBetriebGlobal              
+	4                        notwendig                 1                                    kb.systemModellGlobal              
+	4                        notwendig                 2                                    kb.tmIlseTls                       
+	4                        notwendig                 1                                    kb.tmSystemKalenderGlobal          
+	4                        notwendig                 1                                    kb.kv.kappich                      
+	4                        notwendig                 4                                    kb.fachModellGlobal                
+	4                        notwendig                 1                                    kb.tmVewSimulationGlobal           
+	4                        notwendig                 1                                    kb.tmVewProtokolleGlobal           
+	-->
+	<modell>
+		<typDefinition pid="typ.ilse" name="ILSE" objektNamenPermanent="nein">
+			<info>
+				<kurzinfo>Typ, welcher einen Konfigurationsverantwortlichen für ILSE darstellt.</kurzinfo>
+			</info>
+			<erweitert pid="typ.autarkeOrganisationsEinheit"/>
+			<attributgruppe pid="atg.ilseLogbuch"/>
+			<attributgruppe pid="atg.listeAnschlussPunkte"/>
+			<menge pid="menge.resetObjekte" name="ResetObjekte" erforderlich="ja">
+			</menge>
+			<defaultParameter attributgruppe="atg.listeAnschlussPunkte" typ="typ.ilse">
+				<datenliste name="Urlasser">
+					<datum name="BenutzerReferenz" wert="undefiniert"/>
+					<datum name="Ursache" wert=""/>
+					<datum name="Veranlasser" wert=""/>
+				</datenliste>
+				<datenfeld name="AnschlussPunkte">
+				</datenfeld>
+			</defaultParameter>
+		</typDefinition>
+		<typDefinition pid="typ.reset" name="Reset" objektNamenPermanent="nein">
+			<info>
+				<kurzinfo>Typ, welcher ein RESET ermöglicht.</kurzinfo>
+			</info>
+			<erweitert pid="typ.konfigurationsObjekt"/>
+			<attributgruppe pid="atg.reset"/>
+			<attributgruppe pid="atg.steuerungExterneIO"/>
+		</typDefinition>
+		<attributgruppenDefinition pid="atg.ilseLogbuch" name="ILSE-Logbuch" parametrierend="nein">
+			<info>
+				<kurzinfo>Attributgruppe zum Speichern von Logbucheinträgen.</kurzinfo>
+			</info>
+			<aspekt pid="asp.standard" onlineModus="quelleUndSenke">
+			</aspekt>
+			<attribut pid="att.benutzerReferenz" anzahl="1" anzahlIst="fest" name="Benutzer">
+			</attribut>
+			<attribut pid="att.aktionLogbuch" anzahl="1" anzahlIst="fest" name="Aktion">
+			</attribut>
+			<attribut pid="att.text" anzahl="1" anzahlIst="fest" name="Details">
+			</attribut>
+		</attributgruppenDefinition>
+		<attributgruppenDefinition pid="atg.listeAnschlussPunkte" name="ListeAnschlussPunkte" parametrierend="ja">
+			<info>
+				<kurzinfo>Ein Array von ILSE-AnschlussPunkten.</kurzinfo>
+			</info>
+			<attributliste pid="atl.urlasser" anzahl="1" anzahlIst="fest" name="Urlasser">
+			</attributliste>
+			<attribut pid="att.ilseAnschlussPunktReferenz" anzahl="0" anzahlIst="variabel" name="AnschlussPunkte">
+			</attribut>
+		</attributgruppenDefinition>
+		<attributgruppenDefinition pid="atg.reset" name="Reset" parametrierend="nein">
+			<info>
+				<kurzinfo>Attributgruppe zur Angabe der URL, die zum Ein- bzw. Ausschalten benötigt wird.</kurzinfo>
+			</info>
+			<aspekt pid="asp.eigenschaften" konfigurationsModus="datensatzOptional">
+			</aspekt>
+			<attribut pid="att.text" anzahl="1" anzahlIst="fest" name="URLEinschalten">
+			</attribut>
+			<attribut pid="att.text" anzahl="1" anzahlIst="fest" name="URLAusschalten">
+			</attribut>
+		</attributgruppenDefinition>
+		<attributgruppenDefinition pid="atg.steuerungExterneIO" name="SteuerungExterneIO" parametrierend="nein">
+			<info>
+				<kurzinfo>Attributgruppe zum Steuern der externen IO.</kurzinfo>
+			</info>
+			<aspekt pid="asp.eigenschaften" konfigurationsModus="datensatzNotwendigUndÄnderbar">
+			</aspekt>
+			<aspekt pid="asp.vorgabe" onlineModus="senke">
+			</aspekt>
+			<attribut pid="att.schaltSequenz" anzahl="1" anzahlIst="fest" name="Sequenz">
+			</attribut>
+			<attribut pid="att.zeitDauer" anzahl="1" anzahlIst="fest" name="HalteZeit">
+			</attribut>
+		</attributgruppenDefinition>
+		<attributDefinition pid="att.aktionLogbuch" name="AktionLogbuch">
+			<info>
+				<kurzinfo>Attribut zum Speichern eines Logbucheintrages.</kurzinfo>
+			</info>
+			<ganzzahl bits="8">
+				<zustand name="Einloggen" wert="0">
+				</zustand>
+				<zustand name="Ausloggen" wert="1">
+				</zustand>
+				<zustand name="Reset" wert="2">
+				</zustand>
+				<zustand name="Archivanfrage" wert="3">
+				</zustand>
+				<zustand name="Aktuelle Daten" wert="4">
+				</zustand>
+				<zustand name="Unbefugter Resetversuch" wert="5">
+				</zustand>
+				<zustand name="Überwachungspunkt hinzufügen" wert="6">
+				</zustand>
+				<zustand name="Überwachungspunkt entfernen" wert="7">
+				</zustand>
+				<zustand name="Überwachungspunkt überwachen" wert="8">
+				</zustand>
+				<zustand name="Überwachungspunkt nicht überwachen" wert="9">
+				</zustand>
+			</ganzzahl>
+		</attributDefinition>
+		<attributDefinition pid="att.ilseReferenz" name="IlseReferenz">
+			<info>
+				<kurzinfo>Attribut zur Referenzierung des Objekttyps: typ.ilse.</kurzinfo>
+			</info>
+			<objektReferenz typ="typ.ilse" undefiniert="verboten" referenzierungsart="assoziation"/>
+		</attributDefinition>
+		<attributDefinition pid="att.ilseReferenzOptional" name="IlseReferenzOptional">
+			<info>
+				<kurzinfo>Attribut zur Referenzierung des Objekttyps: typ.ilse (Optionale Referenzierung erlaubt).</kurzinfo>
+			</info>
+			<objektReferenz typ="typ.ilse" undefiniert="erlaubt" referenzierungsart="assoziation"/>
+		</attributDefinition>
+		<attributDefinition pid="att.resetReferenz" name="ResetReferenz">
+			<info>
+				<kurzinfo>Attribut zur Referenzierung des Objekttyps: typ.reset.</kurzinfo>
+			</info>
+			<objektReferenz typ="typ.reset" undefiniert="verboten" referenzierungsart="assoziation"/>
+		</attributDefinition>
+		<attributDefinition pid="att.resetReferenzOptional" name="ResetReferenzOptional">
+			<info>
+				<kurzinfo>Attribut zur Referenzierung des Objekttyps: typ.reset (Optionale Referenzierung erlaubt).</kurzinfo>
+			</info>
+			<objektReferenz typ="typ.reset" undefiniert="erlaubt" referenzierungsart="assoziation"/>
+		</attributDefinition>
+		<attributDefinition pid="att.schaltSequenz" name="SchaltSequenz">
+			<info>
+				<kurzinfo>Attribut zum Schalten von einem Zustand in einen anderen.</kurzinfo>
+			</info>
+			<ganzzahl bits="8">
+				<zustand name="EinAus" wert="0">
+				</zustand>
+				<zustand name="AusEin" wert="1">
+				</zustand>
+			</ganzzahl>
+		</attributDefinition>
+		<mengenDefinition pid="menge.resetObjekte" elemente="typ.reset" aenderbar="nein" mindestens="0" hoechstens="0" referenzierungsart="assoziation">
+			<info>
+				<kurzinfo>Menge der ResetObjekte.</kurzinfo>
+			</info>
+		</mengenDefinition>
+	</modell>
+	<objekte>
+	</objekte>
+</konfigurationsBereich>

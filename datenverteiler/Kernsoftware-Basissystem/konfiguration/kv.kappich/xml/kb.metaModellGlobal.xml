@@ -1,0 +1,1607 @@
+<?xml version="1.0" encoding="ISO-8859-1"?>
+<!DOCTYPE konfigurationsBereich PUBLIC "-//K2S//DTD Dokument//DE" "K2S.dtd">
+<konfigurationsBereich pid="kb.metaModellGlobal" name="MetadatenmodellGlobal" verantwortlich="kv.kappich">
+	<info>
+		<kurzinfo>Datenmodell für globale Metainformationen.</kurzinfo>
+	</info>
+	<konfigurationsAenderung stand="19.03.2007" version="4" autor="inovat, Dipl.-Ing. H. C. Kniß (HCK)" grund="A:Überarbeitung des Datenkatalogs für Veröffentlichung Kernsoftware. Änderungsdokumentation siehe &apos;inovat: Datenkatalog DaV-Release Notes&apos;."></konfigurationsAenderung>
+	<konfigurationsAenderung stand="15.05.2007" version="5" autor="Roland Schmitz" grund="Anpassungen für Parametrierung"><absatz>
+			Das Datenmodell wurde so erweitert, dass an einem Typ-Objekt ein Datensatz der Attributgruppe atg.defaultParameterdatensätze gespeichert werden
+			kann,
+			die für alle am jeweiligen Typ definierten Parameterattributgruppen Default-Parameterdatensätze enthält, die für die Parametrierung als
+			Rückfallebene
+			dienen, falls nicht anderweitig ein Parameterdatensatz für ein bestimmtes Objekt vorgegeben wurde.
+		</absatz></konfigurationsAenderung>
+	<konfigurationsAenderung stand="21.05.2007" version="6" autor="Roland Schmitz" grund="Anpassungen für Parametrierung"><absatz>
+			Das Datenmodell wurde so erweitert, dass nicht nur am Typ-Objekt, sondern an beliebigen Konfigurationsobjekten ein Datensatz der Attributgruppe
+			atg.defaultParameterdatensätze gespeichert werden kann, der Default-Parameterdatensätze enthält, die für die Parametrierung als Rückfallebene
+			dienen, falls nicht anderweitig ein Parameterdatensatz für ein bestimmtes Objekt vorgegeben wurde.
+		</absatz></konfigurationsAenderung>
+	<konfigurationsAenderung stand="12.07.2007" version="8" autor="Achim Wullenkord" grund="Attributgruppe zur Speicherung der Abhängigkeiten zwischen Bereichen eingefügt"><absatz>
+			Attributgruppe atg.konfigurationsBereichAbhängigkeiten am typ.konfigurationsBereich zur Speicherung der Abhängigkeiten zu anderen Bereichen ergänzt.
+		</absatz></konfigurationsAenderung>
+	<konfigurationsAenderung stand="26.07.2007" version="9" autor="Achim Wullenkord" grund="Attributgruppe zur Speicherung der Abhängigkeiten zwischen Bereichen geändert"><absatz>
+			Attributgruppe atg.konfigurationsBereichAbhängigkeiten am typ.konfigurationsBereich zur Speicherung der Abhängigkeiten zu anderen Bereichen
+			geändert. Der Bereich, der benötigt wird um Referenzen aufzulösen, wird nun nicht mehr als Referenz auf ein Systemobjekt gespeichert, sondern als
+			Pid. Dies ermöglicht es den Bereich über die Pid zu identifizieren, auch wenn sich der Bereich nicht im Zugriff der Konfigurations befindet.
+		</absatz></konfigurationsAenderung>
+	<konfigurationsAenderung stand="17.12.2007" version="10" autor="Roland Schmitz" grund="Attributgruppe zur Speicherung der Verwaltenden Instanz einer dynamischen Menge ergänzt"><absatz>
+			Attributgruppe atg.dynamischeMenge am typ.dynamischeMenge ergänzt. Damit kann an jeder dynamischen Menge gespeichert welche Konfiguration für die
+			Elementzugehörigkeit der Menge verantwortlich ist.
+		</absatz></konfigurationsAenderung>
+	<konfigurationsAenderung stand="05.04.2008" version="11" autor="Roland Schmitz" grund="Erweiterung der Schnittstelle für Konfigurationsanfragen um An- und Abmeldungen auf dynamische Mengen und dynamische Typen mit Simulationsvariante."><absatz>Im Attributtyp att.konfigurationsAnfrageNachrichtenTypLesend wurden neue Telegrammtypen DynamischeKollektionAnmeldung, DynamischeKollektionElemente, DynamischeKollektionAktualisierung und DynamischeKollektionAbmeldung ergänzt.</absatz></konfigurationsAenderung>
+	<konfigurationsAenderung stand="27.01.2011" version="14" autor="Roland Schmitz" grund="Implementierung von Datenverteiler-Transaktionen"><absatz>
+			Neue Typen, Attributgruppen und Attributlisten, die von der Implementierung der Datenverteiler-Transaktionenen verwendet werden.
+		</absatz></konfigurationsAenderung>
+	<!--
+	Abhängigkeiten des Bereichs kb.metaModellGlobal
+	Abhängig ab Version      Art der Abhängigkeit      Version des benötigten Bereichs      Benötigter Bereich
+	9                        notwendig                 12                                   kb.systemModellGlobal              
+	9                        notwendig                 1                                    kb.kv.kappich                      
+	9                        notwendig                 1                                    kb.fachModellGlobal                
+	11                       notwendig                 17                                   kb.systemModellGlobal              
+	12                       notwendig                 19                                   kb.systemModellGlobal              
+	13                       notwendig                 24                                   kb.systemModellGlobal              
+	-->
+	<modell>
+		<typDefinition pid="typ.aspekt" name="Aspekt" objektNamenPermanent="nein">
+			<info>
+				<kurzinfo>Aspekt, unter dem Attributgruppen verwendet werden können.</kurzinfo>
+				<beschreibung>Ein Datensatz ist immer einer Attributgruppe und einem Aspekt zugeordnet. Die Attributgruppe beschreibt den Aufbau des Datensatzes
+					und der Aspekt legt die Verwendung und damit die Bedeutung (z.B."soll" und"ist") des Datensatzes fest. Welche Attributgruppen welche Aspekte
+					verwenden können, ist als Menge bei der entsprechenden Attributgruppe versorgt.
+				</beschreibung>
+			</info>
+			<erweitert pid="typ.konfigurationsObjekt"/>
+		</typDefinition>
+		<typDefinition pid="typ.attribut" name="Attribut" objektNamenPermanent="ja">
+			<info>
+				<kurzinfo>Attribut im Kontext einer Attributmenge.</kurzinfo>
+			</info>
+			<erweitert pid="typ.konfigurationsObjekt"/>
+			<attributgruppe pid="atg.attributEigenschaften"/>
+			<attributgruppe pid="atg.defaultAttributwert"/>
+		</typDefinition>
+		<typDefinition pid="typ.attributgruppe" name="Attributgruppe" objektNamenPermanent="nein">
+			<info>
+				<kurzinfo>Objekte von diesem Typ repräsentieren Attributgruppen.</kurzinfo>
+				<beschreibung>Ein Datensatz ist immer einer Attributgruppe und einem Aspekt zugeordnet. Die Attributgruppe beschreibt den Aufbau des Datensatzes
+					und der Aspekt legt die Verwendung und damit die Bedeutung (z.B."soll" und"ist") des Datensatzes fest. Welche Attributgruppen welche Aspekte
+					verwenden können, ist als Menge bei der entsprechenden Attributgruppe versorgt.
+				</beschreibung>
+			</info>
+			<erweitert pid="typ.attributMenge"/>
+			<menge pid="menge.aspekte" name="Aspekte" erforderlich="nein">
+				<info>
+					<kurzinfo>Mögliche Aspekte, unter denen die Attributgruppe verwendet werden kann.</kurzinfo>
+				</info>
+			</menge>
+			<menge pid="menge.attributgruppenVerwendungen" name="AttributgruppenVerwendungen" erforderlich="ja">
+				<info>
+					<kurzinfo>Attributgruppenverwendungen dieser Attributgruppe.</kurzinfo>
+				</info>
+			</menge>
+		</typDefinition>
+		<typDefinition pid="typ.attributgruppenVerwendung" name="AttributgruppenVerwendung" objektNamenPermanent="nein">
+			<info>
+				<kurzinfo>Attributgruppenverwendung definiert, welche Kombination von Attributgruppe und Aspekte verwendet werden kann.</kurzinfo>
+			</info>
+			<erweitert pid="typ.konfigurationsObjekt"/>
+			<attributgruppe pid="atg.attributgruppenVerwendung"/>
+		</typDefinition>
+		<typDefinition pid="typ.attributListenDefinition" name="AttributListenDefinition" objektNamenPermanent="nein">
+			<info>
+				<kurzinfo>Fasst Attribute in einer Liste zusammen.</kurzinfo>
+				<beschreibung>Attributlisten definieren eine Folge von Attributen die in anderen Attributlisten oder Attributgruppen referenziert werden kann.
+					Die Attributlistendefinition dient dabei als Attributtyp des referenzierenden Attributs.
+				</beschreibung>
+			</info>
+			<erweitert pid="typ.attributTyp"/>
+			<erweitert pid="typ.attributMenge"/>
+		</typDefinition>
+		<typDefinition pid="typ.attributMenge" name="AttributMenge" objektNamenPermanent="nein">
+			<info>
+				<kurzinfo>Zusammenfassung von Attributen. Wird bei Attributgruppen und Attributlisten benötigt.</kurzinfo>
+			</info>
+			<erweitert pid="typ.konfigurationsObjekt"/>
+			<menge pid="menge.attribute" name="Attribute" erforderlich="ja">
+				<info>
+					<kurzinfo>Menge der Attribute.</kurzinfo>
+				</info>
+			</menge>
+		</typDefinition>
+		<typDefinition pid="typ.attributTyp" name="AttributTyp" objektNamenPermanent="nein">
+			<info>
+				<kurzinfo>Definiert ein Attribut mit seinen Eigenschaften.</kurzinfo>
+				<beschreibung>Definiert ein Attribut mit seinen Eigenschaften, das in beliebigen Attributlisten und -gruppen verwendet werden kann. Ausserdem
+					kann ein Attribut innerhalb einer Attributliste (oder -gruppe) durch die Vergabe eines Namens (oder Subjekts) mehrfach verwendet werden.
+					Dies ist ein abstrakter Typ, von dem die konkreten Attributtypen GanzzahlAttributTyp, KommazahlAttributTyp, ObjektReferenzAttributTyp,
+					ZeichenkettenAttributTyp und ZeitstempelAttributTyp abgeleitet sind.
+				</beschreibung>
+			</info>
+			<erweitert pid="typ.konfigurationsObjekt"/>
+			<attributgruppe pid="atg.defaultAttributwert"/>
+		</typDefinition>
+		<typDefinition pid="typ.dynamischeMenge" name="DynamischeMenge" objektNamenPermanent="nein">
+			<info>
+				<kurzinfo>Dieser Typ beschreibt die Eigenschaften von Mengen, die sich dynamisch im laufenden Betrieb ändern können.</kurzinfo>
+			</info>
+			<erweitert pid="typ.konfigurationsObjekt"/>
+			<erweitert pid="typ.menge"/>
+			<attributgruppe pid="atg.dynamischeMenge"/>
+		</typDefinition>
+		<typDefinition pid="typ.dynamischerTyp" name="DynamischerTyp" objektNamenPermanent="nein">
+			<info>
+				<kurzinfo>Der Typ aller dynamischen Typobjekte.</kurzinfo>
+				<beschreibung>
+					<absatz>Objekte dieses Typs sind die Typen, die direkt oder indirekt den Typ
+						<verweis pid="typ.dynamischesObjekt" txt="DynamischesObjekt"></verweis>
+
+						erweitern, also die Typen deren Objekte zur Laufzeit erzeugt und gelöscht werden können.
+					</absatz>
+				</beschreibung>
+			</info>
+			<erweitert pid="typ.typ"/>
+			<attributgruppe pid="atg.dynamischerTypEigenschaften"/>
+		</typDefinition>
+		<typDefinition pid="typ.dynamischesObjekt" name="DynamischesObjekt" objektNamenPermanent="nein" persistenzModus="transient">
+			<info>
+				<kurzinfo>Basis der Typen, die dynamisch sind (Z.B. Stau).</kurzinfo>
+				<beschreibung>Dieser Typ fasst Eigenschaften zusammen,die für alle dynamischen Objekte gelten. Alle anderen Typen von dynamischen Objekten sind
+					direkt oder indirekt von diesem Typ abgeleitet.
+				</beschreibung>
+			</info>
+			<basis konfigurierend="nein"/>
+			<attributgruppe pid="atg.alternativeObjektbezeichnung"/>
+			<attributgruppe pid="atg.info"/>
+			<attributgruppe pid="atg.kexdavAustauschObjekt"/>
+		</typDefinition>
+		<typDefinition pid="typ.ganzzahlAttributTyp" name="GanzzahlAttributTyp" objektNamenPermanent="nein">
+			<info>
+				<kurzinfo>Definiert ein Attribut vom Datentyp Ganzzahl mit seinen Eigenschaften.</kurzinfo>
+			</info>
+			<erweitert pid="typ.attributTyp"/>
+			<attributgruppe pid="atg.ganzzahlAttributTypEigenschaften"/>
+			<menge pid="menge.werteZustaende" name="zustände" erforderlich="ja">
+			</menge>
+		</typDefinition>
+		<typDefinition pid="typ.kommazahlAttributTyp" name="KommazahlAttributTyp" objektNamenPermanent="nein">
+			<info>
+				<kurzinfo>Definiert ein Attribut vom Datentyp Kommazahl mit seinen Eigenschaften.</kurzinfo>
+			</info>
+			<erweitert pid="typ.attributTyp"/>
+			<attributgruppe pid="atg.kommazahlAttributTypEigenschaften"/>
+		</typDefinition>
+		<typDefinition pid="typ.konfigurationsBereich" name="KonfigurationsBereich" objektNamenPermanent="nein">
+			<info>
+				<kurzinfo>Zur Gruppierung von Konfigurationsobjekten und Konfigurationsdaten nach modellspezifischen, inhaltlichen und organisatorischen
+					Gesichtspunkten.
+				</kurzinfo>
+			</info>
+			<erweitert pid="typ.konfigurationsObjekt"/>
+			<attributgruppe pid="atg.konfigurationsÄnderungen"/>
+			<attributgruppe pid="atg.konfigurationsBereichAbhängigkeiten"/>
+			<attributgruppe pid="atg.konfigurationsBereichÄnderungsZeiten"/>
+			<attributgruppe pid="atg.konfigurationsBereichEigenschaften"/>
+			<attributgruppe pid="atg.konfigurationsBereichÜbernahmeInformationen"/>
+		</typDefinition>
+		<typDefinition pid="typ.konfigurationsMenge" name="KonfigurationsMenge" objektNamenPermanent="nein">
+			<info>
+				<kurzinfo>Dieser Typ beschreibt die Eigenschaften von konfigurierbaren Mengen von Konfigurationsobjekten.</kurzinfo>
+			</info>
+			<erweitert pid="typ.konfigurationsObjekt"/>
+			<erweitert pid="typ.menge"/>
+		</typDefinition>
+		<typDefinition pid="typ.konfigurationsObjekt" name="KonfigurationsObjekt" objektNamenPermanent="nein">
+			<info>
+				<kurzinfo>Basis der Typen, die zur Konfiguration gehören.</kurzinfo>
+				<beschreibung>Dieser Typ fasst Eigenschaften zusammen, die für alle Konfigurationsobjekte gelten. Alle anderen Typen von Konfigurationsobjekten
+					sind direkt oder indirekt von diesem Typ abgeleitet.
+				</beschreibung>
+			</info>
+			<basis konfigurierend="ja"/>
+			<attributgruppe pid="atg.alternativeObjektbezeichnung"/>
+			<attributgruppe pid="atg.defaultParameterdatensätze"/>
+			<attributgruppe pid="atg.info"/>
+		</typDefinition>
+		<typDefinition pid="typ.konfigurationsVerantwortlicher" name="KonfigurationsVerantwortlicher" objektNamenPermanent="nein">
+			<info>
+				<kurzinfo>Objekte dieses Typs können für die Konfiguration von konfigurierenden Objekten zuständig sein. (z.B. VRZen, UZen, System).</kurzinfo>
+			</info>
+			<erweitert pid="typ.konfigurationsObjekt"/>
+			<attributgruppe pid="atg.archivAnfrage"/>
+			<attributgruppe pid="atg.konfigurationsAnfrage"/>
+			<attributgruppe pid="atg.konfigurationsAnfrageSchnittstelle"/>
+			<attributgruppe pid="atg.konfigurationsAnfrageSchnittstelleLesend"/>
+			<attributgruppe pid="atg.konfigurationsAnfrageSchnittstelleSchreibend"/>
+			<attributgruppe pid="atg.konfigurationsBenutzerverwaltungsAnfrageSchnittstelle"/>
+			<attributgruppe pid="atg.konfigurationsBereichsverwaltungsAnfrageSchnittstelle"/>
+			<attributgruppe pid="atg.konfigurationsSchreibAnfrage"/>
+			<attributgruppe pid="atg.konfigurationsVerantwortlicherEigenschaften"/>
+			<attributgruppe pid="atg.konfigurationsVerantwortlicherLaufendeNummer"/>
+		</typDefinition>
+		<typDefinition pid="typ.menge" name="Menge" objektNamenPermanent="nein">
+			<info>
+				<kurzinfo>Zusammenfassung von Mengen. Wird für konfigurierbare und dynamische Mengen benötigt.</kurzinfo>
+			</info>
+			<erweitert pid="typ.konfigurationsObjekt"/>
+		</typDefinition>
+		<typDefinition pid="typ.mengenTyp" name="MengenTyp" objektNamenPermanent="nein">
+			<info>
+				<kurzinfo>Typ der MengenDefinition.</kurzinfo>
+				<beschreibung>Jede MengenDefinition wird als Objekt dieses Typs umgesetzt. Hier werden die Eigenschaften der MengenDefinitionen
+					zusammengefasst.
+				</beschreibung>
+			</info>
+			<erweitert pid="typ.typ"/>
+			<attributgruppe pid="atg.mengenTypEigenschaften"/>
+			<menge pid="menge.objektTypen" name="ObjektTypen" erforderlich="ja">
+				<info>
+					<kurzinfo>Enthält die möglichen Typen von Objekten, die in Mengen des jeweiligen MengenTyps verwendet werden können.</kurzinfo>
+				</info>
+			</menge>
+		</typDefinition>
+		<typDefinition pid="typ.mengenVerwendung" name="MengenVerwendung" objektNamenPermanent="nein">
+			<info>
+				<kurzinfo>Beschreibt die Verwendung einer MengenDefinition bei einer TypDefinition.</kurzinfo>
+			</info>
+			<erweitert pid="typ.konfigurationsObjekt"/>
+			<attributgruppe pid="atg.mengenVerwendungsEigenschaften"/>
+		</typDefinition>
+		<typDefinition pid="typ.objektReferenzAttributTyp" name="ObjektReferenzAttributTyp" objektNamenPermanent="nein">
+			<info>
+				<kurzinfo>Definiert ein Attribut vom Datentyp Objektreferenz mit seinen Eigenschaften.</kurzinfo>
+			</info>
+			<erweitert pid="typ.attributTyp"/>
+			<attributgruppe pid="atg.objektReferenzAttributTypEigenschaften"/>
+		</typDefinition>
+		<typDefinition pid="typ.transaktion" name="Transaktion" objektNamenPermanent="nein">
+			<info>
+				<kurzinfo>Definiert den Typ für Transaktionsobjekte</kurzinfo>
+			</info>
+			<erweitert pid="typ.attributgruppe"/>
+			<attributgruppe pid="atg.transaktionsEigenschaften"/>
+		</typDefinition>
+		<typDefinition pid="typ.typ" name="Typ" objektNamenPermanent="nein">
+			<info>
+				<kurzinfo>Der Typ aller Typobjekte.</kurzinfo>
+			</info>
+			<erweitert pid="typ.konfigurationsObjekt"/>
+			<attributgruppe pid="atg.typEigenschaften"/>
+			<menge pid="menge.attributgruppen" name="Attributgruppen" erforderlich="ja">
+				<info>
+					<kurzinfo>Jedem Typ ist eine Menge von Attributgruppen zugeordnet.</kurzinfo>
+				</info>
+			</menge>
+			<menge pid="menge.mengenVerwendungen" name="Mengen" erforderlich="ja">
+				<info>
+					<kurzinfo>Führt die Mengen auf, die mit Objekten dieses Typs verwendet werden können oder müssen.</kurzinfo>
+				</info>
+			</menge>
+			<menge pid="menge.objektTypen" name="SuperTypen" erforderlich="ja">
+				<info>
+					<kurzinfo>Jedem Typ ist eine Menge von Supertypen zugeordnet.</kurzinfo>
+					<beschreibung>Supertypen sind die Typen, von dem der jeweilige Typ abgeleitet ist. Ein Typ erbt die Eigenschaften bezüglich der verwendbaren
+						Attributgruppen und Mengen von all seinen Supertypen.
+					</beschreibung>
+				</info>
+			</menge>
+		</typDefinition>
+		<typDefinition pid="typ.werteBereich" name="WerteBereich" objektNamenPermanent="nein">
+			<info>
+				<kurzinfo>Typ eines Wertebereichs.</kurzinfo>
+			</info>
+			<erweitert pid="typ.konfigurationsObjekt"/>
+			<attributgruppe pid="atg.werteBereichsEigenschaften"/>
+		</typDefinition>
+		<typDefinition pid="typ.werteZustand" name="WerteZustand" objektNamenPermanent="nein">
+			<info>
+				<kurzinfo>Typ von diskreten Zuständen eines Attributwerts.</kurzinfo>
+			</info>
+			<erweitert pid="typ.konfigurationsObjekt"/>
+			<attributgruppe pid="atg.werteZustandsEigenschaften"/>
+		</typDefinition>
+		<typDefinition pid="typ.zeichenketteAttributTyp" name="ZeichenkettenAttributTyp" objektNamenPermanent="nein">
+			<info>
+				<kurzinfo>Definiert ein Attribut vom Datentyp Zeichenkette mit seinen Eigenschaften.</kurzinfo>
+			</info>
+			<erweitert pid="typ.attributTyp"/>
+			<attributgruppe pid="atg.zeichenkettenAttributTypEigenschaften"/>
+		</typDefinition>
+		<typDefinition pid="typ.zeitstempelAttributTyp" name="ZeitstempelAttributTyp" objektNamenPermanent="nein">
+			<info>
+				<kurzinfo>Definiert ein Attribut vom Datentyp Zeitstempel mit seinen Eigenschaften.</kurzinfo>
+			</info>
+			<erweitert pid="typ.attributTyp"/>
+			<attributgruppe pid="atg.zeitstempelAttributTypEigenschaften"/>
+		</typDefinition>
+		<attributgruppenDefinition pid="atg.alternativeObjektbezeichnung" name="AlternativeObjektbezeichnung" parametrierend="nein">
+			<info>
+				<kurzinfo>Verwaltet bis zu zehn alternative Bezeichnungen.</kurzinfo>
+			</info>
+			<aspekt pid="asp.eigenschaften" konfigurationsModus="datensatzOptionalUndÄnderbar">
+			</aspekt>
+			<attribut pid="att.name" anzahl="10" anzahlIst="variabel" name="Bezeichnung">
+			</attribut>
+		</attributgruppenDefinition>
+		<attributgruppenDefinition pid="atg.attributEigenschaften" name="AttributEigenschaften" parametrierend="nein">
+			<info>
+				<kurzinfo>Position, Name, Anzahl (fest, variabel) und Attribut-Typ-Referenz eines Attributs in einer Attributmenge.</kurzinfo>
+			</info>
+			<aspekt pid="asp.eigenschaften" konfigurationsModus="datensatzOptional">
+			</aspekt>
+			<attribut pid="att.position" anzahl="1" anzahlIst="fest" name="position">
+				<info>
+					<kurzinfo>Position eines Attributs in einer Attributgruppe oder -liste.</kurzinfo>
+				</info>
+			</attribut>
+			<attribut pid="att.maximaleAnzahl" anzahl="1" anzahlIst="fest" name="anzahl">
+			</attribut>
+			<attribut pid="att.jaNein" anzahl="1" anzahlIst="fest" name="anzahlVariabel">
+				<info>
+					<kurzinfo>Spezifiziert ob die Anzahl der verwendeten Feldelement zwischen 0 und der im Attribut 'anzahl' angegebenen Größe variieren
+						kann.
+					</kurzinfo>
+				</info>
+			</attribut>
+			<attribut pid="att.attributTypReferenz" anzahl="1" anzahlIst="fest" name="attributTyp">
+			</attribut>
+		</attributgruppenDefinition>
+		<attributgruppenDefinition pid="atg.attributgruppenVerwendung" name="AttributgruppenVerwendung" parametrierend="nein">
+			<info>
+				<kurzinfo>Attributgruppenverwendung definiert, welche Kombination von Attributgruppe und Aspekt verwendet werden kann.</kurzinfo>
+			</info>
+			<aspekt pid="asp.eigenschaften" konfigurationsModus="datensatzOptional">
+			</aspekt>
+			<attribut pid="att.aggregationAttributgruppe" anzahl="1" anzahlIst="fest" name="Attributgruppe">
+			</attribut>
+			<attribut pid="att.aggregationAspekt" anzahl="1" anzahlIst="fest" name="Aspekt">
+			</attribut>
+			<attribut pid="att.jaNein" anzahl="1" anzahlIst="fest" name="VerwendungExplizitVorgegeben">
+			</attribut>
+			<attribut pid="att.datensatzVerwendung" anzahl="1" anzahlIst="fest" name="DatensatzVerwendung">
+			</attribut>
+		</attributgruppenDefinition>
+		<attributgruppenDefinition pid="atg.defaultAttributwert" name="DefaultAttributwert" parametrierend="nein">
+			<info>
+				<kurzinfo>Default für Attributwerte der bei Attributen und Attributtypen angegeben werden kann und bei der Erzeugung von Datensätzen durch die
+					DAF benutzt wird um Attribute zu initialisieren.
+				</kurzinfo>
+			</info>
+			<aspekt pid="asp.eigenschaften" konfigurationsModus="datensatzOptional">
+			</aspekt>
+			<attribut pid="att.text" anzahl="1" anzahlIst="fest" name="wert">
+				<info>
+					<kurzinfo>Wert, der initial bei der Erzeugung eines Datensatzes durch die DAF benutzt wird.</kurzinfo>
+				</info>
+			</attribut>
+		</attributgruppenDefinition>
+		<attributgruppenDefinition pid="atg.defaultParameterdatensätze" name="Default-Parameterdatensätze" parametrierend="nein">
+			<info>
+				<kurzinfo>Attributgruppe zur Speicherung von Default-Parameterdatensätzen für alle Parameter-Attributgruppen eines Typs.</kurzinfo>
+			</info>
+			<aspekt pid="asp.eigenschaften" konfigurationsModus="datensatzOptionalUndÄnderbar">
+			</aspekt>
+			<attributliste pid="atl.defaultParameterdatensatz" anzahl="0" anzahlIst="variabel" name="Default-Parameterdatensatz">
+				<info>
+					<kurzinfo>Array mit den definierten Default-Parameterdatensätzen.</kurzinfo>
+				</info>
+			</attributliste>
+		</attributgruppenDefinition>
+		<attributgruppenDefinition pid="atg.dynamischeMenge" name="DynamischeMengenEigenschaften" parametrierend="nein">
+			<info>
+				<kurzinfo>Eigenschaften von dynamischen Mengen.</kurzinfo>
+			</info>
+			<aspekt pid="asp.eigenschaften" konfigurationsModus="datensatzOptional">
+			</aspekt>
+			<attribut pid="att.text" anzahl="1" anzahlIst="fest" name="verwaltung">
+				<info>
+					<kurzinfo>Spezifiziert die Pid der für die Elementzugehörigkeit einer dynamischen Menge zuständigen Konfiguration.
+					</kurzinfo>
+				</info>
+			</attribut>
+		</attributgruppenDefinition>
+		<attributgruppenDefinition pid="atg.dynamischerTypEigenschaften" name="DynamischerTypEigenschaften" parametrierend="nein">
+			<info>
+				<kurzinfo>Eigenschaften von dynamischen Typobjekten.</kurzinfo>
+			</info>
+			<aspekt pid="asp.eigenschaften" konfigurationsModus="datensatzOptional">
+			</aspekt>
+			<attribut pid="att.persistenzModus" anzahl="1" anzahlIst="fest" name="persistenzModus">
+				<info>
+					<kurzinfo>Spezifiziert, ob dynamische Objekte dieses Typs beim Neustart gelöscht, persistent sein sollen oder auf ungültig gesetzt werden
+						sollen.
+					</kurzinfo>
+				</info>
+			</attribut>
+		</attributgruppenDefinition>
+		<attributgruppenDefinition pid="atg.ganzzahlAttributTypEigenschaften" name="GanzzahlAttributTypEigenschaften" parametrierend="nein">
+			<info>
+				<kurzinfo>Attributgruppe zur Beschreibung der Eigenschaften von Attribut-Typen des Datentyps Ganzzahl.</kurzinfo>
+			</info>
+			<aspekt pid="asp.eigenschaften" konfigurationsModus="datensatzOptional">
+			</aspekt>
+			<attribut pid="att.werteBereichReferenz" anzahl="1" anzahlIst="fest" name="bereich">
+			</attribut>
+			<attribut pid="att.datentypGroesse" anzahl="1" anzahlIst="fest" name="anzahlBytes">
+			</attribut>
+		</attributgruppenDefinition>
+		<attributgruppenDefinition pid="atg.info" name="Info" parametrierend="nein">
+			<info>
+				<kurzinfo>Attributgruppe zur Speicherung von beschreibenden Informationen zu einem Objekt.</kurzinfo>
+			</info>
+			<aspekt pid="asp.eigenschaften" konfigurationsModus="datensatzOptionalUndÄnderbar">
+			</aspekt>
+			<attribut pid="att.text" anzahl="1" anzahlIst="fest" name="kurzinfo">
+				<info>
+					<kurzinfo>Kurze beschreibende Information des Objekts</kurzinfo>
+				</info>
+			</attribut>
+			<attribut pid="att.text" anzahl="1" anzahlIst="fest" name="beschreibung">
+				<info>
+					<kurzinfo>Ausführliche Beschreibung des Objekts</kurzinfo>
+				</info>
+			</attribut>
+		</attributgruppenDefinition>
+		<attributgruppenDefinition pid="atg.kexdavAustauschObjekt" name="KExDaVAustauschObjekt" parametrierend="nein">
+			<info>
+				<kurzinfo>Enthält Informationen, wenn dieses Objekt mit KExDaV übertragen wurde und von einer anderen Konfiguration stammt.</kurzinfo>
+			</info>
+			<aspekt pid="asp.eigenschaften" konfigurationsModus="datensatzOptionalUndÄnderbar">
+			</aspekt>
+			<attribut pid="att.zahl" anzahl="1" anzahlIst="fest" name="originalId">
+				<info>
+					<kurzinfo>Die Id des Objektes auf dem Quellsystem</kurzinfo>
+				</info>
+			</attribut>
+			<attribut pid="att.text" anzahl="1" anzahlIst="fest" name="konfigurationsVerantwortlicher">
+				<info>
+					<kurzinfo>Der Konfigurationsverantwortliche des Originalobjekts</kurzinfo>
+				</info>
+			</attribut>
+			<attribut pid="att.text" anzahl="1" anzahlIst="fest" name="kexdavObjekt">
+				<info>
+					<kurzinfo>Das KExDaV-Objekt mit dem dieses Objekt übertragen wurde</kurzinfo>
+				</info>
+			</attribut>
+		</attributgruppenDefinition>
+		<attributgruppenDefinition pid="atg.kommazahlAttributTypEigenschaften" name="KommazahlAttributTypEigenschaften" parametrierend="nein">
+			<info>
+				<kurzinfo>Attributgruppe zur Beschreibung der Eigenschaften von Attribut-Typen des Datentyps Kommazahl.</kurzinfo>
+			</info>
+			<aspekt pid="asp.eigenschaften" konfigurationsModus="datensatzOptional">
+			</aspekt>
+			<attribut pid="att.einheit" anzahl="1" anzahlIst="fest" name="einheit">
+			</attribut>
+			<attribut pid="att.fliesskommaAufloesung" anzahl="1" anzahlIst="fest" name="genauigkeit">
+			</attribut>
+		</attributgruppenDefinition>
+		<attributgruppenDefinition pid="atg.konfigurationsÄnderungen" name="KonfigurationsÄnderungen" parametrierend="nein">
+			<info>
+				<kurzinfo>Verwaltet beliebig viele Änderungseinträge der Konfigurationsbereiche.</kurzinfo>
+				<beschreibung>
+					Jedem Konfigurationsbereich können in der Versorgungsdatei Konfigurationsänderungen mitgeteilt werden. Diese werden in diesem Datensatz
+					abgelegt.
+				</beschreibung>
+			</info>
+			<aspekt pid="asp.eigenschaften" konfigurationsModus="datensatzOptionalUndÄnderbar">
+			</aspekt>
+			<attributliste pid="atl.konfigurationsÄnderung" anzahl="0" anzahlIst="variabel" name="KonfigurationsÄnderung">
+			</attributliste>
+		</attributgruppenDefinition>
+		<attributgruppenDefinition pid="atg.konfigurationsBereichAbhängigkeiten" name="Bereichsabhängigkeiten" parametrierend="nein">
+			<info>
+				<kurzinfo>Verwaltet beliebig viele Abhängigkeiten der Konfigurationsbereiche.</kurzinfo>
+				<beschreibung>
+					Durch Referenzen in andere Bereich können Abhängigkeiten unter den Bereichen entstehen. Alle Abhängigkeiten eines Bereichs zu anderen
+					Bereichen werden in dieser Attributgruppe gespeichert.
+				</beschreibung>
+			</info>
+			<aspekt pid="asp.eigenschaften" konfigurationsModus="datensatzOptionalUndÄnderbar">
+			</aspekt>
+			<attributliste pid="atl.konfigurationsAbhängigkeiten" anzahl="0" anzahlIst="variabel" name="KonfigurationsAbhängigkeiten">
+			</attributliste>
+		</attributgruppenDefinition>
+		<attributgruppenDefinition pid="atg.konfigurationsBereichÄnderungsZeiten" name="KonfigurationsBereichÄnderungsZeiten" parametrierend="nein">
+			<info>
+				<kurzinfo>Attributgruppe zur Speicherung von Zeiten der letzten Änderung eines Bereichs</kurzinfo>
+				<beschreibung>
+					Um die Aktualität seitens einer Applikation zwischengespeicherter Konfigurationsdaten zu unterstützen, müssen zu jedem Konfigurationsbereich
+					verschiedene Zeitpunkte verwaltet werden.
+				</beschreibung>
+			</info>
+			<aspekt pid="asp.eigenschaften" konfigurationsModus="datensatzOptional">
+			</aspekt>
+			<attribut pid="att.zeitstempel" anzahl="1" anzahlIst="fest" name="LetzteÄnderungszeitDynamischesObjekt">
+				<info>
+					<kurzinfo>Liefert die Zeit vom letzten Erzeugen oder Löschen eines dynamischen Objekts.</kurzinfo>
+				</info>
+			</attribut>
+			<attribut pid="att.zeitstempel" anzahl="1" anzahlIst="fest" name="LetzteÄnderungszeitKonfigurationsObjekt">
+				<info>
+					<kurzinfo>Liefert die Zeit vom letzten Erzeugen oder Löschen eines Konfigurationsobjekts (in noch nicht aktivierten Versionen).</kurzinfo>
+				</info>
+			</attribut>
+			<attribut pid="att.zeitstempel" anzahl="1" anzahlIst="fest" name="LetzteÄnderungszeitDatensatz">
+				<info>
+					<kurzinfo>Liefert die Zeit der letzten Änderung eines änderbaren konfigurierenden Datensatzes.</kurzinfo>
+				</info>
+			</attribut>
+		</attributgruppenDefinition>
+		<attributgruppenDefinition pid="atg.konfigurationsBereichEigenschaften" name="KonfigurationsBereichEigenschaften" parametrierend="nein">
+			<info>
+				<kurzinfo>Attributgruppe zur Speicherung von Eigenschaften von Konfigurationsbereichen</kurzinfo>
+				<beschreibung>
+					Dieser Datensatz sollte nur durch den Import und die Aktivierung geändert werden.
+				</beschreibung>
+			</info>
+			<aspekt pid="asp.eigenschaften" konfigurationsModus="datensatzNotwendigUndÄnderbar">
+			</aspekt>
+			<attribut pid="att.zuständiger" anzahl="1" anzahlIst="fest" name="zuständiger">
+				<info>
+					<kurzinfo>Spezifiziert den Konfigurationsverantwortlichen für diesen Bereich.</kurzinfo>
+				</info>
+			</attribut>
+			<attribut pid="att.konfigurationsVerantwortlicherOptional" anzahl="1" anzahlIst="fest" name="neuerZuständiger">
+				<info>
+					<kurzinfo>Spezifiziert den neuen Konfigurationsverantwortlichen für diesen Bereich.</kurzinfo>
+					<beschreibung>Bei der Aktivierung wird der bisherige Zuständige durch den neuen Zuständigen ersetzt.</beschreibung>
+				</info>
+				<default wert="null"/>
+			</attribut>
+		</attributgruppenDefinition>
+		<attributgruppenDefinition pid="atg.konfigurationsBereichÜbernahmeInformationen" name="KonfigurationsBereichÜbernahmeInformationen" parametrierend="nein">
+			<info>
+				<kurzinfo>Attributgruppe zur Speicherung von Informationen zur Übernahme eines Konfigurationsbereichs</kurzinfo>
+			</info>
+			<aspekt pid="asp.eigenschaften" konfigurationsModus="datensatzNotwendigUndÄnderbar">
+			</aspekt>
+			<attribut pid="att.konfigurationsVersion" anzahl="1" anzahlIst="fest" name="aktivierbareVersion">
+				<info>
+					<kurzinfo>Spezifiziert welche Version des Bereichs von anderen Konfigurationen aktiviert werden kann.</kurzinfo>
+				</info>
+			</attribut>
+			<attribut pid="att.konfigurationsVersion" anzahl="1" anzahlIst="fest" name="übernehmbareVersion">
+				<info>
+					<kurzinfo>Spezifiziert welche Version des Bereichs von anderen Konfigurationen übernommen, aber nicht aktiviert werden kann.</kurzinfo>
+				</info>
+			</attribut>
+		</attributgruppenDefinition>
+		<attributgruppenDefinition pid="atg.konfigurationsVerantwortlicherEigenschaften" name="KonfigurationsVerantwortlicherEigenschaften" parametrierend="nein">
+			<info>
+				<kurzinfo>Attributgruppe zur Speicherung von Eigenschaften von Konfigurationsbereichen</kurzinfo>
+			</info>
+			<aspekt pid="asp.eigenschaften" konfigurationsModus="datensatzNotwendigUndÄnderbar">
+			</aspekt>
+			<attribut pid="att.kodierungKonfigurationsVerantwortlicher" anzahl="1" anzahlIst="fest" name="kodierung">
+				<info>
+					<kurzinfo>Spezifiziert die eindeutige Kodierung des Konfigurationsverantwortlichen.</kurzinfo>
+					<beschreibung>
+						Die Kodierung dient bei der Erzeugung von Objekten dazu, eine über alle Konfigurationen hinweg eindeutige Objekt-Id zu
+						generieren.
+					</beschreibung>
+				</info>
+			</attribut>
+			<attribut pid="att.pid" anzahl="1" anzahlIst="variabel" name="defaultBereich">
+				<info>
+					<kurzinfo>Spezifiziert einen Konfigurationsbereich in dem neu erzeugte Objekte von der jeweiligen Konfiguration angelegt werden, wenn keine
+						explizite Vorgabe seitens der Applikation erfolgt.
+					</kurzinfo>
+				</info>
+			</attribut>
+		</attributgruppenDefinition>
+		<attributgruppenDefinition pid="atg.konfigurationsVerantwortlicherLaufendeNummer" name="KonfigurationsVerantwortlicherLaufendeNummer" parametrierend="nein">
+			<info>
+				<kurzinfo>Speichert die Laufende Nummer des KonfigurationsVerantwortlichen.</kurzinfo>
+			</info>
+			<aspekt pid="asp.eigenschaften" konfigurationsModus="datensatzOptionalUndÄnderbar">
+			</aspekt>
+			<attribut pid="att.zahl" anzahl="1" anzahlIst="fest" name="laufendeNummer">
+				<info>
+					<kurzinfo>Enthält die laufende Nummer des Konfigurationsverantwortlichen.</kurzinfo>
+					<beschreibung>
+						Zusammen mit der Kodierung bildet die laufende Nummer die ID eines Objekts. Sie ist streng monoton steigend. Bei jedem neu anzulegenden
+						Objekt wird die laufende Nummer um eins erhöht.
+					</beschreibung>
+				</info>
+				<default wert="0"/>
+			</attribut>
+		</attributgruppenDefinition>
+		<attributgruppenDefinition pid="atg.mengenTypEigenschaften" name="MengenTypEigenschaften" parametrierend="nein">
+			<info>
+				<kurzinfo>Attributgruppe, die die minimal und maximal erlaubte Anzahl von Objekten in Mengen des jeweiligen Typs definiert.</kurzinfo>
+			</info>
+			<aspekt pid="asp.eigenschaften" konfigurationsModus="datensatzOptional">
+			</aspekt>
+			<attribut pid="att.minimaleAnzahl" anzahl="1" anzahlIst="fest" name="minimaleAnzahl">
+				<info>
+					<kurzinfo>Minimale Anzahl der Elemente in der Menge.</kurzinfo>
+				</info>
+			</attribut>
+			<attribut pid="att.maximaleAnzahl" anzahl="1" anzahlIst="fest" name="maximaleAnzahl">
+				<info>
+					<kurzinfo>Maximale Anzahl der Elemente in der Menge.</kurzinfo>
+				</info>
+			</attribut>
+			<attribut pid="att.jaNein" anzahl="1" anzahlIst="fest" name="änderbar">
+				<info>
+					<kurzinfo>Legt fest, ob Mengen dieses Typs online änderbar sind.</kurzinfo>
+				</info>
+			</attribut>
+			<attribut pid="att.referenzierungsart" anzahl="1" anzahlIst="fest" name="referenzierungsart">
+				<info>
+					<kurzinfo>Referenzierungsart von Mengen (Gerichtete Assoziation, Aggregation oder Komposition).</kurzinfo>
+					<beschreibung>
+						<absatz>
+							Zu jedem Mengentyp von Konfigurationsmengen muss verwaltet werden, ob die Referenzen auf die Elemente einer Menge dieses Typs als
+							gerichtete Assoziation, als Aggregation oder als Komposition realisiert werden soll. (TPuK1-90 Referenzierungsart von
+							Konfigurationsmengen).
+						</absatz>
+						<absatz>
+							Zu jedem Mengentyp von dynamischen Mengen darf als Referenzierungsart nur die gerichtete Assoziation zugelassen werden. (TPuK1-91
+							Referenzierungsart von dynamischen Mengen).
+						</absatz>
+					</beschreibung>
+				</info>
+			</attribut>
+		</attributgruppenDefinition>
+		<attributgruppenDefinition pid="atg.mengenVerwendungsEigenschaften" name="MengenVerwendungsEigenschaften" parametrierend="nein">
+			<info>
+				<kurzinfo>Attributgruppe zur Speicherung der Eigenschaften einer MengenVerwendung.</kurzinfo>
+				<beschreibung>Bei jeder TypDefinition ist eine Liste von Mengen angegeben, die bei Objekten dieses Typs verwendet werden müssen oder können. Für
+					jede Menge der Typdefinition wird in dieser Attributgruppe beschrieben, wie die Menge heißen muss, welchen Mengentyp sie haben muss und ob
+					sie bei jedem Objekt des Typs vorhanden sein muss oder optional ist.
+				</beschreibung>
+			</info>
+			<aspekt pid="asp.eigenschaften" konfigurationsModus="datensatzOptional">
+			</aspekt>
+			<attribut pid="att.name" anzahl="1" anzahlIst="fest" name="mengenName">
+				<info>
+					<kurzinfo>Persistenter Name der Menge.</kurzinfo>
+					<beschreibung>Der Name unter dem die Menge ausgehend von einem Objekt des jeweiligen Typs referenzierbar ist.</beschreibung>
+				</info>
+			</attribut>
+			<attribut pid="att.mengenTypReferenz" anzahl="1" anzahlIst="fest" name="mengenTyp">
+				<info>
+					<kurzinfo>Referenz auf die MengenDefinition die den Typ der Menge beschreibt.</kurzinfo>
+				</info>
+			</attribut>
+			<attribut pid="att.jaNein" anzahl="1" anzahlIst="fest" name="erforderlich">
+				<info>
+					<kurzinfo>Gibt an ob die Existenz der Menge unter einem Objekt des jeweiligen Typs erforderlich ist.</kurzinfo>
+				</info>
+			</attribut>
+		</attributgruppenDefinition>
+		<attributgruppenDefinition pid="atg.objektReferenzAttributTypEigenschaften" name="ObjektReferenzAttributTypEigenschaften" parametrierend="nein">
+			<info>
+				<kurzinfo>Attributgruppe zur Beschreibung der Eigenschaften von Attribut-Typen des Datentyps ObjektReferenz.</kurzinfo>
+			</info>
+			<aspekt pid="asp.eigenschaften" konfigurationsModus="datensatzOptional">
+			</aspekt>
+			<attribut pid="att.optionaleTypReferenz" anzahl="1" anzahlIst="fest" name="typ">
+				<info>
+					<kurzinfo>Gibt den Objekttyp der referenzierten Objekte an.</kurzinfo>
+					<beschreibung>
+						Zu Referenz-Attributtypen muss verwaltet werden, von welchem Objekttyp die durch Attributwerte dieses Attributtyps referenzierten
+						Objekte sein müssen (TPuK1-73 Objekttyp der referenzierten Objekte).
+					</beschreibung>
+				</info>
+			</attribut>
+			<attribut pid="att.jaNein" anzahl="1" anzahlIst="fest" name="undefiniertErlaubt">
+				<info>
+					<kurzinfo>Gibt an, ob undefinierte Referenzen in Attributwerten dieses Attributtyps zugelassen werden.</kurzinfo>
+					<beschreibung>
+						Zu Referenz-Attributtypen muss verwaltet werden, ob undefinierte Referenzen in Attributwerten dieses Attributtyps zugelassen werden
+						(TPuK1-74 Undefinierte Referenzen).
+					</beschreibung>
+				</info>
+			</attribut>
+			<attribut pid="att.referenzierungsart" anzahl="1" anzahlIst="fest" name="referenzierungsart">
+				<info>
+					<kurzinfo>Referenzierungsart von Referenzen (Gerichtete Assoziation, Aggregation oder Komposition).</kurzinfo>
+					<beschreibung>
+						Zu Referenz-Attributtypen muss verwaltet werden, ob die in Attributwerten dieses Attributtyps enthaltenen Referenzen als gerichtete
+						Assoziationen, als Aggregationen oder als Kompositionen realisiert werden sollen (TPuK1-75 Referenzierungsart von
+						Referenzen).
+					</beschreibung>
+				</info>
+			</attribut>
+		</attributgruppenDefinition>
+		<attributgruppenDefinition pid="atg.transaktionsEigenschaften" name="TransaktionsEigenschaften" parametrierend="nein">
+			<info>
+				<kurzinfo>Eigenschaften von Transaktionen</kurzinfo>
+			</info>
+			<aspekt pid="asp.eigenschaften" konfigurationsModus="datensatzNotwendig">
+			</aspekt>
+			<attributliste pid="atl.transaktionsEinschränkung" anzahl="0" anzahlIst="variabel" name="akzeptiert">
+			</attributliste>
+			<attributliste pid="atl.transaktionsEinschränkung" anzahl="0" anzahlIst="variabel" name="benötigt">
+			</attributliste>
+		</attributgruppenDefinition>
+		<attributgruppenDefinition pid="atg.typEigenschaften" name="TypEigenschaften" parametrierend="nein">
+			<info>
+				<kurzinfo>Eigenschaften von allen Objekten eines bestimmten Typs.</kurzinfo>
+			</info>
+			<aspekt pid="asp.eigenschaften" konfigurationsModus="datensatzOptional">
+			</aspekt>
+			<attribut pid="att.jaNein" anzahl="1" anzahlIst="fest" name="konfigurierend">
+			</attribut>
+			<attribut pid="att.jaNein" anzahl="1" anzahlIst="fest" name="namePermanent">
+				<info>
+					<kurzinfo>Legt fest, ob der Name eines Objekts dieses Typs (nachdem er einmal vergeben wurde) nochmal geändert werden kann oder
+						nicht.
+					</kurzinfo>
+					<beschreibung>Bei bestimmten Objekten ist die Zugriffsmöglichkeit über den Namen des Objektes vorgesehen (z.B. Mengen eines Objekts oder
+						Attribute einer Attributgruppe). Da mit der Änderung des Objektnamens bei diesen Objekten quasi eine Änderung der Konfigurationsstruktur
+						durchgeführt wird und dies Auswirkungen auf SW-Einheiten haben kann, kann bei diesen Objekten die Änderbarkeit des Objekt-Namens
+						eingeschränkt werden.
+					</beschreibung>
+				</info>
+			</attribut>
+		</attributgruppenDefinition>
+		<attributgruppenDefinition pid="atg.werteBereichsEigenschaften" name="WerteBereichsEigenschaften" parametrierend="nein">
+			<info>
+				<kurzinfo>Attributgruppe zur Beschreibung der Eigenschaften von Wertebereichen.</kurzinfo>
+			</info>
+			<aspekt pid="asp.eigenschaften" konfigurationsModus="datensatzOptional">
+			</aspekt>
+			<attribut pid="att.zahl" anzahl="1" anzahlIst="fest" name="minimum">
+			</attribut>
+			<attribut pid="att.zahl" anzahl="1" anzahlIst="fest" name="maximum">
+			</attribut>
+			<attribut pid="att.faktor" anzahl="1" anzahlIst="fest" name="skalierung">
+			</attribut>
+			<attribut pid="att.einheit" anzahl="1" anzahlIst="fest" name="einheit">
+			</attribut>
+		</attributgruppenDefinition>
+		<attributgruppenDefinition pid="atg.werteZustandsEigenschaften" name="WerteZustandsEigenschaften" parametrierend="nein">
+			<info>
+				<kurzinfo>Attributgruppe zur Beschreibung der Eigenschaften von Wertezuständen.</kurzinfo>
+			</info>
+			<aspekt pid="asp.eigenschaften" konfigurationsModus="datensatzOptional">
+			</aspekt>
+			<attribut pid="att.zahl" anzahl="1" anzahlIst="fest" name="wert">
+			</attribut>
+		</attributgruppenDefinition>
+		<attributgruppenDefinition pid="atg.zeichenkettenAttributTypEigenschaften" name="ZeichenkettenAttributTypEigenschaften" parametrierend="nein">
+			<info>
+				<kurzinfo>Attributgruppe zur Beschreibung der Eigenschaften von Attribut-Typen des Datentyps Zeichenkette.</kurzinfo>
+			</info>
+			<aspekt pid="asp.eigenschaften" konfigurationsModus="datensatzOptional">
+			</aspekt>
+			<attribut pid="att.maximaleAnzahl" anzahl="1" anzahlIst="fest" name="länge">
+			</attribut>
+			<attribut pid="att.zeichenKodierung" anzahl="1" anzahlIst="fest" name="kodierung">
+			</attribut>
+		</attributgruppenDefinition>
+		<attributgruppenDefinition pid="atg.zeitstempelAttributTypEigenschaften" name="ZeitstempelAttributTypEigenschaften" parametrierend="nein">
+			<info>
+				<kurzinfo>Attributgruppe zur Beschreibung der Eigenschaften von Attribut-Typen des Datentyps Zeitstempel.</kurzinfo>
+			</info>
+			<aspekt pid="asp.eigenschaften" konfigurationsModus="datensatzOptional">
+			</aspekt>
+			<attribut pid="att.jaNein" anzahl="1" anzahlIst="fest" name="relativ">
+				<info>
+					<kurzinfo>Gibt an, ob eine Attribut dieses Attributtyps eine relative oder absolute Zeitangabe ist. Bei absoluten Zeitangaben bezieht sich
+						die Angabe auf den 1. Januar 1970 00:00 Uhr.
+					</kurzinfo>
+				</info>
+			</attribut>
+			<attribut pid="att.zeitAufloesung" anzahl="1" anzahlIst="fest" name="genauigkeit">
+			</attribut>
+		</attributgruppenDefinition>
+		<attributDefinition pid="att.aggregationAspekt" name="AggregationAspekt">
+			<info>
+				<kurzinfo>Attributtyp zur Referenzierung von Aspekten mit Referenzierungsart Aggregation.</kurzinfo>
+			</info>
+			<objektReferenz typ="typ.aspekt" undefiniert="verboten" referenzierungsart="aggregation"/>
+		</attributDefinition>
+		<attributDefinition pid="att.aggregationAttributgruppe" name="AggregationAttributgruppe">
+			<info>
+				<kurzinfo>Attributtyp zur Referenzierung von Attributgruppen mit Referenzierungsart Aggregation.</kurzinfo>
+			</info>
+			<objektReferenz typ="typ.attributgruppe" undefiniert="verboten" referenzierungsart="aggregation"/>
+		</attributDefinition>
+		<attributDefinition pid="att.aspektReferenzOptional" name="AspektReferenzOptional">
+			<info>
+				<kurzinfo>Attribut zur Referenzierung des Objekttyps: typ.aspekt (Optionale Referenzierung erlaubt).</kurzinfo>
+			</info>
+			<objektReferenz typ="typ.aspekt" undefiniert="erlaubt" referenzierungsart="assoziation"/>
+		</attributDefinition>
+		<attributDefinition pid="att.attributgruppenVerwendungReferenz" name="AttributgruppenVerwendungReferenz">
+			<info>
+				<kurzinfo>Attribut zur Referenzierung des Objekttyps: typ.attributgruppenVerwendung.</kurzinfo>
+			</info>
+			<objektReferenz typ="typ.attributgruppenVerwendung" undefiniert="verboten" referenzierungsart="assoziation"/>
+		</attributDefinition>
+		<attributDefinition pid="att.attributgruppenVerwendungReferenzOptional" name="AttributgruppenVerwendungReferenzOptional">
+			<info>
+				<kurzinfo>Attribut zur Referenzierung des Objekttyps: typ.attributgruppenVerwendung (Optionale Referenzierung erlaubt).</kurzinfo>
+			</info>
+			<objektReferenz typ="typ.attributgruppenVerwendung" undefiniert="erlaubt" referenzierungsart="assoziation"/>
+		</attributDefinition>
+		<attributDefinition pid="att.attributgruppeReferenz" name="AttributgruppeReferenz">
+			<info>
+				<kurzinfo>Attribut zur Referenzierung des Objekttyps: typ.attributgruppe.</kurzinfo>
+			</info>
+			<objektReferenz typ="typ.attributgruppe" undefiniert="verboten" referenzierungsart="assoziation"/>
+		</attributDefinition>
+		<attributDefinition pid="att.attributgruppeReferenzOptional" name="AttributgruppeReferenzOptional">
+			<info>
+				<kurzinfo>Attribut zur Referenzierung des Objekttyps: typ.attributgruppe (Optionale Referenzierung erlaubt).</kurzinfo>
+			</info>
+			<objektReferenz typ="typ.attributgruppe" undefiniert="erlaubt" referenzierungsart="assoziation"/>
+		</attributDefinition>
+		<attributDefinition pid="att.attributListenDefinitionReferenz" name="AttributListenDefinitionReferenz">
+			<info>
+				<kurzinfo>Attribut zur Referenzierung des Objekttyps: typ.attributListenDefinition.</kurzinfo>
+			</info>
+			<objektReferenz typ="typ.attributListenDefinition" undefiniert="verboten" referenzierungsart="assoziation"/>
+		</attributDefinition>
+		<attributDefinition pid="att.attributListenDefinitionReferenzOptional" name="AttributListenDefinitionReferenzOptional">
+			<info>
+				<kurzinfo>Attribut zur Referenzierung des Objekttyps: typ.attributListenDefinition (Optionale Referenzierung erlaubt).</kurzinfo>
+			</info>
+			<objektReferenz typ="typ.attributListenDefinition" undefiniert="erlaubt" referenzierungsart="assoziation"/>
+		</attributDefinition>
+		<attributDefinition pid="att.attributMengeReferenz" name="AttributMengeReferenz">
+			<info>
+				<kurzinfo>Attribut zur Referenzierung des Objekttyps: typ.attributMenge.</kurzinfo>
+			</info>
+			<objektReferenz typ="typ.attributMenge" undefiniert="verboten" referenzierungsart="assoziation"/>
+		</attributDefinition>
+		<attributDefinition pid="att.attributMengeReferenzOptional" name="AttributMengeReferenzOptional">
+			<info>
+				<kurzinfo>Attribut zur Referenzierung des Objekttyps: typ.attributMenge (Optionale Referenzierung erlaubt).</kurzinfo>
+			</info>
+			<objektReferenz typ="typ.attributMenge" undefiniert="erlaubt" referenzierungsart="assoziation"/>
+		</attributDefinition>
+		<attributDefinition pid="att.attributReferenz" name="AttributReferenz">
+			<info>
+				<kurzinfo>Attribut zur Referenzierung des Objekttyps: typ.attribut.</kurzinfo>
+			</info>
+			<objektReferenz typ="typ.attribut" undefiniert="verboten" referenzierungsart="assoziation"/>
+		</attributDefinition>
+		<attributDefinition pid="att.attributReferenzOptional" name="AttributReferenzOptional">
+			<info>
+				<kurzinfo>Attribut zur Referenzierung des Objekttyps: typ.attribut (Optionale Referenzierung erlaubt).</kurzinfo>
+			</info>
+			<objektReferenz typ="typ.attribut" undefiniert="erlaubt" referenzierungsart="assoziation"/>
+		</attributDefinition>
+		<attributDefinition pid="att.attributTypReferenz" name="AttributTypReferenz">
+			<info>
+				<kurzinfo>Attribut zur Referenzierung von Attribut-Typen.</kurzinfo>
+			</info>
+			<objektReferenz typ="typ.attributTyp" undefiniert="verboten" referenzierungsart="aggregation"/>
+		</attributDefinition>
+		<attributDefinition pid="att.attributTypReferenzOptional" name="AttributTypReferenzOptional">
+			<info>
+				<kurzinfo>Attribut zur Referenzierung des Objekttyps: typ.attributTyp (Optionale Referenzierung erlaubt).</kurzinfo>
+			</info>
+			<objektReferenz typ="typ.attributTyp" undefiniert="erlaubt" referenzierungsart="assoziation"/>
+		</attributDefinition>
+		<attributDefinition pid="att.byte" name="Byte">
+			<info>
+				<kurzinfo>Beliebige ganze Zahl im Bereich -128 bis 127.</kurzinfo>
+			</info>
+			<ganzzahl bits="8">
+				<bereich skalierung="1" minimum="-128" maximum="127">
+				</bereich>
+			</ganzzahl>
+			<default wert="0"/>
+		</attributDefinition>
+		<attributDefinition pid="att.datensatzVerwendung" name="DatensatzVerwendung">
+			<info>
+				<kurzinfo>Verwendungsparameter in Online- oder in konfigurierenden Datensätzen.</kurzinfo>
+				<beschreibung>
+					Hier wird verwaltet, ob ein konfigurierender Datensatz dieser Verwendung notwendigerweise an jedem Objekt des entsprechenden Typs sein muss,
+					oder ob der Datensatz optional vorhanden sein kann und ob die konfigurierenden Datensätze dieser Verwendung änderbar sind, oder
+					nicht.
+				</beschreibung>
+			</info>
+			<ganzzahl bits="8">
+				<zustand name="KonfigurierenderDatensatzNotwendig" wert="1">
+				</zustand>
+				<zustand name="KonfigurierenderDatensatzNotwendigUndÄnderbar" wert="2">
+				</zustand>
+				<zustand name="KonfigurierenderDatensatzOptional" wert="3">
+				</zustand>
+				<zustand name="KonfigurierenderDatensatzOptionalUndÄnderbar" wert="4">
+				</zustand>
+				<zustand name="OnlineDatensatzQuelle" wert="5">
+				</zustand>
+				<zustand name="OnlineDatensatzSenke" wert="6">
+				</zustand>
+				<zustand name="OnlineDatensatzQuelleUndSenke" wert="7">
+				</zustand>
+			</ganzzahl>
+		</attributDefinition>
+		<attributDefinition pid="att.datentypGroesse" name="DatentypGröße">
+			<info>
+				<kurzinfo>Anzahl der von einem einfachen Datentyp benötigten Bytes.</kurzinfo>
+			</info>
+			<ganzzahl bits="8">
+				<zustand name="Byte" wert="1">
+				</zustand>
+				<zustand name="Short" wert="2">
+				</zustand>
+				<zustand name="Int" wert="4">
+				</zustand>
+				<zustand name="Long" wert="8">
+				</zustand>
+			</ganzzahl>
+		</attributDefinition>
+		<attributDefinition pid="att.dynamischeMengeReferenz" name="DynamischeMengeReferenz">
+			<info>
+				<kurzinfo>Attribut zur Referenzierung des Objekttyps: typ.dynamischeMenge.</kurzinfo>
+			</info>
+			<objektReferenz typ="typ.dynamischeMenge" undefiniert="verboten" referenzierungsart="assoziation"/>
+		</attributDefinition>
+		<attributDefinition pid="att.dynamischeMengeReferenzOptional" name="DynamischeMengeReferenzOptional">
+			<info>
+				<kurzinfo>Attribut zur Referenzierung des Objekttyps: typ.dynamischeMenge (Optionale Referenzierung erlaubt).</kurzinfo>
+			</info>
+			<objektReferenz typ="typ.dynamischeMenge" undefiniert="erlaubt" referenzierungsart="assoziation"/>
+		</attributDefinition>
+		<attributDefinition pid="att.dynamischerTypReferenz" name="DynamischerTypReferenz">
+			<info>
+				<kurzinfo>Attribut zur Referenzierung des Objekttyps: typ.dynamischerTyp.</kurzinfo>
+			</info>
+			<objektReferenz typ="typ.dynamischerTyp" undefiniert="verboten" referenzierungsart="assoziation"/>
+		</attributDefinition>
+		<attributDefinition pid="att.dynamischerTypReferenzOptional" name="DynamischerTypReferenzOptional">
+			<info>
+				<kurzinfo>Attribut zur Referenzierung des Objekttyps: typ.dynamischerTyp (Optionale Referenzierung erlaubt).</kurzinfo>
+			</info>
+			<objektReferenz typ="typ.dynamischerTyp" undefiniert="erlaubt" referenzierungsart="assoziation"/>
+		</attributDefinition>
+		<attributDefinition pid="att.dynamischesObjektReferenz" name="DynamischesObjektReferenz">
+			<info>
+				<kurzinfo>Attribut zur Referenzierung des Objekttyps: typ.dynamischesObjekt.</kurzinfo>
+			</info>
+			<objektReferenz typ="typ.dynamischesObjekt" undefiniert="verboten" referenzierungsart="assoziation"/>
+		</attributDefinition>
+		<attributDefinition pid="att.dynamischesObjektReferenzOptional" name="DynamischesObjektReferenzOptional">
+			<info>
+				<kurzinfo>Attribut zur Referenzierung des Objekttyps: typ.dynamischesObjekt (Optionale Referenzierung erlaubt).</kurzinfo>
+			</info>
+			<objektReferenz typ="typ.dynamischesObjekt" undefiniert="erlaubt" referenzierungsart="assoziation"/>
+		</attributDefinition>
+		<attributDefinition pid="att.einheit" name="Einheit">
+			<info>
+				<kurzinfo>Attribut zur Speicherung der Einheit eines Wertes.</kurzinfo>
+			</info>
+			<zeichenkette laenge="64" kodierung="ISO-8859-1"/>
+		</attributDefinition>
+		<attributDefinition pid="att.faktor" name="Faktor">
+			<info>
+				<kurzinfo>Attribut zur Darstellung von Faktoren mit einer Fließkommazahl.</kurzinfo>
+			</info>
+			<kommazahl genauigkeit="doppelt"/>
+			<default wert="1"/>
+		</attributDefinition>
+		<attributDefinition pid="att.fliesskommaAufloesung" name="FließkommaAuflösung">
+			<info>
+				<kurzinfo>Genauigkeit eines Fließkommawertes.</kurzinfo>
+			</info>
+			<ganzzahl bits="8">
+				<zustand name="Float" wert="0">
+					<info>
+						<kurzinfo>Genauigkeit entsprechend dem IEEE 754 floating-point"single format" mit 32 Bits.</kurzinfo>
+					</info>
+				</zustand>
+				<zustand name="Double" wert="1">
+					<info>
+						<kurzinfo>Genauigkeit entsprechend dem IEEE 754 floating-point"double format" mit 64 Bits.</kurzinfo>
+					</info>
+				</zustand>
+			</ganzzahl>
+		</attributDefinition>
+		<attributDefinition pid="att.ganzzahlAttributTypReferenz" name="GanzzahlAttributTypReferenz">
+			<info>
+				<kurzinfo>Attribut zur Referenzierung des Objekttyps: typ.ganzzahlAttributTyp.</kurzinfo>
+			</info>
+			<objektReferenz typ="typ.ganzzahlAttributTyp" undefiniert="verboten" referenzierungsart="assoziation"/>
+		</attributDefinition>
+		<attributDefinition pid="att.ganzzahlAttributTypReferenzOptional" name="GanzzahlAttributTypReferenzOptional">
+			<info>
+				<kurzinfo>Attribut zur Referenzierung des Objekttyps: typ.ganzzahlAttributTyp (Optionale Referenzierung erlaubt).</kurzinfo>
+			</info>
+			<objektReferenz typ="typ.ganzzahlAttributTyp" undefiniert="erlaubt" referenzierungsart="assoziation"/>
+		</attributDefinition>
+		<attributDefinition pid="att.jaNein" name="JaNein">
+			<info>
+				<kurzinfo>Beantwortung einer Frage, die sich implizit durch den Namen des Attributs stellt mit"Ja" (Wert 1) oder"Nein" (Wert 0).</kurzinfo>
+			</info>
+			<ganzzahl bits="8">
+				<zustand name="Ja" wert="1">
+				</zustand>
+				<zustand name="Nein" wert="0">
+				</zustand>
+			</ganzzahl>
+		</attributDefinition>
+		<attributDefinition pid="att.kennungDerAbhängigkeit" name="ArtDerKennung">
+			<info>
+				<kurzinfo>
+					Attributtyp, der zur Unterscheidung der verschiedenen Abhängigkeiten zwischen Konfigurationsbereichen dient.
+				</kurzinfo>
+				<beschreibung>
+					Alle Kennungen, die Abhängigkeiten zwischen Konfigurationsbereichen darstellen.
+				</beschreibung>
+			</info>
+			<ganzzahl bits="8">
+				<zustand name="notwendig" wert="1">
+					<info>
+						<kurzinfo>Kennzeichnet, das ein Bereich notwendig ist um eine Referenz auflösen zu können.</kurzinfo>
+					</info>
+				</zustand>
+				<zustand name="optional" wert="2">
+					<info>
+						<kurzinfo>Kennzeichnet, das ein Bereich nicht notwendig ist um alle Referenzen aufzulösen.</kurzinfo>
+					</info>
+				</zustand>
+			</ganzzahl>
+		</attributDefinition>
+		<attributDefinition pid="att.kodierungKonfigurationsVerantwortlicher" name="KodierungKonfigurationsVerantwortlicher">
+			<info>
+				<kurzinfo>Definiert die Kodierung eines Konfigurationsverantwortlichen.</kurzinfo>
+				<beschreibung>
+					Die Kodierung dient bei der Erzeugung von Objekten dazu, eine über alle Konfigurationen hinweg eindeutige Objekt-Id zu
+					generieren.
+				</beschreibung>
+			</info>
+			<ganzzahl bits="16">
+				<bereich skalierung="1" minimum="0" maximum="32767">
+				</bereich>
+			</ganzzahl>
+		</attributDefinition>
+		<attributDefinition pid="att.kommazahlAttributTypReferenz" name="KommazahlAttributTypReferenz">
+			<info>
+				<kurzinfo>Attribut zur Referenzierung des Objekttyps: typ.kommazahlAttributTyp.</kurzinfo>
+			</info>
+			<objektReferenz typ="typ.kommazahlAttributTyp" undefiniert="verboten" referenzierungsart="assoziation"/>
+		</attributDefinition>
+		<attributDefinition pid="att.kommazahlAttributTypReferenzOptional" name="KommazahlAttributTypReferenzOptional">
+			<info>
+				<kurzinfo>Attribut zur Referenzierung des Objekttyps: typ.kommazahlAttributTyp (Optionale Referenzierung erlaubt).</kurzinfo>
+			</info>
+			<objektReferenz typ="typ.kommazahlAttributTyp" undefiniert="erlaubt" referenzierungsart="assoziation"/>
+		</attributDefinition>
+		<attributDefinition pid="att.konfigurationsBereichReferenzOptional" name="KonfigurationsBereichReferenzOptional">
+			<info>
+				<kurzinfo>Attribut zur Referenzierung des Objekttyps: typ.konfigurationsBereich (Optionale Referenzierung erlaubt).</kurzinfo>
+			</info>
+			<objektReferenz typ="typ.konfigurationsBereich" undefiniert="erlaubt" referenzierungsart="assoziation"/>
+		</attributDefinition>
+		<attributDefinition pid="att.konfigurationsMengeReferenz" name="KonfigurationsMengeReferenz">
+			<info>
+				<kurzinfo>Attribut zur Referenzierung des Objekttyps: typ.konfigurationsMenge.</kurzinfo>
+			</info>
+			<objektReferenz typ="typ.konfigurationsMenge" undefiniert="verboten" referenzierungsart="assoziation"/>
+		</attributDefinition>
+		<attributDefinition pid="att.konfigurationsMengeReferenzOptional" name="KonfigurationsMengeReferenzOptional">
+			<info>
+				<kurzinfo>Attribut zur Referenzierung des Objekttyps: typ.konfigurationsMenge (Optionale Referenzierung erlaubt).</kurzinfo>
+			</info>
+			<objektReferenz typ="typ.konfigurationsMenge" undefiniert="erlaubt" referenzierungsart="assoziation"/>
+		</attributDefinition>
+		<attributDefinition pid="att.konfigurationsObjektReferenz" name="KonfigurationsObjektReferenz">
+			<info>
+				<kurzinfo>Attribut zur Referenzierung des Objekttyps: typ.konfigurationsObjekt.</kurzinfo>
+			</info>
+			<objektReferenz typ="typ.konfigurationsObjekt" undefiniert="verboten" referenzierungsart="assoziation"/>
+		</attributDefinition>
+		<attributDefinition pid="att.konfigurationsObjektReferenzOptional" name="KonfigurationsObjektReferenzOptional">
+			<info>
+				<kurzinfo>Attribut zur Referenzierung des Objekttyps: typ.konfigurationsObjekt (Optionale Referenzierung erlaubt).</kurzinfo>
+			</info>
+			<objektReferenz typ="typ.konfigurationsObjekt" undefiniert="erlaubt" referenzierungsart="assoziation"/>
+		</attributDefinition>
+		<attributDefinition pid="att.konfigurationsVerantwortlicherOptional" name="KonfigurationsVerantwortlicherOptional">
+			<info>
+				<kurzinfo>Referenz auf einen optionalen KonfigurationsVerantwortlichen.</kurzinfo>
+			</info>
+			<objektReferenz typ="typ.konfigurationsVerantwortlicher" undefiniert="erlaubt" referenzierungsart="aggregation"/>
+		</attributDefinition>
+		<attributDefinition pid="att.konfigurationsVersion" name="KonfigurationsVersion">
+			<info>
+				<kurzinfo>Versionsnummer der Konfiguration.</kurzinfo>
+				<beschreibung>Die Versionsnummer der Konfiguration wird z.B.im Zusammenhang von 'gültigAb' und 'nichtMehrGültigAb' in der Objekttabelle der
+					Konfigurationsobjekte benutzt.
+				</beschreibung>
+			</info>
+			<ganzzahl bits="16">
+				<bereich skalierung="1" minimum="1" maximum="32767">
+				</bereich>
+				<zustand name="unspezifiziert" wert="0">
+					<info>
+						<kurzinfo>Mit unspezifiziert ist im Kontext nichtMehrGültigAb gemeint, dass die Konfiguration des entsprechenden Objektes bis auf
+							weiteres besteht.
+						</kurzinfo>
+					</info>
+				</zustand>
+			</ganzzahl>
+		</attributDefinition>
+		<attributDefinition pid="att.maximaleAnzahl" name="MaximaleAnzahl">
+			<info>
+				<kurzinfo>Maximal mögliche Anzahl.</kurzinfo>
+			</info>
+			<ganzzahl bits="32">
+				<bereich skalierung="1" minimum="1" maximum="2147483647">
+				</bereich>
+				<zustand name="unbegrenzt" wert="0">
+				</zustand>
+			</ganzzahl>
+		</attributDefinition>
+		<attributDefinition pid="att.mengenTypReferenz" name="MengenTypReferenz">
+			<info>
+				<kurzinfo>Attribut zur Referenzierung von MengenTypen.</kurzinfo>
+			</info>
+			<objektReferenz typ="typ.mengenTyp" undefiniert="verboten" referenzierungsart="aggregation"/>
+		</attributDefinition>
+		<attributDefinition pid="att.mengenTypReferenzOptional" name="MengenTypReferenzOptional">
+			<info>
+				<kurzinfo>Attribut zur Referenzierung des Objekttyps: typ.mengenTyp (Optionale Referenzierung erlaubt).</kurzinfo>
+			</info>
+			<objektReferenz typ="typ.mengenTyp" undefiniert="erlaubt" referenzierungsart="assoziation"/>
+		</attributDefinition>
+		<attributDefinition pid="att.mengenVerwendungReferenz" name="MengenVerwendungReferenz">
+			<info>
+				<kurzinfo>Attribut zur Referenzierung des Objekttyps: typ.mengenVerwendung.</kurzinfo>
+			</info>
+			<objektReferenz typ="typ.mengenVerwendung" undefiniert="verboten" referenzierungsart="assoziation"/>
+		</attributDefinition>
+		<attributDefinition pid="att.mengenVerwendungReferenzOptional" name="MengenVerwendungReferenzOptional">
+			<info>
+				<kurzinfo>Attribut zur Referenzierung des Objekttyps: typ.mengenVerwendung (Optionale Referenzierung erlaubt).</kurzinfo>
+			</info>
+			<objektReferenz typ="typ.mengenVerwendung" undefiniert="erlaubt" referenzierungsart="assoziation"/>
+		</attributDefinition>
+		<attributDefinition pid="att.mengeReferenz" name="MengeReferenz">
+			<info>
+				<kurzinfo>Attribut zur Referenzierung des Objekttyps: typ.menge.</kurzinfo>
+			</info>
+			<objektReferenz typ="typ.menge" undefiniert="verboten" referenzierungsart="assoziation"/>
+		</attributDefinition>
+		<attributDefinition pid="att.mengeReferenzOptional" name="MengeReferenzOptional">
+			<info>
+				<kurzinfo>Attribut zur Referenzierung des Objekttyps: typ.menge (Optionale Referenzierung erlaubt).</kurzinfo>
+			</info>
+			<objektReferenz typ="typ.menge" undefiniert="erlaubt" referenzierungsart="assoziation"/>
+		</attributDefinition>
+		<attributDefinition pid="att.minimaleAnzahl" name="MinimaleAnzahl">
+			<info>
+				<kurzinfo>Minimal geforderte Anzahl.</kurzinfo>
+			</info>
+			<ganzzahl bits="32">
+				<bereich skalierung="1" minimum="0" maximum="2147483647">
+				</bereich>
+			</ganzzahl>
+		</attributDefinition>
+		<attributDefinition pid="att.name" name="Name">
+			<info>
+				<kurzinfo>Attribut zur Speicherung des Namens eines Objekts.</kurzinfo>
+			</info>
+			<zeichenkette laenge="64" kodierung="ISO-8859-1"/>
+		</attributDefinition>
+		<attributDefinition pid="att.objektReferenz" name="ObjektReferenz">
+			<info>
+				<kurzinfo>Attribut zur Referenzierung von beliebigen Objekten.</kurzinfo>
+			</info>
+			<objektReferenz undefiniert="verboten" referenzierungsart="assoziation"/>
+		</attributDefinition>
+		<attributDefinition pid="att.objektReferenzAttributTypReferenz" name="ObjektReferenzAttributTypReferenz">
+			<info>
+				<kurzinfo>Attribut zur Referenzierung des Objekttyps: typ.objektReferenzAttributTyp.</kurzinfo>
+			</info>
+			<objektReferenz typ="typ.objektReferenzAttributTyp" undefiniert="verboten" referenzierungsart="assoziation"/>
+		</attributDefinition>
+		<attributDefinition pid="att.objektReferenzAttributTypReferenzOptional" name="ObjektReferenzAttributTypReferenzOptional">
+			<info>
+				<kurzinfo>Attribut zur Referenzierung des Objekttyps: typ.objektReferenzAttributTyp (Optionale Referenzierung erlaubt).</kurzinfo>
+			</info>
+			<objektReferenz typ="typ.objektReferenzAttributTyp" undefiniert="erlaubt" referenzierungsart="assoziation"/>
+		</attributDefinition>
+		<attributDefinition pid="att.objektReferenzOptional" name="ObjektReferenzOptional">
+			<info>
+				<kurzinfo>Attribut zur Referenzierung von beliebigen Objekten (Optionale Referenzierung erlaubt).</kurzinfo>
+			</info>
+			<objektReferenz undefiniert="erlaubt" referenzierungsart="assoziation"/>
+		</attributDefinition>
+		<attributDefinition pid="att.optionaleTypReferenz" name="OptionaleTypReferenz">
+			<info>
+				<kurzinfo>Attribut zur Referenzierung von Objekttypen.</kurzinfo>
+			</info>
+			<objektReferenz typ="typ.typ" undefiniert="erlaubt" referenzierungsart="aggregation"/>
+		</attributDefinition>
+		<attributDefinition pid="att.persistenzModus">
+			<info>
+				<kurzinfo>Aufzählung für die Behandlung von dynamische Objekten eines Typs beim Neustart.</kurzinfo>
+			</info>
+			<ganzzahl bits="8">
+				<zustand name="transient" wert="1">
+				</zustand>
+				<zustand name="persistent" wert="2">
+				</zustand>
+				<zustand name="persistentUndUngültigNachNeustart" wert="3">
+				</zustand>
+			</ganzzahl>
+		</attributDefinition>
+		<attributDefinition pid="att.pid" name="pid">
+			<info>
+				<kurzinfo>Attribut zur Speicherung der permanenten ID eines Objekts.</kurzinfo>
+			</info>
+			<zeichenkette laenge="64" kodierung="ISO-8859-1"/>
+		</attributDefinition>
+		<attributDefinition pid="att.position" name="Position">
+			<info>
+				<kurzinfo>Zur Speicherung der Position eines Objekts in einem bestimmten Kontext.</kurzinfo>
+			</info>
+			<ganzzahl bits="16">
+				<bereich skalierung="1" minimum="1" maximum="32767">
+				</bereich>
+			</ganzzahl>
+		</attributDefinition>
+		<attributDefinition pid="att.referenzierungsart" name="Referenzierungsart">
+			<info>
+				<kurzinfo>Bestimmt die Referenzierungsart (Gerichtete Assoziation, Aggregation und Komposition).</kurzinfo>
+			</info>
+			<ganzzahl bits="8">
+				<zustand name="Assoziation" wert="0">
+					<info>
+						<kurzinfo>Die Referenzierungsart 'Gerichtete Assoziation'.</kurzinfo>
+					</info>
+				</zustand>
+				<zustand name="Aggregation" wert="1">
+					<info>
+						<kurzinfo>Die Referenzierungsart 'Aggregation'.</kurzinfo>
+					</info>
+				</zustand>
+				<zustand name="Komposition" wert="2">
+					<info>
+						<kurzinfo>Die Referenzierungsart 'Komposition'.</kurzinfo>
+					</info>
+				</zustand>
+			</ganzzahl>
+		</attributDefinition>
+		<attributDefinition pid="att.serialisiererVersion" name="Serialisierer-Version">
+			<info>
+				<kurzinfo>Version des Serialisierers, der zur Serialisierung eines Datensatzes verwendet wurde..</kurzinfo>
+			</info>
+			<ganzzahl bits="32">
+				<bereich skalierung="1" minimum="1" maximum="2147483647">
+				</bereich>
+			</ganzzahl>
+		</attributDefinition>
+		<attributDefinition pid="att.typReferenz" name="TypReferenz">
+			<info>
+				<kurzinfo>Attribut zur Referenzierung von Objekttypen.</kurzinfo>
+			</info>
+			<objektReferenz typ="typ.typ" undefiniert="verboten" referenzierungsart="aggregation"/>
+		</attributDefinition>
+		<attributDefinition pid="att.typReferenzOptional" name="TypReferenzOptional">
+			<info>
+				<kurzinfo>Attribut zur Referenzierung des Objekttyps: typ.typ (Optionale Referenzierung erlaubt).</kurzinfo>
+			</info>
+			<objektReferenz typ="typ.typ" undefiniert="erlaubt" referenzierungsart="assoziation"/>
+		</attributDefinition>
+		<attributDefinition pid="att.unspezifiziert" name="unspezifiziert">
+			<info>
+				<kurzinfo>Platzhalter für (noch) unspezifizierte Attributtypen.</kurzinfo>
+			</info>
+			<ganzzahl bits="8">
+				<zustand name="unspezifiziert" wert="0">
+					<info>
+						<kurzinfo>Zustände müssen noch festgelegt werden.</kurzinfo>
+					</info>
+				</zustand>
+			</ganzzahl>
+		</attributDefinition>
+		<attributDefinition pid="att.werteBereichReferenz" name="WerteBereichReferenz">
+			<info>
+				<kurzinfo>Referenz auf einen Wertebereich.</kurzinfo>
+			</info>
+			<objektReferenz typ="typ.werteBereich" undefiniert="erlaubt" referenzierungsart="komposition"/>
+		</attributDefinition>
+		<attributDefinition pid="att.werteBereichReferenzOptional" name="WerteBereichReferenzOptional">
+			<info>
+				<kurzinfo>Attribut zur Referenzierung des Objekttyps: typ.werteBereich (Optionale Referenzierung erlaubt).</kurzinfo>
+			</info>
+			<objektReferenz typ="typ.werteBereich" undefiniert="erlaubt" referenzierungsart="assoziation"/>
+		</attributDefinition>
+		<attributDefinition pid="att.werteZustandReferenz" name="WerteZustandReferenz">
+			<info>
+				<kurzinfo>Attribut zur Referenzierung des Objekttyps: typ.werteZustand.</kurzinfo>
+			</info>
+			<objektReferenz typ="typ.werteZustand" undefiniert="verboten" referenzierungsart="assoziation"/>
+		</attributDefinition>
+		<attributDefinition pid="att.werteZustandReferenzOptional" name="WerteZustandReferenzOptional">
+			<info>
+				<kurzinfo>Attribut zur Referenzierung des Objekttyps: typ.werteZustand (Optionale Referenzierung erlaubt).</kurzinfo>
+			</info>
+			<objektReferenz typ="typ.werteZustand" undefiniert="erlaubt" referenzierungsart="assoziation"/>
+		</attributDefinition>
+		<attributDefinition pid="att.zahl" name="Zahl">
+			<info>
+				<kurzinfo>Beliebige ganze Zahl im Bereich -2^63 bis (2^63)-1.</kurzinfo>
+			</info>
+			<ganzzahl bits="64">
+				<bereich skalierung="1" minimum="-9223372036854775808" maximum="9223372036854775807">
+				</bereich>
+			</ganzzahl>
+			<default wert="0"/>
+		</attributDefinition>
+		<attributDefinition pid="att.zeichenketteAttributTypReferenz" name="ZeichenketteAttributTypReferenz">
+			<info>
+				<kurzinfo>Attribut zur Referenzierung des Objekttyps: typ.zeichenketteAttributTyp.</kurzinfo>
+			</info>
+			<objektReferenz typ="typ.zeichenketteAttributTyp" undefiniert="verboten" referenzierungsart="assoziation"/>
+		</attributDefinition>
+		<attributDefinition pid="att.zeichenketteAttributTypReferenzOptional" name="ZeichenketteAttributTypReferenzOptional">
+			<info>
+				<kurzinfo>Attribut zur Referenzierung des Objekttyps: typ.zeichenketteAttributTyp (Optionale Referenzierung erlaubt).</kurzinfo>
+			</info>
+			<objektReferenz typ="typ.zeichenketteAttributTyp" undefiniert="erlaubt" referenzierungsart="assoziation"/>
+		</attributDefinition>
+		<attributDefinition pid="att.zeichenKodierung" name="ZeichenKodierung">
+			<info>
+				<kurzinfo>Kodierung von Zeichenketten.</kurzinfo>
+			</info>
+			<ganzzahl bits="8">
+				<zustand name="ISO-8859-1" wert="2">
+				</zustand>
+			</ganzzahl>
+		</attributDefinition>
+		<attributDefinition pid="att.zeitAufloesung" name="ZeitAuflösung">
+			<info>
+				<kurzinfo>Zeitliche Auflösung einer Zeitangabe.</kurzinfo>
+			</info>
+			<ganzzahl bits="8">
+				<zustand name="Sekunden" wert="0">
+				</zustand>
+				<zustand name="Millisekunden" wert="1">
+				</zustand>
+			</ganzzahl>
+		</attributDefinition>
+		<attributDefinition pid="att.zeitstempel" name="Zeitstempel">
+			<info>
+				<kurzinfo>Zeitstempel.</kurzinfo>
+				<beschreibung>Der Zeitstempel wird z.B.im Zusammenhang von"gültigAb" und"nichtMehrGültigAb" in der Tabelle für die dynamischen Objekte (z.B.
+					Staus) benutzt.
+				</beschreibung>
+			</info>
+			<zeitstempel relativ="nein" genauigkeit="millisekunden"/>
+		</attributDefinition>
+		<attributDefinition pid="att.zeitstempelAttributTypReferenz" name="ZeitstempelAttributTypReferenz">
+			<info>
+				<kurzinfo>Attribut zur Referenzierung des Objekttyps: typ.zeitstempelAttributTyp.</kurzinfo>
+			</info>
+			<objektReferenz typ="typ.zeitstempelAttributTyp" undefiniert="verboten" referenzierungsart="assoziation"/>
+		</attributDefinition>
+		<attributDefinition pid="att.zeitstempelAttributTypReferenzOptional" name="ZeitstempelAttributTypReferenzOptional">
+			<info>
+				<kurzinfo>Attribut zur Referenzierung des Objekttyps: typ.zeitstempelAttributTyp (Optionale Referenzierung erlaubt).</kurzinfo>
+			</info>
+			<objektReferenz typ="typ.zeitstempelAttributTyp" undefiniert="erlaubt" referenzierungsart="assoziation"/>
+		</attributDefinition>
+		<attributDefinition pid="att.zuständiger" name="Zuständiger">
+			<info>
+				<kurzinfo>Referenz auf die Zentrale (ID der Zentrale), die für das Konfigurationsobjekt zuständig ist.</kurzinfo>
+			</info>
+			<objektReferenz typ="typ.konfigurationsVerantwortlicher" undefiniert="verboten" referenzierungsart="aggregation"/>
+		</attributDefinition>
+		<attributlistenDefinition pid="atl.datenIdentifikation">
+			<info>
+				<kurzinfo>Definiert eine Datenidentifikation</kurzinfo>
+			</info>
+			<attribut pid="att.objektReferenz" anzahl="1" anzahlIst="fest" name="Objekt">
+			</attribut>
+			<attribut pid="att.attributgruppeReferenz" anzahl="1" anzahlIst="fest" name="Attributgruppe">
+			</attribut>
+			<attribut pid="att.aspektReferenz" anzahl="1" anzahlIst="fest" name="Aspekt">
+			</attribut>
+		</attributlistenDefinition>
+		<attributlistenDefinition pid="atl.defaultParameterdatensatz" name="Default-Parameterdatensatz">
+			<info>
+				<kurzinfo>Attributliste zur Definition eines Default-Parameterdatensatzes.</kurzinfo>
+			</info>
+			<attribut pid="att.typReferenzOptional" anzahl="1" anzahlIst="fest" name="typ">
+				<info>
+					<kurzinfo>Referenz auf den Typ der Objekte für die dieser Default-Parameterdatensatzes gelten soll.</kurzinfo>
+				</info>
+			</attribut>
+			<attribut pid="att.aggregationAttributgruppe" anzahl="1" anzahlIst="fest" name="attributgruppe">
+				<info>
+					<kurzinfo>Referenz auf die Attributgruppe des Default-Parameterdatensatzes.</kurzinfo>
+				</info>
+			</attribut>
+			<attribut pid="att.serialisiererVersion" anzahl="1" anzahlIst="fest" name="serialisierer">
+				<info>
+					<kurzinfo>
+						Version des Serialisierers der bei der Serialisierung eines Default-Parameterdatensatzes in das nachfolgende Byte-Array verwendet wurde.
+						Als Serialisiererversion sollte anfangs die 3 verwendet werden. Später kann bei Bedarf eine neuere Version verwendet werden.
+					</kurzinfo>
+				</info>
+			</attribut>
+			<attribut pid="att.byte" anzahl="0" anzahlIst="variabel" name="datensatz">
+				<info>
+					<kurzinfo>Serialisierter Default-Parameterdatensatz.</kurzinfo>
+					<beschreibung>
+						<absatz>
+							Dieses Attribut enthält ein Byte-Array in dem ein Default-Parameterdatensatz in serialisierter Form enthalten ist.
+							Zum lesenden Zugriff auf den enthalten Datensatz ist mit Hilfe der Methode
+							<code>SerializingFactory.createDeserializer(serializerVersion, inputStream)</code>
+							ein Deserializer in der Version zu erzeugen, die im Attribut serialisierer eingetragen ist. Ein passender InputStream kann mit Hilfe
+							der Klasse ByteArrayInputStream aus dem Byte-Array
+							erzeugt werden. Der enthaltene Datensatz kann dann mit der Methode Deserializer.readData(AttributeGroup atg, ObjectLookup dataModel)
+							in ein entsprechendes Data-Objekt konvertiert werden. Der zweite Parameter (dataModel) muss zwingend angegeben werden, damit
+							Referenzen mit Referenzierungsart Assoziation richtig aufgelöst werden können.
+						</absatz>
+						<absatz>
+							Der schreibende Zugriff kann analog mit einem entsprechenden Serializer durchgeführt werden. Als Serialisiererversion sollte anfangs
+							die 3 verwendet werden. Später kann bei Bedarf eine neuere Version verwendet werden.
+						</absatz>
+					</beschreibung>
+				</info>
+			</attribut>
+		</attributlistenDefinition>
+		<attributlistenDefinition pid="atl.konfigurationsAbhängigkeiten" name="KonfigurationsAbhängigkeiten">
+			<info>
+				<kurzinfo>Fasst die Attribute zusammen, die zu einer Konfigurationsabhängigkeit gehören.</kurzinfo>
+			</info>
+			<attribut pid="att.konfigurationsVersion" anzahl="1" anzahlIst="fest" name="AbhängigkeitEntstandenInVersion">
+				<info>
+					<kurzinfo>Versionsnummer des Konfigurationsbereichs, in der die Abhängigkeit aufgetreten ist.</kurzinfo>
+					<beschreibung>
+						Gibt die Version an, ab der eine Abhängigkeit aufgetreten ist. Ab dieser Version wird ein anderer Bereich benötigt oder ist
+						zumindest optional nötig.
+					</beschreibung>
+				</info>
+			</attribut>
+			<attribut pid="att.text" anzahl="1" anzahlIst="fest" name="BereichNotwendig">
+				<info>
+					<kurzinfo>Von diesem Bereich ist der Konfigurationsbereich abhängig, der Bereich wird über die Pid identifiziert.</kurzinfo>
+					<beschreibung>
+						Mit diesem Bereich kann der Konfigurationsbereich Abhängigkeiten auflösen. Es wird die Pid gespeichert, da der abhängige Bereich
+						nicht verfügbar sein kann (Der Benutzer hat ihn nicht kopiert, als Beispiel). So kann trotzdem der fehlende Bereich identifiziert
+						werden.
+					</beschreibung>
+				</info>
+			</attribut>
+			<attribut pid="att.konfigurationsVersion" anzahl="1" anzahlIst="fest" name="VersionNotwendig">
+				<info>
+					<kurzinfo>Versionsnummer in der der Bereich (Attribut "BereichNotwendig") vorliegen muss, damit die Referenzen aufgelöst werden können.
+					</kurzinfo>
+				</info>
+			</attribut>
+			<attribut pid="att.kennungDerAbhängigkeit" anzahl="1" anzahlIst="fest" name="Kennung">
+				<info>
+					<kurzinfo>Gibt an, ob der mit Attribut "BereichNotwendig" definierte Bereich in Version "VersionNotwendig" vorliegen muss (notwenig) oder
+						nur vorliegen kann (optional, er wird nicht gebraucht).
+					</kurzinfo>
+				</info>
+			</attribut>
+		</attributlistenDefinition>
+		<attributlistenDefinition pid="atl.konfigurationsÄnderung" name="KonfigurationsÄnderung">
+			<info>
+				<kurzinfo>Fasst die Attribute zusammen, die zu einer KonfigurationsÄnderung gehören.</kurzinfo>
+			</info>
+			<attribut pid="att.zeit" anzahl="1" anzahlIst="fest" name="Stand">
+				<info>
+					<kurzinfo>Das Datum an dem die KonfigurationsÄnderung vorgenommen wurde.</kurzinfo>
+				</info>
+			</attribut>
+			<attribut pid="att.text" anzahl="1" anzahlIst="fest" name="Autor">
+				<info>
+					<kurzinfo>Der Name dessen, der die KonfigurationsÄnderung vorgenommen hat.</kurzinfo>
+				</info>
+			</attribut>
+			<attribut pid="att.konfigurationsVersion" anzahl="1" anzahlIst="fest" name="Version">
+				<info>
+					<kurzinfo>Versionsnummer des Konfigurationsbereichs, in der die Versorgungsdatei importiert wurde.</kurzinfo>
+					<beschreibung>
+						Die Versionsnummer wird vom Import gesetzt. Sie entspricht der Version des Konfigurationsbereichs, die sich beim Import der
+						Versorgungsdatei in Bearbeitung befindet.
+					</beschreibung>
+				</info>
+			</attribut>
+			<attribut pid="att.text" anzahl="1" anzahlIst="fest" name="Grund">
+				<info>
+					<kurzinfo>Gibt an, warum eine KonfigurationsÄnderung erforderlich ist/war.</kurzinfo>
+				</info>
+			</attribut>
+			<attribut pid="att.text" anzahl="1" anzahlIst="fest" name="Text">
+				<info>
+					<kurzinfo>Erklärenden Text zur KonfigurationsÄnderung was alles an der Versorgung geändert wurde.</kurzinfo>
+				</info>
+			</attribut>
+		</attributlistenDefinition>
+		<attributlistenDefinition pid="atl.transaktion">
+			<info>
+				<kurzinfo>Definiert eine Transaktion</kurzinfo>
+			</info>
+			<attributliste pid="atl.transaktionsDatensatz" anzahl="0" anzahlIst="variabel" name="Datensatz">
+			</attributliste>
+		</attributlistenDefinition>
+		<attributlistenDefinition pid="atl.transaktionsDatensatz">
+			<info>
+				<kurzinfo>Definiert einen Transaktionsdatensatz</kurzinfo>
+			</info>
+			<attributliste pid="atl.datenIdentifikation" anzahl="1" anzahlIst="fest" name="Datenidentifikation">
+			</attributliste>
+			<attribut pid="att.zahl" anzahl="1" anzahlIst="fest" name="Datenindex">
+			</attribut>
+			<attribut pid="att.zeitstempel" anzahl="1" anzahlIst="fest" name="Datenzeit">
+			</attribut>
+			<attribut pid="att.jaNein" anzahl="1" anzahlIst="fest" name="AusTransaktion">
+			</attribut>
+			<attribut pid="att.byte" anzahl="0" anzahlIst="variabel" name="Daten">
+			</attribut>
+		</attributlistenDefinition>
+		<attributlistenDefinition pid="atl.transaktionsEinschränkung">
+			<info>
+				<kurzinfo>Definiert eine Transaktionseinschränkung</kurzinfo>
+			</info>
+			<attribut pid="att.typReferenzOptional" anzahl="1" anzahlIst="fest" name="ObjektTyp">
+			</attribut>
+			<attribut pid="att.attributgruppeReferenzOptional" anzahl="1" anzahlIst="fest" name="Attributgruppe">
+			</attribut>
+			<attribut pid="att.aspektReferenzOptional" anzahl="1" anzahlIst="fest" name="Aspekt">
+			</attribut>
+			<attribut pid="att.jaNein" anzahl="1" anzahlIst="fest" name="NurTransaktionsObjekt">
+			</attribut>
+		</attributlistenDefinition>
+		<mengenDefinition pid="menge.aspekte" elemente="typ.aspekt" aenderbar="nein" mindestens="0" hoechstens="0" referenzierungsart="aggregation">
+			<info>
+				<kurzinfo>Menge der Aspekte.</kurzinfo>
+			</info>
+		</mengenDefinition>
+		<mengenDefinition pid="menge.attribute" elemente="typ.attribut" aenderbar="nein" mindestens="1" hoechstens="0" referenzierungsart="komposition">
+			<info>
+				<kurzinfo>Menge der Attribute.</kurzinfo>
+			</info>
+		</mengenDefinition>
+		<mengenDefinition pid="menge.attributgruppen" elemente="typ.attributgruppe" aenderbar="nein" mindestens="0" hoechstens="0" referenzierungsart="assoziation">
+			<info>
+				<kurzinfo>Menge von beliebig vielen Attributgruppen.</kurzinfo>
+			</info>
+		</mengenDefinition>
+		<mengenDefinition pid="menge.attributgruppenVerwendungen" elemente="typ.attributgruppenVerwendung" aenderbar="nein" mindestens="0" hoechstens="0" referenzierungsart="assoziation">
+			<info>
+				<kurzinfo>Menge von AttributgruppenVerwendungen.</kurzinfo>
+				<beschreibung>
+					Die Menge der Attributgruppenverwendungen besitzt als Referenzierungsart "Assoziation", da durch hinzufügen oder entfernen von Aspekten zur
+					Attributgruppe, nicht die Attributgruppe neu erstellt werden soll. Es soll sich lediglich die Menge der Attributgruppenverwendungen ändern.
+					Änderungen der Referenzierungsart erfordern Änderungen in der Konfiguration.
+				</beschreibung>
+			</info>
+		</mengenDefinition>
+		<mengenDefinition pid="menge.konfigurationsMengen" elemente="typ.konfigurationsMenge" aenderbar="nein" mindestens="0" hoechstens="0" referenzierungsart="komposition">
+			<info>
+				<kurzinfo>Menge von beliebig vielen Mengen.</kurzinfo>
+			</info>
+		</mengenDefinition>
+		<mengenDefinition pid="menge.konfigurationsObjekte" elemente="typ.konfigurationsObjekt" aenderbar="nein" mindestens="0" hoechstens="0" referenzierungsart="assoziation">
+			<info>
+				<kurzinfo>Menge von beliebig vielen Konfigurationsobjekten.</kurzinfo>
+			</info>
+		</mengenDefinition>
+		<mengenDefinition pid="menge.mengenVerwendungen" elemente="typ.mengenVerwendung" aenderbar="nein" mindestens="0" hoechstens="0" referenzierungsart="assoziation">
+			<info>
+				<kurzinfo>Menge von beliebig vielen MengenVerwendungen.</kurzinfo>
+			</info>
+		</mengenDefinition>
+		<mengenDefinition pid="menge.objektTypen" elemente="typ.typ" aenderbar="nein" mindestens="0" hoechstens="0" referenzierungsart="assoziation">
+			<info>
+				<kurzinfo>Menge von beliebig vielen Typen.</kurzinfo>
+			</info>
+		</mengenDefinition>
+		<mengenDefinition pid="menge.werteZustaende" elemente="typ.werteZustand" aenderbar="nein" mindestens="0" hoechstens="0" referenzierungsart="komposition">
+			<info>
+				<kurzinfo>Menge der möglichen diskreten Zustände eines Attributwerts.</kurzinfo>
+			</info>
+		</mengenDefinition>
+	</modell>
+	<objekte>
+	</objekte>
+</konfigurationsBereich>

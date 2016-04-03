@@ -1,0 +1,775 @@
+<?xml version="1.0" encoding="ISO-8859-1"?>
+<!DOCTYPE konfigurationsBereich PUBLIC "-//K2S//DTD Dokument//DE" "K2S.dtd">
+<konfigurationsBereich pid="kb.tmKExTlsVaisala"
+	name="Herstellerspezifische TLS Spezifikation (Vaisala)"
+	verantwortlich="kv.bitctrl">
+	<info>
+		<kurzinfo>Spezielle Definitionen für TLS-Geräte von Vaisala
+			(insbesondere herstellerdefinierte TLS-Typen).
+		</kurzinfo>
+	</info>
+	<konfigurationsAenderung stand="13.04.2015"
+		version="1" autor="Christian Hösel, BitCtrl Systems GmbH" grund="Erstellung/Übernahme aus DAV2" />
+	<modell>
+		<typDefinition pid="typ.deUfdVaisala" name="De Ufd Vaisala">
+			<info>
+				<kurzinfo>Spezielle De(Ufd) mit Herstellertypen von Vaisala.
+				</kurzinfo>
+			</info>
+			<erweitert pid="typ.deUfd" />
+			<attributgruppe
+				pid="atg.tlsUfdGlätteprognoseMitAngabeDerZeitreserveVaisala" />
+			<attributgruppe
+				pid="atg.tlsUfdErgebnisMeldungZustandDerFahrbahnOberFlächeFBZVaisala" />
+			<attributgruppe pid="atg.tlsUfdErgebnisMeldungNiederschlagSummeVaisala" />
+			<attributgruppe
+				pid="atg.tlsUfdErgebnisMeldungMengeEnteisungsmittelVaisala" />
+			<attributgruppe pid="atg.tlsUfdErgebnisMeldungNWSCodeVaisala" />
+			<attributgruppe
+				pid="atg.tlsUfdErgebnisMeldungInternerSystemstatusVaisala" />
+			<attributgruppe pid="atg.tlsUfdErgebnisMeldungLiquidusTemperaturVaisala" />
+			<attributgruppe pid="atg.tlsUfdErgebnisMeldungWMOCodeVaisala" />
+			<attributgruppe pid="atg.tlsUfdErgebnisMeldungWMOCodeDWD" />
+		</typDefinition>
+		<attributgruppenDefinition
+			pid="atg.tlsUfdGlätteprognoseMitAngabeDerZeitreserveVaisala" name="TLSUfdGlätteprognoseMitAngabeDerZeitreserveVaisala"
+			parametrierend="nein">
+			<info>
+				<kurzinfo>FG 3: Glätteprognose mit Angabe der Zeitreserve (FG 3 /
+					Typ 187 / Vaisala).
+				</kurzinfo>
+				<beschreibung>
+					<sektion>
+						<titel>Typ 187, Glätteprognose mit Angabe der Zeitreserve</titel>
+						<absatz>Der Typ 187 dient der Übermittlung der Glättewarnungen,
+							die die ROSA bereitstellt.
+						</absatz>
+					</sektion>
+				</beschreibung>
+			</info>
+			<aspekt pid="asp.tlsAntwort" onlineModus="quelleUndSenke" />
+			<attribut pid="att.tlsUfdZeitreserveReifglätteVaisala" name="ZeitreserveReifglätte" />
+			<attribut pid="att.tlsUfdZeitreserveEisglätteVaisala" name="ZeitreserveEisglätte" />
+			<attribut pid="att.tlsUfdZeitreserveRegenwarnungVaisala"
+				name="ZeitreserveRegenwarnung" />
+		</attributgruppenDefinition>
+		<attributgruppenDefinition
+			pid="atg.tlsUfdErgebnisMeldungZustandDerFahrbahnOberFlächeFBZVaisala"
+			name="TLSUfdErgebnisMeldungZustandDerFahrbahnOberFlächeFBZVaisala"
+			parametrierend="nein">
+			<info>
+				<kurzinfo>FG 3: ErgebnisMeldung Zustand der Fahrbahnoberfläche FBZ
+					(FG 3 / Typ 189 / Vaisala).
+				</kurzinfo>
+				<beschreibung>
+					<sektion>
+						<titel>TLS-DE-Block-Struktur wie im Typ 70 "ErgebnisMeldung
+							Zustand der Fahrbahnoberfläche FBZ" mit herstellerdefinierten
+							Erweiterungen Vaisala
+						</titel>
+						<absatz>Wird verwendet mit ID 4 (Ergebnisse) in Antwortrichtung.
+						</absatz>
+					</sektion>
+				</beschreibung>
+			</info>
+			<aspekt pid="asp.tlsAntwort" onlineModus="quelleUndSenke" />
+			<attribut pid="att.tlsHersteller" name="Hersteller" />
+			<attribut pid="att.tlsByte" name="Version" />
+			<attribut pid="att.tlsUfdZustandFahrbahnoberflächeVaisala"
+				name="ZustandFahrbahnoberflächeVaisala" />
+		</attributgruppenDefinition>
+		<attributgruppenDefinition
+			pid="atg.tlsUfdErgebnisMeldungNiederschlagSummeVaisala" name="TLSUfdErgebnisMeldungNiederschlagSummeVaisala"
+			parametrierend="nein">
+			<info>
+				<kurzinfo>FG 3: ErgebnisMeldung Niederschlag Summe (FG 3 / Typ 130 /
+					Vaisala).
+				</kurzinfo>
+				<beschreibung>
+					<sektion>
+						<titel>TLS-DE-Block-Struktur im Typ 130 "Niederschlag Summe" von
+							Vaisala
+						</titel>
+						<absatz>Herstellerdefinierter TLS-Typ "Niederschlag Summe",
+							geliefert wird ein Messwert gemäß Definition der MES14
+							Datennummer 8
+						</absatz>
+					</sektion>
+				</beschreibung>
+			</info>
+			<aspekt pid="asp.tlsAntwort" onlineModus="quelleUndSenke" />
+			<attribut pid="att.tlsUfdNiederschlagSummeVaisala" name="NiederschlagSumme" />
+		</attributgruppenDefinition>
+		<attributgruppenDefinition
+			pid="atg.tlsUfdErgebnisMeldungMengeEnteisungsmittelVaisala" name="TLSUfdErgebnisMeldungMengeEnteisungsmittelVaisala"
+			parametrierend="nein">
+			<info>
+				<kurzinfo>FG 3: ErgebnisMeldung Menge Enteisungsmittel (FG 3 / Typ
+					131 / Vaisala).
+				</kurzinfo>
+				<beschreibung>
+					<sektion>
+						<titel>TLS-DE-Block-Struktur im Typ 131 "Menge Enteisungsmittel"
+							von Vaisala
+						</titel>
+						<absatz>Herstellerdefinierter TLS-Typ "Menge Enteisungsmittel",
+							geliefert wird ein Messwert gemäß Definition der MES14
+							Datennummer 40/55
+						</absatz>
+					</sektion>
+				</beschreibung>
+			</info>
+			<aspekt pid="asp.tlsAntwort" onlineModus="quelleUndSenke" />
+			<attribut pid="att.tlsUfdMengeEnteisungsmittelVaisala" name="MengeEnteisungsmittel" />
+		</attributgruppenDefinition>
+		<attributgruppenDefinition pid="atg.tlsUfdErgebnisMeldungNWSCodeVaisala"
+			name="TLSUfdErgebnisMeldungNWSCodeVaisala" parametrierend="nein">
+			<info>
+				<kurzinfo>FG 3: ErgebnisMeldung NWS Code (FG 3 / Typ 132 / Vaisala).
+				</kurzinfo>
+				<beschreibung>
+					<sektion>
+						<titel>TLS-DE-Block-Struktur im Typ 132 "NWS Code" von Vaisala
+						</titel>
+						<absatz>Herstellerdefinierter TLS-Typ "NWS Code", geliefert wird
+							ein Messwert gemäß Definition der MES14 Datennummer 90
+						</absatz>
+					</sektion>
+				</beschreibung>
+			</info>
+			<aspekt pid="asp.tlsAntwort" onlineModus="quelleUndSenke" />
+			<attribut pid="att.tlsUfdNWSCodeVaisala" name="NWSCodeVaisala" />
+		</attributgruppenDefinition>
+		<attributgruppenDefinition
+			pid="atg.tlsUfdErgebnisMeldungInternerSystemstatusVaisala" name="TLSUfdErgebnisMeldungInternerSystemstatusVaisala"
+			parametrierend="nein">
+			<info>
+				<kurzinfo>FG 3: ErgebnisMeldung Interner Systemstatus (FG 3 / Typ
+					133 / Vaisala).
+				</kurzinfo>
+				<beschreibung>
+					<sektion>
+						<titel>TLS-DE-Block-Struktur im Typ 133 "InternerSystemstatus" von
+							Vaisala
+						</titel>
+						<absatz>Herstellerdefinierter TLS-Typ "Interner Systemstatus",
+							geliefert wird der Systemstatus für Sichtweite und Hardware gemäß
+							Definition der MES14 Datennummer 91
+						</absatz>
+					</sektion>
+				</beschreibung>
+			</info>
+			<aspekt pid="asp.tlsAntwort" onlineModus="quelleUndSenke" />
+			<attribut pid="att.tlsUfdStatusSichtweiteVaisala" name="StatusSichtweite" />
+			<attribut pid="att.tlsUfdStatusHardwareVaisala" name="StatusHardware" />
+		</attributgruppenDefinition>
+		<attributgruppenDefinition
+			pid="atg.tlsUfdErgebnisMeldungLiquidusTemperaturVaisala" name="TLSUfdErgebnisMeldungLiquidusTemperaturVaisala"
+			parametrierend="nein">
+			<info>
+				<kurzinfo>FG 3: ErgebnisMeldung Liquidus Temperatur (FG 3 / Typ 65 /
+					Vaisala).
+				</kurzinfo>
+				<beschreibung>
+					<sektion>
+						<titel>TLS-DE-Block-Struktur im Typ 65 "Gefriertemperatur" -
+							verwendet für die Übertragung der Liquidus Temperatur der Vaisala
+							Detektoren
+						</titel>
+						<absatz>Die Daten des TLS-Typs 65 werden nicht als
+							Gefriertemperatur gemäß TLS2002 übernommen sondern als
+							Liquidus-Temperatur gemäß Herstellerdefinition der MES14
+							Datennummer 41/56.
+						</absatz>
+					</sektion>
+				</beschreibung>
+			</info>
+			<aspekt pid="asp.tlsAntwort" onlineModus="quelleUndSenke" />
+			<attribut pid="att.tlsUfdLiquidusTemperaturVaisala" name="LiquidusTemperatur" />
+		</attributgruppenDefinition>
+		<attributgruppenDefinition pid="atg.tlsUfdErgebnisMeldungWMOCodeVaisala"
+			name="TLSUfdErgebnisMeldungWMOCodeVaisala" parametrierend="nein">
+			<info>
+				<kurzinfo>FG 3: ErgebnisMeldung WMO Code (FG 3 / Typ 134 / Vaisala).
+				</kurzinfo>
+				<beschreibung>
+					<sektion>
+						<titel>TLS-DE-Block-Struktur im Typ 134 "WMO Code" von Vaisala
+						</titel>
+						<absatz>Herstellerdefinierter TLS-Typ "WMO Code", ausführlichster
+							vom Sensor PWD12 gelieferter Code für die Niederschlagsart (gemäß
+							Definition der MES14 Datennummer 92)
+						</absatz>
+					</sektion>
+				</beschreibung>
+			</info>
+			<aspekt pid="asp.tlsAntwort" onlineModus="quelleUndSenke" />
+			<attribut pid="att.tlsUfdWMOCodeVaisala" name="WMOCodeVaisala" />
+		</attributgruppenDefinition>
+		<attributgruppenDefinition pid="atg.tlsUfdErgebnisMeldungWMOCodeDWD"
+			name="TLSUfdErgebnisMeldungWMOCodeDWD" parametrierend="nein">
+			<info>
+				<kurzinfo>FG 3: ErgebnisMeldung WMO Code (SYNOP Code des DWD).
+				</kurzinfo>
+				<beschreibung>
+					<sektion>
+						<titel>WMO SYNOP Code des DWD</titel>
+						<absatz>WMO SYNOP Codes zur Beschreibung des aktuellen
+							Wetterzustands (Present Weather) wie sie vom DWD verwendetet
+							werden. Die herstellerspezifischen Typen können einheitlich auf
+							diesen Typ gemappt werden.
+						</absatz>
+					</sektion>
+				</beschreibung>
+			</info>
+			<aspekt pid="asp.tlsAntwort" onlineModus="quelleUndSenke" />
+			<attribut pid="att.tlsUfdWMOCodeDWD" name="WMOCodeDWD" />
+		</attributgruppenDefinition>
+		<attributDefinition pid="att.tlsUfdZeitreserveReifglätteVaisala"
+			name="TLSUfdZeitreserveReifglätteVaisala">
+			<info>
+				<kurzinfo>Zeitreserve Reifglätte mit Erweiterungen Vaisala.
+				</kurzinfo>
+			</info>
+			<ganzzahl>
+				<zustand name="Eisalarm" wert="0">
+				</zustand>
+				<bereich minimum="1" maximum="253" einheit="Minuten">
+					<info>
+						<kurzinfo>Prognosezeit Zeitreserve Reifglätte in Minuten.
+						</kurzinfo>
+					</info>
+				</bereich>
+				<zustand name="keine Warnung Reifglätte" wert="254">
+				</zustand>
+				<zustand name="Zeitreserve Reifglätte kann nicht ermittelt werden"
+					wert="255">
+				</zustand>
+			</ganzzahl>
+		</attributDefinition>
+		<attributDefinition pid="att.tlsUfdZeitreserveEisglätteVaisala"
+			name="TLSUfdZeitreserveEisglätteVaisala">
+			<info>
+				<kurzinfo>Zeitreserve Eisglätte mit Erweiterungen Vaisala.
+				</kurzinfo>
+			</info>
+			<ganzzahl>
+				<zustand name="Eisalarm" wert="0">
+				</zustand>
+				<bereich minimum="1" maximum="253" einheit="Minuten">
+					<info>
+						<kurzinfo>Prognosezeit Zeitreserve Reifglätte in Minuten.
+						</kurzinfo>
+					</info>
+				</bereich>
+				<zustand name="keine Warnung Eisglätte" wert="254">
+				</zustand>
+				<zustand name="Zeitreserve Eisglätte kann nicht ermittelt werden"
+					wert="255">
+				</zustand>
+			</ganzzahl>
+		</attributDefinition>
+		<attributDefinition pid="att.tlsUfdZeitreserveRegenwarnungVaisala"
+			name="TLSUfdZeitreserveRegenwarnungVaisala">
+			<info>
+				<kurzinfo>Zeitreserve Regenwarnung mit Erweiterungen Vaisala.
+				</kurzinfo>
+			</info>
+			<ganzzahl>
+				<zustand name="Regenwarnung" wert="0">
+				</zustand>
+				<zustand name="keine Regenwarnung" wert="254">
+				</zustand>
+				<zustand name="Regenwarnung kann nicht ermittelt werden"
+					wert="255">
+				</zustand>
+			</ganzzahl>
+		</attributDefinition>
+
+		<attributDefinition pid="att.tlsUfdZustandFahrbahnoberflächeVaisala"
+			name="TLSUfdZustandFahrbahnoberflächeVaisala">
+			<info>
+				<kurzinfo>Zustand der Fahrbahnoberfläche mit Erweiterungen Vaisala.
+				</kurzinfo>
+				<beschreibung>Es ist zu beachten, dass in Relation zur Strecke die
+					Messung immer nur punktförmig sein kann und daher die Ergebnisse
+					entsprechend interpretiert werden müssen. Die Benetzung bzw.
+					Bedeckung wird immer bezogen auf eine glatte ebene Fläche. Die
+					Einschätzung der Gefährlichkeit einer Benetzung oder Bedeckung in
+					Bezug zur Beschaffenheit des Fahrbahnbelags (Rauhigkeit etc.) und
+					den besonderen Bedingungen der betreffenden Straßenstrecke muss in
+					der Zentrale vorgenommen werden. Es ist nicht erforderlich, dass
+					die Sensortechnik alle Zustände direkt als solches detektieren
+					kann. Es genügt vielmehr, wenn die zur Bildung der Zustände
+					beitragenden Einflüsse gemessen werden können, so dass der
+					betreffende Zustand als wahrscheinlich angenommen werden kann. Von
+					einer Fahrbahnmessstelle müssen nicht alle Ausprägungen unterstützt
+					werden. Die Menge der Benetzung bzw. Bedeckung, soweit bestimmbar,
+					wird durch die ?Wasserfilmdicke? (mm bzw. l/m2 ) angegeben.
+				</beschreibung>
+			</info>
+			<ganzzahl>
+				<zustand name="trocken" wert="0">
+					<info>
+						<kurzinfo>Trocken, Fahrbahntemperatur liegt über der
+							Gefriertemperatur (Vaisala Zustand 1 "dry")
+						</kurzinfo>
+					</info>
+				</zustand>
+				<zustand name="Schneeglättegefahr" wert="65">
+					<info>
+						<kurzinfo>Schnee, Glättegefahr (Vaisala Zustand 6 "snowy")
+						</kurzinfo>
+					</info>
+				</zustand>
+				<zustand name="Eisglättegefahr" wert="66">
+					<info>
+						<kurzinfo>Eis, Glättegefahr (Vaisala Zustand 7 "icy")</kurzinfo>
+					</info>
+				</zustand>
+				<zustand name="Raureifglättegefahr" wert="67">
+					<info>
+						<kurzinfo>Reif, Glättegefahr (Vaisala Zustand 5 "frosty")
+						</kurzinfo>
+					</info>
+				</zustand>
+				<zustand name="feucht" wert="128">
+					<info>
+						<kurzinfo>feucht, Fahrbahntemperatur liegt über der
+							Gefriertemperatur (Vaisala Zustand 2 "moist")
+						</kurzinfo>
+					</info>
+				</zustand>
+				<zustand name="feucht mit Restsalz" wert="129">
+					<info>
+						<kurzinfo>feucht, Restsalz ist vorhanden, Fahrbahntemperatur liegt
+							über der Gefriertemperatur (Vaisala Zustand 8 "moist and
+							chemical")
+						</kurzinfo>
+					</info>
+				</zustand>
+				<zustand name="nass" wert="130">
+					<info>
+						<kurzinfo>nass, Fahrbahntemperatur liegt über der
+							Gefriertemperatur (Vaisala Zustand 3 "wet")
+						</kurzinfo>
+					</info>
+				</zustand>
+				<zustand name="nass mit Restsalz" wert="131">
+					<info>
+						<kurzinfo>nass, Restsalz ist vorhanden, Fahrbahntemperatur liegt
+							über der Gefriertemperatur (Vaisala Zustand 4 "wet and chemical")
+						</kurzinfo>
+					</info>
+				</zustand>
+				<bereich minimum="0" maximum="254" einheit="">
+					<info>
+						<kurzinfo>Hersteller- oder anwendungsspezifische Codes.</kurzinfo>
+					</info>
+				</bereich>
+				<zustand wert="255" name="Zustand nicht ermittelbar">
+					<info>
+						<kurzinfo>Sensorik kann auf Grund der herrschenden Bedingungen
+							Zustand nicht bestimmen.
+						</kurzinfo>
+					</info>
+				</zustand>
+			</ganzzahl>
+		</attributDefinition>
+		<attributDefinition pid="att.tlsUfdNiederschlagSummeVaisala"
+			name="TLSUfdNiederschlagSummeVaisala">
+			<info>
+				<kurzinfo>Niederschlag Summe in mm</kurzinfo>
+				<beschreibung>ROSA Datennummer 8, Niederschlag Summe in mm
+				</beschreibung>
+			</info>
+			<ganzzahl>
+				<bereich minimum="0" maximum="9999" skalierung="0,1"
+					einheit="mm">
+					<info>
+						<kurzinfo>Wertebereich gemäß Niederschlagssumme, Vaisala
+							Datennummer 8 für die MES14 und TLS-Umsetzung.
+						</kurzinfo>
+					</info>
+				</bereich>
+			</ganzzahl>
+		</attributDefinition>
+		<attributDefinition pid="att.tlsUfdMengeEnteisungsmittelVaisala"
+			name="TLSUfdMengeEnteisungsmittelVaisala">
+			<info>
+				<kurzinfo>Menge des Enteisungsmittels in g/m²</kurzinfo>
+				<beschreibung>ROSA Datennummer 40/55, Menge des Enteisungsmittels in
+					g/m²
+				</beschreibung>
+			</info>
+			<ganzzahl>
+				<bereich minimum="0" maximum="9999" skalierung="0,1"
+					einheit="g/m²">
+					<info>
+						<kurzinfo>Wertebereich gemäß Umsetzung in der TLS - theoretisch
+							sind lt. Vaisala Werte bis 9999.9 für die Menge des
+							Enteisungsmittels, Vaisala Datennummern 50/55 für die MES14
+							möglich.
+						</kurzinfo>
+					</info>
+				</bereich>
+			</ganzzahl>
+		</attributDefinition>
+		<attributDefinition pid="att.tlsUfdNWSCodeVaisala"
+			name="TLSUfdNWSCodeVaisala">
+			<info>
+				<kurzinfo>NWS Code zur Kennzeichnung der Niederschlagsart</kurzinfo>
+				<beschreibung>ROSA Datennummer 90, NWS Code zur Charakterisierung
+					der Niederschlagsart
+				</beschreibung>
+			</info>
+			<ganzzahl>
+				<bereich minimum="0" maximum="99">
+					<info>
+						<kurzinfo>Der gesamte Bereich von 0..99 wurde von Vaisala zur
+							Verwendung als NWS-Code (Vaisala) reserviert
+						</kurzinfo>
+					</info>
+				</bereich>
+				<zustand name="unbestimmt" wert="0" />
+				<zustand name="Niederschlag" wert="1" />
+				<zustand name="Nieselregen" wert="2" />
+				<zustand name="Regen" wert="3" />
+				<zustand name="Schneefall" wert="4" />
+				<zustand name="Eisregen" wert="5" />
+				<zustand name="Schneeregen" wert="6" />
+				<zustand name="Hagel" wert="7" />
+				<zustand name="Eiskristalle" wert="8" />
+				<zustand name="Schneekörner" wert="9" />
+				<zustand name="Schneegraupel" wert="10" />
+				<zustand name="gefrierender Nieselregen" wert="11" />
+				<zustand name="gefrierender Regen" wert="12" />
+			</ganzzahl>
+		</attributDefinition>
+		<attributDefinition pid="att.tlsUfdStatusSichtweiteVaisala"
+			name="TLSUfdStatusSichtweiteVaisala">
+			<info>
+				<kurzinfo>Interner Systemstatus, Status Sichtweite an Vaisala
+					Anlagen
+				</kurzinfo>
+				<beschreibung>ROSA Datennummer 91, Interner Systemstatus, Status
+					Sichtweite
+				</beschreibung>
+			</info>
+			<ganzzahl>
+				<bereich minimum="0" maximum="9">
+					<info>
+						<kurzinfo>Der gesamte Bereich von 0..9 wurde von Vaisala zur
+							Verwendung als Status Sichtweite reserviert
+						</kurzinfo>
+					</info>
+				</bereich>
+				<zustand name="Sichtweite ok" wert="0" />
+				<zustand name="Sichtweite Alarm 1" wert="1" />
+				<zustand name="Sichtweite Alarm 2" wert="2" />
+				<zustand name="Sichtweite Alarm 3" wert="3" />
+			</ganzzahl>
+		</attributDefinition>
+		<attributDefinition pid="att.tlsUfdStatusHardwareVaisala"
+			name="TLSUfdStatusHardwareVaisala">
+			<info>
+				<kurzinfo>Interner Systemstatus, Status Hardware an Vaisala Anlagen
+				</kurzinfo>
+				<beschreibung>ROSA Datennummer 91, Interner Systemstatus, Status
+					Hardware
+				</beschreibung>
+			</info>
+			<ganzzahl>
+				<bereich minimum="0" maximum="9">
+					<info>
+						<kurzinfo>Der gesamte Bereich von 0..9 wurde von Vaisala zur
+							Verwendung als Status Hardware reserviert
+						</kurzinfo>
+					</info>
+				</bereich>
+				<zustand name="Hardware ok" wert="0" />
+				<zustand name="Hardware Alarm" wert="1" />
+				<zustand name="Hardware Warnung" wert="2" />
+				<zustand name="Rückstreualarm" wert="3" />
+				<zustand name="Rückstreuwarnung" wert="4" />
+			</ganzzahl>
+		</attributDefinition>
+		<attributDefinition pid="att.tlsUfdLiquidusTemperaturVaisala"
+			name="TLSUfdLiquidusTemperaturVaisala">
+			<info>
+				<kurzinfo>Liquidustemperatur (spezielle Gefriertemperatur für
+					Lösungen)
+				</kurzinfo>
+				<beschreibung>
+					<absatz>Die Eisbildung bei Lösungen beginnt bei einer bestimmten
+						Temperatur, genannt Liquidustemperatur, und die Eisbildung nimmt
+						beim Abkühlen der Lösung stetig zu, bis die Solidus-Temperatur
+						erreicht wird.
+					</absatz>
+					<absatz>Der Wert ist die gemäß Datennummer 41/56 definierte und von
+						den Vaisala Detektoren ermittelte Temperatur.
+					</absatz>
+				</beschreibung>
+			</info>
+			<ganzzahl>
+				<bereich minimum="-32640" maximum="32639" skalierung="0,1"
+					einheit="°C">
+					<info>
+						<kurzinfo>Liquidustemperatur, Wertebereichsdefinition entsprechend
+							TLS (Typ65 - Gefriertemperatur)
+						</kurzinfo>
+					</info>
+				</bereich>
+				<zustand name="Gefrierpunkt nicht ermittelbar" wert="0">
+					<info>
+						<kurzinfo>Gefriertemperatur-Erniedrigung bzw.
+							Taumittelkonzentration nicht messbar.
+						</kurzinfo>
+					</info>
+				</zustand>
+			</ganzzahl>
+		</attributDefinition>
+		<attributDefinition pid="att.tlsUfdWMOCodeVaisala"
+			name="TLSUfdWMOCodeVaisala">
+			<info>
+				<kurzinfo>WMO Code zur Wettersituation nach WMO Einteilung aber mit
+					herstellerspezifischen Zahlencodes
+				</kurzinfo>
+				<beschreibung>ROSA Datennummer 92, WMO Code, Niederschlagsart gemäß
+					WMO Einteilung (WMO-SYNOP-Codes nach Tabelle 4680, WaWa); Die Codes
+					20-25 werden verwendet wenn die Situation während der letzten
+					Stunde nicht aber zum Zeitpunkt der Beobachtung auftrat, die Codes
+					30- wenn die Situation zum Zeitpunkt der Beobachtung festgestellt
+					wird.
+				</beschreibung>
+			</info>
+			<ganzzahl>
+				<bereich minimum="0" maximum="99">
+					<info>
+						<kurzinfo>Der gesamte Bereich von 0..99 wurde von Vaisala zur
+							Verwendung als WMO-Code (Vaisala) reserviert
+						</kurzinfo>
+					</info>
+				</bereich>
+				<zustand name="klar" wert="0" />
+				<zustand
+					name="Trübung oder Rauch oder Staub in der Luft, Sichtweite gleich oder über 1km"
+					wert="4" />
+				<zustand
+					name="Trübung oder Rauch oder Staub in der Luft, Sichtweite unter 1km"
+					wert="5" />
+				<zustand name="Dunst" wert="10" />
+				<zustand name="Nebel, während der letzten Stunde" wert="20" />
+				<zustand name="NIEDERSCHLAG, während der letzten Stunde"
+					wert="21" />
+				<zustand
+					name="Niesel (nicht gefroren) oder Schneegriesel, während der letzten Stunde"
+					wert="22" />
+				<zustand name="Regen (nicht gefroren), während der letzten Stunde"
+					wert="23" />
+				<zustand name="SCHNEE, während der letzten Stunde" wert="24" />
+				<zustand name="NEBEL" wert="30" />
+				<zustand name="Nebel oder Eisnebel, in Schwaden" wert="31" />
+				<zustand
+					name="Nebel oder Eisnebel, während der letzten Stunde schwächer geworden"
+					wert="32" />
+				<zustand
+					name="Nebel oder Eisnebel, während der letzten Stunde unwesentlich verändert"
+					wert="33" />
+				<zustand
+					name="Nebel oder Eisnebel, während der letzten Stunde begonnen oder stärker geworden"
+					wert="34" />
+				<zustand name="NIEDERSCHLAG" wert="40" />
+				<zustand name="Niederschlag, leicht oder mittel" wert="41" />
+				<zustand name="Niederschlag, stark" wert="42" />
+				<zustand name="NIESEL" wert="50" />
+				<zustand name="Niesel, nicht gefroren, leicht" wert="51" />
+				<zustand name="Niesel, nicht gefroren, mittel" wert="52" />
+				<zustand name="Niesel, nicht gefroren, stark" wert="53" />
+				<zustand name="REGEN" wert="60" />
+				<zustand name="Regen, leicht" wert="61" />
+				<zustand name="Regen, mittel" wert="62" />
+				<zustand name="Regen, stark" wert="63" />
+				<zustand name="Regen (oder Niesel) und Schnee, leicht" wert="67" />
+				<zustand name="Regen (oder Niesel) und Schnee, mittel oder stark"
+					wert="68" />
+				<zustand name="SCHNEE" wert="70" />
+				<zustand name="Schnee, leicht" wert="71" />
+				<zustand name="Schnee, mittel" wert="72" />
+				<zustand name="Schnee, stark" wert="73" />
+				<zustand name="SCHAUER ODER AUSSETZENDER NIEDERSCHLAG" wert="80" />
+				<zustand name="Regenschauer, leicht" wert="81" />
+				<zustand name="Regenschauer, mittel" wert="82" />
+				<zustand name="Regenschauer, stark" wert="83" />
+				<zustand name="Regenschauer, heftig (>32mm/h)" wert="84" />
+				<zustand name="Schneeschauer, leicht" wert="85" />
+				<zustand name="Schneeschauer, mittel" wert="86" />
+				<zustand name="Schneeschauer, stark" wert="87" />
+			</ganzzahl>
+		</attributDefinition>
+		<attributDefinition pid="att.tlsUfdWMOCodeDWD"
+			name="TLSUfdWMOCodeDWD">
+			<info>
+				<kurzinfo>WMO Code, Niederschlagsart gemäß WMO Einteilung und mit
+					offizieller Zahlenkodierung
+				</kurzinfo>
+				<beschreibung>WMO SYNOP Code zur Beschreibung der aktuellen
+					Wettersituation wie er vom DWD verwendet wird; deutschsprachige
+					Übersetzung der Codes
+				</beschreibung>
+			</info>
+			<ganzzahl>
+				<zustand name="Bewölkungsentwicklung nicht beobachtet" wert="0" />
+				<zustand name="Bewölkung abnehmend" wert="1" />
+				<zustand name="Bewölkung unverändert" wert="2" />
+				<zustand name="Bewölkung zunehmend" wert="3" />
+				<zustand name="Sicht durch Rauch oder Asche vermindert"
+					wert="4" />
+				<zustand name="trockener Dunst (relative Feuchte weniger als 80 %)"
+					wert="5" />
+				<zustand name="verbreiteter Schwebstaub, nicht vom Wind herangeführt"
+					wert="6" />
+				<zustand name="Staub oder Sand bzw. Gischt, vom Wind herangeführt"
+					wert="7" />
+				<zustand name="gut entwickelte Staub- oder Sandwirbel" wert="8" />
+				<zustand
+					name="Staub- oder Sandsturm im Gesichtskreis, aber nicht an der Station"
+					wert="9" />
+				<zustand name="feuchter Dunst (relative Feuchte mehr als 80 %)"
+					wert="10" />
+				<zustand name="Schwaden von Bodennebel" wert="11" />
+				<zustand name="durchgehender Bodennebel" wert="12" />
+				<zustand name="Wetterleuchten sichtbar, kein Donner gehört"
+					wert="13" />
+				<zustand name="Niederschlag im Gesichtskreis, nicht den Boden erreichend"
+					wert="14" />
+				<zustand
+					name="Niederschlag in der Ferne (weiter als 5 km), aber nicht an der Station"
+					wert="15" />
+				<zustand
+					name="Niederschlag in der Nähe (näher als 5 km), aber nicht an der Station"
+					wert="16" />
+				<zustand
+					name="Gewitter (Donner hörbar), aber kein Niederschlag an der Station"
+					wert="17" />
+				<zustand
+					name="Markante Böen im Gesichtskreis, aber kein Niederschlag an der Station"
+					wert="18" />
+				<zustand
+					name="Tromben (trichterförmige Wolkenschläuche) im Gesichtskreis"
+					wert="19" />
+				<zustand name="nach Sprühregen oder Schneegriesel" wert="20" />
+				<zustand name="nach Regen" wert="21" />
+				<zustand name="nach Schneefall" wert="22" />
+				<zustand name="nach Schneeregen oder Eiskörnern" wert="23" />
+				<zustand name="nach gefrierendem Regen" wert="24" />
+				<zustand name="nach Regenschauer" wert="25" />
+				<zustand name="nach Schneeschauer" wert="26" />
+				<zustand name="nach Graupel- oder Hagelschauer" wert="27" />
+				<zustand name="nach Nebel" wert="28" />
+				<zustand name="nach Gewitter" wert="29" />
+				<zustand name="leichter oder mäßiger Sandsturm, an Intensität abnehmend"
+					wert="30" />
+				<zustand name="leichter oder mäßiger Sandsturm, unveränderte Intensität"
+					wert="31" />
+				<zustand name="leichter oder mäßiger Sandsturm, an Intensität zunehmend"
+					wert="32" />
+				<zustand name="schwerer Sandsturm, an Intensität abnehmend"
+					wert="33" />
+				<zustand name="schwerer Sandsturm, unveränderte Intensität"
+					wert="34" />
+				<zustand name="schwerer Sandsturm, an Intensität zunehmend"
+					wert="35" />
+				<zustand name="leichtes oder mäßiges Schneefegen, unter Augenhöhe"
+					wert="36" />
+				<zustand name="starkes Schneefegen, unter Augenhöhe" wert="37" />
+				<zustand name="leichtes oder mäßiges Schneetreiben, über Augenhöhe"
+					wert="38" />
+				<zustand name="starkes Schneetreiben, über Augenhöhe" wert="39" />
+				<zustand name="Nebel in einiger Entfernung" wert="40" />
+				<zustand name="Nebel in Schwaden oder Bänken" wert="41" />
+				<zustand name="Nebel, Himmel erkennbar, dünner werdend"
+					wert="42" />
+				<zustand name="Nebel, Himmel nicht erkennbar, dünner werdend"
+					wert="43" />
+				<zustand name="Nebel, Himmel erkennbar, unverändert" wert="44" />
+				<zustand name="Nebel, Himmel nicht erkennbar, unverändert"
+					wert="45" />
+				<zustand name="Nebel, Himmel erkennbar, dichter werdend"
+					wert="46" />
+				<zustand name="Nebel, Himmel nicht erkennbar, dichter werdend"
+					wert="47" />
+				<zustand name="Nebel mit Reifansatz, Himmel erkennbar" wert="48" />
+				<zustand name="Nebel mit Reifansatz, Himmel nicht erkennbar"
+					wert="49" />
+				<zustand name="unterbrochener leichter Sprühregen" wert="50" />
+				<zustand name="durchgehend leichter Sprühregen" wert="51" />
+				<zustand name="unterbrochener mäßiger Sprühregen" wert="52" />
+				<zustand name="durchgehend mäßiger Sprühregen" wert="53" />
+				<zustand name="unterbrochener starker Sprühregen" wert="54" />
+				<zustand name="durchgehend starker Sprühregen" wert="55" />
+				<zustand name="leichter gefrierender Sprühregen" wert="56" />
+				<zustand name="mäßiger oder starker gefrierender Sprühregen"
+					wert="57" />
+				<zustand name="leichter Sprühregen mit Regen" wert="58" />
+				<zustand name="mäßiger oder starker Sprühregen mit Regen"
+					wert="59" />
+				<zustand name="unterbrochener leichter Regen oder einzelne Regentropfen"
+					wert="60" />
+				<zustand name="durchgehend leichter Regen" wert="61" />
+				<zustand name="unterbrochener mäßiger Regen" wert="62" />
+				<zustand name="durchgehend mäßiger Regen" wert="63" />
+				<zustand name="unterbrochener starker Regen" wert="64" />
+				<zustand name="durchgehend starker Regen" wert="65" />
+				<zustand name="leichter gefrierender Regen" wert="66" />
+				<zustand name="mäßiger oder starker gefrierender Regen"
+					wert="67" />
+				<zustand name="leichter Schneeregen" wert="68" />
+				<zustand name="mäßiger oder starker Schneeregen" wert="69" />
+				<zustand
+					name="unterbrochener leichter Schneefall oder einzelne Schneeflocken"
+					wert="70" />
+				<zustand name="durchgehend leichter Schneefall" wert="71" />
+				<zustand name="unterbrochener mäßiger Schneefall" wert="72" />
+				<zustand name="durchgehend mäßiger Schneefall" wert="73" />
+				<zustand name="unterbrochener starker Schneefall" wert="74" />
+				<zustand name="durchgehend starker Schneefall" wert="75" />
+				<zustand name="Eisnadeln (Polarschnee)" wert="76" />
+				<zustand name="Schneegriesel" wert="77" />
+				<zustand name="Schneekristalle" wert="78" />
+				<zustand name="Eiskörner (gefrorene Regentropfen)" wert="79" />
+				<zustand name="leichter Regenschauer" wert="80" />
+				<zustand name="mäßiger oder starker Regenschauer" wert="81" />
+				<zustand name="äußerst heftiger Regenschauer" wert="82" />
+				<zustand name="leichter Schneeregenschauer" wert="83" />
+				<zustand name="mäßiger oder starker Schneeregenschauer"
+					wert="84" />
+				<zustand name="leichter Schneeschauer" wert="85" />
+				<zustand name="mäßiger oder starker Schneeschauer" wert="86" />
+				<zustand name="leichter Graupelschauer" wert="87" />
+				<zustand name="mäßiger oder starker Graupelschauer" wert="88" />
+				<zustand name="leichter Hagelschauer" wert="89" />
+				<zustand name="mäßiger oder starker Hagelschauer" wert="90" />
+				<zustand name="Gewitter in der letzten Stunde, zurzeit leichter Regen"
+					wert="91" />
+				<zustand
+					name="Gewitter in der letzten Stunde, zurzeit mäßiger oder starker Regen"
+					wert="92" />
+				<zustand
+					name="Gewitter in der letzten Stunde, zurzeit leichter Schneefall/Schneeregen/Graupel/Hagel"
+					wert="93" />
+				<zustand
+					name="Gewitter in der letzten Stunde, zurzeit mäßiger oder starker Schneefall/Schneeregen/Graupel/Hagel"
+					wert="94" />
+				<zustand name="leichtes oder mäßiges Gewitter mit Regen oder Schnee"
+					wert="95" />
+				<zustand name="leichtes oder mäßiges Gewitter mit Graupel oder Hagel"
+					wert="96" />
+				<zustand name="starkes Gewitter mit Regen oder Schnee" wert="97" />
+				<zustand name="starkes Gewitter mit Sandsturm" wert="98" />
+				<zustand name="starkes Gewitter mit Graupel oder Hagel"
+					wert="99" />
+			</ganzzahl>
+		</attributDefinition>
+	</modell>
+</konfigurationsBereich>

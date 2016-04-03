@@ -1,0 +1,217 @@
+***********************************************************************************
+*  Segment 10 System (Sys), SWE 10.1 StartStopp                                   *
+***********************************************************************************
+
+Version: 1.16 (20120828)
+
+
+Übersicht
+=========
+
+Die SWE Start/Stopp realisiert einen koordinierten Start/Stopp von Applikationen bzw.
+Prozessen mit den jeweiligen Aufrufparametern.
+
+Folgende Möglichkeiten Applikation zu starten/stoppen werden realisiert:
+
+1. Start/Stopp durch Konfigurationsdatei
+Die einzelnen Start/Stopp-Blöcke werden einer XML-Datei startStopp.xml entnommen.
+Dies ist der Normalfall beim Hochfahren eines Rechners.
+In dieser XML-Datei stehen alle benötigten Informationen zum Starten bzw. Stoppen der
+zu verwal-tenden Applikationen:
+a) Namen
+b) Name der ausführbaren Datei
+c) Aufrufparameter
+d) Startreihenfolge
+e) Stoppreihenfolge
+f) Parameter zum Startverhalten
+g) usw.
+Beim Hochfahren muss beachtet werden, dass u. U. der Datenverteiler gestartet werden
+muss. Dieser muss dann als erste Applikation gestartet werden.
+
+2. Start/Stopp über DaV
+a) Über den Datenverteiler können Starten- und Stoppanforderungen gestellt werden.
+Hierbei werden folgende Varianten unterschieden:
+b) Übergabe der Start/Stopp Informationen als Attribute
+c) Übergabe der Start/Stopp Informationen in einer XML-Struktur
+d) Übergabe der Start/Stopp Informationen in einer XML-Datei
+e) Übergabe der Start/Stopp Informationen durch Angabe eines Inkarnationsnamen
+
+3. Start/Stopp über Nutzerschnittstelle
+Die SWE ist mit einer Nutzerschnittstelle versehen. Diese wird als
+Telnet-Kommunikation ausgelegt. Daher ist auch eine Bedienung aus der Ferne möglich.
+Über diese Schnittstelle können einzelne Applikationen beendet bzw. neu gestartet
+werden.
+
+
+Versionsgeschichte
+==================
+
+Stand 28.08.2012 Version 1.16
+Beseitigung Bug 26 (NullPointerException in Inkarnation.stoppeInkarnation).
+Beseitigung Bug 31 (Aufräumen der Resourcen des Prozesses "ps").
+
+Stand 06.02.2012 Version 1.15
+Übergabeparameter für Wartezeit zwischen den Anmeldungen integriert.
+
+Stand 04.11.2011 Version 1.14
+Fehler bei der Wartezeitbestimmung bei Startbedingung initialisiert korrigiert.
+
+Stand 27.10.2011 Version 1.13
+Problem unter Windows durch Verarbeitung von Umlauten (seit Version 1.11) korrigiert.
+
+Stand 24.10.2011 Version 1.12
+Verarbeitung beim Ignorieren von Standard- und Fehlerausgaben korrigiert.
+
+Stand 25.07.2011 Version 1.11
+Verarbeitung von Umlauten korrigiert.
+
+Stand 11.08.2010 Version 1.10
+Debugausgaben angepasst.
+
+Stand 26.07.2010 Version 1.9
+Probleme beim Start mit Rechteverwaltung beseitigt (Abbruch Login).
+
+Stand 12.11.2009 Version 1.8.1
+Erste Version mit neuer Paketstruktur
+
+Stand 08.09.2009 Version 1.8
+Fehler beim Starten von StartStopp ohne Tag "kernsystem" beseitigt.
+
+Stand 09.06.2009 Version 1.7
+StartStopp verwendet nun den Datenverteilerlogger und macht keine Ausgaben mehr auf
+stdout bzw. stderr.
+StartStopp legt keine eigenen Logfiles mehr an.
+Fehler in Beispieldatei StartStoppBeispiel.xml wurde beseitigt.
+DTD liegt nun ungezippt vor.
+Attribute startbedingung/rechner bzw. startbedinung/wartezeit sind nun optional.
+Beim Versuch eine 2. Telnet Verbindung mit StartStopp aufzubauen wird diese
+abgewiesen.
+
+Stand 13.02.2009 Version 1.6
+Erweiterung um JUnit Tests
+
+Stand 16.12.2008 Version 1.5
+DTD-Dateien überarbeitet (Datenkatalog optimiert)
+Übergabe von Texten mit Leerzeichen (") plattformunabhängig realisiert
+
+Stand 17.11.2008 Version 1.4
+DTD-Dateien überarbeitet, Auflistung von möglichen Angaben um Fehler schon beim
+Versionieren feststellen zu können (Angaben wie Beginn, Ende usw. müssen jetzt
+vollständig klein geschrieben werden)
+DTD-Dateien in die Jar-Datei integriert, sind im StartStopp-Verzeichnis nicht mehr
+notwendig
+
+Stand 12.11.2008 Version 1.3
+Bestimmung des freien Speichers beim Betriebssystem Linux korrigiert
+
+Stand 10.11.2008 Version 1.2
+Anführungszeichen in Makros "&?quot;" werden nun beim Ersetzen der Makroverwendungen
+richtig übernommen
+
+Stand 29.10.2008 Version 1.1
+Beim Beenden des Kernsystem wird nur noch die als erstes gestartete Applikation,
+normalerweise der Datenverteiler (Transmitter), beendet, die anderen
+Kernsystem-Applikationen beenden sich dann automatisch durch die fehlende
+Datenverteilerverbindung
+StartStopp kann auch durch den Start der Applikation
+de.bsvrz.sys.startstopp.befehle.BeendenBefehlsSender mit Übergabe des Ports beendet
+werden.
+
+
+Stand 14.01.2008 Version 1.0 Erste Auslieferung
+Anmerkungen
+Unter Windows gibt es nicht unter allen Betriebssystemen einen Befehl um die
+Prozessliste aufzulisten. Abhilfe schaffen da die "Ps Tools" von Microsoft, die es
+ermögichen eine Prozessliste zu erstellen und Prozesse zu beenden.
+(http://technet.microsoft.com/de-de/sysinternals/bb896649.aspx). Die
+Applikation erwartet, dass die Tools pslist.exe bzw. pskill.exe sich in einem
+Verzeichnis befinden, dass über die path Variable des Betriebssystem erreichbar ist
+(Sinnvollerweise C:\Windows\System32).
+
+
+Start der SWE
+=============
+
+Aufbau eines Startskripts
+(.bat-Datei im Verzeichnis skripte-dosshell, Unix-Skript im Verzeichnis skripte-bash
+ist analog)
+
+rem Startskript Anfang
+@echo off
+
+rem in einstellungen werden die globalen DaV-Einstellungen gemacht
+rem insbesondere werden die Umgebungsvariablen %dav1% und %java% gesetzt
+call einstellungen.bat
+
+%java% -jar ../distributionspakete/de.bsvrz.sys.startstopp/de.bsvrz.sys.startstopp-runtime.jar ^
+ %dav1% ^
+ <SWE-spezifischer Parameter 1>=... ^
+ <SWE-spezifischer Parameter 2>=... ^
+ ...
+rem Startskript Ende 
+
+SWE-spezifische Parameter
+
+-startStoppKonfiguration=<StartStoppVerzeichnis>
+Verzeichnis in dem sich eine Datei Start-Stopp.xml befindet oder in das eine Datei
+"hi-neinversioniert" werden soll
+
+-reset=<BOOLEAN>
+(Optional) Startet StartStopp auch dann, wenn der Merker, dass schon eine StartStopp
+Applika-tion mit diesem Inkarantionsnamen läuft noch gesetzt ist
+
+-port=<port>
+(Optional) Portnummer für die Benutzeroberflä-che via Telnet. Dieser Parameter ist
+optional. Wird kein Port übergeben, so wird keine Telnet-verbindung gestartet
+
+-versionieren
+(Optional) Name (inklusive Pfad) einer XML-Datei die als neue StartStopp Datei in das
+im Parameter "-startStoppKonfiguration" angege-benen Verzeichnis versioniert werden
+soll
+
+-ausgabe=<BOOLEAN>
+(Optional) Die Standardausgaben der gestarte-ten Applikationen werden zusätzlich an
+der Kon-sole von StartStopp ausgegeben.
+
+-simVariante=<simVariante>
+(Optional) Simulationsvariante unter der die Ap-plikation dieser StartStopp
+Konfiguration gestar-tet werden sollen. Ohne Parameter: Simulati-onsvariante 0
+
+-inkarnationsName=<inkarnationsName>
+(Optional) Inkarantionsname der StartStoppAp-plikation, nur notwendig, wenn auf einem
+Rech-ner mehrere StartStopp Applikation laufen
+
+Hnweis
+Die benötigten Konfiguratiopnsdateien sind gemäß Betriebshandbuch zu pflegen
+
+
+Disclaimer
+==========
+
+Segment 10 System (Sys), SWE 10.1 StartStopp
+Copyright (C) 2009 Swarco Traffic Systems GmbH
+
+This program is free software; you can redistribute it and/or
+modify it under the terms of the GNU General Public License
+as published by the Free Software Foundation; either version 2
+of the License, or (at your option) any later version.
+
+This program is distributed in the hope that it will be useful,
+but WITHOUT ANY WARRANTY; without even the implied warranty of
+MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+GNU General Public License for more details.
+
+You should have received a copy of the GNU General Public License
+along with this program; if not, write to the Free Software
+Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
+
+
+Kontakt
+=======
+
+Swarco Traffic Systems GmbH
+Adolf-Dambach Str. 1
+76571 Gaggenau
+Phone: +49-7225-64-01
+Fax: +49-7225-64-300
+mailto: info@dambach.de

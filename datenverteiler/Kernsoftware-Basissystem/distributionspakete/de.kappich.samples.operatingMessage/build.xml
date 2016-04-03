@@ -1,0 +1,287 @@
+<?xml version="1.0" encoding="ISO-8859-1"?>
+
+<project name="de.kappich.samples.operatingMessage" default="zip" basedir=".">
+
+    <description>
+        Ant-Build-Datei für das Distributionspaket de.kappich.samples.operatingMessage
+
+        Copyright 2007 Kappich Systemberatung, http://www.kappich.de
+        Copyright 2013 Kappich Systemberatung, http://www.kappich.de
+
+        This file is part of de.kappich.samples.operatingMessage.
+
+		de.kappich.samples.operatingMessage is free software; you can redistribute it and/or modify
+		it under the terms of the GNU General Public License as published by
+		the Free Software Foundation; either version 2 of the License, or
+		(at your option) any later version.
+
+		de.kappich.samples.operatingMessage is distributed in the hope that it will be useful,
+		but WITHOUT ANY WARRANTY; without even the implied warranty of
+		MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+		GNU General Public License for more details.
+
+		You should have received a copy of the GNU General Public License
+		along with de.kappich.samples.operatingMessage; if not, write to the Free Software
+		Foundation, Inc., 51 Franklin St, Fifth Floor, Boston, MA  02110-1301  USA
+    </description>
+
+    <tstamp>
+        <format property="compile.time" pattern="dd.MM.yyyy HH:mm:ss" />
+    </tstamp>
+
+    <tstamp>
+        <format property="build.datetime" pattern="yyyyMMdd-HHmm" />
+    </tstamp>
+
+    <property name="release" value="Kernsoftware 3.6.4" />
+
+    <property name="version" value="3.6.4" />
+
+    <property name="license.name" value="GPL" />
+
+    <property name="revision" value="13360" />
+
+    <property name="depends.on.compiled.packages" value="de.bsvrz.dav.daf, de.bsvrz.sys.funclib.dataSerializer, de.bsvrz.sys.funclib.communicationStreams, de.bsvrz.sys.funclib.debug, de.bsvrz.sys.funclib.commandLineArgs, de.bsvrz.sys.funclib.application, de.bsvrz.sys.funclib.operatingMessage" />
+
+    <property name="depends.on.lib.jars" value="" />
+
+    <property name="compile.classpath" value="../de.bsvrz.dav.daf/de.bsvrz.dav.daf.jar:../de.bsvrz.sys.funclib.application/de.bsvrz.sys.funclib.application.jar:../de.bsvrz.sys.funclib.commandLineArgs/de.bsvrz.sys.funclib.commandLineArgs.jar:../de.bsvrz.sys.funclib.communicationStreams/de.bsvrz.sys.funclib.communicationStreams.jar:../de.bsvrz.sys.funclib.dataSerializer/de.bsvrz.sys.funclib.dataSerializer.jar:../de.bsvrz.sys.funclib.debug/de.bsvrz.sys.funclib.debug.jar:../de.bsvrz.sys.funclib.operatingMessage/de.bsvrz.sys.funclib.operatingMessage.jar" />
+
+    <property name="javadoc.sourcepath" value="../de.bsvrz.dav.daf/de.bsvrz.dav.daf-src:../de.bsvrz.sys.funclib.application/de.bsvrz.sys.funclib.application-src:../de.bsvrz.sys.funclib.commandLineArgs/de.bsvrz.sys.funclib.commandLineArgs-src:../de.bsvrz.sys.funclib.communicationStreams/de.bsvrz.sys.funclib.communicationStreams-src:../de.bsvrz.sys.funclib.dataSerializer/de.bsvrz.sys.funclib.dataSerializer-src:../de.bsvrz.sys.funclib.debug/de.bsvrz.sys.funclib.debug-src:../de.bsvrz.sys.funclib.operatingMessage/de.bsvrz.sys.funclib.operatingMessage-src" />
+
+    <property name="compile.jvm" value="1.6" />
+
+    <property name="jar.manifest.classpath" value="de.kappich.samples.operatingMessage.jar ../de.bsvrz.dav.daf/de.bsvrz.dav.daf-runtime.jar ../de.bsvrz.sys.funclib.application/de.bsvrz.sys.funclib.application-runtime.jar ../de.bsvrz.sys.funclib.commandLineArgs/de.bsvrz.sys.funclib.commandLineArgs-runtime.jar ../de.bsvrz.sys.funclib.communicationStreams/de.bsvrz.sys.funclib.communicationStreams-runtime.jar ../de.bsvrz.sys.funclib.dataSerializer/de.bsvrz.sys.funclib.dataSerializer-runtime.jar ../de.bsvrz.sys.funclib.debug/de.bsvrz.sys.funclib.debug-runtime.jar ../de.bsvrz.sys.funclib.operatingMessage/de.bsvrz.sys.funclib.operatingMessage-runtime.jar " />
+
+    <property environment="env" />
+
+    <available property="source-available" file="${ant.project.name}-src" type="dir" />
+
+    <fail message="Achtung: Quellcode Verzeichnis ${ant.project.name}-src ist nicht verfügbar. Bitte vorher die Datei ${ant.project.name}-src.zip entpacken"
+          unless="source-available" />
+
+    <target name="debug" description="Variableninhalte ausgeben">
+        <echoproperties />
+    </target>
+
+    <target name="clean" description="Generierte Zwischenergebnisse und Distributionsdateien löschen">
+        <delete dir="tmp" />
+        <delete dir="classes" />
+        <delete dir="resources" />
+        <delete dir="${ant.project.name}-doc-api" />
+        <delete dir="${ant.project.name}-doc-design" />
+        <delete file="${ant.project.name}-src.zip" />
+        <delete file="${ant.project.name}.jar" />
+        <delete file="${ant.project.name}-runtime.jar" />
+        <delete file="${ant.project.name}-info.html" />
+        <delete file="${ant.project.name}-doc-api.zip" />
+        <delete file="${ant.project.name}-doc-design.zip" />
+        <delete file="${ant.project.name}.zip" />
+        <delete>
+            <fileset dir="." includes="${ant.project.name}_*v*-????????-????.jar" />
+            <fileset dir="." includes="${ant.project.name}.source_*v*-????????-????.jar" />
+        </delete>
+
+    </target>
+
+    <target name="info" description="Erzeugen der info.xml Datei">
+        <echoxml file="${ant.project.name}-info.xml">
+            <package name="${ant.project.name}">
+                <license name="${license.name}" />
+                <release name="${release}" />
+                <version number="${version}-${build.datetime}" />
+                <revision number="${revision}" />
+                <compile time="${compile.time}" />
+                <depends-on-compiled packages="${depends.on.compiled.packages}" />
+                <depends-on-source packages="" />
+                <depends-on-lib jars="${depends.on.lib.jars}" />
+                <jvm version="${compile.jvm}" />
+            </package>
+        </echoxml>
+    </target>
+
+    <target name="runtime-info" description="Erzeugen der PackageRuntimeInfo.java Datei">
+        <echo file="${ant.project.name}.PackageRuntimeInfo.java">
+            package ${ant.project.name};
+            public class PackageRuntimeInfo {
+            public static String getLicence() { return "${license.name}";}
+            public static String getRelease() { return "${release}";}
+            public static String getVersion() { return "${version}";}
+            public static String getRevision() { return "${revision}";}
+            public static String getCompileTime() { return "${compile.time}";}
+            public static String getDependsOnCompiled() { return "${depends.on.compiled.packages}";}
+            public static String getDependsOnSource() { return "";}
+            public static String getDependsOnLib() { return "${depends.on.lib.jars}";}
+            public static String getJvmVersion() { return "${compile.jvm}";}
+            }
+        </echo>
+        <move todir="${ant.project.name}-src">
+            <fileset dir=".">
+                <include name="${ant.project.name}.PackageRuntimeInfo.java" />
+            </fileset>
+            <unpackagemapper from="*.java" to="*.java" />
+        </move>
+    </target>
+
+    <target name="jar" description="Erzeugen einer JAR-Datei mit übersetzten Class-Dateien und Resource-Dateien">
+        <mkdir dir="tmp/classes" />
+        <javac srcdir="${ant.project.name}-src"
+               classpath="${compile.classpath}"
+               destdir="tmp/classes"
+               fork="true"
+               encoding="ISO-8859-1"
+               debug="true"
+               debuglevel="lines,source"
+               target="${compile.jvm}"
+               source="${compile.jvm}"
+               verbose="no" />
+        <mkdir dir="tmp/resources" />
+        <sync todir="tmp/resources" includeEmptyDirs="false" verbose="true">
+            <fileset dir="${ant.project.name}-src" casesensitive="false">
+                <include name="**/*.properties" />
+                <include name="**/*.xml" />
+                <include name="**/*.gif" />
+                <include name="**/*.png" />
+                <include name="**/*.jpeg" />
+                <include name="**/*.jpg" />
+                <include name="**/*.html" />
+                <include name="**/*.dtd" />
+                <include name="**/*.tld" />
+                <include name="**/*.config" />
+                <include name="**/*.csv" />
+                <include name="**/*.txt" />
+                <include name="**/*.pua" />
+                <include name="**/*.dat" />
+                <include name="**/*.xsd" />
+            </fileset>
+        </sync>
+        <jar destfile="${ant.project.name}.jar" basedir="tmp/classes" compress="false" includes="-/**,de/kappich/samples/operatingMessage/**" />
+        <jar destfile="${ant.project.name}.jar" basedir="tmp/resources" compress="false" update="true" />
+        <jar destfile="${ant.project.name}.jar" basedir="." compress="false" update="true">
+            <include name="${ant.project.name}-lizenz.txt" />
+        </jar>
+        <jar destfile="${ant.project.name}-runtime.jar" basedir="tmp/classes" compress="false">
+            <exclude name="**" />
+            <manifest>
+                <attribute name="Class-Path" value="${jar.manifest.classpath}" />
+                
+            </manifest>
+        </jar>
+        <delete dir="tmp/resources" />
+        <delete dir="tmp/classes" />
+    </target>
+
+    <target name="docapizip" description="Erzeugt die Schnittstellenbeschreibung mit JavaDoc">
+        <mkdir dir="${ant.project.name}-doc-api" />
+        <echo message="sourcepath=${ant.project.name}-src:${javadoc.sourcepath}:${env.JAVA_HOME}/src.zip:${env.JAVA_HOME}/src.jar" />
+        <javadoc destdir="${ant.project.name}-doc-api"
+                 sourcepath="${ant.project.name}-src:${javadoc.sourcepath}"
+                 author="true"
+                 version="false"
+                 source="${compile.jvm}"
+                 access="protected"
+                 encoding="ISO-8859-1"
+                 classpath="${compile.classpath}"
+                 includenosourcepackages="true"
+                 packagenames="-.*,de.kappich.samples.operatingMessage.*">
+            <tag name="intern" enabled="false" />
+            <tag name="redundant" enabled="false" />
+            <tag name="verweis" enabled="false" />
+            <link href="../../de.bsvrz.dav.daf/de.bsvrz.dav.daf-doc-api/" />
+			<link href="../../de.bsvrz.sys.funclib.application/de.bsvrz.sys.funclib.application-doc-api/" />
+			<link href="../../de.bsvrz.sys.funclib.commandLineArgs/de.bsvrz.sys.funclib.commandLineArgs-doc-api/" />
+			<link href="../../de.bsvrz.sys.funclib.communicationStreams/de.bsvrz.sys.funclib.communicationStreams-doc-api/" />
+			<link href="../../de.bsvrz.sys.funclib.dataSerializer/de.bsvrz.sys.funclib.dataSerializer-doc-api/" />
+			<link href="../../de.bsvrz.sys.funclib.debug/de.bsvrz.sys.funclib.debug-doc-api/" />
+			<link href="../../de.bsvrz.sys.funclib.operatingMessage/de.bsvrz.sys.funclib.operatingMessage-doc-api/" />
+            <link offline="true" packagelistloc="../j2se/${compile.jvm}/docs/api" href="http://download.oracle.com/javase/${compile.jvm}/docs/api/" />
+        </javadoc>
+        <zip destfile="${ant.project.name}-doc-api.zip" basedir="." includes="${ant.project.name}-doc-api/" encoding="ISO-8859-1" />
+    </target>
+
+    <target name="docdesignzip" description="Erzeugt die interne Dokumentation mit JavaDoc">
+        <mkdir dir="${ant.project.name}-doc-design" />
+        <echo message="sourcepath=${ant.project.name}-src:${javadoc.sourcepath}:${env.JAVA_HOME}/src.zip:${env.JAVA_HOME}/src.jar" />
+        <echo message="javadoc.sourcepath=${javadoc.sourcepath}" />
+        <javadoc destdir="${ant.project.name}-doc-design"
+                 sourcepath="${ant.project.name}-src:${javadoc.sourcepath}"
+                 author="true"
+                 version="false"
+                 source="1.5"
+                 access="private"
+                 encoding="ISO-8859-1"
+                 classpath="${compile.classpath}"
+                 includenosourcepackages="true"
+                 packagenames="-.*,de.kappich.samples.operatingMessage.*">
+            <tag name="intern" enabled="false" />
+            <tag name="redundant" enabled="false" />
+            <tag name="verweis" enabled="false" />
+            <link href="../../de.bsvrz.dav.daf/de.bsvrz.dav.daf-doc-api/" />
+			<link href="../../de.bsvrz.sys.funclib.application/de.bsvrz.sys.funclib.application-doc-api/" />
+			<link href="../../de.bsvrz.sys.funclib.commandLineArgs/de.bsvrz.sys.funclib.commandLineArgs-doc-api/" />
+			<link href="../../de.bsvrz.sys.funclib.communicationStreams/de.bsvrz.sys.funclib.communicationStreams-doc-api/" />
+			<link href="../../de.bsvrz.sys.funclib.dataSerializer/de.bsvrz.sys.funclib.dataSerializer-doc-api/" />
+			<link href="../../de.bsvrz.sys.funclib.debug/de.bsvrz.sys.funclib.debug-doc-api/" />
+			<link href="../../de.bsvrz.sys.funclib.operatingMessage/de.bsvrz.sys.funclib.operatingMessage-doc-api/" />
+            <link offline="true" packagelistloc="../j2se/${compile.jvm}/docs/api" href="http://download.oracle.com/javase/${compile.jvm}/docs/api/" />
+        </javadoc>
+        <zip destfile="${ant.project.name}-doc-design.zip" basedir="." includes="${ant.project.name}-doc-design/" encoding="ISO-8859-1" />
+    </target>
+
+    <target name="srczip" description="Erzeugt eine Zip-Datei mit den Quelldateien">
+        <zip destfile="${ant.project.name}-src.zip" encoding="ISO-8859-1">
+            <zipfileset dir="." includes="${ant.project.name}-src/" />
+            <zipfileset dir="." includes="${ant.project.name}-lizenz.txt" prefix="${ant.project.name}-src" />
+        </zip>
+    </target>
+
+    <target name="zip"
+            depends="clean, info, runtime-info, jar, docapizip, docdesignzip, srczip"
+            description="Zip-Datei mit allen Distributionsdateien erzeugen">
+        <zip destfile="${ant.project.name}.zip" basedir=".." encoding="ISO-8859-1">
+            <include name="${ant.project.name}/build.xml" />
+            <include name="${ant.project.name}/${ant.project.name}-src.zip" />
+            <include name="${ant.project.name}/${ant.project.name}.jar" />
+            <include name="${ant.project.name}/${ant.project.name}-runtime.jar" />
+            <include name="${ant.project.name}/${ant.project.name}-info.xml" />
+            <include name="${ant.project.name}/${ant.project.name}-doc-api.zip" />
+            <include name="${ant.project.name}/${ant.project.name}-doc-design.zip" />
+            <include name="${ant.project.name}/${ant.project.name}-lizenz.txt" />
+            <include name="${ant.project.name}/${ant.project.name}-notes.html" />
+            <include name="${ant.project.name}/lib/**" />
+            <include name="${ant.project.name}/*.pdf" />
+        </zip>
+    </target>
+
+    <target name="test" description="Alle Tests ausführen">
+
+        <delete dir="testergebnisse" quiet="true" />
+        <mkdir dir="testergebnisse" />
+        <junit fork="yes"
+               maxmemory="1000m"
+               dir="testergebnisse"
+               showoutput="yes"
+               printsummary="on"
+               haltonerror="off"
+               errorproperty="junitErrors"
+               failureproperty="junitFailures">
+            <jvmarg value="-Dfile.encoding=ISO-8859-1" />
+            <classpath location="${ant.project.name}-runtime.jar" />
+            <formatter type="plain" usefile="true" />
+            <batchtest todir="testergebnisse">
+                <fileset dir="${ant.project.name}-src">
+                    <include name="**/Test*.java" />
+                    <exclude name="**/TestSuite*.java" />
+                </fileset>
+            </batchtest>
+        </junit>
+
+        <!--
+        <fail if="junitErrors" message="Unerwartete Fehler beim Ausführen von bestimmten Tests" />
+        <fail if="junitFailures" message="Einzelne Tests sind fehlgeschlagen" />
+        -->
+    </target>
+
+    <target name="ziptest" depends="zip, test" description="Distributionspaket erzeugen und alle Tests ausführen"></target>
+</project>
+

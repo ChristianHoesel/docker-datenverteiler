@@ -1,0 +1,597 @@
+<?xml version="1.0" encoding="ISO-8859-1"?>
+<!DOCTYPE konfigurationsBereich PUBLIC "-//K2S//DTD Dokument//DE" "K2S.dtd">
+<konfigurationsBereich pid="kb.tmEreignisKalenderGlobal" name="TeilmodellEreignisKalenderGlobal" verantwortlich="kv.inovat">
+	<info>
+		<kurzinfo>Teilmodell mit Datenmodellierung zum Ereigniskalender.</kurzinfo>
+		<beschreibung>
+			<absatz>
+				<verweis pid="abb.kalender"></verweis>
+				skiziert die Zusammenhänge der Teilmodelle System- und Ereigniskalender.
+			</absatz>
+		</beschreibung>
+	</info>
+	<konfigurationsAenderung stand="19.03.2007" version="5" autor="inovat, Dipl.-Ing. H. C. Kniß (HCK)" grund="A:Überarbeitung des Datenkatalogs für Veröffentlichung Kernsoftware. Änderungsdokumentation siehe &apos;inovat: Datenkatalog DaV-Release Notes&apos;."></konfigurationsAenderung>
+	<konfigurationsAenderung stand="20.03.2007" version="5" autor="inovat, Dipl.-Ing. H. C. Kniß (HCK)" grund="B:Überarbeitung des Datenkatalogs für Veröffentlichung Kernsoftware. Änderungsdokumentation siehe &apos;inovat: Datenkatalog DaV-Release Notes&apos;."></konfigurationsAenderung>
+	<konfigurationsAenderung stand="31.05.2007" version="6" autor="inovat, Dipl.-Ing. H. C. Kniß (HCK)" grund="Änderungsdokumentation siehe &apos;ReleaseNotes kv.inovt.doc&apos;"></konfigurationsAenderung>
+	<konfigurationsAenderung stand="10.06.2007" version="7" autor="inovat, Dipl.-Ing. H. C. Kniß (HCK)" grund="Änderungsdokumentation siehe &apos;ReleaseNotes kv.inovt.doc&apos;"></konfigurationsAenderung>
+	<konfigurationsAenderung stand="14.06.2007" version="7" autor="inovat, Dipl.-Ing. H. C. Kniß (HCK)" grund="Änderungsdokumentation siehe &apos;ReleaseNotes kv.inovt.doc&apos;"></konfigurationsAenderung>
+	<konfigurationsAenderung stand="02.07.2007" version="7" autor="inovat, Dipl.-Ing. H. C. Kniß (HCK)" grund="Änderungsdokumentation siehe &apos;ReleaseNotes kv.inovt.doc&apos;"></konfigurationsAenderung>
+	<konfigurationsAenderung stand="09.07.2007" version="8" autor="inovat, Dipl.-Ing. H. C. Kniß (HCK)" grund="Änderungsdokumentation siehe &apos;ReleaseNotes kv.inovt.doc&apos;"></konfigurationsAenderung>
+	<konfigurationsAenderung stand="17.01.2008" version="9" autor="inovat, Dipl.-Ing. H. C. Kniß (HCK)" grund="Änderungsdokumentation siehe &apos;ReleaseNotes kv.inovt.doc&apos;"></konfigurationsAenderung>
+	<konfigurationsAenderung stand="20.02.2008" version="10" autor="inovat, Dipl.-Ing. H. C. Kniß (HCK)" grund="Änderungsdokumentation siehe &apos;ReleaseNotes kv.inovt.doc&apos;"></konfigurationsAenderung>
+	<konfigurationsAenderung stand="14.07.2008" version="10" autor="inovat, Dipl.-Ing. H. C. Kniß (HCK)" grund="Änderungsdokumentation siehe &apos;ReleaseNotes kv.inovt.doc&apos;"></konfigurationsAenderung>
+	<konfigurationsAenderung stand="12.08.2008" version="10" autor="inovat, Dipl.-Ing. H. C. Kniß (HCK)" grund="Änderungsdokumentation siehe &apos;ReleaseNotes kv.inovt.doc&apos;"></konfigurationsAenderung>
+	<!--
+	Abhängigkeiten des Bereichs kb.tmEreignisKalenderGlobal
+	Abhängig ab Version      Art der Abhängigkeit      Version des benötigten Bereichs      Benötigter Bereich
+	9                        notwendig                 4                                    kb.tmSystemKalenderGlobal          
+	9                        notwendig                 1                                    kb.kv.inovat                       
+	9                        notwendig                 2                                    kb.tmVerkehrGlobal                 
+	9                        notwendig                 1                                    kb.systemModellGlobal              
+	9                        notwendig                 4                                    kb.fachModellGlobal                
+	9                        notwendig                 1                                    kb.metaModellGlobal                
+	9                        notwendig                 7                                    kb.tmGanglinienGlobal              
+	10                       notwendig                 3                                    kb.tmVewBetriebGlobal              
+	-->
+		<modell>
+		<typDefinition pid="typ.ereignis" name="Ereignis" objektNamenPermanent="nein" persistenzModus="persistent">
+			<info>
+				<kurzinfo>Ereignis.</kurzinfo>
+				<beschreibung>
+					<absatz>
+						Ein Ereignis ist ein dynamisches Objekt, das durch den Benutzer angelegt und parametriert werden kann.
+						<verweis pid="ref.TAnf-VeW"></verweis>
+					</absatz>
+				</beschreibung>
+			</info>
+			<erweitert pid="typ.dynamischesObjekt"/>
+			<attributgruppe pid="atg.ereignis"/>
+			<attributgruppe pid="atg.ereignisEigenschaften"/>
+			<attributgruppe pid="atg.ereignisParameter"/>
+			<defaultParameter attributgruppe="atg.ereignisParameter" typ="typ.ereignis">
+				<datenliste name="Urlasser">
+					<datum name="BenutzerReferenz" wert="undefiniert"/>
+					<datum name="Ursache" wert=""/>
+					<datum name="Veranlasser" wert=""/>
+				</datenliste>
+				<datenfeld name="RäumlicheGültigkeit">
+				</datenfeld>
+				<datum name="BeginnZeitlicheGültigkeit" wert="01.01.1971 00:00:00,000 Uhr"/>
+				<datum name="EndeZeitlicheGültigkeit" wert="01.01.1971 00:00:00,000 Uhr"/>
+				<datum name="SystemKalenderEintragReferenz" wert="undefiniert"/>
+				<datenfeld name="VerkehrlicheGültigkeit">
+				</datenfeld>
+				<datum name="Quelle" wert=""/>
+			</defaultParameter>
+		</typDefinition>
+		<typDefinition pid="typ.ereignisTyp" name="EreignisTyp" objektNamenPermanent="nein" persistenzModus="persistent">
+			<info>
+				<kurzinfo>
+					Ereignistyp.
+				</kurzinfo>
+				<beschreibung>
+					<absatz>
+						Ein Ereignistyp ist ein dynamisches Objekt, das durch den Benutzer angelegt und parametriert werden kann.
+					</absatz>
+					<absatz>
+						Zu einem Ereignistyp werden als konfigurierende Eigenschaften der Name und eine Liste von zusätzlichen
+						Attributen
+						<verweis pid="ref.Afo"></verweis>
+						verwaltet. Die Priorität eines Ereignistyps ist parametrierbar.
+					</absatz>
+				</beschreibung>
+			</info>
+			<erweitert pid="typ.dynamischesObjekt"/>
+			<attributgruppe pid="atg.ereignisTypEigenschaften"/>
+			<attributgruppe pid="atg.ereignisTypParameter"/>
+			<attributgruppe pid="atg.ganglinienModellAutomatischesLernenEreignis"/>
+			<defaultParameter attributgruppe="atg.ereignisTypParameter" typ="typ.ereignisTyp">
+				<datenliste name="Urlasser">
+					<datum name="BenutzerReferenz" wert="undefiniert"/>
+					<datum name="Ursache" wert=""/>
+					<datum name="Veranlasser" wert=""/>
+				</datenliste>
+				<datum name="EreignisTypPriorität" wert="0"/>
+			</defaultParameter>
+			<defaultParameter attributgruppe="atg.ganglinienModellAutomatischesLernenEreignis" typ="typ.ereignisTyp">
+				<datenliste name="Urlasser">
+					<datum name="BenutzerReferenz" wert="undefiniert"/>
+					<datum name="Ursache" wert=""/>
+					<datum name="Veranlasser" wert=""/>
+				</datenliste>
+				<datenfeld name="AlgAusschlussliste">
+				</datenfeld>
+				<datum name="AlgGanglinienTyp" wert="absolut"/>
+				<datum name="AlgVergleichsSchrittweite" wert="300 Sekunden"/>
+				<datum name="AlgMaxAbstand" wert="50 %"/>
+				<datenfeld name="AlgBezugsereignistypen">
+				</datenfeld>
+				<datum name="AlgMaxMatchingFehler" wert="50 %"/>
+				<datum name="AlgMatchingSchrittweite" wert="300 Sekunden"/>
+				<datum name="AlgMatchingIntervallVor" wert="21600 Sekunden"/>
+				<datum name="AlgMatchingIntervallNach" wert="21600 Sekunden"/>
+				<datum name="AlgMaxWichtungsfaktor" wert="10"/>
+				<datum name="AlgDarstellungsverfahren" wert="Polyline-Verfahren (lineare Interpolation)"/>
+				<datum name="AlgMaxGanglinien" wert="5"/>
+			</defaultParameter>
+		</typDefinition>
+		<attributgruppenDefinition pid="atg.ereignis" name="Ereignis" parametrierend="nein">
+			<info>
+				<kurzinfo>Zustandsinformationen zu Ereignissen</kurzinfo>
+			</info>
+			<aspekt pid="asp.zustand" onlineModus="quelle">
+			</aspekt>
+			<attribut pid="att.jaNein" anzahl="1" anzahlIst="fest" name="zeitlichGültig">
+				<info>
+					<kurzinfo>Gibt an, ob das Ereignis zeitlich gültig ist oder nicht.</kurzinfo>
+				</info>
+			</attribut>
+			<attribut pid="att.jaNein" anzahl="1" anzahlIst="fest" name="verkehrlichGültig">
+				<info>
+					<kurzinfo>Gibt an, ob das Ereignis verkehrlich gültig ist oder nicht.</kurzinfo>
+				</info>
+			</attribut>
+			<attribut pid="att.jaNein" anzahl="1" anzahlIst="fest" name="AttributÄnderung">
+				<info>
+					<kurzinfo>Gibt an, ob das es eine Attributänderung beim Ereignis gab.</kurzinfo>
+				</info>
+			</attribut>
+			<attribut pid="att.zeitPunkt" anzahl="1" anzahlIst="fest" name="Zeitpunkt">
+				<info>
+					<kurzinfo>Voraussichtlicher Zeitpunkt, an dem der nächste Zustandswechsel stattfindet.</kurzinfo>
+				</info>
+			</attribut>
+		</attributgruppenDefinition>
+		<attributgruppenDefinition pid="atg.ereignisEigenschaften" name="EreignisEigenschaften" parametrierend="nein">
+			<info>
+				<kurzinfo>Konfigurierende Eigenschaften des Ereignisses</kurzinfo>
+			</info>
+			<aspekt pid="asp.eigenschaften" konfigurationsModus="datensatzNotwendig">
+			</aspekt>
+			<attribut pid="att.text" anzahl="1" anzahlIst="fest" name="Ereignisbeschreibung">
+				<info>
+					<kurzinfo>Beschreibung zum Ereignis</kurzinfo>
+				</info>
+			</attribut>
+			<attribut pid="att.ereignisTypReferenz" anzahl="1" anzahlIst="fest" name="EreignisTypReferenz">
+			</attribut>
+			<attributliste pid="atl.zusätzlicheAttribute" anzahl="0" anzahlIst="variabel" name="ZusätzlicheAttribute">
+			</attributliste>
+		</attributgruppenDefinition>
+		<attributgruppenDefinition pid="atg.ereignisKalenderAnfrage" name="EreignisKalenderAnfrage" parametrierend="nein">
+			<info>
+				<kurzinfo>Zur Übermittlung von Ereignisanfragen an den Ereigniskalender.</kurzinfo>
+			</info>
+			<aspekt pid="asp.anfrage" onlineModus="quelleUndSenke">
+			</aspekt>
+			<attribut pid="att.applikationsReferenz" anzahl="1" anzahlIst="fest" name="absenderId">
+				<info>
+					<kurzinfo>Objekt-ID der anfragenden Applikation.</kurzinfo>
+					<beschreibung>
+						<absatz>Die Antworten des Ereigniskalenders werden mit dieser Objekt-ID über den Datenverteiler versendet.</absatz>
+					</beschreibung>
+				</info>
+			</attribut>
+			<attribut pid="att.text" anzahl="1" anzahlIst="fest" name="absenderZeichen">
+				<info>
+					<kurzinfo>Kennzeichnung, die von der anfragenden Applikation beliebig vergeben wird.</kurzinfo>
+					<beschreibung>
+						<absatz>
+							Der angegebene Wert wird von der Datenhaltung in die Antwort zu dieser Anfrage kopiert.
+							Die Bedeutung des Attributs wird von der anfragenden Applikation beliebig festgelegt
+							und kann zum Beispiel dazu benutzt werden, um eine empfangene Antwort der ursprünglichen
+							Anfrage zuzuordnen.
+						</absatz>
+					</beschreibung>
+				</info>
+			</attribut>
+			<attribut pid="att.zeitPunkt" anzahl="1" anzahlIst="fest" name="Anfangszeitpunkt">
+				<info>
+					<kurzinfo>Anfangszeitpunkt der Anfrage.</kurzinfo>
+				</info>
+			</attribut>
+			<attribut pid="att.zeitPunkt" anzahl="1" anzahlIst="fest" name="Endzeitpunkt">
+				<info>
+					<kurzinfo>Endzeitpunkt der Anfrage.</kurzinfo>
+					<beschreibung>
+						<absatz>
+							Liegt die der Anfangszeitpunkt hinter dem Endzweitpunkt, wird der Endzeitpunkt auf den Anfangzeitpunkt gesetzt.
+						</absatz>
+					</beschreibung>
+				</info>
+			</attribut>
+			<attribut pid="att.netzBestandTeilReferenz" anzahl="0" anzahlIst="variabel" name="RäumlicheGültigkeit">
+				<info>
+					<kurzinfo>Räumliche Gültigkeit des Ereignisses</kurzinfo>
+					<beschreibung>
+						<absatz>
+							Hier können beliebig viele Referenzen auf Infrastrukturobjekte angegeben werden.
+							Wenn keine Referenz angegeben wird sollen systemweit alle Ereignisse betrachtet werden.
+						</absatz>
+					</beschreibung>
+				</info>
+			</attribut>
+			<attribut pid="att.ereignisTypenOption" anzahl="1" anzahlIst="fest" name="EreignisTypenOption">
+			</attribut>
+			<attribut pid="att.ereignisTypReferenz" anzahl="0" anzahlIst="variabel" name="EreignisTypReferenz">
+				<info>
+					<kurzinfo>
+						In dieser Liste können Ereignistypen referenziert werden, die je nach Ereignistypenoption
+						explizit zu berücksichtigen oder explizit nicht zu berücksichtigen sind.
+					</kurzinfo>
+				</info>
+			</attribut>
+		</attributgruppenDefinition>
+		<attributgruppenDefinition pid="atg.ereignisKalenderAntwort" name="EreignisKalenderAntwort" parametrierend="nein">
+			<info>
+				<kurzinfo>Zur Übermittlung von Ereignisantworten an die anfragende Applikation.</kurzinfo>
+			</info>
+			<aspekt pid="asp.antwort" onlineModus="quelleUndSenke">
+			</aspekt>
+			<attribut pid="att.text" anzahl="1" anzahlIst="fest" name="absenderZeichen">
+				<info>
+					<kurzinfo>Kennzeichnung, die von der anfragenden Applikation vergeben wurde.</kurzinfo>
+				</info>
+			</attribut>
+			<attribut pid="att.jaNein" anzahl="1" anzahlIst="fest" name="änderung">
+				<info>
+					<kurzinfo>Gibt an, ob der initiale Anfangszustand oder ein Änderung übertragen wurde.</kurzinfo>
+				</info>
+			</attribut>
+			<attributliste pid="atl.ereignisInformation" anzahl="0" anzahlIst="variabel" name="Ereignis">
+				<info>
+					<kurzinfo>
+						Informationen zu Ereignissen.
+					</kurzinfo>
+				</info>
+			</attributliste>
+		</attributgruppenDefinition>
+		<attributgruppenDefinition pid="atg.ereignisParameter" name="EreignisParameter" parametrierend="ja">
+			<info>
+				<kurzinfo>Parametrierbare Eigenschaften des Ereignisses</kurzinfo>
+				<beschreibung>
+					<absatz>
+						Die zeitliche Gültigkeit eines Ereignisses wird entweder durch ein explizite Zeitangabe
+						gesetzt oder durch eine Referenz auf einen Eintrag im Systemkalender.
+					</absatz>
+					<absatz>
+						Wenn eine gültige Referenz auf einen Eintrag im Systemkalender angegeben wurde, werden
+						die Attribute "BeginnZeitlicheGültigkeit" und "EndeZeitlicheGültigkeit" ignoriert.
+					</absatz>
+				</beschreibung>
+			</info>
+			<attributliste pid="atl.urlasser" anzahl="1" anzahlIst="fest" name="Urlasser">
+			</attributliste>
+			<attribut pid="att.netzBestandTeilReferenz" anzahl="0" anzahlIst="variabel" name="RäumlicheGültigkeit">
+				<info>
+					<kurzinfo>Räumliche Gültigkeit des Ereignisses</kurzinfo>
+					<beschreibung>
+						<absatz>
+							Hier können beliebig viele Referenzen auf Infrastrukturobjekte angegeben werden.
+							Wenn keine Referenz angegeben wird hat das Ereignis systemweite räumliche Relevanz.
+						</absatz>
+					</beschreibung>
+				</info>
+			</attribut>
+			<attribut pid="att.zeitPunkt" anzahl="1" anzahlIst="fest" name="BeginnZeitlicheGültigkeit">
+				<info>
+					<kurzinfo>Expliziter Zeitpunkt, zu dem die zeitliche Gültigkeit des Ereignisses beginnt.</kurzinfo>
+				</info>
+			</attribut>
+			<attribut pid="att.zeitPunkt" anzahl="1" anzahlIst="fest" name="EndeZeitlicheGültigkeit">
+				<info>
+					<kurzinfo>Expliziter Zeitpunkt, zu dem die zeitliche Gültigkeit des Ereignisses endet.</kurzinfo>
+				</info>
+			</attribut>
+			<attribut pid="att.systemKalenderEintragReferenzOptional" anzahl="1" anzahlIst="fest" name="SystemKalenderEintragReferenz">
+				<info>
+					<kurzinfo>Referenz auf einen Eintrag im Systemkalender</kurzinfo>
+					<beschreibung>
+						<absatz>
+							In diesem Fall wird die konkrete zeitliche Gültigkeit des Ereignisses
+							durch die Auswertung des Systemkalendereintrages bestimmt.
+							Sei beispielsweise als Referenz der Systemkalendereintrag "Ostermontag"
+							angegeben, so ist das hiermit definierte Ereignis am Ostermontag gültig.
+						</absatz>
+					</beschreibung>
+				</info>
+			</attribut>
+			<attributliste pid="atl.verkehrlicheGültigkeit" anzahl="0" anzahlIst="variabel" name="VerkehrlicheGültigkeit">
+				<info>
+					<kurzinfo>Verkehrliche Gültigkeit des Ereignisses</kurzinfo>
+					<beschreibung>
+						<absatz>
+							Die verkehrliche Gültigkeit kann durch ein oder mehrere relativ zur zeitlichen
+							Gültigkeit definierte Bezüge spezifiziert werden. Dabei bezieht sich ein
+							verkehrlicher Gültigkeitsbereich z.B. von 3 Stunden vor Anfang bis 15 Minuten
+							vor Anfang der zeitlichen Gültigkeit.
+						</absatz>
+						<absatz>
+							Wenn kein Eintrag angegeben wird, stimmt die verkehrtliche Gültigkeit mit der
+							zeitlichen Gültigkeit überein.
+						</absatz>
+					</beschreibung>
+				</info>
+			</attributliste>
+			<attribut pid="att.text" anzahl="1" anzahlIst="fest" name="Quelle">
+				<info>
+					<kurzinfo>Quelle des Ereignisses</kurzinfo>
+					<beschreibung>
+						<absatz>
+							Referenz auf die Quelle des Ereignisses (z.B. auf den Benutzer, der das Ereignis eingegeben hat)
+						</absatz>
+					</beschreibung>
+				</info>
+			</attribut>
+		</attributgruppenDefinition>
+		<attributgruppenDefinition pid="atg.ereignisTypEigenschaften" name="EreignisTypEigenschaften" parametrierend="nein">
+			<info>
+				<kurzinfo>Konfigurierende Eigenschaften des Ereignistyps</kurzinfo>
+			</info>
+			<aspekt pid="asp.eigenschaften" konfigurationsModus="datensatzNotwendig">
+			</aspekt>
+			<attributliste pid="atl.zusätzlicheAttribute" anzahl="0" anzahlIst="variabel" name="ZusätzlicheAttribute">
+			</attributliste>
+		</attributgruppenDefinition>
+		<attributgruppenDefinition pid="atg.ereignisTypParameter" name="EreignisTypParameter" parametrierend="ja">
+			<info>
+				<kurzinfo>Parametrierbare Eigenschaften des Ereignistyps</kurzinfo>
+			</info>
+			<attributliste pid="atl.urlasser" anzahl="1" anzahlIst="fest" name="Urlasser">
+			</attributliste>
+			<attribut pid="att.ereignisTypPriorität" anzahl="1" anzahlIst="fest" name="EreignisTypPriorität">
+				<info>
+					<kurzinfo>Priorität des Ereignistyps</kurzinfo>
+				</info>
+			</attribut>
+		</attributgruppenDefinition>
+		<attributgruppenDefinition pid="atg.ganglinienModellAutomatischesLernenEreignis" name="GanglinienModellAutomatischesLernenEreignis" parametrierend="ja">
+			<info>
+				<kurzinfo>Ereignisabhängige Parameter für das automatische Lernen von Ganglinien (je Ereignistyp).</kurzinfo>
+			</info>
+			<attributliste pid="atl.urlasser" anzahl="1" anzahlIst="fest" name="Urlasser">
+			</attributliste>
+			<attribut pid="att.ereignisTypReferenz" anzahl="0" anzahlIst="variabel" name="AlgAusschlussliste">
+				<info>
+					<kurzinfo>
+						Liste von Ereignistypen, die nicht gleichzeitig mit einem für die Verschmelzung ausgewählten Ereignis anstehen dürfen.
+					</kurzinfo>
+				</info>
+			</attribut>
+			<attribut pid="att.ganglinienTyp" anzahl="1" anzahlIst="fest" name="AlgGanglinienTyp">
+				<info>
+					<kurzinfo>
+						Art der zu generierenden Ganglinien.
+					</kurzinfo>
+				</info>
+			</attribut>
+			<attribut pid="att.anzahlSekunden1Bis" anzahl="1" anzahlIst="fest" name="AlgVergleichsSchrittweite">
+				<info>
+					<kurzinfo>
+						Schrittweite für die Abstandsbestimmung von Ganglinien mit dem komplexen Basismaß.
+					</kurzinfo>
+				</info>
+			</attribut>
+			<attribut pid="att.abstandsMass" anzahl="1" anzahlIst="fest" name="AlgMaxAbstand">
+				<info>
+					<kurzinfo>
+						Maximaler Abstand von gemessenen Ganglinien zur Verschmelzung mit bereits generierten
+						absoluten historischen Ganglinien.
+					</kurzinfo>
+				</info>
+			</attribut>
+			<attribut pid="att.ereignisTypReferenz" anzahl="0" anzahlIst="variabel" name="AlgBezugsereignistypen">
+				<info>
+					<kurzinfo>
+						Liste mit Ereignistypen auf die sich relative Ganglinien beziehen können.
+					</kurzinfo>
+				</info>
+			</attribut>
+			<attribut pid="att.abstandsMass" anzahl="1" anzahlIst="fest" name="AlgMaxMatchingFehler">
+				<info>
+					<kurzinfo>
+						Maximaler Abstand für das Pattern-Matching beim Erzeugen von relativen historischen Ganglinien.
+					</kurzinfo>
+				</info>
+			</attribut>
+			<attribut pid="att.anzahlSekunden1Bis" anzahl="1" anzahlIst="fest" name="AlgMatchingSchrittweite">
+				<info>
+					<kurzinfo>
+						Schrittweite für das Pattern-Matching beim Erzeugen von relativen historischen Ganglinien.
+					</kurzinfo>
+				</info>
+			</attribut>
+			<attribut pid="att.anzahlSekunden0Bis" anzahl="1" anzahlIst="fest" name="AlgMatchingIntervallVor">
+				<info>
+					<kurzinfo>
+						Zeitspanne vor der verkehrlichen Gültigkeit eines Ereignisses in dem bei der Erzeugung von
+						relativen Ganglinien das Pattern-Matching Verfahren angewandt wird.
+					</kurzinfo>
+				</info>
+			</attribut>
+			<attribut pid="att.anzahlSekunden0Bis" anzahl="1" anzahlIst="fest" name="AlgMatchingIntervallNach">
+				<info>
+					<kurzinfo>
+						Zeitspanne nach der verkehrlichen Gültigkeit eines Ereignisses in dem bei der
+						Erzeugung von relativen Ganglinien das Pattern-Matching Verfahren angewandt wird.
+					</kurzinfo>
+				</info>
+			</attribut>
+			<attribut pid="att.wichtungsFaktor" anzahl="1" anzahlIst="fest" name="AlgMaxWichtungsfaktor">
+				<info>
+					<kurzinfo>
+						Maximalwert für die Wichtung historischer Ganglinien bei der Verschmelzung.
+					</kurzinfo>
+				</info>
+			</attribut>
+			<attribut pid="att.ganglinienVerfahren" anzahl="1" anzahlIst="fest" name="AlgDarstellungsverfahren">
+				<info>
+					<kurzinfo>
+						Verfahren, dass zur Interpolation bzw. Approximation bei der Darstellung von erzeugten
+						Ganglinien benutzt werden soll.
+					</kurzinfo>
+				</info>
+			</attribut>
+			<attribut pid="att.ganzzahl1Bis" anzahl="1" anzahlIst="fest" name="AlgMaxGanglinien">
+				<info>
+					<kurzinfo>
+						Maximale Anzahl gespeicherter historischer Ganglinien.
+					</kurzinfo>
+				</info>
+			</attribut>
+		</attributgruppenDefinition>
+		<attributDefinition pid="att.ereignisReferenz" name="EreignisReferenz">
+			<info>
+				<kurzinfo>Attribut zur Referenzierung des Objekttyps: typ.ereignis.</kurzinfo>
+			</info>
+			<objektReferenz typ="typ.ereignis" undefiniert="verboten" referenzierungsart="assoziation"/>
+		</attributDefinition>
+		<attributDefinition pid="att.ereignisReferenzOptional" name="EreignisReferenzOptional">
+			<info>
+				<kurzinfo>Attribut zur Referenzierung des Objekttyps: typ.ereignis (Optionale Referenzierung erlaubt).</kurzinfo>
+			</info>
+			<objektReferenz typ="typ.ereignis" undefiniert="erlaubt" referenzierungsart="assoziation"/>
+		</attributDefinition>
+		<attributDefinition pid="att.ereignisTypenOption" name="EreignisTypenOption">
+			<info>
+				<kurzinfo>Gibt an, welche Ereignistypen betrachtet werden sollen.</kurzinfo>
+			</info>
+			<ganzzahl bits="8">
+				<zustand name="Alle" wert="0">
+					<info>
+						<kurzinfo>Es sollen alle Ereignistypen betrachtet werden.</kurzinfo>
+					</info>
+				</zustand>
+				<zustand name="Nur" wert="1">
+					<info>
+						<kurzinfo>Es sollen nur die spezifizierten Ereignistypen betrachtet werden.</kurzinfo>
+					</info>
+				</zustand>
+				<zustand name="Nicht" wert="2">
+					<info>
+						<kurzinfo>Es sollen bis auf die spezifizierten alle Ereignistypen betrachtet werden.</kurzinfo>
+					</info>
+				</zustand>
+			</ganzzahl>
+		</attributDefinition>
+		<attributDefinition pid="att.ereignisTypPriorität" name="EreignisTypPriorität">
+			<info>
+				<kurzinfo>Priorität von Ereignistypen</kurzinfo>
+			</info>
+			<ganzzahl bits="64">
+				<bereich skalierung="1" minimum="0" maximum="9223372036854775807">
+				</bereich>
+			</ganzzahl>
+		</attributDefinition>
+		<attributDefinition pid="att.ereignisTypReferenz" name="EreignisTypReferenz">
+			<info>
+				<kurzinfo>Attribut zur Referenzierung des Objekttyps: typ.ereignisTyp.</kurzinfo>
+			</info>
+			<objektReferenz typ="typ.ereignisTyp" undefiniert="verboten" referenzierungsart="assoziation"/>
+		</attributDefinition>
+		<attributDefinition pid="att.ereignisTypReferenzOptional" name="EreignisTypReferenzOptional">
+			<info>
+				<kurzinfo>Attribut zur Referenzierung des Objekttyps: typ.ereignisTyp (Optionale Referenzierung erlaubt).</kurzinfo>
+			</info>
+			<objektReferenz typ="typ.ereignisTyp" undefiniert="erlaubt" referenzierungsart="assoziation"/>
+		</attributDefinition>
+		<attributDefinition pid="att.zeitBezug" name="ZeitBezug">
+			<info>
+				<kurzinfo>Zeitbezug zu dem Anfangs oder Endzeitpunkt eines zeitlichen Intervalls</kurzinfo>
+			</info>
+			<ganzzahl bits="8">
+				<zustand name="vorAnfang" wert="0">
+					<info>
+						<kurzinfo>Die Relation gibt einen Zeitpunkt vor dem Anfang des Zeitintervalls an.</kurzinfo>
+					</info>
+				</zustand>
+				<zustand name="nachAnfang" wert="1">
+					<info>
+						<kurzinfo>Die Relation gibt einen Zeitpunkt nach dem Anfang des Zeitintervalls an.</kurzinfo>
+					</info>
+				</zustand>
+				<zustand name="vorEnde" wert="2">
+					<info>
+						<kurzinfo>Die Relation gibt einen Zeitpunkt vor dem Ende des Zeitintervalls an.</kurzinfo>
+					</info>
+				</zustand>
+				<zustand name="nachEnde" wert="3">
+					<info>
+						<kurzinfo>Die Relation gibt einen Zeitpunkt nach dem Ende des Zeitintervalls an.</kurzinfo>
+					</info>
+				</zustand>
+			</ganzzahl>
+		</attributDefinition>
+		<attributlistenDefinition pid="atl.ereignisInformation" name="EreignisInformation">
+			<info>
+				<kurzinfo>Informationen zu Ereignissen</kurzinfo>
+			</info>
+			<attribut pid="att.zeitPunkt" anzahl="1" anzahlIst="fest" name="Zeitpunkt">
+				<info>
+					<kurzinfo>Zeitpunkt des Zustands bzw. der Änderung des Zustands.</kurzinfo>
+				</info>
+			</attribut>
+			<attribut pid="att.ereignisReferenz" anzahl="1" anzahlIst="fest" name="EreignisReferenz">
+				<info>
+					<kurzinfo>Referenz auf das Ereignis</kurzinfo>
+				</info>
+			</attribut>
+			<attribut pid="att.jaNein" anzahl="1" anzahlIst="fest" name="zeitlichGültig">
+				<info>
+					<kurzinfo>Gibt an, ob das Ereignis zeitlich gültig ist oder nicht.</kurzinfo>
+				</info>
+			</attribut>
+			<attribut pid="att.jaNein" anzahl="1" anzahlIst="fest" name="verkehrlichGültig">
+				<info>
+					<kurzinfo>Gibt an, ob das Ereignis verkehrlich gültig ist oder nicht.</kurzinfo>
+				</info>
+			</attribut>
+		</attributlistenDefinition>
+		<attributlistenDefinition pid="atl.verkehrlicheGültigkeit">
+			<info>
+				<kurzinfo>Definition der verkehrlichen Gültigkeit</kurzinfo>
+			</info>
+			<attribut pid="att.zeitDauer" anzahl="1" anzahlIst="fest" name="ZeitDauerAnfangIntervall">
+				<info>
+					<kurzinfo>Zeitdauer</kurzinfo>
+				</info>
+				<default wert="0s"/>
+			</attribut>
+			<attribut pid="att.zeitBezug" anzahl="1" anzahlIst="fest" name="ZeitBezugAnfangIntervall">
+				<info>
+					<kurzinfo>Zeitbezug zum Anfang des Zeitintervalls</kurzinfo>
+				</info>
+				<default wert="vorAnfang"/>
+			</attribut>
+			<attribut pid="att.zeitDauer" anzahl="1" anzahlIst="fest" name="ZeitDauerEndeIntervall">
+				<info>
+					<kurzinfo>Zeitdauer</kurzinfo>
+				</info>
+				<default wert="0s"/>
+			</attribut>
+			<attribut pid="att.zeitBezug" anzahl="1" anzahlIst="fest" name="ZeitBezugEndeIntervall">
+				<info>
+					<kurzinfo>Zeitbezug zum Ende des Zeitintervalls</kurzinfo>
+				</info>
+				<default wert="nachEnde"/>
+			</attribut>
+		</attributlistenDefinition>
+		<attributlistenDefinition pid="atl.zusätzlicheAttribute">
+			<info>
+				<kurzinfo>Zusätzliche Attribute von Ereignistypen</kurzinfo>
+			</info>
+			<attribut pid="att.text" anzahl="1" anzahlIst="fest" name="Attributname">
+				<info>
+					<kurzinfo>Name des zusätzlichen Attributs.</kurzinfo>
+				</info>
+			</attribut>
+			<attribut pid="att.text" anzahl="1" anzahlIst="fest" name="Attributwert">
+				<info>
+					<kurzinfo>Beim Ereignistyp KOMMENTAR zur Bedeutung des zusätzlichen Attributwertes, beim Ereignis WERT des zusätzlichen Attributwertes.</kurzinfo>
+				</info>
+			</attribut>
+		</attributlistenDefinition>
+	</modell>
+	<objekte>
+	</objekte>
+</konfigurationsBereich>

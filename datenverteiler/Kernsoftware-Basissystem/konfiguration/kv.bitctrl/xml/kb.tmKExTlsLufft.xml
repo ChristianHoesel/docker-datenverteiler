@@ -1,0 +1,70 @@
+<?xml version="1.0" encoding="ISO-8859-1"?>
+<!DOCTYPE konfigurationsBereich PUBLIC "-//K2S//DTD Dokument//DE" "K2S.dtd">
+<konfigurationsBereich pid="kb.tmKExTlsLufft"
+	name="Herstellerspezifische TLS Spezifikation (LUFFT)" verantwortlich="kv.bitctrl">
+	<info>
+		<kurzinfo>Spezielle Definitionen für TLS-Geräte von Lufft
+			(insbesondere herstellerdefinierte TLS-Typen).
+		</kurzinfo>
+	</info>
+	<konfigurationsAenderung stand="13.04.2015"
+		version="1" autor="Christian Hösel, BitCtrl Systems GmbH" grund="Erstellung" />
+	<modell>
+		<typDefinition pid="typ.deVltLufft" name="DeVltLufft"
+			objektNamenPermanent="nein">
+			<info>
+				<kurzinfo>
+					Herstellerspezifischer Datenendgerätekanal der
+					Funktionsgruppe 6 für Lufft.
+				</kurzinfo>
+			</info>
+			<erweitert pid="typ.deVlt" />
+			<attributgruppe pid="atg.tlsVltStromVersorungLufft" />
+		</typDefinition>
+		<attributgruppenDefinition pid="atg.tlsVltStromVersorungLufft"
+			name="TLSVltStromVersorungLufft" parametrierend="nein">
+			<info>
+				<kurzinfo>Herstellerspezifische Stromversorung Lufft(FG 6 / Typ
+					151).</kurzinfo>
+				<beschreibung>
+					<sektion>
+						<titel>
+							FG 6: TLS-DE-Block-Struktur im Typ
+							151"Stromversorung Lufft"
+						</titel>
+						<absatz>
+							Wird verwendet mit ID 4 (Ergebnisse) in
+							Abruf- und Antwortrichtung.
+						</absatz>
+					</sektion>
+				</beschreibung>
+			</info>
+			<aspekt pid="asp.tlsAntwort" onlineModus="quelleUndSenke">
+			</aspekt>
+			<attribut pid="att.tlsVltNetzspannung" anzahl="1" anzahlIst="fest"
+				name="Netzspannung">
+			</attribut>
+			<attribut pid="att.tlsVltUSV" anzahl="1" anzahlIst="fest"
+				name="USV">
+			</attribut>
+			<attribut pid="att.tlsVltFISchutzschalter" anzahl="1"
+				anzahlIst="fest" name="FISchutzschalter">
+			</attribut>
+			<attribut pid="att.tlsVltLeitungsschutzschalter" anzahl="1"
+				anzahlIst="fest" name="Leitungsschutzschalter">
+			</attribut>
+		</attributgruppenDefinition>
+		<attributDefinition pid="att.tlsVltLeitungsschutzschalter"
+			name="TLSVltLeitungsschutzschalter">
+			<info>
+				<kurzinfo>Status Leitungsschutzschalter.</kurzinfo>
+			</info>
+			<ganzzahl bits="8">
+				<zustand name="Leitungsschutzschalter eingeschaltet" wert="0">
+				</zustand>
+				<zustand name="Leitungsschutzschalter ausgelöst" wert="1">
+				</zustand>
+			</ganzzahl>
+		</attributDefinition>
+	</modell>
+</konfigurationsBereich>

@@ -1,0 +1,1485 @@
+<?xml version="1.0" encoding="ISO-8859-1"?>
+<!DOCTYPE konfigurationsBereich PUBLIC "-//K2S//DTD Dokument//DE" "K2S.dtd">
+<konfigurationsBereich pid="kb.tmKExTlsFG9" name="TeilmodellKFExTls - FG 9" verantwortlich="kv.inovat">
+	<info>
+		<kurzinfo>
+            Teilmodell mit Datenmodellierung zur Anbindung und zum
+            Datenaustausch mit Geräten, die gemäß TLS 2011 in der FG 9 angebunden
+            sind.
+        </kurzinfo>
+	</info>
+	<konfigurationsAenderung stand="25.02.2012" version="1" autor="inovat, Dipl.-Ing. H. C. Kniß (HCK)" grund="Neuerstellung."></konfigurationsAenderung>
+	<konfigurationsAenderung stand="02.03.2012" version="1" autor="inovat, Dipl.-Ing. H. C. Kniß (HCK)" grund="Anpassung der Default-Parameter auf Basis Vorgabe NW/Kalisch."></konfigurationsAenderung>
+	<konfigurationsAenderung stand="05.03.2012" version="1" autor="inovat, Dipl.-Ing. H. C. Kniß (HCK)" grund="Anpassung der Default-Parameter nach Ruecksprache NW/Kalisch."></konfigurationsAenderung>
+	<konfigurationsAenderung stand="16.03.2012" version="2" autor="inovat, Dipl.-Ing. H. C. Kniß (HCK)" grund="Aspekte ergänzt/angepasst."></konfigurationsAenderung>
+	<!--
+	Abhängigkeiten des Bereichs kb.tmKExTlsFG9
+	Abhängig ab Version      Art der Abhängigkeit      Version des benötigten Bereichs      Benötigter Bereich
+	1                        notwendig                 6                                    kb.tmKExTlsGlobal                  
+	1                        notwendig                 1                                    kb.kv.inovat                       
+	1                        notwendig                 1                                    kb.systemModellGlobal              
+	1                        notwendig                 4                                    kb.fachModellGlobal                
+	1                        notwendig                 1                                    kb.metaModellGlobal                
+	1                        notwendig                 3                                    kb.tmVewBetriebGlobal              
+	-->
+		<modell>
+		<typDefinition pid="typ.deZfr" name="DeZfr" objektNamenPermanent="nein">
+			<info>
+				<kurzinfo>
+                    Datenendgerätekanal der Funktionsgruppe 9,
+                    Zuflussregelung.
+                </kurzinfo>
+			</info>
+			<erweitert pid="typ.de"/>
+			<attributgruppe pid="atg.deZfr"/>
+			<attributgruppe pid="atg.tlsZfrAbrufPufferInhalt"/>
+			<attributgruppe pid="atg.tlsZfrAlineaSchaltVorschläge"/>
+			<attributgruppe pid="atg.tlsZfrBetriebsArt"/>
+			<attributgruppe pid="atg.tlsZfrBetriebsParameterAlinea1"/>
+			<attributgruppe pid="atg.tlsZfrBetriebsParameterAlinea2"/>
+			<attributgruppe pid="atg.tlsZfrBetriebsParameterRotFahrerZähler"/>
+			<attributgruppe pid="atg.tlsZfrBetriebsParameterZuflussRegelung"/>
+			<attributgruppe pid="atg.tlsZfrErgänzendeDeFehlerMeldung"/>
+			<attributgruppe pid="atg.tlsZfrErgebnisMeldungRotFahrerZähler"/>
+			<attributgruppe pid="atg.tlsZfrHelligkeit"/>
+			<attributgruppe pid="atg.tlsZfrNegativeQuittung"/>
+			<attributgruppe pid="atg.tlsZfrSignalPlan"/>
+			<defaultParameter attributgruppe="atg.tlsZfrBetriebsArt" typ="typ.deZfr">
+				<datenliste name="Urlasser">
+					<datum name="BenutzerReferenz" wert="undefiniert"/>
+					<datum name="Ursache" wert=""/>
+					<datum name="Veranlasser" wert=""/>
+				</datenliste>
+				<datum name="BetriebsArt" wert="Blindbetrieb"/>
+			</defaultParameter>
+			<defaultParameter attributgruppe="atg.tlsZfrBetriebsParameterZuflussRegelung" typ="typ.deZfr">
+				<datenliste name="Urlasser">
+					<datum name="BenutzerReferenz" wert="undefiniert"/>
+					<datum name="Ursache" wert=""/>
+					<datum name="Veranlasser" wert=""/>
+				</datenliste>
+				<datum name="GelbZeit" wert="1 s"/>
+				<datum name="RotGelbZeit" wert="1 s"/>
+				<datum name="MindestDunkelOderGrünZeit" wert="1 s"/>
+				<datum name="MaximaleDunkelOderGrünZeit" wert="5 s"/>
+				<datum name="MaximaleBelegZeit" wert="60 s"/>
+				<datum name="MaximaleDunkelOderGrünZeitBeiDetektorStörung" wert="3 s"/>
+				<datum name="GrünFlag" wert="Grünphasendarstellung als Grünes Licht"/>
+				<datum name="Modus" wert="Rot wartend mit Nachläufer"/>
+			</defaultParameter>
+			<defaultParameter attributgruppe="atg.tlsZfrBetriebsParameterAlinea1" typ="typ.deZfr">
+				<datenliste name="Urlasser">
+					<datum name="BenutzerReferenz" wert="undefiniert"/>
+					<datum name="Ursache" wert=""/>
+					<datum name="Veranlasser" wert=""/>
+				</datenliste>
+				<datum name="qEMin" wert="240 Kfz"/>
+				<datum name="Korrekturfaktor" wert="70,0 Kfz/h"/>
+				<datum name="bOpt" wert="23 %"/>
+				<datum name="BerechnungsartBelegung" wert="Erfassung Belegung auf Einzel-FS (arithmetisches Mittel)"/>
+				<datum name="Mindesschaltzeit" wert="2 min"/>
+				<datum name="Nachlaufzeit" wert="2 min"/>
+				<datum name="maxErsteRotLaufZeit" wert="2 s"/>
+				<datum name="schwächsteRotLaufZeit" wert="2 s"/>
+				<datenfeld name="PrgAlinea1">
+					<datenliste name="-">
+						<datum name="TEin" wert="0,0 s/Kfz"/>
+						<datum name="TAus" wert="0,0 s/Kfz"/>
+						<datum name="RotSchaltZeit" wert="Zuflussregelung ausschalten"/>
+					</datenliste>
+				</datenfeld>
+			</defaultParameter>
+			<defaultParameter attributgruppe="atg.tlsZfrBetriebsParameterRotFahrerZähler" typ="typ.deZfr">
+				<datenliste name="Urlasser">
+					<datum name="BenutzerReferenz" wert="undefiniert"/>
+					<datum name="Ursache" wert=""/>
+					<datum name="Veranlasser" wert=""/>
+				</datenliste>
+				<datum name="ErfassungsIntervallDauer" wert="1 Minute"/>
+				<datum name="ÜbertragungsVerfahren" wert="Meldung nur nach Abruf"/>
+			</defaultParameter>
+			<defaultParameter attributgruppe="atg.tlsZfrBetriebsParameterAlinea2" typ="typ.deZfr">
+				<datenliste name="Urlasser">
+					<datum name="BenutzerReferenz" wert="undefiniert"/>
+					<datum name="Ursache" wert=""/>
+					<datum name="Veranlasser" wert=""/>
+				</datenliste>
+				<datum name="vHfbStauEin" wert="0 km/h"/>
+				<datum name="tHfbVStauEin" wert="0 min"/>
+				<datum name="vHfbStauAus" wert="0 km/h"/>
+				<datum name="tHfbVStauAus" wert="0 min"/>
+				<datum name="bHfbStauEin" wert="0 %"/>
+				<datum name="tHfbBStauEin" wert="0 min"/>
+				<datum name="bHfbStauAus" wert="0 %"/>
+				<datum name="tHfbBStauAus" wert="0 min"/>
+				<datum name="bGelbAnSStauEin" wert="0 %"/>
+				<datum name="tGelbAnSBStauEin" wert="0 min"/>
+				<datum name="bGelbAnSStauAus" wert="0 %"/>
+				<datum name="tGelbAnSBStauAus" wert="0 min"/>
+				<datum name="bFGrünAnSStauEin" wert="0 %"/>
+				<datum name="tFGrünAnSBStauEin" wert="0 min"/>
+				<datum name="bFGrünAnSStauAus" wert="0 %"/>
+				<datum name="tFGrünAnSBStauAus" wert="0 min"/>
+				<datum name="bRStauSStauEin" wert="0 %"/>
+				<datum name="tRStauSBStauEin" wert="0 min"/>
+				<datum name="bRStauSStauAus" wert="0 %"/>
+				<datum name="tRStauSBStauAus" wert="0 min"/>
+				<datum name="bHfbMin" wert="0 %"/>
+				<datum name="tRest" wert="0 min"/>
+				<datenfeld name="PrgRotZeitLockerungFGrünAnS">
+				</datenfeld>
+				<datenfeld name="PrgRotZeitLockerungRStauS">
+				</datenfeld>
+			</defaultParameter>
+		</typDefinition>
+		<attributgruppenDefinition pid="atg.deZfr" name="DeZfr" parametrierend="nein">
+			<info>
+				<kurzinfo>
+                    Konfigurierende Eigenschaften der Objekte des Typs.
+                </kurzinfo>
+			</info>
+			<aspekt pid="asp.eigenschaften" konfigurationsModus="datensatzOptional">
+			</aspekt>
+			<attribut pid="att.unspezifiziert" anzahl="1" anzahlIst="fest" name="unspezifiziert">
+			</attribut>
+		</attributgruppenDefinition>
+		<attributgruppenDefinition pid="atg.tlsZfrAbrufPufferInhalt" name="TLSZfrAbrufPufferInhalt" parametrierend="nein">
+			<info>
+				<kurzinfo>Abruf Pufferinhalt (FG 9 / Typ 20).</kurzinfo>
+				<beschreibung>
+                    <sektion>
+                        <titel>
+                            FG 9: DE-Block-Struktur im Typ 20 "Abruf
+                            Pufferinhalt"
+                        </titel>
+                        <absatz>
+                            Die Nachricht wird verwendet mit ID 2
+                            (Statusnachrichten) in Abrufrichtung.
+                        </absatz>
+                        <absatz>
+                            Die Nachricht ist nur für den Fehlerfall
+                            notwendig, dass spontane Nachrichten oder
+                            Rückmeldungen der ZFR-Steuerung nicht in der
+                            archivierenden Zentrale angekommen sind.
+                            Anhand der Folgenummer im Zeitstempel (Typ
+                            31) kann die Zentrale eine Lücke in der
+                            Übertragung erkennen. Mit dieser
+                            Nachricht "Abruf Pufferinhalt" kann die
+                            Zentrale die fehlenden Nachrichten aus dem
+                            Puffer des Quell-EAKs nachfordern,
+                            vorausgesetzt sie sind noch nicht durch
+                            neuere Nachrichten überschrieben worden. Das
+                            Abrufen des Pufferinhaltes bewirkt kein
+                            Löschen des Puffers und kann wahlfrei (evtl.
+                            auch mehrmals) anhand der Folgenummer
+                            geschehen.
+                        </absatz>
+                        <absatz>
+                            Wenn mindestens eine der angeforderten
+                            Nachrichten gesendet werden kann, geschieht
+                            dies. Erst wenn keine der angeforderten
+                            Nachrichten im Puffer vorhanden ist, muss
+                            eine negative Quittung (Typ 16) gesendet
+                            werden.
+                        </absatz>
+                        <absatz>
+                            Die Antworten auf diesen Abruf sind
+                            Nachrichten aus dem Puffer mit FG 9, ID
+                            33..37 und tragen die Jobnummer des Abrufs.
+                        </absatz>
+                    </sektion>
+                </beschreibung>
+			</info>
+			<aspekt pid="asp.tlsAbruf" onlineModus="quelleUndSenke">
+			</aspekt>
+			<attribut pid="att.tlsAnzahl2" anzahl="1" anzahlIst="fest" name="StartFolgeNummer">
+			</attribut>
+			<attribut pid="att.tlsAnzahl1" anzahl="1" anzahlIst="fest" name="Anzahl1">
+			</attribut>
+		</attributgruppenDefinition>
+		<attributgruppenDefinition pid="atg.tlsZfrAlineaSchaltVorschläge" name="TlsZfrAlineaSchaltVorschläge" parametrierend="nein">
+			<info>
+				<kurzinfo>ALINEA Schaltvorschläge (FG 9 / Typ 70).</kurzinfo>
+				<beschreibung>
+                    <sektion>
+                        <titel>FG 9: DE-Block-Struktur im Typ 70 "ALINEASchaltvorschläge"</titel>
+                        <absatz>Die Nachricht überträgt die aktuell errechneten Werte, welche für den ALINEA-Algorithmus
+                            benötigt werden, als Schaltvorschläge. Die Berechnung und Versendung der Werte erfolgt nur,
+                            bei einer aktiv anliegenden ALINEA-Betriebsart.
+                        </absatz>
+                        <absatz>Lassen sich (z. B. aufgrund von Schleifendefekten) einzelne Werte des Blockes nicht
+                            ermitteln, ohne dass ein Totalausfall des DE vorliegt, werden die betroffenen Bytes auf den
+                            Wert 255 (65535 bzw. -3276,8) gesetzt.
+                        </absatz>
+
+                    </sektion>
+
+                </beschreibung>
+			</info>
+			<aspekt pid="asp.tlsAntwort" onlineModus="quelleUndSenke">
+			</aspekt>
+			<attribut pid="att.tlsZfr16BitPositivKfz" anzahl="1" anzahlIst="fest" name="qZufluss">
+				<info>
+					<kurzinfo>Zuflussmenge in Kfz bezogen auf eine Minute.</kurzinfo>
+				</info>
+			</attribut>
+			<attribut pid="att.tlsZfrProzent" anzahl="1" anzahlIst="fest" name="bHfb">
+				<info>
+					<kurzinfo>Belegungsgrad (b HFB) jeweils auf der stromabwärts gelegenen
+                        Hauptfahrbahn(en).
+                    </kurzinfo>
+				</info>
+			</attribut>
+			<attribut pid="att.tlsZfr16BitUmlaufZeit" anzahl="1" anzahlIst="fest" name="UmlaufZeit">
+				<info>
+					<kurzinfo>Berechnete Umlaufzeit 'TU'.</kurzinfo>
+				</info>
+			</attribut>
+			<attribut pid="att.tlsZfrRotSchaltZeitF" anzahl="1" anzahlIst="fest" name="RotSchaltZeit">
+				<info>
+					<kurzinfo>Ermittelte Rotschaltzeit.</kurzinfo>
+				</info>
+			</attribut>
+		</attributgruppenDefinition>
+		<attributgruppenDefinition pid="atg.tlsZfrBetriebsArt" name="TlsZfrBetriebsArt" parametrierend="ja">
+			<info>
+				<kurzinfo>Betriebsart (FG 9 / Typ 17).</kurzinfo>
+				<beschreibung>
+                    <sektion>
+                        <titel>FG 9: DE-Block-Struktur im Typ 17 "Betriebsart"</titel>
+                    </sektion>
+                    <absatz>Wird verwendet im ID 2 (Statusnachrichten) in Abruf- und Antwortrichtung oder mit ID 34
+                        (Statusrückmeldung aus dem Puffer) in Antwortrichtung.
+                    </absatz>
+                    <absatz>Die Nachricht überträgt die Betriebsart der Steuerung für die Zuflussregelung. Die
+                        Betriebsart
+                        wird nur für alle Zuflussregelungen eines E/A-Konzentrators verändert. Die Nachricht wird an
+                        dem bzw. von dem Clusterkanal gesendet.
+                    </absatz>
+                    <absatz>Die Meldung der Betriebsart in Antwortrichtung
+                        wird mit dem DE-Block "Zeitstempel" (Typ 31) ergänzt.
+                    </absatz>
+
+                    <absatz>Die Betriebsart wird ausfallsicher abgelegt.</absatz>
+                </beschreibung>
+			</info>
+			<aspekt pid="asp.tlsParameterVorgabeArchiv" onlineModus="quelleUndSenke">
+			</aspekt>
+			<aspekt pid="asp.tlsVorgabeBedienung" onlineModus="quelleUndSenke">
+			</aspekt>
+			<attributliste pid="atl.urlasser" anzahl="1" anzahlIst="fest" name="Urlasser">
+			</attributliste>
+			<attribut pid="att.tlsZfrBetriebsArt" anzahl="1" anzahlIst="fest" name="BetriebsArt">
+			</attribut>
+		</attributgruppenDefinition>
+		<attributgruppenDefinition pid="atg.tlsZfrBetriebsParameterAlinea1" name="TlsZfrBetriebsParameterAlinea1" parametrierend="ja">
+			<info>
+				<kurzinfo>Betriebsparameter Zuflussregelung (FG 9 / Typ 33)</kurzinfo>
+				<beschreibung>
+                    <sektion>
+                        <titel>FG 9: DE-Block-Struktur im Typ 33 "Betriebsparameter ALINEA 1"</titel>
+                        <absatz>Wird verwendet mit ID 3 (Parameter) in Abruf- und Antwortrichtung oder mit ID 35
+                            (Parametermeldung aus Puffer) in Antwortrichtung.
+                        </absatz>
+                        <absatz>Die Nachricht überträgt Betriebsparameter, welche für den ALINEA- Algorithmus benötigt
+                            werden. Die "Betriebsparameter ALINEA" werden ausfallsicher abgelegt.
+                        </absatz>
+                        <absatz>Die folgenden Einstellungen im DE-Typ 33 beziehen sich auf folgende ALINEA- Formel.
+                            Die aus der ALINEA- Formel resultierende theoretische Umlaufzeit "TU" wird nach Ablauf
+                            eines Intervalls berechnet. Das Intervall ist fest auf 60 Sekunden eingestellt und setzt
+                            voraus, dass auch die Verkehrsdatenerfassung in der FG 1 dieses Erfassungsintervall
+                            verwendet. Da die ALINEA-Formel erst berechnet werden kann, wenn die entsprechenden
+                            Daten aus der FG 1 vorliegen, wird die Berechnung 1s nach FG 1-Intervallende gestartet.
+                        </absatz>
+                    </sektion>
+                </beschreibung>
+			</info>
+			<aspekt pid="asp.tlsParameterVorgabeArchiv" onlineModus="quelleUndSenke">
+			</aspekt>
+			<aspekt pid="asp.tlsVorgabeBedienung" onlineModus="quelleUndSenke">
+			</aspekt>
+			<attributliste pid="atl.urlasser" anzahl="1" anzahlIst="fest" name="Urlasser">
+			</attributliste>
+			<attribut pid="att.tlsZfr16BitPositivKfz" anzahl="1" anzahlIst="fest" name="qEMin">
+				<info>
+					<kurzinfo>[Kfz] Minimale Zuflussmenge in Kfz bezogen auf eine 60 Sekunden.</kurzinfo>
+				</info>
+			</attribut>
+			<attribut pid="att.tlsZfr16BitKfzProStunde" anzahl="1" anzahlIst="fest" name="Korrekturfaktor">
+				<info>
+					<kurzinfo>[Kfz/h] Korrekturfaktor</kurzinfo>
+				</info>
+			</attribut>
+			<attribut pid="att.tlsZfrProzent" anzahl="1" anzahlIst="fest" name="bOpt">
+				<info>
+					<kurzinfo>[%] Optimaler Belegungsgrad auf der/den stromabwärts gelegenen Hauptfahrbahn(en)
+                    </kurzinfo>
+				</info>
+			</attribut>
+			<attribut pid="att.tlsZfrBerechnungBelegung" anzahl="1" anzahlIst="fest" name="BerechnungsartBelegung">
+				<info>
+					<kurzinfo>Legt die Berechnungsart für die Belegung fest: entweder auf allen EFZ (arithmetisches
+                        Mittel) oder nur auf dem HFS.
+                    </kurzinfo>
+				</info>
+			</attribut>
+			<attribut pid="att.tlsZfrZeit000bis255min" anzahl="1" anzahlIst="fest" name="Mindesschaltzeit">
+				<info>
+					<kurzinfo>[min] Für die Mindestschaltzeit tmin muss ein aktives Programm mind.
+                        geschaltet sein, bevor es durch ein Programm mit niedrigerer Priorität
+                        ersetzt werden darf.
+                    </kurzinfo>
+				</info>
+			</attribut>
+			<attribut pid="att.tlsZfrZeit000bis255min" anzahl="1" anzahlIst="fest" name="Nachlaufzeit">
+				<info>
+					<kurzinfo>[min] Beim Übergang von Signalplan &gt; 0 auf einen Signalplan = 0
+                        wird der aktuell geschaltete Signalplan für die Nachlaufzeit taus
+                        beibehalten und als Rotschaltzeit die 'Schwächste Rotschaltzeit'
+                        geschaltet. Die Nachlaufzeit taus beginnt mit der Ermittlung des
+                        Signalplan = 0. Sollte eine entsprechende Mindestschaltzeit tmin noch
+                        nicht abgelaufen sein, wird diese in jedem Fall, mit der aktiven
+                        Rotschaltzeit weitergeführt. Anschließend würde ein evtl.
+                        verbleibender Rest der Nachlaufzeit taus geschaltet werden. Wir
+                        zwischenzeitlich ein neuer Signalplan &gt; 0 ermittelt, wird dieser
+                        geschaltet.
+                    </kurzinfo>
+				</info>
+			</attribut>
+			<attribut pid="att.tlsZfrRotSchaltZeitA" anzahl="1" anzahlIst="fest" name="maxErsteRotLaufZeit">
+				<info>
+					<kurzinfo>[s] Beim Übergang von Signalplan = 0 auf einen Signalplan &gt; 0 wird,
+                        unabhängig von der ermittelten Rotschaltzeit, im ersten Intervall (60s) die
+                        maximale erste Rotschaltzeit verwendet. Geringere Rotschaltzeiten als die
+                        maximale erste Rotschaltzeit werden unverändert geschaltet.
+                    </kurzinfo>
+				</info>
+			</attribut>
+			<attribut pid="att.tlsZfrRotSchaltZeitA" anzahl="1" anzahlIst="fest" name="schwächsteRotLaufZeit">
+				<info>
+					<kurzinfo>[s] Beim Übergang von Signalplan &gt; 0 auf einen Signalplan = 0 wird der
+                        aktuell geschaltete Signalplan für die Nachlaufzeit taus beibehalten und als
+                        Rotschaltzeit die 'Schwächste Rotschaltzeit' geschaltet.
+                    </kurzinfo>
+				</info>
+			</attribut>
+			<attributliste pid="atl.tlsZfrProgAlinea1" anzahl="20" anzahlIst="variabel" name="PrgAlinea1">
+				<info>
+					<kurzinfo>Liste mit Alinea1 Programmen, wobei jedes Programm aus drei
+                        Parametern (TEin, TAus, Rotzeit) besteht. Die Programme müssen in ihrer
+                        Priorität aufsteigend (niedrigste Priorität zuerst) parametriert werden. Das
+                        Programm mit der höchsten Priorität wird geschaltet.
+                    </kurzinfo>
+				</info>
+			</attributliste>
+		</attributgruppenDefinition>
+		<attributgruppenDefinition pid="atg.tlsZfrBetriebsParameterAlinea2" name="TlsZfrBetriebsParameterAlinea2" parametrierend="ja">
+			<info>
+				<kurzinfo>Betriebsparameter Zuflussregelung (FG 9 / Typ 35)</kurzinfo>
+				<beschreibung>
+                    <sektion>
+                        <titel>FG 9: DE-Block-Struktur im Typ 35 "Betriebsparameter ALINEA 2"</titel>
+                        <absatz>Wird verwendet mit ID 3 (Parameter) in Abruf- und Antwortrichtung oder mit ID 35
+                            (Parametermeldung aus Puffer) in Antwortrichtung.
+                        </absatz>
+                        <absatz>Die Nachricht überträgt Betriebsparameter, welche zusätzlich für den ALINEA-Algorithmus
+                            benötigt werden.
+                        </absatz>
+                        <absatz>Die "Betriebsparameter ALINEA 2" werden ausfallsicher abgelegt.</absatz>
+                    </sektion>
+                </beschreibung>
+			</info>
+			<aspekt pid="asp.tlsParameterVorgabeArchiv" onlineModus="quelleUndSenke">
+			</aspekt>
+			<aspekt pid="asp.tlsVorgabeBedienung" onlineModus="quelleUndSenke">
+			</aspekt>
+			<attributliste pid="atl.urlasser" anzahl="1" anzahlIst="fest" name="Urlasser">
+			</attributliste>
+			<attribut pid="att.tlsLveGeschwindigkeit" anzahl="1" anzahlIst="fest" name="vHfbStauEin">
+				<info>
+					<kurzinfo>Stau-Einschaltschwelle für die Geschwindigkeit (v HFB, Stau, Ein)</kurzinfo>
+				</info>
+			</attribut>
+			<attribut pid="att.tlsZfrZeit000bis255min" anzahl="1" anzahlIst="fest" name="tHfbVStauEin">
+				<info>
+					<kurzinfo>Zeitkonstante (t HFB, V, Stau, Ein) für die das Kriterium erfüllt sein muss,
+                        jeweils auf der stromabwärts gelegenen Hauptfahrbahn(en).
+                    </kurzinfo>
+				</info>
+			</attribut>
+			<attribut pid="att.tlsLveGeschwindigkeit" anzahl="1" anzahlIst="fest" name="vHfbStauAus">
+				<info>
+					<kurzinfo>Stau-Ausschaltschwelle für die Geschwindigkeit (v HFB, Stau, Aus</kurzinfo>
+				</info>
+			</attribut>
+			<attribut pid="att.tlsZfrZeit000bis255min" anzahl="1" anzahlIst="fest" name="tHfbVStauAus">
+				<info>
+					<kurzinfo>Zeitkonstante (t HFB, V, Stau, Aus) für die das Kriterium erfüllt sein
+                        muss, jeweils auf der stromabwärts gelegenen Hauptfahrbahn(en).
+                    </kurzinfo>
+				</info>
+			</attribut>
+			<attribut pid="att.tlsZfrProzent" anzahl="1" anzahlIst="fest" name="bHfbStauEin">
+				<info>
+					<kurzinfo>Stau-Einschaltschwelle für den Belegungsgrad (b HFB, Stau, Ein</kurzinfo>
+				</info>
+			</attribut>
+			<attribut pid="att.tlsZfrZeit000bis255min" anzahl="1" anzahlIst="fest" name="tHfbBStauEin">
+				<info>
+					<kurzinfo>Zeitkonstante (t HFB, b, Stau, Ein) für die das Kriterium erfüllt sein muss,
+                        jeweils auf der stromabwärts gelegenen Hauptfahrbahn(en).
+                    </kurzinfo>
+				</info>
+			</attribut>
+			<attribut pid="att.tlsZfrProzent" anzahl="1" anzahlIst="fest" name="bHfbStauAus">
+				<info>
+					<kurzinfo>StauAusschaltschwelle für den Belegungsgrad (b HFB, Stau, Aus</kurzinfo>
+				</info>
+			</attribut>
+			<attribut pid="att.tlsZfrZeit000bis255min" anzahl="1" anzahlIst="fest" name="tHfbBStauAus">
+				<info>
+					<kurzinfo>Zeitkonstante (t HFB, b, Stau, Aus) für die das Kriterium erfüllt sein muss,
+                        jeweils auf der stromabwärts gelegenen Hauptfahrbahn(en).
+                    </kurzinfo>
+				</info>
+			</attribut>
+			<attribut pid="att.tlsZfrProzent" anzahl="1" anzahlIst="fest" name="bGelbAnSStauEin">
+				<info>
+					<kurzinfo>Stau-Einschaltschwelle für den Belegungsgrad (b GelbAnS, Stau, Ein)</kurzinfo>
+				</info>
+			</attribut>
+			<attribut pid="att.tlsZfrZeit000bis255min" anzahl="1" anzahlIst="fest" name="tGelbAnSBStauEin">
+				<info>
+					<kurzinfo>Zeitkonstante (t GelbAnS, b, Stau, Ein) für die das Kriterium erfüllt sein muss,
+                        auf der Gelbanforderungs Schleife.
+                    </kurzinfo>
+				</info>
+			</attribut>
+			<attribut pid="att.tlsZfrProzent" anzahl="1" anzahlIst="fest" name="bGelbAnSStauAus">
+				<info>
+					<kurzinfo>Stau-Ausschaltschwelle für den Belegungsgrad (b GelbAnS, Stau, Aus)</kurzinfo>
+				</info>
+			</attribut>
+			<attribut pid="att.tlsZfrZeit000bis255min" anzahl="1" anzahlIst="fest" name="tGelbAnSBStauAus">
+				<info>
+					<kurzinfo>Zeitkonstante (t GelbAnS, b, Stau, Aus) für die das Kriterium erfüllt sein muss,
+                        auf der Gelbanforderungs Schleife.
+                    </kurzinfo>
+				</info>
+			</attribut>
+			<attribut pid="att.tlsZfrProzent" anzahl="1" anzahlIst="fest" name="bFGrünAnSStauEin">
+				<info>
+					<kurzinfo>Stau-Einschaltschwelle für den Belegungsgrad (b FGrünAnS, Stau, Ein)</kurzinfo>
+				</info>
+			</attribut>
+			<attribut pid="att.tlsZfrZeit000bis255min" anzahl="1" anzahlIst="fest" name="tFGrünAnSBStauEin">
+				<info>
+					<kurzinfo>Zeitkonstante (t FGrünAnS, b, Stau, Ein) für die das Kriterium erfüllt sein muss,
+                        auf der Früh-Grünanforderungs-Schleife.
+                    </kurzinfo>
+				</info>
+			</attribut>
+			<attribut pid="att.tlsZfrProzent" anzahl="1" anzahlIst="fest" name="bFGrünAnSStauAus">
+				<info>
+					<kurzinfo>Stau-Ausschaltschwelle für den Belegungsgrad (b FGrünAnS, Stau, Aus)</kurzinfo>
+				</info>
+			</attribut>
+			<attribut pid="att.tlsZfrZeit000bis255min" anzahl="1" anzahlIst="fest" name="tFGrünAnSBStauAus">
+				<info>
+					<kurzinfo>Zeitkonstante (t FGrünAnS, b, Stau, Aus) für die das Kriterium erfüllt sein muss,
+                        auf der Früh-Grünanforderungs-Schleife.
+                    </kurzinfo>
+				</info>
+			</attribut>
+			<attribut pid="att.tlsZfrProzent" anzahl="1" anzahlIst="fest" name="bRStauSStauEin">
+				<info>
+					<kurzinfo>Stau-Einschaltschwelle für den Belegungsgrad (b RStauS, Stau, Ein)</kurzinfo>
+				</info>
+			</attribut>
+			<attribut pid="att.tlsZfrZeit000bis255min" anzahl="1" anzahlIst="fest" name="tRStauSBStauEin">
+				<info>
+					<kurzinfo>Zeitkonstante (t RStauS, b, Stau, Ein) für die das Kriterium erfüllt sein muss,
+                        auf der Rückstau-Schleife.
+                    </kurzinfo>
+				</info>
+			</attribut>
+			<attribut pid="att.tlsZfrProzent" anzahl="1" anzahlIst="fest" name="bRStauSStauAus">
+				<info>
+					<kurzinfo>StauAusschaltschwelle für den Belegungsgrad (b RStauS, Stau, Aus)</kurzinfo>
+				</info>
+			</attribut>
+			<attribut pid="att.tlsZfrZeit000bis255min" anzahl="1" anzahlIst="fest" name="tRStauSBStauAus">
+				<info>
+					<kurzinfo>Zeitkonstante (t RStauS, b, Stau, Aus) für die das Kriterium erfüllt sein muss,
+                        auf der RückstauSchleife.
+                    </kurzinfo>
+				</info>
+			</attribut>
+			<attribut pid="att.tlsZfrProzent" anzahl="1" anzahlIst="fest" name="bHfbMin">
+				<info>
+					<kurzinfo>Minimaler Belegungsgrad auf der stromabwärts gelegenen
+                        Hauptfahrbahn(en).
+                    </kurzinfo>
+				</info>
+			</attribut>
+			<attribut pid="att.tlsZfrZeit000bis255min" anzahl="1" anzahlIst="fest" name="tRest">
+				<info>
+					<kurzinfo>StauRestlaufzeit (t Rest), für welche die ?Schwächste Rotschaltzeit?
+                        geschaltet wird.
+                    </kurzinfo>
+				</info>
+			</attribut>
+			<attributliste pid="atl.tlsZfrProgRotZeitLockerungAlinea2" anzahl="20" anzahlIst="variabel" name="PrgRotZeitLockerungFGrünAnS">
+				<info>
+					<kurzinfo>Programme für die Rotzeitlockerung, ausgelöst durch
+                        einen Stau auf der Früh-Grünanforderungs-Schleife. Jedes Programm besteht aus drei Parametern
+                        (kleiner oder gleich
+                        Rotschaltzeit, kleiner Rotschaltzeit, Abgeschwächte Rotschaltzeit), diese müssen in ihrer
+                        Priorität
+                        aufsteigend (niedrigste Priorität zuerst) parametriert werden. Das
+                        Programm mit der höchsten Priorität wird geschaltet. Ist die Anzahl der
+                        Programme = 0, erfolgt keine Rotzeitlockerung.
+                    </kurzinfo>
+				</info>
+			</attributliste>
+			<attributliste pid="atl.tlsZfrProgRotZeitLockerungAlinea2" anzahl="20" anzahlIst="variabel" name="PrgRotZeitLockerungRStauS">
+				<info>
+					<kurzinfo>Programme für die Rotzeitlockerung, ausgelöst durch einen Stau auf der Rückstau-Schleife.
+                        Jedes Programm besteht aus drei Parametern (kleiner oder gleich Rotschaltzeit, kleiner
+                        Rotschaltzeit,
+                        Abgeschwächte Rotschaltzeit), diese müssen in ihrer Priorität
+                        aufsteigend (niedrigste Priorität zuerst) parametriert werden. Das
+                        Programm mit der höchsten Priorität wird geschaltet. Ist die Anzahl der
+                        Programme = 0, erfolgt keine Rotzeitlockerung.
+                    </kurzinfo>
+				</info>
+			</attributliste>
+		</attributgruppenDefinition>
+		<attributgruppenDefinition pid="atg.tlsZfrBetriebsParameterRotFahrerZähler" name="TlsZfrBetriebsParameterRotFahrerZähler" parametrierend="ja">
+			<info>
+				<kurzinfo>Betriebsparameter Zuflussregelung (FG 9 / Typ 34)</kurzinfo>
+				<beschreibung>
+                    <sektion>
+                        <titel>FG 9: DE-Block-Struktur im Typ 34 "Betriebsparameter Rotfahrerzähler"</titel>
+                        <absatz>Wird verwendet mit ID 3 (Parameter) in Abruf- und Antwortrichtung.</absatz>
+                        <absatz>Die Nachricht überträgt Parameter, welche für die Generierung der Ergebnismeldung
+                            "Rotfahrerzähler" benötigt werden.
+                        </absatz>
+                        <absatz>Die "Betriebsparameter Rotfahrerzähler" werden ausfallsicher abgelegt.</absatz>
+                    </sektion>
+                </beschreibung>
+			</info>
+			<aspekt pid="asp.tlsParameterVorgabeArchiv" onlineModus="quelleUndSenke">
+			</aspekt>
+			<aspekt pid="asp.tlsVorgabeBedienung" onlineModus="quelleUndSenke">
+			</aspekt>
+			<attributliste pid="atl.urlasser" anzahl="1" anzahlIst="fest" name="Urlasser">
+			</attributliste>
+			<attribut pid="att.tlsZfrErfassungsIntervallDauer" anzahl="1" anzahlIst="fest" name="ErfassungsIntervallDauer">
+				<info>
+					<kurzinfo>Enthält den Wert der Erfassungsintervalldauer in 15-Sekunden-Einheiten. Es sind
+                        nur Werte zugelassen, die ein ganzzahliges Vielfaches haben, welches 60 Minuten ergibt (
+                        15s, 30s, 1, 2, 3, 4, 5, 6, 10, 12, 15, 20, 30, 60 Minuten, Default: 4 (=1 Minute)).
+                    </kurzinfo>
+				</info>
+			</attribut>
+			<attribut pid="att.tlsZfrÜbertragungsVerfahren" anzahl="1" anzahlIst="fest" name="ÜbertragungsVerfahren">
+				<info>
+					<kurzinfo>Legt fest, wann die Daten der Messwertgeber zur Zentrale übertragen
+                        werden. Entweder auf Abruf durch die Zentrale (Ereignisklasse 2) oder spontan nach der o.g.
+                        Erfassungsperiode (Ereignisklasse 1). Meldungen nur nach Abruf durch die Zentrale bedeutet,
+                        dass das DE ohne Aufforderung keine Meldung mehr abgibt.
+                    </kurzinfo>
+				</info>
+			</attribut>
+		</attributgruppenDefinition>
+		<attributgruppenDefinition pid="atg.tlsZfrBetriebsParameterZuflussRegelung" name="TlsZfrBetriebsParameterZuflussRegelung" parametrierend="ja">
+			<info>
+				<kurzinfo>Betriebsparameter Zuflussregelung (FG 9 / Typ 32)</kurzinfo>
+				<beschreibung>
+                    <sektion>
+                        <titel>FG 9: DE-Block-Struktur im Typ 32 "Betriebsparameter Zuflussregelung"</titel>
+                        <absatz>Wird verwendet in ID 3 (Parameternachrichten) in Abruf- und Antwortrichtung oder mit ID
+                            35
+                            (Parameterrückmeldung aus dem Puffer) in Antwortrichtung.
+                        </absatz>
+                        <absatz>Die Nachricht überträgt die verschiedenen Zeiteinstellungen, die das Umlaufprogramm
+                            einer
+                            Zuflussregelung beeinflussen. Die Betriebsparameter werden pro DE eigenständig verändert.
+                            In Sonderlösungen, wie z.B. in einer doppelarmigen Zuflussregelung, kann es Verkettungen
+                            zwischen den DE?s geben, die eine gegenseitige Beeinflussung notwendig werden läßt. Die
+                            Rückmeldung in Antwortrichtung wird mit dem DE-Block "Zeitstempel" (Typ 31) ergänzt.
+                        </absatz>
+                        <absatz>Die "Betriebsparameter Zuflussregelung" werden ausfallsicher abgelegt.</absatz>
+                    </sektion>
+
+                </beschreibung>
+			</info>
+			<aspekt pid="asp.tlsParameterVorgabeArchiv" onlineModus="quelleUndSenke">
+			</aspekt>
+			<aspekt pid="asp.tlsVorgabeBedienung" onlineModus="quelleUndSenke">
+			</aspekt>
+			<attributliste pid="atl.urlasser" anzahl="1" anzahlIst="fest" name="Urlasser">
+			</attributliste>
+			<attribut pid="att.tlsZfrZeit000bis001s" anzahl="1" anzahlIst="fest" name="GelbZeit">
+				<info>
+					<kurzinfo>0 bis 1: Die Gelbzeit gibt die Zeit in Sekunden an, für die in dem normalen
+                        Operationszyklus die LSA-Signalgeber auf gelb geschaltet werden. Diese Zeit
+                        gilt nicht für die Einlauf- oder Abschaltphase. (Voreinstellung: 1s).
+                    </kurzinfo>
+				</info>
+			</attribut>
+			<attribut pid="att.tlsZfrZeit000bis001s" anzahl="1" anzahlIst="fest" name="RotGelbZeit">
+				<info>
+					<kurzinfo>0 bis 1 : Die Rotgelbzeit gibt die Zeit in Sekunden an, für die in dem normalen
+                        Operationszyklus die LSA-Signalgeber auf rotgelb geschaltet werden.
+                        (Voreinstellung: 1s).
+                    </kurzinfo>
+				</info>
+			</attribut>
+			<attribut pid="att.tlsZfrZeit001bis255s" anzahl="1" anzahlIst="fest" name="MindestDunkelOderGrünZeit">
+				<info>
+					<kurzinfo>1 bis 254 : Mindestfreigabezeit d.h. die Mind. Dunkel- bzw. Grünzeit gibt die
+                        Mindestzeit in Sekunden an, nach der, auch wenn schon eine
+                        Detektoranforderung vorliegt, der Übergang nach Rot (ggf. über Gelb)
+                        eingeleitet werden darf (Voreinstellung: 1s).
+                    </kurzinfo>
+				</info>
+			</attribut>
+			<attribut pid="att.tlsZfrZeit002bis255s" anzahl="1" anzahlIst="fest" name="MaximaleDunkelOderGrünZeit">
+				<info>
+					<kurzinfo>2 bis 254 : Maximal-Freigabezeit ohne Detektorstörung d.h. die Max. Dunkel- bzw.
+                        Grünzeit gibt die Zeit in Sekunden an, nach der spätestens der Übergang
+                        nach Rot eingeleitet wird, sofern keine Detektorstörung vorliegt
+                        (Voreinstellung: 60s).
+                    </kurzinfo>
+				</info>
+			</attribut>
+			<attribut pid="att.tlsZfrZeit001bis255s" anzahl="1" anzahlIst="fest" name="MaximaleBelegZeit">
+				<info>
+					<kurzinfo>1 bis 254 : Die Max. Belegtzeit gibt die Zeit in Sekunden an, nach der bei
+                        Dauerbelegung einer Schleife dieser Eingang als gestört betrachtet wird. Eine
+                        Änderung zum Zustand nicht belegt repariert diesen Zustand und die Zeit
+                        wird neu gestartet. (Voreinstellung: 60s).
+                    </kurzinfo>
+				</info>
+			</attribut>
+			<attribut pid="att.tlsZfrZeit001bis255s" anzahl="1" anzahlIst="fest" name="MaximaleDunkelOderGrünZeitBeiDetektorStörung">
+				<info>
+					<kurzinfo>1 bis 254 : Maximal-Freigabezeit mit Detektorstörung d.h. die Dunkel- bzw. Grünzeit
+                        bei Detektorstörung gibt im Falle des Schleifenausfalls bzw. Detektorausfall
+                        gibt die die Zeit in Sekunden an, nach der spätestens der Übergang nach Rot
+                        eingeleitet wird. (Voreinstellung: 5s).
+                    </kurzinfo>
+				</info>
+			</attribut>
+			<attribut pid="att.tlsZfrGrünFlag" anzahl="1" anzahlIst="fest" name="GrünFlag">
+			</attribut>
+			<attribut pid="att.tlsZfrModus" anzahl="1" anzahlIst="fest" name="Modus">
+			</attribut>
+		</attributgruppenDefinition>
+		<attributgruppenDefinition pid="atg.tlsZfrErgänzendeDeFehlerMeldung" name="TLSZfrErgänzendeDeFehlerMeldung" parametrierend="nein">
+			<info>
+				<kurzinfo>
+                    Ergänzende DE-Fehlermeldung (FG 9 Typ 14).
+                </kurzinfo>
+				<beschreibung>
+                    <sektion>
+                        <titel>
+                            FG 9: DE-Block-Struktur im Typ 14 "Ergänzende
+                            DE-Fehlermeldung"
+                        </titel>
+                        <absatz>
+                            Wird verwendet mit ID 1 (Fehler) in
+                            Antwortrichtung.
+                        </absatz>
+                        <absatz>
+                            Dieser DE-Block dient zur Meldung von
+                            Teilstörungen und näheren Erläuterung von
+                            Störungen, die mit dem DEBlock Typ 1
+                            gemeldet werden. Bei reinen Teilstörungen
+                            wird nur der DE-Block 14 gesendet; bei
+                            Erläuterungen von spontanen
+                            Störungsmeldungen wird er in einem Telegramm
+                            mit dem DE-Block Typ 1 gesendet. Er kann
+                            aber mit der ID 17 in Abrufrichtung einzeln
+                            abgerufen werden.
+                        </absatz>
+                        <absatz>
+                            Mit dem DE-Block können unterschiedliche
+                            Störungen/Teilstörungen gleichzeitig
+                            gemeldet werden. Ändert sich der Status
+                            (weitere Störungen bzw. Behebung von
+                            Störungen) wird ebenfalls DE-Block-Typ 14
+                            gesendet.
+                        </absatz>
+                        <absatz>
+                            Weitergehende Informationen siehe [TLS2011].
+                        </absatz>
+                    </sektion>
+                </beschreibung>
+			</info>
+			<aspekt pid="asp.tlsAntwort" onlineModus="quelleUndSenke">
+			</aspekt>
+			<attribut pid="att.tlsHersteller" anzahl="1" anzahlIst="fest" name="Hersteller">
+			</attribut>
+			<attributliste pid="atl.tlsGloErgänzendeFehlerTLS" anzahl="1" anzahlIst="fest" name="FehlercodesTLS">
+			</attributliste>
+			<attributliste pid="atl.tlsGloErgänzendeFehlerHersteller" anzahl="1" anzahlIst="fest" name="FehlercodesHersteller">
+			</attributliste>
+		</attributgruppenDefinition>
+		<attributgruppenDefinition pid="atg.tlsZfrErgebnisMeldungRotFahrerZähler" name="TlsZfrErgebnisMeldungRotFahrerZähler" parametrierend="nein">
+			<info>
+				<kurzinfo>Rotfahrerzähler (FG 9 / Typ 65).</kurzinfo>
+				<beschreibung>
+                    <sektion>
+                        <titel>FG 9: DE-Block-Struktur im Typ 65 "Ergebnismeldung Rotfahrerzähler"</titel>
+                        <absatz>Wird verwendet mit ID 4 (Ergebnisse) in Antwortrichtung.</absatz>
+                        <absatz>Lassen sich einzelne Werte des Blockes nicht ermitteln, ohne dass ein Totalausfall des
+                            DE?s
+                            vorliegt, so werden die betroffenen Messwertbytes auf den Wert 255 gesetzt (z.B. aufgrund
+                            von Schleifendefekten oder verkehrsbedingt).
+                        </absatz>
+                        <absatz>Unter Rotlichtfahrer werden Fahrzeuge gezählt, welche während einer Rotsignalisierung
+                            (Rot
+                            und, falls vorhanden, auch bei Rot-Gelb) neu auf die Gelbanforderungsschleife auffahren
+                            (steigende Belegungsflanke). Alle Fahrzeuge die sich bereits auf der
+                            Gelbanforderungsschleife befinden (z.B. sehr langes bzw. langsames Fahrzeug, Rückstau zur
+                            Hauptfahrbahn) werden nicht als Rotlichtverstöße gewertet. Zusätzlich zum aktiven
+                            Rotsignal, kann eine Ansprechverzögerung für die Rotfahrerzählung ("Rotfahrer
+                            Verzögerung", Voreinstellung 10 [1/10s], nur vor Ort einstellbar) parametriert werden.
+                        </absatz>
+                        <absatz>Während des Blind- bzw. Testbetriebs werden keine Rotlichtverstöße gewertet.</absatz>
+                    </sektion>
+
+                </beschreibung>
+			</info>
+			<aspekt pid="asp.tlsAntwort" onlineModus="quelleUndSenke">
+			</aspekt>
+			<attribut pid="att.tlsIntervalldauer" anzahl="1" anzahlIst="fest" name="T">
+				<info>
+					<kurzinfo>Enthält den Wert der Erfassungsintervalldauer in Sekunden.
+                    </kurzinfo>
+				</info>
+			</attribut>
+			<attribut pid="att.tlsZfr16BitPositivKfz" anzahl="1" anzahlIst="fest" name="AnzahlRotFahrer">
+				<info>
+					<kurzinfo>Anzahl der Fahrzeuge, die im vergangenen Intervall bei Rot die Zuflussregelung
+                        passierten.
+                    </kurzinfo>
+				</info>
+			</attribut>
+		</attributgruppenDefinition>
+		<attributgruppenDefinition pid="atg.tlsZfrHelligkeit" name="TlsZfrHelligkeit" parametrierend="nein">
+			<info>
+				<kurzinfo>Helligkeit (FG 9 / Typ 49).</kurzinfo>
+				<beschreibung>
+                    <sektion>
+                        <titel>FG 9: DE-Block-Struktur im Typ 49 "Helligkeit"</titel>
+                        <absatz>Wird verwendet mit ID 5 (Befehl) in Abruf- und Antwortrichtung oder mit ID 37
+                            (Befehlsrückmeldung aus dem Puffer) in Antwortrichtung.
+                        </absatz>
+                        <absatz>Die Nachricht überträgt die Helligkeit der Steuerung für die Zuflussregelung. Die
+                            Helligkeit
+                            wird nur für alle Zuflussregelungen eines E/A-Konzentrators verändert. Die Nachricht wird an
+                            dem bzw. von dem Clusterkanal gesendet. Die Meldung der Helligkeit in Antwortrichtung wird
+                            mit dem DE-Block "Zeitstempel" (Typ 31) ergänzt.
+                        </absatz>
+                        <absatz>Die Helligkeit wird ausfallsicher abgelegt.</absatz>
+                        <absatz>Der DE-Block "Helligkeit" ist ein optionaler DE-Block. In der Regel wird keine
+                            Helligkeitssteuerung bzw. Meldung gebraucht. Der DE-Block ist nur bei Anlagen zu
+                            realisieren, in denen die Helligkeit auch tatsächlich veränderbar ist. Er entfällt, wenn
+                            z.B.
+                            ausschließlich LED-Signalgeber ohne Dimmung verwendet werden. Sind jedoch auch nur
+                            teilweise dimmbarer Signalgeber installiert, ist eine lokale Helligkeitssteuerung zwingend
+                            erforderlich. Es bleibt damit der Unterzentrale überlassen mittels Zuweisung die
+                            Helligkeitssteuerung auf "zentral gesteuert" einzustellen.
+                        </absatz>
+                        <absatz>Bei der Befehl/Meldung von reduzierten Helligkeiten, gelten diese nur für die dimmbaren
+                            Anteile der unter dem FG 9-EAK zusammengefaßten Teil-Systeme. Einzige Außnahme davon
+                            stellt die 0%-Einstellung dar, in der sich alle Anzeigen wie im Blindbetrieb verhalten.
+                        </absatz>
+                    </sektion>
+                </beschreibung>
+			</info>
+			<aspekt pid="asp.tlsVorgabe" onlineModus="quelleUndSenke">
+			</aspekt>
+			<aspekt pid="asp.tlsVorgabeArchiv" onlineModus="quelleUndSenke">
+			</aspekt>
+			<aspekt pid="asp.tlsZustand" onlineModus="quelleUndSenke">
+			</aspekt>
+			<attribut pid="att.tlsZfrProzent" anzahl="1" anzahlIst="fest" name="HelligkeitsWert">
+			</attribut>
+			<attribut pid="att.tlsZfrStatusHelligkeit" anzahl="1" anzahlIst="fest" name="Status">
+			</attribut>
+		</attributgruppenDefinition>
+		<attributgruppenDefinition pid="atg.tlsZfrNegativeQuittung" name="TLSZfrNegativeQuittung" parametrierend="nein">
+			<info>
+				<kurzinfo>Negative Quittung (FG 9 / Typ 16).</kurzinfo>
+				<beschreibung>
+                    <sektion>
+                        <titel>
+                            FG 9: DE-Block-Struktur im Typ 16 "Negative
+                            Quittung"
+                        </titel>
+                        <absatz>
+                            Wird verwendet mit ID 2 (Statusnachrichten)
+                            in Antwortrichtung.
+                        </absatz>
+                        <absatz>
+                            Mit der "Negativen Quittung" antwortet ein DE
+                            auf eine Nachricht, die an sie korrekt
+                            adressiert ist, aber deren Inhalt von ihr
+                            nicht eindeutig ausgewertet werden kann.
+                        </absatz>
+                        <absatz>
+                            Die Negative Quittung wird mit ID 2 und Typ
+                            16 gesendet, enthält also keinen Hinweis auf
+                            die ID und den Typ der verursachenden
+                            Nachricht. Diese Zuordnung wird über die
+                            Jobnummer hergestellt, welche identisch mit
+                            der der fehlerhaften Nachricht in
+                            Abrufrichtung ist.
+                        </absatz>
+                    </sektion>
+                </beschreibung>
+			</info>
+			<aspekt pid="asp.tlsAntwort" onlineModus="quelleUndSenke">
+			</aspekt>
+			<attribut pid="att.tlsZfrNegativeQuittung" anzahl="1" anzahlIst="fest" name="Code">
+			</attribut>
+			<attribut pid="att.tlsHersteller" anzahl="1" anzahlIst="fest" name="Hersteller">
+			</attribut>
+			<attribut pid="att.text" anzahl="1" anzahlIst="fest" name="EinzelTelegramm">
+				<info>
+					<kurzinfo>
+                        Daten des Einzeltelegramms, dass die negative
+                        Quittung auslöste.
+                    </kurzinfo>
+				</info>
+			</attribut>
+		</attributgruppenDefinition>
+		<attributgruppenDefinition pid="atg.tlsZfrSignalPlan" name="TlsZfrSignalPlan" parametrierend="nein">
+			<info>
+				<kurzinfo>Signalplan (FG 9 / Typ 48)</kurzinfo>
+				<beschreibung>
+                    <sektion>
+                        <titel>FG 9: DE-Block-Struktur im Typ 48 "Signalplan"</titel>
+                        <absatz>Wird verwendet mit ID 5 (Befehl) in Abruf- und Antwortrichtung oder mit ID 37
+                            (Befehlsrückmeldung aus dem Puffer) in Antwortrichtung.
+                        </absatz>
+                        <absatz>Die Nachricht überträgt die minimale Rotzeit mit der die Zuflussregelung ihren Zyklus
+                            abwickeln soll.
+                        </absatz>
+                        <absatz>Die Nachricht wird an/von das/dem DE der Zuflussregelung gesendet. Die Meldung des
+                            Signalplans in Antwortrichtung wird mit dem DE-Block ?Zeitstempel? (Typ 31) ergänzt, um in
+                            der Zentrale den dargestellten Signalplan mit genauen Wechselzeitpunkten dokumentieren
+                            zu können. Bei Änderungen des Signalplans ist zu beachten, dass angebrochene
+                            Signalisierungsphasen zu Ende geführt werden, bevor der neue Signalplan aktiv wird. Die
+                            Rückmeldung in Antwortrichtung wird mit dem DE-Block ?Zeitstempel? (Typ 31) ergänzt.
+                        </absatz>
+                        <absatz>Der Signalplan muss z.B. für Handschaltungen ausfallsicher abgelegt sein. Bei einem
+                            Wiederanlauf im Normalbetrieb (siehe Typ 17) wird im Zustand ausgeschaltet angelaufen.
+                        </absatz>
+                        <absatz>Mit Zuweisung eines Signalplans wird ein anstehender ?Autarker Betrieb? automatisch
+                            verlassen.
+                        </absatz>
+                    </sektion>
+                </beschreibung>
+			</info>
+			<aspekt pid="asp.tlsVorgabe" onlineModus="quelleUndSenke">
+			</aspekt>
+			<aspekt pid="asp.tlsVorgabeArchiv" onlineModus="quelleUndSenke">
+			</aspekt>
+			<aspekt pid="asp.tlsZustand" onlineModus="quelleUndSenke">
+			</aspekt>
+			<attribut pid="att.tlsZfrRotSchaltZeitE" anzahl="1" anzahlIst="fest" name="SignalPlan">
+				<info>
+					<kurzinfo>Legt den Signalplan fest.</kurzinfo>
+				</info>
+			</attribut>
+			<attribut pid="att.tlsZfrAnzahlZusätzlicherKfz" anzahl="1" anzahlIst="fest" name="AnzahlZusätzlicherKfz">
+				<info>
+					<kurzinfo>Ein bis 32 Kfz pro Grünphase, falls die Zuflussregelung
+                        eingeschaltet ist.
+                    </kurzinfo>
+				</info>
+			</attribut>
+		</attributgruppenDefinition>
+		<attributDefinition pid="att.tlsZfr16BitKfzProStunde" name="TlsZfr16BitKfzProStunde">
+			<info>
+				<kurzinfo>Kfz/h-Wert von -3276,7 - +3276,7 [-3276,8].</kurzinfo>
+			</info>
+			<ganzzahl bits="32">
+				<bereich skalierung="0,1" minimum="-32767" maximum="32767" einheit="Kfz/h">
+				</bereich>
+				<zustand name="nicht ermittelbar" wert="-32768">
+					<info>
+						<kurzinfo>
+                            Daten sind nicht ermittelbar (ist KEIN
+                            Fehler).
+                        </kurzinfo>
+						<beschreibung>
+                            Wird gesetzt, wenn der entsprechende Wert
+                            nicht ermittelbar ist und kein Interpolation
+                            sinnvoll möglich ist (z.B. ist die
+                            Geschwindigkeit nicht ermittelbar, wenn kein
+                            Fahrzeug erfasst wurde).
+                        </beschreibung>
+					</info>
+				</zustand>
+			</ganzzahl>
+		</attributDefinition>
+		<attributDefinition pid="att.tlsZfr16BitPositivKfz" name="TlsZfr16BitPositivKfz">
+			<info>
+				<kurzinfo>Kfz-Wert von 0-65534 [65535].</kurzinfo>
+			</info>
+			<ganzzahl bits="32">
+				<bereich skalierung="1" minimum="0" maximum="65534" einheit="Kfz">
+				</bereich>
+				<zustand name="nicht ermittelbar" wert="65535">
+					<info>
+						<kurzinfo>
+                            Daten sind nicht ermittelbar (ist KEIN
+                            Fehler).
+                        </kurzinfo>
+						<beschreibung>
+                            Wird gesetzt, wenn der entsprechende Wert
+                            nicht ermittelbar ist und kein Interpolation
+                            sinnvoll möglich ist (z.B. ist die
+                            Geschwindigkeit nicht ermittelbar, wenn kein
+                            Fahrzeug erfasst wurde).
+                        </beschreibung>
+					</info>
+				</zustand>
+			</ganzzahl>
+		</attributDefinition>
+		<attributDefinition pid="att.tlsZfr16BitUmlaufZeit" name="TlsZfr16BitUmlaufZeit">
+			<info>
+				<kurzinfo>Umlaufzeit in s/Kfz von -3276,7 - +3276,7 [-3276,8].</kurzinfo>
+			</info>
+			<ganzzahl bits="32">
+				<bereich skalierung="0,1" minimum="-32767" maximum="32767" einheit="s/Kfz">
+				</bereich>
+				<zustand name="nicht ermittelbar" wert="-32768">
+					<info>
+						<kurzinfo>
+                            Daten sind nicht ermittelbar (ist KEIN
+                            Fehler).
+                        </kurzinfo>
+						<beschreibung>
+                            Wird gesetzt, wenn der entsprechende Wert
+                            nicht ermittelbar ist und kein Interpolation
+                            sinnvoll möglich ist (z.B. ist die
+                            Geschwindigkeit nicht ermittelbar, wenn kein
+                            Fahrzeug erfasst wurde).
+                        </beschreibung>
+					</info>
+				</zustand>
+			</ganzzahl>
+		</attributDefinition>
+		<attributDefinition pid="att.tlsZfrAnzahlZusätzlicherKfz" name="AnzahlZusätzlicherKfz">
+			<info>
+				<kurzinfo>1 bis 32 Kfz pro Grünphase, falls die Zuflussregelung
+                    eingeschaltet ist
+                </kurzinfo>
+			</info>
+			<ganzzahl bits="8">
+				<bereich skalierung="1" minimum="0" maximum="31" einheit="Kfz/Grünphase">
+				</bereich>
+			</ganzzahl>
+		</attributDefinition>
+		<attributDefinition pid="att.tlsZfrBerechnungBelegung" name="TlsZfrBerechnungBelegung">
+			<info>
+				<kurzinfo>Berechnungsart der Belegung.</kurzinfo>
+			</info>
+			<ganzzahl bits="8">
+				<bereich skalierung="1" minimum="0" maximum="1">
+				</bereich>
+				<zustand name="Erfassung Belegung auf Einzel-FS (arithmetisches Mittel)" wert="0">
+				</zustand>
+				<zustand name="Erfassung Belegung nur auf HFS" wert="1">
+				</zustand>
+			</ganzzahl>
+		</attributDefinition>
+		<attributDefinition pid="att.tlsZfrBetriebsArt" name="TLSZfrBetriebsArt">
+			<info>
+				<kurzinfo>Betriebsart in der FG 9 der TLS.</kurzinfo>
+			</info>
+			<ganzzahl bits="16">
+				<bereich skalierung="1" minimum="0" maximum="255">
+				</bereich>
+				<zustand name="reserviert" wert="0">
+				</zustand>
+				<zustand name="Normalbetrieb" wert="1">
+				</zustand>
+				<zustand name="Blindbetrieb" wert="2">
+				</zustand>
+				<zustand name="Handbetrieb" wert="3">
+				</zustand>
+				<zustand name="Autarker Betrieb" wert="4">
+				</zustand>
+				<zustand name="Testbetrieb" wert="5">
+				</zustand>
+				<zustand name="Notbetrieb" wert="6">
+				</zustand>
+				<zustand name="Sub-Geräte-Handbetrieb" wert="7">
+				</zustand>
+				<zustand name="Externer Betrieb" wert="9">
+				</zustand>
+				<zustand name="ALINEA Normalbetrieb" wert="65">
+				</zustand>
+				<zustand name="ALINEA Blindbetrieb" wert="66">
+				</zustand>
+			</ganzzahl>
+		</attributDefinition>
+		<attributDefinition pid="att.tlsZfrErfassungsIntervallDauer" name="TlsZfrErfassungsIntervallDauer">
+			<info>
+				<kurzinfo>Enthält den Wert der Erfassungsintervalldauer in 15-Sekunden-Einheiten. Es sind
+                    nur Werte zugelassen, die ein ganzzahliges Vielfaches haben, welches 60 Minuten ergibt (
+                    15s, 30s, 1, 2, 3, 4, 5, 6, 10, 12, 15, 20, 30, 60 Minuten, Default: 1 Minute).
+                </kurzinfo>
+			</info>
+			<ganzzahl bits="16">
+				<zustand name="15 Sekunden" wert="1">
+				</zustand>
+				<zustand name="30 Sekunden" wert="2">
+				</zustand>
+				<zustand name="1 Minute" wert="4">
+				</zustand>
+				<zustand name="2 Minuten" wert="8">
+				</zustand>
+				<zustand name="3 Minuten" wert="12">
+				</zustand>
+				<zustand name="4 Minuten" wert="16">
+				</zustand>
+				<zustand name="5 Minuten" wert="20">
+				</zustand>
+				<zustand name="6 Minuten" wert="24">
+				</zustand>
+				<zustand name="10 Minuten" wert="40">
+				</zustand>
+				<zustand name="12 Minuten" wert="48">
+				</zustand>
+				<zustand name="15 Minuten" wert="60">
+				</zustand>
+				<zustand name="20 Minuten" wert="80">
+				</zustand>
+				<zustand name="30 Minuten" wert="120">
+				</zustand>
+				<zustand name="60 Minuten" wert="240">
+				</zustand>
+			</ganzzahl>
+		</attributDefinition>
+		<attributDefinition pid="att.tlsZfrGrünFlag" name="GrünFlag">
+			<info>
+				<kurzinfo>Beschreibt die Darstellung der Grünphasen</kurzinfo>
+			</info>
+			<ganzzahl bits="8">
+				<bereich skalierung="1" minimum="0" maximum="1">
+				</bereich>
+				<zustand name="Grünphasendarstellung als Dunkel" wert="0">
+				</zustand>
+				<zustand name="Grünphasendarstellung als Grünes Licht" wert="1">
+				</zustand>
+			</ganzzahl>
+		</attributDefinition>
+		<attributDefinition pid="att.tlsZfrModus" name="Modus">
+			<info>
+				<kurzinfo>Beschreibt den Modus der Zuflussregelung</kurzinfo>
+			</info>
+			<ganzzahl bits="8">
+				<bereich skalierung="1" minimum="0" maximum="7">
+				</bereich>
+				<zustand name="umlaufend" wert="0">
+				</zustand>
+				<zustand name="Grün wartend" wert="1">
+				</zustand>
+				<zustand name="Rot wartend" wert="2">
+				</zustand>
+				<zustand name="Rot wartend mit Nachläufer" wert="3">
+				</zustand>
+				<zustand name="Reserve1" wert="4">
+				</zustand>
+				<zustand name="Reserve2" wert="5">
+				</zustand>
+				<zustand name="Reserve3" wert="6">
+				</zustand>
+				<zustand name="Reserve4" wert="7">
+				</zustand>
+			</ganzzahl>
+		</attributDefinition>
+		<attributDefinition pid="att.tlsZfrNegativeQuittung" name="TLSZfrNegativeQuittung">
+			<info>
+				<kurzinfo>
+                    Anwort auf ein nicht auswertbares Telegramm.
+                </kurzinfo>
+			</info>
+			<ganzzahl bits="16">
+				<bereich skalierung="1" minimum="0" maximum="255">
+					<info>
+						<kurzinfo>
+                            Ursachencode (0-127 für durch TLS
+                            vordefinierte, durch Hersteller definierte
+                            Codes nur im Bereich 128-255).
+                        </kurzinfo>
+					</info>
+				</bereich>
+				<zustand name="Sonstige Fehlerursache" wert="0">
+				</zustand>
+				<zustand name="Unbekannte oder nicht auswertbare ID" wert="1">
+				</zustand>
+				<zustand name="Unbekannter oder nicht auswertbarer Typ" wert="2">
+				</zustand>
+				<zustand name="Signalplan ist nicht definiert" wert="4">
+				</zustand>
+				<zustand name="Signalplan nicht schaltbar / bzw. wegen sonstiger Hardwarestörung nicht schaltbar" wert="6">
+				</zustand>
+				<zustand name="Signalplan konnte auf Grund einer Neuanforderung nicht geschaltet werden" wert="7">
+				</zustand>
+				<zustand name="Betriebsart unbekannt bzw. nicht einstellbar" wert="9">
+				</zustand>
+				<zustand name="Befehl bzw. Programm in dieser Betriebsart nicht ausführbar" wert="10">
+				</zustand>
+				<zustand name="Pufferinhalt nicht verfügbar" wert="12">
+				</zustand>
+				<zustand name="Helligkeitswert nicht einstellbar" wert="13">
+				</zustand>
+				<zustand name="Keine automatische Helligkeitssteuerung möglich" wert="14">
+				</zustand>
+				<zustand name="Kanal passiviert" wert="15">
+				</zustand>
+				<zustand name="Intervalldaten Rotfahrerzähler nicht verfügbar" wert="16">
+				</zustand>
+				<zustand name="Fehler beim Zuweisen von Signalplänen auf eine Zuflussregelung mit DEübergreifenden Sonderregeln." wert="30">
+				</zustand>
+				<zustand name="Zuweisung der Betriebsparameter Zuflussregelung nicht zulässig." wert="40">
+				</zustand>
+				<zustand name="Gelbzeit in Sekunden fehlerhaft" wert="41">
+				</zustand>
+				<zustand name="Rot-Gelbzeit in Sekunden fehlerhaft" wert="42">
+				</zustand>
+				<zustand name="Mindest-Grünzeit in Sekunden fehlerhaft" wert="43">
+				</zustand>
+				<zustand name="Max. Grünzeit in Sekunden fehlerhaft" wert="44">
+				</zustand>
+				<zustand name="Max. Belegungszeit der Schleifen in Sekunden fehlerhaft" wert="45">
+				</zustand>
+				<zustand name="Max. Grünzeit in Sekunden bei Schleifenfehler fehlerhaft" wert="46">
+				</zustand>
+				<zustand name="Grünflag gesetzt, aber keine Grün-Signalgeber vorhanden" wert="47">
+				</zustand>
+				<zustand name="Steuermodus fehlerhaft" wert="48">
+				</zustand>
+				<zustand name="Wert im Teilbereich zus. Kfz bei Grün ist nicht kompatibel zu den Anlageneigenschaften oder überschreitet den projektierten Wert für die maximale Anzahl der Kfz bei Grün." wert="49">
+				</zustand>
+				<zustand name="Die Anzahl der zusätzlichen Kfz kann aufgrund von Defekten an den Zusatzschildern nicht ausgeführt werden." wert="50">
+				</zustand>
+				<zustand name="Sonstiger Fehler in den Steuerflags (z.B. Reserve-Bits sind nicht Null)" wert="51">
+				</zustand>
+				<zustand name="Die Grünzeiten sind gegeneinander nicht plausibel (z.B. Mindest-Grün größer oder gleich Dunkel bzw. Grün bei Detektorstörung)." wert="60">
+				</zustand>
+				<zustand name="Fehler beim Zuweisen des DE-Blocks Betriebsparameter Zuflussregelung auf eine Zuflussregelung mit DE-übergreifenden Sonderregeln." wert="61">
+				</zustand>
+				<zustand name="Zuweisung der Betriebsparameter Rotfahrerzähler nicht zulässig" wert="70">
+				</zustand>
+				<zustand name="Betriebsparameter Rotfahrerzähler mit fehlerhaftem Zeitintervall" wert="71">
+				</zustand>
+				<zustand name="Betriebsparameter Rotfahrerzähler mit fehlerhaften Übertragungsverfahren" wert="72">
+				</zustand>
+				<zustand name="Zuweisung der Betriebsparameter ALINEA 1 nicht zulässig (Fehlernummern: 75 bis 89)" wert="75">
+				</zustand>
+				<zustand name="ALINEA1: Anzahl Programme mit DE-Länge nicht vereinbar" wert="76">
+				</zustand>
+				<zustand name="ALINEA1: Programmanzahl fehlerhaft" wert="77">
+				</zustand>
+				<zustand name="ALINEA1: q-ZuflussMin fehlerhaft" wert="78">
+				</zustand>
+				<zustand name="ALINEA1: Korrekturfaktor KR fehlerhaft" wert="79">
+				</zustand>
+				<zustand name="ALINEA1: Optimaler Belegungsgrad bopt fehlerhaft" wert="80">
+				</zustand>
+				<zustand name="ALINEA1: Berechnungsart der Belegung fehlerhaft" wert="81">
+				</zustand>
+				<zustand name="ALINEA1: Max. erste Rotschaltzeit fehlerhaft" wert="82">
+				</zustand>
+				<zustand name="ALINEA1: Schwächste Rotschaltzeit fehlerhaft" wert="83">
+				</zustand>
+				<zustand name="ALINEA1: Prog. (n): Einschaltschwelle TEin fehlerhaft" wert="87">
+				</zustand>
+				<zustand name="ALINEA1: Prog. (n): Ausschaltschwelle TAus fehlerhaft" wert="88">
+				</zustand>
+				<zustand name="ALINEA1: Prog. (n): Rotschaltzeit fehlerhaft" wert="89">
+				</zustand>
+				<zustand name="Zuweisung der Betriebsparameter ALINEA 2 nicht zulässig (Fehlernummern: 90 bis 112)" wert="90">
+				</zustand>
+				<zustand name="ALINEA2: Anzahl Programme mit DE-Länge nicht vereinbar" wert="91">
+				</zustand>
+				<zustand name="ALINEA2: Programmanzahl fehlerhaft" wert="92">
+				</zustand>
+				<zustand name="ALINEA2: Stau- Einschaltschwelle v HFB, Stau, Ein fehlerhaft" wert="93">
+				</zustand>
+				<zustand name="ALINEA2: Stau- Ausschaltschwelle v HFB, Stau, Aus fehlerhaft" wert="94">
+				</zustand>
+				<zustand name="ALINEA2: Stau- Einschaltschwelle b HFB, Stau, Ein fehlerhaft" wert="95">
+				</zustand>
+				<zustand name="ALINEA2: Stau- Ausschaltschwelle b HFB, Stau, Aus fehlerhaft" wert="96">
+				</zustand>
+				<zustand name="ALINEA2: Stau- Einschaltschwelle b GelbAnS, Stau, Ein fehlerhaft" wert="97">
+				</zustand>
+				<zustand name="ALINEA2: Stau- Ausschaltschwelle b GelbAnS, Stau, Aus fehlerhaft" wert="98">
+				</zustand>
+				<zustand name="ALINEA2: Stau- Einschaltschwelle b FGrünAnS, Stau, Ein fehlerhaft" wert="99">
+				</zustand>
+				<zustand name="ALINEA2: Stau- Ausschaltschwelle b FGrünAnS, Stau, Aus fehlerhaft" wert="100">
+				</zustand>
+				<zustand name="ALINEA2: Stau- Einschaltschwelle b RStauS, Stau, Ein fehlerhaft" wert="101">
+				</zustand>
+				<zustand name="ALINEA2: Stau- Ausschaltschwelle b RStauS, Stau, Aus fehlerhaft" wert="102">
+				</zustand>
+				<zustand name="ALINEA2: Minimaler Belegungsgrad b HFB, Min fehlerhaft" wert="103">
+				</zustand>
+				<zustand name="ALINEA2: FGrünAnS-Prog. (n): kleiner gleich Rotschaltzeit fehlerhaft" wert="107">
+				</zustand>
+				<zustand name="ALINEA2: FGrünAnS-Prog. (n): kleiner Rotschaltzeit fehlerhaft" wert="108">
+				</zustand>
+				<zustand name="ALINEA2: FGrünAnS-Prog. (n): Abgeschwächte Rotschaltzeit fehlerhaft" wert="109">
+				</zustand>
+				<zustand name="ALINEA2: RStauS-Prog. (n): kleiner gleich Rotschaltzeit fehlerhaft" wert="110">
+				</zustand>
+				<zustand name="ALINEA2: RStauS-Prog. (n): kleiner Rotschaltzeit fehlerhaft" wert="111">
+				</zustand>
+				<zustand name="ALINEA2: RStauS-Prog. (n): Abgeschwächte Rotschaltzeit fehlerhaft" wert="112">
+				</zustand>
+			</ganzzahl>
+		</attributDefinition>
+		<attributDefinition pid="att.tlsZfrProzent" name="TlsZfrProzent">
+			<info>
+				<kurzinfo>Prozentangabe 0-100% [255]</kurzinfo>
+			</info>
+			<ganzzahl bits="16">
+				<bereich skalierung="1" minimum="0" maximum="100" einheit="%">
+				</bereich>
+				<zustand name="nicht ermittelbar" wert="255">
+				</zustand>
+			</ganzzahl>
+		</attributDefinition>
+		<attributDefinition pid="att.tlsZfrRotSchaltZeitA" name="TlsZfrRotSchaltZeitA">
+			<info>
+				<kurzinfo>Rotschaltzeit ZFR Version A.</kurzinfo>
+			</info>
+			<ganzzahl bits="16">
+				<bereich skalierung="1" minimum="2" maximum="240" einheit="s">
+				</bereich>
+			</ganzzahl>
+		</attributDefinition>
+		<attributDefinition pid="att.tlsZfrRotSchaltZeitB" name="TlsZfrRotSchaltZeitB">
+			<info>
+				<kurzinfo>Rotschaltzeit ZFR Version B.</kurzinfo>
+			</info>
+			<ganzzahl bits="16">
+				<bereich skalierung="1" minimum="2" maximum="241" einheit="s">
+				</bereich>
+			</ganzzahl>
+		</attributDefinition>
+		<attributDefinition pid="att.tlsZfrRotSchaltZeitC" name="TlsZfrRotSchaltZeitC">
+			<info>
+				<kurzinfo>Rotschaltzeit ZFR Version C.</kurzinfo>
+			</info>
+			<ganzzahl bits="16">
+				<bereich skalierung="1" minimum="2" maximum="240" einheit="s">
+				</bereich>
+				<zustand name="Zuflussregelung ausschalten" wert="0">
+				</zustand>
+			</ganzzahl>
+		</attributDefinition>
+		<attributDefinition pid="att.tlsZfrRotSchaltZeitD" name="TlsZfrRotSchaltZeitD">
+			<info>
+				<kurzinfo>Rotschaltzeit ZFR Version D.</kurzinfo>
+			</info>
+			<ganzzahl bits="16">
+				<bereich skalierung="1" minimum="2" maximum="240" einheit="s">
+				</bereich>
+				<zustand name="Zuflussregelung ausschalten" wert="0">
+				</zustand>
+				<zustand name="Dauer-Rot" wert="241">
+				</zustand>
+			</ganzzahl>
+		</attributDefinition>
+		<attributDefinition pid="att.tlsZfrRotSchaltZeitE" name="TlsZfrRotSchaltZeitE">
+			<info>
+				<kurzinfo>Rotschaltzeit ZFR Version E.</kurzinfo>
+			</info>
+			<ganzzahl bits="16">
+				<bereich skalierung="1" minimum="2" maximum="240" einheit="s">
+				</bereich>
+				<zustand name="Zuflussregelung ausschalten" wert="0">
+				</zustand>
+				<zustand name="Reserviert" wert="1">
+				</zustand>
+				<zustand name="Dauer-Rot" wert="241">
+				</zustand>
+				<zustand name="Dauer-Gelb-Blinkend" wert="242">
+				</zustand>
+			</ganzzahl>
+		</attributDefinition>
+		<attributDefinition pid="att.tlsZfrRotSchaltZeitF" name="TlsZfrRotSchaltZeitF">
+			<info>
+				<kurzinfo>Rotschaltzeit ZFR Version F.</kurzinfo>
+			</info>
+			<ganzzahl bits="16">
+				<bereich skalierung="1" minimum="2" maximum="240" einheit="s">
+				</bereich>
+				<zustand name="Zuflussregelung ausschalten" wert="0">
+				</zustand>
+				<zustand name="Dauer-Rot" wert="241">
+				</zustand>
+				<zustand name="nicht ermittelbar" wert="255">
+				</zustand>
+			</ganzzahl>
+		</attributDefinition>
+		<attributDefinition pid="att.tlsZfrStatusHelligkeit" name="TLSZfrStatusHelligkeit">
+			<info>
+				<kurzinfo>
+                    Einstellung der Helligkeitssteuerung an einem Signalgeber
+                </kurzinfo>
+			</info>
+			<ganzzahl bits="8">
+				<zustand name="Einstellung durch Zentrale" wert="0">
+				</zustand>
+				<zustand name="lokale Helligkeitssteuerung ohne spontane Änderungsmeldung" wert="1">
+				</zustand>
+				<zustand name="undefiniert (Einstellung durch Zentrale)" wert="2">
+				</zustand>
+				<zustand name="lokale Helligkeitssteuerung mit spontaner Änderungsmeldung" wert="3">
+				</zustand>
+			</ganzzahl>
+		</attributDefinition>
+		<attributDefinition pid="att.tlsZfrÜbertragungsVerfahren" name="TlsZfrÜbertragungsVerfahren">
+			<info>
+				<kurzinfo>Legt fest, wann die Daten der Messwertgeber zur Zentrale übertragen
+                    werden. Entweder auf Abruf durch die Zentrale (Ereignisklasse 2) oder spontan nach der o.g.
+                    Erfassungsperiode (Ereignisklasse 1). Meldungen nur nach Abruf durch die Zentrale bedeutet,
+                    dass das DE ohne Aufforderung keine Meldung mehr abgibt.
+                </kurzinfo>
+			</info>
+			<ganzzahl bits="8">
+				<bereich skalierung="1" minimum="0" maximum="1">
+				</bereich>
+				<zustand name="Meldung nur nach Abruf" wert="0">
+				</zustand>
+				<zustand name="Zyklische Abgabe" wert="1">
+				</zustand>
+			</ganzzahl>
+		</attributDefinition>
+		<attributDefinition pid="att.tlsZfrZeit000bis001s" name="TlsZfrZeit000bis001s">
+			<info>
+				<kurzinfo>Zeitdauer von 1 - 255 Sekunden.</kurzinfo>
+			</info>
+			<ganzzahl bits="8">
+				<bereich skalierung="1" minimum="0" maximum="1" einheit="s">
+				</bereich>
+			</ganzzahl>
+		</attributDefinition>
+		<attributDefinition pid="att.tlsZfrZeit000bis255min" name="TlsZfrZeit000bis255min">
+			<info>
+				<kurzinfo>Zeitdauer von 0 - 255 Minuten.</kurzinfo>
+			</info>
+			<ganzzahl bits="16">
+				<bereich skalierung="1" minimum="0" maximum="255" einheit="min">
+				</bereich>
+			</ganzzahl>
+		</attributDefinition>
+		<attributDefinition pid="att.tlsZfrZeit000bis255s" name="TlsZfrZeit000bis255s">
+			<info>
+				<kurzinfo>Zeitdauer von 0 - 255 Sekunden.</kurzinfo>
+			</info>
+			<ganzzahl bits="16">
+				<bereich skalierung="1" minimum="0" maximum="255" einheit="s">
+				</bereich>
+			</ganzzahl>
+		</attributDefinition>
+		<attributDefinition pid="att.tlsZfrZeit001bis002s" name="TlsZfrZeit001bis002s">
+			<info>
+				<kurzinfo>Zeitdauer von 1 - 2 Sekunden.</kurzinfo>
+			</info>
+			<ganzzahl bits="8">
+				<bereich skalierung="1" minimum="1" maximum="2" einheit="s">
+				</bereich>
+			</ganzzahl>
+		</attributDefinition>
+		<attributDefinition pid="att.tlsZfrZeit001bis255s" name="TlsZfrZeit001bis255s">
+			<info>
+				<kurzinfo>Zeitdauer von 1 - 255 Sekunden.</kurzinfo>
+			</info>
+			<ganzzahl bits="16">
+				<bereich skalierung="1" minimum="1" maximum="255" einheit="s">
+				</bereich>
+			</ganzzahl>
+		</attributDefinition>
+		<attributDefinition pid="att.tlsZfrZeit002bis255s" name="TlsZfrZeit002bis255s">
+			<info>
+				<kurzinfo>Zeitdauer von 2 - 255 Sekunden.</kurzinfo>
+			</info>
+			<ganzzahl bits="16">
+				<bereich skalierung="1" minimum="2" maximum="255" einheit="s">
+				</bereich>
+			</ganzzahl>
+		</attributDefinition>
+		<attributlistenDefinition pid="atl.tlsZfrProgAlinea1" name="TlsZfrProgAlinea1">
+			<info>
+				<kurzinfo>Programmdefinition für Alinea1, wobei jedes Programm aus drei
+                    Parametern (TEin, TAus, Rotzeit) besteht. Die Programme müssen in ihrer
+                    Priorität aufsteigend (niedrigste Priorität zuerst) parametriert werden. Das
+                    Programm mit der höchsten Priorität wird geschaltet.
+                </kurzinfo>
+			</info>
+			<attribut pid="att.tlsZfr16BitUmlaufZeit" anzahl="1" anzahlIst="fest" name="TEin">
+				<info>
+					<kurzinfo>Einschaltschwelle für Vergleich mit theoretischer Umlaufzeit T</kurzinfo>
+				</info>
+			</attribut>
+			<attribut pid="att.tlsZfr16BitUmlaufZeit" anzahl="1" anzahlIst="fest" name="TAus">
+				<info>
+					<kurzinfo>Ausschaltschwelle für Vergleich mit theoretischer Umlaufzeit T</kurzinfo>
+				</info>
+			</attribut>
+			<attribut pid="att.tlsZfrRotSchaltZeitD" anzahl="1" anzahlIst="fest" name="RotSchaltZeit">
+				<info>
+					<kurzinfo>Rotzeit</kurzinfo>
+				</info>
+			</attribut>
+		</attributlistenDefinition>
+		<attributlistenDefinition pid="atl.tlsZfrProgRotZeitLockerungAlinea2" name="ProgRotZeitLockerungAlinea2">
+			<info>
+				<kurzinfo>Programme für die Rotzeitlockerung, ausgelöst durch
+                    einen Stau auf der Früh-Grünanforderungs-Schleife oder durch einen Stau auf der Rückstau-Schleife.
+                    Jedes Programm besteht aus drei Parametern (kleiner oder gleich Rotschaltzeit, kleiner
+                    Rotschaltzeit,
+                    Abgeschwächte Rotschaltzeit), diese müssen in ihrer Priorität
+                    aufsteigend (niedrigste Priorität zuerst) parametriert werden. Das
+                    Programm mit der höchsten Priorität wird geschaltet. Ist die Anzahl der
+                    Programme = 0, erfolgt keine Rotzeitlockerung.
+                </kurzinfo>
+			</info>
+			<attribut pid="att.tlsZfrRotSchaltZeitA" anzahl="1" anzahlIst="fest" name="untereSchwelleRotSchaltZeit">
+				<info>
+					<kurzinfo>Untere Schwelle der aktuellen Rotschaltzeit</kurzinfo>
+				</info>
+			</attribut>
+			<attribut pid="att.tlsZfrRotSchaltZeitB" anzahl="1" anzahlIst="fest" name="obereSchwelleRotSchaltZeit">
+				<info>
+					<kurzinfo>obere Schwelle der aktuellen Rotschaltzeit, '241' nur zulässig da kleiner-Kriterium.
+                    </kurzinfo>
+				</info>
+			</attribut>
+			<attribut pid="att.tlsZfrRotSchaltZeitC" anzahl="1" anzahlIst="fest" name="RotZeit">
+				<info>
+					<kurzinfo>Rotzeit</kurzinfo>
+				</info>
+			</attribut>
+		</attributlistenDefinition>
+	</modell>
+	<objekte>
+	</objekte>
+</konfigurationsBereich>

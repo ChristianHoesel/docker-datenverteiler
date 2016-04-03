@@ -1,0 +1,114 @@
+<?xml version="1.0" encoding="ISO-8859-1"?>
+<!DOCTYPE konfigurationsBereich PUBLIC "-//K2S//DTD Dokument//DE" "K2S.dtd">
+<konfigurationsBereich pid="kb.tmKExTlsZeitSync" name="TeilmodellKFExTlsZeitSync - Modell und Objekt für SWE TLSZeitSync" verantwortlich="kv.inovat">
+	<info>
+		<kurzinfo>
+            Erweiterung um Modell und Verwaltungsobjekt für die SWE TLSZeitSync, die parametrierbar an einzelne SM
+            Zeitsyncronisationstelegramme sendet.
+        </kurzinfo>
+	</info>
+	<konfigurationsAenderung stand="06.07.2012" version="1" autor="inovat, Dipl.-Ing. H. C. Kniß (HCK)" grund="Neuerstellung."></konfigurationsAenderung>
+	<!--
+	Abhängigkeiten des Bereichs kb.tmKExTlsZeitSync
+	Abhängig ab Version      Art der Abhängigkeit      Version des benötigten Bereichs      Benötigter Bereich
+	1                        notwendig                 6                                    kb.tmKExTlsGlobal                  
+	1                        notwendig                 1                                    kb.kv.inovat                       
+	1                        notwendig                 4                                    kb.fachModellGlobal                
+	1                        notwendig                 1                                    kb.metaModellGlobal                
+	1                        notwendig                 3                                    kb.tmVewBetriebGlobal              
+	-->
+		<modell>
+		<typDefinition pid="typ.vewTlsZeitSync" name="VewTlsZeitSync" objektNamenPermanent="nein">
+			<info>
+				<kurzinfo>
+                    Verwaltungsobjekt für die SWE TLSZeitSync.
+                </kurzinfo>
+			</info>
+			<erweitert pid="typ.konfigurationsObjekt"/>
+			<attributgruppe pid="atg.paramTlsZeitSync"/>
+			<defaultParameter attributgruppe="atg.paramTlsZeitSync" typ="typ.vewTlsZeitSync">
+				<datenliste name="Urlasser">
+					<datum name="BenutzerReferenz" wert="undefiniert"/>
+					<datum name="Ursache" wert=""/>
+					<datum name="Veranlasser" wert=""/>
+				</datenliste>
+				<datenfeld name="SmZeitSyncParameter">
+				</datenfeld>
+			</defaultParameter>
+		</typDefinition>
+		<attributgruppenDefinition pid="atg.paramTlsZeitSync" name="ParamTlsZeitSync" parametrierend="ja">
+			<info>
+				<kurzinfo>Parametersatz für die SWE TLSZeitSync</kurzinfo>
+				<beschreibung>
+                    Jeder Eintrag legt für ein SM fest, auf welchem DE-Kanal des DE vom typ.deSys eine ZeitSync gesendet
+                    werden soll (entweder 0 oder 255), wie oft eine ZeitSync geschickt werden soll, und ob der Eintrag
+                    aktiv oder passiv ist (damit kann ein Eintrag vorübergehende deaktiviert werden, ohne ihn zu
+                    löschen).
+                </beschreibung>
+			</info>
+			<aspekt pid="asp.tlsParameterVorgabeArchiv" onlineModus="quelleUndSenke">
+			</aspekt>
+			<aspekt pid="asp.tlsVorgabeBedienung" onlineModus="quelleUndSenke">
+			</aspekt>
+			<attributliste pid="atl.urlasser" anzahl="1" anzahlIst="fest" name="Urlasser">
+			</attributliste>
+			<attributliste pid="atl.smZeitSyncParameter" anzahl="0" anzahlIst="variabel" name="SmZeitSyncParameter">
+			</attributliste>
+		</attributgruppenDefinition>
+		<attributDefinition pid="att.tlsDe0Oder255" name="De0Oder255">
+			<info>
+				<kurzinfo>DE-Kanalnummer für die ZeitSync am SM, entweder 0 oder 255</kurzinfo>
+			</info>
+			<ganzzahl bits="16">
+				<zustand name="0" wert="0">
+					<info>
+						<kurzinfo>ZeitSync wird an den DE-Kanal 0 der DeSys des SM geschickt.</kurzinfo>
+					</info>
+				</zustand>
+				<zustand name="255" wert="255">
+					<info>
+						<kurzinfo>ZeitSync wird an den DE-Kanal 255 der DeSys des SM geschickt.</kurzinfo>
+					</info>
+				</zustand>
+			</ganzzahl>
+		</attributDefinition>
+		<attributlistenDefinition pid="atl.smZeitSyncParameter" name="SmZeitSyncParameter">
+			<info>
+				<kurzinfo>Eintrag für ein SM mit den Daten für die ZeitSync.</kurzinfo>
+			</info>
+			<attribut pid="att.steuerModulReferenz" anzahl="1" anzahlIst="fest" name="SteuerModulReferenz">
+				<info>
+					<kurzinfo>Referenz auf ein Objekt vom Typ typ.steuerModul, an das die ZeitSync gesendet werden
+                        soll.
+                    </kurzinfo>
+				</info>
+			</attribut>
+			<attribut pid="att.tlsDe0Oder255" anzahl="1" anzahlIst="fest" name="De0Oder255">
+				<info>
+					<kurzinfo>DE-Kanalnummer für die ZeitSync am SM, entweder 0 oder 255</kurzinfo>
+				</info>
+			</attribut>
+			<attribut pid="att.zeitDauer" anzahl="1" anzahlIst="fest" name="Intervall">
+				<info>
+					<kurzinfo>Legt die Intervalldauer fest, nach der jeweils eine ZeitSync an das SM geschickt werden
+                        soll.
+                    </kurzinfo>
+				</info>
+			</attribut>
+			<attribut pid="att.jaNein" anzahl="1" anzahlIst="fest" name="aktiviert">
+				<info>
+					<kurzinfo>Legt fest, ob der Parametereintrag aktiviert ist (Ja, ZeitSync wird wie eingetragen
+                        gesendet) oder passiviert ist (Nein, Eintrag wird nicht berücksichtigt.
+                    </kurzinfo>
+				</info>
+			</attribut>
+		</attributlistenDefinition>
+	</modell>
+	<objekte>
+		<konfigurationsObjekt pid="vewTlsZeitSync.vewTlsZeitSync" name="VewTlsZeitSync" typ="typ.vewTlsZeitSync">
+			<info>
+				<kurzinfo>Verwaltungsobjekt für die SWE TLSZeitSync.</kurzinfo>
+			</info>
+		</konfigurationsObjekt>
+	</objekte>
+</konfigurationsBereich>

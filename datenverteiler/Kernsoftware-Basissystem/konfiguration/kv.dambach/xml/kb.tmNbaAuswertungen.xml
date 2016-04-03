@@ -1,0 +1,207 @@
+<?xml version="1.0" encoding="ISO-8859-1"?>
+<!DOCTYPE konfigurationsBereich PUBLIC "-//K2S//DTD Dokument//DE" "K2S.dtd">
+<konfigurationsBereich pid="kb.tmNbaAuswertungen" name="Teilmodell NBA Auswertungen" verantwortlich="kv.dambach">
+	<info>
+		<kurzinfo>Teilmodell mit den notwendigen Auswertungsinformationen für die NBA.</kurzinfo>
+	</info>
+	<konfigurationsAenderung stand="15.06.2011" version="1" autor="Swarco Traffic Systems GmbH, Th. Drapp" grund="Änderungsdokumentation siehe &apos;ReleaseNotes kv.dambach.doc&apos;"></konfigurationsAenderung>
+	<konfigurationsAenderung stand="15.06.2011" version="1" autor="Swarco Traffic Systems GmbH, Th. Drapp" grund="Änderungsdokumentation siehe &apos;ReleaseNotes kv.dambach.doc&apos;"></konfigurationsAenderung>
+	<!--
+	Abhängigkeiten des Bereichs kb.tmNbaAuswertungen
+	Abhängig ab Version      Art der Abhängigkeit      Version des benötigten Bereichs      Benötigter Bereich
+	1                        notwendig                 11                                   kb.tmNbaGlobal                     
+	1                        notwendig                 1                                    kb.metaModellGlobal                
+	1                        notwendig                 1                                    kb.systemModellGlobal              
+	1                        notwendig                 1                                    kb.tmAnzeigenGlobal                
+	1                        notwendig                 2                                    kb.tmVerkehrGlobal                 
+	1                        notwendig                 1                                    kb.kv.dambach                      
+	1                        notwendig                 1                                    kb.fachModellGlobal                
+	-->
+	<modell>
+		<typDefinition pid="typ.anzeigeQuerschnittAuswertung" name="AnzeigeQuerschnittAuswertung" objektNamenPermanent="nein">
+			<info>
+				<kurzinfo>Anzeigequerschnitt mit den notwendigen Auswertungsinformationen.</kurzinfo>
+			</info>
+			<erweitert pid="typ.konfigurationsObjekt"/>
+			<attributgruppe pid="atg.anzeigeQuerschnittAuswertung"/>
+			<attributgruppe pid="atg.anzeigeQuerschnittAuswertungBedeutungCopyPaste"/>
+			<attributgruppe pid="atg.anzeigeQuerschnittAuswertungDarstellungEinfach"/>
+			<attributgruppe pid="atg.anzeigeQuerschnittAuswertungSpalten"/>
+		</typDefinition>
+		<typDefinition pid="typ.nbaEntscheidungspunktAuswertung" name="NbaEntscheidungspunktAuswertung" objektNamenPermanent="nein">
+			<info>
+				<kurzinfo>Entscheidungspunkt mit den notwendigen Auswertungsinformationen.</kurzinfo>
+			</info>
+			<erweitert pid="typ.konfigurationsObjekt"/>
+			<attributgruppe pid="atg.nbaEntscheidungspunktAuswertung"/>
+			<attributgruppe pid="atg.nbaEntscheidungspunktAuswertungZuordnungMessQuerschnittZuFahrtRichtung"/>
+		</typDefinition>
+		<attributgruppenDefinition pid="atg.anzeigeQuerschnittAuswertung" name="AnzeigeQuerschnittAuswertung" parametrierend="nein">
+			<info>
+				<kurzinfo>Konfigurierende Eigenschaften der Objekte des Typs.</kurzinfo>
+			</info>
+			<aspekt pid="asp.eigenschaften" konfigurationsModus="datensatzNotwendig">
+			</aspekt>
+			<attribut pid="att.anzeigeQuerschnittReferenz" anzahl="1" anzahlIst="fest" name="AnzeigeQuerschnitt">
+				<info>
+					<kurzinfo>Anzeigequerschnitt.</kurzinfo>
+				</info>
+			</attribut>
+		</attributgruppenDefinition>
+		<attributgruppenDefinition pid="atg.anzeigeQuerschnittAuswertungBedeutungCopyPaste" name="AnzeigeQuerschnittAuswertungBedeutungCopyPaste" parametrierend="nein">
+			<info>
+				<kurzinfo>Bedeutung der Anzeigen des AnzeigeQuerschnitt für Copy und Paste.</kurzinfo>
+				<beschreibung>
+					  Die angegebene Bezeichnung wird für die Copy-Paste-Funktionalität verwendet.
+					  D. h. bei Copy wird der Inhalt der Anzeige unter der BedeutungCopyPaste zwischengespeichert,
+            beim Paste werden die zwischengespeicherten Inhalte über die BedeutungCopyPaste den Anzeigen, die die gespeicherten Inhalte erhalten sollen, zugeordnet.
+            Durch sinnvolle Versorgung kann damit eine sinnvolle Zuordnung der verkehrlichen Bedeutungen erfolgen.
+					</beschreibung>
+			</info>
+			<aspekt pid="asp.eigenschaften" konfigurationsModus="datensatzOptional">
+			</aspekt>
+			<attributliste pid="atl.anzeigeQuerschnittAuswertungBedeutungCopyPaste" anzahl="0" anzahlIst="variabel" name="Anzeigen">
+				<info>
+					<kurzinfo>Feld mit Anzeigen des AnzeigeQuerschnitt mit der Bedeutung für Copy und Paste.</kurzinfo>
+				</info>
+			</attributliste>
+		</attributgruppenDefinition>
+		<attributgruppenDefinition pid="atg.anzeigeQuerschnittAuswertungDarstellungEinfach" name="AnzeigeQuerschnittAuswertungDarstellungEinfach" parametrierend="nein">
+			<info>
+				<kurzinfo>Informationen zu Spalten in der einfachen Darstellung.</kurzinfo>
+			</info>
+			<aspekt pid="asp.eigenschaften" konfigurationsModus="datensatzOptional">
+			</aspekt>
+			<attributliste pid="atl.anzeigeQuerschnittAuswertungDarstellungEinfach" anzahl="0" anzahlIst="variabel" name="Spalten">
+				<info>
+					<kurzinfo>Feld mit Spalten in der einfachen Darstellung.</kurzinfo>
+				</info>
+			</attributliste>
+		</attributgruppenDefinition>
+		<attributgruppenDefinition pid="atg.anzeigeQuerschnittAuswertungSpalten" name="AnzeigeQuerschnittAuswertungSpalten" parametrierend="nein">
+			<info>
+				<kurzinfo>Information zur Spaltendarstellung von Anzeigen des AnzeigeQuerschnitts.</kurzinfo>
+			</info>
+			<aspekt pid="asp.eigenschaften" konfigurationsModus="datensatzOptional">
+			</aspekt>
+			<attribut pid="att.text" anzahl="1" anzahlIst="fest" name="Auswertungstyp">
+				<info>
+					<kurzinfo>Auswertungs-Typ für die Gruppierung der Spalten.</kurzinfo>
+				</info>
+			</attribut>
+			<attributliste pid="atl.anzeigeQuerschnittAuswertungSpalten" anzahl="0" anzahlIst="variabel" name="Anzeigen">
+				<info>
+					<kurzinfo>Spalteninformationen zu den einzelnen Anzeigen.</kurzinfo>
+				</info>
+			</attributliste>
+		</attributgruppenDefinition>
+		<attributgruppenDefinition pid="atg.nbaEntscheidungspunktAuswertung" name="NbaEntscheidungspunktAuswertung" parametrierend="nein">
+			<info>
+				<kurzinfo>Konfigurierende Eigenschaften der Objekte des Typs.</kurzinfo>
+			</info>
+			<aspekt pid="asp.eigenschaften" konfigurationsModus="datensatzNotwendig">
+			</aspekt>
+			<attribut pid="att.nbaEntscheidungspunktReferenz" anzahl="1" anzahlIst="fest" name="Entscheidungspunkt">
+				<info>
+					<kurzinfo>Entscheidungspunkt.</kurzinfo>
+				</info>
+			</attribut>
+		</attributgruppenDefinition>
+		<attributgruppenDefinition pid="atg.nbaEntscheidungspunktAuswertungZuordnungMessQuerschnittZuFahrtRichtung" name="NbaEntscheidungspunktAuswertungZuordnungMessQuerschnittZuFahrtRichtung" parametrierend="nein">
+			<info>
+				<kurzinfo>Abfluss-MessQuerschnitte pro Fahrtrichtung für den Entscheidungspunkt.</kurzinfo>
+			</info>
+			<aspekt pid="asp.eigenschaften" konfigurationsModus="datensatzOptional">
+			</aspekt>
+			<attributliste pid="atl.nbaEntscheidungspunktAuswertungZuordnungMessQuerschnittZuFahrtRichtung" anzahl="0" anzahlIst="variabel" name="MessQuerschnittMitFahrtRichtung">
+				<info>
+					<kurzinfo>
+						Abfluss-MessQuerschnitt mit FahrtRichtung für den Entscheidungspunkt. Kann für die Berechnung des Befolgungsgrades benutzt werden.
+					</kurzinfo>
+				</info>
+			</attributliste>
+		</attributgruppenDefinition>
+		<attributlistenDefinition pid="atl.anzeigeQuerschnittAuswertungBedeutungCopyPaste" name="AnzeigeQuerschnittAuswertungBedeutungCopyPaste">
+			<info>
+				<kurzinfo>Bedeutung der Anzeige für Copy und Paste.</kurzinfo>
+			</info>
+			<attribut pid="att.anzeigeReferenz" anzahl="1" anzahlIst="fest" name="Anzeige">
+				<info>
+					<kurzinfo>Anzeige, der die Bedeutung zugeordnet wird.</kurzinfo>
+				</info>
+			</attribut>
+			<attribut pid="att.text" anzahl="1" anzahlIst="fest" name="BedeutungCopyPaste">
+				<info>
+					<kurzinfo>Bedeutung der Anzeige für Copy und Paste.</kurzinfo>
+				</info>
+			</attribut>
+		</attributlistenDefinition>
+		<attributlistenDefinition pid="atl.anzeigeQuerschnittAuswertungDarstellungEinfach" name="AnzeigeQuerschnittAuswertungDarstellungEinfach">
+			<info>
+				<kurzinfo>Informationen zu Zellen in der einfachen Darstellung.</kurzinfo>
+			</info>
+			<attributliste pid="atl.anzeigeQuerschnittAuswertungDarstellungEinfachZelle" anzahl="0" anzahlIst="variabel" name="Zellen">
+				<info>
+					<kurzinfo>Feld mit Zellen in der einfachen Darstellung.</kurzinfo>
+				</info>
+			</attributliste>
+		</attributlistenDefinition>
+		<attributlistenDefinition pid="atl.anzeigeQuerschnittAuswertungDarstellungEinfachZelle" name="AnzeigeQuerschnittAuswertungDarstellungEinfachZelle">
+			<info>
+				<kurzinfo>Zelleninformationen einer Anzeige für die einfache Darstellung.</kurzinfo>
+			</info>
+			<attribut pid="att.anzeigeReferenz" anzahl="1" anzahlIst="fest" name="Anzeige">
+				<info>
+					<kurzinfo>Anzeige, die in dieser Zelle angezeigt wird.</kurzinfo>
+				</info>
+			</attribut>
+			<attribut pid="att.text" anzahl="1" anzahlIst="fest" name="AnzeigeTyp">
+				<info>
+					<kurzinfo>AnzeigeTyp der im GUI für die Darstellung der Anzeige verwendet wird (Text wird in GUI in die Art der Darstellung umgesetzt).</kurzinfo>
+				</info>
+			</attribut>
+		</attributlistenDefinition>
+		<attributlistenDefinition pid="atl.anzeigeQuerschnittAuswertungSpalten" name="AnzeigeQuerschnittAuswertungSpalten">
+			<info>
+				<kurzinfo>Spalteninformationen einer Anzeige.</kurzinfo>
+			</info>
+			<attribut pid="att.anzeigeReferenz" anzahl="1" anzahlIst="fest" name="Anzeige">
+				<info>
+					<kurzinfo>Anzeige, für die die Spalteninformationen gelten.</kurzinfo>
+				</info>
+			</attribut>
+			<attribut pid="att.zahlPositiv" anzahl="1" anzahlIst="fest" name="Spaltennummer">
+				<info>
+					<kurzinfo>Spaltennummer, in der die Anzeigeinformation angezeigt werden soll.</kurzinfo>
+				</info>
+			</attribut>
+			<attribut pid="att.text" anzahl="1" anzahlIst="fest" name="Spaltenbezeichnung">
+				<info>
+					<kurzinfo>Spaltenbezeichnung, in der die Anzeigeinformation angezeigt werden soll.</kurzinfo>
+				</info>
+			</attribut>
+		</attributlistenDefinition>
+		<attributlistenDefinition pid="atl.nbaEntscheidungspunktAuswertungZuordnungMessQuerschnittZuFahrtRichtung" name="NbaEntscheidungspunktAuswertungZuordnungMessQuerschnittZuFahrtRichtung">
+			<info>
+				<kurzinfo>Einzelne FahrtRichtungs-MessQuerschnitt-Kombination für die NBA.</kurzinfo>
+				<beschreibung>
+					<absatz>
+						Für eine FahrtRichtung wird der MessQuerschnitt, der den Abfluss misst, angegeben.
+					</absatz>
+				</beschreibung>
+			</info>
+			<attribut pid="att.nbaFahrtRichtung" anzahl="1" anzahlIst="fest" name="FahrtRichtung">
+				<info>
+					<kurzinfo>Gibt die FahrtRichtung für den angegebenen MessQuerschnitt an.</kurzinfo>
+				</info>
+			</attribut>
+			<attribut pid="att.messQuerschnittAllgemeinReferenz" anzahl="1" anzahlIst="fest" name="MessQuerschnitt">
+				<info>
+					<kurzinfo>Referenz auf den MessQuerschnitt, welcher in der angegebenen FahrtRichtung den Abfluss misst.</kurzinfo>
+				</info>
+			</attribut>
+		</attributlistenDefinition>
+	</modell>
+	<objekte>
+	</objekte>
+</konfigurationsBereich>

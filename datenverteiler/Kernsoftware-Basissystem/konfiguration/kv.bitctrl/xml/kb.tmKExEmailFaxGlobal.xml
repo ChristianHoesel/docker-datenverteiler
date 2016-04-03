@@ -1,0 +1,243 @@
+<?xml version="1.0" encoding="ISO-8859-1"?>
+<!DOCTYPE konfigurationsBereich PUBLIC "-//K2S//DTD Dokument//DE" "K2S.dtd">
+
+<konfigurationsBereich pid="kb.tmKExEmailFaxGlobal" name="TeilmodellKExEmailFaxGlobal" verantwortlich="kv.bitctrl">
+	<info>
+		<kurzinfo>Teilmodell mit Datenmodellierung zur Anbindung und zum Datenaustausch mit über eMail, FAX und SMS.</kurzinfo>
+		<beschreibung>
+			<absatz>Datenmodell für Funktionen, die aus den Daten des Systems nach konfigurierbaren Regeln Datenzusammenstellungen vornehmen und diese nach parametrierbaren Regeln automatisch an frei parametrierbare Adressen als e-Mail oder FAX versendet. Die Schnittstelle kann z.B. zur Übermittlung von im System generierten Meldungen an externe Stellen benutzt werden.</absatz>
+			<absatz>Die folgende Abbildung skizziert die Zusammenhänge und Attributgruppen der verschiedenen Objekttypen imTeilmodell EMail/FAX.</absatz>
+			<abbildung src="abbildungen/TeilmodellKExEmailFaxGlobal.jpg">
+				<titel>Übersicht Teilmodell EMail/FAX(global)</titel>
+			</abbildung>
+		</beschreibung>
+	</info>
+	<konfigurationsAenderung stand="31.03.2011" version="1" autor="BitCtrl, Dipl.-Ing. S. Gieseler" grund="Standardparameter ergaenzt"></konfigurationsAenderung>
+	<modell>
+		<typDefinition pid="typ.versandModulExterneMeldungen" name="VersandModulExterneMeldungen">
+			<info>
+				<kurzinfo>Kommunikationspartner ExternerMeldungsEmpfänger (über Email oder Fax).</kurzinfo>
+			</info>
+			<erweitert pid="typ.konfigurationsObjekt"/>
+			<attributgruppe pid="atg.versandModulExterneMeldungen"/>
+			<attributgruppe pid="atg.versandModulExterneMeldungenEmail"/>
+			<attributgruppe pid="atg.versandModulExterneMeldungenFax"/>
+			<attributgruppe pid="atg.versandModulExterneMeldungenSms"/>
+			<attributgruppe pid="atg.smsVersandAuftrag" />
+			<attributgruppe pid="atg.versandStatus" />
+			<attributgruppe pid="atg.emailVersandAuftrag"/>
+			<attributgruppe pid="atg.faxVersandAuftrag"/>
+			<defaultParameter attributgruppe="atg.versandModulExterneMeldungen">
+                <datum name="WiederholungsVersuche" wert="3"/>
+                <datum name="WiederholungsPause" wert="60 Sekunden"/>
+      		</defaultParameter>
+      		<defaultParameter attributgruppe="atg.versandModulExterneMeldungenEmail">
+                <datum name="MailServer" wert="mailserver"/>
+                <datum name="Authentifizierung" wert="Login"/>
+                <datum name="Benutzer" wert="benutzer"/>
+                <datum name="Passwort" wert="passswort"/>
+                <datum name="StandardSender" wert="standard@vrz-domain"/>
+                <datum name="StandardEmpfaenger" wert="standard@vrz-domain"/>
+                <datum name="StandardBetreff" wert="Meldung der VRZ"/>
+			</defaultParameter>
+			<defaultParameter attributgruppe="atg.versandModulExterneMeldungenFax">
+                <datenliste name="ModemParameter">
+                    <datum name="COM-Port" wert="COM1"/>
+                    <datum name="BaudRate" wert="Baud115200"/>
+                    <datum name="EmpfangsTimeout" wert="60"/>
+                    <datum name="ModemTyp" wert="Festnetz"/>
+                    <datum name="GsmPin" wert="0000"/>
+                    <datum name="InitialisierungsBefehl" wert="ATZ"/>
+                    <datum name="WahlPraefix" wert="0"/>
+                </datenliste>
+                <datum name="FaxKennung" wert="FAX-Versand von der VRZ"/>
+                <datum name="Hochaufloesend" wert="Nein"/>
+                <datum name="StandardEmpfaenger" wert="Hier Telefonnummer eintragen"/>
+        	</defaultParameter>
+        	<defaultParameter attributgruppe="atg.versandModulExterneMeldungenSms">
+                <datenliste name="SmsParameter">
+                    <datenliste name="ModemParameter">
+                        <datum name="COM-Port" wert="COM1"/>
+                        <datum name="BaudRate" wert="Baud115200"/>
+                        <datum name="EmpfangsTimeout" wert="60"/>
+                        <datum name="ModemTyp" wert="Festnetz"/>
+                        <datum name="GsmPin" wert="0000"/>
+                        <datum name="InitialisierungsBefehl" wert="ATZ"/>
+                        <datum name="WahlPraefix" wert="0"/>
+                    </datenliste>
+                </datenliste>
+                <datum name="StandardEmpfaenger" wert="Hier Telefonnummer eintragen"/>
+        	</defaultParameter>
+		</typDefinition>
+		
+		<attributgruppenDefinition pid="atg.versandModulExterneMeldungen" name="VersandModulExterneMeldungen" parametrierend="ja">
+			<info>
+				<kurzinfo>Parametersatz mit zur Laufzeit änderbaren Kommunikationseinstellungen.</kurzinfo>
+			</info>
+			<attribut pid="att.zahlPositiv" name="WiederholungsVersuche"/>
+			<attribut pid="att.anzahlSekunden0Bis" name="WiederholungsPause"/>
+		</attributgruppenDefinition>
+
+		<attributgruppenDefinition pid="atg.versandModulExterneMeldungenEmail" name="VersandModulExterneMeldungenEmail" parametrierend="ja">
+			<info>
+				<kurzinfo>Parametersatz mit zur Laufzeit änderbaren Kommunikationseinstellungen für E-Mail-Versand.</kurzinfo>
+			</info>
+			<attribut pid="att.text" name="MailServer"/>
+			<attribut pid="att.authentificationMode" name="Authentifizierung"/>
+			<attribut pid="att.text" name="Benutzer"/>
+			<attribut pid="att.text" name="Passwort"/>
+			<attribut pid="att.text" name="StandardSender"/>
+			<attribut pid="att.text" name="StandardEmpfaenger"/>
+			<attribut pid="att.text" name="StandardBetreff"/>
+		</attributgruppenDefinition>
+
+		<attributgruppenDefinition pid="atg.versandModulExterneMeldungenFax" name="VersandModulExterneMeldungenFax" parametrierend="ja">
+			<info>
+				<kurzinfo>Parametersatz mit zur Laufzeit änderbaren Kommunikationseinstellungen für Fax-Versand.</kurzinfo>
+			</info>
+			<attribut pid="atl.modemParameter" name="ModemParameter"/>
+			<attribut pid="att.text" name="FaxKennung"/>
+			<attribut pid="att.jaNein" name="Hochaufloesend"/>
+			<attribut pid="att.text" name="StandardEmpfaenger"/>
+		</attributgruppenDefinition>
+		
+		<attributgruppenDefinition pid="atg.versandModulExterneMeldungenSms" name="VersandModulExterneMeldungenSms" parametrierend="ja">
+			<info>
+				<kurzinfo>Parametersatz mit zur Laufzeit änderbaren Kommunikationseinstellungen für SMS-Versand.</kurzinfo>
+			</info>
+			<attribut pid="atl.smsParameter" name="SmsParameter"/>
+			<attribut pid="att.text" name="StandardEmpfaenger"/>
+		</attributgruppenDefinition>
+		
+		<attributlistenDefinition pid="atl.smsParameter">
+			<info>
+				<kurzinfo>Parametersatz für ein Modem.</kurzinfo>
+			</info>
+			<attribut pid="atl.modemParameter" name="ModemParameter"/>
+		</attributlistenDefinition>
+		
+		<attributlistenDefinition pid="atl.meldungsID">
+			<info>
+				<kurzinfo>ID der Meldung</kurzinfo>
+			</info>
+			<attribut pid="att.zahlPositiv" name="ApplikationsID"></attribut>
+			<attribut pid="att.zahlPositiv" name="LaufendeNummer"></attribut>
+		</attributlistenDefinition>
+
+		<attributlistenDefinition pid="atl.modemParameter">
+			<info>
+				<kurzinfo>Parametersatz für das zu benutzende Modem.</kurzinfo>
+			</info>
+			<attribut pid="att.text" name="COM-Port"></attribut>
+			<attribut pid="att.baud" name="BaudRate"></attribut>
+			<attribut pid="att.zahlPositiv" name="EmpfangsTimeout"></attribut>
+			<attribut pid="att.modemTyp" name="ModemTyp"></attribut>
+			<attribut pid="att.text" name="GsmPin"></attribut>
+			<attribut pid="att.text" name="InitialisierungsBefehl"></attribut>
+			<attribut pid="att.text" name="WahlPraefix"></attribut>
+		</attributlistenDefinition>
+		
+		<attributDefinition pid="att.authentificationMode">
+			<info>
+				<kurzinfo>Authentifizierungsart</kurzinfo>
+			</info>
+			<ganzzahl>
+				<zustand name="Keine" wert="0"></zustand>
+				<zustand name="Login" wert="1"></zustand>
+			</ganzzahl>
+			
+		</attributDefinition>
+
+		<attributDefinition pid="att.modemTyp">
+			<info>
+				<kurzinfo>Typ des Modems.</kurzinfo>
+			</info>
+			<ganzzahl>
+				<zustand name="Festnetz" wert="0"></zustand>
+				<zustand name="GSM" wert="1"></zustand>
+				<zustand name="GPRS" wert="2"></zustand>
+			</ganzzahl>
+			
+		</attributDefinition>
+		
+		<attributDefinition pid="att.baud">
+			<info>
+				<kurzinfo>Baudraten-Defintionen</kurzinfo>
+			</info>
+			<ganzzahl>
+				<zustand name="Baud300" wert="300"></zustand>
+				<zustand name="Baud600" wert="600"></zustand>
+				<zustand name="Baud1200" wert="1200"></zustand>
+				<zustand name="Baud2400" wert="2400"></zustand>
+				<zustand name="Baud4800" wert="4800"></zustand>
+				<zustand name="Baud9600" wert="9600"></zustand>
+				<zustand name="Baud19200" wert="19200"></zustand>
+				<zustand name="Baud38400" wert="38400"></zustand>
+				<zustand name="Baud57600" wert="57600"></zustand>
+				<zustand name="Baud115200" wert="115200"></zustand>
+			</ganzzahl>
+			
+		</attributDefinition>
+
+		<attributgruppenDefinition pid="atg.faxVersandAuftrag" name="FaxVersandAuftrag" parametrierend="nein">
+			<info>
+				<kurzinfo>Onlinedatensatz für einen Auftrag zum Versenden eines Fax.</kurzinfo>
+			</info>
+			<aspekt pid="asp.auftrag" onlineModus="senke"/>
+			<attribut pid="atl.meldungsID" name="MeldungsID"/>
+			<attribut pid="att.text" name="Empfaenger"
+				anzahlIst="variabel" />
+			<attribut pid="att.text" name="Text"/>
+		</attributgruppenDefinition>
+
+		<attributgruppenDefinition pid="atg.emailVersandAuftrag" name="EmailVersandAuftrag" parametrierend="nein">
+			<info>
+				<kurzinfo>Onlinedatensatz für einen Auftrag zum Versenden einer E-Mail.</kurzinfo>
+			</info>
+			<aspekt pid="asp.auftrag" onlineModus="senke"/>
+			<attribut pid="atl.meldungsID" name="MeldungsID"/>
+			<attribut pid="att.text" name="Empfaenger"/>
+			<attribut pid="att.text" name="CCEmpfaenger"
+				anzahlIst="variabel" />
+			<attribut pid="att.text" name="BCCEmpfaenger"
+				anzahlIst="variabel" />
+			<attribut pid="att.text" name="Absender"/>
+			<attribut pid="att.text" name="Betreff"/>
+			<attribut pid="att.text" name="Text"/>
+		</attributgruppenDefinition>
+		
+		<attributgruppenDefinition pid="atg.smsVersandAuftrag" name="SmsVersandAuftrag" parametrierend="nein">
+			<info>
+				<kurzinfo>Onlinedatensatz für einen Auftrag zum Versenden einer SMS.</kurzinfo>
+			</info>
+			<aspekt pid="asp.auftrag" onlineModus="senke"/>
+			<attribut pid="atl.meldungsID" name="MeldungsID"/>
+			<attribut pid="att.text" name="Empfaenger"
+				anzahlIst="variabel" />
+			<attribut pid="att.text" name="Text"/>
+		</attributgruppenDefinition>
+
+		<attributgruppenDefinition pid="atg.versandStatus" name="VersandStatus" parametrierend="nein">
+			<info>
+				<kurzinfo>Onlinedatensatz für die Rückmeldung der Ergebnisse eines Versandauftrags.</kurzinfo>
+			</info>
+			<aspekt pid="asp.auftragsStatus" onlineModus="quelle"/>
+			<attribut pid="atl.meldungsID" name="MeldungsID"/>
+			<attribut pid="att.jaNein" name="VersandOk">
+				<default wert="Ja" /></attribut>
+			<attribut pid="att.text" name="Fehlermeldung"/>
+		</attributgruppenDefinition>
+
+		<aspektDefinition pid="asp.auftrag">
+			<info>
+				<kurzinfo>Aspekt zum Übertragen von Aufträgen</kurzinfo>
+			</info>
+		</aspektDefinition>
+
+		<aspektDefinition pid="asp.auftragsStatus">
+			<info>
+				<kurzinfo>Aspekt zum Übertragen eines Auftragsstatus</kurzinfo>
+			</info>
+		</aspektDefinition>
+	</modell>
+</konfigurationsBereich>

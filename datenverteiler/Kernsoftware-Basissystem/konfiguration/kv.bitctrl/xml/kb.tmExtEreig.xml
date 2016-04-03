@@ -1,0 +1,120 @@
+<?xml version="1.0" encoding="ISO-8859-1"?>
+<!DOCTYPE konfigurationsBereich SYSTEM "K2S.dtd">
+<konfigurationsBereich pid="kb.tmExtEreig"
+	name="TeilmodellExtEreig" verantwortlich="kv.bitctrl">
+	<info>
+		<kurzinfo>Modell und Objekte für die SWE Externe Ereignisse'.
+		</kurzinfo>
+		<beschreibung />
+	</info>
+	<modell>
+		<typDefinition pid="typ.duaExtEreig" name="Applikation DuA Externe Ereignisse">
+			<info>
+				<kurzinfo>Applikation DuA Externe Ereignisse.</kurzinfo>
+			</info>
+			<erweitert pid="typ.konfigurationsObjekt" />
+			<attributgruppe pid="atg.duaExtEreig" />
+		</typDefinition>
+
+		<attributgruppenDefinition pid="atg.duaExtEreig"
+			name="Parameter Externer Ereignisse" parametrierend="ja">
+			<info>
+				<kurzinfo>Parameter für die Applikation Externe Ereignisse.
+				</kurzinfo>
+			</info>
+			<attributliste pid="atl.duaExtEreigVerbindung" anzahl="0"
+				anzahlIst="variabel" name="Verbindungen" />
+		</attributgruppenDefinition>
+
+		<attributlistenDefinition pid="atl.duaExtEreigVerbindung">
+			<info>
+				<kurzinfo>Definition einer Verknüpfung zwischen Eingang- und
+					Ausgangsplugins der SWE
+				</kurzinfo>
+			</info>
+			<attribut pid="att.text" name="Id">
+				<info>
+					<kurzinfo>eindeutige ID der Verbindung, um bei mehreren Instanzen
+						des gleichen Plug-ins eine Zuordnung treffen zu können.
+					</kurzinfo>
+				</info>
+				<default wert="" />
+			</attribut>
+			<attribut pid="att.text" name="BewertungsPlugin">
+				<info>
+					<kurzinfo>Klassenname des verwendeten eingangsseitigen Plug-ins.
+					</kurzinfo>
+				</info>
+				<default wert="" />
+			</attribut>
+			<attributliste pid="atl.extEreigParameter" name="BewertungsPluginParameter"
+				anzahl="0" anzahlIst="variabel">
+				<info>
+					<kurzinfo>Optionale Parameter die bei der Initialisierung des
+						Plug-ins übergeben werden.
+					</kurzinfo>
+				</info>
+			</attributliste>
+			<attribut pid="att.text" name="AktionsPlugin">
+				<info>
+					<kurzinfo>Klassenname des verwendeten ausgangsseitigen Plug-ins.
+					</kurzinfo>
+				</info>
+				<default wert="" />
+			</attribut>
+			<attributliste pid="atl.extEreigParameter" name="AktionsPluginParameter"
+				anzahl="0" anzahlIst="variabel">
+				<info>
+					<kurzinfo>Optionale Parameter die bei der Initialisierung des
+						Plug-ins übergeben werden.
+					</kurzinfo>
+				</info>
+			</attributliste>
+			<attributliste pid="atl.extEreigZustand" name="Zustaende"
+				anzahl="0" anzahlIst="variabel" />
+		</attributlistenDefinition>
+
+		<attributlistenDefinition pid="atl.extEreigParameter">
+			<info>
+				<kurzinfo>Parameter zur Ausführung eines Aktions-Plug-ins.
+				</kurzinfo>
+			</info>
+			<attribut pid="att.text" name="Name" />
+			<attribut pid="att.text" name="Wert" />
+		</attributlistenDefinition>
+
+		<attributlistenDefinition pid="atl.extEreigZustand">
+			<info>
+				<kurzinfo>Definition eines Wertes eines Bewertungs-Plug-ins und der
+					zugehörigen Parameter, die an das verbundene Aktions-Plug-in
+					weitergereicht werden.</kurzinfo>
+			</info>
+			<attribut pid="att.zahl" name="Wert">
+				<info>
+					<kurzinfo>Der Ergebniswert des Bewertungs-Plug-ins der die
+						angegebene
+						Aktion auslöst.
+					</kurzinfo>
+				</info>
+				<default wert="0" />
+			</attribut>
+			<attributliste pid="atl.extEreigParameter" name="AktionsParameter"
+				anzahl="0" anzahlIst="variabel">
+				<info>
+					<kurzinfo>Optionale Parameter die beim Eintreten der definierten
+						Bewertung an das Aktions-Plug-in weitergereicht werden.
+					</kurzinfo>
+				</info>
+			</attributliste>
+		</attributlistenDefinition>
+
+	</modell>
+	<objekte>
+		<konfigurationsObjekt typ="typ.duaExtEreig" pid="extEreig.vewStandard"
+			name="StandardVerwaltungsObjektExtEreig">
+			<info>
+				<kurzinfo>Standardobjekt für die Verwaltung der Applikation "Externe Ereignisse".</kurzinfo>
+			</info>
+		</konfigurationsObjekt>
+	</objekte>
+</konfigurationsBereich>

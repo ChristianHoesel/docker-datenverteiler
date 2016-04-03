@@ -1,0 +1,235 @@
+<?xml version="1.0" encoding="ISO-8859-1"?>
+<!DOCTYPE konfigurationsBereich PUBLIC "-//K2S//DTD Dokument//DE" "K2S.dtd">
+<konfigurationsBereich pid="kb.simParamTestModell"
+	name="Modell zum Test der BuV-Plug-ins Simulation und Parameter"
+	verantwortlich="kv.bitctrl">
+	<info>
+		<kurzinfo>Definiert ein abstraktes, stark vereinfachtes Datenmodell
+			zur Demonstration und leichten Versteh- und Nachvollziehbarkeit der
+			Wirkungsweise von Simulationen und Parametern
+			und v.a. deren
+			gegenseitige Wechselwirkung.</kurzinfo>
+		<beschreibung>
+			<absatz>Definiert werden zwei Typen: Einen Elementartyp und einen
+				Aggregattyp.</absatz>
+			<liste>
+				<listenPunkt>Elementartyp: Vergleichbar mit
+					einem Fahrstreifen,
+					allerdings hat er nur zwei Online-Attribute: Geschwindigkeit und
+					Alarm. Die "Datenverarbeitung" besteht darin, den eingehenden
+					Geschwindigkeitswert mit einem Faktor zwischen 0 und 1 (ausgedrückt
+					als att.prozent) zu multiplizieren und wieder zu publizieren. Der
+					Faktor ist parametrierbar. Weiterhin ist ein Schwellwert
+					parametrierbar, bei dessen Überschreitung eine Betriebsmeldung
+					generiert wird, deren Text ebenfalls parametrierbar ist.
+				</listenPunkt>
+				<listenPunkt>Aggregattyp: Vergleichbar mit einem MQ: Er hält eine
+					Menge von Elementartypen und fasst deren Geschwindigkeitswerte
+					arithmetisch oder geometrisch zusammen. Dies ist parametrierbar.
+				</listenPunkt>
+			</liste>
+			<absatz>Beide Typen haben eine gemeinsame parametrierbare
+				Attributgruppe: SchwellWertAlarm: wenn die Geschwindigkeit über
+				diesem Wert liegt, wird das Attribut Alarm in den Online-Daten auf
+				Ja gesetzt.</absatz>
+		</beschreibung>
+	</info>
+	<konfigurationsAenderung stand="27.06.2010"
+		version="1" autor="Albrecht Uhlmann, BitCtrl Systems GmbH" grund="Erstellung">
+		Bereich zum Test der Plug-Ins Simulation und Parameter erzeugt. Als
+		Vorlage
+		dienten kb.swe8_2_TestObjekte und
+		kb.swe8_2_TestModell.
+	</konfigurationsAenderung>
+	<konfigurationsAenderung stand="28.06.2010"
+		version="2" autor="Albrecht Uhlmann, BitCtrl Systems GmbH" grund="Attribut Alarm hinzugefügt">
+	</konfigurationsAenderung>
+	<konfigurationsAenderung stand="01.09.2010"
+		version="3" autor="Albrecht Uhlmann, BitCtrl Systems GmbH" grund="Oberhierarchie hinzugefügt">
+		Test
+		der Behandlung von Hierarchien von Hierarchien.
+	</konfigurationsAenderung>
+	<modell>
+		<attributgruppenDefinition pid="atg.simParamTest.Gemeinsam.Parameter"
+			name="SimParamTestGemeinsameParameter" parametrierend="ja">
+			<info>
+				<kurzinfo>Gemeinsame Parameter der Elementar- und
+					Aggregat-Testobjekte</kurzinfo>
+				<beschreibung></beschreibung>
+			</info>
+			<attribut pid="att.geschwindigkeit" name="SchwellWertAlarm" />
+		</attributgruppenDefinition>
+		<attributgruppenDefinition pid="atg.simParamTest.Elementar.Daten"
+			name="SimParamTestElementarDaten">
+			<info>
+				<kurzinfo>Online-Daten der Elementar-Testobjekte</kurzinfo>
+				<beschreibung></beschreibung>
+			</info>
+			<aspekt pid="asp.externeErfassung" onlineModus="quelle" />
+			<aspekt pid="asp.messWertErsetzung" onlineModus="quelle" />
+			<attribut pid="att.geschwindigkeit" name="Geschwindigkeit" />
+			<attribut pid="att.zeitstempel" name="BerechnungsZeitpunkt" />
+			<attribut pid="att.jaNein" name="Alarm" />
+		</attributgruppenDefinition>
+		<attributgruppenDefinition pid="atg.simParamTest.Elementar.Parameter"
+			name="SimParamTestElementarParameter" parametrierend="ja">
+			<info>
+				<kurzinfo>Parameter der Elementar-Testobjekte</kurzinfo>
+				<beschreibung></beschreibung>
+			</info>
+			<attribut pid="att.geschwindigkeit" name="SchwellWertBetriebsmeldung" />
+			<attribut pid="att.text" name="InhaltBetriebsmeldung" />
+			<attribut pid="att.prozent" name="Faktor" />
+		</attributgruppenDefinition>
+		<typDefinition pid="typ.simParamTest.Elementar.Typ"
+			name="SimParamTestElementarTyp">
+			<info>
+				<kurzinfo>Typ der Elementar-Testobjekte</kurzinfo>
+				<beschreibung></beschreibung>
+			</info>
+			<erweitert pid="typ.konfigurationsObjekt" />
+			<attributgruppe pid="atg.simParamTest.Gemeinsam.Parameter" />
+			<attributgruppe pid="atg.simParamTest.Elementar.Daten" />
+			<attributgruppe pid="atg.simParamTest.Elementar.Parameter" />
+			<defaultParameter attributgruppe="atg.simParamTest.Elementar.Parameter">
+				<datenliste name="Urlasser">
+					<datum name="BenutzerReferenz" wert="undefiniert" />
+					<datum name="Ursache" wert="Vorbereitung Test Plug-ins Sim und Param" />
+					<datum name="Veranlasser" wert="Uhlmann" />
+				</datenliste>
+				<datum name="SchwellWertBetriebsmeldung" wert="20 km/h" />
+				<datum name="InhaltBetriebsmeldung"
+					wert="SimParamTestElementarTyp-Default: Schwellwert der Geschwindigkeit überschritten" />
+				<datum name="Faktor" wert="20 %" />
+			</defaultParameter>
+			<defaultParameter attributgruppe="atg.simParamTest.Gemeinsam.Parameter">
+				<datenliste name="Urlasser">
+					<datum name="BenutzerReferenz" wert="undefiniert" />
+					<datum name="Ursache"
+						wert="SimParamTestElementarTyp-Default: Vorbereitung Test Plug-ins Sim und Param" />
+					<datum name="Veranlasser" wert="Uhlmann" />
+				</datenliste>
+				<datum name="SchwellWertAlarm" wert="200 km/h" />
+			</defaultParameter>
+		</typDefinition>
+		<mengenDefinition pid="menge.simParamTest.Elementar"
+			elemente="typ.simParamTest.Elementar.Typ" aenderbar="nein"
+			mindestens="1" hoechstens="0" referenzierungsart="assoziation">
+			<info>
+				<kurzinfo>Menge von Elementar-Testobjekten</kurzinfo>
+			</info>
+		</mengenDefinition>
+
+		<attributDefinition pid="att.simParamTest.Aggregat.Art"
+			name="SimParamTestAggregatArt">
+			<info>
+				<kurzinfo>Bestimmt die Art der Datenaggregierung: Arithmetisches
+					oder geometrisches Mittel</kurzinfo>
+				<beschreibung></beschreibung>
+			</info>
+			<ganzzahl bits="8">
+				<zustand name="Arithmetisch" wert="1" />
+				<zustand name="Geometrisch" wert="2" />
+			</ganzzahl>
+			<default wert="Arithmetisch" />
+		</attributDefinition>
+		<attributgruppenDefinition pid="atg.simParamTest.Aggregat.Daten"
+			name="SimParamTestAggregatDaten">
+			<info>
+				<kurzinfo>Online-Daten der Aggregat-Testobjekte</kurzinfo>
+				<beschreibung></beschreibung>
+			</info>
+			<aspekt pid="asp.messWertErsetzung" onlineModus="quelle" />
+			<attribut pid="att.geschwindigkeit" name="MittlereGeschwindigkeit" />
+			<attribut pid="att.jaNein" name="Alarm" />
+		</attributgruppenDefinition>
+		<attributgruppenDefinition pid="atg.simParamTest.Aggregat.Parameter"
+			name="SimParamTestAggregatParameter" parametrierend="ja">
+			<info>
+				<kurzinfo>Parameter der Aggregat-Testobjekten</kurzinfo>
+				<beschreibung></beschreibung>
+			</info>
+			<attribut pid="att.simParamTest.Aggregat.Art" name="Art" />
+		</attributgruppenDefinition>
+		<typDefinition pid="typ.simParamTest.Aggregat.Typ" name="SimParamTestAggregatTyp">
+			<info>
+				<kurzinfo>Typ der Aggregat-Testobjekte</kurzinfo>
+				<beschreibung></beschreibung>
+			</info>
+			<erweitert pid="typ.konfigurationsObjekt" />
+			<attributgruppe pid="atg.simParamTest.Gemeinsam.Parameter" />
+			<attributgruppe pid="atg.simParamTest.Aggregat.Daten" />
+			<attributgruppe pid="atg.simParamTest.Aggregat.Parameter" />
+			<menge pid="menge.simParamTest.Elementar" name="ElementarObjekte"
+				erforderlich="ja" />
+			<defaultParameter attributgruppe="atg.simParamTest.Gemeinsam.Parameter">
+				<datenliste name="Urlasser">
+					<datum name="BenutzerReferenz" wert="undefiniert" />
+					<datum name="Ursache"
+						wert="SimParamTestAggregatTyp-Default: Vorbereitung Test Plug-ins Sim und Param" />
+					<datum name="Veranlasser" wert="Uhlmann" />
+				</datenliste>
+				<datum name="SchwellWertAlarm" wert="210 km/h" />
+			</defaultParameter>
+			<defaultParameter attributgruppe="atg.simParamTest.Aggregat.Parameter">
+				<datenliste name="Urlasser">
+					<datum name="BenutzerReferenz" wert="undefiniert" />
+					<datum name="Ursache"
+						wert="SimParamTestAggregatTyp-Default: Vorbereitung Test Plug-ins Sim und Param" />
+					<datum name="Veranlasser" wert="Uhlmann" />
+				</datenliste>
+				<datum name="Art" wert="Geometrisch" />
+			</defaultParameter>
+		</typDefinition>
+		<mengenDefinition pid="menge.simParamTest.Aggregat"
+			elemente="typ.simParamTest.Aggregat.Typ" aenderbar="nein" mindestens="1"
+			hoechstens="0" referenzierungsart="assoziation">
+			<info>
+				<kurzinfo>Menge von Aggregat-Testobjekten</kurzinfo>
+			</info>
+		</mengenDefinition>
+		<mengenDefinition pid="menge.simParamTest.Hierarchie"
+			elemente="typ.simParamTest.Hierarchie" aenderbar="nein" mindestens="1"
+			hoechstens="0" referenzierungsart="assoziation">
+			<info>
+				<kurzinfo>SimParamTest-Hierarchieobjekten</kurzinfo>
+			</info>
+		</mengenDefinition>
+
+		<typDefinition pid="typ.simParamTest.Hierarchie"
+			name="SimParamTestAggregatObjektHierarchie" objektNamenPermanent="nein">
+			<info>
+				<kurzinfo>Virtueller Typ zur Zusammenfassung von
+					Aggregat-Testobjekten
+				</kurzinfo>
+			</info>
+			<erweitert pid="typ.konfigurationsObjekt" />
+			<menge pid="menge.simParamTest.Aggregat" name="AggregatObjekte"
+				erforderlich="ja">
+			</menge>
+			<defaultParameter attributgruppe="atg.simParamTest.Gemeinsam.Parameter"
+				typ="typ.simParamTest.Aggregat.Typ">
+				<datenliste name="Urlasser">
+					<datum name="BenutzerReferenz" wert="undefiniert" />
+					<datum name="Ursache"
+						wert="SimParamTestAggregatObjektHierarchie-Default: Vorbereitung Test Plug-ins Sim und Param" />
+					<datum name="Veranlasser" wert="Uhlmann" />
+				</datenliste>
+				<datum name="SchwellWertAlarm" wert="190 km/h" />
+			</defaultParameter>
+		</typDefinition>
+		<typDefinition pid="typ.simParamTest.OberHierarchie"
+			name="SimParamTestOberHierarchie" objektNamenPermanent="nein">
+			<info>
+				<kurzinfo>Virtueller Typ zur Zusammenfassung von
+					SimParamTest-Hierarchieobjekten
+				</kurzinfo>
+			</info>
+			<erweitert pid="typ.konfigurationsObjekt" />
+			<menge pid="menge.simParamTest.Hierarchie" name="HierarchieObjekte"
+				erforderlich="ja">
+			</menge>
+		</typDefinition>
+	</modell>
+	<objekte />
+</konfigurationsBereich>

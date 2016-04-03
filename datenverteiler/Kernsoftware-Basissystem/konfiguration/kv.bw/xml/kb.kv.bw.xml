@@ -1,0 +1,28 @@
+<?xml version="1.0" encoding="ISO-8859-1"?>
+<!DOCTYPE konfigurationsBereich PUBLIC "-//K2S//DTD Dokument//DE" "K2S.dtd">
+<konfigurationsBereich pid="kb.kv.bw" name="Bereich Baden-Württemberg" verantwortlich="kv.bw">
+	<info>
+		<kurzinfo>Bereich mit dem Konfigurationsverantwortlichen für das Bundesland Baden-Württemberg</kurzinfo>
+	</info>
+	<!--
+	Abhängigkeiten des Bereichs kb.kv.bw
+	Abhängig ab Version      Art der Abhängigkeit      Version des benötigten Bereichs      Benötigter Bereich
+	1                        notwendig                 1                                    kb.metaModellGlobal                
+	-->
+    <konfigurationsAenderung stand="15.06.2007" version="1" autor="RPT, LST, Ref. 95" grund="Neuerstellung des Konfigurationsbereichs für BW"></konfigurationsAenderung>	
+    <konfigurationsAenderung stand="19.08.2008" autor="RPT, LST, Ref. 95" grund="Änderung der Kodierung des Konfigurationsbereichs für BW"></konfigurationsAenderung>	
+	<modell>
+	</modell>
+	<objekte>
+		<konfigurationsObjekt pid="kv.bw" name="Konfiguration BW" typ="typ.konfigurationsVerantwortlicher">
+			<info>
+				<kurzinfo>Konfigurationsverantwortlicher für das Bundesland Baden-Württemberg</kurzinfo>
+			</info>
+			<datensatz attributgruppe="atg.konfigurationsVerantwortlicherEigenschaften" aspekt="asp.eigenschaften">
+				<datum name="kodierung" wert="1100"/>
+				<datenfeld name="defaultBereich">
+				</datenfeld>
+			</datensatz>
+		</konfigurationsObjekt>
+	</objekte>
+</konfigurationsBereich>

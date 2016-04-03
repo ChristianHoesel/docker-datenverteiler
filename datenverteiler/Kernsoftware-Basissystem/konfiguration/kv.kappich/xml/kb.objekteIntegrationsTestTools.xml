@@ -1,0 +1,22 @@
+<?xml version="1.0" encoding="ISO-8859-1"?>
+<!DOCTYPE konfigurationsBereich PUBLIC "-//K2S//DTD Dokument//DE" "K2S.dtd">
+<konfigurationsBereich pid="kb.objekteIntegrationsTestTools" name="ObjekteIntegrationsTestTools" verantwortlich="kv.kappich">
+	<info>
+		<kurzinfo>Teilmodell mit Testkonfiguration zu den Test- und Integrationstools</kurzinfo>
+	</info>
+	<!--
+	Abhängigkeiten des Bereichs kb.objekteIntegrationsTestTools
+	Abhängig ab Version      Art der Abhängigkeit      Version des benötigten Bereichs      Benötigter Bereich
+	1                        notwendig                 1                                    kb.metaModellGlobal                
+	1                        notwendig                 1                                    kb.tmBuVGlobal                     
+	1                        notwendig                 1                                    kb.kv.kappich                      
+	-->
+	<modell>
+	</modell>
+	<objekte>
+		<konfigurationsObjekt pid="datenAuswahl.TestMenü01" name="TestMenüDatenAuswahl01" typ="typ.datenAuswahl">
+		</konfigurationsObjekt>
+		<konfigurationsObjekt pid="datenAuswahl.TestMenü02" name="TestMenüDatenAuswahl02" typ="typ.datenAuswahl">
+		</konfigurationsObjekt>
+	</objekte>
+</konfigurationsBereich>

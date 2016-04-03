@@ -1,0 +1,1046 @@
+<?xml version="1.0" encoding="ISO-8859-1"?>
+<!DOCTYPE konfigurationsBereich PUBLIC "-//K2S//DTD Dokument//DE" "K2S.dtd">
+<konfigurationsBereich pid="kb.tmDarstellungAnzeigeQuerschnitt" name="TeilmodellDarstellungAnzeigeQuerschnitt" verantwortlich="kv.dambach">
+	<info>
+		<kurzinfo>Teilmodell mit Datenmodellierung für die Darstellung von AnzeigeQuerschnitten (Version 28.02.2007 TD).</kurzinfo>
+		<beschreibung>
+			<absatz>Dieses Teilmodell stellt die notwendigen Datenstrukturen zur Verfügung, mittels derer die Darstellung von AnzeigeQuerschnitten ermöglicht wird.</absatz>
+			
+		</beschreibung>
+	</info>
+	<konfigurationsAenderung stand="14.06.2007" version="1" autor="inovat, Dipl.-Ing. H. C. Kniß (HCK)" grund="Änderungsdokumentation siehe &apos;ReleaseNotes kv.dambach.doc&apos;"></konfigurationsAenderung>
+	<konfigurationsAenderung stand="15.06.2007" version="3" autor="Dambach-Werke GmbH, Th. Drapp" grund="Änderungsdokumentation siehe &apos;ReleaseNotes kv.dambach.doc&apos;"></konfigurationsAenderung>
+	<!--
+	Abhängigkeiten des Bereichs kb.tmDarstellungAnzeigeQuerschnitt
+	Abhängig ab Version      Art der Abhängigkeit      Version des benötigten Bereichs      Benötigter Bereich
+	3                        notwendig                 1                                    kb.metaModellGlobal                
+	3                        notwendig                 1                                    kb.tmKExTlsGlobal                  
+	3                        notwendig                 1                                    kb.systemModellGlobal              
+	3                        notwendig                 2                                    kb.tmVerkehrGlobal                 
+	3                        notwendig                 1                                    kb.kv.dambach                      
+	3                        notwendig                 1                                    kb.fachModellGlobal                
+	3                        notwendig                 1                                    kb.tmGeoReferenzierungGlobal       
+	-->
+	<modell>
+		<typDefinition pid="typ.daqAnzeigeElement" name="AnzeigeElement" objektNamenPermanent="nein">
+			<info>
+				<kurzinfo>Anzeigeelement (statisch oder dynamisch) einer Anzeigetafel.</kurzinfo>
+			</info>
+			<erweitert pid="typ.daqAnzeigeObjekt"/>
+			<attributgruppe pid="atg.daqAnzeigeAnsteuerung"/>
+			<attributgruppe pid="atg.daqAnzeigeAuflösung"/>
+			<attributgruppe pid="atg.daqAnzeigeBegrenzung"/>
+			<attributgruppe pid="atg.daqAnzeigeElement"/>
+			<attributgruppe pid="atg.daqAnzeigeFarbeOptional"/>
+			<menge pid="menge.daqAnzeigeSeiten" name="AnzeigeSeiten" erforderlich="nein">
+				<info>
+					<kurzinfo>Menge der Anzeigeflächen, die der Anzeigeseite zugeordnet sind.</kurzinfo>
+				</info>
+			</menge>
+		</typDefinition>
+		<typDefinition pid="typ.daqAnzeigeFläche" name="AnzeigeFläche" objektNamenPermanent="nein">
+			<info>
+				<kurzinfo>Anzeigefläche auf einer Anzeigeseite mit grafischen Texten oder Symbolen.</kurzinfo>
+			</info>
+			<erweitert pid="typ.daqAnzeigeObjekt"/>
+			<attributgruppe pid="atg.daqAnzeigeBegrenzungOptional"/>
+			<attributgruppe pid="atg.daqAnzeigeFarbeOptional"/>
+			<attributgruppe pid="atg.daqGrafikText"/>
+			<attributgruppe pid="atg.daqSchriftsatz"/>
+			<attributgruppe pid="atg.daqSymbol"/>
+		</typDefinition>
+		<typDefinition pid="typ.daqAnzeigeObjekt" name="AnzeigeObjekt" objektNamenPermanent="nein">
+			<info>
+				<kurzinfo>Beliebiges Anzeigeobjekt zur Visuaisierung von Verkehrszeichen.</kurzinfo>
+			</info>
+			<erweitert pid="typ.konfigurationsObjekt"/>
+			<attributgruppe pid="atg.daqAnzeigeObjekt"/>
+		</typDefinition>
+		<typDefinition pid="typ.daqAnzeigeQuerschnitt" name="AnzeigeQuerschnitt" objektNamenPermanent="nein">
+			<info>
+				<kurzinfo>AnzeigeQuerschnitt, der ein oder mehrere Anzeigetafeln enthält.</kurzinfo>
+			</info>
+			<erweitert pid="typ.daqAnzeigeObjekt"/>
+			<erweitert pid="typ.punktLiegtAufLinienObjekt"/>
+			<erweitert pid="typ.punktXY"/>
+			<attributgruppe pid="atg.daqAnzeigeAnsteuerung"/>
+			<menge pid="menge.daqAnzeigeTafeln" name="AnzeigeTafeln" erforderlich="ja">
+				<info>
+					<kurzinfo>Menge der Anzeigetafeln, die der Anzeigequerschnitt enthält.</kurzinfo>
+				</info>
+			</menge>
+		</typDefinition>
+		<typDefinition pid="typ.daqAnzeigeSeite" name="AnzeigeSeite" objektNamenPermanent="nein">
+			<info>
+				<kurzinfo>Anzeigeseite, die mehrere Anzeigeflächen enthält.</kurzinfo>
+			</info>
+			<erweitert pid="typ.daqAnzeigeObjekt"/>
+			<attributgruppe pid="atg.daqAqBildinhalt"/>
+			<attributgruppe pid="atg.daqTlsWzgWvzCode"/>
+			<menge pid="menge.daqAnzeigeFlächen" name="AnzeigeFlächen" erforderlich="nein">
+				<info>
+					<kurzinfo>Menge der Anzeigeflächen, die der Anzeigeseite zugeordnet sind.</kurzinfo>
+				</info>
+			</menge>
+		</typDefinition>
+		<typDefinition pid="typ.daqAnzeigeTafel" name="AnzeigeTafel" objektNamenPermanent="nein">
+			<info>
+				<kurzinfo>Anzeigetafel, die mehrere Anzeigeelemente enthält.</kurzinfo>
+			</info>
+			<erweitert pid="typ.daqAnzeigeObjekt"/>
+			<attributgruppe pid="atg.daqAnzeigeBegrenzung"/>
+			<attributgruppe pid="atg.daqAnzeigeFarbe"/>
+			<attributgruppe pid="atg.daqAnzeigeTafel"/>
+			<attributgruppe pid="atg.daqSchriftsatz"/>
+			<menge pid="menge.daqAnzeigeElemente" name="AnzeigeElemente" erforderlich="ja">
+				<info>
+					<kurzinfo>Menge der Anzeigeelemente, die der Anzeigetafel zugeordnet sind.</kurzinfo>
+				</info>
+			</menge>
+		</typDefinition>
+		<typDefinition pid="typ.daqSchilderAnlage" name="SchilderAnlage" objektNamenPermanent="nein">
+			<info>
+				<kurzinfo>Schilderanlage, der mehrere Anzeigequerschnitte zugeordnet sind.</kurzinfo>
+			</info>
+			<erweitert pid="typ.daqAnzeigeObjekt"/>
+			<erweitert pid="typ.punktLiegtAufLinienObjekt"/>
+			<erweitert pid="typ.punktXY"/>
+			<attributgruppe pid="atg.daqSchilderAnlage"/>
+			<menge pid="menge.daqAnzeigeQuerschnitte" name="AnzeigeQuerschnitte" erforderlich="ja">
+				<info>
+					<kurzinfo>Menge der Anzeigequerschnitte, die der Schilderanlage zugeordnet sind.</kurzinfo>
+				</info>
+			</menge>
+		</typDefinition>
+		<attributgruppenDefinition pid="atg.daqAnzeigeAnsteuerung" name="AnzeigeAnsteuerung" parametrierend="nein">
+			<info>
+				<kurzinfo>Konfigurierende Eigenschaften der Objekte des Typs.</kurzinfo>
+			</info>
+			<aspekt pid="asp.eigenschaften" konfigurationsModus="datensatzOptional">
+			</aspekt>
+			<attribut pid="att.objektReferenz" anzahl="1" anzahlIst="fest" name="AnzeigeAnsteuerungQuelle">
+				<info>
+					<kurzinfo>Referenz auf das Objekt, welches die Daten für die Ansteuerung dieses Anzeigeobjektes liefert (z. B. WZG-DE gemäß TLS).</kurzinfo>
+				</info>
+			</attribut>
+		</attributgruppenDefinition>
+		<attributgruppenDefinition pid="atg.daqAnzeigeAuflösung" name="AnzeigeAuflösung" parametrierend="nein">
+			<info>
+				<kurzinfo>Attribute zur Beschreibung der Anzeigenauflösung in Pixel.</kurzinfo>
+			</info>
+			<aspekt pid="asp.eigenschaften" konfigurationsModus="datensatzOptional">
+			</aspekt>
+			<attribut pid="att.zahl" anzahl="1" anzahlIst="fest" name="Höhe">
+				<info>
+					<kurzinfo>Höhe der Anzeige in Pixel.</kurzinfo>
+				</info>
+			</attribut>
+			<attribut pid="att.zahl" anzahl="1" anzahlIst="fest" name="Breite">
+				<info>
+					<kurzinfo>Breite des Anzeige in Pixel.</kurzinfo>
+				</info>
+			</attribut>
+		</attributgruppenDefinition>
+		<attributgruppenDefinition pid="atg.daqAnzeigeBegrenzung" name="AnzeigeBegrenzung" parametrierend="nein">
+			<info>
+				<kurzinfo>Attribute zur Beschreibung der Begrenzung des Anzeigeobjektes (notwendig).</kurzinfo>
+			</info>
+			<aspekt pid="asp.eigenschaften" konfigurationsModus="datensatzNotwendig">
+			</aspekt>
+			<attribut pid="att.zahlPositiv" anzahl="1" anzahlIst="fest" name="Höhe">
+				<info>
+					<kurzinfo>Höhe des Anzeigeobjektes.</kurzinfo>
+				</info>
+			</attribut>
+			<attribut pid="att.zahlPositiv" anzahl="1" anzahlIst="fest" name="Breite">
+				<info>
+					<kurzinfo>Breite des Anzeigeobjektes.</kurzinfo>
+				</info>
+			</attribut>
+			<attribut pid="att.zahl" anzahl="1" anzahlIst="fest" name="AbstandOben">
+				<info>
+					<kurzinfo>Abstand des Anzeigeobjektes vom oberen Rand eines lokalen Rechts-Unten-Koordinatensystems.</kurzinfo>
+				</info>
+			</attribut>
+			<attribut pid="att.zahl" anzahl="1" anzahlIst="fest" name="AbstandLinks">
+				<info>
+					<kurzinfo>Abstand des Anzeigeobjektes vom linken Rand eines lokalen Rechts-Unten-Koordinatensystems.</kurzinfo>
+				</info>
+			</attribut>
+		</attributgruppenDefinition>
+		<attributgruppenDefinition pid="atg.daqAnzeigeBegrenzungOptional" name="AnzeigeBegrenzungOptional" parametrierend="nein">
+			<info>
+				<kurzinfo>Attribute zur Beschreibung der Begrenzung des Anzeigeobjektes (optional).</kurzinfo>
+			</info>
+			<aspekt pid="asp.eigenschaften" konfigurationsModus="datensatzOptional">
+			</aspekt>
+			<attribut pid="att.zahlPositiv" anzahl="1" anzahlIst="fest" name="Höhe">
+				<info>
+					<kurzinfo>Höhe des Anzeigeobjektes.</kurzinfo>
+				</info>
+			</attribut>
+			<attribut pid="att.zahlPositiv" anzahl="1" anzahlIst="fest" name="Breite">
+				<info>
+					<kurzinfo>Breite des Anzeigeobjektes.</kurzinfo>
+				</info>
+			</attribut>
+			<attribut pid="att.zahl" anzahl="1" anzahlIst="fest" name="AbstandOben">
+				<info>
+					<kurzinfo>Abstand des Anzeigeobjektes vom oberen Rand eines lokalen Rechts-Unten-Koordinatensystems.</kurzinfo>
+				</info>
+			</attribut>
+			<attribut pid="att.zahl" anzahl="1" anzahlIst="fest" name="AbstandLinks">
+				<info>
+					<kurzinfo>Abstand des Anzeigeobjektes vom linken Rand eines lokalen Rechts-Unten-Koordinatensystems.</kurzinfo>
+				</info>
+			</attribut>
+		</attributgruppenDefinition>
+		<attributgruppenDefinition pid="atg.daqAnzeigeElement" name="AnzeigeElement" parametrierend="nein">
+			<info>
+				<kurzinfo>Attribute zur Beschreibung eines Anzeigeelementes.</kurzinfo>
+			</info>
+			<aspekt pid="asp.eigenschaften" konfigurationsModus="datensatzNotwendig">
+			</aspekt>
+			<attribut pid="att.daqAnzeigeElementTyp" anzahl="1" anzahlIst="fest" name="Typ">
+				<info>
+					<kurzinfo>Typ des Anzeigeelementes.</kurzinfo>
+				</info>
+			</attribut>
+		</attributgruppenDefinition>
+		<attributgruppenDefinition pid="atg.daqAnzeigeFarbe" name="AnzeigeFarbe" parametrierend="nein">
+			<info>
+				<kurzinfo>Liste mit den Farbdefinitionen für das Anzeigeobjekt (notwendig).</kurzinfo>
+			</info>
+			<aspekt pid="asp.eigenschaften" konfigurationsModus="datensatzNotwendig">
+			</aspekt>
+			<attribut pid="att.daqAnzeigeFarbe" anzahl="1" anzahlIst="fest" name="Vordergrund">
+				<info>
+					<kurzinfo>Vordergrundfarbe eines Anzeigeobjektes.</kurzinfo>
+				</info>
+			</attribut>
+			<attribut pid="att.daqAnzeigeFarbe" anzahl="1" anzahlIst="fest" name="Hintergrund">
+				<info>
+					<kurzinfo>Hintergrundfarbe eines Anzeigeobjektes.</kurzinfo>
+				</info>
+			</attribut>
+		</attributgruppenDefinition>
+		<attributgruppenDefinition pid="atg.daqAnzeigeFarbeOptional" name="AnzeigeFarbeOptional" parametrierend="nein">
+			<info>
+				<kurzinfo>Liste mit den Farbdefinitionen für das Anzeigeobjekt (optional).</kurzinfo>
+			</info>
+			<aspekt pid="asp.eigenschaften" konfigurationsModus="datensatzOptional">
+			</aspekt>
+			<attribut pid="att.daqAnzeigeFarbe" anzahl="1" anzahlIst="fest" name="Vordergrund">
+				<info>
+					<kurzinfo>Vordergrundfarbe eines Anzeigeobjektes.</kurzinfo>
+				</info>
+			</attribut>
+			<attribut pid="att.daqAnzeigeFarbe" anzahl="1" anzahlIst="fest" name="Hintergrund">
+				<info>
+					<kurzinfo>Hintergrundfarbe eines Anzeigeobjektes.</kurzinfo>
+				</info>
+			</attribut>
+		</attributgruppenDefinition>
+		<attributgruppenDefinition pid="atg.daqAnzeigeObjekt" name="AnzeigeObjekt" parametrierend="nein">
+			<info>
+				<kurzinfo>Allgemeine Attribute zur Beschreibung einer Anzeigeobjektes.</kurzinfo>
+			</info>
+			<aspekt pid="asp.eigenschaften" konfigurationsModus="datensatzNotwendig">
+			</aspekt>
+			<attribut pid="att.zahlPositiv" anzahl="1" anzahlIst="fest" name="Index">
+				<info>
+					<kurzinfo>Index des Anzeigeobjektes relativ zur übergeordneten Objekt-Ebene.</kurzinfo>
+				</info>
+			</attribut>
+		</attributgruppenDefinition>
+		<attributgruppenDefinition pid="atg.daqAnzeigeTafel" name="AnzeigeTafel" parametrierend="nein">
+			<info>
+				<kurzinfo>Attribute zur Beschreibung einer Anzeigetafel.</kurzinfo>
+			</info>
+			<aspekt pid="asp.eigenschaften" konfigurationsModus="datensatzNotwendig">
+			</aspekt>
+			<attribut pid="att.daqAnzeigeTafelTyp" anzahl="1" anzahlIst="fest" name="Typ">
+				<info>
+					<kurzinfo>Typ der Anzeigetafel.</kurzinfo>
+				</info>
+			</attribut>
+		</attributgruppenDefinition>
+		<attributgruppenDefinition pid="atg.daqAqBildinhalt" name="AqBildinhalt" parametrierend="nein">
+			<info>
+				<kurzinfo>Attribute zur Beschreibung des zugeordneten Bildinhaltes einer Anzeigeseite.</kurzinfo>
+			</info>
+			<aspekt pid="asp.eigenschaften" konfigurationsModus="datensatzOptional">
+			</aspekt>
+			<attribut pid="att.text" anzahl="1" anzahlIst="fest" name="Bildinhalt">
+				<info>
+					<kurzinfo>Bildinhalt (AQ-Modell) der Anzeigeseite.</kurzinfo>
+				</info>
+			</attribut>
+			<attribut pid="att.jaNein" anzahl="1" anzahlIst="fest" name="Grundstellung">
+				<info>
+					<kurzinfo>Gibt an, ob die Anzeigeseite der Grundstellung der Anzeigetafel zugeordnet ist.</kurzinfo>
+				</info>
+			</attribut>
+		</attributgruppenDefinition>
+		<attributgruppenDefinition pid="atg.daqGrafikText" name="GrafikText" parametrierend="nein">
+			<info>
+				<kurzinfo>Grafische Attribute zur Beschreibung eines Textes.</kurzinfo>
+			</info>
+			<aspekt pid="asp.eigenschaften" konfigurationsModus="datensatzOptional">
+			</aspekt>
+			<attribut pid="att.text" anzahl="1" anzahlIst="fest" name="Text">
+				<info>
+					<kurzinfo>Anzeigetext.</kurzinfo>
+				</info>
+			</attribut>
+		</attributgruppenDefinition>
+		<attributgruppenDefinition pid="atg.daqSchilderAnlage" name="SchilderAnlage" parametrierend="nein">
+			<info>
+				<kurzinfo>Attribute zur Verknüpfung von Schilderanlagen mit dem Verkehrsmodell.</kurzinfo>
+			</info>
+			<aspekt pid="asp.eigenschaften" konfigurationsModus="datensatzOptional">
+			</aspekt>
+			<attribut pid="att.äußeresStraßenSegmentReferenz" anzahl="1" anzahlIst="fest" name="ÄußeresStraßenSegment">
+				<info>
+					<kurzinfo>Äußeres Straßensegment, dem die Wegweisung zugeordnet ist.</kurzinfo>
+				</info>
+			</attribut>
+		</attributgruppenDefinition>
+		<attributgruppenDefinition pid="atg.daqSchriftsatz" name="Schriftsatz" parametrierend="nein">
+			<info>
+				<kurzinfo>Attribute zur Beschreibung des Schriftsatzes, der für einen grafischen Anzeigetext verwendet wird.</kurzinfo>
+			</info>
+			<aspekt pid="asp.eigenschaften" konfigurationsModus="datensatzOptional">
+			</aspekt>
+			<attribut pid="att.zahlPositiv" anzahl="1" anzahlIst="fest" name="Höhe">
+				<info>
+					<kurzinfo>Höhe des Schriftsatzes.</kurzinfo>
+				</info>
+			</attribut>
+			<attribut pid="att.zahlPositiv" anzahl="1" anzahlIst="fest" name="ZiffernHöhe">
+				<info>
+					<kurzinfo>Höhe der Ziffernzeichen.</kurzinfo>
+				</info>
+			</attribut>
+			<attribut pid="att.jaNein" anzahl="1" anzahlIst="fest" name="Engschrift">
+				<info>
+					<kurzinfo>Angabe, ob der Schriftsatz in Engschrift verwendet wird.</kurzinfo>
+				</info>
+			</attribut>
+			<attribut pid="att.jaNein" anzahl="1" anzahlIst="fest" name="Fett">
+				<info>
+					<kurzinfo>Angabe, ob der Schriftsatz fett verwendet wird.</kurzinfo>
+				</info>
+			</attribut>
+			<attribut pid="att.jaNein" anzahl="1" anzahlIst="fest" name="Kursiv">
+				<info>
+					<kurzinfo>Angabe, ob der Schriftsatz kursiv verwendet wird.</kurzinfo>
+				</info>
+			</attribut>
+			<attribut pid="att.jaNein" anzahl="1" anzahlIst="fest" name="Durchgestrichen">
+				<info>
+					<kurzinfo>Angabe, ob der Schriftsatz durchgestrichen verwendet wird.</kurzinfo>
+				</info>
+			</attribut>
+			<attribut pid="att.daqSchriftsatzAusrichtung" anzahl="1" anzahlIst="fest" name="Ausrichtung">
+				<info>
+					<kurzinfo>Ausrichtung des Schriftsatzes.</kurzinfo>
+				</info>
+			</attribut>
+		</attributgruppenDefinition>
+		<attributgruppenDefinition pid="atg.daqSymbol" name="Symbol" parametrierend="nein">
+			<info>
+				<kurzinfo>Attribute zur Beschreibung des zu verwendenden Symbols.</kurzinfo>
+			</info>
+			<aspekt pid="asp.eigenschaften" konfigurationsModus="datensatzOptional">
+			</aspekt>
+			<attribut pid="att.daqSymbol" anzahl="1" anzahlIst="fest" name="Symbol">
+				<info>
+					<kurzinfo>Zu verwendendes Symbol.</kurzinfo>
+				</info>
+			</attribut>
+			<attribut pid="att.text" anzahl="1" anzahlIst="fest" name="Attribut">
+				<info>
+					<kurzinfo>Zusatzinformation abhängig vom verwendeten Symbol.</kurzinfo>
+				</info>
+			</attribut>
+		</attributgruppenDefinition>
+		<attributgruppenDefinition pid="atg.daqTlsWzgWvzCode" name="TlsWzgWvzCode" parametrierend="nein">
+			<info>
+				<kurzinfo>Attribute zur Beschreibung des zugeordneten TLS WVZ-Codes einer Anzeigeseite.</kurzinfo>
+			</info>
+			<aspekt pid="asp.eigenschaften" konfigurationsModus="datensatzOptional">
+			</aspekt>
+			<attribut pid="att.tlsWzgWvzCode" anzahl="1" anzahlIst="fest" name="WvzCode">
+				<info>
+					<kurzinfo>TLS WVZ-Code der Anzeigeseite.</kurzinfo>
+				</info>
+			</attribut>
+			<attribut pid="att.jaNein" anzahl="1" anzahlIst="fest" name="Grundstellung">
+				<info>
+					<kurzinfo>Gibt an, ob die Anzeigeseite der Grundstellung der Anzeigetafel zugeordnet ist.</kurzinfo>
+				</info>
+			</attribut>
+		</attributgruppenDefinition>
+		<attributDefinition pid="att.daqAnzeigeElementReferenz" name="DaqAnzeigeElementReferenz">
+			<info>
+				<kurzinfo>Attribut zur Referenzierung des Objekttyps: typ.daqAnzeigeElement.</kurzinfo>
+			</info>
+			<objektReferenz typ="typ.daqAnzeigeElement" undefiniert="verboten" referenzierungsart="assoziation"/>
+		</attributDefinition>
+		<attributDefinition pid="att.daqAnzeigeElementReferenzOptional" name="DaqAnzeigeElementReferenzOptional">
+			<info>
+				<kurzinfo>Attribut zur Referenzierung des Objekttyps: typ.daqAnzeigeElement (Optionale Referenzierung erlaubt).</kurzinfo>
+			</info>
+			<objektReferenz typ="typ.daqAnzeigeElement" undefiniert="erlaubt" referenzierungsart="assoziation"/>
+		</attributDefinition>
+		<attributDefinition pid="att.daqAnzeigeElementTyp" name="AnzeigeElementTyp">
+			<info>
+				<kurzinfo>Typ des Anzeigeelementes.</kurzinfo>
+			</info>
+			<ganzzahl bits="8">
+				<zustand name="Label, allgemein" wert="1">
+					<info>
+						<kurzinfo>Frühere zusätzliche Namen 'Label'</kurzinfo>
+					</info>
+				</zustand>
+				<zustand name="Prisma" wert="2">
+					<info>
+						<kurzinfo>Wechselprisma</kurzinfo>
+					</info>
+				</zustand>
+				<zustand name="FTA" wert="3">
+					<info>
+						<kurzinfo>Freitextanzeige</kurzinfo>
+					</info>
+				</zustand>
+				<zustand name="Blinker" wert="4">
+					<info>
+						<kurzinfo>Blinker</kurzinfo>
+					</info>
+				</zustand>
+				<zustand name="Label, Autobahn" wert="6">
+					<info>
+						<kurzinfo>Label, Autobahn</kurzinfo>
+					</info>
+				</zustand>
+				<zustand name="Label, Bundesstraße" wert="7">
+					<info>
+						<kurzinfo>Label, Bundesstraße</kurzinfo>
+					</info>
+				</zustand>
+				<zustand name="Label, innerorts" wert="8">
+					<info>
+						<kurzinfo>Label, innerorts</kurzinfo>
+					</info>
+				</zustand>
+				<zustand name="WVZ_B" wert="9">
+					<info>
+						<kurzinfo>WVZ-Anzeige Typ B</kurzinfo>
+					</info>
+				</zustand>
+			</ganzzahl>
+		</attributDefinition>
+		<attributDefinition pid="att.daqAnzeigeFarbe" name="AnzeigeFarbe">
+			<info>
+				<kurzinfo>Farbpalette für Anzeigeobjekte.</kurzinfo>
+			</info>
+			<ganzzahl bits="16">
+				<zustand name="Schwarz" wert="0">
+				</zustand>
+				<zustand name="Blau" wert="1">
+				</zustand>
+				<zustand name="Grün" wert="2">
+				</zustand>
+				<zustand name="Cyan" wert="3">
+				</zustand>
+				<zustand name="Rot" wert="4">
+				</zustand>
+				<zustand name="Magenta" wert="5">
+				</zustand>
+				<zustand name="Gelb" wert="6">
+				</zustand>
+				<zustand name="Weiß" wert="7">
+				</zustand>
+				<zustand name="Grau" wert="8">
+				</zustand>
+				<zustand name="Hellblau" wert="9">
+				</zustand>
+				<zustand name="Hellgrün" wert="10">
+				</zustand>
+				<zustand name="Hellcyan" wert="11">
+				</zustand>
+				<zustand name="Hellrot" wert="12">
+				</zustand>
+				<zustand name="Hellmagenta" wert="13">
+				</zustand>
+				<zustand name="Hellgelb" wert="14">
+				</zustand>
+				<zustand name="Weiß, leuchtend" wert="15">
+				</zustand>
+				<zustand name="undefiniert" wert="255">
+				</zustand>
+			</ganzzahl>
+		</attributDefinition>
+		<attributDefinition pid="att.daqAnzeigeFlächeReferenz" name="DaqAnzeigeFlächeReferenz">
+			<info>
+				<kurzinfo>Attribut zur Referenzierung des Objekttyps: typ.daqAnzeigeFläche.</kurzinfo>
+			</info>
+			<objektReferenz typ="typ.daqAnzeigeFläche" undefiniert="verboten" referenzierungsart="assoziation"/>
+		</attributDefinition>
+		<attributDefinition pid="att.daqAnzeigeFlächeReferenzOptional" name="DaqAnzeigeFlächeReferenzOptional">
+			<info>
+				<kurzinfo>Attribut zur Referenzierung des Objekttyps: typ.daqAnzeigeFläche (Optionale Referenzierung erlaubt).</kurzinfo>
+			</info>
+			<objektReferenz typ="typ.daqAnzeigeFläche" undefiniert="erlaubt" referenzierungsart="assoziation"/>
+		</attributDefinition>
+		<attributDefinition pid="att.daqAnzeigeObjektReferenz" name="DaqAnzeigeObjektReferenz">
+			<info>
+				<kurzinfo>Attribut zur Referenzierung des Objekttyps: typ.daqAnzeigeObjekt.</kurzinfo>
+			</info>
+			<objektReferenz typ="typ.daqAnzeigeObjekt" undefiniert="verboten" referenzierungsart="assoziation"/>
+		</attributDefinition>
+		<attributDefinition pid="att.daqAnzeigeObjektReferenzOptional" name="DaqAnzeigeObjektReferenzOptional">
+			<info>
+				<kurzinfo>Attribut zur Referenzierung des Objekttyps: typ.daqAnzeigeObjekt (Optionale Referenzierung erlaubt).</kurzinfo>
+			</info>
+			<objektReferenz typ="typ.daqAnzeigeObjekt" undefiniert="erlaubt" referenzierungsart="assoziation"/>
+		</attributDefinition>
+		<attributDefinition pid="att.daqAnzeigeQuerschnittReferenz" name="DaqAnzeigeQuerschnittReferenz">
+			<info>
+				<kurzinfo>Attribut zur Referenzierung des Objekttyps: typ.daqAnzeigeQuerschnitt.</kurzinfo>
+			</info>
+			<objektReferenz typ="typ.daqAnzeigeQuerschnitt" undefiniert="verboten" referenzierungsart="assoziation"/>
+		</attributDefinition>
+		<attributDefinition pid="att.daqAnzeigeQuerschnittReferenzOptional" name="DaqAnzeigeQuerschnittReferenzOptional">
+			<info>
+				<kurzinfo>Attribut zur Referenzierung des Objekttyps: typ.daqAnzeigeQuerschnitt (Optionale Referenzierung erlaubt).</kurzinfo>
+			</info>
+			<objektReferenz typ="typ.daqAnzeigeQuerschnitt" undefiniert="erlaubt" referenzierungsart="assoziation"/>
+		</attributDefinition>
+		<attributDefinition pid="att.daqAnzeigeSeiteReferenz" name="DaqAnzeigeSeiteReferenz">
+			<info>
+				<kurzinfo>Attribut zur Referenzierung des Objekttyps: typ.daqAnzeigeSeite.</kurzinfo>
+			</info>
+			<objektReferenz typ="typ.daqAnzeigeSeite" undefiniert="verboten" referenzierungsart="assoziation"/>
+		</attributDefinition>
+		<attributDefinition pid="att.daqAnzeigeSeiteReferenzOptional" name="DaqAnzeigeSeiteReferenzOptional">
+			<info>
+				<kurzinfo>Attribut zur Referenzierung des Objekttyps: typ.daqAnzeigeSeite (Optionale Referenzierung erlaubt).</kurzinfo>
+			</info>
+			<objektReferenz typ="typ.daqAnzeigeSeite" undefiniert="erlaubt" referenzierungsart="assoziation"/>
+		</attributDefinition>
+		<attributDefinition pid="att.daqAnzeigeTafelReferenz" name="DaqAnzeigeTafelReferenz">
+			<info>
+				<kurzinfo>Attribut zur Referenzierung des Objekttyps: typ.daqAnzeigeTafel.</kurzinfo>
+			</info>
+			<objektReferenz typ="typ.daqAnzeigeTafel" undefiniert="verboten" referenzierungsart="assoziation"/>
+		</attributDefinition>
+		<attributDefinition pid="att.daqAnzeigeTafelReferenzOptional" name="DaqAnzeigeTafelReferenzOptional">
+			<info>
+				<kurzinfo>Attribut zur Referenzierung des Objekttyps: typ.daqAnzeigeTafel (Optionale Referenzierung erlaubt).</kurzinfo>
+			</info>
+			<objektReferenz typ="typ.daqAnzeigeTafel" undefiniert="erlaubt" referenzierungsart="assoziation"/>
+		</attributDefinition>
+		<attributDefinition pid="att.daqAnzeigeTafelTyp" name="AnzeigeTafelTyp">
+			<info>
+				<kurzinfo>Typ der Anzeigetafel.</kurzinfo>
+			</info>
+			<ganzzahl bits="8">
+				<zustand name="Entfernungstafel Seitenlage" wert="1">
+					<info>
+						<kurzinfo>Entfernungstafel Seitenlage</kurzinfo>
+					</info>
+				</zustand>
+				<zustand name="Wegweiser Seitenlage" wert="2">
+					<info>
+						<kurzinfo>Wegweiser Seitenlage</kurzinfo>
+					</info>
+				</zustand>
+				<zustand name="Wegweiser Überkopf Hauptfahrbahn" wert="3">
+					<info>
+						<kurzinfo>Wegweiser Überkopf Hauptfahrbahn</kurzinfo>
+					</info>
+				</zustand>
+				<zustand name="Wegweiser Überkopf Rampe" wert="4">
+					<info>
+						<kurzinfo>Wegweiser Überkopf Rampe</kurzinfo>
+					</info>
+				</zustand>
+				<zustand name="Vorwegweiser Seitenlage" wert="6">
+					<info>
+						<kurzinfo>Vorwegweiser Seitenlage</kurzinfo>
+					</info>
+				</zustand>
+				<zustand name="Vorwegweiser Überkopf" wert="7">
+					<info>
+						<kurzinfo>Vorwegweiser Überkopf</kurzinfo>
+					</info>
+				</zustand>
+			</ganzzahl>
+		</attributDefinition>
+		<attributDefinition pid="att.daqSchilderAnlageReferenz" name="DaqSchilderAnlageReferenz">
+			<info>
+				<kurzinfo>Attribut zur Referenzierung des Objekttyps: typ.daqSchilderAnlage.</kurzinfo>
+			</info>
+			<objektReferenz typ="typ.daqSchilderAnlage" undefiniert="verboten" referenzierungsart="assoziation"/>
+		</attributDefinition>
+		<attributDefinition pid="att.daqSchilderAnlageReferenzOptional" name="DaqSchilderAnlageReferenzOptional">
+			<info>
+				<kurzinfo>Attribut zur Referenzierung des Objekttyps: typ.daqSchilderAnlage (Optionale Referenzierung erlaubt).</kurzinfo>
+			</info>
+			<objektReferenz typ="typ.daqSchilderAnlage" undefiniert="erlaubt" referenzierungsart="assoziation"/>
+		</attributDefinition>
+		<attributDefinition pid="att.daqSchriftsatzAusrichtung" name="SchriftsatzAusrichtung">
+			<info>
+				<kurzinfo>Ausrichtung des Schriftsatzes.</kurzinfo>
+			</info>
+			<ganzzahl bits="8">
+				<zustand name="undefiniert" wert="0">
+					<info>
+						<kurzinfo>Neu eingeführt, hatte früher Wert 1 (siehe Info bei Wert 1)</kurzinfo>
+					</info>
+				</zustand>
+				<zustand name="Linksbündig" wert="1">
+					<info>
+						<kurzinfo>Frühere zusätzliche Namen 'L', 'B', 'undefiniert'</kurzinfo>
+					</info>
+				</zustand>
+				<zustand name="Zentriert" wert="2">
+					<info>
+						<kurzinfo>Frühere zusätzliche Namen 'Z'</kurzinfo>
+					</info>
+				</zustand>
+				<zustand name="Rechtsbündig" wert="3">
+					<info>
+						<kurzinfo>Frühere zusätzliche Namen 'R'</kurzinfo>
+					</info>
+				</zustand>
+			</ganzzahl>
+		</attributDefinition>
+		<attributDefinition pid="att.daqSymbol" name="Symbol">
+			<info>
+				<kurzinfo>Anzeigegrafik einer Anzeigefläche.</kurzinfo>
+			</info>
+			<ganzzahl bits="16">
+				<zustand name="Autobahn" wert="1">
+					<info>
+						<kurzinfo>Frühere zusätzliche Namen 'S1'</kurzinfo>
+					</info>
+				</zustand>
+				<zustand name="Autohof" wert="2">
+					<info>
+						<kurzinfo>Frühere zusätzliche Namen 'S2'</kurzinfo>
+					</info>
+				</zustand>
+				<zustand name="Autozug" wert="3">
+					<info>
+						<kurzinfo>Frühere zusätzliche Namen 'S3'</kurzinfo>
+					</info>
+				</zustand>
+				<zustand name="BAB-Ausfahrt" wert="4">
+					<info>
+						<kurzinfo>Frühere zusätzliche Namen 'S4'</kurzinfo>
+					</info>
+				</zustand>
+				<zustand name="BAB-Kreuz/Dreieck" wert="5">
+					<info>
+						<kurzinfo>Frühere zusätzliche Namen 'S5'</kurzinfo>
+					</info>
+				</zustand>
+				<zustand name="Bahnhof" wert="6">
+					<info>
+						<kurzinfo>Frühere zusätzliche Namen 'S6'</kurzinfo>
+					</info>
+				</zustand>
+				<zustand name="Behinderten-WC" wert="7">
+					<info>
+						<kurzinfo>Frühere zusätzliche Namen 'S7'</kurzinfo>
+					</info>
+				</zustand>
+				<zustand name="Bus" wert="8">
+					<info>
+						<kurzinfo>Frühere zusätzliche Namen 'S8'</kurzinfo>
+					</info>
+				</zustand>
+				<zustand name="Erste Hilfe" wert="9">
+					<info>
+						<kurzinfo>Frühere zusätzliche Namen 'S9'</kurzinfo>
+					</info>
+				</zustand>
+				<zustand name="Fernsprecher" wert="10">
+					<info>
+						<kurzinfo>Frühere zusätzliche Namen 'S10'</kurzinfo>
+					</info>
+				</zustand>
+				<zustand name="Flughafen rechts" wert="11">
+					<info>
+						<kurzinfo>Frühere zusätzliche Namen 'S11a'</kurzinfo>
+					</info>
+				</zustand>
+				<zustand name="Flughafen geradeaus" wert="12">
+					<info>
+						<kurzinfo>Frühere zusätzliche Namen 'S11b'</kurzinfo>
+					</info>
+				</zustand>
+				<zustand name="Freizeitsportanlage" wert="13">
+					<info>
+						<kurzinfo>Frühere zusätzliche Namen 'S12'</kurzinfo>
+					</info>
+				</zustand>
+				<zustand name="Gasthaus" wert="14">
+					<info>
+						<kurzinfo>Frühere zusätzliche Namen 'S13'</kurzinfo>
+					</info>
+				</zustand>
+				<zustand name="Güterverkehrszentrum" wert="15">
+					<info>
+						<kurzinfo>Frühere zusätzliche Namen 'S14'</kurzinfo>
+					</info>
+				</zustand>
+				<zustand name="Hafen/Fähre" wert="16">
+					<info>
+						<kurzinfo>Frühere zusätzliche Namen 'S15'</kurzinfo>
+					</info>
+				</zustand>
+				<zustand name="Industriegebiet" wert="17">
+					<info>
+						<kurzinfo>Frühere zusätzliche Namen 'S16'</kurzinfo>
+					</info>
+				</zustand>
+				<zustand name="Informationsstelle" wert="18">
+					<info>
+						<kurzinfo>Frühere zusätzliche Namen 'S17'</kurzinfo>
+					</info>
+				</zustand>
+				<zustand name="Kirche" wert="19">
+					<info>
+						<kurzinfo>Frühere zusätzliche Namen 'S18'</kurzinfo>
+					</info>
+				</zustand>
+				<zustand name="Krankenhaus" wert="20">
+					<info>
+						<kurzinfo>Frühere zusätzliche Namen 'S19'</kurzinfo>
+					</info>
+				</zustand>
+				<zustand name="Lkw" wert="21">
+					<info>
+						<kurzinfo>Frühere zusätzliche Namen 'S20'</kurzinfo>
+					</info>
+				</zustand>
+				<zustand name="Lkw mit Anhänger" wert="22">
+					<info>
+						<kurzinfo>Frühere zusätzliche Namen 'S21'</kurzinfo>
+					</info>
+				</zustand>
+				<zustand name="Motel/Hotel" wert="23">
+					<info>
+						<kurzinfo>Frühere zusätzliche Namen 'S22'</kurzinfo>
+					</info>
+				</zustand>
+				<zustand name="Notrufsäule" wert="24">
+					<info>
+						<kurzinfo>Frühere zusätzliche Namen 'S23'</kurzinfo>
+					</info>
+				</zustand>
+				<zustand name="Park und Ride" wert="25">
+					<info>
+						<kurzinfo>Frühere zusätzliche Namen 'S24', 'P+R'</kurzinfo>
+					</info>
+				</zustand>
+				<zustand name="Parkhaus" wert="26">
+					<info>
+						<kurzinfo>Frühere zusätzliche Namen 'S25'</kurzinfo>
+					</info>
+				</zustand>
+				<zustand name="Parkplatz" wert="27">
+					<info>
+						<kurzinfo>Frühere zusätzliche Namen 'S26'</kurzinfo>
+					</info>
+				</zustand>
+				<zustand name="Pkw" wert="28">
+					<info>
+						<kurzinfo>Frühere zusätzliche Namen 'S27'</kurzinfo>
+					</info>
+				</zustand>
+				<zustand name="Pkw mit Anhänger" wert="29">
+					<info>
+						<kurzinfo>Frühere zusätzliche Namen 'S28'</kurzinfo>
+					</info>
+				</zustand>
+				<zustand name="Polizei" wert="30">
+					<info>
+						<kurzinfo>Frühere zusätzliche Namen 'S29'</kurzinfo>
+					</info>
+				</zustand>
+				<zustand name="Rollstuhlfahrer" wert="31">
+					<info>
+						<kurzinfo>Frühere zusätzliche Namen 'S30'</kurzinfo>
+					</info>
+				</zustand>
+				<zustand name="Stadion" wert="32">
+					<info>
+						<kurzinfo>Frühere zusätzliche Namen 'S31'</kurzinfo>
+					</info>
+				</zustand>
+				<zustand name="Tankstelle" wert="33">
+					<info>
+						<kurzinfo>Frühere zusätzliche Namen 'S32'</kurzinfo>
+					</info>
+				</zustand>
+				<zustand name="Toiletten" wert="34">
+					<info>
+						<kurzinfo>Frühere zusätzliche Namen 'S33'</kurzinfo>
+					</info>
+				</zustand>
+				<zustand name="Verkaufskiosk" wert="35">
+					<info>
+						<kurzinfo>Frühere zusätzliche Namen 'S34'</kurzinfo>
+					</info>
+				</zustand>
+				<zustand name="Werkstatt" wert="36">
+					<info>
+						<kurzinfo>Frühere zusätzliche Namen 'S35'</kurzinfo>
+					</info>
+				</zustand>
+				<zustand name="Zelt-/Wohnwagenplatz" wert="37">
+					<info>
+						<kurzinfo>Frühere zusätzliche Namen 'S36'</kurzinfo>
+					</info>
+				</zustand>
+				<zustand name="Zentrum" wert="38">
+					<info>
+						<kurzinfo>Frühere zusätzliche Namen 'S37'</kurzinfo>
+					</info>
+				</zustand>
+				<zustand name="Fußball" wert="39">
+					<info>
+						<kurzinfo>Frühere zusätzliche Namen 'S38'</kurzinfo>
+					</info>
+				</zustand>
+				<zustand name="Geradeauspfeil, kurz" wert="40">
+					<info>
+						<kurzinfo>Frühere zusätzliche Namen 'P1'</kurzinfo>
+					</info>
+				</zustand>
+				<zustand name="Schrägpfeil rechts, kurz" wert="41">
+					<info>
+						<kurzinfo>Frühere zusätzliche Namen 'P2'</kurzinfo>
+					</info>
+				</zustand>
+				<zustand name="Geradeauspfeil lang, konisch" wert="42">
+					<info>
+						<kurzinfo>Frühere zusätzliche Namen 'P3a'</kurzinfo>
+					</info>
+				</zustand>
+				<zustand name="Schrägpfeil rechts, lang, konisch" wert="43">
+					<info>
+						<kurzinfo>Frühere zusätzliche Namen 'P3b'</kurzinfo>
+					</info>
+				</zustand>
+				<zustand name="Querpfeil rechts, lang, konisch" wert="44">
+					<info>
+						<kurzinfo>Frühere zusätzliche Namen 'P3c'</kurzinfo>
+					</info>
+				</zustand>
+				<zustand name="Geradeauspfeil, lang" wert="45">
+					<info>
+						<kurzinfo>Frühere zusätzliche Namen 'P3d'</kurzinfo>
+					</info>
+				</zustand>
+				<zustand name="Geradeaus+Schrägpfeil rechts, lang" wert="46">
+					<info>
+						<kurzinfo>Frühere zusätzliche Namen 'P3e'</kurzinfo>
+					</info>
+				</zustand>
+				<zustand name="Geradeaus+Schrägpfeil rechts, lang, gebogen" wert="47">
+					<info>
+						<kurzinfo>Frühere zusätzliche Namen 'P3f'</kurzinfo>
+					</info>
+				</zustand>
+				<zustand name="Schrägpfeil links, lang, konisch" wert="73">
+					<info>
+						<kurzinfo>Frühere zusätzliche Namen 'P3k'</kurzinfo>
+					</info>
+				</zustand>
+				<zustand name="ISO-Pfeil geradeaus" wert="48">
+					<info>
+						<kurzinfo>Frühere zusätzliche Namen 'P4a'</kurzinfo>
+					</info>
+				</zustand>
+				<zustand name="ISO-Pfeil halbrechts" wert="49">
+					<info>
+						<kurzinfo>Frühere zusätzliche Namen 'P4b'</kurzinfo>
+					</info>
+				</zustand>
+				<zustand name="ISO-Pfeil rechts" wert="50">
+					<info>
+						<kurzinfo>Frühere zusätzliche Namen 'P4c'</kurzinfo>
+					</info>
+				</zustand>
+				<zustand name="ISO-Pfeil halblinks" wert="51">
+					<info>
+						<kurzinfo>Frühere zusätzliche Namen 'P4d'</kurzinfo>
+					</info>
+				</zustand>
+				<zustand name="ISO-Pfeil links" wert="52">
+					<info>
+						<kurzinfo>Frühere zusätzliche Namen 'P4e'</kurzinfo>
+					</info>
+				</zustand>
+				<zustand name="Blinker" wert="53">
+					<info>
+						<kurzinfo>Frühere zusätzliche Namen 'B'</kurzinfo>
+					</info>
+				</zustand>
+				<zustand name="Nationalitätenzeichen" wert="54">
+					<info>
+						<kurzinfo>Frühere zusätzliche Namen 'N'</kurzinfo>
+					</info>
+				</zustand>
+				<zustand name="Trenner" wert="55">
+					<info>
+						<kurzinfo>Frühere zusätzliche Namen 'T'</kurzinfo>
+					</info>
+				</zustand>
+				<zustand name="Achtung" wert="56">
+					<info>
+						<kurzinfo>Frühere zusätzliche Namen 'Z101'</kurzinfo>
+					</info>
+				</zustand>
+				<zustand name="Achtung Stau" wert="57">
+					<info>
+						<kurzinfo>Frühere zusätzliche Namen 'Z124'</kurzinfo>
+					</info>
+				</zustand>
+				<zustand name="Achtung LSA" wert="58">
+					<info>
+						<kurzinfo>Frühere zusätzliche Namen 'Z131'</kurzinfo>
+					</info>
+				</zustand>
+				<zustand name="Stau" wert="59">
+					<info>
+						<kurzinfo>Frühere zusätzliche Namen 'Z1006-38'</kurzinfo>
+					</info>
+				</zustand>
+				<zustand name="Ausfahrt rechts" wert="60">
+					<info>
+						<kurzinfo>Frühere zusätzliche Namen 'Z1703-01'</kurzinfo>
+					</info>
+				</zustand>
+				<zustand name="Durchfahrt verboten" wert="61">
+					<info>
+						<kurzinfo>Frühere zusätzliche Namen 'Z250'</kurzinfo>
+					</info>
+				</zustand>
+				<zustand name="Z316" wert="62">
+					<info>
+						<kurzinfo>Park und Ride</kurzinfo>
+					</info>
+				</zustand>
+				<zustand name="Autobahn Beginn" wert="63">
+					<info>
+						<kurzinfo>Frühere zusätzliche Namen 'Z330'</kurzinfo>
+					</info>
+				</zustand>
+				<zustand name="Kraftfahrstraße Beginn" wert="64">
+					<info>
+						<kurzinfo>Frühere zusätzliche Namen 'Z331'</kurzinfo>
+					</info>
+				</zustand>
+				<zustand name="Autobahn Ausfahrt" wert="65">
+					<info>
+						<kurzinfo>Frühere zusätzliche Namen 'Z333-20'</kurzinfo>
+					</info>
+				</zustand>
+				<zustand name="Autobahn Ende" wert="66">
+					<info>
+						<kurzinfo>Frühere zusätzliche Namen 'Z334'</kurzinfo>
+					</info>
+				</zustand>
+				<zustand name="Kraftfahrstraße Ende" wert="67">
+					<info>
+						<kurzinfo>Frühere zusätzliche Namen 'Z336'</kurzinfo>
+					</info>
+				</zustand>
+				<zustand name="Pfeil geradeaus" wert="68">
+					<info>
+						<kurzinfo>Frühere zusätzliche Namen 'Z353'</kurzinfo>
+					</info>
+				</zustand>
+				<zustand name="Bundesstraße Nummernzeichen" wert="69">
+					<info>
+						<kurzinfo>Frühere zusätzliche Namen 'Z401'</kurzinfo>
+					</info>
+				</zustand>
+				<zustand name="Autobahn Nummernzeichen" wert="70">
+					<info>
+						<kurzinfo>Frühere zusätzliche Namen 'Z405'</kurzinfo>
+					</info>
+				</zustand>
+				<zustand name="Anschlussstelle Nummernzeichen" wert="71">
+					<info>
+						<kurzinfo>Frühere zusätzliche Namen 'Z406'</kurzinfo>
+					</info>
+				</zustand>
+				<zustand name="Europastraße Nummernzeichen" wert="72">
+					<info>
+						<kurzinfo>Frühere zusätzliche Namen 'Z410'</kurzinfo>
+					</info>
+				</zustand>
+				<zustand name="Achtung Bauarbeiten" wert="200">
+					<info>
+						<kurzinfo>Frühere zusätzliche Namen 'Z123'</kurzinfo>
+					</info>
+				</zustand>
+				<zustand name="dWiSta Stau" wert="201">
+					<info>
+						<kurzinfo>Frühere zusätzliche Namen 'DZ124'</kurzinfo>
+					</info>
+				</zustand>
+				<zustand name="dWiSta Stadion" wert="202">
+					<info>
+						<kurzinfo>Frühere zusätzliche Namen 'S200'</kurzinfo>
+					</info>
+				</zustand>
+				<zustand name="Centrico-Pfeil gerade" wert="203">
+					<info>
+						<kurzinfo>Frühere zusätzliche Namen 'CP1a'</kurzinfo>
+					</info>
+				</zustand>
+				<zustand name="Centrico-Pfeil halb-rechts" wert="204">
+					<info>
+						<kurzinfo>Frühere zusätzliche Namen 'CP1b'</kurzinfo>
+					</info>
+				</zustand>
+			</ganzzahl>
+		</attributDefinition>
+		<mengenDefinition pid="menge.daqAnzeigeElemente" elemente="typ.daqAnzeigeElement" aenderbar="nein" mindestens="1" hoechstens="0" referenzierungsart="assoziation">
+			<info>
+				<kurzinfo>Menge der Anzeigeelemente, die zu einer Anzeigetafel gehören.</kurzinfo>
+			</info>
+		</mengenDefinition>
+		<mengenDefinition pid="menge.daqAnzeigeFlächen" elemente="typ.daqAnzeigeFläche" aenderbar="nein" mindestens="0" hoechstens="0" referenzierungsart="assoziation">
+			<info>
+				<kurzinfo>Menge der Anzeigeflächen, die einer Anzeigeseite zugeordnet sind.</kurzinfo>
+			</info>
+		</mengenDefinition>
+		<mengenDefinition pid="menge.daqAnzeigeQuerschnitte" elemente="typ.daqAnzeigeQuerschnitt" aenderbar="nein" mindestens="1" hoechstens="0" referenzierungsart="assoziation">
+			<info>
+				<kurzinfo>Menge der Anzeigequerschnitte, die zu einer Schilderanlage gehören.</kurzinfo>
+			</info>
+		</mengenDefinition>
+		<mengenDefinition pid="menge.daqAnzeigeSeiten" elemente="typ.daqAnzeigeSeite" aenderbar="nein" mindestens="0" hoechstens="0" referenzierungsart="assoziation">
+			<info>
+				<kurzinfo>Menge der Anzeigeseiten, die ein Anzeigeelement enthält.</kurzinfo>
+			</info>
+		</mengenDefinition>
+		<mengenDefinition pid="menge.daqAnzeigeTafeln" elemente="typ.daqAnzeigeTafel" aenderbar="nein" mindestens="1" hoechstens="0" referenzierungsart="assoziation">
+			<info>
+				<kurzinfo>Menge der Anzeigetafeln, die zu einem Anzeigequerschnitt gehören.</kurzinfo>
+			</info>
+		</mengenDefinition>
+	</modell>
+	<objekte>
+	</objekte>
+</konfigurationsBereich>

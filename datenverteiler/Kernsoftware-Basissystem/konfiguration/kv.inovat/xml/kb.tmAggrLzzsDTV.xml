@@ -1,0 +1,116 @@
+<?xml version="1.0" encoding="ISO-8859-1"?>
+<!DOCTYPE konfigurationsBereich PUBLIC "-//K2S//DTD Dokument//DE" "K2S.dtd">
+<konfigurationsBereich pid="kb.tmAggrLzzsDTV" name="Aggregation Langzeitzählstellen DTV" verantwortlich="kv.inovat">
+	<info>
+		<kurzinfo>Teilmodell mit Datenmodellierung für die Steuerung der Langzeitzählstellen-DTV-Werte Aggregation.</kurzinfo>
+		<beschreibung>A</beschreibung>
+	</info>
+	<konfigurationsAenderung stand="08.10.2010" version="1" autor="inovat, Dipl.-Ing. H. C. Kniß (HCK)" grund="Neuerstellung"></konfigurationsAenderung>
+	<konfigurationsAenderung stand="15.11.2010" version="2" autor="inovat, Dipl.-Ing. H. C. Kniß (HCK)" grund="Zusätzliche Steuerungsmoelichkeiten bei LZZS für Intervall, DTV-Tag, Monat, Quartal und Jahr ergaenzt."></konfigurationsAenderung>
+	<konfigurationsAenderung stand="01.12.2010" version="3" autor="inovat, Dipl.-Ing. H. C. Kniß (HCK)" grund="Steuerung für MSV-Jahr ergaenzt, Steuerung Intervall FS entfernt."></konfigurationsAenderung>
+	<!--
+	Abhängigkeiten des Bereichs kb.tmAggrLzzsDTV
+	Abhängig ab Version      Art der Abhängigkeit      Version des benötigten Bereichs      Benötigter Bereich
+	1                        notwendig                 1                                    kb.kv.inovat                       
+	1                        notwendig                 1                                    kb.systemModellGlobal              
+	1                        notwendig                 1                                    kb.fachModellGlobal                
+	1                        notwendig                 3                                    kb.tmLangZeitVerkehrsDaten         
+	1                        notwendig                 1                                    kb.metaModellGlobal                
+	-->
+		<modell>
+		<typDefinition pid="typ.aggrLzzsDtv" name="AggregationLzzsDTV" objektNamenPermanent="nein">
+			<info>
+				<kurzinfo>Systemobjekt für für die Steuerung der Aggregation der Langzeitzählstellen DTV-Werte.</kurzinfo>
+			</info>
+			<erweitert pid="typ.konfigurationsObjekt"/>
+			<attributgruppe pid="atg.aggrLzzsDtvStatus"/>
+			<attributgruppe pid="atg.aggrLzzsDtvSteuerung"/>
+		</typDefinition>
+		<attributgruppenDefinition pid="atg.aggrLzzsDtvStatus" name="AggrLzzsDtvStatus" parametrierend="nein">
+			<info>
+				<kurzinfo>Informationen zum aktuellen Status der Aggregation Langzeitzählstellen DTV-Werte (Fortschritt, Status).</kurzinfo>
+			</info>
+			<aspekt pid="asp.aggrLzzsDtvStatus" onlineModus="quelle">
+			</aspekt>
+			<attribut pid="att.prozent" anzahl="1" anzahlIst="fest" name="FortschrittProzent">
+			</attribut>
+			<attribut pid="att.text" anzahl="1" anzahlIst="fest" name="StatusMeldung">
+				<info>
+					<kurzinfo>StatusMeldung mit dem aktuellen Zustand der Aggregation.</kurzinfo>
+				</info>
+			</attribut>
+		</attributgruppenDefinition>
+		<attributgruppenDefinition pid="atg.aggrLzzsDtvSteuerung" name="AggrLzzsDtvSteuerung" parametrierend="nein">
+			<info>
+				<kurzinfo>Attributgruppe zur Steuerung des der Aggregation der Langzeitzählstellen DTV-Werte.</kurzinfo>
+			</info>
+			<aspekt pid="asp.anfrage" onlineModus="senke">
+			</aspekt>
+			<attribut pid="att.aggrLzzsDtvZeitpunkt" anzahl="1" anzahlIst="fest" name="von">
+				<info>
+					<kurzinfo>Zeitbereichsanfang, für den nachaggregiert werden soll. Der tatsächliche Anfang liegt i. d. R. davor (tatsächlicher Intervallanfang) und wird automatisch ermittelt.</kurzinfo>
+				</info>
+			</attribut>
+			<attribut pid="att.aggrLzzsDtvZeitpunkt" anzahl="1" anzahlIst="fest" name="bis">
+				<info>
+					<kurzinfo>Zeitbereichsende, für den nachaggregiert werden soll. Das tatsächliche Ende liegt i. d. R. dahinter (tatsächliches Intervallende (ausschließlich) und wird automatisch ermittelt.)</kurzinfo>
+				</info>
+			</attribut>
+			<attribut pid="att.jaNein" anzahl="1" anzahlIst="fest" name="berechneDTVTag">
+				<info>
+					<kurzinfo>Legt fest, ob die DTV-Tageswerte berechnet werden sollen.</kurzinfo>
+				</info>
+			</attribut>
+			<attribut pid="att.jaNein" anzahl="1" anzahlIst="fest" name="berechneDTVMonat">
+				<info>
+					<kurzinfo>Legt fest, ob die DTV-Monatswerte berechnet werden sollen.</kurzinfo>
+				</info>
+			</attribut>
+			<attribut pid="att.jaNein" anzahl="1" anzahlIst="fest" name="berechneDTVQuartal">
+				<info>
+					<kurzinfo>Legt fest, ob die DTV-Quartalswerte berechnet werden sollen.</kurzinfo>
+				</info>
+			</attribut>
+			<attribut pid="att.jaNein" anzahl="1" anzahlIst="fest" name="berechneDTVJahr">
+				<info>
+					<kurzinfo>Legt fest, ob die DTV-Jahreswerte berechnet werden sollen.</kurzinfo>
+				</info>
+			</attribut>
+			<attribut pid="att.jaNein" anzahl="1" anzahlIst="fest" name="berechneMSVJahr">
+				<info>
+					<kurzinfo>Legt fest, ob die MSV-Jahreswerte berechnet werden sollen.</kurzinfo>
+				</info>
+			</attribut>
+			<attribut pid="att.langZeitZählstelleReferenz" anzahl="0" anzahlIst="variabel" name="Lzzs">
+				<info>
+					<kurzinfo>Liste aller Langzeitzählstellen, für die aggregiert werden soll.</kurzinfo>
+				</info>
+			</attribut>
+		</attributgruppenDefinition>
+		<aspektDefinition pid="asp.aggrLzzsDtvStatus" name="AggrLzzsDtvStatus">
+			<info>
+				<kurzinfo>Aspekt zur Statusanzeige.</kurzinfo>
+			</info>
+		</aspektDefinition>
+		<attributDefinition pid="att.aggrLzzsDtvZeitpunkt" name="Zeitpunkt">
+			<info>
+				<kurzinfo>
+					Zeitpunkt für Intervallbeginn und Ende.
+				</kurzinfo>
+			</info>
+			<zeitstempel relativ="nein" genauigkeit="millisekunden"/>
+		</attributDefinition>
+	</modell>
+	<objekte>
+		<konfigurationsObjekt pid="aggrLzzsDtv.vewStandard1" name="StandardVerwaltungsObjektAggrLzzsDtv1" typ="typ.aggrLzzsDtv">
+		</konfigurationsObjekt>
+		<konfigurationsObjekt pid="aggrLzzsDtv.vewStandard2" name="StandardVerwaltungsObjektAggrLzzsDtv2" typ="typ.aggrLzzsDtv">
+		</konfigurationsObjekt>
+		<konfigurationsObjekt pid="aggrLzzsDtv.vewStandard3" name="StandardVerwaltungsObjektAggrLzzsDtv3" typ="typ.aggrLzzsDtv">
+		</konfigurationsObjekt>
+		<konfigurationsObjekt pid="aggrLzzsDtv.vewStandard4" name="StandardVerwaltungsObjektAggrLzzsDtv4" typ="typ.aggrLzzsDtv">
+		</konfigurationsObjekt>
+		<konfigurationsObjekt pid="aggrLzzsDtv.vewStandard5" name="StandardVerwaltungsObjektAggrLzzsDtv5" typ="typ.aggrLzzsDtv">
+		</konfigurationsObjekt>
+	</objekte>
+</konfigurationsBereich>

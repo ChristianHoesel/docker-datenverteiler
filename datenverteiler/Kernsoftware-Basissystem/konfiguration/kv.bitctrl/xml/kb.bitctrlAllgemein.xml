@@ -1,0 +1,188 @@
+<?xml version="1.0" encoding="ISO-8859-1"?>
+<!DOCTYPE konfigurationsBereich PUBLIC "-//K2S//DTD Dokument//DE" "K2S.dtd">
+<konfigurationsBereich pid="kb.bitctrlAllgemein"
+	name="BitCtrlAllgemein" verantwortlich="kv.bitctrl">
+	<info>
+		<kurzinfo>Allgemeine konfigurationsbereichübergreifende Definitionen.
+		</kurzinfo>
+	</info>
+	<konfigurationsAenderung autor="BitCtrl Systems GmbH, Falko Schumann"
+		stand="1.12.2009" grund="Ersterstellung" />
+	<konfigurationsAenderung autor="BitCtrl Systems GmbH, Uwe Peuker"
+		stand="24.02.2010" grund="Bilder und Bitmap-Objekte sollten persistent sein"></konfigurationsAenderung>
+	<modell>
+
+		<!-- Typdefinitionen -->
+		<typDefinition pid="typ.bild" name="Bild"
+			persistenzModus="persistent">
+			<info>
+				<kurzinfo>Sichert ein Bild im Datenverteiler.</kurzinfo>
+			</info>
+			<erweitert pid="typ.dynamischesObjekt" />
+			<attributgruppe pid="atg.bild" />
+		</typDefinition>
+		<typDefinition pid="typ.portableBitMap" name="Portable BitMap"
+			persistenzModus="persistent">
+			<info>
+				<kurzinfo>Sichert ein Portable BitMap (*.pbm-Datei, Magic Number
+					"P1") im Datenverteiler.</kurzinfo>
+				<beschreibung>Dieses Bildformat stammt von Sun und definiert ein
+					Bild mit 1-Bit Farbtiefe.</beschreibung>
+			</info>
+			<erweitert pid="typ.dynamischesObjekt" />
+			<attributgruppe pid="atg.portableBitMap" />
+		</typDefinition>
+
+		<!-- Attributgruppen -->
+		<attributgruppenDefinition pid="atg.bild"
+			name="Bild" konfigurierend="ja">
+			<info>
+				<kurzinfo>Hält die Bildinformationen eines Bildes in Binärform.
+				</kurzinfo>
+				<beschreibung>Es wird der Typ als MIME Type und die Binärdaten des
+					Bildes gehalten. Die Binärdaten sind der selbe
+					Datenstrom, der auf
+					eine Festplatte o.ä. geschrieben werden würde. So das das Binärfeld
+					auch genau wie von einer
+					Festplatte gelesen werden kann.
+				</beschreibung>
+			</info>
+			<aspekt pid="asp.eigenschaften" konfigurationsModus="datensatzNotwendigUndÄnderbar" />
+			<attribut pid="att.text" name="MIME-Type" />
+			<attribut pid="att.byte" name="Bilddaten" anzahlIst="variabel" />
+		</attributgruppenDefinition>
+		<attributgruppenDefinition pid="atg.portableBitMap"
+			name="Portable BitMap" konfigurierend="ja">
+			<info>
+				<kurzinfo>Hält die Bildinformationen eines PBM-Bildes.</kurzinfo>
+			</info>
+			<aspekt pid="asp.eigenschaften" konfigurationsModus="datensatzNotwendigUndÄnderbar" />
+			<attributliste pid="atl.portableBitMap" name="Bilddaten" />
+		</attributgruppenDefinition>
+
+		<!-- Allgemeine Attributlisten -->
+		<attributlistenDefinition pid="atl.punkt"
+			name="Punkt">
+			<info>
+				<kurzinfo>Beschreibt einen Punkt mit x- und y-Koordinate.</kurzinfo>
+			</info>
+			<attribut pid="att.zahl" name="X">
+				<default wert="0" />
+			</attribut>
+			<attribut pid="att.zahl" name="Y">
+				<default wert="0" />
+			</attribut>
+		</attributlistenDefinition>
+		<attributlistenDefinition pid="atl.ausmaße"
+			name="Ausmaße">
+			<info>
+				<kurzinfo>Beschreibt die Ausmaße eines Objekts mit Breite und Höhe.
+				</kurzinfo>
+			</info>
+			<attribut pid="att.zahlPositiv" name="Breite">
+				<default wert="0" />
+			</attribut>
+			<attribut pid="att.zahlPositiv" name="Höhe">
+				<default wert="0" />
+			</attribut>
+		</attributlistenDefinition>
+		<attributlistenDefinition pid="atl.portableBitMap"
+			name="Portable BitMap">
+			<info>
+				<kurzinfo>Definiert eine PBM-Datei.</kurzinfo>
+			</info>
+			<attributliste pid="atl.ausmaße" name="Ausmaße" />
+			<attribut pid="att.pbmBildInformationsZeile" name="Maske"
+				anzahlIst="variabel" />
+		</attributlistenDefinition>
+		<attributlistenDefinition pid="atl.intervall"
+			name="Intervall">
+			<info>
+				<kurzinfo>Beschreibt ein Intervall zweier ganzer Zahlen</kurzinfo>
+			</info>
+			<attribut pid="att.intervallGrenze" name="Start" />
+			<attribut pid="att.intervallGrenze" name="Ende" />
+		</attributlistenDefinition>
+
+		<!-- Attributdefinitionen -->
+		<attributDefinition pid="att.pbmBildInformationsZeile"
+			name="PBM-BildInformationsZeile">
+			<info>
+				<kurzinfo>Definiert die Bitmaske des Bildes als Folge von 0 und 1.
+				</kurzinfo>
+				<beschreibung>Die Definition darf keine anderen Zeichen als 0 und 1
+					enthalten. Eventuell enthaltene Leerzeichen
+					werden ignoriert. Jedes
+					Feldelement sollte genau einer Zeile der Maske entsprechen, so
+					lassen sich Daten mit
+					generischen Tools wie dem GTM besser lesen.
+					Siehe auch http://netpbm.sourceforge.net/doc/pbm.html
+				</beschreibung>
+			</info>
+			<zeichenkette laenge="70" />
+		</attributDefinition>
+		<attributDefinition pid="att.unsignedByte" name="UnsignedByte">
+			<info>
+				<kurzinfo>Eine allgemeine ganze Zahl mit dem Wertebereich 0 bis 255.
+				</kurzinfo>
+			</info>
+			<ganzzahl bits="16">
+				<bereich minimum="0" maximum="255" />
+			</ganzzahl>
+		</attributDefinition>
+		<attributDefinition pid="att.winkel" name="Winkel">
+			<info>
+				<kurzinfo>Ein Winkel zwischen 0 bis 360° und einer Nachkommastelle.
+				</kurzinfo>
+			</info>
+			<ganzzahl bits="16">
+				<bereich minimum="0" maximum="3600" skalierung="0,1"
+					einheit="°" />
+			</ganzzahl>
+			<default wert="0" />
+		</attributDefinition>
+		<attributDefinition pid="att.intervallGrenze" name="IntervallGrenze">
+			<info>
+				<kurzinfo>Eine Intervallgrenze, also Minimum oder Maximum.
+				</kurzinfo>
+			</info>
+			<ganzzahl bits="64">
+				<bereich minimum="-9223372036854775807" maximum="9223372036854775807"
+					skalierung="0,00001" />
+				<zustand name="Undefiniert" wert="-9223372036854775808" />
+			</ganzzahl>
+			<default wert="Undefiniert" />
+		</attributDefinition>
+		<attributDefinition pid="att.bildReferenz" name="BildReferenz">
+			<info>
+				<kurzinfo>Referenziert auf ein Bildobjekt.</kurzinfo>
+			</info>
+			<objektReferenz referenzierungsart="assoziation" typ="typ.bild" />
+		</attributDefinition>
+		<attributDefinition pid="att.bildReferenzOptional"
+			name="BildReferenzOptional">
+			<info>
+				<kurzinfo>Eine optionale Referenz auf ein Bildobjekt.</kurzinfo>
+			</info>
+			<objektReferenz referenzierungsart="assoziation" typ="typ.bild"
+				undefiniert="erlaubt" />
+		</attributDefinition>
+		<attributDefinition pid="att.portableBitMapReferenz"
+			name="PortableBitMapReferenz">
+			<info>
+				<kurzinfo>Referenziert auf eine Portable Bitmap.</kurzinfo>
+			</info>
+			<objektReferenz referenzierungsart="assoziation"
+				typ="typ.portableBitMap" />
+		</attributDefinition>
+		<attributDefinition pid="att.portableBitMapReferenzOptional"
+			name="PortableBitMapReferenzOptional">
+			<info>
+				<kurzinfo>Eine optionale Referenz auf eine Portable Bitmap.
+				</kurzinfo>
+			</info>
+			<objektReferenz referenzierungsart="assoziation"
+				typ="typ.portableBitMap" undefiniert="erlaubt" />
+		</attributDefinition>
+	</modell>
+</konfigurationsBereich>

@@ -1,0 +1,139 @@
+<?xml version="1.0" encoding="ISO-8859-1"?>
+<!DOCTYPE konfigurationsBereich PUBLIC "-//K2S//DTD Dokument//DE" "K2S.dtd">
+<konfigurationsBereich pid="kb.tmSbaUmsetzungsEinheitNiederschlagsIntensitaet" name="Teilmodell SBA Umsetzungseinheit Niederschlagsintensitaet" verantwortlich="kv.dambach">
+	<info>
+		<kurzinfo>Teilmodell mit Datenmodellierung für die Umsetzungseinheit der Niederschlagsintensität.</kurzinfo>
+	</info>
+	<konfigurationsAenderung stand="21.02.2011" version="1" autor="Dambach-Werke GmbH, R. Asal" grund="Änderungsdokumentation siehe &apos;ReleaseNotes kv.dambach.doc&apos;"></konfigurationsAenderung>
+	<!--
+	Abhängigkeiten des Bereichs kb.tmSbaUmsetzungsEinheitNiederschlagsIntensitaet
+	Abhängig ab Version      Art der Abhängigkeit      Version des benötigten Bereichs      Benötigter Bereich
+	1                        notwendig                 1                                    kb.metaModellGlobal                
+	1                        notwendig                 1                                    kb.tmUmfeldDatenGlobal             
+	1                        notwendig                 3                                    kb.tmVewBetriebGlobal              
+	1                        notwendig                 1                                    kb.kv.dambach                      
+	1                        notwendig                 4                                    kb.fachModellGlobal                
+	-->
+	<modell>
+		<typDefinition pid="typ.sbaUmsetzungsEinheitNiederschlagsIntensität" name="UmsetzungsEinheitNiederschlagsIntensität" objektNamenPermanent="nein">
+			<info>
+				<kurzinfo>
+					Globales Objekt für eine Umsetzungseinheit der Niederschlagsintensität.
+				</kurzinfo>
+				<beschreibung>
+					<absatz>
+						Bereitstellung von globalen Konfigurationsdaten und Parametern für virtuelle Umsetzungseinheiten.
+					</absatz>
+				</beschreibung>
+			</info>
+			<erweitert pid="typ.konfigurationsObjekt"/>
+			<attributgruppe pid="atg.sbaUmsetzungsEinheitenSensorwerteVerwendung"/>
+			<menge pid="menge.umsetzungsEinheitenVirtuell" name="UmsetzungsEinheitenVirtuell" erforderlich="ja">
+				<info>
+					<kurzinfo>Menge mit virtuellen Umsetzungseinheiten.</kurzinfo>
+				</info>
+			</menge>
+			<defaultParameter attributgruppe="atg.sbaUmsetzungsEinheitenSensorwerteVerwendung" typ="typ.sbaUmsetzungsEinheitNiederschlagsIntensität">
+				<datum name="HauptsensorVerwenden" wert="Ja"/>
+				<datum name="NebensensorenVerwenden" wert="Nein"/>
+				<datenliste name="Urlasser">
+					<datum name="BenutzerReferenz" wert="undefiniert"/>
+					<datum name="Ursache" wert=""/>
+					<datum name="Veranlasser" wert=""/>
+				</datenliste>
+			</defaultParameter>
+		</typDefinition>
+		<typDefinition pid="typ.sbaUmsetzungsEinheitVirtuell" name="UmsetzungsEinheitVirtuell" objektNamenPermanent="nein">
+			<info>
+				<kurzinfo>
+					Stellt eine virtuelle Umsetzungseinheit für die Niederschlagsintensität dar.
+				</kurzinfo>
+				<beschreibung>
+					<absatz>
+						Validierung der gemeldeten Niederschlagsstufe eines Hauptsensors mit seinen Nebensensoren und die Simulation der Abtrocknung.
+					</absatz>
+				</beschreibung>
+			</info>
+			<erweitert pid="typ.konfigurationsObjekt"/>
+			<attributgruppe pid="atg.sbaUmsetzungsEinheitAbtrocknung"/>
+			<attributgruppe pid="atg.sbaUmsetzungsEinheitVirtuell"/>
+			<defaultParameter attributgruppe="atg.sbaUmsetzungsEinheitAbtrocknung" typ="typ.sbaUmsetzungsEinheitVirtuell">
+				<datenfeld name="Verzögerungszeit">
+				</datenfeld>
+				<datenliste name="Urlasser">
+					<datum name="BenutzerReferenz" wert="undefiniert"/>
+					<datum name="Ursache" wert=""/>
+					<datum name="Veranlasser" wert=""/>
+				</datenliste>
+			</defaultParameter>
+		</typDefinition>
+		<attributgruppenDefinition pid="atg.sbaUmsetzungsEinheitAbtrocknung" name="UmsetzungsEinheitAbtrocknung" parametrierend="ja">
+			<info>
+				<kurzinfo>Parameter für die Definition der Verzögerungszeiten pro Nässestufe.</kurzinfo>
+			</info>
+			<attribut pid="att.zeitDauer" anzahl="0" anzahlIst="variabel" name="Verzögerungszeit">
+				<info>
+					<kurzinfo>Verzögerungszeiten pro Nässestufe zur nächst niedrigeren Nässestufe.</kurzinfo>
+					<beschreibung>
+					<absatz>
+						Index 0 wird nicht verwendet. Die Verzögerungszeit in Index 1 ist die Verzögerungszeit von "Nass1" nach "Trocken usw.".
+					</absatz>
+				</beschreibung>
+				</info>
+			</attribut>
+			<attributliste pid="atl.urlasser" anzahl="1" anzahlIst="fest" name="Urlasser">
+			</attributliste>
+		</attributgruppenDefinition>
+		<attributgruppenDefinition pid="atg.sbaUmsetzungsEinheitenSensorwerteVerwendung" name="UmsetzungsEinheitenSensorwerteVerwendung" parametrierend="ja">
+			<info>
+				<kurzinfo>Parameter für die Definition der Verwendung der Sensorwerte für alle Umsetzungseinheiten.</kurzinfo>
+			</info>
+			<attribut pid="att.jaNein" anzahl="1" anzahlIst="fest" name="HauptsensorVerwenden">
+				<info>
+					<kurzinfo>Es werden nur die Werte des Hauptsensors verwendet.</kurzinfo>
+				</info>
+			</attribut>
+			<attribut pid="att.jaNein" anzahl="1" anzahlIst="fest" name="NebensensorenVerwenden">
+				<info>
+					<kurzinfo>Es werden nur die Werte der Nebensensoren verwendet.</kurzinfo>
+				</info>
+			</attribut>
+			<attributliste pid="atl.urlasser" anzahl="1" anzahlIst="fest" name="Urlasser">
+			</attributliste>
+		</attributgruppenDefinition>
+		<attributgruppenDefinition pid="atg.sbaUmsetzungsEinheitVirtuell" name="UmsetzungsEinheitVirtuell" parametrierend="nein">
+			<info>
+				<kurzinfo>Konfigurierende Daten der virtuellen Umsetzungseinheit für die Niederschlagsintensität.</kurzinfo>
+			</info>
+			<aspekt pid="asp.eigenschaften" konfigurationsModus="datensatzOptionalUndÄnderbar">
+			</aspekt>
+			<attribut pid="att.umfeldDatenSensorReferenz" anzahl="1" anzahlIst="fest" name="SensorVirtuell">
+				<info>
+					<kurzinfo>Virtueller Umfelddatensensor für das Ergebnis der Umsetzungseinheit. Mit Hilfe dieses virtuellen Sensors arbeitet die Nässesteuerung des Steuerungsmodells wie gewohnt.</kurzinfo>
+				</info>
+			</attribut>
+			<attribut pid="att.umfeldDatenSensorReferenz" anzahl="1" anzahlIst="fest" name="Hauptsensor">
+				<info>
+					<kurzinfo>Referenz auf einen Umfelddatensensor Niederschlagsintensität gemäß TLS Typ53.</kurzinfo>
+				</info>
+			</attribut>
+			<attribut pid="att.umfeldDatenSensorReferenz" anzahl="0" anzahlIst="variabel" name="NebensensorenTrocken">
+				<info>
+					<kurzinfo>Referenzen auf Umfelddatensensoren für die Überprüfung von "trocken".</kurzinfo>
+				</info>
+			</attribut>
+			<attribut pid="att.umfeldDatenSensorReferenz" anzahl="0" anzahlIst="variabel" name="NebensensorenNass">
+				<info>
+					<kurzinfo>Referenzen auf Umfelddatensensoren für die Überprüfung von "nass".</kurzinfo>
+				</info>
+			</attribut>
+		</attributgruppenDefinition>
+		<mengenDefinition pid="menge.umsetzungsEinheitenVirtuell" elemente="typ.sbaUmsetzungsEinheitVirtuell" aenderbar="nein" mindestens="0" hoechstens="0" referenzierungsart="assoziation">
+			<info>
+				<kurzinfo>Menge mit virtuellen Umsetzungseinheiten.</kurzinfo>
+			</info>
+		</mengenDefinition>
+	</modell>
+	<objekte>
+	</objekte>
+</konfigurationsBereich>

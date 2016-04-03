@@ -1,0 +1,89 @@
+<?xml version="1.0" encoding="ISO-8859-1"?>
+<!DOCTYPE konfigurationsBereich PUBLIC "-//K2S//DTD Dokument//DE" "K2S.dtd">
+<konfigurationsBereich pid="kb.tmAggrAxl" name="Aggregation Achslastdaten" verantwortlich="kv.inovat">
+	<info>
+		<kurzinfo>Teilmodell mit Datenmodellierung für die Steuerung der Achslastdaten Aggregation.</kurzinfo>
+		<beschreibung>A</beschreibung>
+	</info>
+	<konfigurationsAenderung stand="08.10.2010" version="1" autor="inovat, Dipl.-Ing. H. C. Kniß (HCK)" grund="Neuerstellung"></konfigurationsAenderung>
+	<!--
+	Abhängigkeiten des Bereichs kb.tmAggrAxl
+	Abhängig ab Version      Art der Abhängigkeit      Version des benötigten Bereichs      Benötigter Bereich
+	1                        notwendig                 2                                    kb.tmKExTlsGlobal                  
+	1                        notwendig                 1                                    kb.kv.inovat                       
+	1                        notwendig                 1                                    kb.systemModellGlobal              
+	1                        notwendig                 1                                    kb.fachModellGlobal                
+	1                        notwendig                 1                                    kb.metaModellGlobal                
+	-->
+		<modell>
+		<typDefinition pid="typ.aggrAxl" name="AggregationAchslast" objektNamenPermanent="nein">
+			<info>
+				<kurzinfo>Systemobjekt für für die Steuerung der Aggregation der Achslastdaten (FG 2: Typ 66 (Achslast Version 11) aus Typ 62 (Einzelergebnisse Version3) .</kurzinfo>
+			</info>
+			<erweitert pid="typ.konfigurationsObjekt"/>
+			<attributgruppe pid="atg.aggrAxlStatus"/>
+			<attributgruppe pid="atg.aggrAxlSteuerung"/>
+		</typDefinition>
+		<attributgruppenDefinition pid="atg.aggrAxlStatus" name="AggrAxlStatus" parametrierend="nein">
+			<info>
+				<kurzinfo>Informationen zum aktuellen Status der Aggregation Achslastdaten (Fortschritt, Status).</kurzinfo>
+			</info>
+			<aspekt pid="asp.aggrAxlStatus" onlineModus="quelle">
+			</aspekt>
+			<attribut pid="att.prozent" anzahl="1" anzahlIst="fest" name="FortschrittProzent">
+			</attribut>
+			<attribut pid="att.text" anzahl="1" anzahlIst="fest" name="StatusMeldung">
+				<info>
+					<kurzinfo>StatusMeldung mit dem aktuellen Zustand der Aggregation.</kurzinfo>
+				</info>
+			</attribut>
+		</attributgruppenDefinition>
+		<attributgruppenDefinition pid="atg.aggrAxlSteuerung" name="AggrAxlSteuerung" parametrierend="nein">
+			<info>
+				<kurzinfo>Attributgruppe zur Steuerung des der Aggregation der Achslastdaten.</kurzinfo>
+			</info>
+			<aspekt pid="asp.anfrage" onlineModus="senke">
+			</aspekt>
+			<attribut pid="att.aggrAxlZeitpunkt" anzahl="1" anzahlIst="fest" name="von">
+				<info>
+					<kurzinfo>Zeitbereichsanfang, für den nachaggregiert werden soll. Der tatsächliche Anfang liegt i. d. R. davor (tatsächlicher Intervallanfang) und wird automatisch ermittelt.</kurzinfo>
+				</info>
+			</attribut>
+			<attribut pid="att.aggrAxlZeitpunkt" anzahl="1" anzahlIst="fest" name="bis">
+				<info>
+					<kurzinfo>Zeitbereichsende, für den nachaggregiert werden soll. Das tatsächliche Ende liegt i. d. R. dahinter (tatsächliches Intervallende (ausschließlich) und wird automatisch ermittelt.)</kurzinfo>
+				</info>
+			</attribut>
+			<attribut pid="att.deAxlReferenz" anzahl="0" anzahlIst="variabel" name="DeAxl">
+				<info>
+					<kurzinfo>Liste aller TLS AXL-DE, für die aggregiert werden soll.</kurzinfo>
+				</info>
+			</attribut>
+		</attributgruppenDefinition>
+		<aspektDefinition pid="asp.aggrAxlStatus" name="AggrAxlStatus">
+			<info>
+				<kurzinfo>Aspekt zur Statusanzeige.</kurzinfo>
+			</info>
+		</aspektDefinition>
+		<attributDefinition pid="att.aggrAxlZeitpunkt" name="TLSZeitpunkt">
+			<info>
+				<kurzinfo>
+					Zeitpunkt für Intervallbeginn und Ende.
+				</kurzinfo>
+			</info>
+			<zeitstempel relativ="nein" genauigkeit="millisekunden"/>
+		</attributDefinition>
+	</modell>
+	<objekte>
+		<konfigurationsObjekt pid="aggrAxl.vewStandard1" name="StandardVerwaltungsObjektAggrAxl1" typ="typ.aggrAxl">
+		</konfigurationsObjekt>
+		<konfigurationsObjekt pid="aggrAxl.vewStandard2" name="StandardVerwaltungsObjektAggrAxl2" typ="typ.aggrAxl">
+		</konfigurationsObjekt>
+		<konfigurationsObjekt pid="aggrAxl.vewStandard3" name="StandardVerwaltungsObjektAggrAxl3" typ="typ.aggrAxl">
+		</konfigurationsObjekt>
+		<konfigurationsObjekt pid="aggrAxl.vewStandard4" name="StandardVerwaltungsObjektAggrAxl4" typ="typ.aggrAxl">
+		</konfigurationsObjekt>
+		<konfigurationsObjekt pid="aggrAxl.vewStandard5" name="StandardVerwaltungsObjektAggrAxl5" typ="typ.aggrAxl">
+		</konfigurationsObjekt>
+	</objekte>
+</konfigurationsBereich>

@@ -1,0 +1,22 @@
+<?xml version="1.0" encoding="ISO-8859-1"?>
+<!DOCTYPE konfigurationsBereich PUBLIC "-//K2S//DTD Dokument//DE" "K2S.dtd">
+<konfigurationsBereich pid="kb.kv.bitctrl" name="Bereich BitCtrl Systems" verantwortlich="kv.bitctrl">
+	<info>
+		<kurzinfo>Bereich mit dem Konfigurationsverantwortlichen für BitCtrl Systems</kurzinfo>
+	</info>
+	<konfigurationsAenderung stand="19.03.2007" version="1" autor="inovat, Dipl.-Ing. H. C. Kniß (HCK)" grund="A:Überarbeitung des Datenkatalogs für Veröffentlichung Kernsoftware. Änderungsdokumentation siehe 'inovat: Datenkatalog DaV-Release Notes'."></konfigurationsAenderung>
+	<modell>
+	</modell>
+	<objekte>
+		<konfigurationsObjekt pid="kv.bitctrl" name="Konfiguration BitCtrl Systems" typ="typ.konfigurationsVerantwortlicher">
+			<info>
+				<kurzinfo>Konfigurationsverantwortlicher für BitCtrl Systems</kurzinfo>
+			</info>
+			<datensatz attributgruppe="atg.konfigurationsVerantwortlicherEigenschaften" aspekt="asp.eigenschaften">
+				<datum name="kodierung" wert="55"/>
+				<datenfeld name="defaultBereich">
+				</datenfeld>
+			</datensatz>
+		</konfigurationsObjekt>
+	</objekte>
+</konfigurationsBereich>

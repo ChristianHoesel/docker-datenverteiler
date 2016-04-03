@@ -1,0 +1,71 @@
+<?xml version="1.0" encoding="ISO-8859-1"?>
+<!DOCTYPE konfigurationsBereich PUBLIC "-//K2S//DTD Dokument//DE" "K2S.dtd">
+<konfigurationsBereich pid="kb.udaTestModell" verantwortlich="kv.bitctrl">
+	<konfigurationsAenderung stand="19.02.2007" version="1" autor="Uwe Peuker, BitCtrl Systems GmbH" grund="Test">Bereich zum Test der Umfassenden Datenanalyse erzeugt.</konfigurationsAenderung>
+	<modell>
+		<typDefinition pid="typ.mqt" name="MQT" objektNamenPermanent="nein" persistenzModus="transient">
+			<info>
+				<kurzinfo>Prüfobjekt-Typ MQT</kurzinfo>
+			</info>
+			<erweitert pid="typ.dynamischesObjekt"/>
+			<attributgruppe pid="atg.verkehrswerteT"/>
+		</typDefinition>
+		<typDefinition pid="typ.uzt" name="UZT" objektNamenPermanent="nein">
+			<info>
+				<kurzinfo>Prüfobjekt-Typ UZT</kurzinfo>
+			</info>
+			<erweitert pid="typ.konfigurationsObjekt"/>
+			<menge pid="menge.MQT" name="MQT" erforderlich="ja">
+			</menge>
+		</typDefinition>
+		<attributgruppenDefinition pid="atg.verkehrswerteT" name="VerkehrswerteT" parametrierend="nein">
+			<info>
+				<kurzinfo>ATG VerkehrswerteT</kurzinfo>
+			</info>
+			<aspekt pid="asp.aufbereitetT" onlineModus="quelleUndSenke">
+			</aspekt>
+			<aspekt pid="asp.logischPLgeprueftT" onlineModus="quelleUndSenke">
+			</aspekt>
+			<aspekt pid="asp.weitererAspektT" onlineModus="quelleUndSenke">
+			</aspekt>
+			<attribut pid="att.verkehrsstaerke" anzahl="1" anzahlIst="fest" name="qKfzT">
+				<info>
+					<kurzinfo>Kfz-Verkehrsstärke</kurzinfo>
+				</info>
+			</attribut>
+			<attribut pid="att.verkehrsstaerke" anzahl="1" anzahlIst="fest" name="qLkwT">
+			</attribut>
+		</attributgruppenDefinition>
+		<aspektDefinition pid="asp.aufbereitetT">
+			<info>
+				<kurzinfo>Aspekt aufbereitetT</kurzinfo>
+			</info>
+		</aspektDefinition>
+		<aspektDefinition pid="asp.logischPLgeprueftT">
+			<info>
+				<kurzinfo>Aspekt logisch PL-geprüftT</kurzinfo>
+			</info>
+		</aspektDefinition>
+		<aspektDefinition pid="asp.weitererAspektT">
+			<info>
+				<kurzinfo>Aspekt weiterer Aspekt</kurzinfo>
+			</info>
+		</aspektDefinition>
+		<attributDefinition pid="att.verkehrsstaerke" name="Kfz-Verkehrsstaerke">
+			<info>
+				<kurzinfo>Attribut Verkehrsstärke</kurzinfo>
+			</info>
+			<ganzzahl bits="32">
+				<bereich skalierung="1" minimum="0" maximum="65535" einheit="Fz/h">
+				</bereich>
+			</ganzzahl>
+		</attributDefinition>
+		<mengenDefinition pid="menge.MQT" elemente="typ.mqt" aenderbar="ja" mindestens="0" hoechstens="0" referenzierungsart="assoziation">
+			<info>
+				<kurzinfo>Mengen von MQT</kurzinfo>
+			</info>
+		</mengenDefinition>
+	</modell>
+	<objekte>
+	</objekte>
+</konfigurationsBereich>

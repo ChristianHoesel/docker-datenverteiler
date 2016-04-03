@@ -1,0 +1,43 @@
+<?xml version="1.0" encoding="ISO-8859-1"?>
+<!DOCTYPE konfigurationsBereich PUBLIC "-//K2S//DTD Dokument//DE" "K2S.dtd">
+
+<konfigurationsBereich pid="kb.MifImportObjekteTypen" name="MIF-Importobjekttypen" verantwortlich="kv.bw">
+	<info>
+		<kurzinfo>Typen zur Repräsentation der importierten MIF-Objekte.</kurzinfo>
+		<beschreibung>
+		</beschreibung>
+	</info>
+	
+	<modell>
+		<typDefinition pid="typ.Ortslage" name="Ortslage">
+			<info>
+			  <kurzinfo>Ortslagen als geographische Objekte.</kurzinfo> 
+			</info>
+			<erweitert pid="typ.komplexXY" /> 
+		</typDefinition>
+		
+		<typDefinition pid="typ.Ortsname" name="Ortsname">
+			<info>
+			  <kurzinfo>Ortsname als geographisches Objekt.</kurzinfo> 
+			</info>
+			<erweitert pid="typ.punktXY" /> 
+		</typDefinition>
+
+		<typDefinition pid="typ.Kreis" name="Kreisgrenzen">
+			<info>
+			  <kurzinfo>Kreise als geographisches Objekt.</kurzinfo> 
+			</info>
+			<erweitert pid="typ.komplexXY" /> 
+		</typDefinition>
+		
+		<typDefinition pid="typ.gewässer" name="Gewässer">
+			<info>
+			  <kurzinfo>Gewässer als geographisches Objekt.</kurzinfo> 
+			</info>
+			<erweitert pid="typ.komplexXY" /> 
+		</typDefinition>
+	</modell>
+	
+</konfigurationsBereich>
+
+

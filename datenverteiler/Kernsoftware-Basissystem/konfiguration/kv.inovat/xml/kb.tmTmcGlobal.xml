@@ -1,0 +1,947 @@
+<?xml version="1.0" encoding="ISO-8859-1"?>
+<!DOCTYPE konfigurationsBereich PUBLIC "-//K2S//DTD Dokument//DE" "K2S.dtd">
+<konfigurationsBereich pid="kb.tmTmcGlobal" name="TeilmodellTmcGlobal" verantwortlich="kv.inovat">
+	<info>
+		<kurzinfo>Teilmodell mit Datenmodellierung für TMC Location Code Liste.</kurzinfo>
+		<beschreibung>
+			<absatz>Dieses Teilmodell stellt bildet die TMC Location Code Liste mit ihren Informationen ab.</absatz>
+			<absatz>Die folgende Abbildung skizziert die Zusammenhänge und Attributgruppen der verschiedenen Objekttypen imTeilmodell GeoReferenzierung.</absatz>
+			<abbildung src="abbildungen/tmTmcGlobal.jpg">
+				<titel>Übersicht Teilmodell TMC Location Code Liste (global)</titel>
+			</abbildung>
+		</beschreibung>
+	</info>
+	<konfigurationsAenderung stand="19.03.2007" version="3" autor="inovat, Dipl.-Ing. H. C. Kniß (HCK)" grund="A:Überarbeitung des Datenkatalogs für Veröffentlichung Kernsoftware. Änderungsdokumentation siehe &apos;inovat: Datenkatalog DaV-Release Notes&apos;."></konfigurationsAenderung>
+	<konfigurationsAenderung stand="20.03.2007" version="3" autor="inovat, Dipl.-Ing. H. C. Kniß (HCK)" grund="B:Überarbeitung des Datenkatalogs für Veröffentlichung Kernsoftware. Änderungsdokumentation siehe &apos;inovat: Datenkatalog DaV-Release Notes&apos;."></konfigurationsAenderung>
+	<konfigurationsAenderung stand="26.06.2007" version="4" autor="inovat, Dipl.-Ing. H. C. Kniß (HCK)" grund="Änderungsdokumentation siehe &apos;ReleaseNotes kv.inovt.doc&apos;"></konfigurationsAenderung>
+	<konfigurationsAenderung stand="20.02.2008" version="4" autor="inovat, Dipl.-Ing. H. C. Kniß (HCK)" grund="B:Überarbeitung des Datenkatalogs für Veröffentlichung Kernsoftware. Änderungsdokumentation siehe &apos;inovat: Datenkatalog DaV-Release Notes&apos;."></konfigurationsAenderung>
+	<!--
+	Abhängigkeiten des Bereichs kb.tmTmcGlobal
+	Abhängig ab Version      Art der Abhängigkeit      Version des benötigten Bereichs      Benötigter Bereich
+	4                        notwendig                 1                                    kb.kv.inovat                       
+	4                        notwendig                 1                                    kb.systemModellGlobal              
+	4                        notwendig                 1                                    kb.fachModellGlobal                
+	4                        notwendig                 1                                    kb.tmGeoReferenzierungGlobal       
+	4                        notwendig                 1                                    kb.metaModellGlobal                
+	-->
+		<modell>
+		<typDefinition pid="typ.tmcGebiet" name="TmcGebiet" objektNamenPermanent="nein">
+			<info>
+				<kurzinfo>TMC Gebietsobjekt.</kurzinfo>
+				<beschreibung>
+					<absatz>Richtlinie für die Vergabe der Pid: 'tmclc.xxxxx' mit</absatz>
+					<liste zeichen="punkt">
+						<listenPunkt>'tmclc' : Abkürzung für
+							<wichtig>TMC L</wichtig>
+							ocation
+							<wichtig>C</wichtig>
+							ode.
+						</listenPunkt>
+						<listenPunkt>'xxxxx' : LocationCode, fünfstellig mit führenden Nullen.</listenPunkt>
+					</liste>
+				</beschreibung>
+			</info>
+			<erweitert pid="typ.tmcLocationCode"/>
+			<erweitert pid="typ.flächeXY"/>
+			<attributgruppe pid="atg.tmcGebiet"/>
+		</typDefinition>
+		<typDefinition pid="typ.tmcLinie" name="TmcLinie" objektNamenPermanent="nein">
+			<info>
+				<kurzinfo>TMC Linienobjekt.</kurzinfo>
+				<beschreibung>
+					<absatz>Richtlinie für die Vergabe der Pid: 'tmclc.xxxxx' mit</absatz>
+					<liste zeichen="punkt">
+						<listenPunkt>'tmclc' : Abkürzung für
+							<wichtig>TMC L</wichtig>
+							ocation
+							<wichtig>C</wichtig>
+							ode.
+						</listenPunkt>
+						<listenPunkt>'xxxxx' : LocationCode, fünfstellig mit führenden Nullen.</listenPunkt>
+					</liste>
+				</beschreibung>
+			</info>
+			<erweitert pid="typ.tmcLocationCode"/>
+			<erweitert pid="typ.linieXY"/>
+			<attributgruppe pid="atg.tmcLinie"/>
+		</typDefinition>
+		<typDefinition pid="typ.tmcLocationCode" name="TmcLocationCode" objektNamenPermanent="nein">
+			<info>
+				<kurzinfo>Basisobjekttyp, der von allen Objettypen erweitert wird, die Tmc Location Code enthalten.</kurzinfo>
+				<beschreibung>
+					<absatz>Richtlinie für die Vergabe der Pid: 'tmclc.xxxxx' mit</absatz>
+					<liste zeichen="punkt">
+						<listenPunkt>'tmclc' : Abkürzung für
+							<wichtig>TMC L</wichtig>
+							ocation
+							<wichtig>C</wichtig>
+							ode.
+						</listenPunkt>
+						<listenPunkt>'xxxxx' : LocationCode, fünfstellig mit führenden Nullen.</listenPunkt>
+					</liste>
+				</beschreibung>
+			</info>
+			<erweitert pid="typ.konfigurationsObjekt"/>
+			<attributgruppe pid="atg.tmcLocationCode"/>
+		</typDefinition>
+		<typDefinition pid="typ.tmcPunkt" name="TmcPunkt" objektNamenPermanent="nein">
+			<info>
+				<kurzinfo>TMC Punktobjekt.</kurzinfo>
+				<beschreibung>
+					<absatz>Richtlinie für die Vergabe der Pid: 'tmclc.xxxxx' mit</absatz>
+					<liste zeichen="punkt">
+						<listenPunkt>'tmclc' : Abkürzung für
+							<wichtig>TMC L</wichtig>
+							ocation
+							<wichtig>C</wichtig>
+							ode.
+						</listenPunkt>
+						<listenPunkt>'xxxxx' : LocationCode, fünfstellig mit führenden Nullen.</listenPunkt>
+					</liste>
+				</beschreibung>
+			</info>
+			<erweitert pid="typ.tmcLocationCode"/>
+			<erweitert pid="typ.punktXY"/>
+			<attributgruppe pid="atg.tmcPunkt"/>
+		</typDefinition>
+		<attributgruppenDefinition pid="atg.tmcGebiet" name="TmcGebiet" parametrierend="nein">
+			<info>
+				<kurzinfo>Konfigurierende Eigenschaften der Objekte des Typs.</kurzinfo>
+			</info>
+			<aspekt pid="asp.eigenschaften" konfigurationsModus="datensatzOptional">
+			</aspekt>
+			<attribut pid="att.tmcGebietReferenzOptional" anzahl="1" anzahlIst="fest" name="istTeilvonTmcGebiet">
+			</attribut>
+		</attributgruppenDefinition>
+		<attributgruppenDefinition pid="atg.tmcLinie" name="TmcLinie" parametrierend="nein">
+			<info>
+				<kurzinfo>Konfigurierende Eigenschaften der Objekte des Typs.</kurzinfo>
+			</info>
+			<aspekt pid="asp.eigenschaften" konfigurationsModus="datensatzOptional">
+			</aspekt>
+			<attribut pid="att.tmcLinieReferenzOptional" anzahl="1" anzahlIst="fest" name="Vorgänger">
+			</attribut>
+			<attribut pid="att.tmcLinieReferenzOptional" anzahl="1" anzahlIst="fest" name="Nachfolger">
+			</attribut>
+			<attribut pid="att.tmcLinieReferenzOptional" anzahl="1" anzahlIst="fest" name="istTeilvonTmcLinie">
+			</attribut>
+			<attribut pid="att.tmcGebietReferenzOptional" anzahl="1" anzahlIst="fest" name="istTeilvonTmcGebiet">
+			</attribut>
+		</attributgruppenDefinition>
+		<attributgruppenDefinition pid="atg.tmcLocationCode" name="TmcLocationCode" parametrierend="nein">
+			<info>
+				<kurzinfo>Konfigurierende Eigenschaften der Objekte des Typs.</kurzinfo>
+			</info>
+			<aspekt pid="asp.eigenschaften" konfigurationsModus="datensatzOptional">
+			</aspekt>
+			<attribut pid="att.tmcLocationCode" anzahl="1" anzahlIst="fest" name="TmcLocationCode">
+				<info>
+					<kurzinfo>Ortscode (TMC Location Code)</kurzinfo>
+				</info>
+			</attribut>
+			<attribut pid="att.tmcOrtsTyp" anzahl="1" anzahlIst="fest" name="TmcOrtsTyp">
+				<info>
+					<kurzinfo>Ortstyp und OrtSubtyp des Ortes entsprechend der Festlegungen der LCL.</kurzinfo>
+					<beschreibung>
+						<absatz>Für die Sprachunabhängigkeit der weitergegebenen Informationen und zur Mitteilung an das empfangende System, welche Datenfelder zu erwarten sind, sind Ortstypen und Untertypen erforderlich. Innerhalb einer jeden Kategorie wird (grundsätzlich) nach Ortstypen unterschieden, sofern für einen Ort ein funktionaler Unterschied besteht in der Art, wie er vom Empfänger einer Meldung zu behandeln ist.</absatz>
+						<absatz>Orts- und Untertypen werden gemeinsam kodiert. Dabei gilt folgendes Kodierschema:</absatz>
+						<liste zeichen="punkt">
+							<listenPunkt>Der TMC-Typ 'Punkt', 'Linie' oder 'Gebiet' ergibt sich aus dem Objekttyp
+								<verweis pid="typ.tmcPunkt"></verweis>
+								,
+								<verweis pid="typ.tmcLinie"></verweis>
+								oder
+								<verweis pid="typ.tmcGebiet"></verweis>
+								.
+							</listenPunkt>
+							<listenPunkt>Der Name wird gebildet aus 'OrtTypName:UntertypName', wobei 'UnterTypName' gleich 'Allgemein' verwendet wird, sofern kein Untertyp vorhanden ist.</listenPunkt>
+							<listenPunkt>Der Wert des Aufzahlungstyps ist eine sechsstellige Zahl der Form TNNSSS mit T gleich Typ (1=Punkt, 2=Linie, 3=Gebiet), NN gleich Orttypnummer und SSS gleich Untertypnummer entsprechend LCL, jeweils mit führenden Nullen.</listenPunkt>
+						</liste>
+					</beschreibung>
+				</info>
+			</attribut>
+			<attribut pid="att.text" anzahl="1" anzahlIst="fest" name="TmcStraßenNummer">
+				<info>
+					<kurzinfo>Straßennummer der Straße, die durch diesen Ortscode referenziert wird.</kurzinfo>
+				</info>
+			</attribut>
+			<attribut pid="att.text" anzahl="1" anzahlIst="fest" name="TmcStraßenName">
+				<info>
+					<kurzinfo>Straßenname der Straße.</kurzinfo>
+				</info>
+			</attribut>
+			<attribut pid="att.text" anzahl="1" anzahlIst="fest" name="TmcErsterName">
+				<info>
+					<kurzinfo>Zusätzlicher Name.</kurzinfo>
+					<beschreibung>Namen von Orten sind im Regelfall in der Sprache des jeweiligen Ortes anzugeben. Es ist jedoch auch zulässig, Fassungen von Ortstabellen mit (zwei- oder mehrsprachigen) Ortsnamen, welche in andere Sprachen übersetzt wurden, zu erstellen. Der Name eines Anschlusses darf eine Beschreibung sein, wie sie Straßennutzern am besten bekannt ist.</beschreibung>
+				</info>
+			</attribut>
+			<attribut pid="att.text" anzahl="1" anzahlIst="fest" name="TmcZweiterName">
+				<info>
+					<kurzinfo>Zusätzlicher Name.</kurzinfo>
+					<beschreibung>Namen von Orten sind im Regelfall in der Sprache des jeweiligen Ortes anzugeben. Es ist jedoch auch zulässig, Fassungen von Ortstabellen mit (zwei- oder mehrsprachigen) Ortsnamen, welche in andere Sprachen übersetzt wurden, zu erstellen. Der Name eines Anschlusses darf eine Beschreibung sein, wie sie Straßennutzern am besten bekannt ist.</beschreibung>
+				</info>
+			</attribut>
+			<attribut pid="att.jaNein" anzahl="1" anzahlIst="fest" name="TmcStadtverkehr">
+				<info>
+					<kurzinfo>Gibt an, ob der Verkehr an diesem Punktort hauptsächlich den Charakter von Stadtverkehr (ja) oder von außerorts Verkehr (nein) hat</kurzinfo>
+				</info>
+			</attribut>
+			<attribut pid="att.jaNein" anzahl="1" anzahlIst="fest" name="EinfahrtPositiveRichtung">
+				<info>
+					<kurzinfo>Möglichkeit, auf die Straße in positiver Erfassungsrichtung aufzufahren.</kurzinfo>
+				</info>
+			</attribut>
+			<attribut pid="att.jaNein" anzahl="1" anzahlIst="fest" name="AusfahrtPositiveRichtung">
+				<info>
+					<kurzinfo>Möglichkeit, aus der Straße in positiver Erfassungsrichtung herauszufahren.</kurzinfo>
+				</info>
+			</attribut>
+			<attribut pid="att.jaNein" anzahl="1" anzahlIst="fest" name="EinfahrtNegativeRichtung">
+				<info>
+					<kurzinfo>Möglichkeit, in die Straße in negativer Erfassungsrichtung einzufahren.</kurzinfo>
+				</info>
+			</attribut>
+			<attribut pid="att.jaNein" anzahl="1" anzahlIst="fest" name="AusfahrtNegativeRichtung">
+				<info>
+					<kurzinfo>Möglichkeit, aus der Straße in negariver Erfassungsrichtung auszufahren</kurzinfo>
+				</info>
+			</attribut>
+			<attribut pid="att.jaNein" anzahl="1" anzahlIst="fest" name="VorhandenPositiveRichtung">
+				<info>
+					<kurzinfo>Zur Angabe, dass ein Ort in der positiven Erfassungsrichtung vorhanden ist.</kurzinfo>
+				</info>
+			</attribut>
+			<attribut pid="att.jaNein" anzahl="1" anzahlIst="fest" name="VorhandenNegativeRichtung">
+				<info>
+					<kurzinfo>Zur Angabe, dass ein Ort in negativer Erfassungsrichtung vorhanden ist.</kurzinfo>
+				</info>
+			</attribut>
+			<attribut pid="att.text" anzahl="1" anzahlIst="fest" name="AusfahrtNr">
+				<info>
+					<kurzinfo>Nummer der Ausfahrt (z. B. "4a" ).</kurzinfo>
+				</info>
+			</attribut>
+			<attribut pid="att.wgs84Länge" anzahl="1" anzahlIst="fest" name="x">
+				<info>
+					<kurzinfo>x-Koordinate (Längenangaben gemäß WGS84).</kurzinfo>
+				</info>
+			</attribut>
+			<attribut pid="att.wgs84Breite" anzahl="1" anzahlIst="fest" name="y">
+				<info>
+					<kurzinfo>y-Koordinate (Breitenangabe gemäß WGS84).</kurzinfo>
+				</info>
+			</attribut>
+			<attribut pid="att.text" anzahl="1" anzahlIst="fest" name="UmleitungPositiveRichtung">
+				<info>
+					<kurzinfo>Umleitung in positive Richtung über angegebene Umleitungsstrecke.</kurzinfo>
+				</info>
+			</attribut>
+			<attribut pid="att.text" anzahl="1" anzahlIst="fest" name="UmleitungNegativeRichtung">
+				<info>
+					<kurzinfo>Umleitung in negative Richtung über angegebene Umleitungsstrecke.</kurzinfo>
+				</info>
+			</attribut>
+			<attribut pid="att.text" anzahl="1" anzahlIst="fest" name="NetzKnotenNrA">
+				<info>
+					<kurzinfo>Ortscode gehört zum angegebenen Netzknoten A.</kurzinfo>
+				</info>
+			</attribut>
+			<attribut pid="att.text" anzahl="1" anzahlIst="fest" name="NetzKnotenNrB">
+				<info>
+					<kurzinfo>Ortscode gehört zum angegebenen Netzknoten B.</kurzinfo>
+				</info>
+			</attribut>
+			<attribut pid="att.text" anzahl="1" anzahlIst="fest" name="Station">
+				<info>
+					<kurzinfo>Ortscode gehört zur angegebenen Station.</kurzinfo>
+				</info>
+			</attribut>
+			<attribut pid="att.text" anzahl="1" anzahlIst="fest" name="PolizeiDirektion">
+				<info>
+					<kurzinfo>Ortscode gehört zur angegebenen Polizeidirektion.</kurzinfo>
+				</info>
+			</attribut>
+			<attribut pid="att.text" anzahl="1" anzahlIst="fest" name="VerwaltungsBereich">
+				<info>
+					<kurzinfo>Ortscode liegt im angegebenen Verwaltungsbereich.</kurzinfo>
+				</info>
+			</attribut>
+			<attribut pid="att.jaNein" anzahl="1" anzahlIst="fest" name="Veränderung">
+				<info>
+					<kurzinfo>Wurde Datensatz gegenüber letzter LocationCodeListe verändert ?</kurzinfo>
+				</info>
+			</attribut>
+			<attribut pid="att.jaNein" anzahl="1" anzahlIst="fest" name="Tern">
+				<info>
+					<kurzinfo>Tern ????</kurzinfo>
+				</info>
+			</attribut>
+			<attribut pid="att.text" anzahl="1" anzahlIst="fest" name="ÄnderungsDatum">
+				<info>
+					<kurzinfo>Eintrag wurde zuletzt geändert am angegebenen Datum.</kurzinfo>
+				</info>
+			</attribut>
+			<attribut pid="att.jaNein" anzahl="1" anzahlIst="fest" name="aktiviert">
+				<info>
+					<kurzinfo>Ortscode ist aktiv.</kurzinfo>
+				</info>
+			</attribut>
+			<attribut pid="att.jaNein" anzahl="1" anzahlIst="fest" name="getestet">
+				<info>
+					<kurzinfo>Daten wurden getestet.</kurzinfo>
+				</info>
+			</attribut>
+			<attribut pid="att.text" anzahl="10" anzahlIst="variabel" name="Sondereintrag">
+				<info>
+					<kurzinfo>Sondereintrag. Interpretation ist nicht definiert.</kurzinfo>
+				</info>
+			</attribut>
+		</attributgruppenDefinition>
+		<attributgruppenDefinition pid="atg.tmcPunkt" name="TmcPunkt" parametrierend="nein">
+			<info>
+				<kurzinfo>Konfigurierende Eigenschaften der Objekte des Typs.</kurzinfo>
+			</info>
+			<aspekt pid="asp.eigenschaften" konfigurationsModus="datensatzOptional">
+			</aspekt>
+			<attribut pid="att.tmcPunktReferenzOptional" anzahl="1" anzahlIst="fest" name="Vorgänger">
+			</attribut>
+			<attribut pid="att.tmcPunktReferenzOptional" anzahl="1" anzahlIst="fest" name="Nachfolger">
+			</attribut>
+			<attribut pid="att.tmcPunktReferenzOptional" anzahl="1" anzahlIst="fest" name="Kreuzung">
+			</attribut>
+			<attribut pid="att.tmcLinieReferenzOptional" anzahl="1" anzahlIst="fest" name="istTeilvonTmcLinie">
+			</attribut>
+			<attribut pid="att.tmcGebietReferenzOptional" anzahl="1" anzahlIst="fest" name="istTeilvonTmcGebiet">
+			</attribut>
+		</attributgruppenDefinition>
+		<attributDefinition pid="att.tmcGebietReferenz" name="TmcGebietReferenz">
+			<info>
+				<kurzinfo>Attribut zur Referenzierung des Objekttyps: typ.tmcGebiet.</kurzinfo>
+			</info>
+			<objektReferenz typ="typ.tmcGebiet" undefiniert="verboten" referenzierungsart="assoziation"/>
+		</attributDefinition>
+		<attributDefinition pid="att.tmcGebietReferenzOptional" name="TmcGebietReferenzOptional">
+			<info>
+				<kurzinfo>Attribut zur Referenzierung des Objekttyps: typ.tmcGebiet (Optionale Referenzierung erlaubt).</kurzinfo>
+			</info>
+			<objektReferenz typ="typ.tmcGebiet" undefiniert="erlaubt" referenzierungsart="assoziation"/>
+		</attributDefinition>
+		<attributDefinition pid="att.tmcLinieReferenz" name="TmcLinieReferenz">
+			<info>
+				<kurzinfo>Attribut zur Referenzierung des Objekttyps: typ.tmcLinie.</kurzinfo>
+			</info>
+			<objektReferenz typ="typ.tmcLinie" undefiniert="verboten" referenzierungsart="assoziation"/>
+		</attributDefinition>
+		<attributDefinition pid="att.tmcLinieReferenzOptional" name="TmcLinieReferenzOptional">
+			<info>
+				<kurzinfo>Attribut zur Referenzierung des Objekttyps: typ.tmcLinie (Optionale Referenzierung erlaubt).</kurzinfo>
+			</info>
+			<objektReferenz typ="typ.tmcLinie" undefiniert="erlaubt" referenzierungsart="assoziation"/>
+		</attributDefinition>
+		<attributDefinition pid="att.tmcLocationCode" name="TmcLocationCode">
+			<info>
+				<kurzinfo>Tmc Location Code.</kurzinfo>
+			</info>
+			<ganzzahl bits="32">
+				<bereich skalierung="1" minimum="0" maximum="65535">
+				</bereich>
+			</ganzzahl>
+		</attributDefinition>
+		<attributDefinition pid="att.tmcLocationCodeReferenz" name="TmcLocationCodeReferenz">
+			<info>
+				<kurzinfo>Attribut zur Referenzierung des Objekttyps: typ.tmcLocationCode.</kurzinfo>
+			</info>
+			<objektReferenz typ="typ.tmcLocationCode" undefiniert="verboten" referenzierungsart="assoziation"/>
+		</attributDefinition>
+		<attributDefinition pid="att.tmcLocationCodeReferenzOptional" name="TmcLocationCodeReferenzOptional">
+			<info>
+				<kurzinfo>Attribut zur Referenzierung des Objekttyps: typ.tmcLocationCode (Optionale Referenzierung erlaubt).</kurzinfo>
+			</info>
+			<objektReferenz typ="typ.tmcLocationCode" undefiniert="erlaubt" referenzierungsart="assoziation"/>
+		</attributDefinition>
+		<attributDefinition pid="att.tmcOrtsTyp" name="TmcOrtsTyp">
+			<info>
+				<kurzinfo>Ortstyp des Ortes.</kurzinfo>
+				<beschreibung>
+					<absatz>Für die Sprachunabhängigkeit der weitergegebenen Informationen und zur Mitteilung an das empfangende System, welche Datenfelder zu erwarten sind, sind Ortstypen und Untertypen erforderlich. Innerhalb einer jeden Kategorie wird (grundsätzlich) nach Ortstypen unterschieden, sofern für einen Ort ein funktionaler Unterschied besteht in der Art, wie er vom Empfänger einer Meldung zu behandeln ist.</absatz>
+					<absatz>Orts- und Untertypen werden gemeinsam kodiert. Dabei gilt folgendes Kodierschema:</absatz>
+					<liste zeichen="punkt">
+						<listenPunkt>Der TMC-Typ 'Punkt', 'Linie' oder 'Gebiet' ergibt sich aus dem Objekttyp
+							<verweis pid="typ.tmcPunkt"></verweis>
+							,
+							<verweis pid="typ.tmcLinie"></verweis>
+							oder
+							<verweis pid="typ.tmcGebiet"></verweis>
+							.
+						</listenPunkt>
+						<listenPunkt>Der Name wird gebildet aus 'OrtTypName:UntertypName', wobei 'UnterTypName' gleich 'Allgemein' verwendet wird, sofern kein Untertyp vorhanden ist.</listenPunkt>
+						<listenPunkt>Der Wert des Aufzahlungstyps ist eine sechsstellige Zahl der Form TNNSSS mit T gleich Typ (1=Punkt, 2=Linie, 3=Gebiet), NN gleich Orttypnummer und SSS gleich Untertypnummer entsprechend LCL, jeweils mit führenden Nullen.</listenPunkt>
+					</liste>
+				</beschreibung>
+			</info>
+			<ganzzahl bits="32">
+				<bereich skalierung="1" minimum="0" maximum="999999">
+				</bereich>
+				<zustand name="Kontinent:Allgemein" wert="301000">
+					<info>
+						<kurzinfo>Einer der sieben Kontinente.</kurzinfo>
+					</info>
+				</zustand>
+				<zustand name="Ländergruppe:Allgemein" wert="302000">
+					<info>
+						<kurzinfo>Anerkannte Gruppe aneinander grenzender Länder mit einen gemeinsamen Namen.</kurzinfo>
+					</info>
+				</zustand>
+				<zustand name="Land:Allgemein" wert="303000">
+					<info>
+						<kurzinfo>Gebiet eines souveränen Staates</kurzinfo>
+					</info>
+				</zustand>
+				<zustand name="Wassergebiet:Allgemein" wert="304000">
+					<info>
+						<kurzinfo>Benanntes Wassergebiet, für welches Verkehrs- und Reisemeldungen gegeben werden können.</kurzinfo>
+					</info>
+				</zustand>
+				<zustand name="Wassergebiet:Meer" wert="304001">
+					<info>
+						<kurzinfo>Benanntes Wassergebiet, welches mit den Weltmeeren verbunden ist oder an diese grenzt.</kurzinfo>
+					</info>
+				</zustand>
+				<zustand name="Wassergebiet:(Binnen)see" wert="304002">
+					<info>
+						<kurzinfo>Benanntes Wassergebiet, welches physisch von den Weltmeeren getrennt ist.</kurzinfo>
+					</info>
+				</zustand>
+				<zustand name="Unscharfes Gebiet:Allgemein" wert="306000">
+					<info>
+						<kurzinfo>Benanntes Landgebiet (das nicht ein Unterglied in der folgenden Hierarchie ist), für welches Meldungen gegeben werden können, zul. Abweichung seiner Größe weniger als 10%.</kurzinfo>
+					</info>
+				</zustand>
+				<zustand name="Unscharfes Gebiet:Touristisches Gebiet" wert="306001">
+					<info>
+						<kurzinfo>Gebiet mit touristischem Charakter.</kurzinfo>
+					</info>
+				</zustand>
+				<zustand name="Unscharfes Gebiet:Ballungsraum" wert="306002">
+					<info>
+						<kurzinfo>Gebiet mit großstädtischem Charakter.</kurzinfo>
+					</info>
+				</zustand>
+				<zustand name="Unscharfes Gebiet:Industrieregion" wert="306003">
+					<info>
+						<kurzinfo>Gebiet mit einer signifikanten Konzentration von Industriebetrieben.</kurzinfo>
+					</info>
+				</zustand>
+				<zustand name="Unscharfes Gebiet:Verkehrsgebiet" wert="306004">
+					<info>
+						<kurzinfo>Komplexes Verkehrsgebiet mit zwei oder mehr Anschlüssen und/oder Knotenpunkten.</kurzinfo>
+					</info>
+				</zustand>
+				<zustand name="Unscharfes Gebiet:Meteorologisches Gebiet" wert="306005">
+					<info>
+						<kurzinfo>Gebiet für das Wettermeldungen gegeben werden können.</kurzinfo>
+					</info>
+				</zustand>
+				<zustand name="Unscharfes Gebiet:Sammelparkplatz" wert="306006">
+					<info>
+						<kurzinfo>Zugewiesenes Gebiet, wo Verkehrsteilnehmer parken und sich zur Bildung von Fahrgemeinschaften Fahrgemeinschaften treffen können.</kurzinfo>
+					</info>
+				</zustand>
+				<zustand name="Unscharfes Gebiet:P+R-Parkplatz" wert="306007">
+					<info>
+						<kurzinfo>Zugewiesenes Gebiet, wo Verkehrsteilnehmer parken können zum Umsteigen in den ÖPNV.</kurzinfo>
+					</info>
+				</zustand>
+				<zustand name="Unscharfes Gebiet:Parkplatz" wert="306008">
+					<info>
+						<kurzinfo>Zugewiesenes Gebiet, wo Verkehrsteilnehmer parken können.</kurzinfo>
+					</info>
+				</zustand>
+				<zustand name="(Gebiet 1. Ordnung) Bundesland:Allgemein" wert="307000">
+					<info>
+						<kurzinfo>Verwaltungsgebiet der 1.Ebene (unter A3), die jedoch nicht die kleinste des Landes sein muss.</kurzinfo>
+					</info>
+				</zustand>
+				<zustand name="(Gebiet 2.Ordnung) Regierungsbezirk:Allgemein" wert="308000">
+					<info>
+						<kurzinfo>Verwaltungsgebiet der 2.Ebene, die jedoch nicht die kleinste des Landes sein muss.</kurzinfo>
+					</info>
+				</zustand>
+				<zustand name="(Gebiet 3.Ordnung) Kreis/kreisfreie Stadt:Allgemein" wert="309000">
+					<info>
+						<kurzinfo>Verwaltungsgebiet der 3.Ebene, die jedoch nicht die kleinste des Landes sein muss.</kurzinfo>
+					</info>
+				</zustand>
+				<zustand name="(Gebiet 3.Ordnung) Kreis/kreisfreie Stadt:Kreis/Landkreis" wert="309001">
+					<info>
+						<kurzinfo>Gebiet der 3. Ebene mit ländlichem Charakter.</kurzinfo>
+					</info>
+				</zustand>
+				<zustand name="(Gebiet 3.Ordnung) Kreis/kreisfreie Stadt:Kreisfreie Stadt" wert="309002">
+					<info>
+						<kurzinfo>Gebiet der 3.Ebene mit städtischem Charakter.</kurzinfo>
+					</info>
+				</zustand>
+				<zustand name="Gemeinde/Stadt:Allgemein" wert="310000">
+					<info>
+						<kurzinfo>Gebiet der 4.Ebene, die jedoch nicht die kleinste des Landes sein muss.</kurzinfo>
+					</info>
+				</zustand>
+				<zustand name="Gemeindeteil/Stadtteil:Allgemein" wert="311000">
+					<info>
+						<kurzinfo>Gebiet der 5.Ebene, die auch die niedrigste administrative Ebene des Landes ist.</kurzinfo>
+					</info>
+				</zustand>
+				<zustand name="Teilgebiet (eines administrativen Gebietes der Ebenen A7 bis A11):Allgemein" wert="312000">
+					<info>
+						<kurzinfo>Teilgebiet eines der definierten administrativen Gebiete.</kurzinfo>
+					</info>
+				</zustand>
+				<zustand name="Straße:Allgemein" wert="201000">
+					<info>
+						<kurzinfo>Ein oder mehrere ineinander übergehende Abschnitte einer Straße innerhalb eines einzigen nationalen oder für eine Ebene gültigen Numerierungsgebietes, dessen/deren Endpunkte sich an unterschiedlichen Orten befinden.</kurzinfo>
+					</info>
+				</zustand>
+				<zustand name="Straße:(Straße 1.Ordnung) Bundesautobahn" wert="201001">
+					<info>
+						<kurzinfo>(mit Zeichen 330 gekennzeichnete Straße) gewidmet als Autobahn.</kurzinfo>
+					</info>
+				</zustand>
+				<zustand name="Straße:(Straße 2.Ordnung) Bundesstraße" wert="201002">
+					<info>
+						<kurzinfo>(Straße 1.Klasse) gewidmet als Bundesstraße.</kurzinfo>
+					</info>
+				</zustand>
+				<zustand name="Straße:Landes-oder Staatsstraße" wert="201003">
+					<info>
+						<kurzinfo>(Straße 2.Klasse) gewidmet als Landesstraße, Staatsstraße.</kurzinfo>
+					</info>
+				</zustand>
+				<zustand name="Straße:Kreisstraße, Gemeindestraße" wert="201004">
+					<info>
+						<kurzinfo>(Straße 3.Klasse) gewidmet als Kreisstraße.</kurzinfo>
+					</info>
+				</zustand>
+				<zustand name="Ringstraße:Allgemein" wert="202000">
+					<info>
+						<kurzinfo>Straße ohne Endpunkte, die einen fortlaufenden Ring bildet, durchgehend mit einer einzigen Straßennummmer.</kurzinfo>
+					</info>
+				</zustand>
+				<zustand name="Ringstraße:BAB-Ring" wert="202001">
+					<info>
+						<kurzinfo>Ringautobahn ohne Anfangs- und Endpunkt.</kurzinfo>
+					</info>
+				</zustand>
+				<zustand name="Ringstraße:Ringstraße" wert="202002">
+					<info>
+						<kurzinfo>Ringstraße, die keine Autobahn ist.</kurzinfo>
+					</info>
+				</zustand>
+				<zustand name="Streckenabschnitt 1.Ordnung:Allgemein" wert="203000">
+					<info>
+						<kurzinfo>Streckenabschnitt 1. Ordnung von L1, L2, L6.</kurzinfo>
+					</info>
+				</zustand>
+				<zustand name="Streckenabschnitt 2.Ordnung:Allgemein" wert="204000">
+					<info>
+						<kurzinfo>(Teil)abschnitt eines Abschnittes 1.Ordnung.</kurzinfo>
+					</info>
+				</zustand>
+				<zustand name="Gemeindestraße Stadtstraße:Allgemein" wert="205000">
+					<info>
+						<kurzinfo>Straße in einer Gemeinde/Stadt, die gewöhnlich durch einen Straßennamen, weniger durch eine Nummer bezeichnet ist.</kurzinfo>
+					</info>
+				</zustand>
+				<zustand name="Verkehrsverbindung:Allgemein" wert="206000">
+					<info>
+						<kurzinfo>Netzsegment, das nicht Teil einer Straße ist, für den Transport per Schiff oder auf der Schiene.</kurzinfo>
+					</info>
+				</zustand>
+				<zustand name="Verkehrsverbindung:Fährverbindung" wert="206001">
+					<info>
+						<kurzinfo>Spezieller Dienst, der mittels RO-RO-Schiff Straßenfahrzeuge zwischen zwei Punkten transportiert.</kurzinfo>
+					</info>
+				</zustand>
+				<zustand name="Verkehrsverbindung:Autoreisezugverbindung" wert="206002">
+					<info>
+						<kurzinfo>Spezieller Dienst, der mittels Zug Straßenfahrzeuge zwischen zwei Punkten transportiert.</kurzinfo>
+					</info>
+				</zustand>
+				<zustand name="Knotenpunkt:Allgemein" wert="101000">
+					<info>
+						<kurzinfo>Punkt auf einer Straße/Ringstraße, wo eine oder mehrere andere Straßen/Ringstraßen angeschlossen sind.</kurzinfo>
+					</info>
+				</zustand>
+				<zustand name="Knotenpunkt:Autobahnkreuz" wert="101001">
+					<info>
+						<kurzinfo>Knotenpunkt mit unterschiedlichem Straßenniveau, wo sich zwei oder mehrere Autobahnen kreuzen und wo einige (oder alle) Fahrtrichtungen möglich sind.</kurzinfo>
+					</info>
+				</zustand>
+				<zustand name="Knotenpunkt:Autobahndreieck" wert="101002">
+					<info>
+						<kurzinfo>Knotenpunkt mit unterschiedlichem Straßenniveau, wo eine Autobahn mit eingeschränktem Zugang auf eine durchgehende Autobahn trifft, auf welcher einige (oder alle) Fahrtrichtungen zulässig sind.</kurzinfo>
+					</info>
+				</zustand>
+				<zustand name="Knotenpunkt:Autobahnanschlussstelle" wert="101003">
+					<info>
+						<kurzinfo>Knotenpunkt mit unterschiedlichem Straßenniveau, wo der Verkehr auf eine Autobahn mit beschränktem Zugang aus dem allgemeinen Straßennetz einfahren bzw, von der Autobahn in dieses ausfahren kann.</kurzinfo>
+					</info>
+				</zustand>
+				<zustand name="Knotenpunkt:Autobahnausfahrt" wert="101004">
+					<info>
+						<kurzinfo>Knotenpunkt mit unterschiedlichem Straßenniveau, wo der Verkehr lediglich von einer Autobahn in das allgemeine Straßennetz ausfahren kann.</kurzinfo>
+					</info>
+				</zustand>
+				<zustand name="Knotenpunkt:Autobahneinfahrt" wert="101005">
+					<info>
+						<kurzinfo>Knotenpunkt mit unterschiedlichem Straßenniveau, wo der Verkehr lediglich in eine Autobahn aus dem allgemeinen Straßennetz einfahren kann.</kurzinfo>
+					</info>
+				</zustand>
+				<zustand name="Knotenpunkt:Überführung" wert="101006">
+					<info>
+						<kurzinfo>Knotenpunkt mit Überführung durchgehender Fahrbahnen einer Straße über eine oder mehrere andere Straßen und Anschluss an diese.</kurzinfo>
+					</info>
+				</zustand>
+				<zustand name="Knotenpunkt:Unterführung" wert="101007">
+					<info>
+						<kurzinfo>Knotenpunkt, bei dem durchgehende Fahr-bahnen einer Straße unter einer oder mehreren anderen Straßen hindurchgeführt werden und Anschluss an diese.</kurzinfo>
+					</info>
+				</zustand>
+				<zustand name="Knotenpunkt:Kleiner Kreisverkehr(splatz)" wert="101008">
+					<info>
+						<kurzinfo>Knotenpunkt, wo der Verkehr um eine zentrale Verkehrsinsel geführt wird.</kurzinfo>
+					</info>
+				</zustand>
+				<zustand name="Knotenpunkt:Großer Kreisverkehr(splatz)" wert="101009">
+					<info>
+						<kurzinfo>Knotenpunkt, an dem der Verkehr mehrstreifig um eine sehr große zentrale Verkehrsinsel geführt wird, auf welcher normalerweise Gebäude, Denkmäler stehen. Die Zufahrt kann durch Lichtsignalregelung, Vorfahrtsregelung oder unkontrolliert erfolgen.</kurzinfo>
+					</info>
+				</zustand>
+				<zustand name="Knotenpunkt:Lichtsignalgeregelter Knotenpunkt" wert="101010">
+					<info>
+						<kurzinfo>Knotenpunkt, von zwei oder mehreren Straßen mit Lichtsignalregelung.</kurzinfo>
+					</info>
+				</zustand>
+				<zustand name="Knotenpunkt:Kreuzung" wert="101011">
+					<info>
+						<kurzinfo>Knotenpunkt von zwei oder mehr Straßen mit beschilderter Vorfahrt oder ohne Vorfahrts-regelung ('Rechts' vor 'Links').</kurzinfo>
+					</info>
+				</zustand>
+				<zustand name="Knotenpunkt:Einmündung" wert="101012">
+					<info>
+						<kurzinfo>Knotenpunkt einer durchgehenden mit einer einmündenden Straße mit oder ohne Vorfahrtsregelung.</kurzinfo>
+					</info>
+				</zustand>
+				<zustand name="Knotenpunkt:Übergang" wert="101013">
+					<info>
+						<kurzinfo>Punkt auf einer Straße, an dem sich ein wesentliches Attribut der Straße ändert (Straßennummer, -name oder der administrative Status).</kurzinfo>
+					</info>
+				</zustand>
+				<zustand name="Knotenpunkt:Kurze Verbindungsstraße, Querspange" wert="101014">
+					<info>
+						<kurzinfo>Einzelfahrbahn von begrenzter Länge, welche zwei Straßen miteinander verbindet.</kurzinfo>
+					</info>
+				</zustand>
+				<zustand name="Knotenpunkt:Ausfahrt" wert="101015">
+					<info>
+						<kurzinfo>Oberbegriff Ausfahrt für jeglichen Zweck.</kurzinfo>
+					</info>
+				</zustand>
+				<zustand name="Zwischenpunkt:Allgemein" wert="102000">
+					<info>
+						<kurzinfo>Punkt zwischen zwei Knotenpunkten, auf den in Verkehrs- und Reisemeldungen Bezug genommen wird.</kurzinfo>
+					</info>
+				</zustand>
+				<zustand name="Zwischenpunkt:(Streckenmarke)Kilometrierung" wert="102001">
+					<info>
+						<kurzinfo>Vordefinierter Punkt zwischen Knotenpunkten, dessen einziger Zweck darin besteht, für Ortsangaben eine höhere Auflösung zu erhalten. Diese Punkte sind gewöhnlich Kilometerangaben und gelten für beide Fahrtrichtungen.</kurzinfo>
+					</info>
+				</zustand>
+				<zustand name="Zwischenpunkt:Verkehrserfassungsstation" wert="102002">
+					<info>
+						<kurzinfo>Punkt, an dem Verkehrsdaten in einer oder beiden Richtungen erfasst werden.</kurzinfo>
+					</info>
+				</zustand>
+				<zustand name="Sonstiger markanter Punkt:Allgemein" wert="103000">
+					<info>
+						<kurzinfo>Punkt, der in Verkehrs- und Reisemeldungen von Interesse ist.</kurzinfo>
+					</info>
+				</zustand>
+				<zustand name="Sonstiger markanter Punkt:Tunnel" wert="103001">
+					<info>
+						<kurzinfo>Markanter,mit Namen versehener Punkt, wo die Straße über eine signifikante Strecke eingehüllt ist.</kurzinfo>
+					</info>
+				</zustand>
+				<zustand name="Sonstiger markanter Punkt:Brücke" wert="103002">
+					<info>
+						<kurzinfo>Markanter, mit Namen versehene Punkt, wo die Straße von einem Hochbauwerk getragen wird.</kurzinfo>
+					</info>
+				</zustand>
+				<zustand name="Sonstiger markanter Punkt:Raststätte" wert="103003">
+					<info>
+						<kurzinfo>Dezidierter Ort, wo die Kraftfahrer halten und eine Reihe von Dienstleistungen nutzen können.</kurzinfo>
+					</info>
+				</zustand>
+				<zustand name="Sonstiger markanter Punkt:Rastplatz mit einzelnen Einrichtungen" wert="103004">
+					<info>
+						<kurzinfo>Dezidierter Ort, wo die Kraftfahrer halten und eine begrenzte Reihe von Einrichtungen nutzen können.</kurzinfo>
+					</info>
+				</zustand>
+				<zustand name="Sonstiger markanter Punkt:Aussichtspunkt" wert="103005">
+					<info>
+						<kurzinfo>Dezidierter Ort, wo die Kraftfahrer halten und eine Aussicht haben können.</kurzinfo>
+					</info>
+				</zustand>
+				<zustand name="Sonstiger markanter Punkt:Mitfahrersammelparkplatz" wert="103006">
+					<info>
+						<kurzinfo>Festgelegter Platz, wo die Kraftfahrer parken und sich zur Bildung von Fahrgemeinschaften treffen können.</kurzinfo>
+					</info>
+				</zustand>
+				<zustand name="Sonstiger markanter Punkt:P+R-Parkplatz" wert="103007">
+					<info>
+						<kurzinfo>Dezidierter Ort, wo die Kraftfahrer parken und auf öffentliche Verkehrsmittel umsteigen können.</kurzinfo>
+					</info>
+				</zustand>
+				<zustand name="Sonstiger markanter Punkt:Parkplatz" wert="103008">
+					<info>
+						<kurzinfo>Dezidierter Ort, wo die Kraftfahrer parken können.</kurzinfo>
+					</info>
+				</zustand>
+				<zustand name="Sonstiger markanter Punkt:Parkplatz mit Kiosk" wert="103009">
+					<info>
+						<kurzinfo>Dezidierter Ort, wo Kraftfahrer begrenzte Einkaufsmöglichkeiten haben.</kurzinfo>
+					</info>
+				</zustand>
+				<zustand name="Sonstiger markanter Punkt:Parkplatz mit Kiosk + WC" wert="103010">
+					<info>
+						<kurzinfo>Dezidierter Ort, wo Kraftfahrer eine begrenzte Reihe von Einrichtungen nutzen können.</kurzinfo>
+					</info>
+				</zustand>
+				<zustand name="Sonstiger markanter Punkt:Tankstelle" wert="103011">
+					<info>
+						<kurzinfo>Dezidierter Ort, wo Kraftfahrer Treibstoff kaufen können.</kurzinfo>
+					</info>
+				</zustand>
+				<zustand name="Sonstiger markanter Punkt:Tankstelle mit Kiosk" wert="103012">
+					<info>
+						<kurzinfo>Dezidierter Ort, mit einem eingeschränktem Angebot von Einrichtungen.</kurzinfo>
+					</info>
+				</zustand>
+				<zustand name="Sonstiger markanter Punkt:Motel" wert="103013">
+					<info>
+						<kurzinfo>Dezidierter Ort, wo den Kraftfahrern Unterkunft anboten wird.</kurzinfo>
+					</info>
+				</zustand>
+				<zustand name="Sonstiger markanter Punkt:Grenzübergang" wert="103014">
+					<info>
+						<kurzinfo>Ort, wo die Grenze eines administrativen Gebietes ein Segment des Netzes kreuzt.</kurzinfo>
+					</info>
+				</zustand>
+				<zustand name="Sonstiger markanter Punkt:Zollstation" wert="103015">
+					<info>
+						<kurzinfo>Dezidierter Ort, an dem Zollbeamte tätig sind.</kurzinfo>
+					</info>
+				</zustand>
+				<zustand name="Sonstiger markanter Punkt:Mautstation" wert="103016">
+					<info>
+						<kurzinfo>Dezidierter Ort, wo die Kraftfahrer für die Benutzung gebührenpflichtiger Straßen bezahlen.</kurzinfo>
+					</info>
+				</zustand>
+				<zustand name="Sonstiger markanter Punkt:Fähranlieger" wert="103017">
+					<info>
+						<kurzinfo>Dezidierter Ort, an welchem Autofahrer Zugang zum zum Beladen bzw. Entladen einer Fähre haben.</kurzinfo>
+					</info>
+				</zustand>
+				<zustand name="Sonstiger markanter Punkt:Hafen" wert="103018">
+					<info>
+						<kurzinfo>Dezidierter Ort, wo eine Reihe von mit dem Wasser verbundener Einrichtungen arbeitet.</kurzinfo>
+					</info>
+				</zustand>
+				<zustand name="Sonstiger markanter Punkt:Platz" wert="103019">
+					<info>
+						<kurzinfo>Offener Platz, häufig in der Nähe eines Stadtzentrums gelegen, der für eine Vielzahl von Nutzungen zur Verfügung steht.</kurzinfo>
+					</info>
+				</zustand>
+				<zustand name="Sonstiger markanter Punkt:Marktplatz/Fest-platz" wert="103020">
+					<info>
+						<kurzinfo>Ort, an welchem periodisch (z.B. jährlich) oft traditionelle Veranstaltungen stattfinden zu Zwecken der Unterhaltung oder Handel.</kurzinfo>
+					</info>
+				</zustand>
+				<zustand name="Sonstiger markanter Punkt:Parkhaus" wert="103021">
+					<info>
+						<kurzinfo>Festgelegter Platz, wo Kraftfahrer eine begrenzte Anzahl von Einrichtungen nutzen können.</kurzinfo>
+					</info>
+				</zustand>
+				<zustand name="Sonstiger markanter Punkt:Tiefgarage" wert="103022">
+					<info>
+						<kurzinfo>Dezidierter Ort unter der Erdoberfläche, an welchem Kraftfahrn ein begrenztes Angebot von Einrichtungen zur Verfügung steht.</kurzinfo>
+					</info>
+				</zustand>
+				<zustand name="Sonstiger markanter Punkt:Einkaufszentrum" wert="103023">
+					<info>
+						<kurzinfo>Dezidierter Ort, wo Kraftfahrern ein breites Angebot von Einkaufsmöglichkeiten zur Verfügung steht.</kurzinfo>
+					</info>
+				</zustand>
+				<zustand name="Sonstiger markanter Punkt:Freizeitpark" wert="103024">
+					<info>
+						<kurzinfo>Dezidierter Ort für Unterhaltungszwecke.</kurzinfo>
+					</info>
+				</zustand>
+				<zustand name="Sonstiger markanter Punkt:Touristenattraktion" wert="103025">
+					<info>
+						<kurzinfo>Dezidierter Ort, wo Autofahrer anhalten und sich eine Sehenswürdigkeit (zu Natur, Gesellschaft, Geschichte oder Handel) ansehen können.</kurzinfo>
+					</info>
+				</zustand>
+				<zustand name="Sonstiger markanter Punkt:Universität" wert="103026">
+					<info>
+						<kurzinfo>Dezidierter Ort einer Bildungseinrichtung, für die Ausbildung von Studenten.</kurzinfo>
+					</info>
+				</zustand>
+				<zustand name="Sonstiger markanter Punkt:Flughafen" wert="103027">
+					<info>
+						<kurzinfo>Flugplatz mit Einrichtungen für Passagiere und Fracht.</kurzinfo>
+					</info>
+				</zustand>
+				<zustand name="Sonstiger markanter Punkt:Bahnhof/Busbahnhof" wert="103028">
+					<info>
+						<kurzinfo>Dezidierter Ort, reguläre Haltestation des öffentlichen Verkehrs.</kurzinfo>
+					</info>
+				</zustand>
+				<zustand name="Sonstiger markanter Punkt:Krankenhaus" wert="103029">
+					<info>
+						<kurzinfo>Dezidierter Ort für medizinische und chirurgische Behandlung.</kurzinfo>
+					</info>
+				</zustand>
+				<zustand name="Sonstiger markanter Punkt:Kirche" wert="103030">
+					<info>
+						<kurzinfo>Dezidierter Ort für öffentlichen Gottesdienst.</kurzinfo>
+					</info>
+				</zustand>
+				<zustand name="Sonstiger markanter Punkt:Stadion" wert="103031">
+					<info>
+						<kurzinfo>Dezidierter Ort für öffentliche Unterhaltung.</kurzinfo>
+					</info>
+				</zustand>
+				<zustand name="Sonstiger markanter Punkt:Öffentliches Gebäude" wert="103032">
+					<info>
+						<kurzinfo>Dezidierter Ort mit einer Staats- oder Kirchenresidenz oder einem öffentlichen Staatsgebäude.</kurzinfo>
+					</info>
+				</zustand>
+				<zustand name="Sonstiger markanter Punkt:Burg" wert="103033">
+					<info>
+						<kurzinfo>Befestigter Platz, oft mit Türmen und Wehranlagen.</kurzinfo>
+					</info>
+				</zustand>
+				<zustand name="Sonstiger markanter Punkt:Rathaus" wert="103034">
+					<info>
+						<kurzinfo>Öffentliches Gebäude, häufig Sitz der lokalen Verwaltung.</kurzinfo>
+					</info>
+				</zustand>
+				<zustand name="Sonstiger markanter Punkt:Ausstellungs-/Kongresszentrum" wert="103035">
+					<info>
+						<kurzinfo>Ort zur Durchführung von Messen, Kongres-sen, Ausstellungen und Parteiversammlungen.</kurzinfo>
+					</info>
+				</zustand>
+				<zustand name="Sonstiger markanter Punkt:Weiler" wert="103036">
+					<info>
+						<kurzinfo>Bewohnte Siedlung, die nicht am gängigen/üblichen Straßennetz liegt.</kurzinfo>
+					</info>
+				</zustand>
+				<zustand name="Sonstiger markanter Punkt:Benannter Punkt" wert="103037">
+					<info>
+						<kurzinfo>Ort an einer innerörtlichen Straße, welcher gemäß den Straßenschildern benannt ist (Gemeinde, Stadt).</kurzinfo>
+					</info>
+				</zustand>
+				<zustand name="Sonstiger markanter Punkt:Damm" wert="103038">
+					<info>
+						<kurzinfo>Straße auf festem Untergrund, welche zwei Wasserflächen voneinander trennt.</kurzinfo>
+					</info>
+				</zustand>
+				<zustand name="Sonstiger markanter Punkt:Deich" wert="103039">
+					<info>
+						<kurzinfo>Straße auf festem Untergrund, welche eine Wasserfläche und eine Landfläche von einander trennt.</kurzinfo>
+					</info>
+				</zustand>
+				<zustand name="Sonstiger markanter Punkt:Aquädukt" wert="103040">
+					<info>
+						<kurzinfo>Wasserweg über einer Straße.</kurzinfo>
+					</info>
+				</zustand>
+				<zustand name="Sonstiger markanter Punkt:Schleuse" wert="103041">
+					<info>
+						<kurzinfo>Wasserwegschleuse.</kurzinfo>
+					</info>
+				</zustand>
+				<zustand name="Sonstiger markanter Punkt:Pass" wert="103042">
+					<info>
+						<kurzinfo>Straße, die über einen Berg führt. Dieser Subtyp ist bestimmt für jene Bergpässe, die im Winter normalerweise Wetterprobleme (hauptsächlich Schnee und Eis) aufweisen.</kurzinfo>
+					</info>
+				</zustand>
+				<zustand name="Sonstiger markanter Punkt:Bahnübergang" wert="103043">
+					<info>
+						<kurzinfo>Straße-Eisenbahn-Kreuzung auf gleichem Niveau.</kurzinfo>
+					</info>
+				</zustand>
+				<zustand name="Sonstiger markanter Punkt:Furt" wert="103044">
+					<info>
+						<kurzinfo>Straße, die durch einen Fluss oder zu einer Insel führt, welche ständig oder in regelmäßigen Abständen überflutet ist.</kurzinfo>
+					</info>
+				</zustand>
+				<zustand name="Sonstiger markanter Punkt:Flußfähre (Binnengewässer)" wert="103045">
+					<info>
+						<kurzinfo>Kurze Fährverbindung zur Überquerung eines Flusses/Kanals (anstelle einer Brücke oder bis zum späteren Ersatz durch eine Brücke).</kurzinfo>
+					</info>
+				</zustand>
+				<zustand name="Sonstiger markanter Punkt:Industriegebiet" wert="103046">
+					<info>
+						<kurzinfo>Allgemein bekanntes Gebiet, das vorwiegend von der Industrie genutzt wird.</kurzinfo>
+					</info>
+				</zustand>
+				<zustand name="Sonstiger markanter Punkt:Viaduckt" wert="103047">
+					<info>
+						<kurzinfo>Bauwerk, auf welchem eine hochgelegene über eine tiefer gelegene Straße, ein Tal oder eine Flußmündung führt.</kurzinfo>
+					</info>
+				</zustand>
+			</ganzzahl>
+		</attributDefinition>
+		<attributDefinition pid="att.tmcPunktReferenz" name="TmcPunktReferenz">
+			<info>
+				<kurzinfo>Attribut zur Referenzierung des Objekttyps: typ.tmcPunkt.</kurzinfo>
+			</info>
+			<objektReferenz typ="typ.tmcPunkt" undefiniert="verboten" referenzierungsart="assoziation"/>
+		</attributDefinition>
+		<attributDefinition pid="att.tmcPunktReferenzOptional" name="TmcPunktReferenzOptional">
+			<info>
+				<kurzinfo>Attribut zur Referenzierung des Objekttyps: typ.tmcPunkt (Optionale Referenzierung erlaubt).</kurzinfo>
+			</info>
+			<objektReferenz typ="typ.tmcPunkt" undefiniert="erlaubt" referenzierungsart="assoziation"/>
+		</attributDefinition>
+		<attributDefinition pid="att.tmcRichtung" name="TmcRichtung">
+			<info>
+				<kurzinfo>Richtung der TMCLocation.</kurzinfo>
+			</info>
+			<ganzzahl bits="8">
+				<bereich skalierung="1" minimum="-1" maximum="1">
+				</bereich>
+				<zustand name="negativ" wert="-1">
+					<info>
+						<kurzinfo>Fahrtrichtung gegen die Richtung der TMC Location Codes.</kurzinfo>
+					</info>
+				</zustand>
+				<zustand name="ohne Richtung" wert="0">
+					<info>
+						<kurzinfo>Location Code hat keine Richtung (z. B. bei Flächen).</kurzinfo>
+					</info>
+				</zustand>
+				<zustand name="positiv" wert="1">
+					<info>
+						<kurzinfo>Fahrtrichtung in Richtung der TMC Location Codes.</kurzinfo>
+					</info>
+				</zustand>
+			</ganzzahl>
+		</attributDefinition>
+	</modell>
+	<objekte>
+	</objekte>
+</konfigurationsBereich>

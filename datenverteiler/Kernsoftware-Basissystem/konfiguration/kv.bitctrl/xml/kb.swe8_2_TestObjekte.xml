@@ -1,0 +1,65 @@
+<?xml version="1.0" encoding="ISO-8859-1"?>
+<!DOCTYPE konfigurationsBereich PUBLIC "-//K2S//DTD Dokument//DE" "K2S.dtd">
+<konfigurationsBereich pid="kb.swe8_2_TestObjekte"
+	verantwortlich="kv.bitctrl">
+	<konfigurationsAenderung stand="01.06.2007" version="1" autor="Uwe Peuker, BitCtrl Systems GmbH" grund="Test">Bereich zum Test der Parametrierung erzeugt.</konfigurationsAenderung>
+	<modell>
+	</modell>
+	<objekte>
+		<konfigurationsObjekt pid="bitctrl.parameterTest" typ="typ.parametrierungsTestObjekt">
+		</konfigurationsObjekt>
+		<konfigurationsObjekt pid="hierarchie.testModell" name="HierarchieDefinitionParametrierungstest" typ="typ.hierarchieDefinition">
+			<datensatz attributgruppe="atg.hierarchieDefinition" aspekt="asp.eigenschaften">
+				<datenfeld name="HierarchieObjekte">
+					<datenliste name="-">
+						<datum name="ObjektTyp" wert="paramtest.typ.3spMq"/>
+						<datum name="Menge" wert="MQ"/>
+						<datum name="NachfolgerTyp" wert="paramtest.typ.mq"/>
+					</datenliste>
+					<datenliste name="-">
+						<datum name="ObjektTyp" wert="paramtest.typ.mq"/>
+						<datum name="Menge" wert="Fahrstreifen"/>
+						<datum name="NachfolgerTyp" wert="paramtest.typ.fs"/>
+					</datenliste>
+					<datenliste name="-">
+						<datum name="ObjektTyp" wert="paramtest.typ.fs"/>
+						<datum name="Menge" wert=""/>
+						<datum name="NachfolgerTyp" wert="null"/>
+					</datenliste>
+				</datenfeld>
+			</datensatz>
+		</konfigurationsObjekt>
+		<konfigurationsObjekt pid="paramtest.fs1" name="FS1" typ="paramtest.typ.fs">
+		</konfigurationsObjekt>
+		<konfigurationsObjekt pid="paramtest.fs2" name="FS2" typ="paramtest.typ.fs">
+		</konfigurationsObjekt>
+		<konfigurationsObjekt pid="paramtest.fs3" name="FS3" typ="paramtest.typ.fs">
+		</konfigurationsObjekt>
+		<konfigurationsObjekt pid="paramtest.fs4" name="FS4" typ="paramtest.typ.fs">
+		</konfigurationsObjekt>
+		<konfigurationsObjekt pid="paramtest.fs5" name="FS5" typ="paramtest.typ.fs">
+		</konfigurationsObjekt>
+		<konfigurationsObjekt pid="paramtest.fs6" name="FS6" typ="paramtest.typ.fs">
+		</konfigurationsObjekt>
+		<konfigurationsObjekt pid="paramtest.mq" name="MQ" typ="paramtest.typ.3spMq">
+			<objektMenge name="MQ">
+				<element pid="paramtest.mq2"/>
+				<element pid="paramtest.mq1"/>
+			</objektMenge>
+		</konfigurationsObjekt>
+		<konfigurationsObjekt pid="paramtest.mq1" name="MQ1" typ="paramtest.typ.mq">
+			<objektMenge name="Fahrstreifen">
+				<element pid="paramtest.fs3"/>
+				<element pid="paramtest.fs2"/>
+				<element pid="paramtest.fs1"/>
+			</objektMenge>
+		</konfigurationsObjekt>
+		<konfigurationsObjekt pid="paramtest.mq2" name="MQ2" typ="paramtest.typ.mq">
+			<objektMenge name="Fahrstreifen">
+				<element pid="paramtest.fs4"/>
+				<element pid="paramtest.fs6"/>
+				<element pid="paramtest.fs5"/>
+			</objektMenge>
+		</konfigurationsObjekt>
+	</objekte>
+</konfigurationsBereich>

@@ -1,0 +1,2606 @@
+<?xml version="1.0" encoding="ISO-8859-1"?>
+<!DOCTYPE konfigurationsBereich PUBLIC "-//K2S//DTD Dokument//DE" "K2S.dtd">
+<konfigurationsBereich pid="kb.tmLangZeitVerkehrsDaten" name="Teilmodell Langzeitverkehrsdaten und Langzeitzählstelle" verantwortlich="kv.logos">
+	<info>
+		<kurzinfo>Teilmodell mit Datenmodellierung von Langzeitzählstelle und Langzeitverkehrsdaten</kurzinfo>
+		<beschreibung>
+			<absatz>TODO: Abbildung mit dem Datenmodell von Langzeitzählstelle sowie den Datenwerten.</absatz>
+		</beschreibung>
+	</info>
+	<konfigurationsAenderung stand="19.03.2007" version="3" autor="inovat, Dipl.-Ing. H. C. Kniß (HCK)" grund="A:Überarbeitung des Datenkatalogs für Veröffentlichung Kernsoftware. Änderungsdokumentation siehe &apos;inovat: Datenkatalog DaV-Release Notes&apos;."></konfigurationsAenderung>
+	<konfigurationsAenderung stand="09.09.2010" version="5" autor="inovat, Dipl.-Ing. H. C. Kniß (HCK)" grund="Änderung Typ typ.langZeitZählstelle: ist jetzt von typ.punktXY abgeleitet, damit Lagekoordinaten für Netzdarstellung verwendet werden kann. "></konfigurationsAenderung>
+	<konfigurationsAenderung stand="29.09.2010" version="6" autor="inovat, Dipl.-Ing. H. C. Kniß (HCK)" grund="Zusaetzliche ATG atg.verkehrsDatenLangZeitIntervallGeschwindigkeitVerteilungMqDtv ergaenzt (an LZZS, wird analog auch für die MQ der AWQ berechnet)."></konfigurationsAenderung>
+	<konfigurationsAenderung stand="29.09.2010" version="6" autor="inovat, Dipl.-Ing. H. C. Kniß (HCK)" grund="Zusaetzliche ATG atg.verkehrsDatenLangZeitMSV ergaenzt (an LZZS, wird analog auch für die MQ der AWQ berechnet)."></konfigurationsAenderung>
+	<konfigurationsAenderung stand="27.09.2010" version="9" autor="inovat, Dipl.-Ing. H. C. Kniß (HCK)/LOGOS, Jörn Schawaller" grund="Erweiterung der ATT-Definition att.klassifizierungsGruppeBAST um einen neuen Zustand: 8 plus 1 Geschw, wert=5"></konfigurationsAenderung>
+	<!--
+	Abhängigkeiten des Bereichs kb.tmLangZeitVerkehrsDaten
+	Abhängig ab Version      Art der Abhängigkeit      Version des benötigten Bereichs      Benötigter Bereich
+	4                        notwendig                 1                                    kb.kv.logos                        
+	4                        notwendig                 2                                    kb.tmVerkehrGlobal                 
+	4                        notwendig                 1                                    kb.systemModellGlobal              
+	4                        notwendig                 6                                    kb.fachModellGlobal                
+	4                        notwendig                 1                                    kb.metaModellGlobal                
+	4                        notwendig                 3                                    kb.tmVewBetriebGlobal              
+	5                        notwendig                 1                                    kb.tmGeoReferenzierungGlobal       
+	6                        notwendig                 41                                   kb.tmVerkehrGlobal                 
+	7                        notwendig                 44                                   kb.tmVerkehrGlobal                 
+	8                        notwendig                 45                                   kb.tmVerkehrGlobal                 
+	-->
+	<modell>
+		<typDefinition pid="typ.auswerteQuerschnitt" name="Auswertequerschnitt" objektNamenPermanent="nein">
+			<info>
+				<kurzinfo>Gesamtquerschnitt für Messwerte einer Langzeitzählstelle. Ein Gesamtquerschnitt bezieht seine Daten aus einem oder mehreren Messquerschnitten. Er wird angewendet als Richtungsquerschnitt (alle Messquerschnitte je Fahrtrichtung) bzw. Gesamtquerschnitt (Summe aller Richtungsquerschnitte).</kurzinfo>
+			</info>
+			<erweitert pid="typ.konfigurationsObjekt"/>
+			<attributgruppe pid="atg.auswerteQuerschnitt"/>
+			<attributgruppe pid="atg.langZeitDatenDTV"/>
+			<attributgruppe pid="atg.langZeitDatenFahrzeugAnzahl"/>
+			<attributgruppe pid="atg.langZeitDatenGeschwindigkeit"/>
+			<attributgruppe pid="atg.langZeitDatenSpitzenStunde"/>
+			<attributgruppe pid="atg.langZeitDatenSpitzenTag"/>
+			<attributgruppe pid="atg.langZeitDatenV15"/>
+			<attributgruppe pid="atg.langZeitDatenV50"/>
+			<attributgruppe pid="atg.langZeitDatenV85"/>
+			<attributgruppe pid="atg.langZeitDatenVK130"/>
+			<attributgruppe pid="atg.langZeitDatenVK160"/>
+		</typDefinition>
+		<typDefinition pid="typ.fahrStreifenLangZeit" name="FahrStreifenLangZeit" objektNamenPermanent="nein">
+			<info>
+				<kurzinfo>Fahrstreifen eines Messquerschnitts, der auch als Langzeitmessstelle Verwendung findet.</kurzinfo>
+			</info>
+			<erweitert pid="typ.fahrStreifen"/>
+			<attributgruppe pid="atg.langZeitDatenDTV"/>
+			<attributgruppe pid="atg.langZeitDatenFahrzeugAnzahl"/>
+			<attributgruppe pid="atg.langZeitDatenGeschwindigkeit"/>
+			<attributgruppe pid="atg.langZeitDatenSpitzenStunde"/>
+			<attributgruppe pid="atg.langZeitDatenSpitzenTag"/>
+			<attributgruppe pid="atg.langZeitDatenV15"/>
+			<attributgruppe pid="atg.langZeitDatenV50"/>
+			<attributgruppe pid="atg.langZeitDatenV85"/>
+			<attributgruppe pid="atg.langZeitDatenVK130"/>
+			<attributgruppe pid="atg.langZeitDatenVK160"/>
+			<attributgruppe pid="atg.verkehrsDatenLangZeitIntervallPlausibilitätsPrüfungFormal"/>
+			<attributgruppe pid="atg.verkehrsDatenLangZeitIntervallPlausibilitätsPrüfungLogisch"/>
+		</typDefinition>
+		<typDefinition pid="typ.langZeitZählstelle" name="Langzeitzählstelle" objektNamenPermanent="nein">
+			<info>
+				<kurzinfo>Zählstelle zur Erfassung von Verkehrsdaten allgemein. Bei der konkreten Ausprägung kann es sich sowohl um eine TLS-Streckenstation, Langzeitzählstellen zur Verkehrsdatenerfassung, manuelle Zählstellen o.ä. handeln. Der Typ fasst alle allgemeingültigen Eigenschaften zusammen.</kurzinfo>
+			</info>
+			<erweitert pid="typ.punktXY"/>
+			<attributgruppe pid="atg.langZeitDatenDTV"/>
+			<attributgruppe pid="atg.langZeitDatenFahrzeugAnzahl"/>
+			<attributgruppe pid="atg.langZeitDatenGeschwindigkeit"/>
+			<attributgruppe pid="atg.langZeitDatenSpitzenStunde"/>
+			<attributgruppe pid="atg.langZeitDatenSpitzenTag"/>
+			<attributgruppe pid="atg.langZeitDatenV15"/>
+			<attributgruppe pid="atg.langZeitDatenV50"/>
+			<attributgruppe pid="atg.langZeitDatenV85"/>
+			<attributgruppe pid="atg.langZeitDatenVK130"/>
+			<attributgruppe pid="atg.langZeitDatenVK160"/>
+			<attributgruppe pid="atg.langZeitZählstelle"/>
+			<attributgruppe pid="atg.verkehrsDatenLangZeitIntervallGeschwindigkeitVerteilungDtvMq"/>
+			<attributgruppe pid="atg.verkehrsDatenLangZeitMSV"/>
+			<menge pid="menge.auswerteQuerschnitte" name="AuswerteQuerschnitte" erforderlich="nein">
+				<info>
+					<kurzinfo>zusätzliche Auswertequerschnitte, die nicht IN oder GEGEN-Richtung darstellen</kurzinfo>
+				</info>
+			</menge>
+		</typDefinition>
+		<typDefinition pid="typ.verkehrsDatenQuelleASCII" name="VerkehrsDatenQuelleASCII" objektNamenPermanent="nein">
+			<info>
+				<kurzinfo>Mit der Verkehrsdatenquelle vom Typ ASCII ist die Möglichkeit gegeben, Daten von Erfassungspositionen in das System zu übernehmen, die nicht über TLS angeschlossen. Die Verkehrsdatenquelle ASCII ist vergleichbar einem DE-Kanal an einer TLS-Streckenstation, nur werden die Fahrstreifenbezogenen Werte hier aus einer ASCII-Datei bezogen.</kurzinfo>
+			</info>
+			<erweitert pid="typ.konfigurationsObjekt"/>
+			<attributgruppe pid="atg.verkehrsDatenQuelleASCII"/>
+		</typDefinition>
+		<typDefinition pid="typ.verkehrsDatenQuelleVirtuell" name="VerkehrsDatenQuelleVirtuell" objektNamenPermanent="nein">
+			<info>
+				<kurzinfo>Die Verkehrsdatenquelle vom Typ Virtuell gestattet die Bildung virtueller Messstellen. Mittels einer Berechnungsvorschrift werden die Daten aus anderer Quellen zusammengefasst.</kurzinfo>
+			</info>
+			<erweitert pid="typ.konfigurationsObjekt"/>
+			<attributgruppe pid="atg.verkehrsDatenQuelleVirtuell"/>
+		</typDefinition>
+		<attributgruppenDefinition pid="atg.auswerteQuerschnitt" name="AuswerteQuerschnitt" parametrierend="nein">
+			<info>
+				<kurzinfo>Charakterisierende Daten eines Auswertequerschnitts</kurzinfo>
+				<beschreibung>
+					<sektion>
+						<titel>Auswertequerschnitt</titel>
+						<absatz>Der Auswertequerschnitt dient der Zuordnung von Messquerschnitten für die Erhebung von Langzeitzähldaten. Die Daten werden einersetits von der BAST und andererseits von den Ländern benötigt. Für jede Langzeitzählstelle werden zwei Richtungsquerschnitte definiert und der Gesamtquerschnitt als Zusammenfassung dieser Richtungsquerschnitte.Die an einem Auswertequerschnitt anfallenden Verkehrsdaten liegen normalerweise im Intervall 1 Stunde (normiert) vor.</absatz>
+					</sektion>
+				</beschreibung>
+			</info>
+			<aspekt pid="asp.eigenschaften" konfigurationsModus="datensatzOptional">
+			</aspekt>
+			<attribut pid="att.messQuerschnittAllgemeinReferenz" anzahl="1" anzahlIst="fest" name="Messquerschnitt">
+			</attribut>
+			<attribut pid="att.himmelsRichtung" anzahl="1" anzahlIst="fest" name="Himmelsrichtung">
+			</attribut>
+			<attribut pid="att.text" anzahl="1" anzahlIst="fest" name="Bezeichnung">
+			</attribut>
+		</attributgruppenDefinition>
+		<attributgruppenDefinition pid="atg.langZeitDatenDTV" name="LangzeitdatenDTV" parametrierend="nein">
+			<info>
+				<kurzinfo>Langzeitdaten der Datenart Durchscnittliche tägliche Verkehrslast (DTV)</kurzinfo>
+				<beschreibung>
+					<sektion>
+						<titel>Langzeitdaten der Datenart Fahrzeuganzahl</titel>
+						<absatz>Langzeitdaten der Datenart DTV können ab dem Aggregationsintervall Monat ermittelt werden. Der DTV ist die durchschnittliche Fahrzeuganzahl aller korrekt (d.h. lückenlos und nicht fehlerbehaftet) vorliegenden Tageswerte. Der DTV wird mit der Einheit "Fz/Tag" angegeben.</absatz>
+					</sektion>
+				</beschreibung>
+			</info>
+			<aspekt pid="asp.aggregationsIntervall15Minuten" onlineModus="quelleUndSenke">
+			</aspekt>
+			<aspekt pid="asp.aggregationsIntervallJahr" onlineModus="quelleUndSenke">
+			</aspekt>
+			<aspekt pid="asp.aggregationsIntervallMonat" onlineModus="quelleUndSenke">
+			</aspekt>
+			<aspekt pid="asp.aggregationsIntervallStunde" onlineModus="quelleUndSenke">
+			</aspekt>
+			<aspekt pid="asp.aggregationsIntervallTag" onlineModus="quelleUndSenke">
+			</aspekt>
+			<attributliste pid="atl.langZeitDatenDTV" anzahl="1" anzahlIst="fest" name="Kfz">
+				<info>
+					<kurzinfo>DTV der Fahrzeugart "Kraftfahrzeug" entsprechend TLS</kurzinfo>
+				</info>
+			</attributliste>
+			<attributliste pid="atl.langZeitDatenDTV" anzahl="1" anzahlIst="fest" name="PkwÄ">
+				<info>
+					<kurzinfo>DTVl der Fahrzeugart "Pkw ähnliche Fahrzeuge" entsprechend TLS</kurzinfo>
+				</info>
+			</attributliste>
+			<attributliste pid="atl.langZeitDatenDTV" anzahl="1" anzahlIst="fest" name="LkwÄ">
+				<info>
+					<kurzinfo>DTV der Fahrzeugart "Lkw ähnliche Fahrzeuge" entsprechend TLS</kurzinfo>
+				</info>
+			</attributliste>
+			<attributliste pid="atl.langZeitDatenDTV" anzahl="1" anzahlIst="fest" name="KfzNk">
+				<info>
+					<kurzinfo>DTV der Fahrzeugart "nicht klassifizierbare Fahrzeuge" entsprechend TLS</kurzinfo>
+				</info>
+			</attributliste>
+			<attributliste pid="atl.langZeitDatenDTV" anzahl="1" anzahlIst="fest" name="PkwG">
+				<info>
+					<kurzinfo>DTV der Fahrzeugart "Pkw Grundklasse" entsprechend TLS</kurzinfo>
+				</info>
+			</attributliste>
+			<attributliste pid="atl.langZeitDatenDTV" anzahl="1" anzahlIst="fest" name="Pkw">
+				<info>
+					<kurzinfo>DTV der Fahrzeugart "Personenkraftwagen" entsprechend TLS</kurzinfo>
+				</info>
+			</attributliste>
+			<attributliste pid="atl.langZeitDatenDTV" anzahl="1" anzahlIst="fest" name="Krad">
+				<info>
+					<kurzinfo>DTV der Fahrzeugart "Kraftrad" entsprechend TLS</kurzinfo>
+				</info>
+			</attributliste>
+			<attributliste pid="atl.langZeitDatenDTV" anzahl="1" anzahlIst="fest" name="Lfw">
+				<info>
+					<kurzinfo>DTV der Fahrzeugart "Lieferfahrzeug" entsprechend TLS</kurzinfo>
+				</info>
+			</attributliste>
+			<attributliste pid="atl.langZeitDatenDTV" anzahl="1" anzahlIst="fest" name="PkwA">
+				<info>
+					<kurzinfo>DTV der Fahrzeugart "Personenkraftwagen mit Anhänger" entsprechend TLS</kurzinfo>
+				</info>
+			</attributliste>
+			<attributliste pid="atl.langZeitDatenDTV" anzahl="1" anzahlIst="fest" name="Lkw">
+				<info>
+					<kurzinfo>DTV der Fahrzeugart "Lastkraftwagen" entsprechend TLS</kurzinfo>
+				</info>
+			</attributliste>
+			<attributliste pid="atl.langZeitDatenDTV" anzahl="1" anzahlIst="fest" name="Bus">
+				<info>
+					<kurzinfo>DTV der Fahrzeugart "Busse" entsprechend TLS</kurzinfo>
+				</info>
+			</attributliste>
+			<attributliste pid="atl.langZeitDatenDTV" anzahl="1" anzahlIst="fest" name="LkwK">
+				<info>
+					<kurzinfo>DTV der Fahrzeugart "Lastkraftwagen Kombination" entsprechend TLS</kurzinfo>
+				</info>
+			</attributliste>
+			<attributliste pid="atl.langZeitDatenDTV" anzahl="1" anzahlIst="fest" name="LkwA">
+				<info>
+					<kurzinfo>DTV der Fahrzeugart "Lastkraftwagen mit Anhänger" entsprechend TLS</kurzinfo>
+				</info>
+			</attributliste>
+			<attributliste pid="atl.langZeitDatenDTV" anzahl="1" anzahlIst="fest" name="SattelKfz">
+				<info>
+					<kurzinfo>DTV der Fahrzeugart "Sattel-Kraftfahrzeuge" entsprechend TLS</kurzinfo>
+				</info>
+			</attributliste>
+		</attributgruppenDefinition>
+		<attributgruppenDefinition pid="atg.langZeitDatenFahrzeugAnzahl" name="LangzeitdatenFahrzeuganzahl" parametrierend="nein">
+			<info>
+				<kurzinfo>Langzeitdaten der Datenart Fahrzeuganzahl in [Fz]</kurzinfo>
+				<beschreibung>
+					<sektion>
+						<titel>Langzeitdaten der Datenart Fahrzeuganzahl</titel>
+						<absatz>Langzeitdaten der Datenart Fahrzeuganzahl sind im Erfassungsintervall erfasste Zählwerte bzw. je Aggregationsintervall aufsummierte Zählwerte. Sie werden als absoluter Wert mit der Einheit "Fahrzeuge" angegeben.</absatz>
+					</sektion>
+				</beschreibung>
+			</info>
+			<aspekt pid="asp.aggregationsIntervall15Minuten" onlineModus="quelleUndSenke">
+			</aspekt>
+			<aspekt pid="asp.aggregationsIntervallJahr" onlineModus="quelleUndSenke">
+			</aspekt>
+			<aspekt pid="asp.aggregationsIntervallMonat" onlineModus="quelleUndSenke">
+			</aspekt>
+			<aspekt pid="asp.aggregationsIntervallStunde" onlineModus="quelleUndSenke">
+			</aspekt>
+			<aspekt pid="asp.aggregationsIntervallTag" onlineModus="quelleUndSenke">
+			</aspekt>
+			<attributliste pid="atl.langZeitDatenFahrzeugAnzahl" anzahl="1" anzahlIst="fest" name="Kfz">
+				<info>
+					<kurzinfo>Fahrzeuganzahl der Fahrzeugart "Kraftfahrzeug" entsprechend TLS</kurzinfo>
+				</info>
+			</attributliste>
+			<attributliste pid="atl.langZeitDatenFahrzeugAnzahl" anzahl="1" anzahlIst="fest" name="PkwÄ">
+				<info>
+					<kurzinfo>Fahrzeuganzahl der Fahrzeugart "Pkw ähnliche Fahrzeuge" entsprechend TLS</kurzinfo>
+				</info>
+			</attributliste>
+			<attributliste pid="atl.langZeitDatenFahrzeugAnzahl" anzahl="1" anzahlIst="fest" name="LkwÄ">
+				<info>
+					<kurzinfo>Fahrzeuganzahl der Fahrzeugart "Lkw ähnliche Fahrzeuge" entsprechend TLS</kurzinfo>
+				</info>
+			</attributliste>
+			<attributliste pid="atl.langZeitDatenFahrzeugAnzahl" anzahl="1" anzahlIst="fest" name="KfzNk">
+				<info>
+					<kurzinfo>Fahrzeuganzahl der Fahrzeugart "nicht klassifizierbare Fahrzeuge" entsprechend TLS</kurzinfo>
+				</info>
+			</attributliste>
+			<attributliste pid="atl.langZeitDatenFahrzeugAnzahl" anzahl="1" anzahlIst="fest" name="PkwG">
+				<info>
+					<kurzinfo>Fahrzeuganzahl der Fahrzeugart "Pkw Grundklasse" entsprechend TLS</kurzinfo>
+				</info>
+			</attributliste>
+			<attributliste pid="atl.langZeitDatenFahrzeugAnzahl" anzahl="1" anzahlIst="fest" name="Pkw">
+				<info>
+					<kurzinfo>Fahrzeuganzahl der Fahrzeugart "Personenkraftwagen" entsprechend TLS</kurzinfo>
+				</info>
+			</attributliste>
+			<attributliste pid="atl.langZeitDatenFahrzeugAnzahl" anzahl="1" anzahlIst="fest" name="Krad">
+				<info>
+					<kurzinfo>Fahrzeuganzahl der Fahrzeugart "Kraftrad" entsprechend TLS</kurzinfo>
+				</info>
+			</attributliste>
+			<attributliste pid="atl.langZeitDatenFahrzeugAnzahl" anzahl="1" anzahlIst="fest" name="Lfw">
+				<info>
+					<kurzinfo>Fahrzeuganzahl der Fahrzeugart "Lieferfahrzeug" entsprechend TLS</kurzinfo>
+				</info>
+			</attributliste>
+			<attributliste pid="atl.langZeitDatenFahrzeugAnzahl" anzahl="1" anzahlIst="fest" name="PkwA">
+				<info>
+					<kurzinfo>Fahrzeuganzahl der Fahrzeugart "Personenkraftwagen mit Anhänger" entsprechend TLS</kurzinfo>
+				</info>
+			</attributliste>
+			<attributliste pid="atl.langZeitDatenFahrzeugAnzahl" anzahl="1" anzahlIst="fest" name="Lkw">
+				<info>
+					<kurzinfo>Fahrzeuganzahl der Fahrzeugart "Lastkraftwagen" entsprechend TLS</kurzinfo>
+				</info>
+			</attributliste>
+			<attributliste pid="atl.langZeitDatenFahrzeugAnzahl" anzahl="1" anzahlIst="fest" name="Bus">
+				<info>
+					<kurzinfo>Fahrzeuganzahl der Fahrzeugart "Busse" entsprechend TLS</kurzinfo>
+				</info>
+			</attributliste>
+			<attributliste pid="atl.langZeitDatenFahrzeugAnzahl" anzahl="1" anzahlIst="fest" name="LkwK">
+				<info>
+					<kurzinfo>Fahrzeuganzahl der Fahrzeugart "Lastkraftwagen Kombination" entsprechend TLS</kurzinfo>
+				</info>
+			</attributliste>
+			<attributliste pid="atl.langZeitDatenFahrzeugAnzahl" anzahl="1" anzahlIst="fest" name="LkwA">
+				<info>
+					<kurzinfo>Fahrzeuganzahl der Fahrzeugart "Lastkraftwagen mit Anhänger" entsprechend TLS</kurzinfo>
+				</info>
+			</attributliste>
+			<attributliste pid="atl.langZeitDatenFahrzeugAnzahl" anzahl="1" anzahlIst="fest" name="SattelKfz">
+				<info>
+					<kurzinfo>Fahrzeuganzahl der Fahrzeugart "Sattel-Kraftfahrzeuge" entsprechend TLS</kurzinfo>
+				</info>
+			</attributliste>
+		</attributgruppenDefinition>
+		<attributgruppenDefinition pid="atg.langZeitDatenGeschwindigkeit" name="LangzeitdatenGeschwindigkeit" parametrierend="nein">
+			<info>
+				<kurzinfo>Langzeitdaten der Datenart Geschwindigkeit [km/h]</kurzinfo>
+				<beschreibung>
+					<sektion>
+						<titel>Langzeitdaten der Datenart Fahrzeuggeschwindigkeit</titel>
+						<absatz>Langzeitdaten der Datenart Fahrzeuggeschwindigkeit sind im Erfassungsintervall bzw. Aggregationsintervall arithmetisch gemittelte Geschwindigkeitsangaben. Sie werden als mit der Einheit "km/h" angegeben und mit der Skalierung 0.1 km/h ausgewiesen.</absatz>
+					</sektion>
+				</beschreibung>
+			</info>
+			<aspekt pid="asp.aggregationsIntervall15Minuten" onlineModus="quelleUndSenke">
+			</aspekt>
+			<aspekt pid="asp.aggregationsIntervallJahr" onlineModus="quelleUndSenke">
+			</aspekt>
+			<aspekt pid="asp.aggregationsIntervallMonat" onlineModus="quelleUndSenke">
+			</aspekt>
+			<aspekt pid="asp.aggregationsIntervallStunde" onlineModus="quelleUndSenke">
+			</aspekt>
+			<aspekt pid="asp.aggregationsIntervallTag" onlineModus="quelleUndSenke">
+			</aspekt>
+			<attributliste pid="atl.langZeitDatenGeschwindigkeit" anzahl="1" anzahlIst="fest" name="Kfz">
+				<info>
+					<kurzinfo>Arithmetisch gemittelte Geschwindigkeit der Fahrzeugart "Kraftfahrzeug" entsprechend TLS</kurzinfo>
+				</info>
+			</attributliste>
+			<attributliste pid="atl.langZeitDatenGeschwindigkeit" anzahl="1" anzahlIst="fest" name="PkwÄ">
+				<info>
+					<kurzinfo>Arithmetisch gemittelte Geschwindigkeit der Fahrzeugart "Pkw ähnliche Fahrzeuge" entsprechend TLS</kurzinfo>
+				</info>
+			</attributliste>
+			<attributliste pid="atl.langZeitDatenGeschwindigkeit" anzahl="1" anzahlIst="fest" name="LkwÄ">
+				<info>
+					<kurzinfo>Arithmetisch gemittelte Geschwindigkeit der Fahrzeugart "Lkw ähnliche Fahrzeuge" entsprechend TLS</kurzinfo>
+				</info>
+			</attributliste>
+			<attributliste pid="atl.langZeitDatenGeschwindigkeit" anzahl="1" anzahlIst="fest" name="KfzNk">
+				<info>
+					<kurzinfo>Arithmetisch gemittelte Geschwindigkeit der Fahrzeugart "nicht klassifizierbare Fahrzeuge" entsprechend TLS</kurzinfo>
+				</info>
+			</attributliste>
+			<attributliste pid="atl.langZeitDatenGeschwindigkeit" anzahl="1" anzahlIst="fest" name="PkwG">
+				<info>
+					<kurzinfo>Arithmetisch gemittelte Geschwindigkeit der Fahrzeugart "Pkw Grundklasse" entsprechend TLS</kurzinfo>
+				</info>
+			</attributliste>
+			<attributliste pid="atl.langZeitDatenGeschwindigkeit" anzahl="1" anzahlIst="fest" name="Pkw">
+				<info>
+					<kurzinfo>Arithmetisch gemittelte Geschwindigkeit der Fahrzeugart "Personenkraftwagen" entsprechend TLS</kurzinfo>
+				</info>
+			</attributliste>
+			<attributliste pid="atl.langZeitDatenGeschwindigkeit" anzahl="1" anzahlIst="fest" name="Krad">
+				<info>
+					<kurzinfo>Arithmetisch gemittelte Geschwindigkeit der Fahrzeugart "Kraftrad" entsprechend TLS</kurzinfo>
+				</info>
+			</attributliste>
+			<attributliste pid="atl.langZeitDatenGeschwindigkeit" anzahl="1" anzahlIst="fest" name="Lfw">
+				<info>
+					<kurzinfo>Arithmetisch gemittelte Geschwindigkeit der Fahrzeugart "Lieferfahrzeug" entsprechend TLS</kurzinfo>
+				</info>
+			</attributliste>
+			<attributliste pid="atl.langZeitDatenGeschwindigkeit" anzahl="1" anzahlIst="fest" name="PkwA">
+				<info>
+					<kurzinfo>Arithmetisch gemittelte Geschwindigkeit der Fahrzeugart "Personenkraftwagen mit Anhänger" entsprechend TLS</kurzinfo>
+				</info>
+			</attributliste>
+			<attributliste pid="atl.langZeitDatenGeschwindigkeit" anzahl="1" anzahlIst="fest" name="Lkw">
+				<info>
+					<kurzinfo>Arithmetisch gemittelte Geschwindigkeit der Fahrzeugart "Lastkraftwagen" entsprechend TLS</kurzinfo>
+				</info>
+			</attributliste>
+			<attributliste pid="atl.langZeitDatenGeschwindigkeit" anzahl="1" anzahlIst="fest" name="Bus">
+				<info>
+					<kurzinfo>Arithmetisch gemittelte Geschwindigkeit der Fahrzeugart "Busse" entsprechend TLS</kurzinfo>
+				</info>
+			</attributliste>
+			<attributliste pid="atl.langZeitDatenGeschwindigkeit" anzahl="1" anzahlIst="fest" name="LkwK">
+				<info>
+					<kurzinfo>Arithmetisch gemittelte Geschwindigkeit der Fahrzeugart "Lastkraftwagen Kombination" entsprechend TLS</kurzinfo>
+				</info>
+			</attributliste>
+			<attributliste pid="atl.langZeitDatenGeschwindigkeit" anzahl="1" anzahlIst="fest" name="LkwA">
+				<info>
+					<kurzinfo>Arithmetisch gemittelte Geschwindigkeit der Fahrzeugart "Lastkraftwagen mit Anhänger" entsprechend TLS</kurzinfo>
+				</info>
+			</attributliste>
+			<attributliste pid="atl.langZeitDatenGeschwindigkeit" anzahl="1" anzahlIst="fest" name="SattelKfz">
+				<info>
+					<kurzinfo>Arithmetisch gemittelte Geschwindigkeit der Fahrzeugart "Sattel-Kraftfahrzeuge" entsprechend TLS</kurzinfo>
+				</info>
+			</attributliste>
+		</attributgruppenDefinition>
+		<attributgruppenDefinition pid="atg.langZeitDatenSpitzenStunde" name="LangzeitdatenSpitzenstunde" parametrierend="nein">
+			<info>
+				<kurzinfo>Die Spitzenstunde gibt die Stunde mit der höchsten Verkehsbelastung an.</kurzinfo>
+				<beschreibung>
+					<sektion>
+						<titel>Spitzenstunde (Stunde mit der höchsten Verkehsbelastung)</titel>
+						<absatz>Die Spitzenstunde gibt die Stunde mit der höchsten Verkehsbelastung im zugrundeliegenden Intervall an. Die Spitzenstunde wird ab dem Aggregationsintervall Tag bestimmt und als Zeiteinheit angegeben.</absatz>
+					</sektion>
+				</beschreibung>
+			</info>
+			<aspekt pid="asp.aggregationsIntervall15Minuten" onlineModus="quelleUndSenke">
+			</aspekt>
+			<aspekt pid="asp.aggregationsIntervallJahr" onlineModus="quelleUndSenke">
+			</aspekt>
+			<aspekt pid="asp.aggregationsIntervallMonat" onlineModus="quelleUndSenke">
+			</aspekt>
+			<aspekt pid="asp.aggregationsIntervallStunde" onlineModus="quelleUndSenke">
+			</aspekt>
+			<aspekt pid="asp.aggregationsIntervallTag" onlineModus="quelleUndSenke">
+			</aspekt>
+			<attributliste pid="atl.langZeitDatenSpitzenZeit" anzahl="1" anzahlIst="fest" name="Kfz">
+				<info>
+					<kurzinfo>Spitzenstunde für die Fahrzeugart "Kraftfahrzeug" entsprechend TLS</kurzinfo>
+				</info>
+			</attributliste>
+			<attributliste pid="atl.langZeitDatenSpitzenZeit" anzahl="1" anzahlIst="fest" name="PkwÄ">
+				<info>
+					<kurzinfo>Spitzenstunde für die Fahrzeugart "Pkw ähnliche Fahrzeuge" entsprechend TLS</kurzinfo>
+				</info>
+			</attributliste>
+			<attributliste pid="atl.langZeitDatenSpitzenZeit" anzahl="1" anzahlIst="fest" name="LkwÄ">
+				<info>
+					<kurzinfo>Spitzenstunde für die Fahrzeugart "Lkw ähnliche Fahrzeuge" entsprechend TLS</kurzinfo>
+				</info>
+			</attributliste>
+			<attributliste pid="atl.langZeitDatenSpitzenZeit" anzahl="1" anzahlIst="fest" name="KfzNk">
+				<info>
+					<kurzinfo>Spitzenstunde für die Fahrzeugart "nicht klassifizierbare Fahrzeuge" entsprechend TLS</kurzinfo>
+				</info>
+			</attributliste>
+			<attributliste pid="atl.langZeitDatenSpitzenZeit" anzahl="1" anzahlIst="fest" name="PkwG">
+				<info>
+					<kurzinfo>Spitzenstunde für die Fahrzeugart "Pkw Grundklasse" entsprechend TLS</kurzinfo>
+				</info>
+			</attributliste>
+			<attributliste pid="atl.langZeitDatenSpitzenZeit" anzahl="1" anzahlIst="fest" name="Pkw">
+				<info>
+					<kurzinfo>Spitzenstunde für die Fahrzeugart "Personenkraftwagen" entsprechend TLS</kurzinfo>
+				</info>
+			</attributliste>
+			<attributliste pid="atl.langZeitDatenSpitzenZeit" anzahl="1" anzahlIst="fest" name="Krad">
+				<info>
+					<kurzinfo>Spitzenstunde für die Fahrzeugart "Kraftrad" entsprechend TLS</kurzinfo>
+				</info>
+			</attributliste>
+			<attributliste pid="atl.langZeitDatenSpitzenZeit" anzahl="1" anzahlIst="fest" name="Lfw">
+				<info>
+					<kurzinfo>Spitzenstunde für die Fahrzeugart "Lieferfahrzeug" entsprechend TLS</kurzinfo>
+				</info>
+			</attributliste>
+			<attributliste pid="atl.langZeitDatenSpitzenZeit" anzahl="1" anzahlIst="fest" name="PkwA">
+				<info>
+					<kurzinfo>Spitzenstunde für die Fahrzeugart "Personenkraftwagen mit Anhänger" entsprechend TLS</kurzinfo>
+				</info>
+			</attributliste>
+			<attributliste pid="atl.langZeitDatenSpitzenZeit" anzahl="1" anzahlIst="fest" name="Lkw">
+				<info>
+					<kurzinfo>Spitzenstunde für die Fahrzeugart "Lastkraftwagen" entsprechend TLS</kurzinfo>
+				</info>
+			</attributliste>
+			<attributliste pid="atl.langZeitDatenSpitzenZeit" anzahl="1" anzahlIst="fest" name="Bus">
+				<info>
+					<kurzinfo>Spitzenstunde für die Fahrzeugart "Busse" entsprechend TLS</kurzinfo>
+				</info>
+			</attributliste>
+			<attributliste pid="atl.langZeitDatenSpitzenZeit" anzahl="1" anzahlIst="fest" name="LkwK">
+				<info>
+					<kurzinfo>Spitzenstunde für die Fahrzeugart "Lastkraftwagen Kombination" entsprechend TLS</kurzinfo>
+				</info>
+			</attributliste>
+			<attributliste pid="atl.langZeitDatenSpitzenZeit" anzahl="1" anzahlIst="fest" name="LkwA">
+				<info>
+					<kurzinfo>Spitzenstunde für die Fahrzeugart "Lastkraftwagen mit Anhänger" entsprechend TLS</kurzinfo>
+				</info>
+			</attributliste>
+			<attributliste pid="atl.langZeitDatenSpitzenZeit" anzahl="1" anzahlIst="fest" name="SattelKfz">
+				<info>
+					<kurzinfo>Spitzenstunde für die Fahrzeugart "Sattel-Kraftfahrzeuge" entsprechend TLS</kurzinfo>
+				</info>
+			</attributliste>
+			<attributliste pid="atl.langZeitDatenFahrzeugAnzahl" anzahl="1" anzahlIst="fest" name="qKfz">
+				<info>
+					<kurzinfo>Fahrzeuganzahl der Fahrzeugart "Kraftfahrzeug" entsprechend TLS</kurzinfo>
+				</info>
+			</attributliste>
+			<attributliste pid="atl.langZeitDatenFahrzeugAnzahl" anzahl="1" anzahlIst="fest" name="qPkwÄ">
+				<info>
+					<kurzinfo>Fahrzeuganzahl der Fahrzeugart "Pkw ähnliche Fahrzeuge" entsprechend TLS</kurzinfo>
+				</info>
+			</attributliste>
+			<attributliste pid="atl.langZeitDatenFahrzeugAnzahl" anzahl="1" anzahlIst="fest" name="qLkwÄ">
+				<info>
+					<kurzinfo>Fahrzeuganzahl der Fahrzeugart "Lkw ähnliche Fahrzeuge" entsprechend TLS</kurzinfo>
+				</info>
+			</attributliste>
+			<attributliste pid="atl.langZeitDatenFahrzeugAnzahl" anzahl="1" anzahlIst="fest" name="qKfzNk">
+				<info>
+					<kurzinfo>Fahrzeuganzahl der Fahrzeugart "nicht klassifizierbare Fahrzeuge" entsprechend TLS</kurzinfo>
+				</info>
+			</attributliste>
+			<attributliste pid="atl.langZeitDatenFahrzeugAnzahl" anzahl="1" anzahlIst="fest" name="qPkwG">
+				<info>
+					<kurzinfo>Fahrzeuganzahl der Fahrzeugart "Pkw Grundklasse" entsprechend TLS</kurzinfo>
+				</info>
+			</attributliste>
+			<attributliste pid="atl.langZeitDatenFahrzeugAnzahl" anzahl="1" anzahlIst="fest" name="qPkw">
+				<info>
+					<kurzinfo>Fahrzeuganzahl der Fahrzeugart "Personenkraftwagen" entsprechend TLS</kurzinfo>
+				</info>
+			</attributliste>
+			<attributliste pid="atl.langZeitDatenFahrzeugAnzahl" anzahl="1" anzahlIst="fest" name="qKrad">
+				<info>
+					<kurzinfo>Fahrzeuganzahl der Fahrzeugart "Kraftrad" entsprechend TLS</kurzinfo>
+				</info>
+			</attributliste>
+			<attributliste pid="atl.langZeitDatenFahrzeugAnzahl" anzahl="1" anzahlIst="fest" name="qLfw">
+				<info>
+					<kurzinfo>Fahrzeuganzahl der Fahrzeugart "Lieferfahrzeug" entsprechend TLS</kurzinfo>
+				</info>
+			</attributliste>
+			<attributliste pid="atl.langZeitDatenFahrzeugAnzahl" anzahl="1" anzahlIst="fest" name="qPkwA">
+				<info>
+					<kurzinfo>Fahrzeuganzahl der Fahrzeugart "Personenkraftwagen mit Anhänger" entsprechend TLS</kurzinfo>
+				</info>
+			</attributliste>
+			<attributliste pid="atl.langZeitDatenFahrzeugAnzahl" anzahl="1" anzahlIst="fest" name="qLkw">
+				<info>
+					<kurzinfo>Fahrzeuganzahl der Fahrzeugart "Lastkraftwagen" entsprechend TLS</kurzinfo>
+				</info>
+			</attributliste>
+			<attributliste pid="atl.langZeitDatenFahrzeugAnzahl" anzahl="1" anzahlIst="fest" name="qBus">
+				<info>
+					<kurzinfo>Fahrzeuganzahl der Fahrzeugart "Busse" entsprechend TLS</kurzinfo>
+				</info>
+			</attributliste>
+			<attributliste pid="atl.langZeitDatenFahrzeugAnzahl" anzahl="1" anzahlIst="fest" name="qLkwK">
+				<info>
+					<kurzinfo>Fahrzeuganzahl der Fahrzeugart "Lastkraftwagen Kombination" entsprechend TLS</kurzinfo>
+				</info>
+			</attributliste>
+			<attributliste pid="atl.langZeitDatenFahrzeugAnzahl" anzahl="1" anzahlIst="fest" name="qLkwA">
+				<info>
+					<kurzinfo>Fahrzeuganzahl der Fahrzeugart "Lastkraftwagen mit Anhänger" entsprechend TLS</kurzinfo>
+				</info>
+			</attributliste>
+			<attributliste pid="atl.langZeitDatenFahrzeugAnzahl" anzahl="1" anzahlIst="fest" name="qSattelKfz">
+				<info>
+					<kurzinfo>Fahrzeuganzahl der Fahrzeugart "Sattel-Kraftfahrzeuge" entsprechend TLS</kurzinfo>
+				</info>
+			</attributliste>
+		</attributgruppenDefinition>
+		<attributgruppenDefinition pid="atg.langZeitDatenSpitzenTag" name="LangzeitdatenSpitzentag" parametrierend="nein">
+			<info>
+				<kurzinfo>Der Spitzentag gibt den Tag mit der höchsten Verkehsbelastung an.</kurzinfo>
+				<beschreibung>
+					<sektion>
+						<titel>Spitzentag (Tag mit der höchsten Verkehsbelastung)</titel>
+						<absatz>Der Spitzentag gibt den Tag mit der höchsten Verkehsbelastung im zugrundeliegenden Intervall an. Der Spitzentag wird ab dem Aggregationsintervall Monat bestimmt und als Zeiteinheit angegeben.</absatz>
+					</sektion>
+				</beschreibung>
+			</info>
+			<aspekt pid="asp.aggregationsIntervall15Minuten" onlineModus="quelleUndSenke">
+			</aspekt>
+			<aspekt pid="asp.aggregationsIntervallJahr" onlineModus="quelleUndSenke">
+			</aspekt>
+			<aspekt pid="asp.aggregationsIntervallMonat" onlineModus="quelleUndSenke">
+			</aspekt>
+			<aspekt pid="asp.aggregationsIntervallStunde" onlineModus="quelleUndSenke">
+			</aspekt>
+			<aspekt pid="asp.aggregationsIntervallTag" onlineModus="quelleUndSenke">
+			</aspekt>
+			<attributliste pid="atl.langZeitDatenSpitzenZeit" anzahl="1" anzahlIst="fest" name="Kfz">
+				<info>
+					<kurzinfo>Spitzentag für die Fahrzeugart "Kraftfahrzeug" entsprechend TLS</kurzinfo>
+				</info>
+			</attributliste>
+			<attributliste pid="atl.langZeitDatenSpitzenZeit" anzahl="1" anzahlIst="fest" name="PkwÄ">
+				<info>
+					<kurzinfo>Spitzentag für die Fahrzeugart "Pkw ähnliche Fahrzeuge" entsprechend TLS</kurzinfo>
+				</info>
+			</attributliste>
+			<attributliste pid="atl.langZeitDatenSpitzenZeit" anzahl="1" anzahlIst="fest" name="LkwÄ">
+				<info>
+					<kurzinfo>Spitzentag für die Fahrzeugart "Lkw ähnliche Fahrzeuge" entsprechend TLS</kurzinfo>
+				</info>
+			</attributliste>
+			<attributliste pid="atl.langZeitDatenSpitzenZeit" anzahl="1" anzahlIst="fest" name="KfzNk">
+				<info>
+					<kurzinfo>Spitzentag für die Fahrzeugart "nicht klassifizierbare Fahrzeuge" entsprechend TLS</kurzinfo>
+				</info>
+			</attributliste>
+			<attributliste pid="atl.langZeitDatenSpitzenZeit" anzahl="1" anzahlIst="fest" name="PkwG">
+				<info>
+					<kurzinfo>Spitzentag für die Fahrzeugart "Pkw Grundklasse" entsprechend TLS</kurzinfo>
+				</info>
+			</attributliste>
+			<attributliste pid="atl.langZeitDatenSpitzenZeit" anzahl="1" anzahlIst="fest" name="Pkw">
+				<info>
+					<kurzinfo>Spitzentag für die Fahrzeugart "Personenkraftwagen" entsprechend TLS</kurzinfo>
+				</info>
+			</attributliste>
+			<attributliste pid="atl.langZeitDatenSpitzenZeit" anzahl="1" anzahlIst="fest" name="Krad">
+				<info>
+					<kurzinfo>Spitzentag für die Fahrzeugart "Kraftrad" entsprechend TLS</kurzinfo>
+				</info>
+			</attributliste>
+			<attributliste pid="atl.langZeitDatenSpitzenZeit" anzahl="1" anzahlIst="fest" name="Lfw">
+				<info>
+					<kurzinfo>Spitzentag für die Fahrzeugart "Lieferfahrzeug" entsprechend TLS</kurzinfo>
+				</info>
+			</attributliste>
+			<attributliste pid="atl.langZeitDatenSpitzenZeit" anzahl="1" anzahlIst="fest" name="PkwA">
+				<info>
+					<kurzinfo>Spitzentag für die Fahrzeugart "Personenkraftwagen mit Anhänger" entsprechend TLS</kurzinfo>
+				</info>
+			</attributliste>
+			<attributliste pid="atl.langZeitDatenSpitzenZeit" anzahl="1" anzahlIst="fest" name="Lkw">
+				<info>
+					<kurzinfo>Spitzentag für die Fahrzeugart "Lastkraftwagen" entsprechend TLS</kurzinfo>
+				</info>
+			</attributliste>
+			<attributliste pid="atl.langZeitDatenSpitzenZeit" anzahl="1" anzahlIst="fest" name="Bus">
+				<info>
+					<kurzinfo>Spitzentag für die Fahrzeugart "Busse" entsprechend TLS</kurzinfo>
+				</info>
+			</attributliste>
+			<attributliste pid="atl.langZeitDatenSpitzenZeit" anzahl="1" anzahlIst="fest" name="LkwK">
+				<info>
+					<kurzinfo>Spitzentag für die Fahrzeugart "Lastkraftwagen Kombination" entsprechend TLS</kurzinfo>
+				</info>
+			</attributliste>
+			<attributliste pid="atl.langZeitDatenSpitzenZeit" anzahl="1" anzahlIst="fest" name="LkwA">
+				<info>
+					<kurzinfo>Spitzentag für die Fahrzeugart "Lastkraftwagen mit Anhänger" entsprechend TLS</kurzinfo>
+				</info>
+			</attributliste>
+			<attributliste pid="atl.langZeitDatenSpitzenZeit" anzahl="1" anzahlIst="fest" name="SattelKfz">
+				<info>
+					<kurzinfo>Spitzentag für die Fahrzeugart "Sattel-Kraftfahrzeuge" entsprechend TLS</kurzinfo>
+				</info>
+			</attributliste>
+			<attributliste pid="atl.langZeitDatenFahrzeugAnzahl" anzahl="1" anzahlIst="fest" name="qKfz">
+				<info>
+					<kurzinfo>Fahrzeuganzahl der Fahrzeugart "Kraftfahrzeug" entsprechend TLS</kurzinfo>
+				</info>
+			</attributliste>
+			<attributliste pid="atl.langZeitDatenFahrzeugAnzahl" anzahl="1" anzahlIst="fest" name="qPkwÄ">
+				<info>
+					<kurzinfo>Fahrzeuganzahl der Fahrzeugart "Pkw ähnliche Fahrzeuge" entsprechend TLS</kurzinfo>
+				</info>
+			</attributliste>
+			<attributliste pid="atl.langZeitDatenFahrzeugAnzahl" anzahl="1" anzahlIst="fest" name="qLkwÄ">
+				<info>
+					<kurzinfo>Fahrzeuganzahl der Fahrzeugart "Lkw ähnliche Fahrzeuge" entsprechend TLS</kurzinfo>
+				</info>
+			</attributliste>
+			<attributliste pid="atl.langZeitDatenFahrzeugAnzahl" anzahl="1" anzahlIst="fest" name="qKfzNk">
+				<info>
+					<kurzinfo>Fahrzeuganzahl der Fahrzeugart "nicht klassifizierbare Fahrzeuge" entsprechend TLS</kurzinfo>
+				</info>
+			</attributliste>
+			<attributliste pid="atl.langZeitDatenFahrzeugAnzahl" anzahl="1" anzahlIst="fest" name="qPkwG">
+				<info>
+					<kurzinfo>Fahrzeuganzahl der Fahrzeugart "Pkw Grundklasse" entsprechend TLS</kurzinfo>
+				</info>
+			</attributliste>
+			<attributliste pid="atl.langZeitDatenFahrzeugAnzahl" anzahl="1" anzahlIst="fest" name="qPkw">
+				<info>
+					<kurzinfo>Fahrzeuganzahl der Fahrzeugart "Personenkraftwagen" entsprechend TLS</kurzinfo>
+				</info>
+			</attributliste>
+			<attributliste pid="atl.langZeitDatenFahrzeugAnzahl" anzahl="1" anzahlIst="fest" name="qKrad">
+				<info>
+					<kurzinfo>Fahrzeuganzahl der Fahrzeugart "Kraftrad" entsprechend TLS</kurzinfo>
+				</info>
+			</attributliste>
+			<attributliste pid="atl.langZeitDatenFahrzeugAnzahl" anzahl="1" anzahlIst="fest" name="qLfw">
+				<info>
+					<kurzinfo>Fahrzeuganzahl der Fahrzeugart "Lieferfahrzeug" entsprechend TLS</kurzinfo>
+				</info>
+			</attributliste>
+			<attributliste pid="atl.langZeitDatenFahrzeugAnzahl" anzahl="1" anzahlIst="fest" name="qPkwA">
+				<info>
+					<kurzinfo>Fahrzeuganzahl der Fahrzeugart "Personenkraftwagen mit Anhänger" entsprechend TLS</kurzinfo>
+				</info>
+			</attributliste>
+			<attributliste pid="atl.langZeitDatenFahrzeugAnzahl" anzahl="1" anzahlIst="fest" name="qLkw">
+				<info>
+					<kurzinfo>Fahrzeuganzahl der Fahrzeugart "Lastkraftwagen" entsprechend TLS</kurzinfo>
+				</info>
+			</attributliste>
+			<attributliste pid="atl.langZeitDatenFahrzeugAnzahl" anzahl="1" anzahlIst="fest" name="qBus">
+				<info>
+					<kurzinfo>Fahrzeuganzahl der Fahrzeugart "Busse" entsprechend TLS</kurzinfo>
+				</info>
+			</attributliste>
+			<attributliste pid="atl.langZeitDatenFahrzeugAnzahl" anzahl="1" anzahlIst="fest" name="qLkwK">
+				<info>
+					<kurzinfo>Fahrzeuganzahl der Fahrzeugart "Lastkraftwagen Kombination" entsprechend TLS</kurzinfo>
+				</info>
+			</attributliste>
+			<attributliste pid="atl.langZeitDatenFahrzeugAnzahl" anzahl="1" anzahlIst="fest" name="qLkwA">
+				<info>
+					<kurzinfo>Fahrzeuganzahl der Fahrzeugart "Lastkraftwagen mit Anhänger" entsprechend TLS</kurzinfo>
+				</info>
+			</attributliste>
+			<attributliste pid="atl.langZeitDatenFahrzeugAnzahl" anzahl="1" anzahlIst="fest" name="qSattelKfz">
+				<info>
+					<kurzinfo>Fahrzeuganzahl der Fahrzeugart "Sattel-Kraftfahrzeuge" entsprechend TLS</kurzinfo>
+				</info>
+			</attributliste>
+		</attributgruppenDefinition>
+		<attributgruppenDefinition pid="atg.langZeitDatenV15" name="LangzeitdatenV15" parametrierend="nein">
+			<info>
+				<kurzinfo>Langzeitdaten der Datenart V15-Geschwindigkeit [km/h]</kurzinfo>
+				<beschreibung>
+					<sektion>
+						<titel>Langzeitdaten der Datenart V15-Geschwindigkeit</titel>
+						<absatz>Die Datenart V15-Geschwindigkeit ist die Geschwindigkeit im Erfassungsintervall bzw. Aggregationsintervall, welche von 15% aller Fahrzeuge unterschritten wurde. Die Angabe erfolgt in der Einheit "km/h" und mit der Skalierung 0.1 km/h.</absatz>
+					</sektion>
+				</beschreibung>
+			</info>
+			<aspekt pid="asp.aggregationsIntervall15Minuten" onlineModus="quelleUndSenke">
+			</aspekt>
+			<aspekt pid="asp.aggregationsIntervallJahr" onlineModus="quelleUndSenke">
+			</aspekt>
+			<aspekt pid="asp.aggregationsIntervallMonat" onlineModus="quelleUndSenke">
+			</aspekt>
+			<aspekt pid="asp.aggregationsIntervallStunde" onlineModus="quelleUndSenke">
+			</aspekt>
+			<aspekt pid="asp.aggregationsIntervallTag" onlineModus="quelleUndSenke">
+			</aspekt>
+			<attributliste pid="atl.langZeitDatenGeschwindigkeit" anzahl="1" anzahlIst="fest" name="Kfz">
+				<info>
+					<kurzinfo>V15 Geschwindigkeit der Fahrzeugart "Kraftfahrzeug" entsprechend TLS</kurzinfo>
+				</info>
+			</attributliste>
+			<attributliste pid="atl.langZeitDatenGeschwindigkeit" anzahl="1" anzahlIst="fest" name="PkwÄ">
+				<info>
+					<kurzinfo>V15 Geschwindigkeit der Fahrzeugart "Pkw ähnliche Fahrzeuge" entsprechend TLS</kurzinfo>
+				</info>
+			</attributliste>
+			<attributliste pid="atl.langZeitDatenGeschwindigkeit" anzahl="1" anzahlIst="fest" name="LkwÄ">
+				<info>
+					<kurzinfo>V15 Geschwindigkeit der Fahrzeugart "Lkw ähnliche Fahrzeuge" entsprechend TLS</kurzinfo>
+				</info>
+			</attributliste>
+			<attributliste pid="atl.langZeitDatenGeschwindigkeit" anzahl="1" anzahlIst="fest" name="KfzNk">
+				<info>
+					<kurzinfo>V15 Geschwindigkeit der Fahrzeugart "nicht klassifizierbare Fahrzeuge" entsprechend TLS</kurzinfo>
+				</info>
+			</attributliste>
+			<attributliste pid="atl.langZeitDatenGeschwindigkeit" anzahl="1" anzahlIst="fest" name="PkwG">
+				<info>
+					<kurzinfo>V15 Geschwindigkeit der Fahrzeugart "Pkw Grundklasse" entsprechend TLS</kurzinfo>
+				</info>
+			</attributliste>
+			<attributliste pid="atl.langZeitDatenGeschwindigkeit" anzahl="1" anzahlIst="fest" name="Pkw">
+				<info>
+					<kurzinfo>V15 Geschwindigkeit der Fahrzeugart "Personenkraftwagen" entsprechend TLS</kurzinfo>
+				</info>
+			</attributliste>
+			<attributliste pid="atl.langZeitDatenGeschwindigkeit" anzahl="1" anzahlIst="fest" name="Krad">
+				<info>
+					<kurzinfo>V15 Geschwindigkeit der Fahrzeugart "Kraftrad" entsprechend TLS</kurzinfo>
+				</info>
+			</attributliste>
+			<attributliste pid="atl.langZeitDatenGeschwindigkeit" anzahl="1" anzahlIst="fest" name="Lfw">
+				<info>
+					<kurzinfo>V15 Geschwindigkeit der Fahrzeugart "Lieferfahrzeug" entsprechend TLS</kurzinfo>
+				</info>
+			</attributliste>
+			<attributliste pid="atl.langZeitDatenGeschwindigkeit" anzahl="1" anzahlIst="fest" name="PkwA">
+				<info>
+					<kurzinfo>V15 Geschwindigkeit der Fahrzeugart "Personenkraftwagen mit Anhänger" entsprechend TLS</kurzinfo>
+				</info>
+			</attributliste>
+			<attributliste pid="atl.langZeitDatenGeschwindigkeit" anzahl="1" anzahlIst="fest" name="Lkw">
+				<info>
+					<kurzinfo>V15 Geschwindigkeit der Fahrzeugart "Lastkraftwagen" entsprechend TLS</kurzinfo>
+				</info>
+			</attributliste>
+			<attributliste pid="atl.langZeitDatenGeschwindigkeit" anzahl="1" anzahlIst="fest" name="Bus">
+				<info>
+					<kurzinfo>V15 Geschwindigkeit der Fahrzeugart "Busse" entsprechend TLS</kurzinfo>
+				</info>
+			</attributliste>
+			<attributliste pid="atl.langZeitDatenGeschwindigkeit" anzahl="1" anzahlIst="fest" name="LkwK">
+				<info>
+					<kurzinfo>V15 Geschwindigkeit der Fahrzeugart "Lastkraftwagen Kombination" entsprechend TLS</kurzinfo>
+				</info>
+			</attributliste>
+			<attributliste pid="atl.langZeitDatenGeschwindigkeit" anzahl="1" anzahlIst="fest" name="LkwA">
+				<info>
+					<kurzinfo>V15 Geschwindigkeit der Fahrzeugart "Lastkraftwagen mit Anhänger" entsprechend TLS</kurzinfo>
+				</info>
+			</attributliste>
+			<attributliste pid="atl.langZeitDatenGeschwindigkeit" anzahl="1" anzahlIst="fest" name="SattelKfz">
+				<info>
+					<kurzinfo>V15 Geschwindigkeit der Fahrzeugart "Sattel-Kraftfahrzeuge" entsprechend TLS</kurzinfo>
+				</info>
+			</attributliste>
+		</attributgruppenDefinition>
+		<attributgruppenDefinition pid="atg.langZeitDatenV50" name="LangzeitdatenV50" parametrierend="nein">
+			<info>
+				<kurzinfo>Langzeitdaten der Datenart V50-Geschwindigkeit [km/h]</kurzinfo>
+				<beschreibung>
+					<sektion>
+						<titel>Langzeitdaten der Datenart V50-Geschwindigkeit</titel>
+						<absatz>Die Datenart V50-Geschwindigkeit ist die Geschwindigkeit im Erfassungsintervall bzw. Aggregationsintervall, welche von 50% aller Fahrzeuge unterschritten wurde. Die Angabe erfolgt in der Einheit "km/h" und mit der Skalierung 0.1 km/h.</absatz>
+					</sektion>
+				</beschreibung>
+			</info>
+			<aspekt pid="asp.aggregationsIntervall15Minuten" onlineModus="quelleUndSenke">
+			</aspekt>
+			<aspekt pid="asp.aggregationsIntervallJahr" onlineModus="quelleUndSenke">
+			</aspekt>
+			<aspekt pid="asp.aggregationsIntervallMonat" onlineModus="quelleUndSenke">
+			</aspekt>
+			<aspekt pid="asp.aggregationsIntervallStunde" onlineModus="quelleUndSenke">
+			</aspekt>
+			<aspekt pid="asp.aggregationsIntervallTag" onlineModus="quelleUndSenke">
+			</aspekt>
+			<attributliste pid="atl.langZeitDatenGeschwindigkeit" anzahl="1" anzahlIst="fest" name="Kfz">
+				<info>
+					<kurzinfo>V50 Geschwindigkeit der Fahrzeugart "Kraftfahrzeug" entsprechend TLS</kurzinfo>
+				</info>
+			</attributliste>
+			<attributliste pid="atl.langZeitDatenGeschwindigkeit" anzahl="1" anzahlIst="fest" name="PkwÄ">
+				<info>
+					<kurzinfo>V50 Geschwindigkeit der Fahrzeugart "Pkw ähnliche Fahrzeuge" entsprechend TLS</kurzinfo>
+				</info>
+			</attributliste>
+			<attributliste pid="atl.langZeitDatenGeschwindigkeit" anzahl="1" anzahlIst="fest" name="LkwÄ">
+				<info>
+					<kurzinfo>V50 Geschwindigkeit der Fahrzeugart "Lkw ähnliche Fahrzeuge" entsprechend TLS</kurzinfo>
+				</info>
+			</attributliste>
+			<attributliste pid="atl.langZeitDatenGeschwindigkeit" anzahl="1" anzahlIst="fest" name="KfzNk">
+				<info>
+					<kurzinfo>V50 Geschwindigkeit der Fahrzeugart "nicht klassifizierbare Fahrzeuge" entsprechend TLS</kurzinfo>
+				</info>
+			</attributliste>
+			<attributliste pid="atl.langZeitDatenGeschwindigkeit" anzahl="1" anzahlIst="fest" name="PkwG">
+				<info>
+					<kurzinfo>V50 Geschwindigkeit der Fahrzeugart "Pkw Grundklasse" entsprechend TLS</kurzinfo>
+				</info>
+			</attributliste>
+			<attributliste pid="atl.langZeitDatenGeschwindigkeit" anzahl="1" anzahlIst="fest" name="Pkw">
+				<info>
+					<kurzinfo>V50 Geschwindigkeit der Fahrzeugart "Personenkraftwagen" entsprechend TLS</kurzinfo>
+				</info>
+			</attributliste>
+			<attributliste pid="atl.langZeitDatenGeschwindigkeit" anzahl="1" anzahlIst="fest" name="Krad">
+				<info>
+					<kurzinfo>V50 Geschwindigkeit der Fahrzeugart "Kraftrad" entsprechend TLS</kurzinfo>
+				</info>
+			</attributliste>
+			<attributliste pid="atl.langZeitDatenGeschwindigkeit" anzahl="1" anzahlIst="fest" name="Lfw">
+				<info>
+					<kurzinfo>V50 Geschwindigkeit der Fahrzeugart "Lieferfahrzeug" entsprechend TLS</kurzinfo>
+				</info>
+			</attributliste>
+			<attributliste pid="atl.langZeitDatenGeschwindigkeit" anzahl="1" anzahlIst="fest" name="PkwA">
+				<info>
+					<kurzinfo>V50 Geschwindigkeit der Fahrzeugart "Personenkraftwagen mit Anhänger" entsprechend TLS</kurzinfo>
+				</info>
+			</attributliste>
+			<attributliste pid="atl.langZeitDatenGeschwindigkeit" anzahl="1" anzahlIst="fest" name="Lkw">
+				<info>
+					<kurzinfo>V50 Geschwindigkeit der Fahrzeugart "Lastkraftwagen" entsprechend TLS</kurzinfo>
+				</info>
+			</attributliste>
+			<attributliste pid="atl.langZeitDatenGeschwindigkeit" anzahl="1" anzahlIst="fest" name="Bus">
+				<info>
+					<kurzinfo>V50 Geschwindigkeit der Fahrzeugart "Busse" entsprechend TLS</kurzinfo>
+				</info>
+			</attributliste>
+			<attributliste pid="atl.langZeitDatenGeschwindigkeit" anzahl="1" anzahlIst="fest" name="LkwK">
+				<info>
+					<kurzinfo>V50 Geschwindigkeit der Fahrzeugart "Lastkraftwagen Kombination" entsprechend TLS</kurzinfo>
+				</info>
+			</attributliste>
+			<attributliste pid="atl.langZeitDatenGeschwindigkeit" anzahl="1" anzahlIst="fest" name="LkwA">
+				<info>
+					<kurzinfo>V50 Geschwindigkeit der Fahrzeugart "Lastkraftwagen mit Anhänger" entsprechend TLS</kurzinfo>
+				</info>
+			</attributliste>
+			<attributliste pid="atl.langZeitDatenGeschwindigkeit" anzahl="1" anzahlIst="fest" name="SattelKfz">
+				<info>
+					<kurzinfo>V50 Geschwindigkeit der Fahrzeugart "Sattel-Kraftfahrzeuge" entsprechend TLS</kurzinfo>
+				</info>
+			</attributliste>
+		</attributgruppenDefinition>
+		<attributgruppenDefinition pid="atg.langZeitDatenV85" name="LangzeitdatenV85" parametrierend="nein">
+			<info>
+				<kurzinfo>Langzeitdaten der Datenart V85-Geschwindigkeit [km/h]</kurzinfo>
+				<beschreibung>
+					<sektion>
+						<titel>Langzeitdaten der Datenart V85-Geschwindigkeit</titel>
+						<absatz>Die Datenart V85-Geschwindigkeit ist die Geschwindigkeit im Erfassungsintervall bzw. Aggregationsintervall, welche von 85% aller Fahrzeuge unterschritten wurde. Die Angabe erfolgt in der Einheit "km/h" und mit der Skalierung 0.1 km/h.</absatz>
+					</sektion>
+				</beschreibung>
+			</info>
+			<aspekt pid="asp.aggregationsIntervall15Minuten" onlineModus="quelleUndSenke">
+			</aspekt>
+			<aspekt pid="asp.aggregationsIntervallJahr" onlineModus="quelleUndSenke">
+			</aspekt>
+			<aspekt pid="asp.aggregationsIntervallMonat" onlineModus="quelleUndSenke">
+			</aspekt>
+			<aspekt pid="asp.aggregationsIntervallStunde" onlineModus="quelleUndSenke">
+			</aspekt>
+			<aspekt pid="asp.aggregationsIntervallTag" onlineModus="quelleUndSenke">
+			</aspekt>
+			<attributliste pid="atl.langZeitDatenGeschwindigkeit" anzahl="1" anzahlIst="fest" name="Kfz">
+				<info>
+					<kurzinfo>V85 Geschwindigkeit der Fahrzeugart "Kraftfahrzeug" entsprechend TLS</kurzinfo>
+				</info>
+			</attributliste>
+			<attributliste pid="atl.langZeitDatenGeschwindigkeit" anzahl="1" anzahlIst="fest" name="PkwÄ">
+				<info>
+					<kurzinfo>V85 Geschwindigkeit der Fahrzeugart "Pkw ähnliche Fahrzeuge" entsprechend TLS</kurzinfo>
+				</info>
+			</attributliste>
+			<attributliste pid="atl.langZeitDatenGeschwindigkeit" anzahl="1" anzahlIst="fest" name="LkwÄ">
+				<info>
+					<kurzinfo>V85 Geschwindigkeit der Fahrzeugart "Lkw ähnliche Fahrzeuge" entsprechend TLS</kurzinfo>
+				</info>
+			</attributliste>
+			<attributliste pid="atl.langZeitDatenGeschwindigkeit" anzahl="1" anzahlIst="fest" name="KfzNk">
+				<info>
+					<kurzinfo>V85 Geschwindigkeit der Fahrzeugart "nicht klassifizierbare Fahrzeuge" entsprechend TLS</kurzinfo>
+				</info>
+			</attributliste>
+			<attributliste pid="atl.langZeitDatenGeschwindigkeit" anzahl="1" anzahlIst="fest" name="PkwG">
+				<info>
+					<kurzinfo>V85 Geschwindigkeit der Fahrzeugart "Pkw Grundklasse" entsprechend TLS</kurzinfo>
+				</info>
+			</attributliste>
+			<attributliste pid="atl.langZeitDatenGeschwindigkeit" anzahl="1" anzahlIst="fest" name="Pkw">
+				<info>
+					<kurzinfo>V85 Geschwindigkeit der Fahrzeugart "Personenkraftwagen" entsprechend TLS</kurzinfo>
+				</info>
+			</attributliste>
+			<attributliste pid="atl.langZeitDatenGeschwindigkeit" anzahl="1" anzahlIst="fest" name="Krad">
+				<info>
+					<kurzinfo>V85 Geschwindigkeit der Fahrzeugart "Kraftrad" entsprechend TLS</kurzinfo>
+				</info>
+			</attributliste>
+			<attributliste pid="atl.langZeitDatenGeschwindigkeit" anzahl="1" anzahlIst="fest" name="Lfw">
+				<info>
+					<kurzinfo>V85 Geschwindigkeit der Fahrzeugart "Lieferfahrzeug" entsprechend TLS</kurzinfo>
+				</info>
+			</attributliste>
+			<attributliste pid="atl.langZeitDatenGeschwindigkeit" anzahl="1" anzahlIst="fest" name="PkwA">
+				<info>
+					<kurzinfo>V85 Geschwindigkeit der Fahrzeugart "Personenkraftwagen mit Anhänger" entsprechend TLS</kurzinfo>
+				</info>
+			</attributliste>
+			<attributliste pid="atl.langZeitDatenGeschwindigkeit" anzahl="1" anzahlIst="fest" name="Lkw">
+				<info>
+					<kurzinfo>V85 Geschwindigkeit der Fahrzeugart "Lastkraftwagen" entsprechend TLS</kurzinfo>
+				</info>
+			</attributliste>
+			<attributliste pid="atl.langZeitDatenGeschwindigkeit" anzahl="1" anzahlIst="fest" name="Bus">
+				<info>
+					<kurzinfo>V85 Geschwindigkeit der Fahrzeugart "Busse" entsprechend TLS</kurzinfo>
+				</info>
+			</attributliste>
+			<attributliste pid="atl.langZeitDatenGeschwindigkeit" anzahl="1" anzahlIst="fest" name="LkwK">
+				<info>
+					<kurzinfo>V85 Geschwindigkeit der Fahrzeugart "Lastkraftwagen Kombination" entsprechend TLS</kurzinfo>
+				</info>
+			</attributliste>
+			<attributliste pid="atl.langZeitDatenGeschwindigkeit" anzahl="1" anzahlIst="fest" name="LkwA">
+				<info>
+					<kurzinfo>V85 Geschwindigkeit der Fahrzeugart "Lastkraftwagen mit Anhänger" entsprechend TLS</kurzinfo>
+				</info>
+			</attributliste>
+			<attributliste pid="atl.langZeitDatenGeschwindigkeit" anzahl="1" anzahlIst="fest" name="SattelKfz">
+				<info>
+					<kurzinfo>V85 Geschwindigkeit der Fahrzeugart "Sattel-Kraftfahrzeuge" entsprechend TLS</kurzinfo>
+				</info>
+			</attributliste>
+		</attributgruppenDefinition>
+		<attributgruppenDefinition pid="atg.langZeitDatenVK130" name="LangzeitdatenGeschwindigkeitsklassenVK130" parametrierend="nein">
+			<info>
+				<kurzinfo>Geschwindigkeitsklassifizierung entsprechend Geschwindigkeitsraster VK130 (0-50 km/h, 50-60 km/h, ... , 120-130 km/h, 130- km/h)</kurzinfo>
+				<beschreibung>
+					<sektion>
+						<titel>Fahrzeuganzahl in den Geschwindigkeitsklassen</titel>
+						<absatz>Langzeitdaten für die Geschwindigkeitsklassen, der Wert gibt die absolute Fahrzeuganzahl im Erfassungsintervall bzw. Aggregationsintervall an. Die Angabe erfolgt mit der Einheit "Fahrzeuge". Folgendes festes Geschwindigkeitsraster mit 10 Klassen wird verwendet: (0-50 km/h, 50-60 km/h, ... , 120-130 km/h, 130- km/h)</absatz>
+					</sektion>
+				</beschreibung>
+			</info>
+			<aspekt pid="asp.aggregationsIntervall15Minuten" onlineModus="quelleUndSenke">
+			</aspekt>
+			<aspekt pid="asp.aggregationsIntervallJahr" onlineModus="quelleUndSenke">
+			</aspekt>
+			<aspekt pid="asp.aggregationsIntervallMonat" onlineModus="quelleUndSenke">
+			</aspekt>
+			<aspekt pid="asp.aggregationsIntervallStunde" onlineModus="quelleUndSenke">
+			</aspekt>
+			<aspekt pid="asp.aggregationsIntervallTag" onlineModus="quelleUndSenke">
+			</aspekt>
+			<attributliste pid="atl.langZeitDatenFahrzeugAnzahl" anzahl="16" anzahlIst="variabel" name="Kfz">
+				<info>
+					<kurzinfo>Fahrzeuganzahl der Fahrzeugart "Kraftfahrzeug" entsprechend TLS</kurzinfo>
+				</info>
+			</attributliste>
+			<attributliste pid="atl.langZeitDatenFahrzeugAnzahl" anzahl="16" anzahlIst="variabel" name="PkwÄ">
+				<info>
+					<kurzinfo>Fahrzeuganzahl der Fahrzeugart "Pkw ähnliche Fahrzeuge" entsprechend TLS</kurzinfo>
+				</info>
+			</attributliste>
+			<attributliste pid="atl.langZeitDatenFahrzeugAnzahl" anzahl="16" anzahlIst="variabel" name="LkwÄ">
+				<info>
+					<kurzinfo>Fahrzeuganzahl der Fahrzeugart "Lkw ähnliche Fahrzeuge" entsprechend TLS</kurzinfo>
+				</info>
+			</attributliste>
+			<attributliste pid="atl.langZeitDatenFahrzeugAnzahl" anzahl="16" anzahlIst="variabel" name="KfzNk">
+				<info>
+					<kurzinfo>Fahrzeuganzahl der Fahrzeugart "nicht klassifizierbare Fahrzeuge" entsprechend TLS</kurzinfo>
+				</info>
+			</attributliste>
+			<attributliste pid="atl.langZeitDatenFahrzeugAnzahl" anzahl="16" anzahlIst="variabel" name="PkwG">
+				<info>
+					<kurzinfo>Fahrzeuganzahl der Fahrzeugart "Pkw Grundklasse" entsprechend TLS</kurzinfo>
+				</info>
+			</attributliste>
+			<attributliste pid="atl.langZeitDatenFahrzeugAnzahl" anzahl="16" anzahlIst="variabel" name="Pkw">
+				<info>
+					<kurzinfo>Fahrzeuganzahl der Fahrzeugart "Personenkraftwagen" entsprechend TLS</kurzinfo>
+				</info>
+			</attributliste>
+			<attributliste pid="atl.langZeitDatenFahrzeugAnzahl" anzahl="16" anzahlIst="variabel" name="Krad">
+				<info>
+					<kurzinfo>Fahrzeuganzahl der Fahrzeugart "Kraftrad" entsprechend TLS</kurzinfo>
+				</info>
+			</attributliste>
+			<attributliste pid="atl.langZeitDatenFahrzeugAnzahl" anzahl="16" anzahlIst="variabel" name="Lfw">
+				<info>
+					<kurzinfo>Fahrzeuganzahl der Fahrzeugart "Lieferfahrzeug" entsprechend TLS</kurzinfo>
+				</info>
+			</attributliste>
+			<attributliste pid="atl.langZeitDatenFahrzeugAnzahl" anzahl="16" anzahlIst="variabel" name="PkwA">
+				<info>
+					<kurzinfo>Fahrzeuganzahl der Fahrzeugart "Personenkraftwagen mit Anhänger" entsprechend TLS</kurzinfo>
+				</info>
+			</attributliste>
+			<attributliste pid="atl.langZeitDatenFahrzeugAnzahl" anzahl="16" anzahlIst="variabel" name="Lkw">
+				<info>
+					<kurzinfo>Fahrzeuganzahl der Fahrzeugart "Lastkraftwagen" entsprechend TLS</kurzinfo>
+				</info>
+			</attributliste>
+			<attributliste pid="atl.langZeitDatenFahrzeugAnzahl" anzahl="16" anzahlIst="variabel" name="Bus">
+				<info>
+					<kurzinfo>Fahrzeuganzahl der Fahrzeugart "Busse" entsprechend TLS</kurzinfo>
+				</info>
+			</attributliste>
+			<attributliste pid="atl.langZeitDatenFahrzeugAnzahl" anzahl="16" anzahlIst="variabel" name="LkwK">
+				<info>
+					<kurzinfo>Fahrzeuganzahl der Fahrzeugart "Lastkraftwagen Kombination" entsprechend TLS</kurzinfo>
+				</info>
+			</attributliste>
+			<attributliste pid="atl.langZeitDatenFahrzeugAnzahl" anzahl="16" anzahlIst="variabel" name="LkwA">
+				<info>
+					<kurzinfo>Fahrzeuganzahl der Fahrzeugart "Lastkraftwagen mit Anhänger" entsprechend TLS</kurzinfo>
+				</info>
+			</attributliste>
+			<attributliste pid="atl.langZeitDatenFahrzeugAnzahl" anzahl="16" anzahlIst="variabel" name="SattelKfz">
+				<info>
+					<kurzinfo>Fahrzeuganzahl der Fahrzeugart "Sattel-Kraftfahrzeuge" entsprechend TLS</kurzinfo>
+				</info>
+			</attributliste>
+		</attributgruppenDefinition>
+		<attributgruppenDefinition pid="atg.langZeitDatenVK160" name="LangzeitdatenGeschwindigkeitsklassenVK160" parametrierend="nein">
+			<info>
+				<kurzinfo>Geschwindigkeitsklassifizierung entsprechend Geschwindigkeitsraster VK160 (0-80 km/h, 80-90 km/h, ... , 150-160 km/h, 160- km/h)</kurzinfo>
+				<beschreibung>
+					<sektion>
+						<titel>Fahrzeuganzahl in den Geschwindigkeitsklassen</titel>
+						<absatz>Langzeitdaten für die Geschwindigkeitsklassen, der Wert gibt die absolute Fahrzeuganzahl im Erfassungsintervall bzw. Aggregationsintervall an. Die Angabe erfolgt mit der Einheit "Fahrzeuge". Folgendes festes Geschwindigkeitsraster mit 10 Klassen wird verwendet: (0-80 km/h, 80-90 km/h, ... , 150-160 km/h, 160- km/h)</absatz>
+					</sektion>
+				</beschreibung>
+			</info>
+			<aspekt pid="asp.aggregationsIntervall15Minuten" onlineModus="quelleUndSenke">
+			</aspekt>
+			<aspekt pid="asp.aggregationsIntervallJahr" onlineModus="quelleUndSenke">
+			</aspekt>
+			<aspekt pid="asp.aggregationsIntervallMonat" onlineModus="quelleUndSenke">
+			</aspekt>
+			<aspekt pid="asp.aggregationsIntervallStunde" onlineModus="quelleUndSenke">
+			</aspekt>
+			<aspekt pid="asp.aggregationsIntervallTag" onlineModus="quelleUndSenke">
+			</aspekt>
+			<attributliste pid="atl.langZeitDatenFahrzeugAnzahl" anzahl="16" anzahlIst="variabel" name="Kfz">
+				<info>
+					<kurzinfo>Fahrzeuganzahl der Fahrzeugart "Kraftfahrzeug" entsprechend TLS</kurzinfo>
+				</info>
+			</attributliste>
+			<attributliste pid="atl.langZeitDatenFahrzeugAnzahl" anzahl="16" anzahlIst="variabel" name="PkwÄ">
+				<info>
+					<kurzinfo>Fahrzeuganzahl der Fahrzeugart "Pkw ähnliche Fahrzeuge" entsprechend TLS</kurzinfo>
+				</info>
+			</attributliste>
+			<attributliste pid="atl.langZeitDatenFahrzeugAnzahl" anzahl="16" anzahlIst="variabel" name="LkwÄ">
+				<info>
+					<kurzinfo>Fahrzeuganzahl der Fahrzeugart "Lkw ähnliche Fahrzeuge" entsprechend TLS</kurzinfo>
+				</info>
+			</attributliste>
+			<attributliste pid="atl.langZeitDatenFahrzeugAnzahl" anzahl="16" anzahlIst="variabel" name="KfzNk">
+				<info>
+					<kurzinfo>Fahrzeuganzahl der Fahrzeugart "nicht klassifizierbare Fahrzeuge" entsprechend TLS</kurzinfo>
+				</info>
+			</attributliste>
+			<attributliste pid="atl.langZeitDatenFahrzeugAnzahl" anzahl="16" anzahlIst="variabel" name="PkwG">
+				<info>
+					<kurzinfo>Fahrzeuganzahl der Fahrzeugart "Pkw Grundklasse" entsprechend TLS</kurzinfo>
+				</info>
+			</attributliste>
+			<attributliste pid="atl.langZeitDatenFahrzeugAnzahl" anzahl="16" anzahlIst="variabel" name="Pkw">
+				<info>
+					<kurzinfo>Fahrzeuganzahl der Fahrzeugart "Personenkraftwagen" entsprechend TLS</kurzinfo>
+				</info>
+			</attributliste>
+			<attributliste pid="atl.langZeitDatenFahrzeugAnzahl" anzahl="16" anzahlIst="variabel" name="Krad">
+				<info>
+					<kurzinfo>Fahrzeuganzahl der Fahrzeugart "Kraftrad" entsprechend TLS</kurzinfo>
+				</info>
+			</attributliste>
+			<attributliste pid="atl.langZeitDatenFahrzeugAnzahl" anzahl="16" anzahlIst="variabel" name="Lfw">
+				<info>
+					<kurzinfo>Fahrzeuganzahl der Fahrzeugart "Lieferfahrzeug" entsprechend TLS</kurzinfo>
+				</info>
+			</attributliste>
+			<attributliste pid="atl.langZeitDatenFahrzeugAnzahl" anzahl="16" anzahlIst="variabel" name="PkwA">
+				<info>
+					<kurzinfo>Fahrzeuganzahl der Fahrzeugart "Personenkraftwagen mit Anhänger" entsprechend TLS</kurzinfo>
+				</info>
+			</attributliste>
+			<attributliste pid="atl.langZeitDatenFahrzeugAnzahl" anzahl="16" anzahlIst="variabel" name="Lkw">
+				<info>
+					<kurzinfo>Fahrzeuganzahl der Fahrzeugart "Lastkraftwagen" entsprechend TLS</kurzinfo>
+				</info>
+			</attributliste>
+			<attributliste pid="atl.langZeitDatenFahrzeugAnzahl" anzahl="16" anzahlIst="variabel" name="Bus">
+				<info>
+					<kurzinfo>Fahrzeuganzahl der Fahrzeugart "Busse" entsprechend TLS</kurzinfo>
+				</info>
+			</attributliste>
+			<attributliste pid="atl.langZeitDatenFahrzeugAnzahl" anzahl="16" anzahlIst="variabel" name="LkwK">
+				<info>
+					<kurzinfo>Fahrzeuganzahl der Fahrzeugart "Lastkraftwagen Kombination" entsprechend TLS</kurzinfo>
+				</info>
+			</attributliste>
+			<attributliste pid="atl.langZeitDatenFahrzeugAnzahl" anzahl="16" anzahlIst="variabel" name="LkwA">
+				<info>
+					<kurzinfo>Fahrzeuganzahl der Fahrzeugart "Lastkraftwagen mit Anhänger" entsprechend TLS</kurzinfo>
+				</info>
+			</attributliste>
+			<attributliste pid="atl.langZeitDatenFahrzeugAnzahl" anzahl="16" anzahlIst="variabel" name="SattelKfz">
+				<info>
+					<kurzinfo>Fahrzeuganzahl der Fahrzeugart "Sattel-Kraftfahrzeuge" entsprechend TLS</kurzinfo>
+				</info>
+			</attributliste>
+		</attributgruppenDefinition>
+		<attributgruppenDefinition pid="atg.langZeitZählstelle" name="LangzeitZählstelle" parametrierend="nein">
+			<info>
+				<kurzinfo>Charakterisierende Daten einer Langzeitzählstelle</kurzinfo>
+				<beschreibung>
+					<sektion>
+						<titel>Langzeitzählstelle</titel>
+						<absatz>Die Langzeitzählstelle dient zur Erhebung von Langzeitzähldaten. Die Daten werden einerseits von der bast und andererseits von den Ländern benötigt. Jede Langzeitzählstelle besitzt eine Zählstellennummer anhand der sie bundesweit eindeutig identifierbar ist. Dazu können geografische Kenndaten, Verwaltungsinformationen und Herstellerangaben (Gerät) hinterlegt werden. Die an einer Langzeitzählstelle erhobenen Verkehrsdaten liegen normalerweise im Intervall 1 Stunde vor.</absatz>
+					</sektion>
+				</beschreibung>
+			</info>
+			<aspekt pid="asp.eigenschaften" konfigurationsModus="datensatzOptional">
+			</aspekt>
+			<attribut pid="att.langZeitZählStellenName" anzahl="1" anzahlIst="fest" name="ZählstellenName">
+			</attribut>
+			<attribut pid="att.langZeitZählStellenNummer" anzahl="1" anzahlIst="fest" name="ZählstellenNummer">
+			</attribut>
+			<attribut pid="att.bundesLandBAST" anzahl="1" anzahlIst="fest" name="LandesNummer">
+			</attribut>
+			<attribut pid="att.straßenKlasseBAST" anzahl="1" anzahlIst="fest" name="StraßenKlasse">
+			</attribut>
+			<attribut pid="att.zählStellenArt" anzahl="1" anzahlIst="fest" name="ZählstellenArt">
+			</attribut>
+			<attribut pid="att.straßenReferenz" anzahl="1" anzahlIst="fest" name="Straße">
+			</attribut>
+			<attribut pid="att.netzKnoten" anzahl="1" anzahlIst="fest" name="vonNK">
+			</attribut>
+			<attribut pid="att.netzKnoten" anzahl="1" anzahlIst="fest" name="nachNK">
+			</attribut>
+			<attribut pid="att.station" anzahl="1" anzahlIst="fest" name="Station">
+			</attribut>
+			<attribut pid="att.zeit" anzahl="1" anzahlIst="fest" name="Beginn">
+			</attribut>
+			<attribut pid="att.zeit" anzahl="1" anzahlIst="fest" name="Ende">
+			</attribut>
+			<attribut pid="att.klassifizierungsGruppeBAST" anzahl="1" anzahlIst="fest" name="KlassifizierungsgruppeBAST">
+			</attribut>
+			<attribut pid="att.telefonAnwahl" anzahl="1" anzahlIst="fest" name="TelefonNummer">
+			</attribut>
+			<attributliste pid="atl.langZeitDatenRichtungsQuerschnitt" anzahl="1" anzahlIst="fest" name="InRichtung">
+				<info>
+					<kurzinfo>IN-Richtung nach Vorgabe der BAST</kurzinfo>
+				</info>
+			</attributliste>
+			<attributliste pid="atl.langZeitDatenRichtungsQuerschnitt" anzahl="1" anzahlIst="fest" name="GegenRichtung">
+				<info>
+					<kurzinfo>GEGEN-Richtung nach Vorgabe der BAST</kurzinfo>
+				</info>
+			</attributliste>
+		</attributgruppenDefinition>
+		<attributgruppenDefinition pid="atg.verkehrsDatenLangZeitIntervallPlausibilitätsPrüfungFormal" name="VerkehrsDatenLangZeitIntervallPlausibilitätsPrüfungFormal" parametrierend="ja">
+			<info>
+				<kurzinfo>Parameter für die Plausibilitätsprüfung Formal der Verkehrsdaten (Langzeit) mit Intervallwerten (nicht normiert auf Stundenwerte).</kurzinfo>
+				<beschreibung>Die Parameter legen fest, wie im Falle von Bereichunterschreitungen bzw. Überschreitungen vorzugehen ist und wie die jeweiligen zulässigen Wertebereiche aussehen. Da die Anzahl der Geschwindigkeitsklassen variabel ist und das zugrundeliegende Geschwindigkeitsraster erst zur Laufzeit bekannt ist, gilt der Parameter für alle vorgefundenen Feldelemente.</beschreibung>
+			</info>
+			<attributliste pid="atl.urlasser" anzahl="1" anzahlIst="fest" name="Urlasser">
+			</attributliste>
+			<attribut pid="att.optionenPlausibilitätsPrüfungFormal" anzahl="1" anzahlIst="fest" name="Optionen">
+				<info>
+					<kurzinfo>Optionen für die Art und Weise der Plausibilitätsprüfung.</kurzinfo>
+				</info>
+			</attribut>
+			<attributliste pid="atl.minMaxVerkehrsStärkeStunde" anzahl="1" anzahlIst="fest" name="qKfzBereich">
+				<info>
+					<kurzinfo>zulässiger Bereich für die Fahrzeugmenge Kfz.</kurzinfo>
+				</info>
+			</attributliste>
+			<attributliste pid="atl.minMaxVerkehrsStärkeStunde" anzahl="1" anzahlIst="fest" name="qPkwÄBereich">
+				<info>
+					<kurzinfo>zulässiger Bereich für die Fahrzeugmenge Pkw ähnliche.</kurzinfo>
+				</info>
+			</attributliste>
+			<attributliste pid="atl.minMaxVerkehrsStärkeStunde" anzahl="1" anzahlIst="fest" name="qKfzNkBereich">
+				<info>
+					<kurzinfo>zulässiger Bereich für die Fahrzeugmenge Kfz nicht klassifiziert.</kurzinfo>
+				</info>
+			</attributliste>
+			<attributliste pid="atl.minMaxVerkehrsStärkeStunde" anzahl="1" anzahlIst="fest" name="qPkwGBereich">
+				<info>
+					<kurzinfo>zulässiger Bereich für die Fahrzeugmenge Pkw Gruppe (Motorräder, Pkw , Lieferwagen).</kurzinfo>
+				</info>
+			</attributliste>
+			<attributliste pid="atl.minMaxVerkehrsStärkeStunde" anzahl="1" anzahlIst="fest" name="qPkwBereich">
+				<info>
+					<kurzinfo>zulässiger Bereich für die Fahrzeugmenge Pkw.</kurzinfo>
+				</info>
+			</attributliste>
+			<attributliste pid="atl.minMaxVerkehrsStärkeStunde" anzahl="1" anzahlIst="fest" name="qKradBereich">
+				<info>
+					<kurzinfo>zulässiger Bereich für die Fahrzeugmenge Krad.</kurzinfo>
+				</info>
+			</attributliste>
+			<attributliste pid="atl.minMaxVerkehrsStärkeStunde" anzahl="1" anzahlIst="fest" name="qLfwBereich">
+				<info>
+					<kurzinfo>zulässiger Bereich für die Fahrzeugmenge Lieferwagen.</kurzinfo>
+				</info>
+			</attributliste>
+			<attributliste pid="atl.minMaxVerkehrsStärkeStunde" anzahl="1" anzahlIst="fest" name="qLkwÄBereich">
+				<info>
+					<kurzinfo>zulässiger Bereich für die Fahrzeugmenge Lkw ähnliche.</kurzinfo>
+				</info>
+			</attributliste>
+			<attributliste pid="atl.minMaxVerkehrsStärkeStunde" anzahl="1" anzahlIst="fest" name="qPkwABereich">
+				<info>
+					<kurzinfo>zulässiger Bereich für die Fahrzeugmenge Pkw mit Anhänger.</kurzinfo>
+				</info>
+			</attributliste>
+			<attributliste pid="atl.minMaxVerkehrsStärkeStunde" anzahl="1" anzahlIst="fest" name="qLkwBereich">
+				<info>
+					<kurzinfo>zulässiger Bereich für die Fahrzeugmenge Lkw.</kurzinfo>
+				</info>
+			</attributliste>
+			<attributliste pid="atl.minMaxVerkehrsStärkeStunde" anzahl="1" anzahlIst="fest" name="qBusBereich">
+				<info>
+					<kurzinfo>zulässiger Bereich für die Fahrzeugmenge Busse.</kurzinfo>
+				</info>
+			</attributliste>
+			<attributliste pid="atl.minMaxVerkehrsStärkeStunde" anzahl="1" anzahlIst="fest" name="qLkwKBereich">
+				<info>
+					<kurzinfo>zulässiger Bereich für die Fahrzeugmenge Lkw mit Anhänger und Sattel-Kfz.</kurzinfo>
+				</info>
+			</attributliste>
+			<attributliste pid="atl.minMaxVerkehrsStärkeStunde" anzahl="1" anzahlIst="fest" name="qLkwABereich">
+				<info>
+					<kurzinfo>zulässiger Bereich für die Fahrzeugmenge Lkw mit Anhänger.</kurzinfo>
+				</info>
+			</attributliste>
+			<attributliste pid="atl.minMaxVerkehrsStärkeStunde" anzahl="1" anzahlIst="fest" name="qSattelKfzBereich">
+				<info>
+					<kurzinfo>zulässiger Bereich für die Fahrzeugmenge Sattel-Kfz</kurzinfo>
+				</info>
+			</attributliste>
+			<attributliste pid="atl.minMaxGeschwindigkeit" anzahl="1" anzahlIst="fest" name="vKfzBereich">
+				<info>
+					<kurzinfo>zulässiger Bereich für die Geschwindigkeit Kfz.</kurzinfo>
+				</info>
+			</attributliste>
+			<attributliste pid="atl.minMaxGeschwindigkeit" anzahl="1" anzahlIst="fest" name="vPkwÄBereich">
+				<info>
+					<kurzinfo>zulässiger Bereich für die Geschwindigkeit Pkw ähnliche.</kurzinfo>
+				</info>
+			</attributliste>
+			<attributliste pid="atl.minMaxGeschwindigkeit" anzahl="1" anzahlIst="fest" name="vKfzNkBereich">
+				<info>
+					<kurzinfo>zulässiger Bereich für die Geschwindigkeit Kfz nicht klassifiziert.</kurzinfo>
+				</info>
+			</attributliste>
+			<attributliste pid="atl.minMaxGeschwindigkeit" anzahl="1" anzahlIst="fest" name="vPkwGBereich">
+				<info>
+					<kurzinfo>zulässiger Bereich für die Geschwindigkeit Pkw Gruppe (Motorräder, Pkw , Lieferwagen).</kurzinfo>
+				</info>
+			</attributliste>
+			<attributliste pid="atl.minMaxGeschwindigkeit" anzahl="1" anzahlIst="fest" name="vPkwBereich">
+				<info>
+					<kurzinfo>zulässiger Bereich für die Geschwindigkeit Pkw.</kurzinfo>
+				</info>
+			</attributliste>
+			<attributliste pid="atl.minMaxGeschwindigkeit" anzahl="1" anzahlIst="fest" name="vKradBereich">
+				<info>
+					<kurzinfo>zulässiger Bereich für die Geschwindigkeit Krad.</kurzinfo>
+				</info>
+			</attributliste>
+			<attributliste pid="atl.minMaxGeschwindigkeit" anzahl="1" anzahlIst="fest" name="vLfwBereich">
+				<info>
+					<kurzinfo>zulässiger Bereich für die Geschwindigkeit Lieferwagen.</kurzinfo>
+				</info>
+			</attributliste>
+			<attributliste pid="atl.minMaxGeschwindigkeit" anzahl="1" anzahlIst="fest" name="vLkwÄBereich">
+				<info>
+					<kurzinfo>zulässiger Bereich für die Geschwindigkeit Lkw ähnliche.</kurzinfo>
+				</info>
+			</attributliste>
+			<attributliste pid="atl.minMaxGeschwindigkeit" anzahl="1" anzahlIst="fest" name="vPkwABereich">
+				<info>
+					<kurzinfo>zulässiger Bereich für die Geschwindigkeit Pkw mit Anhänger.</kurzinfo>
+				</info>
+			</attributliste>
+			<attributliste pid="atl.minMaxGeschwindigkeit" anzahl="1" anzahlIst="fest" name="vLkwBereich">
+				<info>
+					<kurzinfo>zulässiger Bereich für die Geschwindigkeit Lkw.</kurzinfo>
+				</info>
+			</attributliste>
+			<attributliste pid="atl.minMaxGeschwindigkeit" anzahl="1" anzahlIst="fest" name="vBusBereich">
+				<info>
+					<kurzinfo>zulässiger Bereich für die Geschwindigkeit Busse.</kurzinfo>
+				</info>
+			</attributliste>
+			<attributliste pid="atl.minMaxGeschwindigkeit" anzahl="1" anzahlIst="fest" name="vLkwKBereich">
+				<info>
+					<kurzinfo>zulässiger Bereich für die Geschwindigkeit Lkw mit Anhänger und Sattel-Kfz.</kurzinfo>
+				</info>
+			</attributliste>
+			<attributliste pid="atl.minMaxGeschwindigkeit" anzahl="1" anzahlIst="fest" name="vLkwABereich">
+				<info>
+					<kurzinfo>zulässiger Bereich für die Geschwindigkeit Lkw mit Anhänger.</kurzinfo>
+				</info>
+			</attributliste>
+			<attributliste pid="atl.minMaxGeschwindigkeit" anzahl="1" anzahlIst="fest" name="vSattelKfzBereich">
+				<info>
+					<kurzinfo>zulässiger Bereich für die Geschwindigkeit Sattel-Kfz</kurzinfo>
+				</info>
+			</attributliste>
+			<attributliste pid="atl.minMaxGeschwindigkeit" anzahl="1" anzahlIst="fest" name="sKfzBereich">
+				<info>
+					<kurzinfo>zulässiger Bereich für die Standardabweichung der Geschwindigkeit Kfz.</kurzinfo>
+				</info>
+			</attributliste>
+			<attributliste pid="atl.minMaxGeschwindigkeit" anzahl="1" anzahlIst="fest" name="sPkwÄBereich">
+				<info>
+					<kurzinfo>zulässiger Bereich für die Standardabweichung der Geschwindigkeit Pkw ähnliche.</kurzinfo>
+				</info>
+			</attributliste>
+			<attributliste pid="atl.minMaxGeschwindigkeit" anzahl="1" anzahlIst="fest" name="sKfzNkBereich">
+				<info>
+					<kurzinfo>zulässiger Bereich für die Standardabweichung der Geschwindigkeit Kfz nicht klassifiziert.</kurzinfo>
+				</info>
+			</attributliste>
+			<attributliste pid="atl.minMaxGeschwindigkeit" anzahl="1" anzahlIst="fest" name="sPkwGBereich">
+				<info>
+					<kurzinfo>zulässiger Bereich für die Standardabweichung der Geschwindigkeit Pkw Gruppe (Motorräder, Pkw , Lieferwagen).</kurzinfo>
+				</info>
+			</attributliste>
+			<attributliste pid="atl.minMaxGeschwindigkeit" anzahl="1" anzahlIst="fest" name="sPkwBereich">
+				<info>
+					<kurzinfo>zulässiger Bereich für die Standardabweichung der Geschwindigkeit Pkw.</kurzinfo>
+				</info>
+			</attributliste>
+			<attributliste pid="atl.minMaxGeschwindigkeit" anzahl="1" anzahlIst="fest" name="sKradBereich">
+				<info>
+					<kurzinfo>zulässiger Bereich für die Standardabweichung der Geschwindigkeit Krad.</kurzinfo>
+				</info>
+			</attributliste>
+			<attributliste pid="atl.minMaxGeschwindigkeit" anzahl="1" anzahlIst="fest" name="sLfwBereich">
+				<info>
+					<kurzinfo>zulässiger Bereich für die Standardabweichung der Geschwindigkeit Lieferwagen.</kurzinfo>
+				</info>
+			</attributliste>
+			<attributliste pid="atl.minMaxGeschwindigkeit" anzahl="1" anzahlIst="fest" name="sLkwÄBereich">
+				<info>
+					<kurzinfo>zulässiger Bereich für die Standardabweichung der Geschwindigkeit Lkw ähnliche.</kurzinfo>
+				</info>
+			</attributliste>
+			<attributliste pid="atl.minMaxGeschwindigkeit" anzahl="1" anzahlIst="fest" name="sPkwABereich">
+				<info>
+					<kurzinfo>zulässiger Bereich für die Standardabweichung der Geschwindigkeit Pkw mit Anhänger.</kurzinfo>
+				</info>
+			</attributliste>
+			<attributliste pid="atl.minMaxGeschwindigkeit" anzahl="1" anzahlIst="fest" name="sLkwBereich">
+				<info>
+					<kurzinfo>zulässiger Bereich für die Standardabweichung der Geschwindigkeit Lkw.</kurzinfo>
+				</info>
+			</attributliste>
+			<attributliste pid="atl.minMaxGeschwindigkeit" anzahl="1" anzahlIst="fest" name="sBusBereich">
+				<info>
+					<kurzinfo>zulässiger Bereich für die Standardabweichung der Geschwindigkeit Busse.</kurzinfo>
+				</info>
+			</attributliste>
+			<attributliste pid="atl.minMaxGeschwindigkeit" anzahl="1" anzahlIst="fest" name="sLkwKBereich">
+				<info>
+					<kurzinfo>zulässiger Bereich für die Standardabweichung der Geschwindigkeit Lkw mit Anhänger und Sattel-Kfz.</kurzinfo>
+				</info>
+			</attributliste>
+			<attributliste pid="atl.minMaxGeschwindigkeit" anzahl="1" anzahlIst="fest" name="sLkwABereich">
+				<info>
+					<kurzinfo>zulässiger Bereich für die Standardabweichung der Geschwindigkeit Lkw mit Anhänger.</kurzinfo>
+				</info>
+			</attributliste>
+			<attributliste pid="atl.minMaxGeschwindigkeit" anzahl="1" anzahlIst="fest" name="sSattelKfzBereich">
+				<info>
+					<kurzinfo>zulässiger Bereich für die Standardabweichung der Geschwindigkeit Sattel-Kfz</kurzinfo>
+				</info>
+			</attributliste>
+			<attributliste pid="atl.minMaxGeschwindigkeit" anzahl="1" anzahlIst="fest" name="v85KfzBereich">
+				<info>
+					<kurzinfo>zulässiger Bereich für die v85-Geschwindigkeit Kfz.</kurzinfo>
+				</info>
+			</attributliste>
+			<attributliste pid="atl.minMaxGeschwindigkeit" anzahl="1" anzahlIst="fest" name="v85PkwÄBereich">
+				<info>
+					<kurzinfo>zulässiger Bereich für die v85-Geschwindigkeit Pkw ähnliche.</kurzinfo>
+				</info>
+			</attributliste>
+			<attributliste pid="atl.minMaxGeschwindigkeit" anzahl="1" anzahlIst="fest" name="v85KfzNkBereich">
+				<info>
+					<kurzinfo>zulässiger Bereich für die v85-Geschwindigkeit Kfz nicht klassifiziert.</kurzinfo>
+				</info>
+			</attributliste>
+			<attributliste pid="atl.minMaxGeschwindigkeit" anzahl="1" anzahlIst="fest" name="v85PkwGBereich">
+				<info>
+					<kurzinfo>zulässiger Bereich für die v85-Geschwindigkeit Pkw Gruppe (Motorräder, Pkw , Lieferwagen).</kurzinfo>
+				</info>
+			</attributliste>
+			<attributliste pid="atl.minMaxGeschwindigkeit" anzahl="1" anzahlIst="fest" name="v85PkwBereich">
+				<info>
+					<kurzinfo>zulässiger Bereich für die v85-Geschwindigkeit Pkw.</kurzinfo>
+				</info>
+			</attributliste>
+			<attributliste pid="atl.minMaxGeschwindigkeit" anzahl="1" anzahlIst="fest" name="v85KradBereich">
+				<info>
+					<kurzinfo>zulässiger Bereich für die v85-Geschwindigkeit Krad.</kurzinfo>
+				</info>
+			</attributliste>
+			<attributliste pid="atl.minMaxGeschwindigkeit" anzahl="1" anzahlIst="fest" name="v85LfwBereich">
+				<info>
+					<kurzinfo>zulässiger Bereich für die v85-Geschwindigkeit Lieferwagen.</kurzinfo>
+				</info>
+			</attributliste>
+			<attributliste pid="atl.minMaxGeschwindigkeit" anzahl="1" anzahlIst="fest" name="v85LkwÄBereich">
+				<info>
+					<kurzinfo>zulässiger Bereich für die v85-Geschwindigkeit Lkw ähnliche.</kurzinfo>
+				</info>
+			</attributliste>
+			<attributliste pid="atl.minMaxGeschwindigkeit" anzahl="1" anzahlIst="fest" name="v85PkwABereich">
+				<info>
+					<kurzinfo>zulässiger Bereich für die v85-Geschwindigkeit Pkw mit Anhänger.</kurzinfo>
+				</info>
+			</attributliste>
+			<attributliste pid="atl.minMaxGeschwindigkeit" anzahl="1" anzahlIst="fest" name="v85LkwBereich">
+				<info>
+					<kurzinfo>zulässiger Bereich für die v85-Geschwindigkeit Lkw.</kurzinfo>
+				</info>
+			</attributliste>
+			<attributliste pid="atl.minMaxGeschwindigkeit" anzahl="1" anzahlIst="fest" name="v85BusBereich">
+				<info>
+					<kurzinfo>zulässiger Bereich für die v85-Geschwindigkeit Busse.</kurzinfo>
+				</info>
+			</attributliste>
+			<attributliste pid="atl.minMaxGeschwindigkeit" anzahl="1" anzahlIst="fest" name="v85LkwKBereich">
+				<info>
+					<kurzinfo>zulässiger Bereich für die v85-Geschwindigkeit Lkw mit Anhänger und Sattel-Kfz.</kurzinfo>
+				</info>
+			</attributliste>
+			<attributliste pid="atl.minMaxGeschwindigkeit" anzahl="1" anzahlIst="fest" name="v85LkwABereich">
+				<info>
+					<kurzinfo>zulässiger Bereich für die v85-Geschwindigkeit Lkw mit Anhänger.</kurzinfo>
+				</info>
+			</attributliste>
+			<attributliste pid="atl.minMaxGeschwindigkeit" anzahl="1" anzahlIst="fest" name="v85SattelKfzBereich">
+				<info>
+					<kurzinfo>zulässiger Bereich für die v85-Geschwindigkeit Sattel-Kfz</kurzinfo>
+				</info>
+			</attributliste>
+			<attributliste pid="atl.minMaxVerkehrsStärkeStunde" anzahl="1" anzahlIst="fest" name="qKfzGeschwKlasseBereich">
+				<info>
+					<kurzinfo>zulässiger Bereich für die Anzahl Fahrzeuge in Geschwindigkeitsklasse Kfz.</kurzinfo>
+				</info>
+			</attributliste>
+			<attributliste pid="atl.minMaxVerkehrsStärkeStunde" anzahl="1" anzahlIst="fest" name="qPkwÄGeschwKlasseBereich">
+				<info>
+					<kurzinfo>zulässiger Bereich für die Anzahl Fahrzeuge in Geschwindigkeitsklasse Pkw ähnliche.</kurzinfo>
+				</info>
+			</attributliste>
+			<attributliste pid="atl.minMaxVerkehrsStärkeStunde" anzahl="1" anzahlIst="fest" name="qKfzNkGeschwKlasseBereich">
+				<info>
+					<kurzinfo>zulässiger Bereich für die Anzahl Fahrzeuge in Geschwindigkeitsklasse Kfz nicht klassifiziert.</kurzinfo>
+				</info>
+			</attributliste>
+			<attributliste pid="atl.minMaxVerkehrsStärkeStunde" anzahl="1" anzahlIst="fest" name="qPkwGGeschwKlasseBereich">
+				<info>
+					<kurzinfo>zulässiger Bereich für die Anzahl Fahrzeuge in Geschwindigkeitsklasse Pkw Gruppe (Motorräder, Pkw , Lieferwagen).</kurzinfo>
+				</info>
+			</attributliste>
+			<attributliste pid="atl.minMaxVerkehrsStärkeStunde" anzahl="1" anzahlIst="fest" name="qPkwGeschwKlasseBereich">
+				<info>
+					<kurzinfo>zulässiger Bereich für die Anzahl Fahrzeuge in Geschwindigkeitsklasse Pkw.</kurzinfo>
+				</info>
+			</attributliste>
+			<attributliste pid="atl.minMaxVerkehrsStärkeStunde" anzahl="1" anzahlIst="fest" name="qKradGeschwKlasseBereich">
+				<info>
+					<kurzinfo>zulässiger Bereich für die Anzahl Fahrzeuge in Geschwindigkeitsklasse Krad.</kurzinfo>
+				</info>
+			</attributliste>
+			<attributliste pid="atl.minMaxVerkehrsStärkeStunde" anzahl="1" anzahlIst="fest" name="qLfwGeschwKlasseBereich">
+				<info>
+					<kurzinfo>zulässiger Bereich für die Anzahl Fahrzeuge in Geschwindigkeitsklasse Lieferwagen.</kurzinfo>
+				</info>
+			</attributliste>
+			<attributliste pid="atl.minMaxVerkehrsStärkeStunde" anzahl="1" anzahlIst="fest" name="qLkwÄGeschwKlasseBereich">
+				<info>
+					<kurzinfo>zulässiger Bereich für die Anzahl Fahrzeuge in Geschwindigkeitsklasse Lkw ähnliche.</kurzinfo>
+				</info>
+			</attributliste>
+			<attributliste pid="atl.minMaxVerkehrsStärkeStunde" anzahl="1" anzahlIst="fest" name="qPkwAGeschwKlasseBereich">
+				<info>
+					<kurzinfo>zulässiger Bereich für die Anzahl Fahrzeuge in Geschwindigkeitsklasse Pkw mit Anhänger.</kurzinfo>
+				</info>
+			</attributliste>
+			<attributliste pid="atl.minMaxVerkehrsStärkeStunde" anzahl="1" anzahlIst="fest" name="qLkwGeschwKlasseBereich">
+				<info>
+					<kurzinfo>zulässiger Bereich für die Anzahl Fahrzeuge in Geschwindigkeitsklasse Lkw.</kurzinfo>
+				</info>
+			</attributliste>
+			<attributliste pid="atl.minMaxVerkehrsStärkeStunde" anzahl="1" anzahlIst="fest" name="qBusGeschwKlasseBereich">
+				<info>
+					<kurzinfo>zulässiger Bereich für die Anzahl Fahrzeuge in Geschwindigkeitsklasse Busse.</kurzinfo>
+				</info>
+			</attributliste>
+			<attributliste pid="atl.minMaxVerkehrsStärkeStunde" anzahl="1" anzahlIst="fest" name="qLkwKGeschwKlasseBereich">
+				<info>
+					<kurzinfo>zulässiger Bereich für die Anzahl Fahrzeuge in Geschwindigkeitsklasse Lkw mit Anhänger und Sattel-Kfz.</kurzinfo>
+				</info>
+			</attributliste>
+			<attributliste pid="atl.minMaxVerkehrsStärkeStunde" anzahl="1" anzahlIst="fest" name="qLkwAGeschwKlasseBereich">
+				<info>
+					<kurzinfo>zulässiger Bereich für die Anzahl Fahrzeuge in Geschwindigkeitsklasse Lkw mit Anhänger.</kurzinfo>
+				</info>
+			</attributliste>
+			<attributliste pid="atl.minMaxVerkehrsStärkeStunde" anzahl="1" anzahlIst="fest" name="qSattelKfzGeschwKlasseBereich">
+				<info>
+					<kurzinfo>zulässiger Bereich für die Anzahl Fahrzeuge in Geschwindigkeitsklasse Sattel-Kfz</kurzinfo>
+				</info>
+			</attributliste>
+		</attributgruppenDefinition>
+		<attributgruppenDefinition pid="atg.verkehrsDatenLangZeitIntervallPlausibilitätsPrüfungLogisch" name="VerkehrsDatenLangZeitIntervallPlausibilitätsPrüfungLogisch" parametrierend="ja">
+			<info>
+				<kurzinfo>Parameter für die Plausibilitätsprüfung Logisch der Verkehrsdaten (Langzeit) mit Intervallwerten (nicht normiert auf Stundenwerte).</kurzinfo>
+				<beschreibung>Die Parameter legen fest, wie im Falle von Bereichunterschreitungen bzw. Überschreitungen vorzugehen ist und wie die jeweiligen zulässigen Wertebereiche aussehen. Da die Anzahl der Geschwindigkeitsklassen variabel ist und das zugrundeliegende Geschwindigkeitsraster erst zur Laufzeit bekannt ist, gilt der Parameter für alle vorgefundenen Feldelemente.</beschreibung>
+			</info>
+			<attributliste pid="atl.urlasser" anzahl="1" anzahlIst="fest" name="Urlasser">
+			</attributliste>
+			<attribut pid="att.optionenPlausibilitätsPrüfungLogischVerkehr" anzahl="1" anzahlIst="fest" name="Optionen">
+				<info>
+					<kurzinfo>Optionen für die Art und Weise der Plausibilitätsprüfung.</kurzinfo>
+				</info>
+			</attribut>
+			<attributliste pid="atl.minMaxVerkehrsStärkeStunde" anzahl="1" anzahlIst="fest" name="qKfzBereich">
+				<info>
+					<kurzinfo>zulässiger Bereich für die Fahrzeugmenge Kfz.</kurzinfo>
+				</info>
+			</attributliste>
+			<attributliste pid="atl.minMaxVerkehrsStärkeStunde" anzahl="1" anzahlIst="fest" name="qPkwÄBereich">
+				<info>
+					<kurzinfo>zulässiger Bereich für die Fahrzeugmenge Pkw ähnliche.</kurzinfo>
+				</info>
+			</attributliste>
+			<attributliste pid="atl.minMaxVerkehrsStärkeStunde" anzahl="1" anzahlIst="fest" name="qKfzNkBereich">
+				<info>
+					<kurzinfo>zulässiger Bereich für die Fahrzeugmenge Kfz nicht klassifiziert.</kurzinfo>
+				</info>
+			</attributliste>
+			<attributliste pid="atl.minMaxVerkehrsStärkeStunde" anzahl="1" anzahlIst="fest" name="qPkwGBereich">
+				<info>
+					<kurzinfo>zulässiger Bereich für die Fahrzeugmenge Pkw Gruppe (Motorräder, Pkw , Lieferwagen).</kurzinfo>
+				</info>
+			</attributliste>
+			<attributliste pid="atl.minMaxVerkehrsStärkeStunde" anzahl="1" anzahlIst="fest" name="qPkwBereich">
+				<info>
+					<kurzinfo>zulässiger Bereich für die Fahrzeugmenge Pkw.</kurzinfo>
+				</info>
+			</attributliste>
+			<attributliste pid="atl.minMaxVerkehrsStärkeStunde" anzahl="1" anzahlIst="fest" name="qKradBereich">
+				<info>
+					<kurzinfo>zulässiger Bereich für die Fahrzeugmenge Krad.</kurzinfo>
+				</info>
+			</attributliste>
+			<attributliste pid="atl.minMaxVerkehrsStärkeStunde" anzahl="1" anzahlIst="fest" name="qLfwBereich">
+				<info>
+					<kurzinfo>zulässiger Bereich für die Fahrzeugmenge Lieferwagen.</kurzinfo>
+				</info>
+			</attributliste>
+			<attributliste pid="atl.minMaxVerkehrsStärkeStunde" anzahl="1" anzahlIst="fest" name="qLkwÄBereich">
+				<info>
+					<kurzinfo>zulässiger Bereich für die Fahrzeugmenge Lkw ähnliche.</kurzinfo>
+				</info>
+			</attributliste>
+			<attributliste pid="atl.minMaxVerkehrsStärkeStunde" anzahl="1" anzahlIst="fest" name="qPkwABereich">
+				<info>
+					<kurzinfo>zulässiger Bereich für die Fahrzeugmenge Pkw mit Anhänger.</kurzinfo>
+				</info>
+			</attributliste>
+			<attributliste pid="atl.minMaxVerkehrsStärkeStunde" anzahl="1" anzahlIst="fest" name="qLkwBereich">
+				<info>
+					<kurzinfo>zulässiger Bereich für die Fahrzeugmenge Lkw.</kurzinfo>
+				</info>
+			</attributliste>
+			<attributliste pid="atl.minMaxVerkehrsStärkeStunde" anzahl="1" anzahlIst="fest" name="qBusBereich">
+				<info>
+					<kurzinfo>zulässiger Bereich für die Fahrzeugmenge Busse.</kurzinfo>
+				</info>
+			</attributliste>
+			<attributliste pid="atl.minMaxVerkehrsStärkeStunde" anzahl="1" anzahlIst="fest" name="qLkwKBereich">
+				<info>
+					<kurzinfo>zulässiger Bereich für die Fahrzeugmenge Lkw mit Anhänger und Sattel-Kfz.</kurzinfo>
+				</info>
+			</attributliste>
+			<attributliste pid="atl.minMaxVerkehrsStärkeStunde" anzahl="1" anzahlIst="fest" name="qLkwABereich">
+				<info>
+					<kurzinfo>zulässiger Bereich für die Fahrzeugmenge Lkw mit Anhänger.</kurzinfo>
+				</info>
+			</attributliste>
+			<attributliste pid="atl.minMaxVerkehrsStärkeStunde" anzahl="1" anzahlIst="fest" name="qSattelKfzBereich">
+				<info>
+					<kurzinfo>zulässiger Bereich für die Fahrzeugmenge Sattel-Kfz</kurzinfo>
+				</info>
+			</attributliste>
+			<attributliste pid="atl.minMaxGeschwindigkeit" anzahl="1" anzahlIst="fest" name="vKfzBereich">
+				<info>
+					<kurzinfo>zulässiger Bereich für die Geschwindigkeit Kfz.</kurzinfo>
+				</info>
+			</attributliste>
+			<attributliste pid="atl.minMaxGeschwindigkeit" anzahl="1" anzahlIst="fest" name="vPkwÄBereich">
+				<info>
+					<kurzinfo>zulässiger Bereich für die Geschwindigkeit Pkw ähnliche.</kurzinfo>
+				</info>
+			</attributliste>
+			<attributliste pid="atl.minMaxGeschwindigkeit" anzahl="1" anzahlIst="fest" name="vKfzNkBereich">
+				<info>
+					<kurzinfo>zulässiger Bereich für die Geschwindigkeit Kfz nicht klassifiziert.</kurzinfo>
+				</info>
+			</attributliste>
+			<attributliste pid="atl.minMaxGeschwindigkeit" anzahl="1" anzahlIst="fest" name="vPkwGBereich">
+				<info>
+					<kurzinfo>zulässiger Bereich für die Geschwindigkeit Pkw Gruppe (Motorräder, Pkw , Lieferwagen).</kurzinfo>
+				</info>
+			</attributliste>
+			<attributliste pid="atl.minMaxGeschwindigkeit" anzahl="1" anzahlIst="fest" name="vPkwBereich">
+				<info>
+					<kurzinfo>zulässiger Bereich für die Geschwindigkeit Pkw.</kurzinfo>
+				</info>
+			</attributliste>
+			<attributliste pid="atl.minMaxGeschwindigkeit" anzahl="1" anzahlIst="fest" name="vKradBereich">
+				<info>
+					<kurzinfo>zulässiger Bereich für die Geschwindigkeit Krad.</kurzinfo>
+				</info>
+			</attributliste>
+			<attributliste pid="atl.minMaxGeschwindigkeit" anzahl="1" anzahlIst="fest" name="vLfwBereich">
+				<info>
+					<kurzinfo>zulässiger Bereich für die Geschwindigkeit Lieferwagen.</kurzinfo>
+				</info>
+			</attributliste>
+			<attributliste pid="atl.minMaxGeschwindigkeit" anzahl="1" anzahlIst="fest" name="vLkwÄBereich">
+				<info>
+					<kurzinfo>zulässiger Bereich für die Geschwindigkeit Lkw ähnliche.</kurzinfo>
+				</info>
+			</attributliste>
+			<attributliste pid="atl.minMaxGeschwindigkeit" anzahl="1" anzahlIst="fest" name="vPkwABereich">
+				<info>
+					<kurzinfo>zulässiger Bereich für die Geschwindigkeit Pkw mit Anhänger.</kurzinfo>
+				</info>
+			</attributliste>
+			<attributliste pid="atl.minMaxGeschwindigkeit" anzahl="1" anzahlIst="fest" name="vLkwBereich">
+				<info>
+					<kurzinfo>zulässiger Bereich für die Geschwindigkeit Lkw.</kurzinfo>
+				</info>
+			</attributliste>
+			<attributliste pid="atl.minMaxGeschwindigkeit" anzahl="1" anzahlIst="fest" name="vBusBereich">
+				<info>
+					<kurzinfo>zulässiger Bereich für die Geschwindigkeit Busse.</kurzinfo>
+				</info>
+			</attributliste>
+			<attributliste pid="atl.minMaxGeschwindigkeit" anzahl="1" anzahlIst="fest" name="vLkwKBereich">
+				<info>
+					<kurzinfo>zulässiger Bereich für die Geschwindigkeit Lkw mit Anhänger und Sattel-Kfz.</kurzinfo>
+				</info>
+			</attributliste>
+			<attributliste pid="atl.minMaxGeschwindigkeit" anzahl="1" anzahlIst="fest" name="vLkwABereich">
+				<info>
+					<kurzinfo>zulässiger Bereich für die Geschwindigkeit Lkw mit Anhänger.</kurzinfo>
+				</info>
+			</attributliste>
+			<attributliste pid="atl.minMaxGeschwindigkeit" anzahl="1" anzahlIst="fest" name="vSattelKfzBereich">
+				<info>
+					<kurzinfo>zulässiger Bereich für die Geschwindigkeit Sattel-Kfz</kurzinfo>
+				</info>
+			</attributliste>
+			<attributliste pid="atl.minMaxGeschwindigkeit" anzahl="1" anzahlIst="fest" name="sKfzBereich">
+				<info>
+					<kurzinfo>zulässiger Bereich für die Standardabweichung der Geschwindigkeit Kfz.</kurzinfo>
+				</info>
+			</attributliste>
+			<attributliste pid="atl.minMaxGeschwindigkeit" anzahl="1" anzahlIst="fest" name="sPkwÄBereich">
+				<info>
+					<kurzinfo>zulässiger Bereich für die Standardabweichung der Geschwindigkeit Pkw ähnliche.</kurzinfo>
+				</info>
+			</attributliste>
+			<attributliste pid="atl.minMaxGeschwindigkeit" anzahl="1" anzahlIst="fest" name="sKfzNkBereich">
+				<info>
+					<kurzinfo>zulässiger Bereich für die Standardabweichung der Geschwindigkeit Kfz nicht klassifiziert.</kurzinfo>
+				</info>
+			</attributliste>
+			<attributliste pid="atl.minMaxGeschwindigkeit" anzahl="1" anzahlIst="fest" name="sPkwGBereich">
+				<info>
+					<kurzinfo>zulässiger Bereich für die Standardabweichung der Geschwindigkeit Pkw Gruppe (Motorräder, Pkw , Lieferwagen).</kurzinfo>
+				</info>
+			</attributliste>
+			<attributliste pid="atl.minMaxGeschwindigkeit" anzahl="1" anzahlIst="fest" name="sPkwBereich">
+				<info>
+					<kurzinfo>zulässiger Bereich für die Standardabweichung der Geschwindigkeit Pkw.</kurzinfo>
+				</info>
+			</attributliste>
+			<attributliste pid="atl.minMaxGeschwindigkeit" anzahl="1" anzahlIst="fest" name="sKradBereich">
+				<info>
+					<kurzinfo>zulässiger Bereich für die Standardabweichung der Geschwindigkeit Krad.</kurzinfo>
+				</info>
+			</attributliste>
+			<attributliste pid="atl.minMaxGeschwindigkeit" anzahl="1" anzahlIst="fest" name="sLfwBereich">
+				<info>
+					<kurzinfo>zulässiger Bereich für die Standardabweichung der Geschwindigkeit Lieferwagen.</kurzinfo>
+				</info>
+			</attributliste>
+			<attributliste pid="atl.minMaxGeschwindigkeit" anzahl="1" anzahlIst="fest" name="sLkwÄBereich">
+				<info>
+					<kurzinfo>zulässiger Bereich für die Standardabweichung der Geschwindigkeit Lkw ähnliche.</kurzinfo>
+				</info>
+			</attributliste>
+			<attributliste pid="atl.minMaxGeschwindigkeit" anzahl="1" anzahlIst="fest" name="sPkwABereich">
+				<info>
+					<kurzinfo>zulässiger Bereich für die Standardabweichung der Geschwindigkeit Pkw mit Anhänger.</kurzinfo>
+				</info>
+			</attributliste>
+			<attributliste pid="atl.minMaxGeschwindigkeit" anzahl="1" anzahlIst="fest" name="sLkwBereich">
+				<info>
+					<kurzinfo>zulässiger Bereich für die Standardabweichung der Geschwindigkeit Lkw.</kurzinfo>
+				</info>
+			</attributliste>
+			<attributliste pid="atl.minMaxGeschwindigkeit" anzahl="1" anzahlIst="fest" name="sBusBereich">
+				<info>
+					<kurzinfo>zulässiger Bereich für die Standardabweichung der Geschwindigkeit Busse.</kurzinfo>
+				</info>
+			</attributliste>
+			<attributliste pid="atl.minMaxGeschwindigkeit" anzahl="1" anzahlIst="fest" name="sLkwKBereich">
+				<info>
+					<kurzinfo>zulässiger Bereich für die Standardabweichung der Geschwindigkeit Lkw mit Anhänger und Sattel-Kfz.</kurzinfo>
+				</info>
+			</attributliste>
+			<attributliste pid="atl.minMaxGeschwindigkeit" anzahl="1" anzahlIst="fest" name="sLkwABereich">
+				<info>
+					<kurzinfo>zulässiger Bereich für die Standardabweichung der Geschwindigkeit Lkw mit Anhänger.</kurzinfo>
+				</info>
+			</attributliste>
+			<attributliste pid="atl.minMaxGeschwindigkeit" anzahl="1" anzahlIst="fest" name="sSattelKfzBereich">
+				<info>
+					<kurzinfo>zulässiger Bereich für die Standardabweichung der Geschwindigkeit Sattel-Kfz</kurzinfo>
+				</info>
+			</attributliste>
+			<attributliste pid="atl.minMaxGeschwindigkeit" anzahl="1" anzahlIst="fest" name="v85KfzBereich">
+				<info>
+					<kurzinfo>zulässiger Bereich für die v85-Geschwindigkeit Kfz.</kurzinfo>
+				</info>
+			</attributliste>
+			<attributliste pid="atl.minMaxGeschwindigkeit" anzahl="1" anzahlIst="fest" name="v85PkwÄBereich">
+				<info>
+					<kurzinfo>zulässiger Bereich für die v85-Geschwindigkeit Pkw ähnliche.</kurzinfo>
+				</info>
+			</attributliste>
+			<attributliste pid="atl.minMaxGeschwindigkeit" anzahl="1" anzahlIst="fest" name="v85KfzNkBereich">
+				<info>
+					<kurzinfo>zulässiger Bereich für die v85-Geschwindigkeit Kfz nicht klassifiziert.</kurzinfo>
+				</info>
+			</attributliste>
+			<attributliste pid="atl.minMaxGeschwindigkeit" anzahl="1" anzahlIst="fest" name="v85PkwGBereich">
+				<info>
+					<kurzinfo>zulässiger Bereich für die v85-Geschwindigkeit Pkw Gruppe (Motorräder, Pkw , Lieferwagen).</kurzinfo>
+				</info>
+			</attributliste>
+			<attributliste pid="atl.minMaxGeschwindigkeit" anzahl="1" anzahlIst="fest" name="v85PkwBereich">
+				<info>
+					<kurzinfo>zulässiger Bereich für die v85-Geschwindigkeit Pkw.</kurzinfo>
+				</info>
+			</attributliste>
+			<attributliste pid="atl.minMaxGeschwindigkeit" anzahl="1" anzahlIst="fest" name="v85KradBereich">
+				<info>
+					<kurzinfo>zulässiger Bereich für die v85-Geschwindigkeit Krad.</kurzinfo>
+				</info>
+			</attributliste>
+			<attributliste pid="atl.minMaxGeschwindigkeit" anzahl="1" anzahlIst="fest" name="v85LfwBereich">
+				<info>
+					<kurzinfo>zulässiger Bereich für die v85-Geschwindigkeit Lieferwagen.</kurzinfo>
+				</info>
+			</attributliste>
+			<attributliste pid="atl.minMaxGeschwindigkeit" anzahl="1" anzahlIst="fest" name="v85LkwÄBereich">
+				<info>
+					<kurzinfo>zulässiger Bereich für die v85-Geschwindigkeit Lkw ähnliche.</kurzinfo>
+				</info>
+			</attributliste>
+			<attributliste pid="atl.minMaxGeschwindigkeit" anzahl="1" anzahlIst="fest" name="v85PkwABereich">
+				<info>
+					<kurzinfo>zulässiger Bereich für die v85-Geschwindigkeit Pkw mit Anhänger.</kurzinfo>
+				</info>
+			</attributliste>
+			<attributliste pid="atl.minMaxGeschwindigkeit" anzahl="1" anzahlIst="fest" name="v85LkwBereich">
+				<info>
+					<kurzinfo>zulässiger Bereich für die v85-Geschwindigkeit Lkw.</kurzinfo>
+				</info>
+			</attributliste>
+			<attributliste pid="atl.minMaxGeschwindigkeit" anzahl="1" anzahlIst="fest" name="v85BusBereich">
+				<info>
+					<kurzinfo>zulässiger Bereich für die v85-Geschwindigkeit Busse.</kurzinfo>
+				</info>
+			</attributliste>
+			<attributliste pid="atl.minMaxGeschwindigkeit" anzahl="1" anzahlIst="fest" name="v85LkwKBereich">
+				<info>
+					<kurzinfo>zulässiger Bereich für die v85-Geschwindigkeit Lkw mit Anhänger und Sattel-Kfz.</kurzinfo>
+				</info>
+			</attributliste>
+			<attributliste pid="atl.minMaxGeschwindigkeit" anzahl="1" anzahlIst="fest" name="v85LkwABereich">
+				<info>
+					<kurzinfo>zulässiger Bereich für die v85-Geschwindigkeit Lkw mit Anhänger.</kurzinfo>
+				</info>
+			</attributliste>
+			<attributliste pid="atl.minMaxGeschwindigkeit" anzahl="1" anzahlIst="fest" name="v85SattelKfzBereich">
+				<info>
+					<kurzinfo>zulässiger Bereich für die v85-Geschwindigkeit Sattel-Kfz</kurzinfo>
+				</info>
+			</attributliste>
+			<attributliste pid="atl.minMaxVerkehrsStärkeStunde" anzahl="1" anzahlIst="fest" name="qKfzGeschwKlasseBereich">
+				<info>
+					<kurzinfo>zulässiger Bereich für die Anzahl Fahrzeuge in Geschwindigkeitsklasse Kfz.</kurzinfo>
+				</info>
+			</attributliste>
+			<attributliste pid="atl.minMaxVerkehrsStärkeStunde" anzahl="1" anzahlIst="fest" name="qPkwÄGeschwKlasseBereich">
+				<info>
+					<kurzinfo>zulässiger Bereich für die Anzahl Fahrzeuge in Geschwindigkeitsklasse Pkw ähnliche.</kurzinfo>
+				</info>
+			</attributliste>
+			<attributliste pid="atl.minMaxVerkehrsStärkeStunde" anzahl="1" anzahlIst="fest" name="qKfzNkGeschwKlasseBereich">
+				<info>
+					<kurzinfo>zulässiger Bereich für die Anzahl Fahrzeuge in Geschwindigkeitsklasse Kfz nicht klassifiziert.</kurzinfo>
+				</info>
+			</attributliste>
+			<attributliste pid="atl.minMaxVerkehrsStärkeStunde" anzahl="1" anzahlIst="fest" name="qPkwGGeschwKlasseBereich">
+				<info>
+					<kurzinfo>zulässiger Bereich für die Anzahl Fahrzeuge in Geschwindigkeitsklasse Pkw Gruppe (Motorräder, Pkw , Lieferwagen).</kurzinfo>
+				</info>
+			</attributliste>
+			<attributliste pid="atl.minMaxVerkehrsStärkeStunde" anzahl="1" anzahlIst="fest" name="qPkwGeschwKlasseBereich">
+				<info>
+					<kurzinfo>zulässiger Bereich für die Anzahl Fahrzeuge in Geschwindigkeitsklasse Pkw.</kurzinfo>
+				</info>
+			</attributliste>
+			<attributliste pid="atl.minMaxVerkehrsStärkeStunde" anzahl="1" anzahlIst="fest" name="qKradGeschwKlasseBereich">
+				<info>
+					<kurzinfo>zulässiger Bereich für die Anzahl Fahrzeuge in Geschwindigkeitsklasse Krad.</kurzinfo>
+				</info>
+			</attributliste>
+			<attributliste pid="atl.minMaxVerkehrsStärkeStunde" anzahl="1" anzahlIst="fest" name="qLfwGeschwKlasseBereich">
+				<info>
+					<kurzinfo>zulässiger Bereich für die Anzahl Fahrzeuge in Geschwindigkeitsklasse Lieferwagen.</kurzinfo>
+				</info>
+			</attributliste>
+			<attributliste pid="atl.minMaxVerkehrsStärkeStunde" anzahl="1" anzahlIst="fest" name="qLkwÄGeschwKlasseBereich">
+				<info>
+					<kurzinfo>zulässiger Bereich für die Anzahl Fahrzeuge in Geschwindigkeitsklasse Lkw ähnliche.</kurzinfo>
+				</info>
+			</attributliste>
+			<attributliste pid="atl.minMaxVerkehrsStärkeStunde" anzahl="1" anzahlIst="fest" name="qPkwAGeschwKlasseBereich">
+				<info>
+					<kurzinfo>zulässiger Bereich für die Anzahl Fahrzeuge in Geschwindigkeitsklasse Pkw mit Anhänger.</kurzinfo>
+				</info>
+			</attributliste>
+			<attributliste pid="atl.minMaxVerkehrsStärkeStunde" anzahl="1" anzahlIst="fest" name="qLkwGeschwKlasseBereich">
+				<info>
+					<kurzinfo>zulässiger Bereich für die Anzahl Fahrzeuge in Geschwindigkeitsklasse Lkw.</kurzinfo>
+				</info>
+			</attributliste>
+			<attributliste pid="atl.minMaxVerkehrsStärkeStunde" anzahl="1" anzahlIst="fest" name="qBusGeschwKlasseBereich">
+				<info>
+					<kurzinfo>zulässiger Bereich für die Anzahl Fahrzeuge in Geschwindigkeitsklasse Busse.</kurzinfo>
+				</info>
+			</attributliste>
+			<attributliste pid="atl.minMaxVerkehrsStärkeStunde" anzahl="1" anzahlIst="fest" name="qLkwKGeschwKlasseBereich">
+				<info>
+					<kurzinfo>zulässiger Bereich für die Anzahl Fahrzeuge in Geschwindigkeitsklasse Lkw mit Anhänger und Sattel-Kfz.</kurzinfo>
+				</info>
+			</attributliste>
+			<attributliste pid="atl.minMaxVerkehrsStärkeStunde" anzahl="1" anzahlIst="fest" name="qLkwAGeschwKlasseBereich">
+				<info>
+					<kurzinfo>zulässiger Bereich für die Anzahl Fahrzeuge in Geschwindigkeitsklasse Lkw mit Anhänger.</kurzinfo>
+				</info>
+			</attributliste>
+			<attributliste pid="atl.minMaxVerkehrsStärkeStunde" anzahl="1" anzahlIst="fest" name="qSattelKfzGeschwKlasseBereich">
+				<info>
+					<kurzinfo>zulässiger Bereich für die Anzahl Fahrzeuge in Geschwindigkeitsklasse Sattel-Kfz</kurzinfo>
+				</info>
+			</attributliste>
+		</attributgruppenDefinition>
+		<attributgruppenDefinition pid="atg.verkehrsDatenQuelleASCII" name="VerkehrsdatenQuelleASCII" parametrierend="nein">
+			<info>
+				<kurzinfo>Auf einen Fahrstreifen bezogene Quelle von Verkehrsdaten.</kurzinfo>
+				<beschreibung>
+					<sektion>
+						<titel>Verkehrsdatenquelle ASCII</titel>
+						<absatz>Mit der Verkehrsdatenquelle vom Typ ASCII ist die Möglichkeit gegeben, Daten von Erfassungspositionen in das System zu übernehmen, die nicht über TLS angeschlossen. Die Verkehrsdatenquelle ASCII ist vergleichbar einem DE-Kanal an einer TLS-Streckenstation, nur werden die Fahrstreifenbezogenen Werte hier aus einer ASCII-Datei bezogen.</absatz>
+					</sektion>
+				</beschreibung>
+			</info>
+			<aspekt pid="asp.eigenschaften" konfigurationsModus="datensatzOptional">
+			</aspekt>
+			<attribut pid="att.verkehrsDatenQuelleASCIIUrl" anzahl="1" anzahlIst="fest" name="Url">
+			</attribut>
+			<attribut pid="att.verkehrsDatenQuelleASCIIIndex" anzahl="1" anzahlIst="fest" name="FahrStreifenIndex">
+			</attribut>
+			<attribut pid="att.verkehrsDatenQuelleASCIIFormat" anzahl="1" anzahlIst="fest" name="DatenFormat">
+			</attribut>
+			<attribut pid="att.verkehrsDatenQuelleASCIIVKRaster" anzahl="1" anzahlIst="fest" name="VKRaster">
+			</attribut>
+		</attributgruppenDefinition>
+		<attributgruppenDefinition pid="atg.verkehrsDatenQuelleVirtuell" name="VerkehrsdatenQuelleVirtuell" parametrierend="nein">
+			<info>
+				<kurzinfo>Virtuelle Datenquelle, die ihre Daten durch arithmetische Berechnung aus anderen Datenquellen generiert.</kurzinfo>
+				<beschreibung>
+					<sektion>
+						<titel>Verkehrsdatenquelle Virtuell</titel>
+						<absatz>Die Verkehrsdatenquelle vom Typ Virtuell gestattet die Bildung virtueller Messstellen. Mittels einer Berechnungsvorschrift werden die Daten aus anderer Quellen zusammengefasst.</absatz>
+					</sektion>
+				</beschreibung>
+			</info>
+			<aspekt pid="asp.eigenschaften" konfigurationsModus="datensatzOptional">
+			</aspekt>
+			<attribut pid="att.verkehrsDatenQuelleVirtuellFormel" anzahl="1" anzahlIst="fest" name="BerechnungsVorschrift">
+			</attribut>
+		</attributgruppenDefinition>
+		<aspektDefinition pid="asp.aggregationsIntervall15Minuten" name="AggregationsIntervall15Minuten">
+			<info>
+				<kurzinfo>Der Aspekt kennzeichnet Daten, denen das Erfassungs bzw. Aggregationsintervall 15 Minuten zugrundeliegt.</kurzinfo>
+			</info>
+		</aspektDefinition>
+		<aspektDefinition pid="asp.aggregationsIntervallJahr" name="AggregationsIntervallJahr">
+			<info>
+				<kurzinfo>Der Aspekt kennzeichnet Daten, denen das Erfassungs bzw. Aggregationsintervall 1 Jahr zugrundeliegt.</kurzinfo>
+			</info>
+		</aspektDefinition>
+		<aspektDefinition pid="asp.aggregationsIntervallMonat" name="AggregationsIntervallMonat">
+			<info>
+				<kurzinfo>Der Aspekt kennzeichnet Daten, denen das Erfassungs bzw. Aggregationsintervall 1 Monat zugrundeliegt.</kurzinfo>
+			</info>
+		</aspektDefinition>
+		<aspektDefinition pid="asp.aggregationsIntervallStunde" name="AggregationsIntervallStunde">
+			<info>
+				<kurzinfo>Der Aspekt kennzeichnet Daten, denen das Erfassungs bzw. Aggregationsintervall 1 Stunde (60 Minuten) zugrundeliegt.</kurzinfo>
+			</info>
+		</aspektDefinition>
+		<aspektDefinition pid="asp.aggregationsIntervallTag" name="AggregationsIntervallTag">
+			<info>
+				<kurzinfo>Der Aspekt kennzeichnet Daten, denen das Erfassungs bzw. Aggregationsintervall 1 Tag (24 Stunden) zugrundeliegt.</kurzinfo>
+			</info>
+		</aspektDefinition>
+		<attributDefinition pid="att.auswerteQuerschnittReferenz" name="AuswerteQuerschnittReferenz">
+			<info>
+				<kurzinfo>Attribut zur Referenzierung des Objekttyps: typ.auswerteQuerschnitt.</kurzinfo>
+			</info>
+			<objektReferenz typ="typ.auswerteQuerschnitt" undefiniert="verboten" referenzierungsart="assoziation"/>
+		</attributDefinition>
+		<attributDefinition pid="att.auswerteQuerschnittReferenzOptional" name="AuswerteQuerschnittReferenzOptional">
+			<info>
+				<kurzinfo>Attribut zur Referenzierung des Objekttyps: typ.auswerteQuerschnitt (Optionale Referenzierung erlaubt).</kurzinfo>
+			</info>
+			<objektReferenz typ="typ.auswerteQuerschnitt" undefiniert="erlaubt" referenzierungsart="assoziation"/>
+		</attributDefinition>
+		<attributDefinition pid="att.betriebsKilometer" name="Betriebskilometer">
+			<info>
+				<kurzinfo>Betriebskilometer (z.B: bei BAST-Zählstellen)</kurzinfo>
+			</info>
+			<ganzzahl bits="32">
+				<bereich skalierung="1000" minimum="0" maximum="999999" einheit="km">
+				</bereich>
+			</ganzzahl>
+		</attributDefinition>
+		<attributDefinition pid="att.bundesLandBAST" name="LandesnummerBAST">
+			<info>
+				<kurzinfo>Landeskennung für BAST-Zählstelle</kurzinfo>
+			</info>
+			<ganzzahl bits="8">
+				<zustand name="unbekannt" wert="0">
+				</zustand>
+				<zustand name="Schleswig-Holstein" wert="1">
+				</zustand>
+				<zustand name="Hamburg" wert="2">
+				</zustand>
+				<zustand name="Niedersachsen" wert="3">
+				</zustand>
+				<zustand name="Bremen" wert="4">
+				</zustand>
+				<zustand name="Nordrhein-Westfalen" wert="5">
+				</zustand>
+				<zustand name="Hessen" wert="6">
+				</zustand>
+				<zustand name="Rheinland-Pfalz" wert="7">
+				</zustand>
+				<zustand name="Baden-Württemberg" wert="8">
+				</zustand>
+				<zustand name="Bayern" wert="9">
+				</zustand>
+				<zustand name="Saarland" wert="10">
+				</zustand>
+				<zustand name="Berlin" wert="11">
+				</zustand>
+				<zustand name="Brandenburg" wert="12">
+				</zustand>
+				<zustand name="Mecklenburg-Vorpommern" wert="13">
+				</zustand>
+				<zustand name="Sachsen" wert="14">
+				</zustand>
+				<zustand name="Sachsen-Anhalt" wert="15">
+				</zustand>
+				<zustand name="Thüringen" wert="16">
+				</zustand>
+			</ganzzahl>
+		</attributDefinition>
+		<attributDefinition pid="att.fahrStreifenLangZeitReferenz" name="FahrStreifenLangZeitReferenz">
+			<info>
+				<kurzinfo>Attribut zur Referenzierung des Objekttyps: typ.fahrStreifenLangZeit.</kurzinfo>
+			</info>
+			<objektReferenz typ="typ.fahrStreifenLangZeit" undefiniert="verboten" referenzierungsart="assoziation"/>
+		</attributDefinition>
+		<attributDefinition pid="att.fahrStreifenLangZeitReferenzOptional" name="FahrStreifenLangZeitReferenzOptional">
+			<info>
+				<kurzinfo>Attribut zur Referenzierung des Objekttyps: typ.fahrStreifenLangZeit (Optionale Referenzierung erlaubt).</kurzinfo>
+			</info>
+			<objektReferenz typ="typ.fahrStreifenLangZeit" undefiniert="erlaubt" referenzierungsart="assoziation"/>
+		</attributDefinition>
+		<attributDefinition pid="att.fernZiel" name="AuswerteQuerschnittFernziel">
+			<info>
+				<kurzinfo>Nahzielangabe für einen Richtungsquerschnitt</kurzinfo>
+			</info>
+			<zeichenkette laenge="30" kodierung="ISO-8859-1"/>
+		</attributDefinition>
+		<attributDefinition pid="att.himmelsRichtung" name="Himmelsrichtung">
+			<info>
+				<kurzinfo>Himmelsrichtung zur Angabe der Richtung u.a. von Richtungsquerschnitten</kurzinfo>
+			</info>
+			<ganzzahl bits="8">
+				<zustand name="?" wert="0">
+					<info>
+						<kurzinfo>Himmelsrichtung unbestimmt</kurzinfo>
+					</info>
+				</zustand>
+				<zustand name="N" wert="1">
+					<info>
+						<kurzinfo>Norden</kurzinfo>
+					</info>
+				</zustand>
+				<zustand name="O" wert="2">
+					<info>
+						<kurzinfo>Osten</kurzinfo>
+					</info>
+				</zustand>
+				<zustand name="S" wert="3">
+					<info>
+						<kurzinfo>Süden</kurzinfo>
+					</info>
+				</zustand>
+				<zustand name="W" wert="4">
+					<info>
+						<kurzinfo>Westen</kurzinfo>
+					</info>
+				</zustand>
+			</ganzzahl>
+		</attributDefinition>
+		<attributDefinition pid="att.klassifizierungsGruppeBAST" name="KlassifizierungsgruppeBAST">
+			<info>
+				<kurzinfo>entspricht der Fahrzeuggruppierung der TLS gemäß Anhang 2, Punkt 2.4 (maßgeblich für die Generierung des BAST-Bestandsbandsformats)</kurzinfo>
+			</info>
+			<ganzzahl bits="8">
+				<zustand name="1" wert="1">
+					<info>
+						<kurzinfo>Klassifizierungsgruppe 1: {Kfz}</kurzinfo>
+					</info>
+				</zustand>
+				<zustand name="2" wert="2">
+					<info>
+						<kurzinfo>Klassifizierungsgruppe2: {Pkw-ähnlich, Lkw-ähnlich}</kurzinfo>
+					</info>
+				</zustand>
+				<zustand name="5 plus 1" wert="3">
+					<info>
+						<kurzinfo>Klassifizierungsgruppe 5+1: {nk Kfz, PkwG, PkwA, Lkw, LkwK, Bus}</kurzinfo>
+					</info>
+				</zustand>
+				<zustand name="8 plus 1" wert="4">
+					<info>
+						<kurzinfo>Klassifizierungsgruppe 8+1: {nk Kfz, Krad, Kfz, Lfw, PkwA, Lkw, LkwA, Sattel-Kfz, Bus}</kurzinfo>
+					</info>
+				</zustand>
+				<zustand name="8 plus 1 Geschw" wert="5">
+					<info>
+						<kurzinfo>Klassifizierungsgruppe 8+1 + Bast-Geschw: {nk Kfz, Krad, Kfz, Lfw, PkwA, Lkw, LkwA, Sattel-Kfz, Bus} und Geschwindigkeitsdaten LVo, SGV, BPA</kurzinfo>
+					</info>
+				</zustand>
+			</ganzzahl>
+		</attributDefinition>
+		<attributDefinition pid="att.langZeitDatenDTV" name="LangzeitdatenDTV">
+			<info>
+				<kurzinfo>Langzeitzählwert Durchscnittliche Tägliche Verkehrslasr.</kurzinfo>
+			</info>
+			<ganzzahl bits="32">
+				<bereich skalierung="1" minimum="0" maximum="100000000" einheit="Fz/Tag">
+				</bereich>
+				<zustand name="nicht ermittelbar" wert="-1">
+					<info>
+						<kurzinfo>Daten sind nicht ermittelbar (ist KEIN Fehler)</kurzinfo>
+						<beschreibung>Wird gesetzt, wenn der entsprechende Wert nicht ermittelbar ist und keine Interpolation sinnvoll möglich ist (z.B. wenn die Fahrzeugklassifizierung nach 5+1 Fahrzeugarten erfolgt kann der Wert für PkwG zumeist nicht ermittelt werden).</beschreibung>
+					</info>
+				</zustand>
+				<zustand name="fehlerhaft" wert="-2">
+					<info>
+						<kurzinfo>Daten sind fehlerhaft</kurzinfo>
+						<beschreibung>Der Zustand wird gesetzt, wenn die Daten als fehlerhaft erkannt wurden.</beschreibung>
+					</info>
+				</zustand>
+				<zustand name="nicht ermittelbar/fehlerhaft" wert="-3">
+					<info>
+						<kurzinfo>Wert ist nicht ermittelbar, da bereits Basiswerte fehlen oder fehlerhaft sind.</kurzinfo>
+						<beschreibung>Dieser Zustand wird gesetzt, wenn Daten die zur Berechnung dieses Wertes notwendig sind, bereits als fehlerhaft gekennzeichnet sind, oder wenn die Berechnung aus anderen Gründen nicht möglich war (z.B: DTV des Monats benötigt mindestens 20 korrekte Tageswerte).</beschreibung>
+					</info>
+				</zustand>
+			</ganzzahl>
+		</attributDefinition>
+		<attributDefinition pid="att.langZeitDatenFahrzeugAnzahl" name="LangzeitdatenFahrzeuganzahl">
+			<info>
+				<kurzinfo>Langzeitzählwert der Datenart Fahrzeuganzahl.</kurzinfo>
+			</info>
+			<ganzzahl bits="32">
+				<bereich skalierung="1" minimum="0" maximum="100000000" einheit="Fz">
+				</bereich>
+				<zustand name="nicht ermittelbar" wert="-1">
+					<info>
+						<kurzinfo>Daten sind nicht ermittelbar (ist KEIN Fehler)</kurzinfo>
+						<beschreibung>Wird gesetzt, wenn der entsprechende Wert nicht ermittelbar ist und keine Interpolation sinnvoll möglich ist (z.B. wenn die Fahrzeugklassifizierung nach 5+1 Fahrzeugarten erfolgt kann der Wert für PkwG zumeist nicht ermittelt werden).</beschreibung>
+					</info>
+				</zustand>
+				<zustand name="fehlerhaft" wert="-2">
+					<info>
+						<kurzinfo>Daten sind fehlerhaft</kurzinfo>
+						<beschreibung>Der Zustand wird gesetzt, wenn die Daten als fehlerhaft erkannt wurden.</beschreibung>
+					</info>
+				</zustand>
+				<zustand name="nicht ermittelbar/fehlerhaft" wert="-3">
+					<info>
+						<kurzinfo>Wert ist nicht ermittelbar, da bereits Basiswerte fehlen oder fehlerhaft sind.</kurzinfo>
+						<beschreibung>Dieser Zustand wird gesetzt, wenn Daten die zur Berechnung dieses Wertes notwendig sind, bereits als fehlerhaft gekennzeichnet sind, oder wenn die Berechnung aus anderen Gründen nicht möglich war (z.B: Division durch 0).</beschreibung>
+					</info>
+				</zustand>
+			</ganzzahl>
+		</attributDefinition>
+		<attributDefinition pid="att.langZeitDatenGeschwindigkeit" name="LangzeitdatenGeschwindigkeit">
+			<info>
+				<kurzinfo>Arithmetisches Mittel der Geschwindigkeit aller Fahrzeuge im zugrundeliegenden Intervall.</kurzinfo>
+			</info>
+			<ganzzahl bits="16">
+				<bereich skalierung="0,1" minimum="0" maximum="2540" einheit="km/h">
+				</bereich>
+				<zustand name="nicht ermittelbar" wert="-1">
+					<info>
+						<kurzinfo>Daten sind nicht ermittelbar (ist KEIN Fehler)</kurzinfo>
+						<beschreibung>Wird gesetzt, wenn der entsprechende Wert nicht ermittelbar ist und keine Interpolation sinnvoll möglich ist (z.B. ist die Geschwindigkeit nicht ermittelbar, wenn kein Fahrzeug erfasst wurde).</beschreibung>
+					</info>
+				</zustand>
+				<zustand name="fehlerhaft" wert="-2">
+					<info>
+						<kurzinfo>Daten sind fehlerhaft</kurzinfo>
+						<beschreibung>Der Zustand wird gesetzt, wenn die Daten als fehlerhaft erkannt wurden.</beschreibung>
+					</info>
+				</zustand>
+				<zustand name="nicht ermittelbar/fehlerhaft" wert="-3">
+					<info>
+						<kurzinfo>Wert ist nicht ermittelbar, da bereits Basiswerte fehlen oder fehlerhaft sind.</kurzinfo>
+						<beschreibung>Dieser Zustand wird gesetzt, wenn Daten die zur Berechnung dieses Wertes notwendig sind, bereits als fehlerhaft gekennzeichnet sind, oder wenn die Berechnung aus anderen Gründen nicht möglich war (z.B: Division durch 0).</beschreibung>
+					</info>
+				</zustand>
+			</ganzzahl>
+		</attributDefinition>
+		<attributDefinition pid="att.langZeitDatenSpitzenZeit" name="LangzeitdatenSpitzenzeit">
+			<info>
+				<kurzinfo>Spitzenzeitpunkt für einen Langzeitdatenwert (z.B. Spitzenstunden).</kurzinfo>
+			</info>
+			<zeitstempel relativ="nein" genauigkeit="sekunden"/>
+		</attributDefinition>
+		<attributDefinition pid="att.langZeitZählStellenName" name="LangzeitzählstellenName">
+			<info>
+				<kurzinfo>Name der Langzeitzählstelle</kurzinfo>
+			</info>
+			<zeichenkette laenge="30" kodierung="ISO-8859-1"/>
+		</attributDefinition>
+		<attributDefinition pid="att.langZeitZählStellenNummer" name="LangzeitzählstellenNummer">
+			<info>
+				<kurzinfo>Zählstellennummer für Langzeitzählstellen gemäß Definition der BAST bestehend aus TK25 (4stellig) und BAST-Nummer (4stellig)</kurzinfo>
+			</info>
+			<ganzzahl bits="32">
+				<bereich skalierung="1" minimum="0" maximum="99999999">
+				</bereich>
+			</ganzzahl>
+		</attributDefinition>
+		<attributDefinition pid="att.langZeitZählstelleReferenz" name="LangZeitZählstelleReferenz">
+			<info>
+				<kurzinfo>Attribut zur Referenzierung des Objekttyps: typ.langZeitZählstelle.</kurzinfo>
+			</info>
+			<objektReferenz typ="typ.langZeitZählstelle" undefiniert="verboten" referenzierungsart="assoziation"/>
+		</attributDefinition>
+		<attributDefinition pid="att.langZeitZählstelleReferenzOptional" name="LangZeitZählstelleReferenzOptional">
+			<info>
+				<kurzinfo>Attribut zur Referenzierung des Objekttyps: typ.langZeitZählstelle (Optionale Referenzierung erlaubt).</kurzinfo>
+			</info>
+			<objektReferenz typ="typ.langZeitZählstelle" undefiniert="erlaubt" referenzierungsart="assoziation"/>
+		</attributDefinition>
+		<attributDefinition pid="att.nahZiel" name="AuswerteQuerschnittNahziel">
+			<info>
+				<kurzinfo>Nahzielangabe für einen Richtungsquerschnitt</kurzinfo>
+			</info>
+			<zeichenkette laenge="30" kodierung="ISO-8859-1"/>
+		</attributDefinition>
+		<attributDefinition pid="att.netzKnoten" name="NetzknotenNummer">
+			<info>
+				<kurzinfo>Netzknotenangabe für BAST</kurzinfo>
+			</info>
+			<ganzzahl bits="32">
+				<bereich skalierung="1" minimum="0" maximum="9999999">
+				</bereich>
+			</ganzzahl>
+		</attributDefinition>
+		<attributDefinition pid="att.netzKnotenBezeichnung" name="Netzknotenbezeichnung">
+			<info>
+				<kurzinfo>nähere Bezeichnung für den Knotenpunk (z.B. Autobahnkreuz)</kurzinfo>
+			</info>
+			<zeichenkette laenge="6" kodierung="ISO-8859-1"/>
+		</attributDefinition>
+		<attributDefinition pid="att.optionenPlausibilitätsPrüfungFormal" name="OptionenPlausibilitätsprüfungFormal">
+			<info>
+				<kurzinfo>Parameter für die Art- und Weise der formalen Plausibilitätsprüfung</kurzinfo>
+			</info>
+			<ganzzahl bits="8">
+				<zustand name="Keine Prüfung" wert="0">
+					<info>
+						<kurzinfo>Wertebereichsprüfungwird NICHT durchgeführt. Wert wird nicht verändert, es werden keine Statusflags gesetzt.</kurzinfo>
+					</info>
+				</zustand>
+				<zustand name="NurPrüfung" wert="1">
+					<info>
+						<kurzinfo>Wertebereichsprüfung wird durchgeführt. Fehlerhafte Werte werden nicht verändert, es werden nur die Statusflags gesetzt.</kurzinfo>
+					</info>
+				</zustand>
+				<zustand name="Setze MinMax" wert="2">
+					<info>
+						<kurzinfo>Wertebereichsprüfung wird durchgeführt. Bei Bereichsunter- bzw. überschreitung wird der Wert auf den parametrierten Min- bzw. /Max-Wert korrigiert und die Statusflags gesetzt.</kurzinfo>
+					</info>
+				</zustand>
+				<zustand name="Setze Min" wert="3">
+					<info>
+						<kurzinfo>Wertebereichsprüfung wird durchgeführt. Bei Bereichsunterschreitung wird der Wert auf den parametrierten Min-Wert korrigiert und die Statusflags gesetzt, ansonsten Verhalten wie bei Option"NurPrüfen".</kurzinfo>
+					</info>
+				</zustand>
+				<zustand name="Setze Max" wert="4">
+					<info>
+						<kurzinfo>Wertebereichsprüfung wird durchgeführt. Bei Bereichsüberschreitung wird der Wert auf den parametrierten Max-Wert korrigiert und die Statusflags gesetzt, ansonsten Verhalten wie bei Option"NurPrüfen".</kurzinfo>
+					</info>
+				</zustand>
+			</ganzzahl>
+		</attributDefinition>
+		<attributDefinition pid="att.station" name="Station">
+			<info>
+				<kurzinfo>Stationierung auf der Strecken die über zwei Netzknoten eindeutig referenziert werden kann</kurzinfo>
+			</info>
+			<kommazahl einheit="km" genauigkeit="doppelt"/>
+			<default wert="0"/>
+		</attributDefinition>
+		<attributDefinition pid="att.straßenKlasseBAST" name="StraßenKlasseBAST">
+			<info>
+				<kurzinfo>Straßenklasse nach Definition der BAST</kurzinfo>
+			</info>
+			<ganzzahl bits="8">
+				<zustand name="Autobahn" wert="1">
+					<info>
+						<kurzinfo>Straße ist Autobahn.</kurzinfo>
+					</info>
+				</zustand>
+				<zustand name="Bundesstraße" wert="2">
+					<info>
+						<kurzinfo>Straße ist Bundesstraße.</kurzinfo>
+					</info>
+				</zustand>
+				<zustand name="Landesstraße" wert="3">
+					<info>
+						<kurzinfo>Straße ist Landesstraße</kurzinfo>
+					</info>
+				</zustand>
+				<zustand name="Kreisstraße" wert="4">
+					<info>
+						<kurzinfo>Straße ist Kreisstraße.</kurzinfo>
+					</info>
+				</zustand>
+				<zustand name="Stadtstraße" wert="5">
+					<info>
+						<kurzinfo>Straße ist Stadtstraße.</kurzinfo>
+					</info>
+				</zustand>
+				<zustand name="Gemeindestraße" wert="6">
+					<info>
+						<kurzinfo>Straße ist Gemeindestraße.</kurzinfo>
+					</info>
+				</zustand>
+			</ganzzahl>
+		</attributDefinition>
+		<attributDefinition pid="att.straßenReferenz" name="StraßenReferenz">
+			<info>
+				<kurzinfo>Verweis auf Straße</kurzinfo>
+			</info>
+			<objektReferenz typ="typ.straße" undefiniert="verboten" referenzierungsart="assoziation"/>
+		</attributDefinition>
+		<attributDefinition pid="att.telefonAnwahl" name="Telefonanwahl">
+			<info>
+				<kurzinfo>Telefonnummer zur direkten Anwahl der Zählstelle</kurzinfo>
+			</info>
+			<zeichenkette laenge="32" kodierung="ISO-8859-1"/>
+		</attributDefinition>
+		<attributDefinition pid="att.verkehrsDatenQuelleASCIIFormat" name="VerkehrsdatenQuelleASCIIFormat">
+			<info>
+				<kurzinfo>Formatangabe für die zugrundeliegende ASCII Datei</kurzinfo>
+			</info>
+			<ganzzahl bits="8">
+				<zustand name="bast" wert="0">
+					<info>
+						<kurzinfo>bast Bestandsbandformat</kurzinfo>
+						<beschreibung>Die ASCII Daten liegen im Bast-Bestandsbandformat vor (einzelne oder kombinierte Dateien mit G-, K- und V-Sätzen)</beschreibung>
+					</info>
+				</zustand>
+				<zustand name="biandi" wert="1">
+					<info>
+						<kurzinfo>Biandi ASCII Format</kurzinfo>
+						<beschreibung>Die Daten liegen im Biandi Delemited Format vor. Je Messaufgabe gibt es eine ASCII-Datei, die mit der Konvertierungssoftware ADAKO generiert werden.</beschreibung>
+					</info>
+				</zustand>
+				<zustand name="tds" wert="2">
+					<info>
+						<kurzinfo>Traffic Data Systems (ehem. Prodata) Datenformat</kurzinfo>
+						<beschreibung>Die ASCII Dateien liegen im blockorientierten Datenformat des Herstellers vor. Sie werden mit der Konvertierungssoftware KOFIRM generiert.</beschreibung>
+					</info>
+				</zustand>
+				<zustand name="dambach" wert="3">
+					<info>
+						<kurzinfo>Dambach ASCII Datenformat</kurzinfo>
+						<beschreibung>Die ASCII Dateien liegen im zeilenorientierten Datenformat des Herstellers vor. Sie werden mit der Konvertierungssoftware UMWAND aus der firmeneigenen Datenbank generiert.</beschreibung>
+					</info>
+				</zustand>
+			</ganzzahl>
+		</attributDefinition>
+		<attributDefinition pid="att.verkehrsDatenQuelleASCIIIndex" name="VerkehrsdatenQuelleASCIIIndex">
+			<info>
+				<kurzinfo>Datensdatzindex mit deren Hilfe aus der Quelldatei die Daten zum erforderlichen Fahrstreifen ermittelt werden können.</kurzinfo>
+			</info>
+			<ganzzahl bits="16">
+				<bereich skalierung="1" minimum="0" maximum="255">
+				</bereich>
+			</ganzzahl>
+		</attributDefinition>
+		<attributDefinition pid="att.verkehrsDatenQuelleASCIIReferenz" name="VerkehrsDatenQuelleASCIIReferenz">
+			<info>
+				<kurzinfo>Attribut zur Referenzierung des Objekttyps: typ.verkehrsDatenQuelleASCII.</kurzinfo>
+			</info>
+			<objektReferenz typ="typ.verkehrsDatenQuelleASCII" undefiniert="verboten" referenzierungsart="assoziation"/>
+		</attributDefinition>
+		<attributDefinition pid="att.verkehrsDatenQuelleASCIIReferenzOptional" name="VerkehrsDatenQuelleASCIIReferenzOptional">
+			<info>
+				<kurzinfo>Attribut zur Referenzierung des Objekttyps: typ.verkehrsDatenQuelleASCII (Optionale Referenzierung erlaubt).</kurzinfo>
+			</info>
+			<objektReferenz typ="typ.verkehrsDatenQuelleASCII" undefiniert="erlaubt" referenzierungsart="assoziation"/>
+		</attributDefinition>
+		<attributDefinition pid="att.verkehrsDatenQuelleASCIIUrl" name="VerkehrsdatenQuelleASCIIUrl">
+			<info>
+				<kurzinfo>Pfadangabe (URL) zu den ASCII Dateien mit den Zählwerten.</kurzinfo>
+			</info>
+			<zeichenkette laenge="4096" kodierung="ISO-8859-1"/>
+		</attributDefinition>
+		<attributDefinition pid="att.verkehrsDatenQuelleASCIIVKRaster" name="VerkehrsdatenQuelleASCIIVKRaster">
+			<info>
+				<kurzinfo>Grobklassifikation für die Geschwindigkeitsklassen</kurzinfo>
+				<beschreibung>Entsprechend Vorgaben wird in M-V mit der Einteilung VK160 auf BAB und VK130 auf anderen Straßen gearbeitet. Die Monatlichen und Jährlichen Auswertungen basieren auf jeweils 10 vordefinierten Klassen.</beschreibung>
+			</info>
+			<ganzzahl bits="8">
+				<zustand name="unbekannt" wert="0">
+					<info>
+						<kurzinfo>Das den Daten zugrundeliegende Geschwindigkeitsraster kann nicht ermittelt werden.</kurzinfo>
+					</info>
+				</zustand>
+				<zustand name="VK130" wert="1">
+					<info>
+						<kurzinfo>Geschwindigkeitsraster für nicht BAB Straßen (Definition M-V)</kurzinfo>
+						<beschreibung>Es werden folgende 10 Klassen verwendet: 0-50, 50-60, 60-70, 70-80, 80-90, 90-100, 100-110, 110-120, 120-130 für VK130 und &gt;130 (alle Angaben in km/h)</beschreibung>
+					</info>
+				</zustand>
+				<zustand name="VK160" wert="2">
+					<info>
+						<kurzinfo>Geschwindigkeitsraster für BAB (Definition M-V)</kurzinfo>
+						<beschreibung>Es werden folgende 10 Klassen verwendet: 0-80, 80-90, 90-100, 100-110, 110-120, 120-130, 130-140, 140-150, 150-160 und &gt;160 (alle Angaben in km/h)</beschreibung>
+					</info>
+				</zustand>
+			</ganzzahl>
+		</attributDefinition>
+		<attributDefinition pid="att.verkehrsDatenQuelleVirtuellFormel" name="VerkehrsdatenQuelleVirtuellFormel">
+			<info>
+				<kurzinfo>Berechnungsvorschrift, mit der Verkehrsdaten aus verschiedenen Quellen (üblicherweise Fahrstreifen, referenziert über Objektidentifikator) verknüpft werden müssen, um den Wert für die virtuelle Datenquelle zu erhalten.</kurzinfo>
+			</info>
+			<zeichenkette laenge="32768" kodierung="ISO-8859-1"/>
+		</attributDefinition>
+		<attributDefinition pid="att.verkehrsDatenQuelleVirtuellReferenz" name="VerkehrsDatenQuelleVirtuellReferenz">
+			<info>
+				<kurzinfo>Attribut zur Referenzierung des Objekttyps: typ.verkehrsDatenQuelleVirtuell.</kurzinfo>
+			</info>
+			<objektReferenz typ="typ.verkehrsDatenQuelleVirtuell" undefiniert="verboten" referenzierungsart="assoziation"/>
+		</attributDefinition>
+		<attributDefinition pid="att.verkehrsDatenQuelleVirtuellReferenzOptional" name="VerkehrsDatenQuelleVirtuellReferenzOptional">
+			<info>
+				<kurzinfo>Attribut zur Referenzierung des Objekttyps: typ.verkehrsDatenQuelleVirtuell (Optionale Referenzierung erlaubt).</kurzinfo>
+			</info>
+			<objektReferenz typ="typ.verkehrsDatenQuelleVirtuell" undefiniert="erlaubt" referenzierungsart="assoziation"/>
+		</attributDefinition>
+		<attributDefinition pid="att.zählStellenArt" name="Zählstellenart">
+			<info>
+				<kurzinfo>Zählstellenart nach BAST ()</kurzinfo>
+			</info>
+			<ganzzahl bits="8">
+				<zustand name="Einfachzählstelle" wert="1">
+					<info>
+						<kurzinfo>Einfachzählstelle</kurzinfo>
+					</info>
+				</zustand>
+				<zustand name="Hauptzählstelle" wert="2">
+					<info>
+						<kurzinfo>Mehrfachzählstelle(Abschnittswerfassung)</kurzinfo>
+					</info>
+				</zustand>
+				<zustand name="Nebenzählstelle" wert="3">
+					<info>
+						<kurzinfo>Mehrfachzählstelle(rechnerische Ermittlung für Abschnitte)</kurzinfo>
+					</info>
+				</zustand>
+			</ganzzahl>
+		</attributDefinition>
+		<attributlistenDefinition pid="atl.langZeitDatenDTV" name="LangzeitdatenDTV">
+			<info>
+				<kurzinfo>Langzeitdaten der Datenart Durchscnittliche tägliche Verkehrslast (DTV)</kurzinfo>
+				<beschreibung>Langzeitdaten der Datenart DTV können ab dem Aggregationsintervall Monat ermittelt werden. Der DTV ist die durchschnittliche Fahrzeuganzahl aller korrekt (d.h. lückenlos und nicht fehlerbehaftet) vorliegenden Tageswerte. Der DTV wird mit der Einheit "Fz/Tag" angegeben.angegeben.</beschreibung>
+			</info>
+			<attribut pid="att.langZeitDatenDTV" anzahl="1" anzahlIst="fest" name="Wert">
+				<info>
+					<kurzinfo>Wert "Durchschnittliche tägliche Verkehrslast (DTV)"</kurzinfo>
+				</info>
+			</attribut>
+			<attributliste pid="atl.güte" anzahl="1" anzahlIst="fest" name="Güte">
+				<info>
+					<kurzinfo>Güteinformationen zum Wert (Güte und Verfahren, welches zur Güteermittlung verwendet wurde).</kurzinfo>
+				</info>
+			</attributliste>
+		</attributlistenDefinition>
+		<attributlistenDefinition pid="atl.langZeitDatenFahrzeugAnzahl" name="LangzeitdatenFahrzeuganzahl">
+			<info>
+				<kurzinfo>Langzeitzählwert der Datenart Fahrzeuganzahl.</kurzinfo>
+				<beschreibung>Langzeitdaten der Datenart Fahrzeuganzahl sind im Erfassungsintervall erfasste Zählwerte bzw. je Aggregationsintervall aufsummierte Zählwerte. Sie werden als absoluter Wert mit der Einheit "Fahrzeuge" angegeben.</beschreibung>
+			</info>
+			<attribut pid="att.langZeitDatenFahrzeugAnzahl" anzahl="1" anzahlIst="fest" name="Wert">
+				<info>
+					<kurzinfo>Wert "Fahrzeuganzahl"</kurzinfo>
+				</info>
+			</attribut>
+			<attributliste pid="atl.güte" anzahl="1" anzahlIst="fest" name="Güte">
+				<info>
+					<kurzinfo>Güteinformationen zum Wert (Güte und Verfahren, welches zur Güteermittlung verwendet wurde).</kurzinfo>
+				</info>
+			</attributliste>
+		</attributlistenDefinition>
+		<attributlistenDefinition pid="atl.langZeitDatenGeschwindigkeit" name="LangzeitdatenGeschwindigkeit">
+			<info>
+				<kurzinfo>Langzeitdaten der Datenart Fahrzeuggeschwindigkeit</kurzinfo>
+				<beschreibung>Langzeitdaten der Datenart Fahrzeuggeschwindigkeit sind im Erfassungsintervall bzw. Aggregationsintervall arithmetisch gemittelte Geschwindigkeitsangaben. Sie werden als mit der Einheit "km/h" angegeben und mit der Skalierung 0.1 km/h ausgewiesen.</beschreibung>
+			</info>
+			<attribut pid="att.langZeitDatenGeschwindigkeit" anzahl="1" anzahlIst="fest" name="Wert">
+				<info>
+					<kurzinfo>Wert "Geschwindigkeit"</kurzinfo>
+				</info>
+			</attribut>
+			<attributliste pid="atl.güte" anzahl="1" anzahlIst="fest" name="Güte">
+				<info>
+					<kurzinfo>Güteinformationen zum Wert (Güte und Verfahren, welches zur Güteermittlung verwendet wurde).</kurzinfo>
+				</info>
+			</attributliste>
+		</attributlistenDefinition>
+		<attributlistenDefinition pid="atl.langZeitDatenRichtungsQuerschnitt" name="LangzeitdatenRichtungsQuerschnitt">
+			<info>
+				<kurzinfo>Beschreibung des Richtungsquerschnitts</kurzinfo>
+				<beschreibung>Beschreibung des Richtungsquerschnitts mit den für die BAST erforderlichen Informationen und Verweis auf den zugrundeliegenden Messquerschnitt für die Verkehrsdaten.</beschreibung>
+			</info>
+			<attribut pid="att.netzKnoten" anzahl="1" anzahlIst="fest" name="NK">
+			</attribut>
+			<attribut pid="att.nahZiel" anzahl="1" anzahlIst="fest" name="Nahziel">
+			</attribut>
+			<attribut pid="att.fernZiel" anzahl="1" anzahlIst="fest" name="Fernziel">
+			</attribut>
+			<attribut pid="att.netzKnotenBezeichnung" anzahl="1" anzahlIst="fest" name="Bezeichnung">
+			</attribut>
+			<attribut pid="att.auswerteQuerschnittReferenz" anzahl="1" anzahlIst="fest" name="Auswertequerschnitt">
+			</attribut>
+		</attributlistenDefinition>
+		<attributlistenDefinition pid="atl.langZeitDatenSpitzenZeit" name="LangzeitdatenSpitzenzeit">
+			<info>
+				<kurzinfo>Langzeitzählwert der Datenart Spitzenzeitl.</kurzinfo>
+				<beschreibung>Die Spitzenzeit weist dasjenige Intervall innerhalb einer Aggregationsmenge aus, in der die höchste Verkehrsbelastung (Fahrzeuganzahl) auftritt. Die Angabe erfolg als Zeitwert und liegt immer auf einem Intervallbeginn.</beschreibung>
+			</info>
+			<attribut pid="att.langZeitDatenSpitzenZeit" anzahl="1" anzahlIst="fest" name="Wert">
+				<info>
+					<kurzinfo>Wert "Spitzenzeit"</kurzinfo>
+				</info>
+			</attribut>
+			<attributliste pid="atl.güte" anzahl="1" anzahlIst="fest" name="Güte">
+				<info>
+					<kurzinfo>Güteinformationen zum Wert (Güte und Verfahren, welches zur Güteermittlung verwendet wurde).</kurzinfo>
+				</info>
+			</attributliste>
+		</attributlistenDefinition>
+		<mengenDefinition pid="menge.auswerteQuerschnitte" elemente="typ.auswerteQuerschnitt" aenderbar="nein" mindestens="0" hoechstens="0" referenzierungsart="assoziation">
+			<info>
+				<kurzinfo>Menge der Auswertequerschnitte, für die Berechnungen von Verkehrsdaten erfolgen.</kurzinfo>
+			</info>
+		</mengenDefinition>
+		<mengenDefinition pid="menge.langZeitZählStelle" elemente="typ.langZeitZählstelle" aenderbar="nein" mindestens="0" hoechstens="0" referenzierungsart="assoziation">
+			<info>
+				<kurzinfo>Menge aller Langzeitzählstellen</kurzinfo>
+			</info>
+		</mengenDefinition>
+		<mengenDefinition pid="menge.messQuerschnitte" elemente="typ.messQuerschnittAllgemein" aenderbar="nein" mindestens="0" hoechstens="0" referenzierungsart="assoziation">
+			<info>
+				<kurzinfo>Menge allerMessquerschnitte, für die Berechnungen von Verkehrsdaten erfolgen.</kurzinfo>
+			</info>
+		</mengenDefinition>
+		<mengenDefinition pid="menge.verkehrsDatenQuelleASCII" elemente="typ.verkehrsDatenQuelleASCII" aenderbar="nein" mindestens="0" hoechstens="0" referenzierungsart="assoziation">
+			<info>
+				<kurzinfo>Menge der ASCII Datenquellen, aus denen Langzeitverkehrsdaten übernommen werden.</kurzinfo>
+			</info>
+		</mengenDefinition>
+		<mengenDefinition pid="menge.verkehrsDatenQuelleVirtuell" elemente="typ.verkehrsDatenQuelleVirtuell" aenderbar="nein" mindestens="0" hoechstens="0" referenzierungsart="assoziation">
+			<info>
+				<kurzinfo>Menge der virtuellen Datenquellen, für die Berechnung von Langzeitverkehrsdaten.</kurzinfo>
+			</info>
+		</mengenDefinition>
+	</modell>
+	<objekte>
+	</objekte>
+</konfigurationsBereich>

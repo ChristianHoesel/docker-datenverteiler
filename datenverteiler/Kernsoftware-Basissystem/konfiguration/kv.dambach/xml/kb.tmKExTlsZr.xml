@@ -1,0 +1,803 @@
+<?xml version="1.0" encoding="ISO-8859-1"?>
+<!DOCTYPE konfigurationsBereich PUBLIC "-//K2S//DTD Dokument//DE" "K2S.dtd">
+<konfigurationsBereich pid="kb.tmKExTlsZr" name="TeilmodellKExTlsZr" verantwortlich="kv.dambach">
+	<info>
+		<kurzinfo>
+			Teilmodell mit Datenmodellierung zur Anbindung von ZuflussRegelungsAnlagen in NW gemäß TLS 
+			(Telegramme entsprechend Anlagen in NW).
+		</kurzinfo>
+	</info>
+	<konfigurationsAenderung stand="31.10.2009" version="1" autor="Th. Drapp, Dambach-Werke" grund="Änderungsdokumentation siehe &apos;ReleaseNotes kv.dambach.doc&apos;"></konfigurationsAenderung>
+	<!--
+	Abhängigkeiten des Bereichs kb.tmKExTlsZr
+	Abhängig ab Version      Art der Abhängigkeit      Version des benötigten Bereichs      Benötigter Bereich
+	1                        notwendig                 1                                    kb.metaModellGlobal                
+	1                        notwendig                 3                                    kb.tmVewBetriebGlobal              
+	1                        notwendig                 6                                    kb.tmKExTlsGlobal                  
+	1                        notwendig                 1                                    kb.systemModellGlobal              
+	1                        notwendig                 1                                    kb.kv.dambach                      
+	1                        notwendig                 4                                    kb.fachModellGlobal                
+	-->
+	<modell>
+		<typDefinition pid="typ.deZr" name="DeZr" objektNamenPermanent="nein">
+			<info>
+				<kurzinfo>
+					Datenendgerätekanal der Funktionsgruppe 9, Zuflussregelung.
+				</kurzinfo>
+			</info>
+			<erweitert pid="typ.de"/>
+			<attributgruppe pid="atg.tlsZrBetriebsArt"/>
+			<attributgruppe pid="atg.tlsZrBetriebsParameter"/>
+			<attributgruppe pid="atg.tlsZrBetriebsParameterRotfahrer"/>
+			<attributgruppe pid="atg.tlsZrNegativeQuittung"/>
+			<attributgruppe pid="atg.tlsZrRotfahrerzähler"/>
+			<attributgruppe pid="atg.tlsZrSignalplan"/>
+			<attributgruppe pid="atg.tlsZrSignalplanTyp2"/>
+			<defaultParameter attributgruppe="atg.tlsZrBetriebsArt" typ="typ.deZr">
+				<datenliste name="Urlasser">
+					<datum name="BenutzerReferenz" wert="undefiniert"/>
+					<datum name="Ursache" wert=""/>
+					<datum name="Veranlasser" wert=""/>
+				</datenliste>
+				<datum name="BetriebsArt" wert="Normalbetrieb"/>
+			</defaultParameter>
+			<defaultParameter attributgruppe="atg.tlsZrBetriebsParameter" typ="typ.deZr">
+				<datenliste name="Urlasser">
+					<datum name="BenutzerReferenz" wert="undefiniert"/>
+					<datum name="Ursache" wert=""/>
+					<datum name="Veranlasser" wert=""/>
+				</datenliste>
+				<datum name="GelbZeit" wert="1 Sekunden"/>
+				<datum name="RotGelbZeit" wert="1 Sekunden"/>
+				<datum name="DunkelzeitBzwGrünzeit" wert="1 Sekunden"/>
+				<datum name="MaximaleDunkelzeitBzwGrünzeit" wert="60 Sekunden"/>
+				<datum name="MaximaleBelegtZeit" wert="20 Sekunden"/>
+				<datum name="DunkelzeitBzwGrünzeitBeiDetektorStörung" wert="5 Sekunden"/>
+				<datum name="Grünphasen" wert="Dunkel"/>
+				<datum name="Steuermodus" wert="umlaufend"/>
+			</defaultParameter>
+			<defaultParameter attributgruppe="atg.tlsZrBetriebsParameterRotfahrer" typ="typ.deZr">
+				<datenliste name="Urlasser">
+					<datum name="BenutzerReferenz" wert="undefiniert"/>
+					<datum name="Ursache" wert=""/>
+					<datum name="Veranlasser" wert=""/>
+				</datenliste>
+				<datum name="Hersteller" wert="Hersteller unbekannt"/>
+				<datum name="Erfassungsintervalldauer" wert="1 Minute"/>
+				<datum name="Übertragungsverfahren" wert="Zyklische Abgabe von Meldungen"/>
+			</defaultParameter>
+		</typDefinition>
+		<attributgruppenDefinition pid="atg.tlsZrBetriebsArt" name="TLSZrBetriebsArt" parametrierend="ja">
+			<info>
+				<kurzinfo>Betriebsart (FG 9 / Typ 17).</kurzinfo>
+				<beschreibung>
+					<sektion>
+						<titel>
+							FG 9: DE-Block-Struktur im Typ
+							17 "Betriebsart"
+						</titel>
+						<absatz>
+							Wird verwendet mit ID 2 (Statusnachrichten)
+							in Abruf- und Antwortrichtung oder mit ID 34
+							(Statusnachricht aus Puffer) in
+							Antwortrichtung.
+						</absatz>
+						<absatz>
+							Die Nachricht überträgt die Betriebsart der
+							ZRA-Steuerung. Die Betriebsart für den
+							EAK verändert. Die Nachricht wird daher an/von
+							einem Clusterkanal gesendet und von diesem
+							spannungsausfallsicher abgelegt. Nach
+							erfolgter Zuweisung oder spontan wird die
+							Meldung der Betriebsart in Antwortrichtung
+							zusammen mit dem DE-Block"Zeitstempel mit
+							Folgenummer" (Typ 31) gesendet, um in der
+							Zentrale die Betriebsart mit genauen
+							Wechselzeitpunkten dokumentieren zu können.
+							Die Betriebsarten sind wie folgt definiert:
+						</absatz>
+						<absatz>1) Normalbetrieb</absatz>
+						<absatz>
+							Standardfall, wenn keine Störung oder
+							Servicefall vorliegt. Die Steuerung erfolgt
+							durch die Zentrale (i.d.R. UZ).
+						</absatz>
+						<absatz>2) Blindbetrieb</absatz>
+						<absatz>
+							In der Blindbetriebsart wird durch eine
+							Blende, einen Rollo, etc., verhindert, dass
+							der Verkehrsteilnehmer die WVZs erkennen
+							kann. Die Steuerung verhält sich ansonsten
+							wie im Normalbetrieb, das Schalten der WVZs
+							ist weiterhin möglich. Vom Blindbetrieb
+							erfolgt kein automatischer Übergang in den
+							autarken Betrieb bei Kommunikationsstörung.
+						</absatz>
+						<absatz>
+							Ist es z.B. bei WWWs mit Prismentechnik
+							nicht möglich, die Schilder für den
+							Verkehrsteilnehmer nicht erkennbar zu
+							machen, so ist die anzuzeigende Prismenseite
+							dieser Komponenten in der Betriebsart
+							Blindbetrieb vom Auftraggeber explizit
+							festzulegen (Festlegung in Anhang 9).
+						</absatz>
+						<absatz>3) Handbetrieb</absatz>
+						<absatz>
+							Der Handbetrieb ist dadurch gekennzeichnet,
+							dass der Zugriff nicht von der Zentrale,
+							sondern nur von einem lokalen Bedienfeld
+							möglich ist. Die Zentrale erhält weiterhin
+							alle Meldungen und kann diese auch abfragen.
+							Alle aktiv ändernden Telegramme werden
+							jedoch zurückgewiesen (Stellzustand bzw.
+							Programm, Helligkeit, Betriebsart und
+							Wechseltext). Parametrierung und
+							Kanalsteuerung können während des
+							Handbetriebs weiterhin durch die Zentrale
+							vorgenommen werden. Der Handbetrieb kann nur
+							durch manuelle Eingabe vor Ort aktiviert und
+							wieder beendet werden.
+						</absatz>
+						<absatz>
+							Passivierte DE können im Handbetrieb manuell
+							geschaltet werden. Erst nach Beenden des
+							Handbetriebs wird vom EAK die Passivierung
+							an den entsprechenden Wzg/WWW ausgeführt,
+							d.h. sie werden ausgeschaltet oder das Rollo
+							geschlossen oder ggf. bei Prismen die
+							Neutralstellung eingestellt.
+						</absatz>
+						<absatz>
+							Nach Beenden des Handbetriebs bleibt die
+							Anzeige so lange bestehen, bis ein neuer
+							Stellzustand vom EAK empfangen wird oder in
+							den autarken Betrieb geschaltet wird.
+						</absatz>
+						<absatz>4) Autarker Betrieb</absatz>
+						<absatz>
+							Autarker Betrieb bedeutet, dass die
+							WVZ-Steuerung die Kontrolle über die
+							Wzgs/WWWs selbst übernimmt, sie kann z.B.
+							selbsttätig ein für diesen Fall
+							projektiertes WVZ bzw. Programm darstellen.
+							Wenn sich die Steuerung im Normalbetrieb
+							befindet und sie die Kommunikation mit der
+							übergeordneten Steuerung als gestört erkennt
+							(siehe Anhang 6, Teil 2, Kap. 2.2.6), dann
+							wird der autarke Betrieb eingeschaltet. Die
+							gesamte WVZ-Steuerung wechselt zurück in den
+							Normalbetrieb, wenn ein Befehl (Typ 55, bei
+							Altanlagen auch 48..50,58) empfangen wird.
+							Die Betriebsart wechselt natürlich auch
+							aufgrund eines anderslautenden
+							Betriebsarten-Befehls.
+						</absatz>
+						<absatz>
+							Für Wechseltext-DEs muss mit dem
+							Auftraggeber abgestimmt werden, ob in der
+							Betriebsart ?Autarker Betrieb? die Anzeige
+							ausgeschaltet werden soll oder der aktuelle
+							Inhalt bestehen bleiben soll.
+						</absatz>
+						<absatz>
+							Der Autarkbetrieb kann auch explizit von
+							oben eingestellt werden.
+						</absatz>
+						<absatz>5) Testbetrieb</absatz>
+						<absatz>
+							Die Funktion der WVZ-Steuerung im
+							Testbetrieb ist rein herstellerspezifisch
+							definiert. Durch einen entsprechenden
+							anderen Betriebsartenbefehl ist der
+							Testbetrieb wieder zu verlassen. Die
+							Betriebsart"Testbetrieb" ist optional.
+						</absatz>
+						<absatz>
+							6) Notbetrieb (nur bei speziellen Anlagen
+							erforderlich)
+						</absatz>
+						<absatz>
+							Er kann, falls erforderlich, in Anlagen wie
+							z.B. Knotenpunktsbeeinflussungsanlagen und
+							Zuflusssteuerungen realisiert werden, bei
+							denen auch bei Störungen aus
+							Sicherheitsgründen eine Verkehrsregelung
+							angezeigt werden muss. Er ist jedoch nicht
+							für eine WWW oder
+							Steckenbeeinflussungsanlage vorgesehen. Der
+							Notbetrieb ist der sichere immer erfüllbare
+							Zustand wie er z.B. durch Klapptafeln oder
+							Rollos erreicht werden kann. I.d.R. wird der
+							Notbetrieb nur eingeschaltet, wenn eine
+							Hardwarestörung vorliegt, bei der auf einen
+							zusätzlichen, vom autarken Betrieb
+							unabhängigen Anlagenzustand zurückgegriffen
+							werden können muss. Der Zustand im
+							Notbetrieb ist im Gegensatz zu dem des
+							autarken Betriebs nicht von der Zentrale aus
+							parametrierbar. Die Betriebsart Notbetrieb
+							ist nicht von der Zentrale oder von den
+							Handbedienteilen einschaltbar, sondern wird
+							durch Betätigung eines Notausschalters
+							aktiviert.
+						</absatz>
+					</sektion>
+				</beschreibung>
+			</info>
+			<aspekt pid="asp.tlsParameterVorgabeArchiv" onlineModus="quelleUndSenke">
+			</aspekt>
+			<aspekt pid="asp.tlsVorgabeBedienung" onlineModus="quelleUndSenke">
+			</aspekt>
+			<attributliste pid="atl.urlasser" anzahl="1" anzahlIst="fest" name="Urlasser">
+			</attributliste>
+			<attribut pid="att.tlsZrBetriebsArt" anzahl="1" anzahlIst="fest" name="BetriebsArt">
+			</attribut>
+		</attributgruppenDefinition>
+		<attributgruppenDefinition pid="atg.tlsZrBetriebsParameter" name="TLSZrBetriebsParameter" parametrierend="ja">
+			<info>
+				<kurzinfo>
+					ZR-Betriebsparameter (FG 9 / Typ 32).
+				</kurzinfo>
+				<beschreibung>
+					<sektion>
+						<titel>
+							FG 9: DE-Block-Struktur im Typ
+							32 "Zr-Betriebsparameter"
+						</titel>
+						<absatz>
+							Wird verwendet mit ID 3 (Parameter) in
+							Abruf- und Antwortrichtung.
+						</absatz>
+						<absatz>
+							Die Nachricht überträgt Parameter, welche
+							für den Betrieb der Zr benötigt werden.
+						</absatz>
+					</sektion>
+				</beschreibung>
+			</info>
+			<aspekt pid="asp.tlsParameterVorgabeArchiv" onlineModus="quelleUndSenke">
+			</aspekt>
+			<attributliste pid="atl.urlasser" anzahl="1" anzahlIst="fest" name="Urlasser">
+			</attributliste>
+			<attribut pid="att.tlsZrBetriebsParameterZeitKurz" anzahl="1" anzahlIst="fest" name="GelbZeit">
+				<info>
+					<kurzinfo>
+						Gibt die Zeit in Sekunden an, für die im normalen Operationszyklus die Ampelköpfe auf
+						gelb geschaltet werden. Diese Zeit gilt nicht für die Einlauf- oder Abschaltphase.
+						(Defaultwert ist 1 Sekunde).
+					</kurzinfo>
+				</info>
+			</attribut>
+			<attribut pid="att.tlsZrBetriebsParameterZeitKurz" anzahl="1" anzahlIst="fest" name="RotGelbZeit">
+				<info>
+					<kurzinfo>
+						Gibt die Zeit in Sekunden an, für die im normalen Operationszyklus die Ampelköpfe auf
+						rotgelb geschaltet werden. (Defaultwert ist 1 Sekunde).
+					</kurzinfo>
+				</info>
+			</attribut>
+			<attribut pid="att.tlsZrBetriebsParameterZeitLang" anzahl="1" anzahlIst="fest" name="DunkelzeitBzwGrünzeit">
+				<info>
+					<kurzinfo>
+					  Gibt die Zeit in Sekunden an, nach der, wenn schon eine Detektoranforderung vorliegt, der 
+					  Übergang nach "Dunkel / Grün" eingeleitet werden darf. (Defaultwert ist 1 Sekunde).
+					</kurzinfo>
+				</info>
+			</attribut>
+			<attribut pid="att.tlsZrBetriebsParameterZeitLang" anzahl="1" anzahlIst="fest" name="MaximaleDunkelzeitBzwGrünzeit">
+				<info>
+					<kurzinfo>
+						Gibt die Zeit in Sekunden an, nach der spätestens der Übergang nach Rot eingeleitet wird, sofern 
+						keine Detektorstörung vorliegt. (Defaultwert ist 60 Sekunden).
+					</kurzinfo>
+				</info>
+			</attribut>
+			<attribut pid="att.tlsZrBetriebsParameterZeitLang" anzahl="1" anzahlIst="fest" name="MaximaleBelegtZeit">
+				<info>
+					<kurzinfo>
+						Gibt die Zeit in Sekunden an, nach der bei Dauerbelegung einer Schleife dieser Eingang als gestört betrachtet wird.
+						Eine Änderung zum Zustand "nicht belegt" repariert diesen Zustand und die Zeit wird neu gestartet.
+						(Defaultwert ist 20 Sekunden).
+					</kurzinfo>
+				</info>
+			</attribut>
+			<attribut pid="att.tlsZrBetriebsParameterZeitLang" anzahl="1" anzahlIst="fest" name="DunkelzeitBzwGrünzeitBeiDetektorStörung">
+				<info>
+					<kurzinfo>
+						Gibt im Falle des Schleifenausfalls bzw. Detektorausfall die Zeit in Sekunden an, nach der spätestens der
+						Übergang nach Rot eingeleitet wird. (Defaultwert ist 5 Sekunden).
+					</kurzinfo>
+				</info>
+			</attribut>
+			<attribut pid="att.tlsZrGrünphasen" anzahl="1" anzahlIst="fest" name="Grünphasen">
+				<info>
+					<kurzinfo>
+						Darstellung der Grünphasen als "Dunkel" oder durch grünes Licht. (Defaultwert ist Dunkel).
+					</kurzinfo>
+				</info>
+			</attribut>
+			<attribut pid="att.tlsZrSteuermodus" anzahl="1" anzahlIst="fest" name="Steuermodus">
+				<info>
+					<kurzinfo>
+						Steuermodus des LSA-Programm. "umlaufend", "grün wartend", "rot wartend" oder rot wartend mit Nachläufer".
+					</kurzinfo>
+				</info>
+			</attribut>
+		</attributgruppenDefinition>
+		<attributgruppenDefinition pid="atg.tlsZrBetriebsParameterRotfahrer" name="TLSZrBetriebsParameterRotfahrer" parametrierend="ja">
+			<info>
+				<kurzinfo>
+					ZR-Betriebsparameter (FG 9 / Typ 160).
+				</kurzinfo>
+				<beschreibung>
+					<sektion>
+						<titel>
+							FG 9: DE-Block-Struktur im Typ
+							160 "Zr-BetriebsparameterRotfahrer"
+						</titel>
+						<absatz>
+							Wird verwendet mit ID 3 (Parameter) in
+							Abruf- und Antwortrichtung.
+						</absatz>
+						<absatz>
+							Die Nachricht überträgt Parameter, welche
+							für die Überwachung der Rotfahrer der Zr benötigt werden.
+						</absatz>
+					</sektion>
+				</beschreibung>
+			</info>
+			<aspekt pid="asp.tlsParameterVorgabeArchiv" onlineModus="quelleUndSenke">
+			</aspekt>
+			<attributliste pid="atl.urlasser" anzahl="1" anzahlIst="fest" name="Urlasser">
+			</attributliste>
+			<attribut pid="att.tlsHersteller" anzahl="1" anzahlIst="fest" name="Hersteller">
+				<info>
+					<kurzinfo>
+						Hersteller des Gerätes.
+					</kurzinfo>
+				</info>
+			</attribut>
+			<attribut pid="att.tlsZrErfassungsIntervalldauerRotfahrer" anzahl="1" anzahlIst="fest" name="Erfassungsintervalldauer">
+				<info>
+					<kurzinfo>
+						Gibt die Erfassungsintervalldauer für die Erfassung der Rotfahrer in Sekunden an.
+					</kurzinfo>
+				</info>
+			</attribut>
+			<attribut pid="att.tlsZrÜbertragungsverfahren" anzahl="1" anzahlIst="fest" name="Übertragungsverfahren">
+				<info>
+					<kurzinfo>
+					  Gibt das Übertragungsverfahren für das Übertragen der Daten zur Zentrale an.
+					  Entweder auf Abruf durch die Zentrale oder zyklisch am Intervallende (default).
+					</kurzinfo>
+				</info>
+			</attribut>
+		</attributgruppenDefinition>
+		<attributgruppenDefinition pid="atg.tlsZrNegativeQuittung" name="TLSZrNegativeQuittung" parametrierend="nein">
+			<info>
+				<kurzinfo>Negative Quittung (FG 9 / Typ 16).</kurzinfo>
+				<beschreibung>
+					<sektion>
+						<titel>
+							FG 9: DE-Block-Struktur im Typ 16 "Negative
+							Quittung"
+						</titel>
+						<absatz>
+							Wird verwendet mit ID 2 (Statusnachrichten)
+							in Antwortrichtung.
+						</absatz>
+						<absatz>
+							Mit der"Negativen Quittung" antwortet ein DE
+							auf eine Nachricht, die an sie korrekt
+							adressiert ist, aber deren Inhalt von ihr
+							nicht eindeutig ausgewertet werden kann.
+						</absatz>
+						<absatz>
+							Die Negative Quittung wird mit ID 2 und Typ
+							16 gesendet, enthält also keinen Hinweis auf
+							die ID und den Typ der verursachenden
+							Nachricht. Diese Zuordnung wird über die
+							Jobnummer hergestellt, welche identisch mit
+							der der fehlerhaften Nachricht in
+							Abrufrichtung ist.
+						</absatz>
+					</sektion>
+				</beschreibung>
+			</info>
+			<aspekt pid="asp.tlsAntwort" onlineModus="quelleUndSenke">
+			</aspekt>
+			<attribut pid="att.tlsZrNegativeQuittung" anzahl="1" anzahlIst="fest" name="Code">
+			</attribut>
+			<attribut pid="att.tlsHersteller" anzahl="1" anzahlIst="fest" name="Hersteller">
+			</attribut>
+			<attribut pid="att.text" anzahl="1" anzahlIst="fest" name="EinzelTelegramm">
+				<info>
+					<kurzinfo>
+						Daten des Einzeltelegramms, dass die negative
+						Quittung auslöste.
+					</kurzinfo>
+				</info>
+			</attribut>
+		</attributgruppenDefinition>
+		<attributgruppenDefinition pid="atg.tlsZrRotfahrerzähler" name="TLSZrRotfahrerzähler" parametrierend="nein">
+			<info>
+				<kurzinfo>
+					ZR-Betriebsparameter (FG 9 / Typ 175).
+				</kurzinfo>
+				<beschreibung>
+					<sektion>
+						<titel>
+							FG 9: DE-Block-Struktur im Typ
+							175 "Zr-Rotfahrerzähler"
+						</titel>
+						<absatz>
+							Wird verwendet mit ID 4 (Ergebnisse) in
+							Antwortrichtung.
+						</absatz>
+					</sektion>
+				</beschreibung>
+			</info>
+			<aspekt pid="asp.tlsAntwort" onlineModus="quelleUndSenke">
+			</aspekt>
+			<attribut pid="att.tlsIntervalldauer" anzahl="1" anzahlIst="fest" name="T">
+				<info>
+					<kurzinfo>
+						Intervalldauer der Erfassung der Rotfahrer.
+					</kurzinfo>
+				</info>
+			</attribut>
+			<attribut pid="att.tlsAnzahl2" anzahl="1" anzahlIst="fest" name="Rotfahrer">
+				<info>
+					<kurzinfo>
+						Anzahl der Fahrzeuge, die bei Rot die Zuflussanlage in der angegebenen Intervalldauer passierten.
+					</kurzinfo>
+				</info>
+			</attribut>
+			<attribut pid="att.tlsHersteller" anzahl="1" anzahlIst="fest" name="Hersteller">
+				<info>
+					<kurzinfo>
+						Hersteller des Gerätes.
+					</kurzinfo>
+				</info>
+			</attribut>
+		</attributgruppenDefinition>
+		<attributgruppenDefinition pid="atg.tlsZrSignalplan" name="TLSZrSignalplan" parametrierend="nein">
+			<info>
+				<kurzinfo>ZR-Signalplan (FG 9 / Typ 48).</kurzinfo>
+				<beschreibung>
+					<sektion>
+						<titel>
+							FG 9: DE-Block-Struktur im Typ 48 "Signalplan"
+						</titel>
+						<absatz>
+							Wird verwendet mit ID 5 (Befehl) in Abruf-
+							und Antwortrichtung.
+						</absatz>
+						<absatz>
+							Bei spontaner Meldung des Stellzustands wird 
+							ebenfalls die ID 5 in Antwortrichtung verwendet.
+						</absatz>
+						<absatz>
+							Die Nachricht überträgt den Signal, welcher 
+							bei der ZRA verwendet werden soll. Nach 
+							erfolgter Zuweisung oder spontan wird die 
+							Meldung des Signalplan in Antwortrichtung mit
+							dem DE-Block "Zeitstempel" (Typ 30) zusammen 
+							gesendet, um in der Zentrale den dargestellten 
+							Signalplan mit genauen Wechselzeitpunkten 
+							dokumentieren zu können.
+						</absatz>
+					</sektion>
+				</beschreibung>
+			</info>
+			<aspekt pid="asp.tlsVorgabe" onlineModus="quelleUndSenke">
+			</aspekt>
+			<aspekt pid="asp.tlsVorgabeArchiv" onlineModus="quelleUndSenke">
+			</aspekt>
+			<aspekt pid="asp.tlsZustand" onlineModus="quelleUndSenke">
+			</aspekt>
+			<attribut pid="att.tlsZrSignalplan" anzahl="1" anzahlIst="fest" name="Signalplan">
+			</attribut>
+		</attributgruppenDefinition>
+		<attributgruppenDefinition pid="atg.tlsZrSignalplanTyp2" name="TLSZrSignalplanTyp2" parametrierend="nein">
+			<info>
+				<kurzinfo>ZR-Signalplan (FG 9 / Typ 58).</kurzinfo>
+				<beschreibung>
+					<sektion>
+						<titel>
+							FG 9: DE-Block-Struktur im Typ 58 "Signalplan Typ 2"
+						</titel>
+						<absatz>
+							Wird verwendet mit ID 5 (Befehl) in Abruf-
+							und Antwortrichtung.
+						</absatz>
+						<absatz>
+							Bei spontaner Meldung des Stellzustands wird 
+							ebenfalls die ID 5 in Antwortrichtung verwendet.
+						</absatz>
+						<absatz>
+							Die Nachricht überträgt den Signal, welcher 
+							bei der ZRA verwendet werden soll. Nach 
+							erfolgter Zuweisung oder spontan wird die 
+							Meldung des Signalplan in Antwortrichtung mit
+							dem DE-Block "Zeitstempel" (Typ 30) zusammen 
+							gesendet, um in der Zentrale den dargestellten 
+							Signalplan mit genauen Wechselzeitpunkten 
+							dokumentieren zu können.
+						</absatz>
+					</sektion>
+				</beschreibung>
+			</info>
+			<aspekt pid="asp.tlsVorgabe" onlineModus="quelleUndSenke">
+			</aspekt>
+			<aspekt pid="asp.tlsVorgabeArchiv" onlineModus="quelleUndSenke">
+			</aspekt>
+			<aspekt pid="asp.tlsZustand" onlineModus="quelleUndSenke">
+			</aspekt>
+			<attribut pid="att.tlsZrSignalplan" anzahl="1" anzahlIst="fest" name="Signalplan">
+			</attribut>
+			<attribut pid="att.tlsZrZusätzlicheFahrzeugeBeiGrün" anzahl="1" anzahlIst="fest" name="ZusätzlicheFahrzeugeBeiGrün">
+			</attribut>
+		</attributgruppenDefinition>
+		<attributDefinition pid="att.deZrReferenz" name="DeZrReferenz">
+			<info>
+				<kurzinfo>
+					Attribut zur Referenzierung des Objekttyps:
+					typ.deZr.
+				</kurzinfo>
+			</info>
+			<objektReferenz typ="typ.deZr" undefiniert="verboten" referenzierungsart="assoziation"/>
+		</attributDefinition>
+		<attributDefinition pid="att.deZrReferenzOptional" name="DeZrReferenzOptional">
+			<info>
+				<kurzinfo>
+					Attribut zur Referenzierung des Objekttyps:
+					typ.deZr (Optionale Referenzierung erlaubt).
+				</kurzinfo>
+			</info>
+			<objektReferenz typ="typ.deZr" undefiniert="erlaubt" referenzierungsart="assoziation"/>
+		</attributDefinition>
+		<attributDefinition pid="att.tlsZrBetriebsArt" name="TLSZrBetriebsArt">
+			<info>
+				<kurzinfo>Betriebsart in der FG 9 der TLS.</kurzinfo>
+			</info>
+			<ganzzahl bits="16">
+				<bereich skalierung="1" minimum="7" maximum="255">
+					<info>
+						<kurzinfo>Undefinierter Zustand.</kurzinfo>
+					</info>
+				</bereich>
+				<zustand name="frei" wert="0">
+				</zustand>
+				<zustand name="Normalbetrieb" wert="1">
+				</zustand>
+				<zustand name="Blindbetrieb" wert="2">
+				</zustand>
+				<zustand name="Handbetrieb" wert="3">
+				</zustand>
+				<zustand name="Autarker Betrieb" wert="4">
+				</zustand>
+				<zustand name="Testbetrieb" wert="5">
+				</zustand>
+				<zustand name="Notbetrieb" wert="6">
+				</zustand>
+			</ganzzahl>
+		</attributDefinition>
+		<attributDefinition pid="att.tlsZrBetriebsParameterZeitKurz" name="TLSZrBetriebsParameterZeitKurz">
+			<info>
+				<kurzinfo>Gelbzeit bzw. Rotgelbzeit bei TLSZrBetriebsParameter.</kurzinfo>
+			</info>
+			<ganzzahl bits="8">
+				<bereich skalierung="1" minimum="0" maximum="1" einheit="Sekunden">
+					<info>
+						<kurzinfo>
+							Gültiger Bereich. Zahl ist die Zeit in Sekunden.
+						</kurzinfo>
+					</info>
+				</bereich>
+			</ganzzahl>
+		</attributDefinition>
+		<attributDefinition pid="att.tlsZrBetriebsParameterZeitLang" name="TLSZrBetriebsParameterZeitLang">
+			<info>
+				<kurzinfo>Zeiten bei TLSZrBetriebsParameter.</kurzinfo>
+			</info>
+			<ganzzahl bits="16">
+				<bereich skalierung="1" minimum="1" maximum="255" einheit="Sekunden">
+					<info>
+						<kurzinfo>
+							Gültiger Bereich. Zahl ist die Zeit in Sekunden.
+						</kurzinfo>
+					</info>
+				</bereich>
+			</ganzzahl>
+		</attributDefinition>
+		<attributDefinition pid="att.tlsZrErfassungsIntervalldauerRotfahrer" name="TLSZrErfassungsIntervalldauerRotfahrer">
+			<info>
+				<kurzinfo>
+					Erfassungsintervalldauer der ZRA-Rotfahrer.
+				</kurzinfo>
+				<beschreibung>
+					Enthält den Wert der Erfassungsintervalldauer. Es
+					sind nur Werte zugelassen, die ein ganzzahliges
+					Vielfaches haben, welches 60 Minuten ergibt (15s,
+					30s, 1, 2, 3, 4, 5, 6, 10, 12, 15, 20, 30, 60
+					Minuten).
+				</beschreibung>
+			</info>
+			<ganzzahl bits="16">
+				<zustand name="15 Sekunden" wert="1">
+				</zustand>
+				<zustand name="30 Sekunden" wert="2">
+				</zustand>
+				<zustand name="1 Minute" wert="4">
+				</zustand>
+				<zustand name="2 Minuten" wert="8">
+				</zustand>
+				<zustand name="3 Minuten" wert="12">
+				</zustand>
+				<zustand name="4 Minuten" wert="16">
+				</zustand>
+				<zustand name="5 Minuten" wert="20">
+				</zustand>
+				<zustand name="6 Minuten" wert="24">
+				</zustand>
+				<zustand name="10 Minuten" wert="40">
+				</zustand>
+				<zustand name="12 Minuten" wert="48">
+				</zustand>
+				<zustand name="15 Minuten" wert="60">
+				</zustand>
+				<zustand name="20 Minuten" wert="80">
+				</zustand>
+				<zustand name="30 Minuten" wert="120">
+				</zustand>
+				<zustand name="60 Minuten" wert="240">
+				</zustand>
+			</ganzzahl>
+		</attributDefinition>
+		<attributDefinition pid="att.tlsZrGrünphasen" name="TLSZrGrünphasen">
+			<info>
+				<kurzinfo>Darstellung der Grünphasen.</kurzinfo>
+			</info>
+			<ganzzahl bits="8">
+				<zustand name="Dunkel" wert="0">
+					<info>
+						<kurzinfo>Die Grünphasen werden als "Dunkel" dargestellt (default).</kurzinfo>
+					</info>
+				</zustand>
+				<zustand name="Grünes Licht" wert="1">
+					<info>
+						<kurzinfo>Die Grünphasen werden durch grünes Licht dargestellt.</kurzinfo>
+					</info>
+				</zustand>
+			</ganzzahl>
+		</attributDefinition>
+		<attributDefinition pid="att.tlsZrNegativeQuittung" name="TLSZrNegativeQuittung">
+			<info>
+				<kurzinfo>
+					Anwort auf eine nicht auswertbares Telegramm.
+				</kurzinfo>
+			</info>
+			<ganzzahl bits="16">
+				<bereich skalierung="1" minimum="0" maximum="255">
+					<info>
+						<kurzinfo>
+							Ursachencode (0-127 für durch TLS
+							vordefinierte, durch Hersteller definierte
+							Codes nur im Bereich 128-255).
+						</kurzinfo>
+					</info>
+				</bereich>
+				<zustand name="sonstige Fehlerursache" wert="0">
+				</zustand>
+				<zustand name="unbekannte oder nicht auswertbare ID" wert="1">
+				</zustand>
+				<zustand name="unbekannter oder nicht auswertbarer Typ" wert="2">
+				</zustand>
+				<zustand name="Signalplan ist nicht definiert" wert="4">
+				</zustand>
+				<zustand name="Signalplan nicht schaltbar / bzw. wegen sonstiger Hardwarestörungen nicht schaltbar" wert="6">
+				</zustand>
+				<zustand name="Betriebsart unbekannt bzw. nicht einstellbar" wert="9">
+				</zustand>
+				<zustand name="Befehl bzw. Programm in dieser Betriebsart nicht aufrufbar" wert="10">
+				</zustand>
+			</ganzzahl>
+		</attributDefinition>
+		<attributDefinition pid="att.tlsZrSignalplan" name="TLSZrSignalplan">
+			<info>
+				<kurzinfo>Signalplan entsprechend TLS.</kurzinfo>
+			</info>
+			<ganzzahl bits="16">
+				<bereich skalierung="1" minimum="2" maximum="240" einheit="Sekunden">
+					<info>
+						<kurzinfo>
+							Gültiger Bereich. Wird Wert nur als Zahl
+							dargestellt, ist dies die minimale Rotzeit 
+							in Sekunden.
+						</kurzinfo>
+					</info>
+				</bereich>
+				<zustand name="aus" wert="0">
+					<info>
+						<kurzinfo>ZRA ausgeschaltet.</kurzinfo>
+					</info>
+				</zustand>
+				<zustand name="Dauerrot" wert="241">
+					<info>
+						<kurzinfo>ZRA in Dauerrot</kurzinfo>
+					</info>
+				</zustand>
+			</ganzzahl>
+		</attributDefinition>
+		<attributDefinition pid="att.tlsZrSteuermodus" name="TLSZrSteuermodus">
+			<info>
+				<kurzinfo>Steuermodus der LSA.</kurzinfo>
+			</info>
+			<ganzzahl bits="8">
+				<zustand name="umlaufend" wert="0">
+					<info>
+						<kurzinfo>Das LSA-Programm läuft im Steuermodus "umlaufend".</kurzinfo>
+					</info>
+				</zustand>
+				<zustand name="grün wartend" wert="1">
+					<info>
+						<kurzinfo>Das LSA-Programm läuft im Steuermodus "grün wartend".</kurzinfo>
+					</info>
+				</zustand>
+				<zustand name="rot wartend" wert="2">
+					<info>
+						<kurzinfo>Das LSA-Programm läuft im Steuermodus "rot wartend".</kurzinfo>
+					</info>
+				</zustand>
+				<zustand name="rot wartend mit Nachläufer" wert="3">
+					<info>
+						<kurzinfo>Das LSA-Programm läuft im Steuermodus "rot wartend mit Nachläufer".</kurzinfo>
+					</info>
+				</zustand>
+			</ganzzahl>
+		</attributDefinition>
+		<attributDefinition pid="att.tlsZrÜbertragungsverfahren" name="TLSZrÜbertragungsverfahren">
+			<info>
+				<kurzinfo>
+					Art der Übertragung (spontan / nach Abruf).
+				</kurzinfo>
+				<beschreibung>
+					<absatz>
+						Gibt an, wann die Daten der Rotfahrer zur
+						Zentrale übertragen werden: Entweder auf Abruf
+						durch die Zentrale (Ereignisklasse 2), spontan
+						nach Ende der o.g. Erfassungsperiode
+						(Ereignisklasse 1). Meldung nur nach Abruf durch
+						die Zentrale bedeutet, dass der DE ohne
+						Aufforderung keine Meldungen mehr abgibt.
+					</absatz>
+				</beschreibung>
+			</info>
+			<ganzzahl bits="8">
+				<zustand name="Meldung nur nach Abruf" wert="0">
+				</zustand>
+				<zustand name="Zyklische Abgabe von Meldungen" wert="1">
+				</zustand>
+			</ganzzahl>
+		</attributDefinition>
+		<attributDefinition pid="att.tlsZrZusätzlicheFahrzeugeBeiGrün" name="TLSZrZusätzlicheFahrzeugeBeiGrün">
+			<info>
+				<kurzinfo>Zusätzliche Fahrzeuge bei Grün entsprechend TLS.</kurzinfo>
+			</info>
+			<ganzzahl bits="16">
+				<bereich skalierung="1" minimum="1" maximum="32" einheit="Kfz">
+					<info>
+						<kurzinfo>
+							Gültiger Bereich. Zahl ist die Anzahl Kfz
+							die pro Grünphase passieren dürfen.
+						</kurzinfo>
+					</info>
+				</bereich>
+			</ganzzahl>
+		</attributDefinition>
+	</modell>
+	<objekte>
+	</objekte>
+</konfigurationsBereich>

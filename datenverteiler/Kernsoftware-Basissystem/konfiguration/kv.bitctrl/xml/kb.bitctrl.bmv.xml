@@ -1,0 +1,207 @@
+<?xml version="1.0" encoding="ISO-8859-1"?>
+<!DOCTYPE konfigurationsBereich SYSTEM "K2S.dtd">
+<konfigurationsBereich pid="kb.bitctrl.bmv" name="BitCtrl Betriebsmeldungsverwaltung" verantwortlich="kv.bitctrl">
+	<info>
+		<kurzinfo>Definitionen für BitCtrl-Betriebsmeldungsverwaltung</kurzinfo>
+	</info>
+	<konfigurationsAenderung stand="15.05.2009" version="2" autor="BitCtrl Systems GmbH, Albrecht Uhlmann" grund="Import aus DaV2." />
+	<konfigurationsAenderung stand="23.11.2010" version="3" autor="BitCtrl Systems GmbH, Albrecht Uhlmann" grund="Externe Aktionen nachgezogen." />
+	<modell>
+		<typDefinition pid="typ.bcBetriebsMeldungsVerwaltung" name="BitCtrl BetriebsMeldungsVerwaltung">
+			<info>
+				<kurzinfo>BitCtrl Erweiterung der Betriebsmeldungsverwaltung.</kurzinfo>
+			</info>
+			<erweitert pid="typ.konfigurationsObjekt" />
+			<attributgruppe pid="atg.bcBetriebsmeldungDarstellung" />
+			<attributgruppe pid="atg.bmvMessageExtern" />
+			<defaultParameter attributgruppe="atg.bcBetriebsmeldungDarstellung">
+				<datenfeld name="Darstellung">
+					<datenliste name="-">
+						<datum name="Klasse" wert="Information" />
+						<datum name="Vordergrundfarbe" wert="0" />
+						<datum name="Hintergrundfarbe" wert="16777215" />
+						<datum name="Schriftart" wert="Arial" />
+						<datum name="Fettdruck" wert="Nein" />
+						<datum name="Kursivdruck" wert="Nein" />
+					</datenliste>
+					<datenliste name="-">
+						<datum name="Klasse" wert="Warnung" />
+						<datum name="Vordergrundfarbe" wert="0" />
+						<datum name="Hintergrundfarbe" wert="16777088" />
+						<datum name="Schriftart" wert="Arial" />
+						<datum name="Fettdruck" wert="Nein" />
+						<datum name="Kursivdruck" wert="Nein" />
+					</datenliste>
+					<datenliste name="-">
+						<datum name="Klasse" wert="Fehler" />
+						<datum name="Vordergrundfarbe" wert="0" />
+						<datum name="Hintergrundfarbe" wert="16744512" />
+						<datum name="Schriftart" wert="Arial" />
+						<datum name="Fettdruck" wert="Nein" />
+						<datum name="Kursivdruck" wert="Nein" />
+					</datenliste>
+					<datenliste name="-">
+						<datum name="Klasse" wert="Fatal" />
+						<datum name="Vordergrundfarbe" wert="16777215" />
+						<datum name="Hintergrundfarbe" wert="16711680" />
+						<datum name="Schriftart" wert="Arial" />
+						<datum name="Fettdruck" wert="Nein" />
+						<datum name="Kursivdruck" wert="Nein" />
+					</datenliste>
+				</datenfeld>
+				<datum name="MaxHistory" wert="3" />
+				<datum name="MaxAnzahl" wert="100" />
+				<datenfeld name="AnzuzeigendeSpalten">
+					<datum name="-" wert="Zeit" />
+					<datum name="-" wert="ApplikationsTyp" />
+					<datum name="-" wert="MeldungsTyp" />
+					<datum name="-" wert="MeldungsTypZusatz" />
+					<datum name="-" wert="MeldungsKlasse" />
+					<datum name="-" wert="Status" />
+					<datum name="-" wert="MeldungsText" />
+				</datenfeld>
+			</defaultParameter>
+			<defaultParameter attributgruppe="atg.bmvMessageExtern">
+				<datenfeld name="Aktionen" />
+			</defaultParameter>
+		</typDefinition>
+
+		<attributgruppenDefinition pid="atg.bcBetriebsmeldungDarstellung" name="BitCtrl BetriebsmeldungsDarstellung" parametrierend="ja">
+			<info>
+				<kurzinfo>Definition der externen Versendung von Meldungen.</kurzinfo>
+			</info>
+			<attributliste pid="atl.bcBetriebsmeldungDarstellung" name="Darstellung" anzahlIst="variabel" />
+			<attribut pid="att.anzahlTage" name="MaxHistory" />
+			<attribut pid="att.positiveZahl32Bit" name="MaxAnzahl" />
+			<attribut pid="att.bcBetriebsmeldungSpalte" name="AnzuzeigendeSpalten" anzahlIst="variabel" />
+		</attributgruppenDefinition>
+
+		<attributlistenDefinition pid="atl.bcBetriebsmeldungDarstellung" name="BitCtrl Darstellungseigenschaften für Betriebsmeldungen">
+			<info>
+				<kurzinfo>Definition für die Attribute der Anzeige eines Meldungstyps.</kurzinfo>
+			</info>
+			<attribut pid="att.meldungsKlasse" name="Klasse">
+				<info>
+					<kurzinfo>Betriebsmeldungsklasse</kurzinfo>
+				</info>
+			</attribut>
+			<attribut pid="att.zahl" name="Vordergrundfarbe">
+				<info>
+					<kurzinfo>Zeichenfarbe</kurzinfo>
+				</info>
+			</attribut>
+			<attribut pid="att.zahl" name="Hintergrundfarbe">
+				<info>
+					<kurzinfo>Hintergrundfarbe</kurzinfo>
+				</info>
+			</attribut>
+			<attribut pid="att.text" name="Schriftart">
+				<info>
+					<kurzinfo>Schriftart</kurzinfo>
+				</info>
+			</attribut>
+			<attribut pid="att.jaNein" name="Fettdruck">
+				<info>
+					<kurzinfo>Schriftauszeichnung</kurzinfo>
+				</info>
+			</attribut>
+			<attribut pid="att.jaNein" name="Kursivdruck">
+				<info>
+					<kurzinfo>Schriftauszeichnung</kurzinfo>
+				</info>
+			</attribut>
+		</attributlistenDefinition>
+
+		<attributDefinition pid="att.bcBetriebsmeldungSpalte" name="BitCtrl MeldungslistenSpalte">
+			<info>
+				<kurzinfo>Aktionstyp für Meldungen.</kurzinfo>
+			</info>
+			<ganzzahl bits="32">
+				<zustand name="Zeit" wert="0" />
+				<zustand name="ApplikationsID" wert="1" />
+				<zustand name="LaufendeNummer" wert="2" />
+				<zustand name="ApplikationsTyp" wert="3" />
+				<zustand name="ApplikationsKennung" wert="4" />
+				<zustand name="ID" wert="5" />
+				<zustand name="MeldungsTyp" wert="6" />
+				<zustand name="MeldungsTypZusatz" wert="7" />
+				<zustand name="MeldungsKlasse" wert="8" />
+				<zustand name="Referenz" wert="9" />
+				<zustand name="Status" wert="10" />
+				<zustand name="Urlasserbenutzer" wert="11" />
+				<zustand name="Urlasserursache" wert="12" />
+				<zustand name="Urlasserveranlasser" wert="13" />
+				<zustand name="MeldungsText" wert="14" />
+			</ganzzahl>
+		</attributDefinition>
+		<attributgruppenDefinition pid="atg.bmvMessageExtern" name="Externer Meldungsversand" parametrierend="ja">
+			<info>
+				<kurzinfo>Definition der externen Versendung von Meldungen.</kurzinfo>
+			</info>
+			<attributliste pid="atl.bcBmvExternalAction" name="Aktionen" anzahlIst="variabel" />
+		</attributgruppenDefinition>
+		<attributlistenDefinition pid="atl.bcBmvExternalAction" name="Externe Meldungsaktion">
+			<info>
+				<kurzinfo>Definition für eine externe Meldungsaktion.</kurzinfo>
+			</info>
+			<attribut pid="att.text" name="Name">
+				<info>
+					<kurzinfo>Name der Aktion</kurzinfo>
+				</info>
+				<default wert="Neue externe Aktion"/>
+			</attribut>
+			<attribut pid="att.bcBmvAktionType" name="Aktion">
+				<info>
+					<kurzinfo>Typ der Aktion</kurzinfo>
+				</info>
+				<default wert="Extrafenster"/>
+			</attribut>
+			<attribut pid="att.text" name="Destination">
+				<info>
+					<kurzinfo>Ziel-Addresse</kurzinfo>
+				</info>
+				<default wert="Dateiname / E-Mail-Adresse / Telefonnummer eingeben"/>
+			</attribut>
+			<attribut pid="att.relativeSekunden" name="Dauer">
+				<info>
+					<kurzinfo>Dauer der Aktion in Sekunden (bei Sound)</kurzinfo>
+				</info>
+				<default wert="30 s"/>
+			</attribut>
+			<attribut pid="att.meldungsKlasse" name="Klasse">
+				<info>
+					<kurzinfo>Klasse der Meldung</kurzinfo>
+					<beschreibung>
+						Hiermit ist die Klassifizierung einer Meldung in "Fatal", "Fehler", "Warnung" und "Information" möglich.
+					</beschreibung>
+				</info>
+				<default wert="Information"/>
+			</attribut>
+			<attribut pid="att.meldungsTyp" name="Typ">
+				<info>
+					<kurzinfo>Typ der Meldung</kurzinfo>
+				</info>
+				<default wert="System"/>
+			</attribut>
+			<attribut pid="att.text" name="Filter">
+				<info>
+					<kurzinfo>Ein Filtertext, der es erlaubt, nur bestimmte Meldungstexte in einer externen Aktion auszuwerten.</kurzinfo>
+				</info>
+				<default wert=""/>
+			</attribut>
+		</attributlistenDefinition>
+		<attributDefinition pid="att.bcBmvAktionType" name="MessageAktion">
+			<info>
+				<kurzinfo>Aktionstyp für Meldungen.</kurzinfo>
+			</info>
+			<ganzzahl>
+				<zustand name="SMS" wert="1" />
+				<zustand name="Fax" wert="2" />
+				<zustand name="Email" wert="3" />
+				<zustand name="Sound" wert="4" />
+				<zustand name="Extrafenster" wert="5" />
+			</ganzzahl>
+			<default wert="Extrafenster"/>
+		</attributDefinition>
+	</modell>
+</konfigurationsBereich>

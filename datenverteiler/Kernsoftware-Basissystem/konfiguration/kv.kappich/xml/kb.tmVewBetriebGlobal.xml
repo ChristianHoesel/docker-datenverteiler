@@ -1,0 +1,802 @@
+<?xml version="1.0" encoding="ISO-8859-1"?>
+<!DOCTYPE konfigurationsBereich PUBLIC "-//K2S//DTD Dokument//DE" "K2S.dtd">
+<konfigurationsBereich pid="kb.tmVewBetriebGlobal" name="TeilmodellVeWBetriebGlobal" verantwortlich="kv.kappich">
+	<info>
+		<kurzinfo>Teilmodell mit Datenmodellierung zur Verwaltung von Betriebsmeldungen und sonstiger betrieblich relevanter Informationen.</kurzinfo>
+		<beschreibung>
+			<absatz>
+				Die Betriebsmeldungsverwaltung ist für die Verwaltung der automatisch und manuell erzeugten Meldungen zuständig.
+			</absatz>
+			<absatz>
+				Jede beliebige Applikation kann automatisch Meldungen erzeugen, um z.B. auf einen Fehler oder eine Unregelmäßigkeit hinzuweisen.
+				In diesem Zusammenhang wird im Folgenden von Informationen bzw. Informationsmeldungen gesprochen. Diese Informationsmeldungen
+				werden von der Applikation als einfacher Sender an die spezifizierte Betriebsmeldungsverwaltung geschickt.
+			</absatz>
+			<absatz>
+				Die Betriebsmeldungsverwaltung prüft die erzeugten Informationsmeldungen nach parametrierbaren Kriterien und führt entsprechende
+				Aktionen - so z.B. die Publizierung der Informationsmeldung - durch.
+			</absatz>
+			<absatz>Die folgende Abbildung skizziert die Zusammenhänge und Attributgruppen der verschiedenen Objekttypen imTeilmodell Betrieb.</absatz>
+			<abbildung src="abbildungen/TeilmodelVewBetriebGlobal.jpg">
+				<titel>Übersicht Teilmodell Verwaltung Betrieb (global)</titel>
+			</abbildung>
+		</beschreibung>
+	</info>
+	<konfigurationsAenderung stand="19.03.2007" version="2" autor="inovat, Dipl.-Ing. H. C. Kniß (HCK)" grund="A:Überarbeitung des Datenkatalogs für Veröffentlichung Kernsoftware. Änderungsdokumentation siehe &apos;inovat: Datenkatalog DaV-Release Notes&apos;."></konfigurationsAenderung>
+	<konfigurationsAenderung stand="16.11.2007" version="3" autor="Roland Schmitz" grund="atl.urlasser für Default-Parameterdatensätze überarbeitet"><absatz>Bei dem Attribut "BenutzerReferenz" der Attributliste atl.urlasser wurde "undefiniert" zugelassen, um die Verwendung von Default-Parameterdatensätzen zu ermöglichen. Für alle Attribute der Attributliste wurden Default-Attributwerte festgelegt.
+		</absatz></konfigurationsAenderung>
+	<konfigurationsAenderung stand="27.04.2008" version="4" autor="Roland Schmitz" grund="Notwendige Erweiterungen für die Betriebsmeldungsverwaltung, basierend auf einem Vorschlag der Firma Dambach"><absatz>Erweiterung der Attributgruppen und Mengen am Typ typ.betriebsMeldungVerwaltung (atg.betriebsMeldungsVerwaltungRegel, atg.meldungsBearbeitung, atg.meldungsGruppeZuordnung, menge.meldungen)</absatz>
+		<absatz>Hinzufügen von typ.meldung und typ.meldungsGruppe</absatz>
+		<absatz>Neue Attributgruppen für typ.meldung und typ.meldungsGruppe</absatz>
+		<absatz>Neue Attribute und Attributlisten für typ.meldung und typ.meldungsGruppe</absatz>
+		<absatz>Neue Menge für typ.betriebsMeldungsVerwaltung</absatz></konfigurationsAenderung>
+	<konfigurationsAenderung stand="26.05.2008" version="5" autor="Roland Schmitz" grund="Notwendige Änderungen der Attributgruppe atg.betriebsMeldungsVerwaltungRegel für die Betriebsmeldungsverwaltung, basierend auf einem Vorschlag der Firma Dambach"><absatz>Überflüssige Attributliste atl.betriebsMeldungsVerwaltungFilterAktion entfernt.</absatz>
+		<absatz>In der Attributliste atl.betriebsMeldungsVerwaltungRegel wurden die Attribute Filter und Aktion aus der atl.betriebsMeldungsVerwaltungFilterAktion übernommen und als Arrays definiert</absatz></konfigurationsAenderung>
+	<konfigurationsAenderung stand="01.08.2013" version="6" autor="Roland Schmitz" grund="Erweiterung der SWE Betriebsmeldungsverwaltung gemäß NERZ Änderungsantrag 34"><absatz>Änderung entsprechend eines Vorschlags von Herrn Peuker/BitCtrl um Kriterien für die Filterung zu erweitern. Um den Filter in einer Anwendung auch tatsächlich verwenden zu können, wurde der AttributTyp "att.vewBetrKriterium" um den Zustand "Meldungstext" erweitert.</absatz></konfigurationsAenderung>
+	<!--
+	Abhängigkeiten des Bereichs kb.tmVewBetriebGlobal
+	Abhängig ab Version      Art der Abhängigkeit      Version des benötigten Bereichs      Benötigter Bereich
+	3                        notwendig                 1                                    kb.metaModellGlobal                
+	3                        notwendig                 2                                    kb.systemModellGlobal              
+	3                        notwendig                 1                                    kb.kv.kappich                      
+	3                        notwendig                 1                                    kb.fachModellGlobal                
+	4                        notwendig                 4                                    kb.fachModellGlobal                
+	4                        notwendig                 4                                    kb.metaModellGlobal                
+	-->
+	<modell>
+		<typDefinition pid="typ.betriebsMeldungsVerwaltung" name="BetriebsMeldungsVerwaltung" objektNamenPermanent="nein">
+			<info>
+				<kurzinfo>Objekttyp, der die BetriebsMeldungsVerwaltung repräsentiert.</kurzinfo>
+			</info>
+			<erweitert pid="typ.konfigurationsObjekt"/>
+			<attributgruppe pid="atg.betriebsMeldung"/>
+			<attributgruppe pid="atg.betriebsMeldungsVerwaltungRegel"/>
+			<attributgruppe pid="atg.meldungsBearbeitung"/>
+			<attributgruppe pid="atg.meldungsGruppeZuordnung"/>
+			<menge pid="menge.meldungen" name="Meldungen" erforderlich="nein">
+				<info>
+					<kurzinfo>Dynamische Menge mit Meldungen.</kurzinfo>
+				</info>
+			</menge>
+			<defaultParameter attributgruppe="atg.betriebsMeldungsVerwaltungRegel" typ="typ.betriebsMeldungsVerwaltung">
+				<datenfeld name="Regel">
+				</datenfeld>
+				<datenliste name="Urlasser">
+					<datum name="BenutzerReferenz" wert="undefiniert"/>
+					<datum name="Ursache" wert=""/>
+					<datum name="Veranlasser" wert=""/>
+				</datenliste>
+			</defaultParameter>
+		</typDefinition>
+		<typDefinition pid="typ.informationsKanal" name="InformationsKanal" objektNamenPermanent="nein">
+			<info>
+				<kurzinfo>Objekttyp, auf dem die BetriebsMeldungen von der Verwaltung publiziert werden.</kurzinfo>
+			</info>
+			<erweitert pid="typ.konfigurationsObjekt"/>
+			<attributgruppe pid="atg.betriebsMeldung"/>
+		</typDefinition>
+		<typDefinition pid="typ.meldung" name="Meldung" objektNamenPermanent="nein" persistenzModus="persistent">
+			<info>
+				<kurzinfo>
+					Meldung
+				</kurzinfo>
+				<beschreibung>
+					<absatz>
+						Eine Meldung ist ein dynamisches Objekt, das durch den Benutzer angelegt und parametriert werden kann.
+					</absatz>
+					<absatz>
+						Zu einer Meldung werden als konfigurierende Eigenschaften die Applikationskennung und die ID
+						<verweis pid="ref.Afo"></verweis> verwaltet. Die Attribute Wichtigkeit, Status, Wiedervorlage Ergänzungstext
+						und Benutzer sind parametrierbar.
+					</absatz>
+				</beschreibung>
+			</info>
+			<erweitert pid="typ.dynamischesObjekt"/>
+			<attributgruppe pid="atg.meldung"/>
+			<attributgruppe pid="atg.meldungEigenschaften"/>
+			<defaultParameter attributgruppe="atg.meldung" typ="typ.meldung">
+				<datum name="Wichtigkeit" wert="keine Änderung"/>
+				<datum name="Status" wert="keine Änderung"/>
+				<datum name="Wiedervorlage" wert="01.01.1970 02:00:00,000 Uhr"/>
+				<datum name="Ergänzungstext" wert=""/>
+				<datenfeld name="InformationsMeldungsAnteil">
+				</datenfeld>
+				<datenfeld name="BenutzerMeldungsAnteil">
+				</datenfeld>
+				<datenliste name="Urlasser">
+					<datum name="BenutzerReferenz" wert="undefiniert"/>
+					<datum name="Ursache" wert=""/>
+					<datum name="Veranlasser" wert=""/>
+				</datenliste>
+			</defaultParameter>
+		</typDefinition>
+		<typDefinition pid="typ.meldungsGruppe" name="MeldungsGruppe" objektNamenPermanent="nein">
+			<info>
+				<kurzinfo>Objekttyp, der Gruppen von Meldungen publiziert</kurzinfo>
+			</info>
+			<erweitert pid="typ.konfigurationsObjekt"/>
+			<attributgruppe pid="atg.meldungsGruppeMeldung"/>
+			<defaultParameter attributgruppe="atg.meldungsGruppeMeldung" typ="typ.meldungsGruppe">
+				<datenfeld name="MeldungReferenz">
+				</datenfeld>
+				<datenliste name="Urlasser">
+					<datum name="BenutzerReferenz" wert="undefiniert"/>
+					<datum name="Ursache" wert=""/>
+					<datum name="Veranlasser" wert=""/>
+				</datenliste>
+			</defaultParameter>
+		</typDefinition>
+		<attributgruppenDefinition pid="atg.betriebsMeldung" name="BetriebsMeldung" parametrierend="nein">
+			<info>
+				<kurzinfo>Beinhaltet alle Merkmale, die eine Betriebsmeldung ausmachen.</kurzinfo>
+				<beschreibung>
+					<absatz>Fast alle Funktionen des Systems setzen in bestimmten Situationen (i.d.R. beim Auftreten von Fehlern und sonstigen Ausnahmefällen), die ein Eingreifen durch den Operator nötig machen, zusätzlich zur normalen Protokollierung des entsprechenden Ereignisses eine (quittierungspflichtige) Meldung an das Bedienpersonal ab. Diese Meldungen werden zusätzlich in einem einheitlichen Format generiert und zentral verwaltet. Die Quittierung und Manipulation (Ergänzung um Kommentare etc.) dieser (Fehler-)Meldungen erfolgt ausschließlich auf Basis dieser zusätzlich erzeugten Meldungen.</absatz>
+				</beschreibung>
+			</info>
+			<aspekt pid="asp.information" onlineModus="quelleUndSenke">
+			</aspekt>
+			<attribut pid="att.zahlPositiv" anzahl="1" anzahlIst="fest" name="ApplikationsID">
+				<info>
+					<kurzinfo>ID der Applikation, die die Informationsmeldung erzeugt hat.</kurzinfo>
+					<beschreibung>
+						ID der Applikation, die die Informationsmeldung erzeugt hat. Die ApplikationsID wird bei jedem Start einer Applikation eindeutig vergeben. Damit lässt sich im Nachhinein verfolgen, welche Applikation die Meldung veranlasst hat.
+					</beschreibung>
+				</info>
+			</attribut>
+			<attribut pid="att.zahlPositiv" anzahl="1" anzahlIst="fest" name="LaufendeNummer">
+				<info>
+					<kurzinfo>Laufende Nummerierung der durch die Applikation seit dem Applikationsstart erzeugten Informationsmeldungen.</kurzinfo>
+					<beschreibung>
+						Laufende Nummerierung der durch die Applikation seit dem Applikationsstart erzeugten Informationsmeldungen. Aus der Kombination von ApplikationsID und LaufendeNummer lässt sich prüfen, ob Meldungen verloren wurden.
+					</beschreibung>
+				</info>
+			</attribut>
+			<attribut pid="att.objektReferenz" anzahl="1" anzahlIst="fest" name="ApplikationsTyp">
+				<info>
+					<kurzinfo>Typ der Applikation, die die Informationsmeldung erzeugt hat.</kurzinfo>
+				</info>
+			</attribut>
+			<attribut pid="att.text" anzahl="1" anzahlIst="fest" name="ApplikationsKennung">
+				<info>
+					<kurzinfo>Wird für einen Bezug zur vorherigen Meldung benötigt.</kurzinfo>
+					<beschreibung>
+						Die ApplikationsKennung wird benötigt, um einen Bezug zur vorherigen Meldung herzustellen. Sie wird einmal im Code der Applikation festgelegt und ist für diese Applikation immer gleich.
+					</beschreibung>
+				</info>
+			</attribut>
+			<attribut pid="att.text" anzahl="1" anzahlIst="fest" name="ID">
+				<info>
+					<kurzinfo>ID der Meldung</kurzinfo>
+					<beschreibung>
+						ID der Meldung. Dieses Attribut kann bei jeder Meldung von der Applikation gesetzt werden, um einen Bezug zu einer vorherigen Meldung herzustellen.
+					</beschreibung>
+				</info>
+			</attribut>
+			<attribut pid="att.meldungsTyp" anzahl="1" anzahlIst="fest" name="MeldungsTyp">
+				<info>
+					<kurzinfo>Klassifizierung der Meldungen in unterschiedliche Typen.</kurzinfo>
+					<beschreibung>
+						Klassifizierung der Meldungen in unterschiedliche Typen, die eine inhaltliche Unterscheidung der Meldungen bewirken. Z.B. System und Fach für Meldungen, die sich auf programmtechnische oder fachliche Zustände beziehen.
+					</beschreibung>
+				</info>
+			</attribut>
+			<attribut pid="att.text" anzahl="1" anzahlIst="fest" name="MeldungsTypZusatz">
+				<info>
+					<kurzinfo>
+						Zur genaueren Beschreibung des MeldungsTyps.
+					</kurzinfo>
+					<beschreibung>
+						Der MeldungsTypZusatz ermöglicht eine genauere Beschreibung des MeldungsTyps und eine weitere Unterteilung der verschiedenen Typen.
+					</beschreibung>
+				</info>
+			</attribut>
+			<attribut pid="att.meldungsKlasse" anzahl="1" anzahlIst="fest" name="MeldungsKlasse">
+				<info>
+					<kurzinfo>Klassifizierung einer Meldung.</kurzinfo>
+					<beschreibung>
+						Hiermit ist die Klassifizierung einer Meldung in "Fatal", "Fehler", "Warnung" und "Information" möglich.
+					</beschreibung>
+				</info>
+			</attribut>
+			<attribut pid="att.objektReferenz" anzahl="1" anzahlIst="variabel" name="Referenz">
+				<info>
+					<kurzinfo>Referenz auf ein beliebiges Konfigurationsobjekt.</kurzinfo>
+					<beschreibung>
+						Referenz auf ein beliebiges Konfigurationsobjekt, auf das sich die Meldung bezieht. Dieses Attribut ist optional.
+					</beschreibung>
+				</info>
+			</attribut>
+			<attribut pid="att.meldungsStatus" anzahl="1" anzahlIst="fest" name="Status">
+				<info>
+					<kurzinfo>Gibt den Meldungsstatus an.</kurzinfo>
+				</info>
+			</attribut>
+			<attributliste pid="atl.urlasser" anzahl="1" anzahlIst="fest" name="Urlasser">
+				<info>
+					<kurzinfo>Urlasserinformation</kurzinfo>
+					<beschreibung>
+						Dieses Attribut wird insbesondere für von Benutzern angelegte Informationsmeldungen benötigt.
+					</beschreibung>
+				</info>
+			</attributliste>
+			<attribut pid="att.text" anzahl="1" anzahlIst="fest" name="MeldungsText">
+				<info>
+					<kurzinfo>Text der Meldung</kurzinfo>
+				</info>
+			</attribut>
+		</attributgruppenDefinition>
+		<attributgruppenDefinition pid="atg.betriebsMeldungsVerwaltungRegel" name="BetriebsMeldungsVerwaltungRegel" parametrierend="ja">
+			<info>
+				<kurzinfo>Spezifikation einer Betriebsmeldung</kurzinfo>
+			</info>
+			<attributliste pid="atl.betriebsMeldungsVerwaltungRegel" anzahl="0" anzahlIst="variabel" name="Regel">
+			</attributliste>
+			<attributliste pid="atl.urlasser" anzahl="1" anzahlIst="fest" name="Urlasser">
+				<info>
+					<kurzinfo>Urlasserinformation</kurzinfo>
+				</info>
+			</attributliste>
+		</attributgruppenDefinition>
+		<attributgruppenDefinition pid="atg.meldung" name="Meldung" parametrierend="ja">
+			<info>
+				<kurzinfo>Parametrierbare Eigenschaften einer Melddung</kurzinfo>
+				<beschreibung>
+				</beschreibung>
+			</info>
+			<aspekt pid="asp.zustand" onlineModus="quelle">
+			</aspekt>
+			<attribut pid="att.wichtigkeit" anzahl="1" anzahlIst="fest" name="Wichtigkeit">
+				<info>
+					<kurzinfo>Dringlichkeit einer Meldung</kurzinfo>
+					<beschreibung>
+						<absatz>
+							hiermit ist eine Unterscheidung nach der Dringlichkeit der Meldung möglich.
+							Ein Wert zwischen 10(sehr Dringend) und 0 (keine Dringlichkeit) ist möglich
+						</absatz>
+					</beschreibung>
+				</info>
+			</attribut>
+			<attribut pid="att.status" anzahl="1" anzahlIst="fest" name="Status">
+				<info>
+					<kurzinfo>Status der Meldung </kurzinfo>
+					<beschreibung>
+						<absatz>
+							"neu", "in Bearbeitung", "Wiedervorlage", "erledigt
+						</absatz>
+					</beschreibung>
+				</info>
+			</attribut>
+			<attribut pid="att.zeitPunkt" anzahl="1" anzahlIst="fest" name="Wiedervorlage">
+				<info>
+					<kurzinfo>Zeitpunkt an dem die Meldung erneut vorgelegt (verschickt) werden soll</kurzinfo>
+				</info>
+			</attribut>
+			<attribut pid="att.text" anzahl="1" anzahlIst="fest" name="Ergänzungstext">
+				<info>
+					<kurzinfo>Ergänzender Text zur Meldung</kurzinfo>
+				</info>
+			</attribut>
+			<attributliste pid="atl.informationsMeldungsAnteil" anzahl="0" anzahlIst="variabel" name="InformationsMeldungsAnteil">
+			</attributliste>
+			<attributliste pid="atl.benutzerMeldungsAnteil" anzahl="0" anzahlIst="variabel" name="BenutzerMeldungsAnteil">
+			</attributliste>
+			<attributliste pid="atl.urlasser" anzahl="1" anzahlIst="fest" name="Urlasser">
+			</attributliste>
+		</attributgruppenDefinition>
+		<attributgruppenDefinition pid="atg.meldungEigenschaften" name="MeldungEigenschaften" parametrierend="nein">
+			<info>
+				<kurzinfo>Konfigurierende Eigenschaften einer Meldung</kurzinfo>
+			</info>
+			<aspekt pid="asp.eigenschaften" konfigurationsModus="datensatzOptionalUndÄnderbar">
+			</aspekt>
+			<attribut pid="att.text" anzahl="1" anzahlIst="fest" name="ApplikationsKennung">
+				<info>
+					<kurzinfo>Stellt den Bezug zur vorherigen Meldung her</kurzinfo>
+				</info>
+			</attribut>
+			<attribut pid="att.text" anzahl="1" anzahlIst="fest" name="ID">
+				<info>
+					<kurzinfo>ID der Meldung</kurzinfo>
+				</info>
+			</attribut>
+		</attributgruppenDefinition>
+		<attributgruppenDefinition pid="atg.meldungsBearbeitung" name="MeldungsBearbeitung" parametrierend="nein">
+			<info>
+				<kurzinfo>Parametrierbare Eigenschaften einer Melddung</kurzinfo>
+				<beschreibung>
+				</beschreibung>
+			</info>
+			<aspekt pid="asp.vorgabe" onlineModus="quelleUndSenke">
+			</aspekt>
+			<attribut pid="att.meldungReferenz" anzahl="0" anzahlIst="variabel" name="MeldungReferenz">
+				<info>
+					<kurzinfo>Referenzen auf Meldungen</kurzinfo>
+				</info>
+			</attribut>
+			<attribut pid="att.wichtigkeit" anzahl="1" anzahlIst="fest" name="Wichtigkeit">
+				<info>
+					<kurzinfo>Dringlichkeit einer Meldung</kurzinfo>
+					<beschreibung>
+						<absatz>
+							hiermit ist eine Unterscheidung nach der Dringlichkeit der Meldung möglich.
+							Ein Wert zwischen 10(sehr Dringend) und 0 (keine Dringlichkeit) ist möglich
+						</absatz>
+					</beschreibung>
+				</info>
+			</attribut>
+			<attribut pid="att.status" anzahl="1" anzahlIst="fest" name="Status">
+				<info>
+					<kurzinfo>Status der Meldung </kurzinfo>
+					<beschreibung>
+						<absatz>
+							"neu", "in Bearbeitung", "Wiedervorlage", "erledigt
+						</absatz>
+					</beschreibung>
+				</info>
+			</attribut>
+			<attribut pid="att.zeitPunkt" anzahl="1" anzahlIst="fest" name="Wiedervorlage">
+				<info>
+					<kurzinfo>Zeitpunkt an dem die Meldung erneut vorgelegt (verschickt) werden soll</kurzinfo>
+				</info>
+			</attribut>
+			<attribut pid="att.text" anzahl="1" anzahlIst="fest" name="BenutzerMeldungsAnteil">
+				<info>
+					<kurzinfo>Ergänzender Text zur Meldung</kurzinfo>
+				</info>
+			</attribut>
+			<attributliste pid="atl.urlasser" anzahl="1" anzahlIst="fest" name="Urlasser">
+			</attributliste>
+		</attributgruppenDefinition>
+		<attributgruppenDefinition pid="atg.meldungsGruppeMeldung" name="MeldungsGruppeMeldung" parametrierend="ja">
+			<info>
+				<kurzinfo>Die Meldungen der Meldungsgruppe</kurzinfo>
+				<beschreibung>
+				</beschreibung>
+			</info>
+			<aspekt pid="asp.zustand" onlineModus="quelle">
+			</aspekt>
+			<attribut pid="att.meldungReferenz" anzahl="0" anzahlIst="variabel" name="MeldungReferenz">
+				<info>
+					<kurzinfo>Referenzen auf Meldungen</kurzinfo>
+				</info>
+			</attribut>
+			<attributliste pid="atl.urlasser" anzahl="1" anzahlIst="fest" name="Urlasser">
+				<info>
+					<kurzinfo>Urlasserinformation</kurzinfo>
+				</info>
+			</attributliste>
+		</attributgruppenDefinition>
+		<attributgruppenDefinition pid="atg.meldungsGruppeZuordnung" name="MeldungsGruppeZuordnung" parametrierend="nein">
+			<info>
+				<kurzinfo>Die Meldungen der Meldungsgruppe</kurzinfo>
+				<beschreibung>
+				</beschreibung>
+			</info>
+			<aspekt pid="asp.vorgabe" onlineModus="quelleUndSenke">
+			</aspekt>
+			<attribut pid="att.meldungReferenz" anzahl="0" anzahlIst="variabel" name="MeldungReferenz">
+				<info>
+					<kurzinfo>Referenzen auf Meldungen</kurzinfo>
+				</info>
+			</attribut>
+			<attribut pid="att.meldungsGruppeReferenz" anzahl="0" anzahlIst="variabel" name="MeldungsGruppeReferenz">
+				<info>
+					<kurzinfo>Referenzen auf Meldungsgruppen</kurzinfo>
+				</info>
+			</attribut>
+			<attributliste pid="atl.urlasser" anzahl="1" anzahlIst="fest" name="Urlasser">
+				<info>
+					<kurzinfo>Urlasserinformation</kurzinfo>
+				</info>
+			</attributliste>
+		</attributgruppenDefinition>
+		<aspektDefinition pid="asp.information" name="Information">
+			<info>
+				<kurzinfo>Aspekt zum Senden von Betriebsmeldungen.</kurzinfo>
+			</info>
+		</aspektDefinition>
+		<attributDefinition pid="att.betriebsMeldungsVerwaltungReferenz" name="BetriebsMeldungsVerwaltungReferenz">
+			<info>
+				<kurzinfo>Attribut zur Referenzierung des Objekttyps: typ.betriebsMeldungsVerwaltung.</kurzinfo>
+			</info>
+			<objektReferenz typ="typ.betriebsMeldungsVerwaltung" undefiniert="verboten" referenzierungsart="assoziation"/>
+		</attributDefinition>
+		<attributDefinition pid="att.betriebsMeldungsVerwaltungReferenzOptional" name="BetriebsMeldungsVerwaltungReferenzOptional">
+			<info>
+				<kurzinfo>Attribut zur Referenzierung des Objekttyps: typ.betriebsMeldungsVerwaltung (Optionale Referenzierung erlaubt).</kurzinfo>
+			</info>
+			<objektReferenz typ="typ.betriebsMeldungsVerwaltung" undefiniert="erlaubt" referenzierungsart="assoziation"/>
+		</attributDefinition>
+		<attributDefinition pid="att.informationsKanalReferenz" name="InformationsKanalReferenz">
+			<info>
+				<kurzinfo>Attribut zur Referenzierung des Objekttyps: typ.informationsKanal.</kurzinfo>
+			</info>
+			<objektReferenz typ="typ.informationsKanal" undefiniert="verboten" referenzierungsart="assoziation"/>
+		</attributDefinition>
+		<attributDefinition pid="att.informationsKanalReferenzOptional" name="InformationsKanalReferenzOptional">
+			<info>
+				<kurzinfo>Attribut zur Referenzierung des Objekttyps: typ.informationsKanal (Optionale Referenzierung erlaubt).</kurzinfo>
+			</info>
+			<objektReferenz typ="typ.informationsKanal" undefiniert="erlaubt" referenzierungsart="assoziation"/>
+		</attributDefinition>
+		<attributDefinition pid="att.meldungReferenz" name="MeldungReferenz">
+			<info>
+				<kurzinfo>Referenzen auf Meldungen</kurzinfo>
+			</info>
+			<objektReferenz typ="typ.meldung" undefiniert="erlaubt" referenzierungsart="assoziation"/>
+		</attributDefinition>
+		<attributDefinition pid="att.meldungsGruppeReferenz" name="MeldungsGruppeReferenz">
+			<info>
+				<kurzinfo>Referenzen auf Meldungsgruppen</kurzinfo>
+			</info>
+			<objektReferenz typ="typ.meldungsGruppe" undefiniert="erlaubt" referenzierungsart="assoziation"/>
+		</attributDefinition>
+		<attributDefinition pid="att.meldungsKlasse" name="MeldungsKlasse">
+			<info>
+				<kurzinfo>Klassifizierung einer Meldung.</kurzinfo>
+				<beschreibung>
+					Hiermit ist die Klassifizierung einer Meldung in "Fatal", "Fehler", "Warnung" und "Information" möglich.
+				</beschreibung>
+			</info>
+			<ganzzahl bits="8">
+				<zustand name="Fatal" wert="0">
+				</zustand>
+				<zustand name="Fehler" wert="1">
+				</zustand>
+				<zustand name="Warnung" wert="2">
+				</zustand>
+				<zustand name="Information" wert="3">
+				</zustand>
+			</ganzzahl>
+		</attributDefinition>
+		<attributDefinition pid="att.meldungsStatus" name="Status">
+			<info>
+				<kurzinfo>Status der Meldung.</kurzinfo>
+				<beschreibung>
+					Für eine Meldung gibt es fünf verschiedene Stati: "Gutmeldung", "Meldung", "Neue Meldung", "Wiederholungsmeldung" und "Änderungsmeldung".
+				</beschreibung>
+			</info>
+			<ganzzahl bits="8">
+				<zustand name="Meldung" wert="0">
+					<info>
+						<kurzinfo>Meldung, die nicht mit einem der anderen Status bezeichnet werden kann.</kurzinfo>
+						<beschreibung>
+							Diese Meldung wird von Applikationen benutzt, die den für die Unterscheidung der drei Fälle "Neue Meldung",
+							"Wiederholungsmeldung" und "Änderungsmeldung" notwendigen Verwaltungsaufwand nicht selbst vornehmen können oder möchten.
+						</beschreibung>
+					</info>
+				</zustand>
+				<zustand name="Gutmeldung" wert="1">
+					<info>
+						<kurzinfo>Meldung, die zu einer zuvor gesandten Meldung gehört und deren Inhalt wieder aufhebt.</kurzinfo>
+					</info>
+				</zustand>
+				<zustand name="Neue Meldung" wert="2">
+					<info>
+						<kurzinfo>Eine Meldung, die zum ersten Mal rausgeschickt wird.</kurzinfo>
+					</info>
+				</zustand>
+				<zustand name="Wiederholungsmeldung" wert="3">
+					<info>
+						<kurzinfo>Eine Meldung, die zu einer bereits zuvor gesendeten Meldung gehört.</kurzinfo>
+					</info>
+				</zustand>
+				<zustand name="Änderungsmeldung" wert="4">
+					<info>
+						<kurzinfo>Meldung, die zu einer zuvor gesendeten Meldung gehört und deren Inhalt modifiziert.</kurzinfo>
+					</info>
+				</zustand>
+			</ganzzahl>
+		</attributDefinition>
+		<attributDefinition pid="att.meldungsTyp" name="MeldungsTyp">
+			<info>
+				<kurzinfo>Klassifizierung der Meldungen in unterschiedliche Typen.</kurzinfo>
+				<beschreibung>
+					Klassifizierung der Meldungen in unterschiedliche Typen, die eine inhaltliche Unterscheidung der Meldungen bewirken. Z.B. System und Fach für Meldungen, die sich auf systemtechnische oder fachliche Zustände beziehen.
+				</beschreibung>
+			</info>
+			<ganzzahl bits="8">
+				<zustand name="System" wert="0">
+					<info>
+						<kurzinfo>Meldungstyp für eine Meldung eines systemtechnischen Zustands.</kurzinfo>
+					</info>
+				</zustand>
+				<zustand name="Fach" wert="1">
+					<info>
+						<kurzinfo>Meldungstyp für eine Meldung eines fachlichen Zustands.</kurzinfo>
+					</info>
+				</zustand>
+			</ganzzahl>
+		</attributDefinition>
+		<attributDefinition pid="att.status" name="Status">
+			<info>
+				<kurzinfo>Status der Meldung</kurzinfo>
+				<beschreibung>
+					<absatz>
+						"neu", "in Bearbeitung", "Wiedervorlage", "erledigt", "keine Änderung"
+					</absatz>
+.				</beschreibung>
+			</info>
+			<ganzzahl bits="8">
+				<zustand name="neu" wert="0">
+				</zustand>
+				<zustand name="in Bearbeitung" wert="1">
+				</zustand>
+				<zustand name="Wiedervorlage" wert="2">
+				</zustand>
+				<zustand name="erledigt" wert="3">
+				</zustand>
+				<zustand name="keine Änderung" wert="-1">
+				</zustand>
+			</ganzzahl>
+		</attributDefinition>
+		<attributDefinition pid="att.vewBetrAktion" name="VewBetrAktion">
+			<info>
+				<kurzinfo>Definition einer Aktion für die Aktion</kurzinfo>
+				<beschreibung>
+				</beschreibung>
+			</info>
+			<ganzzahl bits="8">
+				<zustand name="Verteilen" wert="0">
+				</zustand>
+				<zustand name="Senden" wert="1">
+				</zustand>
+				<zustand name="Verwalten" wert="2">
+				</zustand>
+				<zustand name="Email" wert="3">
+				</zustand>
+				<zustand name="Fax" wert="4">
+				</zustand>
+				<zustand name="Abbruch" wert="5">
+				</zustand>
+				<zustand name="erweitert" wert="6">
+				</zustand>
+			</ganzzahl>
+		</attributDefinition>
+		<attributDefinition pid="att.vewBetrKriterium" name="VewBetrKriterium">
+			<info>
+				<kurzinfo>Definition eines Kriteriums für den Filter</kurzinfo>
+				<beschreibung>
+				</beschreibung>
+			</info>
+			<ganzzahl bits="8">
+				<zustand name="Meldungstyp" wert="0">
+				</zustand>
+				<zustand name="Meldungsklasse" wert="1">
+				</zustand>
+				<zustand name="Applikation" wert="2">
+				</zustand>
+				<zustand name="Referenz" wert="3">
+				</zustand>
+				<zustand name="Benutzer" wert="4">
+				</zustand>
+				<zustand name="Veranlasser" wert="5">
+				</zustand>
+				<zustand name="Ursache" wert="6">
+				</zustand>
+				<zustand name="erweitert" wert="7">
+				</zustand>
+				<zustand name="Meldungstext" wert="8">
+				</zustand>
+			</ganzzahl>
+		</attributDefinition>
+		<attributDefinition pid="att.vewBetrOperation" name="VewBetrOperation">
+			<info>
+				<kurzinfo>Definition einer Operation für den Filter</kurzinfo>
+				<beschreibung>
+				</beschreibung>
+			</info>
+			<ganzzahl bits="8">
+				<zustand name="Wert ist gleich" wert="0">
+				</zustand>
+				<zustand name="Wert ist kleiner" wert="1">
+				</zustand>
+				<zustand name="Wert ist größer" wert="2">
+				</zustand>
+				<zustand name="Wert ist kleiner oder gleich" wert="3">
+				</zustand>
+				<zustand name="Wert ist größer oder gleich" wert="4">
+				</zustand>
+				<zustand name="Text gleich" wert="5">
+				</zustand>
+				<zustand name="Text enthält" wert="6">
+				</zustand>
+				<zustand name="Text beginnt mit" wert="7">
+				</zustand>
+				<zustand name="Text endet mit" wert="8">
+				</zustand>
+				<zustand name="kein Operator" wert="9">
+				</zustand>
+			</ganzzahl>
+		</attributDefinition>
+		<attributDefinition pid="att.wichtigkeit" name="Wichtigkeit">
+			<info>
+				<kurzinfo>Wichtigkeit einer Meldung.</kurzinfo>
+				<beschreibung>
+					Hiermit ist die Unterscheidung nach Dringlichkeit einer Meldung möglich.
+					Ein Wert zwischen 10(sehr Dringend) und 0 (keine Dringlichkeit) ist möglich.
+				</beschreibung>
+			</info>
+			<ganzzahl bits="8">
+				<bereich skalierung="1" minimum="0" maximum="10">
+				</bereich>
+				<zustand name="keine Änderung" wert="-1">
+				</zustand>
+			</ganzzahl>
+		</attributDefinition>
+		<attributlistenDefinition pid="atl.benutzerMeldungsAnteil" name="BenutzerMeldungsAnteil">
+			<info>
+				<kurzinfo>BenutzerMeldungsAnteil</kurzinfo>
+				<beschreibung>
+					Notwender Anteil der Benutzermeldung
+				</beschreibung>
+			</info>
+			<attribut pid="att.zeitPunkt" anzahl="1" anzahlIst="fest" name="Zeitstempel">
+				<info>
+					<kurzinfo>Zeitstempel der InformationsMeldung</kurzinfo>
+				</info>
+			</attribut>
+			<attribut pid="att.text" anzahl="1" anzahlIst="fest" name="MeldungsText">
+				<info>
+					<kurzinfo>Text der Meldung</kurzinfo>
+				</info>
+			</attribut>
+			<attributliste pid="atl.urlasser" anzahl="1" anzahlIst="fest" name="Urlasser">
+				<info>
+					<kurzinfo>Urlasserinformation</kurzinfo>
+				</info>
+			</attributliste>
+		</attributlistenDefinition>
+		<attributlistenDefinition pid="atl.betriebsMeldungsVerwaltungAktion" name="BetriebsMeldungsVerwaltungAktion">
+			<info>
+				<kurzinfo>Aktion</kurzinfo>
+				<beschreibung>
+					Mit dieser Attributliste wird spezifiziert, welche Aktion durchgefuehrt wird, wenn die Filterbedingung erfuellt ist. Die Attributliste
+					ist als Feld ausgelegt und somit koennen mehere Aktionen angegeben werden.
+				</beschreibung>
+			</info>
+			<attribut pid="att.vewBetrAktion" anzahl="1" anzahlIst="fest" name="Aktion">
+				<info>
+					<kurzinfo>
+						Mit diesem Attribut wird eine Aktion spezifiziert
+					</kurzinfo>
+				</info>
+			</attribut>
+			<attribut pid="att.text" anzahl="0" anzahlIst="variabel" name="Parameter">
+				<info>
+					<kurzinfo>
+						Mit diesem Attribut werden Parameter fuer die durchzufuehrende Aktion spezifiziert. Das Attribut ist als Feld ausgelegt und somit
+						koennen mehere Werte angegeben werden.
+					</kurzinfo>
+				</info>
+			</attribut>
+		</attributlistenDefinition>
+		<attributlistenDefinition pid="atl.betriebsMeldungsVerwaltungFilter" name="BetriebsMeldungsVerwaltungFilter">
+			<info>
+				<kurzinfo>Filter</kurzinfo>
+				<beschreibung>
+					Mit dieser Attributliste wird spezifiziert, fuer welche auf dem Informationskanal empfangenen Meldungen die folgende spezifizierte
+					Aktion durchgefuehrt werden soll. Die Attributliste ist als Feld ausgelegt und somit koennen mehere Kriterien angegeben werden.
+				</beschreibung>
+			</info>
+			<attribut pid="att.vewBetrKriterium" anzahl="1" anzahlIst="fest" name="Kriterium">
+				<info>
+					<kurzinfo>
+						Mit diesem Attribut wird ein zu pruefendes Kriterium angegeben
+					</kurzinfo>
+				</info>
+			</attribut>
+			<attribut pid="att.vewBetrOperation" anzahl="1" anzahlIst="fest" name="Operation">
+				<info>
+					<kurzinfo>
+						Mit diesem Attribut wird  die Vergleichsoperation angegeben, wie das Kriterium mit den entsprechenden Werten verglichen werden
+						soll.
+					</kurzinfo>
+				</info>
+			</attribut>
+			<attribut pid="att.text" anzahl="0" anzahlIst="variabel" name="Wert">
+				<info>
+					<kurzinfo>
+						Mit diesem Attribut wird der erforderliche Wert spezifiziert, den das Kriterium aufweisen muss, damit die entsprechende Aktion
+						durchgefuehrt wird. Das Attribut ist als Feld ausgelegt und somit koennen mehere Werte angegeben werden.
+					</kurzinfo>
+				</info>
+			</attribut>
+		</attributlistenDefinition>
+		<attributlistenDefinition pid="atl.betriebsMeldungsVerwaltungRegel" name="ListeBetriebsMeldungsVerwaltungRegel">
+			<info>
+				<kurzinfo>Enthält die Spezifikation für eine Regel</kurzinfo>
+				<beschreibung>
+					Mit Hilfe dieser Attributliste werden die Filter und Aktionen für eine Regel spezifiziert.
+					Mit der variablen Attributliste Filter können mehrere Filterkriterien angegeben werden, wobei die einzelnen Kriterien UND-verknüpft werden.
+					Die variable Attributliste Aktion legt alle auzuführenden Aktionen fest, die durchgeführt werden, wenn alle Filterkriterien erfüllt sind.
+				</beschreibung>
+			</info>
+			<attributliste pid="atl.betriebsMeldungsVerwaltungFilter" anzahl="0" anzahlIst="variabel" name="Filter">
+			</attributliste>
+			<attributliste pid="atl.betriebsMeldungsVerwaltungAktion" anzahl="0" anzahlIst="variabel" name="Aktion">
+			</attributliste>
+		</attributlistenDefinition>
+		<attributlistenDefinition pid="atl.informationsMeldungsAnteil" name="InformationsMeldungsAnteil">
+			<info>
+				<kurzinfo>InformationsMeldungsAnteil</kurzinfo>
+				<beschreibung>
+					Notwender Anteil der Informationsmeldung
+				</beschreibung>
+			</info>
+			<attribut pid="att.zeitPunkt" anzahl="1" anzahlIst="fest" name="Zeitstempel">
+				<info>
+					<kurzinfo>Zeitstempel der InformationsMeldung</kurzinfo>
+				</info>
+			</attribut>
+			<attribut pid="att.meldungsTyp" anzahl="1" anzahlIst="fest" name="MeldungsTyp">
+				<info>
+					<kurzinfo>Klassifizierung der Meldungen in unterschiedliche Typen</kurzinfo>
+				</info>
+			</attribut>
+			<attribut pid="att.meldungsKlasse" anzahl="1" anzahlIst="fest" name="MeldungsKlasse">
+				<info>
+					<kurzinfo>Hiermit ist die Klassifizierung einer Meldung in "Fatal", "Fehler", "Warnung", "Information" möglich</kurzinfo>
+				</info>
+			</attribut>
+			<attribut pid="att.objektReferenzOptional" anzahl="1" anzahlIst="variabel" name="Referenz">
+				<info>
+					<kurzinfo>Optionale Referenz auf ein Konfigurationsobjekt</kurzinfo>
+				</info>
+			</attribut>
+			<attribut pid="att.meldungsStatus" anzahl="1" anzahlIst="fest" name="MeldungsStatus">
+				<info>
+					<kurzinfo>Flag das angibt ob es sich um eine Gutmeldung handelt</kurzinfo>
+				</info>
+			</attribut>
+			<attribut pid="att.text" anzahl="1" anzahlIst="fest" name="MeldungsText">
+				<info>
+					<kurzinfo>Text der Meldung</kurzinfo>
+				</info>
+			</attribut>
+			<attributliste pid="atl.urlasser" anzahl="1" anzahlIst="fest" name="Urlasser">
+				<info>
+					<kurzinfo>Urlasserinformation</kurzinfo>
+				</info>
+			</attributliste>
+		</attributlistenDefinition>
+		<attributlistenDefinition pid="atl.urlasser" name="Urlasser">
+			<info>
+				<kurzinfo>Urlasserinformationen</kurzinfo>
+				<beschreibung>
+					Urlasserinformationen bestehen aus einer Referenz auf den Benutzer, der die Meldung erzeugt hat, einer Angabe der Ursache für die Meldung und einem Veranlasser für die Meldung.
+				</beschreibung>
+			</info>
+			<attribut pid="att.benutzerReferenzOptional" anzahl="1" anzahlIst="fest" name="BenutzerReferenz">
+				<info>
+					<kurzinfo>Referenz auf den Benutzer, der die Meldung erzeugt hat.</kurzinfo>
+				</info>
+				<default wert="null"/>
+			</attribut>
+			<attribut pid="att.text" anzahl="1" anzahlIst="fest" name="Ursache">
+				<info>
+					<kurzinfo>Angabe der Ursache für die Meldung</kurzinfo>
+				</info>
+				<default wert=""/>
+			</attribut>
+			<attribut pid="att.text" anzahl="1" anzahlIst="fest" name="Veranlasser">
+				<info>
+					<kurzinfo>Veranlasser für die Meldung</kurzinfo>
+				</info>
+				<default wert=""/>
+			</attribut>
+		</attributlistenDefinition>
+		<mengenDefinition pid="menge.meldungen" elemente="typ.meldung" aenderbar="ja" mindestens="0" hoechstens="0" referenzierungsart="assoziation">
+			<info>
+				<kurzinfo>Dynamische Meldungen</kurzinfo>
+			</info>
+		</mengenDefinition>
+	</modell>
+	<objekte>
+		<konfigurationsObjekt pid="betriebsMeldung.informationsKanal" name="InformationsKanal" typ="typ.informationsKanal">
+			<info>
+				<kurzinfo>Dieses Objekt wird von einer einfachen Implementierung der BetriebsMeldungsVerwaltung verwendet.</kurzinfo>
+			</info>
+		</konfigurationsObjekt>
+	</objekte>
+</konfigurationsBereich>

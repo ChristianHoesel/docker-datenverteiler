@@ -1,0 +1,29 @@
+<?xml version="1.0" encoding="ISO-8859-1"?>
+<!DOCTYPE konfigurationsBereich PUBLIC "-//K2S//DTD Dokument//DE" "K2S.dtd">
+<konfigurationsBereich pid="kb.kv.inovat" name="Bereich inovat" verantwortlich="kv.inovat">
+	<info>
+		<kurzinfo>Bereich mit dem Konfigurationsverantwortlichen für Firma inovat</kurzinfo>
+	</info>
+	<konfigurationsAenderung stand="19.03.2007" version="1" autor="inovat, Dipl.-Ing. H. C. Kniß (HCK)" grund="A:Überarbeitung des Datenkatalogs für Veröffentlichung Kernsoftware. Änderungsdokumentation siehe &apos;inovat: Datenkatalog DaV-Release Notes&apos;."></konfigurationsAenderung>
+	<konfigurationsAenderung stand="20.03.2007" version="1" autor="inovat, Dipl.-Ing. H. C. Kniß (HCK)" grund="B:Überarbeitung des Datenkatalogs für Veröffentlichung Kernsoftware. Änderungsdokumentation siehe &apos;inovat: Datenkatalog DaV-Release Notes&apos;."></konfigurationsAenderung>
+	<konfigurationsAenderung stand="20.02.2008" version="1" autor="inovat, Dipl.-Ing. H. C. Kniß (HCK)" grund="B:Überarbeitung des Datenkatalogs für Veröffentlichung Kernsoftware. Änderungsdokumentation siehe &apos;inovat: Datenkatalog DaV-Release Notes&apos;."></konfigurationsAenderung>
+	<!--
+	Abhängigkeiten des Bereichs kb.kv.inovat
+	Abhängig ab Version      Art der Abhängigkeit      Version des benötigten Bereichs      Benötigter Bereich
+	1                        notwendig                 1                                    kb.metaModellGlobal                
+	-->
+		<modell>
+	</modell>
+	<objekte>
+		<konfigurationsObjekt pid="kv.inovat" name="Konfiguration inovat" typ="typ.konfigurationsVerantwortlicher">
+			<info>
+				<kurzinfo>Konfigurationsverantwortlicher für Firma inovat</kurzinfo>
+			</info>
+			<datensatz attributgruppe="atg.konfigurationsVerantwortlicherEigenschaften" aspekt="asp.eigenschaften">
+				<datum name="kodierung" wert="53"/>
+				<datenfeld name="defaultBereich">
+				</datenfeld>
+			</datensatz>
+		</konfigurationsObjekt>
+	</objekte>
+</konfigurationsBereich>

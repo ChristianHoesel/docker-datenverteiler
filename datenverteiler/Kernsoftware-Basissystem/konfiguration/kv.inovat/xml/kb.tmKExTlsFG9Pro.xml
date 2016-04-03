@@ -1,0 +1,956 @@
+<?xml version="1.0" encoding="ISO-8859-1"?>
+<!DOCTYPE konfigurationsBereich PUBLIC "-//K2S//DTD Dokument//DE" "K2S.dtd">
+<konfigurationsBereich pid="kb.tmKExTlsFG9Pro" name="TeilmodellKFExTls - FG 9 - Erweiterung für ZRAPro-Algorithmus" verantwortlich="kv.inovat">
+	<info>
+		<kurzinfo>
+            Erweiterung der FG9 um spezifische Daten für den ZRAPro Algorithmus (Dr. Trapp)
+            sind.
+        </kurzinfo>
+	</info>
+	<konfigurationsAenderung stand="18.04.2012" version="1" autor="inovat, Dipl.-Ing. H. C. Kniß (HCK)" grund="Neuerstellung."></konfigurationsAenderung>
+	<konfigurationsAenderung stand="27.04.2012" version="2" autor="inovat, Dipl.-Ing. H. C. Kniß (HCK)" grund="Erweiterungen."></konfigurationsAenderung>
+	<konfigurationsAenderung stand="08.05.2012" version="3" autor="inovat, Dipl.-Ing. H. C. Kniß (HCK)" grund="atg.tlsZfrProEinAusSchaltung am typ.deZfrPro eingehängt."></konfigurationsAenderung>
+	<konfigurationsAenderung stand="08.06.2012" version="4" autor="inovat, Dipl.-Ing. H. C. Kniß (HCK)" grund="atg.tlsZfrParamProEinAusSchaltung am typ.deZfrPro ergänzt."></konfigurationsAenderung>
+	<konfigurationsAenderung stand="08.06.2012" version="5" autor="inovat, Dipl.-Ing. H. C. Kniß (HCK)" grund="atg.tlsZfrProSchaltVorschläge wieder ergänzt (war versehentlich gelöscht worden)."></konfigurationsAenderung>
+	<konfigurationsAenderung stand="08.06.2012" version="6" autor="inovat, Dipl.-Ing. H. C. Kniß (HCK)" grund="atg.tlsZfrParamProEinAusSchaltung ergaenzt um Parameter für die Stauerkennung)."></konfigurationsAenderung>
+	<konfigurationsAenderung stand="20.11.2012" version="7" autor="inovat, Dipl.-Ing. H. C. Kniß (HCK)" grund="atg.tlsZfrBetriebsParameterPro ergaenzt um att.tlsZfrMaxSignalPlan)."></konfigurationsAenderung>
+	<konfigurationsAenderung stand="20.11.2012" version="7" autor="inovat, Dipl.-Ing. H. C. Kniß (HCK)" grund="atg.tlsZfrParamProEinAusSchaltung ergaenzt um Parameter für die Stauerholung auf der HFB und der Rampe)."></konfigurationsAenderung>
+	<konfigurationsAenderung stand="29.04.2013" version="8" autor="inovat, Dipl.-Ing. H. C. Kniß (HCK)" grund="atg.tlsZfrBetriebsParameterPro geändert, zusätzliches Attribut TBeleg)."></konfigurationsAenderung>
+	<konfigurationsAenderung stand="24.02.2014" version="9" autor="inovat, Dipl.-Ing. H. C. Kniß (HCK)" grund="atg.tlsZfrEinAusSchaltEntscheidungsDaten am typ.deZfrPro ergänzt)."></konfigurationsAenderung>
+	<konfigurationsAenderung stand="24.02.2014" version="10" autor="inovat, Dipl.-Ing. H. C. Kniß (HCK)" grund="asp.standard zu atg.tlsZfrEinAusSchaltEntscheidungsDaten am typ.deZfrPro ergänzt)."></konfigurationsAenderung>
+	<!--
+	Abhängigkeiten des Bereichs kb.tmKExTlsFG9Pro
+	Abhängig ab Version      Art der Abhängigkeit      Version des benötigten Bereichs      Benötigter Bereich
+	1                        notwendig                 6                                    kb.tmKExTlsGlobal                  
+	1                        notwendig                 1                                    kb.kv.inovat                       
+	1                        notwendig                 4                                    kb.fachModellGlobal                
+	1                        notwendig                 1                                    kb.metaModellGlobal                
+	1                        notwendig                 3                                    kb.tmVewBetriebGlobal              
+	1                        notwendig                 1                                    kb.tmKExTlsFG9                     
+	9                        notwendig                 1                                    kb.tmVerkehrGlobal                 
+	9                        notwendig                 1                                    kb.systemModellGlobal              
+	-->
+		<modell>
+		<typDefinition pid="typ.deZfrPro" name="DeZfrPro" objektNamenPermanent="nein">
+			<info>
+				<kurzinfo>
+                    Datenendgerätekanal der Funktionsgruppe 9  erweitert für den Pro-Algorithmus.
+                </kurzinfo>
+			</info>
+			<erweitert pid="typ.deZfr"/>
+			<attributgruppe pid="atg.tlsZfrBetriebsParameterPro"/>
+			<attributgruppe pid="atg.tlsZfrEinAusSchaltEntscheidungsDaten"/>
+			<attributgruppe pid="atg.tlsZfrParamProEinAusSchaltung"/>
+			<attributgruppe pid="atg.tlsZfrProEinAusSchaltung"/>
+			<attributgruppe pid="atg.tlsZfrProSchaltVorschläge"/>
+			<defaultParameter attributgruppe="atg.tlsZfrBetriebsParameterPro" typ="typ.deZfrPro">
+				<datenliste name="Urlasser">
+					<datum name="BenutzerReferenz" wert="undefiniert"/>
+					<datum name="Ursache" wert=""/>
+					<datum name="Veranlasser" wert=""/>
+				</datenliste>
+				<datum name="Hersteller" wert="48"/>
+				<datum name="TRotMin" wert="2 s"/>
+				<datum name="TRotMax" wert="80 s"/>
+				<datum name="TGrünMin" wert="1 s"/>
+				<datum name="TGrünMax1Fz" wert="3 s"/>
+				<datum name="TGrünMax2Fz" wert="5 s"/>
+				<datum name="TGrünMax3Fz" wert="7 s"/>
+				<datum name="bStauSchleifeEin" wert="30 %"/>
+				<datum name="bStauSchleifeAus" wert="25 %"/>
+				<datum name="bZweiteAnforderungEin" wert="35 %"/>
+				<datum name="bZweiteAnforderungAus" wert="25 %"/>
+				<datum name="TStau" wert="30 s"/>
+				<datum name="TBeleg" wert="0 s"/>
+				<datum name="QKfzOffsetStauSchleifeBeiErhöhtemZufluss" wert="600 Kfz/h"/>
+				<datum name="QKfzOffsetBeiAusfallHFB2" wert="200 Kfz/h"/>
+				<datum name="THFB1" wert="60 s"/>
+				<datum name="THFB2" wert="15 s"/>
+				<datum name="TEinfahrt" wert="300 s"/>
+				<datum name="deltaTHFB1" wert="5 s"/>
+				<datum name="deltaTHFB2" wert="5 s"/>
+				<datum name="deltaTEinfahrt" wert="0 s"/>
+				<datum name="EinschaltungFsAufHfb" wert="HFS eingeschaltet-1UeFS eingeschaltet"/>
+				<datum name="Lambda" wert="1,00"/>
+				<datum name="fQ" wert="1,00"/>
+				<datum name="MaxAnzahlZusätzlicherKfz" wert="2 Kfz/Grünphase"/>
+				<datum name="MaxSignalPlan" wert="Kopie TRotMax"/>
+				<datum name="QKfz2Ein" wert="650 Kfz/h"/>
+				<datum name="QKfz2Aus" wert="450 Kfz/h"/>
+				<datum name="QKfz3Ein" wert="950 Kfz/h"/>
+				<datum name="QKfz3Aus" wert="750 Kfz/h"/>
+				<datum name="QKfz4Ein" wert="0 Kfz/h"/>
+				<datum name="QKfz4Aus" wert="0 Kfz/h"/>
+				<datum name="QKfz5Ein" wert="0 Kfz/h"/>
+				<datum name="QKfz5Aus" wert="0 Kfz/h"/>
+				<datum name="QKfz6Ein" wert="0 Kfz/h"/>
+				<datum name="QKfz6Aus" wert="0 Kfz/h"/>
+				<datum name="QKfz7Ein" wert="0 Kfz/h"/>
+				<datum name="QKfz7Aus" wert="0 Kfz/h"/>
+				<datum name="QKfz8Ein" wert="0 Kfz/h"/>
+				<datum name="QKfz8Aus" wert="0 Kfz/h"/>
+			</defaultParameter>
+			<defaultParameter attributgruppe="atg.tlsZfrProEinAusSchaltung" typ="typ.deZfrPro">
+				<datenliste name="Urlasser">
+					<datum name="BenutzerReferenz" wert="undefiniert"/>
+					<datum name="Ursache" wert=""/>
+					<datum name="Veranlasser" wert=""/>
+				</datenliste>
+				<datum name="Hersteller" wert="48"/>
+				<datum name="AnlageEinschalten" wert="Nein"/>
+			</defaultParameter>
+			<defaultParameter attributgruppe="atg.tlsZfrParamProEinAusSchaltung" typ="typ.deZfrPro">
+				<datenliste name="Urlasser">
+					<datum name="BenutzerReferenz" wert="undefiniert"/>
+					<datum name="Ursache" wert=""/>
+					<datum name="Veranlasser" wert=""/>
+				</datenliste>
+				<datum name="QKfzEin" wert="3500 Kfz/h"/>
+				<datum name="DichteEin" wert="40 Fz/km"/>
+				<datum name="DichteStau" wert="75 Fz/km"/>
+				<datum name="MaxDichteStauErholung" wert="90 Fz/km"/>
+				<datum name="DiffDichteStauErholung" wert="10 Fz/km"/>
+				<datum name="MaxStauZustandRampe" wert="kein Stau"/>
+				<datum name="MaxAnzahlAusfälle" wert="1"/>
+			</defaultParameter>
+		</typDefinition>
+		<attributgruppenDefinition pid="atg.tlsZfrBetriebsParameterPro" name="TlsZfrBetriebsParameterPro" parametrierend="ja">
+			<info>
+				<kurzinfo>Betriebsparameter Zuflussregelung (FG 9 / Typ 161 - Dürr)</kurzinfo>
+				<beschreibung>
+                    <sektion>
+                        <titel>FG 9: DE-Block-Struktur im Typ 33 "Betriebsparameter ALINEA 1"</titel>
+                        <absatz>Wird verwendet mit ID 3 (Parameter) in Abruf- und Antwortrichtung oder mit ID 35
+                            (Parametermeldung aus Puffer) in Antwortrichtung.
+                        </absatz>
+                        <absatz>Die Nachricht überträgt Betriebsparameter, welche für den ALINEA- Algorithmus benötigt
+                            werden. Die "Betriebsparameter ALINEA" werden ausfallsicher abgelegt.
+                        </absatz>
+                        <absatz>Die folgenden Einstellungen im DE-Typ 33 beziehen sich auf folgende ALINEA- Formel.
+                            Die aus der ALINEA- Formel resultierende theoretische Umlaufzeit "TU" wird nach Ablauf
+                            eines Intervalls berechnet. Das Intervall ist fest auf 60 Sekunden eingestellt und setzt
+                            voraus, dass auch die Verkehrsdatenerfassung in der FG 1 dieses Erfassungsintervall
+                            verwendet. Da die ALINEA-Formel erst berechnet werden kann, wenn die entsprechenden
+                            Daten aus der FG 1 vorliegen, wird die Berechnung 1s nach FG 1-Intervallende gestartet.
+                        </absatz>
+                    </sektion>
+                </beschreibung>
+			</info>
+			<aspekt pid="asp.tlsParameterVorgabeArchiv" onlineModus="quelleUndSenke">
+			</aspekt>
+			<aspekt pid="asp.tlsVorgabeBedienung" onlineModus="quelleUndSenke">
+			</aspekt>
+			<attributliste pid="atl.urlasser" anzahl="1" anzahlIst="fest" name="Urlasser">
+			</attributliste>
+			<attribut pid="att.tlsHersteller" anzahl="1" anzahlIst="fest" name="Hersteller">
+				<info>
+					<kurzinfo>Herstellercode: Dürr = 48</kurzinfo>
+				</info>
+			</attribut>
+			<attribut pid="att.tlsZfrZeit000bis255s" anzahl="1" anzahlIst="fest" name="TRotMin">
+				<info>
+					<kurzinfo>Minimale Rotzeit 'TRot'.</kurzinfo>
+				</info>
+			</attribut>
+			<attribut pid="att.tlsZfrZeit000bis255s" anzahl="1" anzahlIst="fest" name="TRotMax">
+				<info>
+					<kurzinfo>Maximale Rotzeit 'TRot'.</kurzinfo>
+				</info>
+			</attribut>
+			<attribut pid="att.tlsZfrZeit000bis255s" anzahl="1" anzahlIst="fest" name="TGrünMin">
+				<info>
+					<kurzinfo>Minimale Grünzeit 'TGrün'.</kurzinfo>
+				</info>
+			</attribut>
+			<attribut pid="att.tlsZfrZeit000bis255s" anzahl="1" anzahlIst="fest" name="TGrünMax1Fz">
+				<info>
+					<kurzinfo>Maximale Grünzeit 'TGrün' bei Z = 1 Fz bei grün.</kurzinfo>
+				</info>
+			</attribut>
+			<attribut pid="att.tlsZfrZeit000bis255s" anzahl="1" anzahlIst="fest" name="TGrünMax2Fz">
+				<info>
+					<kurzinfo>Maximale Grünzeit 'TGrün' bei Z = 2 Fz bei grün.</kurzinfo>
+				</info>
+			</attribut>
+			<attribut pid="att.tlsZfrZeit000bis255s" anzahl="1" anzahlIst="fest" name="TGrünMax3Fz">
+				<info>
+					<kurzinfo>Maximale Grünzeit 'TGrün' bei Z &gt;= 3 Fz bei grün.</kurzinfo>
+				</info>
+			</attribut>
+			<attribut pid="att.tlsZfrProzent" anzahl="1" anzahlIst="fest" name="bStauSchleifeEin">
+				<info>
+					<kurzinfo>Einschaltschwelle bei Belegungsgrad auf der Stauschleife in der Einfahrt.
+                    </kurzinfo>
+				</info>
+			</attribut>
+			<attribut pid="att.tlsZfrProzent" anzahl="1" anzahlIst="fest" name="bStauSchleifeAus">
+				<info>
+					<kurzinfo>Ausschaltschwelle bei Belegungsgrad auf der Stauschleife in der Einfahrt.
+                    </kurzinfo>
+				</info>
+			</attribut>
+			<attribut pid="att.tlsZfrProzent" anzahl="1" anzahlIst="fest" name="bZweiteAnforderungEin">
+				<info>
+					<kurzinfo>Einschaltschwelle bei Belegungsgrad auf der zweiten Anforderungsschleife in der Einfahrt.
+                    </kurzinfo>
+				</info>
+			</attribut>
+			<attribut pid="att.tlsZfrProzent" anzahl="1" anzahlIst="fest" name="bZweiteAnforderungAus">
+				<info>
+					<kurzinfo>Ausschaltschwelle bei Belegungsgrad auf der zweiten Anforderungsschleife in der Einfahrt.
+                    </kurzinfo>
+				</info>
+			</attribut>
+			<attribut pid="att.tlsZfrZeit000bis255s" anzahl="1" anzahlIst="fest" name="TStau">
+				<info>
+					<kurzinfo>Zeitliche Betrachtung des Zustandes Stau in der Einfahrt: Zykluszeit für die Neuberechung des StauZustandes (Auswirkung von Stau in der Einfahrt).</kurzinfo>
+				</info>
+			</attribut>
+			<attribut pid="att.tlsZfrZeit000bis255s" anzahl="1" anzahlIst="fest" name="TBeleg">
+				<info>
+					<kurzinfo>Glättungszeit für FG9 Typ200 b(Stauerfassung) und b(2. Anforderung= = TStau</kurzinfo>
+				</info>
+			</attribut>
+			<attribut pid="att.tlsZfr16BitPositivKfzProStunde" anzahl="1" anzahlIst="fest" name="QKfzOffsetStauSchleifeBeiErhöhtemZufluss">
+				<info>
+					<kurzinfo>Offset bei Zustand der Stauschleife Is = 1 (erhöhter Zufluss) in Kfz/h.</kurzinfo>
+				</info>
+			</attribut>
+			<attribut pid="att.tlsZfr16BitPositivKfzProStunde" anzahl="1" anzahlIst="fest" name="QKfzOffsetBeiAusfallHFB2">
+				<info>
+					<kurzinfo>Offset für Fehlerfall 2b (Ausfall der HFB2) in Kfz/h.</kurzinfo>
+				</info>
+			</attribut>
+			<attribut pid="att.tlsZfrZeit000bis900s" anzahl="1" anzahlIst="fest" name="THFB1">
+				<info>
+					<kurzinfo>Zykluszeit für Erfassung an HFB1.</kurzinfo>
+				</info>
+			</attribut>
+			<attribut pid="att.tlsZfrZeit000bis900s" anzahl="1" anzahlIst="fest" name="THFB2">
+				<info>
+					<kurzinfo>Zykluszeit für Erfassung an HFB2.</kurzinfo>
+				</info>
+			</attribut>
+			<attribut pid="att.tlsZfrZeit000bis900s" anzahl="1" anzahlIst="fest" name="TEinfahrt">
+				<info>
+					<kurzinfo>Zykluszeit für Erfassung an der Einfahrt.</kurzinfo>
+				</info>
+			</attribut>
+			<attribut pid="att.tlsZfrZeit000bis120s" anzahl="1" anzahlIst="fest" name="deltaTHFB1">
+				<info>
+					<kurzinfo>Zeitversatz für Erfassung an HFB1.</kurzinfo>
+				</info>
+			</attribut>
+			<attribut pid="att.tlsZfrZeit000bis120s" anzahl="1" anzahlIst="fest" name="deltaTHFB2">
+				<info>
+					<kurzinfo>Zeitversatz für Erfassung an HFB2.</kurzinfo>
+				</info>
+			</attribut>
+			<attribut pid="att.tlsZfrZeit000bis120s" anzahl="1" anzahlIst="fest" name="deltaTEinfahrt">
+				<info>
+					<kurzinfo>Zeitversatz für Erfassung an der Einfahrt.</kurzinfo>
+				</info>
+			</attribut>
+			<attribut pid="att.tlsZfrEinschaltungFsAufHfb" anzahl="1" anzahlIst="fest" name="EinschaltungFsAufHfb">
+				<info>
+					<kurzinfo>Ein- oder Ausschaltung der Fs der HFB für den Steueralgorithmus</kurzinfo>
+				</info>
+			</attribut>
+			<attribut pid="att.tlsZfrLambda" anzahl="1" anzahlIst="fest" name="Lambda">
+				<info>
+					<kurzinfo>Sensitivitätsfaktor Lambda. Der Wert dämpf (kleiner 1.00) oder verstärkt (größer 1.00) die Größe der Schwankung der Zuflussmenge auf der HFB.</kurzinfo>
+				</info>
+			</attribut>
+			<attribut pid="att.tlsZfrfQ" anzahl="1" anzahlIst="fest" name="fQ">
+				<info>
+					<kurzinfo>Konstanter Korrekturfaktor fQ, der die systematische Abweichung von qHFB60 und qHFB15 ausgleicht.</kurzinfo>
+				</info>
+			</attribut>
+			<attribut pid="att.tlsZfrAnzahlZusätzlicherKfz" anzahl="1" anzahlIst="fest" name="MaxAnzahlZusätzlicherKfz">
+				<info>
+					<kurzinfo>Maximale Anzahl der zusätzlichen Kfz pro Grünphase, falls die Zuflussregelung
+                        eingeschaltet ist.
+                    </kurzinfo>
+				</info>
+			</attribut>
+			<attribut pid="att.tlsZfrMaxSignalPlan" anzahl="1" anzahlIst="fest" name="MaxSignalPlan">
+				<info>
+					<kurzinfo>Max. SignalPlan. Verringerung der LSA-Wartezeit
+                    </kurzinfo>
+				</info>
+			</attribut>
+			<attribut pid="att.tlsZfr16BitPositivKfzProStunde" anzahl="1" anzahlIst="fest" name="QKfz2Ein">
+				<info>
+					<kurzinfo>Schwellwerte mit Hysterese für die Umschaltung zwischen den Programmen in Kfz/h.</kurzinfo>
+				</info>
+			</attribut>
+			<attribut pid="att.tlsZfr16BitPositivKfzProStunde" anzahl="1" anzahlIst="fest" name="QKfz2Aus">
+				<info>
+					<kurzinfo>Schwellwerte mit Hysterese für die Umschaltung zwischen den Programmen in Kfz/h.</kurzinfo>
+				</info>
+			</attribut>
+			<attribut pid="att.tlsZfr16BitPositivKfzProStunde" anzahl="1" anzahlIst="fest" name="QKfz3Ein">
+				<info>
+					<kurzinfo>Schwellwerte mit Hysterese für die Umschaltung zwischen den Programmen in Kfz/h.</kurzinfo>
+				</info>
+			</attribut>
+			<attribut pid="att.tlsZfr16BitPositivKfzProStunde" anzahl="1" anzahlIst="fest" name="QKfz3Aus">
+				<info>
+					<kurzinfo>Schwellwerte mit Hysterese für die Umschaltung zwischen den Programmen in Kfz/h.</kurzinfo>
+				</info>
+			</attribut>
+			<attribut pid="att.tlsZfr16BitPositivKfzProStunde" anzahl="1" anzahlIst="fest" name="QKfz4Ein">
+				<info>
+					<kurzinfo>Schwellwerte mit Hysterese für die Umschaltung zwischen den Programmen in Kfz/h.</kurzinfo>
+				</info>
+			</attribut>
+			<attribut pid="att.tlsZfr16BitPositivKfzProStunde" anzahl="1" anzahlIst="fest" name="QKfz4Aus">
+				<info>
+					<kurzinfo>Schwellwerte mit Hysterese für die Umschaltung zwischen den Programmen in Kfz/h.</kurzinfo>
+				</info>
+			</attribut>
+			<attribut pid="att.tlsZfr16BitPositivKfzProStunde" anzahl="1" anzahlIst="fest" name="QKfz5Ein">
+				<info>
+					<kurzinfo>Schwellwerte mit Hysterese für die Umschaltung zwischen den Programmen in Kfz/h.</kurzinfo>
+				</info>
+			</attribut>
+			<attribut pid="att.tlsZfr16BitPositivKfzProStunde" anzahl="1" anzahlIst="fest" name="QKfz5Aus">
+				<info>
+					<kurzinfo>Schwellwerte mit Hysterese für die Umschaltung zwischen den Programmen in Kfz/h.</kurzinfo>
+				</info>
+			</attribut>
+			<attribut pid="att.tlsZfr16BitPositivKfzProStunde" anzahl="1" anzahlIst="fest" name="QKfz6Ein">
+				<info>
+					<kurzinfo>Schwellwerte mit Hysterese für die Umschaltung zwischen den Programmen in Kfz/h.</kurzinfo>
+				</info>
+			</attribut>
+			<attribut pid="att.tlsZfr16BitPositivKfzProStunde" anzahl="1" anzahlIst="fest" name="QKfz6Aus">
+				<info>
+					<kurzinfo>Schwellwerte mit Hysterese für die Umschaltung zwischen den Programmen in Kfz/h.</kurzinfo>
+				</info>
+			</attribut>
+			<attribut pid="att.tlsZfr16BitPositivKfzProStunde" anzahl="1" anzahlIst="fest" name="QKfz7Ein">
+				<info>
+					<kurzinfo>Schwellwerte mit Hysterese für die Umschaltung zwischen den Programmen in Kfz/h.</kurzinfo>
+				</info>
+			</attribut>
+			<attribut pid="att.tlsZfr16BitPositivKfzProStunde" anzahl="1" anzahlIst="fest" name="QKfz7Aus">
+				<info>
+					<kurzinfo>Schwellwerte mit Hysterese für die Umschaltung zwischen den Programmen in Kfz/h.</kurzinfo>
+				</info>
+			</attribut>
+			<attribut pid="att.tlsZfr16BitPositivKfzProStunde" anzahl="1" anzahlIst="fest" name="QKfz8Ein">
+				<info>
+					<kurzinfo>Schwellwerte mit Hysterese für die Umschaltung zwischen den Programmen in Kfz/h.</kurzinfo>
+				</info>
+			</attribut>
+			<attribut pid="att.tlsZfr16BitPositivKfzProStunde" anzahl="1" anzahlIst="fest" name="QKfz8Aus">
+				<info>
+					<kurzinfo>Schwellwerte mit Hysterese für die Umschaltung zwischen den Programmen in Kfz/h.</kurzinfo>
+				</info>
+			</attribut>
+		</attributgruppenDefinition>
+		<attributgruppenDefinition pid="atg.tlsZfrEinAusSchaltEntscheidungsDaten" name="TlsZfrEinAusSchaltEntscheidungsDaten" parametrierend="nein">
+			<info>
+				<kurzinfo>Schaltentscheidungsdaten der ZRA-EinAusSteuerung, die bei jeder Neuberechnung ausgegeben werden.</kurzinfo>
+			</info>
+			<aspekt pid="asp.standard" onlineModus="quelleUndSenke">
+			</aspekt>
+			<attribut pid="att.jaNein" anzahl="1" anzahlIst="fest" name="AnlageEinschalten">
+				<info>
+					<kurzinfo>Schaltkriterium: alle,Ist ZRA aktuell eingeschaltet ?</kurzinfo>
+				</info>
+			</attribut>
+			<attribut pid="att.jaNein" anzahl="1" anzahlIst="fest" name="K1">
+				<info>
+					<kurzinfo>Schaltkriterium: 1,Ist Kriterium 1 erfüllt ?</kurzinfo>
+				</info>
+			</attribut>
+			<attribut pid="att.jaNein" anzahl="1" anzahlIst="fest" name="K2">
+				<info>
+					<kurzinfo>Schaltkriterium: 2,Ist Kriterium 2 erfüllt ?</kurzinfo>
+				</info>
+			</attribut>
+			<attribut pid="att.jaNein" anzahl="1" anzahlIst="fest" name="K3">
+				<info>
+					<kurzinfo>Schaltkriterium: 3,Ist Kriterium 3 erfüllt ?</kurzinfo>
+				</info>
+			</attribut>
+			<attribut pid="att.jaNein" anzahl="1" anzahlIst="fest" name="K4">
+				<info>
+					<kurzinfo>Schaltkriterium: 4,Ist Kriterium 4 erfüllt ?</kurzinfo>
+				</info>
+			</attribut>
+			<attribut pid="att.text" anzahl="1" anzahlIst="fest" name="SchaltGrundKriterium1">
+				<info>
+					<kurzinfo>Schaltkriterium: 1,Klartext mit der Schaltbegründung für Schaltkriterium 1</kurzinfo>
+				</info>
+			</attribut>
+			<attribut pid="att.text" anzahl="1" anzahlIst="fest" name="SchaltGrundKriterium2">
+				<info>
+					<kurzinfo>Schaltkriterium: 2,Klartext mit der Schaltbegründung für Schaltkriterium 2</kurzinfo>
+				</info>
+			</attribut>
+			<attribut pid="att.text" anzahl="1" anzahlIst="fest" name="SchaltGrundKriterium3">
+				<info>
+					<kurzinfo>Schaltkriterium: 3,Klartext mit der Schaltbegründung für Schaltkriterium 3</kurzinfo>
+				</info>
+			</attribut>
+			<attribut pid="att.text" anzahl="1" anzahlIst="fest" name="SchaltGrundKriterium4">
+				<info>
+					<kurzinfo>Schaltkriterium: 4,Klartext mit der Schaltbegründung für Schaltkriterium 4</kurzinfo>
+				</info>
+			</attribut>
+			<attribut pid="att.tlsZfr16BitPositivKfzProStunde" anzahl="1" anzahlIst="fest" name="QKfzMQZufluss">
+				<info>
+					<kurzinfo>Schaltkriterium: 1,MQ Zufluss: Mittelwert QKfz</kurzinfo>
+				</info>
+			</attribut>
+			<attribut pid="att.tlsZfr16BitPositivKfzProStunde" anzahl="1" anzahlIst="fest" name="QKfzMQEinfahrt">
+				<info>
+					<kurzinfo>Schaltkriterium: 1,MQ Einfahrt: Mittelwert QKfz</kurzinfo>
+				</info>
+			</attribut>
+			<attribut pid="att.tlsZfr16BitPositivKfzProStunde" anzahl="1" anzahlIst="fest" name="QKfzEin">
+				<info>
+					<kurzinfo>Schaltkriterium: 1,Schwellwert Kriterium 1</kurzinfo>
+				</info>
+			</attribut>
+			<attribut pid="att.jaNein" anzahl="1" anzahlIst="fest" name="QKfzMQZuflussGueltig">
+				<info>
+					<kurzinfo>Schaltkriterium: 1,MQ Zufluss: Ist der (Mittel)Wert QKfz gültig ?</kurzinfo>
+				</info>
+			</attribut>
+			<attribut pid="att.jaNein" anzahl="1" anzahlIst="fest" name="QKfzMQEinfahrtGueltig">
+				<info>
+					<kurzinfo>Schaltkriterium: 1,MQ Einfahrt Ist der (Mittel)Wert QKfz gültig ?</kurzinfo>
+				</info>
+			</attribut>
+			<attribut pid="att.jaNein" anzahl="1" anzahlIst="fest" name="QKfzMQZuflErsatzGueltig">
+				<info>
+					<kurzinfo>Schaltkriterium: 1,MQ Zufluss Ersatz: Ist der (Mittel)Wert QKfz gültig ?</kurzinfo>
+				</info>
+			</attribut>
+			<attribut pid="att.tlsZfr16BitPositivDichte" anzahl="1" anzahlIst="fest" name="DichteMQZufl">
+				<info>
+					<kurzinfo>Schaltkriterium: 2,Aktuelle Dichte</kurzinfo>
+				</info>
+			</attribut>
+			<attribut pid="att.tlsZfr16BitPositivDichte" anzahl="1" anzahlIst="fest" name="DichteEin">
+				<info>
+					<kurzinfo>Schaltkriterium: 2,Schwellwert Kriterium 2</kurzinfo>
+				</info>
+			</attribut>
+			<attribut pid="att.tlsZfr16BitPositivKfzProStunde" anzahl="1" anzahlIst="fest" name="QBMQZufl">
+				<info>
+					<kurzinfo>Schaltkriterium: 2,MQ Zufluss: Mittelwert QB</kurzinfo>
+				</info>
+			</attribut>
+			<attribut pid="att.geschwindigkeit" anzahl="1" anzahlIst="fest" name="VKfzMQZufl">
+				<info>
+					<kurzinfo>Schaltkriterium: 2,MQ Zufluss: Mittelwert VKfz (muss != 0 sein)</kurzinfo>
+				</info>
+			</attribut>
+			<attribut pid="att.jaNein" anzahl="1" anzahlIst="fest" name="QBMQZuflGueltig">
+				<info>
+					<kurzinfo>Schaltkriterium: 2,MQ Zufluss: Ist der (Mittel)Wert QB gültig ?</kurzinfo>
+				</info>
+			</attribut>
+			<attribut pid="att.jaNein" anzahl="1" anzahlIst="fest" name="VKfzMQZuflGueltig">
+				<info>
+					<kurzinfo>Schaltkriterium: 2,MQ Zufluss: Ist der (Mittel)Wert VKfz gültig ?</kurzinfo>
+				</info>
+			</attribut>
+			<attribut pid="att.bemessungsVerkehrsStärkeStunde" anzahl="1" anzahlIst="fest" name="QBMQZuflErsatz">
+				<info>
+					<kurzinfo>Schaltkriterium: 2,MQ Zufluss Ersatz: Mittelwert QB</kurzinfo>
+				</info>
+			</attribut>
+			<attribut pid="att.geschwindigkeit" anzahl="1" anzahlIst="fest" name="VKfzMQErsatz">
+				<info>
+					<kurzinfo>Schaltkriterium: 2,MQ Zufluss Ersatz: Mittelwert VKfz (muss != 0 sein)</kurzinfo>
+				</info>
+			</attribut>
+			<attribut pid="att.jaNein" anzahl="1" anzahlIst="fest" name="QBMQZuflErsatzGueltig">
+				<info>
+					<kurzinfo>Schaltkriterium: 2,MQ Zufluss Ersatz: Ist der (Mittel)Wert QB gültig ?</kurzinfo>
+				</info>
+			</attribut>
+			<attribut pid="att.jaNein" anzahl="1" anzahlIst="fest" name="VKfzMQZuflErsatzGueltig">
+				<info>
+					<kurzinfo>Schaltkriterium: 2,MQ Zufluss Ersatz: Ist der (Mittel)Wert VKfz gültig ?</kurzinfo>
+				</info>
+			</attribut>
+			<attribut pid="att.tlsZfr16BitPositivDichte" anzahl="1" anzahlIst="fest" name="PrognoseDichteMQZufl">
+				<info>
+					<kurzinfo>Schaltkriterium: 3,Prognosedichte</kurzinfo>
+				</info>
+			</attribut>
+			<attribut pid="att.tlsZfr16BitPositivDichte" anzahl="1" anzahlIst="fest" name="DichteStau">
+				<info>
+					<kurzinfo>Schaltkriterium: 3,Schwellwert Kriterium 3</kurzinfo>
+				</info>
+			</attribut>
+			<attribut pid="att.bemessungsVerkehrsStärkeStunde" anzahl="1" anzahlIst="fest" name="QBPMQZufl">
+				<info>
+					<kurzinfo>Schaltkriterium: 3,MQ Zufluss: Mittelwert QBP</kurzinfo>
+				</info>
+			</attribut>
+			<attribut pid="att.geschwindigkeit" anzahl="1" anzahlIst="fest" name="VKfzPMQZufl">
+				<info>
+					<kurzinfo>Schaltkriterium: 3,MQ Zufluss: Mittelwert VKfzP (muss != 0 sein)</kurzinfo>
+				</info>
+			</attribut>
+			<attribut pid="att.jaNein" anzahl="1" anzahlIst="fest" name="VKfzPMQZuflGueltig">
+				<info>
+					<kurzinfo>Schaltkriterium: 3,MQ Zufluss: Ist der (Mittel)Wert VKfzP gültig ?</kurzinfo>
+				</info>
+			</attribut>
+			<attribut pid="att.jaNein" anzahl="1" anzahlIst="fest" name="QBPMQZuflGueltig">
+				<info>
+					<kurzinfo>Schaltkriterium: 3,MQ Zufluss: Ist der (Mittel)Wert QBP gültig ?</kurzinfo>
+				</info>
+			</attribut>
+			<attribut pid="att.jaNein" anzahl="1" anzahlIst="fest" name="StauErhol">
+				<info>
+					<kurzinfo>Schaltkriterium: 3,Liegt Stauerholung vor ?</kurzinfo>
+				</info>
+			</attribut>
+			<attribut pid="att.tlsZfr16BitPositivDichte" anzahl="1" anzahlIst="fest" name="DiffDichteStauErhol">
+				<info>
+					<kurzinfo>Schaltkriterium: 3,Schwellwert Kriterium 3</kurzinfo>
+				</info>
+			</attribut>
+			<attribut pid="att.tlsZfr16BitPositivDichte" anzahl="1" anzahlIst="fest" name="MaxDichteStauErhol">
+				<info>
+					<kurzinfo>Schaltkriterium: 3,Schwellwert Kriterium 3</kurzinfo>
+				</info>
+			</attribut>
+			<attribut pid="att.tlsZfr16BitPositivDichte" anzahl="1" anzahlIst="fest" name="PrognoseDichteAlt">
+				<info>
+					<kurzinfo>Schaltkriterium: 3,Prognosedichte Alt</kurzinfo>
+				</info>
+			</attribut>
+			<attribut pid="att.tlsZfr16BitPositivDichte" anzahl="1" anzahlIst="fest" name="PrognoseDichteAktuell">
+				<info>
+					<kurzinfo>Schaltkriterium: 3,Prognosedichte Aktuell</kurzinfo>
+				</info>
+			</attribut>
+			<attribut pid="att.bemessungsVerkehrsStärkeStunde" anzahl="1" anzahlIst="fest" name="QBPMQZuflAlt">
+				<info>
+					<kurzinfo>Schaltkriterium: 3,MQ Zufluss: Mittelwert QBP alt</kurzinfo>
+				</info>
+			</attribut>
+			<attribut pid="att.geschwindigkeit" anzahl="1" anzahlIst="fest" name="VKfzPMQZuflAlt">
+				<info>
+					<kurzinfo>Schaltkriterium: 3,MQ Zufluss: Mittelwert VKfzP alt (muss != 0 sein)</kurzinfo>
+				</info>
+			</attribut>
+			<attribut pid="att.bemessungsVerkehrsStärkeStunde" anzahl="1" anzahlIst="fest" name="QBPMQZuflAktuell">
+				<info>
+					<kurzinfo>Schaltkriterium: 3,MQ Zufluss:  QBP aktuell (muss != 0 sein)</kurzinfo>
+				</info>
+			</attribut>
+			<attribut pid="att.geschwindigkeit" anzahl="1" anzahlIst="fest" name="VKfzPMQZuflAktuell">
+				<info>
+					<kurzinfo>Schaltkriterium: 3,MQ Zufluss:  VKfzP aktuell (muss != 0 sein)</kurzinfo>
+				</info>
+			</attribut>
+			<attribut pid="att.tlsZfrStauZustand" anzahl="1" anzahlIst="fest" name="StauZustandRampe">
+				<info>
+					<kurzinfo>Schaltkriterium: 4,Aktueller Stauzustand der Einfahrt</kurzinfo>
+				</info>
+			</attribut>
+			<attribut pid="att.tlsZfrStauZustand" anzahl="1" anzahlIst="fest" name="MaxStauZustandRampe">
+				<info>
+					<kurzinfo>Schaltkriterium: 4,Schwellwert Kriterium 4</kurzinfo>
+				</info>
+			</attribut>
+			<attribut pid="att.jaNein" anzahl="1" anzahlIst="fest" name="ZraAutomBetrieb">
+				<info>
+					<kurzinfo>Schaltkriterium: alle,Ist die ZRA im Automatikbetrieb ?</kurzinfo>
+				</info>
+			</attribut>
+			<attribut pid="att.jaNein" anzahl="1" anzahlIst="fest" name="AnlagenFehler">
+				<info>
+					<kurzinfo>Schaltkriterium: alle,Liegt aktuell ein Anlagenfehler vor ?</kurzinfo>
+				</info>
+			</attribut>
+			<attribut pid="att.jaNein" anzahl="1" anzahlIst="fest" name="AnlageAusWegAnlagenFehler">
+				<info>
+					<kurzinfo>Schaltkriterium: alle,Ist Anlage ausgeschaltet, weil ein Fehler vorliegt ?</kurzinfo>
+				</info>
+			</attribut>
+			<attribut pid="att.jaNein" anzahl="1" anzahlIst="fest" name="ParamGeandert">
+				<info>
+					<kurzinfo>Schaltkriterium: alle,Liegt eine Parameteränderung vor ? (dann immer neuschalten)</kurzinfo>
+				</info>
+			</attribut>
+			<attribut pid="att.jaNein" anzahl="1" anzahlIst="fest" name="SchaltDatenSendenErlaubt">
+				<info>
+					<kurzinfo>Schaltkriterium: alle,Dürfen die Schaltdaten überhaupt gesendet werden ?</kurzinfo>
+				</info>
+			</attribut>
+		</attributgruppenDefinition>
+		<attributgruppenDefinition pid="atg.tlsZfrParamProEinAusSchaltung" name="TlsZfrParamProEinAusSchaltung" parametrierend="ja">
+			<info>
+				<kurzinfo>Parameter für die Ein- und Ausschaltgrenzen der automatischen Ein-Aus-Steuerung.</kurzinfo>
+			</info>
+			<aspekt pid="asp.tlsParameterVorgabeArchiv" onlineModus="quelleUndSenke">
+			</aspekt>
+			<attributliste pid="atl.urlasser" anzahl="1" anzahlIst="fest" name="Urlasser">
+			</attributliste>
+			<attribut pid="att.tlsZfr16BitPositivKfzProStunde" anzahl="1" anzahlIst="fest" name="QKfzEin">
+				<info>
+					<kurzinfo>Einschaltgrenze für Kriterium 1: QKfz (Zufluss HFB) + QKfz (Einfahrt) &gt; QKfzEin</kurzinfo>
+				</info>
+			</attribut>
+			<attribut pid="att.tlsZfr16BitPositivDichte" anzahl="1" anzahlIst="fest" name="DichteEin">
+				<info>
+					<kurzinfo>Einschaltgrenze für Kriterium 2: Dichte (Zufluss HFB) &gt; DichteEin</kurzinfo>
+				</info>
+			</attribut>
+			<attribut pid="att.tlsZfr16BitPositivDichte" anzahl="1" anzahlIst="fest" name="DichteStau">
+				<info>
+					<kurzinfo>Grenze für Stauerkennung für Kriterium 3: Dichte (Zufluss HFB) &gt; DichteStau</kurzinfo>
+				</info>
+			</attribut>
+			<attribut pid="att.tlsZfr16BitPositivDichte" anzahl="1" anzahlIst="fest" name="MaxDichteStauErholung">
+				<info>
+					<kurzinfo>Zusatzkriterium bei Kriterium 3 für Erkennung Stauerholung: Erholung wird nur berücksichtigt, wenn Dichte auf HFB unter diesem Wert liegt.</kurzinfo>
+				</info>
+			</attribut>
+			<attribut pid="att.tlsZfr16BitPositivDichte" anzahl="1" anzahlIst="fest" name="DiffDichteStauErholung">
+				<info>
+					<kurzinfo>Zusatzkriterium bei Kriterium 3 für Erkennung Stauerholung: Aktuelle Dichte ist um DiffDichteStauErholung kleiner als Dichte (Zufluss HFB)</kurzinfo>
+				</info>
+			</attribut>
+			<attribut pid="att.tlsZfrStauZustand" anzahl="1" anzahlIst="fest" name="MaxStauZustandRampe">
+				<info>
+					<kurzinfo>Zusatzkriterium für das Einschalten der Zuflussregelung nach Stauauflösung: Stauzustand auf der Rampe muss kleiner oder gleich
+						diesem Wert sein.
+					</kurzinfo>
+				</info>
+			</attribut>
+			<attribut pid="att.tlsZfrMaxAnzahlAusfaelle" anzahl="1" anzahlIst="fest" name="MaxAnzahlAusfälle">
+				<info>
+					<kurzinfo>Maximale Anzahl von Messwertausfällen, die noch durch Ersetzung ausgeglichen werden dürfen.</kurzinfo>
+				</info>
+			</attribut>
+		</attributgruppenDefinition>
+		<attributgruppenDefinition pid="atg.tlsZfrProEinAusSchaltung" name="TlsZfrProEinAusSchaltung" parametrierend="ja">
+			<info>
+				<kurzinfo>Ein-Aus-Schaltung der ZRA (FG 9 / Typ 145 Hersteller Dürr).</kurzinfo>
+				<beschreibung>
+                    <sektion>
+                        <titel>FG 9: DE-Block-Struktur im Typ 145 "Einschaltung der Anlage"</titel>
+                        <absatz>Wird von der UZ eine Verkehrslage erkannt, die ien Ein- oder Ausschalten der Anlage erfordert,
+                            geschieht dies über diese ATG. Eine ausgeschaltete Anlage berechnet in der Betriebsart 65 oder 66 (FG 9, Typ 17)
+                            immer den Signalplan 0 (FG 9, Typ 48).
+                        </absatz>
+                    </sektion>
+                </beschreibung>
+			</info>
+			<aspekt pid="asp.tlsParameterVorgabeArchiv" onlineModus="quelleUndSenke">
+			</aspekt>
+			<attributliste pid="atl.urlasser" anzahl="1" anzahlIst="fest" name="Urlasser">
+			</attributliste>
+			<attribut pid="att.tlsHersteller" anzahl="1" anzahlIst="fest" name="Hersteller">
+				<info>
+					<kurzinfo>Herstellercode: Dürr = 48</kurzinfo>
+				</info>
+			</attribut>
+			<attribut pid="att.jaNein" anzahl="1" anzahlIst="fest" name="AnlageEinschalten">
+				<info>
+					<kurzinfo>Legt fest, ob die ZRA eingeschaltetet (Ja) oder ausgeschaltet werden soll (Nein)</kurzinfo>
+				</info>
+			</attribut>
+		</attributgruppenDefinition>
+		<attributgruppenDefinition pid="atg.tlsZfrProSchaltVorschläge" name="TlsZfrProSchaltVorschläge" parametrierend="nein">
+			<info>
+				<kurzinfo>ZRA Pro Schaltvorschläge (FG 9 / Typ 200 Hersteller Dürr).</kurzinfo>
+				<beschreibung>
+                    <sektion>
+                        <titel>FG 9: DE-Block-Struktur im Typ 200 "ProSchaltvorschläge"</titel>
+                        <absatz>Die Nachricht überträgt die aktuell errechneten Werte, welche für den Pro-Algorithmus
+                            benötigt werden, als Schaltvorschläge. Wird versendet mit Zeitstempel Typ 30.
+                        </absatz>
+                    </sektion>
+                </beschreibung>
+			</info>
+			<aspekt pid="asp.tlsAntwort" onlineModus="quelleUndSenke">
+			</aspekt>
+			<attribut pid="att.tlsHersteller" anzahl="1" anzahlIst="fest" name="Hersteller">
+				<info>
+					<kurzinfo>Herstellercode: Dürr = 48</kurzinfo>
+				</info>
+			</attribut>
+			<attribut pid="att.tlsZfr16BitPositivKfzProStunde" anzahl="1" anzahlIst="fest" name="QZufluss">
+				<info>
+					<kurzinfo>Zuflussrate in Kfz/h.</kurzinfo>
+				</info>
+			</attribut>
+			<attribut pid="att.tlsZfrZeit000bis255s" anzahl="1" anzahlIst="fest" name="UmlaufZeit">
+				<info>
+					<kurzinfo>Berechnete Umlaufzeit 'TU'.</kurzinfo>
+				</info>
+			</attribut>
+			<attribut pid="att.tlsZfrAnzahlZusätzlicherKfz" anzahl="1" anzahlIst="fest" name="AnzahlZusätzlicherKfz">
+				<info>
+					<kurzinfo>Ein bis 32 Kfz pro Grünphase, falls die Zuflussregelung
+                        eingeschaltet ist.
+                    </kurzinfo>
+				</info>
+			</attribut>
+			<attribut pid="att.tlsZfrZeit000bis255s" anzahl="1" anzahlIst="fest" name="TRot">
+				<info>
+					<kurzinfo>Berechnete Rotzeit 'TRot'.</kurzinfo>
+				</info>
+			</attribut>
+			<attribut pid="att.tlsZfrZeit000bis255s" anzahl="1" anzahlIst="fest" name="TGrün">
+				<info>
+					<kurzinfo>Berechnete Grünzeit 'TGrün'.</kurzinfo>
+				</info>
+			</attribut>
+			<attribut pid="att.tlsZfr16BitPositivKfzProStunde" anzahl="1" anzahlIst="fest" name="QKfzEinfahrt">
+				<info>
+					<kurzinfo>Zufluss in der Einfahrt in Kfz/h.</kurzinfo>
+				</info>
+			</attribut>
+			<attribut pid="att.tlsZfrProzent" anzahl="1" anzahlIst="fest" name="bStauSchleife">
+				<info>
+					<kurzinfo>Belegungsgrad auf der Stauschleife in der Einfahrt.
+                    </kurzinfo>
+				</info>
+			</attribut>
+			<attribut pid="att.tlsZfrProzent" anzahl="1" anzahlIst="fest" name="bZweiteAnforderung">
+				<info>
+					<kurzinfo>Belegungsgrad auf der zweiten Anforderungsschleife in der Einfahrt.
+                    </kurzinfo>
+				</info>
+			</attribut>
+			<attribut pid="att.tlsZfrStauZustand" anzahl="1" anzahlIst="fest" name="StauZustand">
+				<info>
+					<kurzinfo>Stauzustand auf der Zufahrt.</kurzinfo>
+				</info>
+			</attribut>
+			<attribut pid="att.tlsZfr16BitPositivKfzProStunde" anzahl="1" anzahlIst="fest" name="QKfzHFB1HFS">
+				<info>
+					<kurzinfo>Verkehrsmenge auf der Hauptfahrbahn am 1. Querschnitt auf dem HFS in Kfz/h.</kurzinfo>
+				</info>
+			</attribut>
+			<attribut pid="att.tlsZfr16BitPositivKfzProStunde" anzahl="1" anzahlIst="fest" name="QKfzHFB2HFS">
+				<info>
+					<kurzinfo>Verkehrsmenge auf der Hauptfahrbahn am 2. Querschnitt auf dem HFS in Kfz/h.</kurzinfo>
+				</info>
+			</attribut>
+			<attribut pid="att.tlsZfrProzent" anzahl="1" anzahlIst="fest" name="bHFB1HFS">
+				<info>
+					<kurzinfo>Belegungsgrad auf der Hauptfahrbahn am 1. Querschnitt auf dem HFS.
+                    </kurzinfo>
+				</info>
+			</attribut>
+			<attribut pid="att.tlsZfrProzent" anzahl="1" anzahlIst="fest" name="bHFB2HFS">
+				<info>
+					<kurzinfo>Belegungsgrad auf der Hauptfahrbahn am 2. Querschnitt auf dem HFS.
+                    </kurzinfo>
+				</info>
+			</attribut>
+			<attribut pid="att.tlsZfr16BitPositivKfzProStunde" anzahl="1" anzahlIst="fest" name="QKfzHFB1UEFS">
+				<info>
+					<kurzinfo>Verkehrsmenge auf der Hauptfahrbahn am 1. Querschnitt auf dem UEFS in Kfz/h.</kurzinfo>
+				</info>
+			</attribut>
+			<attribut pid="att.tlsZfr16BitPositivKfzProStunde" anzahl="1" anzahlIst="fest" name="QKfzHFB2UEFS">
+				<info>
+					<kurzinfo>Verkehrsmenge auf der Hauptfahrbahn am 2. Querschnitt auf dem UEFS in Kfz/h.</kurzinfo>
+				</info>
+			</attribut>
+			<attribut pid="att.tlsZfrProzent" anzahl="1" anzahlIst="fest" name="bHFB1UEFS">
+				<info>
+					<kurzinfo>Belegungsgrad auf der Hauptfahrbahn am 1. Querschnitt auf dem UEFS.
+                    </kurzinfo>
+				</info>
+			</attribut>
+			<attribut pid="att.tlsZfrProzent" anzahl="1" anzahlIst="fest" name="bHFB2UEFS">
+				<info>
+					<kurzinfo>Belegungsgrad auf der Hauptfahrbahn am 2. Querschnitt auf dem UEFS.
+                    </kurzinfo>
+				</info>
+			</attribut>
+		</attributgruppenDefinition>
+		<attributDefinition pid="att.tlsZfr16BitPositivDichte" name="TlsZfr16BitPositivDichte">
+			<info>
+				<kurzinfo>Dichte: Fz/km-Wert von 0 - 65534.</kurzinfo>
+			</info>
+			<ganzzahl bits="32">
+				<bereich skalierung="1" minimum="0" maximum="65535" einheit="Fz/km">
+				</bereich>
+				<zustand name="nicht ermittelbar" wert="65535">
+					<info>
+						<kurzinfo>
+                            Daten sind nicht ermittelbar (ist KEIN
+                            Fehler).
+                        </kurzinfo>
+						<beschreibung>
+                            Wird gesetzt, wenn der entsprechende Wert
+                            nicht ermittelbar ist und kein Interpolation
+                            sinnvoll möglich ist (z.B. ist die
+                            Geschwindigkeit nicht ermittelbar, wenn kein
+                            Fahrzeug erfasst wurde).
+                        </beschreibung>
+					</info>
+				</zustand>
+			</ganzzahl>
+		</attributDefinition>
+		<attributDefinition pid="att.tlsZfr16BitPositivKfzProStunde" name="TlsZfr16BitPositivKfzProStunde">
+			<info>
+				<kurzinfo>Kfz/h-Wert von 0 - 65534.</kurzinfo>
+			</info>
+			<ganzzahl bits="32">
+				<bereich skalierung="1" minimum="0" maximum="65535" einheit="Kfz/h">
+				</bereich>
+				<zustand name="nicht ermittelbar" wert="65535">
+					<info>
+						<kurzinfo>
+                            Daten sind nicht ermittelbar (ist KEIN
+                            Fehler).
+                        </kurzinfo>
+						<beschreibung>
+                            Wird gesetzt, wenn der entsprechende Wert
+                            nicht ermittelbar ist und kein Interpolation
+                            sinnvoll möglich ist (z.B. ist die
+                            Geschwindigkeit nicht ermittelbar, wenn kein
+                            Fahrzeug erfasst wurde).
+                        </beschreibung>
+					</info>
+				</zustand>
+			</ganzzahl>
+		</attributDefinition>
+		<attributDefinition pid="att.tlsZfrEinschaltungFsAufHfb" name="TlsZfrEinschaltungFsAufHfb">
+			<info>
+				<kurzinfo>Ein- oder Ausschaltung der Fs der HFB für den Steueralgorithmus</kurzinfo>
+			</info>
+			<ganzzahl bits="8">
+				<bereich skalierung="1" minimum="0" maximum="3">
+				</bereich>
+				<zustand name="HFS ausgeschaltet-1UeFS ausgeschaltet" wert="0">
+					<info>
+						<kurzinfo>HFS ausgeschaltet-1UeFS ausgeschaltet.</kurzinfo>
+					</info>
+				</zustand>
+				<zustand name="HFS eingeschaltet-1UeFS ausgeschaltet" wert="1">
+					<info>
+						<kurzinfo>HFS eingeschaltet-1UeFS ausgeschaltet.</kurzinfo>
+					</info>
+				</zustand>
+				<zustand name="HFS ausgeschaltet-1UeFS eingeschaltet" wert="2">
+					<info>
+						<kurzinfo>HFS ausgeschaltet-1UeFS eingeschaltet.</kurzinfo>
+					</info>
+				</zustand>
+				<zustand name="HFS eingeschaltet-1UeFS eingeschaltet" wert="3">
+					<info>
+						<kurzinfo>HFS eingeschaltet-1UeFS eingeschaltet.</kurzinfo>
+					</info>
+				</zustand>
+			</ganzzahl>
+		</attributDefinition>
+		<attributDefinition pid="att.tlsZfrfQ" name="TlsZfrfQ">
+			<info>
+				<kurzinfo>Konstanter Korrekturfaktor fQ, der die systematische Abweichung von qHFB60 und qHFB15 ausgleicht.</kurzinfo>
+			</info>
+			<ganzzahl bits="16">
+				<bereich skalierung="0,01" minimum="0" maximum="200">
+				</bereich>
+			</ganzzahl>
+		</attributDefinition>
+		<attributDefinition pid="att.tlsZfrLambda" name="TlsZfrLambda">
+			<info>
+				<kurzinfo>Sensitivitätsfaktor Lambda. Der Wert dämpf (kleiner 1.00) oder verstärkt (größer 1.00) die Größe der Schwankung der Zuflussmenge auf der HFB.</kurzinfo>
+			</info>
+			<ganzzahl bits="16">
+				<bereich skalierung="0,01" minimum="0" maximum="200">
+				</bereich>
+			</ganzzahl>
+		</attributDefinition>
+		<attributDefinition pid="att.tlsZfrMaxAnzahlAusfaelle" name="TlsZfrMaxAnzahlAusfaelle">
+			<info>
+				<kurzinfo>Maximale Anzahl von Messwertausfällen, die noch durch Ersetzung ausgeglichen werden dürfen.</kurzinfo>
+			</info>
+			<ganzzahl bits="8">
+				<bereich skalierung="1" minimum="0" maximum="127">
+				</bereich>
+			</ganzzahl>
+		</attributDefinition>
+		<attributDefinition pid="att.tlsZfrMaxSignalPlan" name="MaxSignalPlan">
+			<info>
+				<kurzinfo>Max. SignalPlan. Verringerung der LSA-Wartezeit</kurzinfo>
+			</info>
+			<ganzzahl bits="16">
+				<bereich skalierung="1" minimum="2" maximum="240" einheit="s">
+				</bereich>
+				<zustand name="Kopie TRotMax" wert="0">
+				</zustand>
+			</ganzzahl>
+		</attributDefinition>
+		<attributDefinition pid="att.tlsZfrStauZustand" name="TlsZfrStauZustand">
+			<info>
+				<kurzinfo>Stauzustand</kurzinfo>
+			</info>
+			<ganzzahl bits="8">
+				<bereich skalierung="1" minimum="0" maximum="3">
+				</bereich>
+				<zustand name="kein Stau" wert="0">
+					<info>
+						<kurzinfo>kein Stau, Anlage arbeitet normal.</kurzinfo>
+					</info>
+				</zustand>
+				<zustand name="erhöhter Abfluss" wert="1">
+					<info>
+						<kurzinfo>Leichter Stau --&gt; erhöhter Abfluss</kurzinfo>
+					</info>
+				</zustand>
+				<zustand name="max. Abfluss (3 Fz)" wert="2">
+					<info>
+						<kurzinfo>Starker Zufluss in Rampe --&gt; max. Abfluss (3 Fz)</kurzinfo>
+					</info>
+				</zustand>
+				<zustand name="Dauergrün" wert="3">
+					<info>
+						<kurzinfo>Stauschleife in Rampe überstaut --&gt; Dauergrün einschalten</kurzinfo>
+					</info>
+				</zustand>
+			</ganzzahl>
+		</attributDefinition>
+		<attributDefinition pid="att.tlsZfrZeit000bis120s" name="TlsZfrZeit000bis120s">
+			<info>
+				<kurzinfo>Zeitdauer von 0 - 120 Sekunden.</kurzinfo>
+			</info>
+			<ganzzahl bits="16">
+				<bereich skalierung="1" minimum="0" maximum="120" einheit="s">
+				</bereich>
+			</ganzzahl>
+		</attributDefinition>
+		<attributDefinition pid="att.tlsZfrZeit000bis300s" name="TlsZfrZeit000bis300s">
+			<info>
+				<kurzinfo>Zeitdauer von 0 - 300 Sekunden.</kurzinfo>
+			</info>
+			<ganzzahl bits="16">
+				<bereich skalierung="1" minimum="0" maximum="300" einheit="s">
+				</bereich>
+			</ganzzahl>
+		</attributDefinition>
+		<attributDefinition pid="att.tlsZfrZeit000bis900s" name="TlsZfrZeit000bis900s">
+			<info>
+				<kurzinfo>Zeitdauer von 0 - 900 Sekunden.</kurzinfo>
+			</info>
+			<ganzzahl bits="16">
+				<bereich skalierung="1" minimum="0" maximum="900" einheit="s">
+				</bereich>
+			</ganzzahl>
+		</attributDefinition>
+	</modell>
+	<objekte>
+	</objekte>
+</konfigurationsBereich>

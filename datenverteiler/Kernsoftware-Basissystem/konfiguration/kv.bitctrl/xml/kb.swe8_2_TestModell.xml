@@ -1,0 +1,93 @@
+<?xml version="1.0" encoding="ISO-8859-1"?>
+<!DOCTYPE konfigurationsBereich PUBLIC "-//K2S//DTD Dokument//DE" "K2S.dtd">
+<konfigurationsBereich pid="kb.swe8_2_TestModell"
+	verantwortlich="kv.bitctrl">
+	<konfigurationsAenderung stand="01.06.2007" version="1" autor="Uwe Peuker, BitCtrl Systems GmbH" grund="Test">Bereich zum Test der Parametrierung erzeugt.</konfigurationsAenderung>
+	<modell>
+		<typDefinition pid="paramtest.typ.3spMq" name="3 spuriger Messquerschnitt (Test)" objektNamenPermanent="nein">
+			<info>
+				<kurzinfo>Virtueller Typ zur Zusammenfassung von dreistreifigen MQ</kurzinfo>
+			</info>
+			<erweitert pid="typ.konfigurationsObjekt"/>
+			<menge pid="paramtest.menge.mq" name="MQ" erforderlich="ja">
+			</menge>
+		</typDefinition>
+		<typDefinition pid="paramtest.typ.fs" name="Fahrstreifen (Test)" objektNamenPermanent="nein">
+			<info>
+				<kurzinfo>Typ Test-Fahrstreifen</kurzinfo>
+			</info>
+			<erweitert pid="typ.konfigurationsObjekt"/>
+			<attributgruppe pid="paramtest.atg.fs"/>
+			<defaultParameter attributgruppe="paramtest.atg.fs" typ="paramtest.typ.fs">
+				<datum name="Parameter" wert="Der Standardtext"/>
+			</defaultParameter>
+		</typDefinition>
+		<typDefinition pid="paramtest.typ.mq" name="Messquerschnitt (Test)" objektNamenPermanent="nein">
+			<info>
+				<kurzinfo>Test-Messquerschnitt</kurzinfo>
+			</info>
+			<erweitert pid="typ.konfigurationsObjekt"/>
+			<menge pid="paramtest.menge.fs" name="Fahrstreifen" erforderlich="ja">
+			</menge>
+		</typDefinition>
+		<typDefinition pid="typ.parametrierungsTestObjekt" objektNamenPermanent="nein">
+			<info>
+				<kurzinfo>Ein Objekt zum Test der Parametrierung</kurzinfo>
+			</info>
+			<erweitert pid="typ.konfigurationsObjekt"/>
+			<attributgruppe pid="atg.parametrierungsTestObjekt"/>
+		</typDefinition>
+		<attributgruppenDefinition pid="atg.parametrierungsTestObjekt" parametrierend="ja">
+			<info>
+				<kurzinfo>Testattributgruppe</kurzinfo>
+			</info>
+			<attribut pid="att.text" anzahl="1" anzahlIst="fest" name="Text">
+			</attribut>
+			<attribut pid="att.zahl" anzahl="1" anzahlIst="fest" name="Ganzzahl">
+			</attribut>
+			<attribut pid="att.parametrierungsTestKommazahl" anzahl="1" anzahlIst="fest" name="Kommazahl">
+			</attribut>
+			<attribut pid="att.zeit" anzahl="1" anzahlIst="fest" name="Zeit">
+			</attribut>
+			<attributliste pid="atl.parametrierungsTestAtl" anzahl="1" anzahlIst="fest" name="Attributliste">
+			</attributliste>
+			<attributliste pid="atl.parametrierungsTestAtl" anzahl="0" anzahlIst="variabel" name="Feld">
+			</attributliste>
+		</attributgruppenDefinition>
+		<attributgruppenDefinition pid="paramtest.atg.fs" parametrierend="ja">
+			<info>
+				<kurzinfo>Parameterdatensatz für Test-Fahrstreifen</kurzinfo>
+			</info>
+			<attribut pid="att.text" anzahl="1" anzahlIst="fest" name="Parameter">
+			</attribut>
+		</attributgruppenDefinition>
+		<attributDefinition pid="att.parametrierungsTestKommazahl">
+			<info>
+				<kurzinfo>Test-Kommazahlattribut</kurzinfo>
+			</info>
+			<kommazahl genauigkeit="doppelt"/>
+			<default wert="0.0"/>
+		</attributDefinition>
+		<attributlistenDefinition pid="atl.parametrierungsTestAtl">
+			<info>
+				<kurzinfo>Test-Attributliste</kurzinfo>
+			</info>
+			<attribut pid="att.text" anzahl="1" anzahlIst="fest" name="Text1">
+			</attribut>
+			<attribut pid="att.text" anzahl="1" anzahlIst="fest" name="Text2">
+			</attribut>
+		</attributlistenDefinition>
+		<mengenDefinition pid="paramtest.menge.fs" elemente="paramtest.typ.fs" aenderbar="nein" mindestens="0" hoechstens="0" referenzierungsart="assoziation">
+			<info>
+				<kurzinfo>Menge von Test-Fahrstreifen</kurzinfo>
+			</info>
+		</mengenDefinition>
+		<mengenDefinition pid="paramtest.menge.mq" elemente="paramtest.typ.mq" aenderbar="nein" mindestens="0" hoechstens="0" referenzierungsart="assoziation">
+			<info>
+				<kurzinfo>Menge von Test-MQ</kurzinfo>
+			</info>
+		</mengenDefinition>
+	</modell>
+	<objekte>
+	</objekte>
+</konfigurationsBereich>

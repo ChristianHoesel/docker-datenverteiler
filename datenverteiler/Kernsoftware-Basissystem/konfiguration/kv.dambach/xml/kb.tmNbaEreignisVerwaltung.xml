@@ -1,0 +1,371 @@
+<?xml version="1.0" encoding="ISO-8859-1"?>
+<!DOCTYPE konfigurationsBereich PUBLIC "-//K2S//DTD Dokument//DE" "K2S.dtd">
+<konfigurationsBereich pid="kb.tmNbaEreignisVerwaltung" name="Teilmodell NBA Ereignis Verwaltung" verantwortlich="kv.dambach">
+	<info>
+		<kurzinfo>Teilmodell mit Datenmodellierung für die Netzbeeinflussung Ereignis Verwaltung.</kurzinfo>
+	</info>
+	<konfigurationsAenderung stand="11.09.2011" version="1" autor="Swarco Traffic Systems GmbH, Th. Drapp" grund="Änderungsdokumentation siehe &apos;ReleaseNotes kv.dambach.doc&apos;"></konfigurationsAenderung>
+	<konfigurationsAenderung stand="01.12.2011" version="2" autor="Swarco Traffic Systems GmbH, Th. Drapp" grund="Änderungsdokumentation siehe &apos;ReleaseNotes kv.dambach.doc&apos;"></konfigurationsAenderung>
+	<konfigurationsAenderung stand="05.12.2011" version="3" autor="Swarco Traffic Systems GmbH, Th. Drapp" grund="Änderungsdokumentation siehe &apos;ReleaseNotes kv.dambach.doc&apos;"></konfigurationsAenderung>
+	<!--
+	Abhängigkeiten des Bereichs kb.tmNbaEreignisVerwaltung
+	Abhängig ab Version      Art der Abhängigkeit      Version des benötigten Bereichs      Benötigter Bereich
+	1                        notwendig                 3                                    kb.metaModellGlobal                
+	1                        notwendig                 3                                    kb.tmVewBetriebGlobal              
+	1                        notwendig                 1                                    kb.systemModellGlobal              
+	1                        notwendig                 1                                    kb.kv.dambach                      
+	1                        notwendig                 4                                    kb.fachModellGlobal                
+	-->
+	<modell>
+		<typDefinition pid="typ.nbaEreignisVerwaltung" name="EreignisVerwaltung" objektNamenPermanent="nein">
+			<info>
+				<kurzinfo>
+					Netzbeeinflussung Ereignis-Verwaltung.
+				</kurzinfo>
+			</info>
+			<erweitert pid="typ.konfigurationsObjekt"/>
+			<attributgruppe pid="atg.nbaEreignisVerwaltung"/>
+			<attributgruppe pid="atg.nbaEreignisVerwaltungGueltigkeitObjekt"/>
+			<attributgruppe pid="atg.nbaEreignisVerwaltungGueltigkeitObjekte"/>
+			<attributgruppe pid="atg.nbaEreignisVerwaltungGueltigkeitObjekteAktuell"/>
+			<attributgruppe pid="atg.nbaEreignisVerwaltungGueltigkeitObjekteParameter"/>
+			<attributgruppe pid="atg.nbaEreignisVerwaltungParameter"/>
+			<defaultParameter attributgruppe="atg.nbaEreignisVerwaltungParameter" typ="typ.nbaEreignisVerwaltung">
+				<datenfeld name="DefaultVersorgung">
+				</datenfeld>
+				<datenfeld name="ZuBearbeitendeObjekteMitMengen">
+				</datenfeld>
+				<datenliste name="Urlasser">
+					<datum name="BenutzerReferenz" wert="undefiniert"/>
+					<datum name="Ursache" wert=""/>
+					<datum name="Veranlasser" wert=""/>
+				</datenliste>
+			</defaultParameter>
+			<defaultParameter attributgruppe="atg.nbaEreignisVerwaltungGueltigkeitObjekteParameter" typ="typ.nbaEreignisVerwaltung">
+				<datenfeld name="GueltigkeitObjekte">
+				</datenfeld>
+				<datenliste name="Urlasser">
+					<datum name="BenutzerReferenz" wert="undefiniert"/>
+					<datum name="Ursache" wert=""/>
+					<datum name="Veranlasser" wert=""/>
+				</datenliste>
+			</defaultParameter>
+		</typDefinition>
+		<attributgruppenDefinition pid="atg.nbaEreignisVerwaltung" name="EreignisVerwaltung" parametrierend="nein">
+			<info>
+				<kurzinfo>Eigenschaften der EreignisVerwaltung.</kurzinfo>
+				<beschreibung>
+					AttributGruppe mit Dummy-Attribut, da aktuell keine konfigurierenden Eigenschaften benötigt werden.
+				</beschreibung>
+			</info>
+			<aspekt pid="asp.eigenschaften" konfigurationsModus="datensatzOptional">
+			</aspekt>
+			<attribut pid="att.text" anzahl="1" anzahlIst="fest" name="Dummy">
+			</attribut>
+		</attributgruppenDefinition>
+		<attributgruppenDefinition pid="atg.nbaEreignisVerwaltungGueltigkeitObjekt" name="EreignisVerwaltungGueltigkeitObjekt" parametrierend="nein">
+			<info>
+				<kurzinfo>Senden der Gültigkeitsänderung für ein Objekt in der übergebenen Menge am übergebenen Objekt.</kurzinfo>
+				<beschreibung>
+					Mit dieser AttributGruppe wird eine Änderung der Gültigkeitsinformation von z. B. dem GUI
+      an die Ereignisverwaltung zur Übernahme der Änderung gesendet.
+				</beschreibung>
+			</info>
+			<aspekt pid="asp.vorgabe" onlineModus="quelleUndSenke">
+			</aspekt>
+			<attribut pid="att.konfigurationsObjektReferenz" anzahl="1" anzahlIst="fest" name="KonfigurationsObjekt">
+				<info>
+					<kurzinfo>
+		        Referenz auf das Konfigurationsobjekt, an dem die Menge vorhanden ist.
+		      </kurzinfo>
+				</info>
+			</attribut>
+			<attribut pid="att.text" anzahl="1" anzahlIst="fest" name="Menge">
+				<info>
+					<kurzinfo>
+						Name der Menge am Konfigurationsobjekt.
+					</kurzinfo>
+				</info>
+			</attribut>
+			<attribut pid="att.dynamischesObjektReferenz" anzahl="1" anzahlIst="fest" name="Objekt">
+				<info>
+					<kurzinfo>
+		        Referenz auf das dynamischen Objekt.
+		      </kurzinfo>
+				</info>
+			</attribut>
+			<attribut pid="att.jaNein" anzahl="1" anzahlIst="fest" name="Ungueltig">
+				<info>
+					<kurzinfo>
+						Festlegung, ob das Objekt gültig oder ungültig ist.
+					</kurzinfo>
+				</info>
+			</attribut>
+			<attribut pid="att.zeitPunkt" anzahl="1" anzahlIst="fest" name="UngueltigBis">
+				<info>
+					<kurzinfo>
+						Zeitpunkt, bis zu dem das Objekt ungültig sein soll (0 bzw. kleiner als 01.02.1970 00:00:00 Uhr für Verwendung des Attribut Ungültig).
+					</kurzinfo>
+				</info>
+			</attribut>
+			<attributliste pid="atl.urlasser" anzahl="1" anzahlIst="fest" name="Urlasser">
+			</attributliste>
+		</attributgruppenDefinition>
+		<attributgruppenDefinition pid="atg.nbaEreignisVerwaltungGueltigkeitObjekte" name="EreignisVerwaltungGueltigkeitObjekte" parametrierend="nein">
+			<info>
+				<kurzinfo>Ausgabe der Gültigkeitsinformation für alle Objekte, gegliedert nach Menge.</kurzinfo>
+				<beschreibung>
+					Mit dieser AttributGruppe versendet die Ereignisverwaltung für alle verwalteten Objekte
+      die aktuellen Einstellungen (Information UngültigBis enthalten).
+      Entspricht prinzipiell der Information der AttributGruppe EreignisVerwaltungGueltigkeitObjekteParameter.
+				</beschreibung>
+			</info>
+			<aspekt pid="asp.zustand" onlineModus="quelleUndSenke">
+			</aspekt>
+			<attributliste pid="atl.nbaEreignisVerwaltungGueltigkeitObjekte" anzahl="0" anzahlIst="variabel" name="EreignisVerwaltungGueltigkeitObjekte">
+				<info>
+					<kurzinfo>
+						Liste mit Menge und den darin gültigen Objekten.
+					</kurzinfo>
+				</info>
+			</attributliste>
+		</attributgruppenDefinition>
+		<attributgruppenDefinition pid="atg.nbaEreignisVerwaltungGueltigkeitObjekteAktuell" name="EreignisVerwaltungGueltigkeitObjekteAktuell" parametrierend="nein">
+			<info>
+				<kurzinfo>Ausgabe der Gültigkeit aller verwalteten Objekte, gegliedert nach Menge.</kurzinfo>
+				<beschreibung>
+					Mit dieser AttributGruppe versendet die Ereignisverwaltung für alle verwalteten Objekte
+      die aktuelle Gütligkeit. Dazu bestimmt die Ereignisverwaltung immer die aktuelle Gültigkeit für alle 
+      UngültigBis-Objekte und versendet diese AttributGruppe bei Änderung.
+				</beschreibung>
+			</info>
+			<aspekt pid="asp.zustand" onlineModus="quelleUndSenke">
+			</aspekt>
+			<attributliste pid="atl.nbaEreignisVerwaltungGueltigkeitObjekteAktuell" anzahl="0" anzahlIst="variabel" name="EreignisVerwaltungGueltigkeitObjekteAktuell">
+				<info>
+					<kurzinfo>
+						Liste mit Menge und den darin gültigen/ungültigen Objekten.
+					</kurzinfo>
+				</info>
+			</attributliste>
+		</attributgruppenDefinition>
+		<attributgruppenDefinition pid="atg.nbaEreignisVerwaltungGueltigkeitObjekteParameter" name="EreignisVerwaltungGueltigkeitObjekteParameter" parametrierend="ja">
+			<info>
+				<kurzinfo>Parameter für die EreignisVerwaltung, Gültigkeit der Objekte.</kurzinfo>
+				<beschreibung>
+					Parametersatz, in dem das Modul den aktuellen Zustand für den Wiederanlauf zu Initialisierung speichert.
+				</beschreibung>
+			</info>
+			<attributliste pid="atl.nbaEreignisVerwaltungGueltigkeitObjekteParameter" anzahl="0" anzahlIst="variabel" name="GueltigkeitObjekte">
+			</attributliste>
+			<attributliste pid="atl.urlasser" anzahl="1" anzahlIst="fest" name="Urlasser">
+			</attributliste>
+		</attributgruppenDefinition>
+		<attributgruppenDefinition pid="atg.nbaEreignisVerwaltungParameter" name="EreignisVerwaltungParameter" parametrierend="ja">
+			<info>
+				<kurzinfo>Parameter für die EreignisVerwaltung.</kurzinfo>
+				<beschreibung>
+					Parametersatz mit Default-Gültigkeit für neu eintreffende Objekte nach ObjektTyp und
+      den zu bearbeitenden Mengen.
+				</beschreibung>
+			</info>
+			<attributliste pid="atl.nbaEreignisVerwaltungDefaultVersorgung" anzahl="0" anzahlIst="variabel" name="DefaultVersorgung">
+			</attributliste>
+			<attributliste pid="atl.nbaEreignisVerwaltungObjekteMitMengen" anzahl="0" anzahlIst="variabel" name="ZuBearbeitendeObjekteMitMengen">
+			</attributliste>
+			<attributliste pid="atl.urlasser" anzahl="1" anzahlIst="fest" name="Urlasser">
+			</attributliste>
+		</attributgruppenDefinition>
+		<attributlistenDefinition pid="atl.nbaEreignisVerwaltungDefaultVersorgung" name="EreignisVerwaltungDefaultVersorgung">
+			<info>
+				<kurzinfo>
+          EreignisVerwaltungDefaultVersorgung.
+        </kurzinfo>
+			</info>
+			<attribut pid="att.dynamischerTypReferenz" anzahl="1" anzahlIst="fest" name="DynamischerTyp">
+				<info>
+					<kurzinfo>
+		        Referenz auf einen Dynamischen Objekttyp.
+		      </kurzinfo>
+				</info>
+			</attribut>
+			<attribut pid="att.jaNein" anzahl="1" anzahlIst="fest" name="DefaultGueltig">
+				<info>
+					<kurzinfo>
+						Festlegung, ob das Objekt per Default gültig oder ungültig ist.
+					</kurzinfo>
+				</info>
+			</attribut>
+		</attributlistenDefinition>
+		<attributlistenDefinition pid="atl.nbaEreignisVerwaltungGueltigkeitObjekte" name="EreignisVerwaltungGueltigkeitObjekte">
+			<info>
+				<kurzinfo>
+          EreignisVerwaltungGültigkeitObjekte.
+        </kurzinfo>
+			</info>
+			<attribut pid="att.konfigurationsObjektReferenz" anzahl="1" anzahlIst="fest" name="KonfigurationsObjekt">
+				<info>
+					<kurzinfo>
+		        Referenz auf das Konfigurationsobjekt, an dem die Menge vorhanden ist.
+		      </kurzinfo>
+				</info>
+			</attribut>
+			<attribut pid="att.text" anzahl="1" anzahlIst="fest" name="Menge">
+				<info>
+					<kurzinfo>
+						Name der Menge am Konfigurationsobjekt.
+					</kurzinfo>
+				</info>
+			</attribut>
+			<attributliste pid="atl.nbaEreignisVerwaltungGueltigkeitObjekteObjekt" anzahl="0" anzahlIst="variabel" name="Objekte">
+				<info>
+					<kurzinfo>
+						Infos zum Objekt.
+					</kurzinfo>
+				</info>
+			</attributliste>
+		</attributlistenDefinition>
+		<attributlistenDefinition pid="atl.nbaEreignisVerwaltungGueltigkeitObjekteAktuell" name="EreignisVerwaltungGueltigkeitObjekteAktuell">
+			<info>
+				<kurzinfo>
+          EreignisVerwaltungGueltigkeitObjekteAktuell.
+        </kurzinfo>
+			</info>
+			<attribut pid="att.konfigurationsObjektReferenz" anzahl="1" anzahlIst="fest" name="KonfigurationsObjekt">
+				<info>
+					<kurzinfo>
+		        Referenz auf das Konfigurationsobjekt, an dem die Menge vorhanden ist.
+		      </kurzinfo>
+				</info>
+			</attribut>
+			<attribut pid="att.text" anzahl="1" anzahlIst="fest" name="Menge">
+				<info>
+					<kurzinfo>
+						Name der Menge am Konfigurationsobjekt.
+					</kurzinfo>
+				</info>
+			</attribut>
+			<attribut pid="att.dynamischesObjektReferenz" anzahl="0" anzahlIst="variabel" name="ObjekteGueltig">
+				<info>
+					<kurzinfo>
+						Feld mit aktuell gültigen Objekten.
+					</kurzinfo>
+				</info>
+			</attribut>
+			<attribut pid="att.dynamischesObjektReferenz" anzahl="0" anzahlIst="variabel" name="ObjekteUngueltig">
+				<info>
+					<kurzinfo>
+						Feld mit aktuell ungültigen Objekten.
+					</kurzinfo>
+				</info>
+			</attribut>
+		</attributlistenDefinition>
+		<attributlistenDefinition pid="atl.nbaEreignisVerwaltungGueltigkeitObjekteObjekt" name="EreignisVerwaltungGueltigkeitObjekteObjekt">
+			<info>
+				<kurzinfo>
+          EreignisVerwaltungGültigkeitObjekteObjekt.
+        </kurzinfo>
+			</info>
+			<attribut pid="att.dynamischesObjektReferenz" anzahl="1" anzahlIst="fest" name="Objekt">
+				<info>
+					<kurzinfo>
+						Referenz auf dynamisches Objekt.
+					</kurzinfo>
+				</info>
+			</attribut>
+			<attribut pid="att.jaNein" anzahl="1" anzahlIst="fest" name="Ungueltig">
+				<info>
+					<kurzinfo>
+						Festlegung, ob das Objekt gültig oder ungültig ist.
+					</kurzinfo>
+				</info>
+			</attribut>
+			<attribut pid="att.zeitPunkt" anzahl="1" anzahlIst="fest" name="UngueltigBis">
+				<info>
+					<kurzinfo>
+						Zeitpunkt, bis zu dem das Objekt ungültig sein soll (0 bzw. kleiner als 01.02.1970 00:00:00 Uhr für Verwendung des Attribut Ungültig).
+					</kurzinfo>
+				</info>
+			</attribut>
+		</attributlistenDefinition>
+		<attributlistenDefinition pid="atl.nbaEreignisVerwaltungGueltigkeitObjekteParameter" name="EreignisVerwaltungGueltigkeitObjekteParameter">
+			<info>
+				<kurzinfo>
+          EreignisVerwaltungGültigeObjekte.
+        </kurzinfo>
+			</info>
+			<attribut pid="att.konfigurationsObjektReferenz" anzahl="1" anzahlIst="fest" name="KonfigurationsObjekt">
+				<info>
+					<kurzinfo>
+		        Referenz auf das Konfigurationsobjekt, an dem die Menge vorhanden sind.
+		      </kurzinfo>
+				</info>
+			</attribut>
+			<attribut pid="att.text" anzahl="1" anzahlIst="fest" name="Menge">
+				<info>
+					<kurzinfo>
+						Name der Menge am Konfigurationsobjekt.
+					</kurzinfo>
+				</info>
+			</attribut>
+			<attributliste pid="atl.nbaEreignisVerwaltungGueltigkeitObjekteParameterGueltigkeit" anzahl="0" anzahlIst="variabel" name="ObjektParameter">
+				<info>
+					<kurzinfo>
+						Name der Menge am Konfigurationsobjekt.
+					</kurzinfo>
+				</info>
+			</attributliste>
+		</attributlistenDefinition>
+		<attributlistenDefinition pid="atl.nbaEreignisVerwaltungGueltigkeitObjekteParameterGueltigkeit" name="EreignisVerwaltungGueltigkeitObjekteParameterGueltigkeit">
+			<info>
+				<kurzinfo>
+          EreignisVerwaltungGültigkeitObjekteParameterGültigkeit.
+        </kurzinfo>
+			</info>
+			<attribut pid="att.dynamischesObjektReferenz" anzahl="1" anzahlIst="fest" name="Objekt">
+				<info>
+					<kurzinfo>
+		        Referenz auf einen Dynamischen Objekttyp.
+		      </kurzinfo>
+				</info>
+			</attribut>
+			<attribut pid="att.jaNein" anzahl="1" anzahlIst="fest" name="Ungueltig">
+				<info>
+					<kurzinfo>
+						Festlegung, ob das Objekt gültig oder ungültig ist.
+					</kurzinfo>
+				</info>
+			</attribut>
+			<attribut pid="att.zeitPunkt" anzahl="1" anzahlIst="fest" name="UngueltigBis">
+				<info>
+					<kurzinfo>
+						Zeitpunkt, bis zu dem das Objekt ungültig sein soll (0 bzw. kleiner als 01.02.1970 00:00:00 Uhr für Verwendung des Attribut Ungültig).
+					</kurzinfo>
+				</info>
+			</attribut>
+		</attributlistenDefinition>
+		<attributlistenDefinition pid="atl.nbaEreignisVerwaltungObjekteMitMengen" name="EreignisVerwaltungObjekteMitMengen">
+			<info>
+				<kurzinfo>
+          EreignisVerwaltungObjekteMitMengen.
+        </kurzinfo>
+			</info>
+			<attribut pid="att.konfigurationsObjektReferenz" anzahl="1" anzahlIst="fest" name="KonfigurationsObjekt">
+				<info>
+					<kurzinfo>
+		        Referenz auf das Konfigurationsobjekt, an dem die aufgelisteten Mengen vorhanden sind.
+		      </kurzinfo>
+				</info>
+			</attribut>
+			<attribut pid="att.text" anzahl="0" anzahlIst="variabel" name="Menge">
+				<info>
+					<kurzinfo>
+						Name der Menge am Konfigurationsobjekt.
+					</kurzinfo>
+				</info>
+			</attribut>
+		</attributlistenDefinition>
+	</modell>
+	<objekte>
+	</objekte>
+</konfigurationsBereich>

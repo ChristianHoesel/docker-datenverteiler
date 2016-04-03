@@ -1,0 +1,89 @@
+<?xml version="1.0" encoding="ISO-8859-1"?>
+<!DOCTYPE konfigurationsBereich PUBLIC "-//K2S//DTD Dokument//DE" "K2S.dtd">
+<konfigurationsBereich pid="kb.tmAggrLve2Lzzs" name="Aggregation LVE-Kurzzeitdaten zu Langzeitzählstellendaten (AggrLve2Lzzs)" verantwortlich="kv.inovat">
+	<info>
+		<kurzinfo>Teilmodell mit Datenmodellierung für die Steuerung der Aggregation LVE-Kurzzeitdaten zu Langzeitzählstellendaten (AggrLve2Lzzs).</kurzinfo>
+		<beschreibung>A</beschreibung>
+	</info>
+	<konfigurationsAenderung stand="12.09.2013" version="1" autor="inovat, Dipl.-Ing. H. C. Kniß (HCK)" grund="Neuerstellung"></konfigurationsAenderung>
+	<!--
+	Abhängigkeiten des Bereichs kb.tmAggrLve2Lzzs
+	Abhängig ab Version      Art der Abhängigkeit      Version des benötigten Bereichs      Benötigter Bereich
+	1                        notwendig                 1                                    kb.kv.inovat                       
+	1                        notwendig                 1                                    kb.systemModellGlobal              
+	1                        notwendig                 1                                    kb.fachModellGlobal                
+	1                        notwendig                 3                                    kb.tmLangZeitVerkehrsDaten         
+	1                        notwendig                 1                                    kb.metaModellGlobal                
+	-->
+		<modell>
+		<typDefinition pid="typ.aggrLve2Lzzs" name="AggregationLve2Lzzs" objektNamenPermanent="nein">
+			<info>
+				<kurzinfo>Systemobjekt für für die Steuerung der Aggregation der LVE-Kurzzeitdaten zu Langzeitzählstellendaten (AggrLve2Lzzs).</kurzinfo>
+			</info>
+			<erweitert pid="typ.konfigurationsObjekt"/>
+			<attributgruppe pid="atg.aggrLve2LzzsStatus"/>
+			<attributgruppe pid="atg.aggrLve2LzzsSteuerung"/>
+		</typDefinition>
+		<attributgruppenDefinition pid="atg.aggrLve2LzzsStatus" name="AggrLve2LzzsStatus" parametrierend="nein">
+			<info>
+				<kurzinfo>Informationen zum aktuellen Status der Aggregation der LVE-Kurzzeitdaten zu Langzeitzählstellendaten (Fortschritt, Status).</kurzinfo>
+			</info>
+			<aspekt pid="asp.aggrLve2LzzsStatus" onlineModus="quelle">
+			</aspekt>
+			<attribut pid="att.prozent" anzahl="1" anzahlIst="fest" name="FortschrittProzent">
+			</attribut>
+			<attribut pid="att.text" anzahl="1" anzahlIst="fest" name="StatusMeldung">
+				<info>
+					<kurzinfo>StatusMeldung mit dem aktuellen Zustand der Aggregation.</kurzinfo>
+				</info>
+			</attribut>
+		</attributgruppenDefinition>
+		<attributgruppenDefinition pid="atg.aggrLve2LzzsSteuerung" name="AggrLve2LzzsSteuerung" parametrierend="nein">
+			<info>
+				<kurzinfo>Attributgruppe zur Steuerung des der Aggregation der LVE-Kurzzeitdaten zu Langzeitzählstellendaten.</kurzinfo>
+			</info>
+			<aspekt pid="asp.anfrage" onlineModus="senke">
+			</aspekt>
+			<attribut pid="att.aggrLve2LzzsZeitpunkt" anzahl="1" anzahlIst="fest" name="von">
+				<info>
+					<kurzinfo>Zeitbereichsanfang, für den nachaggregiert werden soll. Der tatsächliche Anfang liegt i. d. R. davor (tatsächlicher Intervallanfang) und wird automatisch ermittelt.</kurzinfo>
+				</info>
+			</attribut>
+			<attribut pid="att.aggrLve2LzzsZeitpunkt" anzahl="1" anzahlIst="fest" name="bis">
+				<info>
+					<kurzinfo>Zeitbereichsende, für den nachaggregiert werden soll. Das tatsächliche Ende liegt i. d. R. dahinter (tatsächliches Intervallende (ausschließlich) und wird automatisch ermittelt.)</kurzinfo>
+				</info>
+			</attribut>
+			<attribut pid="att.langZeitZählstelleReferenz" anzahl="0" anzahlIst="variabel" name="Lzzs">
+				<info>
+					<kurzinfo>Liste aller Langzeitzählstellen, für die aggregiert werden soll.</kurzinfo>
+				</info>
+			</attribut>
+		</attributgruppenDefinition>
+		<aspektDefinition pid="asp.aggrLve2LzzsStatus" name="AggrLve2LzzsStatus">
+			<info>
+				<kurzinfo>Aspekt zur Statusanzeige.</kurzinfo>
+			</info>
+		</aspektDefinition>
+		<attributDefinition pid="att.aggrLve2LzzsZeitpunkt" name="Zeitpunkt">
+			<info>
+				<kurzinfo>
+					Zeitpunkt für Intervallbeginn und Ende.
+				</kurzinfo>
+			</info>
+			<zeitstempel relativ="nein" genauigkeit="millisekunden"/>
+		</attributDefinition>
+	</modell>
+	<objekte>
+		<konfigurationsObjekt pid="aggrLve2Lzzs.vewStandard1" name="StandardVerwaltungsObjektAggrLve2Lzzs1" typ="typ.aggrLve2Lzzs">
+		</konfigurationsObjekt>
+		<konfigurationsObjekt pid="aggrLve2Lzzs.vewStandard2" name="StandardVerwaltungsObjektAggrLve2Lzzs2" typ="typ.aggrLve2Lzzs">
+		</konfigurationsObjekt>
+		<konfigurationsObjekt pid="aggrLve2Lzzs.vewStandard3" name="StandardVerwaltungsObjektAggrLve2Lzzs3" typ="typ.aggrLve2Lzzs">
+		</konfigurationsObjekt>
+		<konfigurationsObjekt pid="aggrLve2Lzzs.vewStandard4" name="StandardVerwaltungsObjektAggrLve2Lzzs4" typ="typ.aggrLve2Lzzs">
+		</konfigurationsObjekt>
+		<konfigurationsObjekt pid="aggrLve2Lzzs.vewStandard5" name="StandardVerwaltungsObjektAggrLve2Lzzs5" typ="typ.aggrLve2Lzzs">
+		</konfigurationsObjekt>
+	</objekte>
+</konfigurationsBereich>

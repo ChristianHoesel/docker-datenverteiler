@@ -1,0 +1,211 @@
+<?xml version="1.0" encoding="ISO-8859-1"?>
+<!DOCTYPE konfigurationsBereich PUBLIC "-//K2S//DTD Dokument//DE" "K2S.dtd">
+<konfigurationsBereich pid="kb.tmSystemKalenderGlobal" name="TeilmodellSystemKalenderGlobal" verantwortlich="kv.inovat">
+	<info>
+		<kurzinfo>
+			Teilmodell mit Datenmodellierung zum Systemkalender.
+		</kurzinfo>
+		<beschreibung>
+			<absatz>
+				Die folgende Abbildung skizziert die Zusammenhänge der
+				verschiedenen Objekttypen der Teilmodelle Systemkalender
+				und Ereigniskalender.
+			</absatz>
+			<abbildung pid="abb.kalender" src="abbildungen/systemereignisganglinien-tmSystemkalender.jpg">
+				<titel>Übersicht Kalender (global)</titel>
+			</abbildung>
+		</beschreibung>
+	</info>
+	<konfigurationsAenderung stand="19.03.2007" version="4" autor="inovat, Dipl.-Ing. H. C. Kniß (HCK)" grund="A:Überarbeitung des Datenkatalogs für Veröffentlichung Kernsoftware. Änderungsdokumentation siehe &apos;inovat: Datenkatalog DaV-Release Notes&apos;."></konfigurationsAenderung>
+	<konfigurationsAenderung stand="20.03.2007" version="4" autor="inovat, Dipl.-Ing. H. C. Kniß (HCK)" grund="B:Überarbeitung des Datenkatalogs für Veröffentlichung Kernsoftware. Änderungsdokumentation siehe &apos;inovat: Datenkatalog DaV-Release Notes&apos;."></konfigurationsAenderung>
+	<konfigurationsAenderung stand="31.05.2007" version="5" autor="inovat, Dipl.-Ing. H. C. Kniß (HCK)" grund="Änderungsdokumentation siehe &apos;ReleaseNotes kv.inovt.doc&apos;"></konfigurationsAenderung>
+	<konfigurationsAenderung stand="20.02.2008" version="6" autor="inovat, Dipl.-Ing. H. C. Kniß (HCK)" grund="B:Überarbeitung des Datenkatalogs für Veröffentlichung Kernsoftware. Änderungsdokumentation siehe &apos;inovat: Datenkatalog DaV-Release Notes&apos;."></konfigurationsAenderung>
+	<konfigurationsAenderung stand="14.07.2008" version="6" autor="inovat, Dipl.-Ing. H. C. Kniß (HCK)" grund="B:Überarbeitung des Datenkatalogs für Veröffentlichung Kernsoftware. Änderungsdokumentation siehe &apos;inovat: Datenkatalog DaV-Release Notes&apos;."></konfigurationsAenderung>
+	<konfigurationsAenderung stand="10.06.2011" version="7" autor="inovat, Dipl.-Ing. H. C. Kniß (HCK)" grund="atg.statusBaustelleAlsEreignis fuer Steuerung, in welchem Zustand Baustellen als Ereignis angelegt werden sollen. Änderungsdokumentation siehe &apos;inovat: Datenkatalog DaV-Release Notes&apos;."></konfigurationsAenderung>
+	<!--
+	Abhängigkeiten des Bereichs kb.tmSystemKalenderGlobal
+	Abhängig ab Version      Art der Abhängigkeit      Version des benötigten Bereichs      Benötigter Bereich
+	5                        notwendig                 1                                    kb.kv.inovat                       
+	5                        notwendig                 1                                    kb.systemModellGlobal              
+	5                        notwendig                 4                                    kb.fachModellGlobal                
+	5                        notwendig                 1                                    kb.metaModellGlobal                
+	5                        notwendig                 5                                    kb.tmEreignisKalenderGlobal        
+	6                        notwendig                 3                                    kb.tmVewBetriebGlobal              
+	-->
+		<modell>
+		<typDefinition pid="typ.kalender" name="Kalender" objektNamenPermanent="nein">
+			<info>
+				<kurzinfo>
+					Typ eines Kalenders, der einzelne Systemkalender und
+					Ereigniskalendereinträge verwaltet.
+				</kurzinfo>
+			</info>
+			<erweitert pid="typ.konfigurationsObjekt"/>
+			<attributgruppe pid="atg.ereignisKalenderAnfrage"/>
+			<attributgruppe pid="atg.statusBaustelleAlsEreignis"/>
+			<menge pid="menge.ereignisse" name="Ereignisse" erforderlich="ja">
+				<info>
+					<kurzinfo>
+						Dynamische Menge mit definierten Ereignissen.
+					</kurzinfo>
+				</info>
+			</menge>
+			<menge pid="menge.ereignisTypen" name="EreignisTypen" erforderlich="ja">
+				<info>
+					<kurzinfo>
+						Dynamische Menge mit definierten Ereignistypen.
+					</kurzinfo>
+				</info>
+			</menge>
+			<menge pid="menge.systemKalenderEinträge" name="SystemKalenderEinträge" erforderlich="ja">
+				<info>
+					<kurzinfo>
+						Dynamische Menge mit definierten
+						Systemkalendereinträgen.
+					</kurzinfo>
+				</info>
+			</menge>
+			<defaultParameter attributgruppe="atg.statusBaustelleAlsEreignis" typ="typ.kalender">
+				<datenliste name="Urlasser">
+					<datum name="BenutzerReferenz" wert="undefiniert"/>
+					<datum name="Ursache" wert=""/>
+					<datum name="Veranlasser" wert=""/>
+				</datenliste>
+				<datum name="entworfen" wert="Nein"/>
+				<datum name="geplant" wert="Ja"/>
+				<datum name="gültig" wert="Ja"/>
+				<datum name="storniert" wert="Nein"/>
+			</defaultParameter>
+		</typDefinition>
+		<typDefinition pid="typ.systemKalenderEintrag" name="SystemKalenderEintrag" objektNamenPermanent="nein" persistenzModus="persistent">
+			<info>
+				<kurzinfo>Systemkalendereintrag.</kurzinfo>
+				<beschreibung>
+					<absatz>
+						Ein Systemkalendereintrag ist ein dynamisches
+						Objekt, das durch den Benutzer angelegt und
+						parametriert werden kann.
+					</absatz>
+					<absatz>
+						Mit den Systemkalendereinträgen lassen sich z.B.
+						Feiertage, Tage mit hoher Staugefahr, Urlaubs
+						und Ferienzeiten etc. definieren, die nicht über
+						normale Zeitfunktionen ermittelbar sind. Der
+						Systemkalender wird u.a. dazu verwendet, bei
+						Festlegungen von Zeitspezifikationen, z.B. bei
+						der Abfrage von Protokollen, diese weitergehend
+						zu spezifizieren.
+					</absatz>
+				</beschreibung>
+			</info>
+			<erweitert pid="typ.dynamischesObjekt"/>
+			<attributgruppe pid="atg.systemKalenderEintrag"/>
+			<defaultParameter attributgruppe="atg.systemKalenderEintrag" typ="typ.systemKalenderEintrag">
+				<datenliste name="Urlasser">
+					<datum name="BenutzerReferenz" wert="undefiniert"/>
+					<datum name="Ursache" wert=""/>
+					<datum name="Veranlasser" wert=""/>
+				</datenliste>
+				<datum name="Definition" wert=""/>
+			</defaultParameter>
+		</typDefinition>
+		<attributgruppenDefinition pid="atg.statusBaustelleAlsEreignis" name="StatusBaustelleAlsEreignis" parametrierend="ja">
+			<info>
+				<kurzinfo>Parametersatz zur Festlegung der Zustände einer Baustelle, bei der zusätzlich ein Ereignis angelegt werden soll. Wird benötigt, wenn z. B. ein externes BIS-System Baustelle anlegt und dafür auch entsprechende Ereignisse verwalten soll.</kurzinfo>
+			</info>
+			<attributliste pid="atl.urlasser" anzahl="1" anzahlIst="fest" name="Urlasser">
+			</attributliste>
+			<attribut pid="att.jaNein" anzahl="1" anzahlIst="fest" name="entworfen">
+				<info>
+					<kurzinfo>Für Baustellen im Zustand "entworfen" sollen Ereigniskalendereinträge angelegt/verwaltet werden.</kurzinfo>
+				</info>
+			</attribut>
+			<attribut pid="att.jaNein" anzahl="1" anzahlIst="fest" name="geplant">
+				<info>
+					<kurzinfo>Für Baustellen im Zustand "geplant" sollen Ereigniskalendereinträge angelegt/verwaltet werden.</kurzinfo>
+				</info>
+			</attribut>
+			<attribut pid="att.jaNein" anzahl="1" anzahlIst="fest" name="gültig">
+				<info>
+					<kurzinfo>Für Baustellen im Zustand "gültig" sollen Ereigniskalendereinträge angelegt/verwaltet werden.</kurzinfo>
+				</info>
+			</attribut>
+			<attribut pid="att.jaNein" anzahl="1" anzahlIst="fest" name="storniert">
+				<info>
+					<kurzinfo>Für Baustellen im Zustand "storniert" sollen Ereigniskalendereinträge angelegt/verwaltet werden.</kurzinfo>
+				</info>
+			</attribut>
+		</attributgruppenDefinition>
+		<attributgruppenDefinition pid="atg.systemKalenderEintrag" name="SystemKalenderEintrag" parametrierend="ja">
+			<info>
+				<kurzinfo>Definition eines Kalendereintrags</kurzinfo>
+				<beschreibung>
+					<absatz>
+						Die Syntax zur Definition von Kalendereinträgen
+						ist in
+						<verweis pid="ref.TAnf-VeW"></verweis>
+						beschrieben.
+					</absatz>
+				</beschreibung>
+			</info>
+			<attributliste pid="atl.urlasser" anzahl="1" anzahlIst="fest" name="Urlasser">
+			</attributliste>
+			<attribut pid="att.text" anzahl="1" anzahlIst="fest" name="Definition">
+			</attribut>
+		</attributgruppenDefinition>
+		<attributDefinition pid="att.kalenderReferenz" name="KalenderReferenz">
+			<info>
+				<kurzinfo>
+					Attribut zur Referenzierung des Objekttyps:
+					typ.kalender.
+				</kurzinfo>
+			</info>
+			<objektReferenz typ="typ.kalender" undefiniert="verboten" referenzierungsart="assoziation"/>
+		</attributDefinition>
+		<attributDefinition pid="att.kalenderReferenzOptional" name="KalenderReferenzOptional">
+			<info>
+				<kurzinfo>
+					Attribut zur Referenzierung des Objekttyps:
+					typ.kalender (Optionale Referenzierung erlaubt).
+				</kurzinfo>
+			</info>
+			<objektReferenz typ="typ.kalender" undefiniert="erlaubt" referenzierungsart="assoziation"/>
+		</attributDefinition>
+		<attributDefinition pid="att.systemKalenderEintragReferenz" name="SystemKalenderEintragReferenz">
+			<info>
+				<kurzinfo>
+					Attribut zur Referenzierung des Objekttyps:
+					typ.systemKalenderEintrag.
+				</kurzinfo>
+			</info>
+			<objektReferenz typ="typ.systemKalenderEintrag" undefiniert="verboten" referenzierungsart="assoziation"/>
+		</attributDefinition>
+		<attributDefinition pid="att.systemKalenderEintragReferenzOptional" name="SystemKalenderEintragReferenzOptional">
+			<info>
+				<kurzinfo>
+					Attribut zur Referenzierung des Objekttyps:
+					typ.systemKalenderEintrag (Optionale Referenzierung
+					erlaubt).
+				</kurzinfo>
+			</info>
+			<objektReferenz typ="typ.systemKalenderEintrag" undefiniert="erlaubt" referenzierungsart="assoziation"/>
+		</attributDefinition>
+		<mengenDefinition pid="menge.ereignisse" elemente="typ.ereignis" aenderbar="ja" mindestens="0" hoechstens="0" referenzierungsart="assoziation">
+			<info>
+				<kurzinfo>Dynamische Ereignisse</kurzinfo>
+			</info>
+		</mengenDefinition>
+		<mengenDefinition pid="menge.ereignisTypen" elemente="typ.ereignisTyp" aenderbar="ja" mindestens="0" hoechstens="0" referenzierungsart="assoziation">
+			<info>
+				<kurzinfo>Dynamische Ereignistypen</kurzinfo>
+			</info>
+		</mengenDefinition>
+		<mengenDefinition pid="menge.systemKalenderEinträge" elemente="typ.systemKalenderEintrag" aenderbar="ja" mindestens="0" hoechstens="0" referenzierungsart="assoziation">
+			<info>
+				<kurzinfo>Dynamische Systemkalendereinträge</kurzinfo>
+			</info>
+		</mengenDefinition>
+	</modell>
+	<objekte>
+	</objekte>
+</konfigurationsBereich>

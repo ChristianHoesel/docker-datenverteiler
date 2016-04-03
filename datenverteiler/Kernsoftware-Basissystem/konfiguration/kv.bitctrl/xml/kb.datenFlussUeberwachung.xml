@@ -1,0 +1,97 @@
+<?xml version="1.0" encoding="ISO-8859-1"?>
+<!DOCTYPE konfigurationsBereich PUBLIC "-//K2S//DTD Dokument//DE" "K2S.dtd">
+<konfigurationsBereich pid="kb.datenFlussUeberwachung"
+	name="Datenflussüberwachung" verantwortlich="kv.bitctrl">
+	<info>
+		<kurzinfo>Typdefinitionen zur Beschreibung von Objekten mit dnen eine
+			Datenflussüberwachungsmatrix definiert werden kann.</kurzinfo>
+	</info>
+	<konfigurationsAenderung autor="BitCtrl Systems GmbH, Uwe Peuker"
+		stand="12.2.2019" grund="Ersterstellung" />
+	<konfigurationsAenderung autor="BitCtrl Systems GmbH, Uwe Peuker"
+		stand="18.2.2019" grund="Timeout-Attribut auf ZeitdauerInSekunden geändert" />
+	<modell>
+
+		<!-- Typdefinitionen -->
+		<typDefinition pid="typ.datenFlussUeberwachungsMatrix"
+			name="DatenflussÜberwachungsMatrix" persistenzModus="persistent">
+			<info>
+				<kurzinfo>Ein Matrix zur Darstellung des Zustands des Datenflusses
+					innerhalb des Datenverteilersystems.</kurzinfo>
+				<beschreibung></beschreibung>
+			</info>
+			<erweitert pid="typ.dynamischesObjekt" />
+			<attributgruppe pid="atg.datenFlussUeberwachungsMatrix" />
+		</typDefinition>
+
+		<!-- Attributgruppen -->
+		<attributgruppenDefinition pid="atg.datenFlussUeberwachungsMatrix"
+			name="DatenflussÜberwachungsMatrix" konfigurierend="ja">
+			<info>
+				<kurzinfo>Eigenschaften eines Datenflussüberwachungsmatrix.
+				</kurzinfo>
+				<beschreibung></beschreibung>
+			</info>
+			<aspekt pid="asp.eigenschaften" konfigurationsModus="datensatzNotwendigUndÄnderbar" />
+			<attribut pid="att.text" name="Beschreibung" />
+			<attribut pid="atl.datenFlussZeile" name="Zeilen" anzahlIst="variabel" />
+			<attribut pid="atl.datenFlussSpalte" name="Spalten"
+				anzahlIst="variabel" />
+		</attributgruppenDefinition>
+
+		<!-- Attributlisten -->
+		<attributlistenDefinition pid="atl.datenFlussZeile"
+			name="DatenflussMatrixZeile">
+			<info>
+				<kurzinfo>Definiert eine Zeile in einer
+					Datenflussüberwachungsmatrix.</kurzinfo>
+				<beschreibung>Eine Zeile in einer Datenflussüberwachungsmatrix wird
+					durch eine Liste von Systemobjekten definiert.</beschreibung>
+			</info>
+			<attribut pid="att.text" name="Name">
+				<info>
+					<kurzinfo>Die Bezeichnung der Spalte, wie sie in der Darstellung
+						der Matrix angezeigt wird.</kurzinfo>
+				</info>
+			</attribut>
+			<attribut pid="att.objektReferenzOptional" name="Objekte" anzahlIst="variabel" />
+		</attributlistenDefinition>
+
+		<attributlistenDefinition pid="atl.datenFlussSpalte"
+			name="DatenflussMatrixSpalte">
+			<info>
+				<kurzinfo>Definiert eine Spalte in einer
+					Datenflussüberwachungsmatrix.</kurzinfo>
+				<beschreibung>Eine Spalte in einer Datenflussüberwachungsmatrix wird
+					durch eine Liste von Kombinationen aus Attributgruppe, Aspekt,
+					Timeout definiert.</beschreibung>
+			</info>
+			<attribut pid="att.text" name="Name">
+				<info>
+					<kurzinfo>Die Bezeichnung der Spalte, wie sie in der Darstellung
+						der Matrix angezeigt wird.</kurzinfo>
+				</info>
+			</attribut>
+			<attributliste pid="atl.datenFlussSpaltenEintrag" name="Definitionen"
+				anzahlIst="variabel" />
+		</attributlistenDefinition>
+
+		<attributlistenDefinition pid="atl.datenFlussSpaltenEintrag"
+			name="DatenflussMatrixSpaltenEintrag">
+			<info>
+				<kurzinfo>Definiert einen Eintrag innerhalb einer Spalte in einer
+					Datenflussüberwachungsmatrix.</kurzinfo>
+				<beschreibung></beschreibung>
+			</info>
+			<attribut pid="att.objektReferenz" name="Attributgruppe" />
+			<attribut pid="att.objektReferenz" name="Aspekt" />
+			<attribut pid="att.zeitDauerSekunden" name="Timeout">
+				<info>
+					<kurzinfo>das maximale Alter eines Wertes bezüglich der aktuellen
+						Zeit, um diesen als gültig zu betrachten.</kurzinfo>
+				</info>
+			</attribut>
+		</attributlistenDefinition>
+
+	</modell>
+</konfigurationsBereich>

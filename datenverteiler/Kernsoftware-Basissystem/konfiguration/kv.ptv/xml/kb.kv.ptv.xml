@@ -1,0 +1,22 @@
+<?xml version="1.0" encoding="ISO-8859-1"?>
+<!DOCTYPE konfigurationsBereich PUBLIC "-//K2S//DTD Dokument//DE" "K2S.dtd">
+<konfigurationsBereich pid="kb.kv.ptv" name="Bereich PTV" verantwortlich="kv.ptv">
+	<info>
+		<kurzinfo>Bereich mit dem Konfigurationsverantwortlichen für PTV AG</kurzinfo>
+	</info>
+	<konfigurationsAenderung stand="19.03.2007" version="1" autor="inovat, Dipl.-Ing. H. C. Kniß (HCK)" grund="A:Überarbeitung des Datenkatalogs für Veröffentlichung Kernsoftware. Änderungsdokumentation siehe 'inovat: Datenkatalog DaV-Release Notes'."></konfigurationsAenderung>
+	<modell>
+	</modell>
+	<objekte>
+		<konfigurationsObjekt pid="kv.ptv" name="Konfiguration PTV" typ="typ.konfigurationsVerantwortlicher">
+			<info>
+				<kurzinfo>Konfigurationsverantwortlicher für PTV AG</kurzinfo>
+			</info>
+			<datensatz attributgruppe="atg.konfigurationsVerantwortlicherEigenschaften" aspekt="asp.eigenschaften">
+				<datum name="kodierung" wert="57"/>
+				<datenfeld name="defaultBereich">
+				</datenfeld>
+			</datensatz>
+		</konfigurationsObjekt>
+	</objekte>
+</konfigurationsBereich>

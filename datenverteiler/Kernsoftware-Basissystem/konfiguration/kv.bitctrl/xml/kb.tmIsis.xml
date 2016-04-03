@@ -1,0 +1,67 @@
+<?xml version="1.0" encoding="ISO-8859-1"?>
+<!DOCTYPE konfigurationsBereich PUBLIC "-//K2S//DTD Dokument//DE" "K2S.dtd">
+<konfigurationsBereich pid="kb.tmIsis" name="Teilmodell ISIS" verantwortlich="kv.bitctrl">
+	<info>
+		<kurzinfo>Teilmodell mit Datenmodellierung für ISIS (Baustelleninformationssystem).</kurzinfo>
+		<beschreibung>
+			<absatz>Die folgende Abbildung skizziert die Zusammenhänge und Attributgruppen der verschiedenen Objekttypen imTeilmodell ISIS (Baustelleninformationssystem).</absatz>
+			<abbildung src="abbildungen/TeilmodellIsis.jpg">
+				<titel>Übersicht Teilmodell ISIS (Baustelleninformationssystem).</titel>
+			</abbildung>
+		</beschreibung>
+	</info>
+	<konfigurationsAenderung stand="01.04.2011" version="2" autor="BitCtrl, Dipl.-Ing. S. Gieseler" grund="Standardparameter vervollständigt"></konfigurationsAenderung>
+	<modell>
+		<typDefinition pid="typ.isis" name="ISIS">
+			<info>
+				<kurzinfo>Typ, welcher einen Konfigurationsverantwortlichen für ISIS darstellt.</kurzinfo>
+			</info>
+			<erweitert pid="typ.autarkeOrganisationsEinheit"/>
+			<attributgruppe pid="atg.parameterIsis"/>
+			<defaultParameter attributgruppe="atg.parameterIsis">
+				<datenliste name="Urlasser">
+					<datum name="BenutzerReferenz" wert="undefiniert"/>
+					<datum name="Ursache" wert=""/>
+					<datum name="Veranlasser" wert=""/>
+				</datenliste>
+			</defaultParameter>
+		</typDefinition>
+		<attributgruppenDefinition pid="atg.parameterIsis" name="ParameterIsis" parametrierend="ja">
+			<info>
+				<kurzinfo>
+					Parametersatz für die Funktionsbibliothek ISIS.
+				</kurzinfo>
+			</info>
+			<attribut pid="att.jaNein" name="EreignisBeiEntworfen">
+				<info>
+					<kurzinfo>Erzeugt ein Ereignis für die Baustelle, wenn diese den Status 'entworfen' hat (BIS-ISIS: Grobplanung).</kurzinfo>
+				</info>
+				<default wert="Nein"/>
+			</attribut>
+			<attribut pid="att.jaNein" name="EreignisBeiGeplant">
+				<info>
+					<kurzinfo>Erzeugt ein Ereignis für die Baustelle, wenn diese den Status 'geplant' hat (BIS-ISIS: Feinplanung).</kurzinfo>
+				</info>
+				<default wert="Ja"/>
+			</attribut>
+			<attribut pid="att.jaNein" name="EreignisBeiGültig">
+				<info>
+					<kurzinfo>Erzeugt ein Ereignis für die Baustelle, wenn diese den Status 'gültig' hat (BIS-ISIS: Umsetzung).</kurzinfo>
+				</info>
+				<default wert="Ja"/>
+			</attribut>
+			<attribut pid="att.jaNein" name="EreignisBeiStorniert">
+				<info>
+					<kurzinfo>Erzeugt ein Ereignis für die Baustelle, wenn diese den Status 'storniert' hat (BIS-ISIS: Gelöscht).</kurzinfo>
+				</info>
+				<default wert="Nein"/>
+			</attribut>
+			<attribut pid="att.zeitDauer" name="WarnZeitraum">
+				<info>
+					<kurzinfo>Zeitdauer in Tagen, bei dem Änderungen des Baustellenzustandes auf dem VRZ-System durch Zustandsänderungen beim BIS-ISIS System quittiert werden müssen, wenn die Baustelle aus Sicht des VRZ-Systems in nächsten n-Arbeitstagen (WarnZeitraum) gültig ist, wird oder war.</kurzinfo>
+				</info>
+				<default wert="3 Tage"/>
+			</attribut>
+		</attributgruppenDefinition>
+	</modell>
+</konfigurationsBereich>

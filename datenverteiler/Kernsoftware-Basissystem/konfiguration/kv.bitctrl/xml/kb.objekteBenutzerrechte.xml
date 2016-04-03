@@ -1,0 +1,161 @@
+<?xml version="1.0" encoding="ISO-8859-1"?>
+<!DOCTYPE konfigurationsBereich PUBLIC "-//K2S//DTD Dokument//DE" "K2S.dtd">
+<konfigurationsBereich pid="kb.objekteBenutzerrechte" verantwortlich="kv.bitctrl">
+	<modell></modell>
+	<objekte>
+
+		<!-- Aktivitäten -->
+
+		<konfigurationsObjekt pid="aktivitaet.nurLesen" name="Nur Lesen (Aktivität)" typ="typ.zugriffsAktivität">
+			<info>
+				<kurzinfo>Diese Aktivität darf alle Attributgruppen unter allen Aspekten lesen, aber nicht schreiben, und sich dafür als Quelle und Senke anmelden.</kurzinfo>
+			</info>
+			<datensatz pid="atg.zugriffsRechte">
+				<datum name="lesen" wert="Ja" />
+				<datum name="schreiben" wert="Nein" />
+				<datum name="quelleSenke" wert="Ja" />
+			</datensatz>
+			<objektMenge name="Aspekte" />
+			<objektMenge name="Attributgruppen" />
+		</konfigurationsObjekt>
+
+		<konfigurationsObjekt pid="aktivitaet.lesenUndSchreiben" name="Lesen und Schreiben (Aktivität)" typ="typ.zugriffsAktivität">
+			<info>
+				<kurzinfo>Diese Aktivität darf alle Attributgruppen unter allen Aspekten lesen und schreiben und sich dafür als Quelle und Senke anmelden.</kurzinfo>
+			</info>
+			<datensatz pid="atg.zugriffsRechte" aspekt="asp.eigenschaften">
+				<datum name="lesen" wert="Ja" />
+				<datum name="schreiben" wert="Ja" />
+				<datum name="quelleSenke" wert="Ja" />
+			</datensatz>
+			<objektMenge name="Aspekte" />
+			<objektMenge name="Attributgruppen" />
+		</konfigurationsObjekt>
+
+		<konfigurationsObjekt pid="aktivitaet.konfigurationsanfrageLesendSenden" name="Konfigurationsanfrage - nur lesend - senden (Aktivität)" typ="typ.zugriffsAktivität">
+			<info>
+				<kurzinfo>Diese Aktivität darf alle Attributgruppen unter allen Aspekten lesen, aber nicht schreiben, und sich dafür als Quelle und Senke anmelden.</kurzinfo>
+			</info>
+			<datensatz pid="atg.zugriffsRechte">
+				<datum name="lesen" wert="Nein" />
+				<datum name="schreiben" wert="Ja" />
+				<datum name="quelleSenke" wert="Nein" />
+			</datensatz>
+			<objektMenge name="Aspekte">
+				<element pid="asp.anfrage" />
+			</objektMenge>
+			<objektMenge name="Attributgruppen">
+				<element pid="atg.konfigurationsAnfrageSchnittstelleLesend" />
+			</objektMenge>
+		</konfigurationsObjekt>
+		
+		<konfigurationsObjekt pid="aktivitaet.konfigurationsantwortLesendEmpfangen" name="Konfigurationsanwort - nur lesend - empfangen (Aktivität)" typ="typ.zugriffsAktivität">
+			<info>
+				<kurzinfo>Diese Aktivität darf alle Attributgruppen unter allen Aspekten lesen, aber nicht schreiben, und sich dafür als Quelle und Senke anmelden.</kurzinfo>
+			</info>
+			<datensatz pid="atg.zugriffsRechte">
+				<datum name="lesen" wert="Ja" />
+				<datum name="schreiben" wert="Nein" />
+				<datum name="quelleSenke" wert="Ja" />
+			</datensatz>
+			<objektMenge name="Aspekte">
+				<element pid="asp.antwort" />
+			</objektMenge>
+			<objektMenge name="Attributgruppen">
+				<element pid="atg.konfigurationsAnfrageSchnittstelleLesend" />
+			</objektMenge>
+		</konfigurationsObjekt>
+		
+		<konfigurationsObjekt pid="aktivitaet.applikationReadyMessageSenden" name="Senden der Ready Message einer Applikation (Aktivität)" typ="typ.zugriffsAktivität">
+			<info>
+				<kurzinfo>Diese Aktivität darf alle Attributgruppen unter allen Aspekten lesen, aber nicht schreiben, und sich dafür als Quelle und Senke anmelden.</kurzinfo>
+			</info>
+			<datensatz pid="atg.zugriffsRechte">
+				<datum name="lesen" wert="Nein" />
+				<datum name="schreiben" wert="Ja" />
+				<datum name="quelleSenke" wert="Ja" />
+			</datensatz>
+			<objektMenge name="Aspekte">
+				<element pid="asp.standard" />
+			</objektMenge>
+			<objektMenge name="Attributgruppen">
+				<element pid="atg.applikationsFertigmeldung" />
+			</objektMenge>
+		</konfigurationsObjekt>
+
+		<!-- Regionen -->
+
+		<konfigurationsObjekt pid="region.alles" name="Alles (Region)" typ="typ.zugriffsRegion">
+			<info>
+				<kurzinfo>Diese Region umfasst alle Objekte in allen Mengen und Regionen.</kurzinfo>
+			</info>
+			<objektMenge name="Objekte" />
+			<objektMenge name="Zusammmenstellungen" />
+		</konfigurationsObjekt>
+
+		<!-- Rollen -->
+
+		<konfigurationsObjekt pid="rolle.beobachter" name="Beobachter (Rolle)" typ="typ.zugriffsRolle">
+			<info>
+				<kurzinfo>Die Benutzer dieser Rolle haben nur lesenden Zugriff auf alle Objekte und Daten.</kurzinfo>
+			</info>
+			<objektMenge name="Aktivitäten">
+				<element pid="aktivitaet.nurLesen" />
+				<element pid="aktivitaet.applikationReadyMessageSenden" />
+				<element pid="aktivitaet.konfigurationsanfrageLesendSenden" />
+				<element pid="aktivitaet.konfigurationsantwortLesendEmpfangen" />
+			</objektMenge>
+		</konfigurationsObjekt>
+
+		<konfigurationsObjekt pid="rolle.administrator" name="Administrator (Rolle)" typ="typ.zugriffsRolle">
+			<info>
+				<kurzinfo>Die Benutzer dieser Rolle haben lesenden und schreibenden Zugriff auf alle Objekte und Daten.</kurzinfo>
+			</info>
+			<objektMenge name="Aktivitäten">
+				<element pid="aktivitaet.lesenUndSchreiben" />
+			</objektMenge>
+		</konfigurationsObjekt>
+
+		<!-- Berechtigungsklassen -->
+		
+		<konfigurationsObjekt pid="berechtigungsklasse.administrator" name="Administrator" typ="typ.berechtigungsklasse">
+			<info>
+				<kurzinfo>Die Benutzer dieser Klasse haben vollen Zugriff auf den Datenverteiler.</kurzinfo>
+			</info>
+			<defaultParameter attributgruppe="atg.rollenRegionenPaareParameter">
+				<datenfeld name="rollenRegionenPaare">
+					<datenliste name="0">
+						<datum name="rolle" wert="rolle.administrator" />
+						<datum name="region" wert="region.alles" />  
+					</datenliste>
+				</datenfeld>
+			</defaultParameter>
+		</konfigurationsObjekt>
+		
+		<konfigurationsObjekt pid="berechtigungsklasse.beobachter" name="Beobachter" typ="typ.berechtigungsklasse">
+			<info>
+				<kurzinfo>Die Benutzer dieser Klasse haben nur lesenden Zugriff auf den Datenverteiler.</kurzinfo>
+			</info>
+			<defaultParameter attributgruppe="atg.rollenRegionenPaareParameter">
+				<datenfeld name="rollenRegionenPaare">
+					<datenliste name="0">
+						<datum name="rolle" wert="rolle.beobachter" />
+						<datum name="region" wert="region.alles" />  
+					</datenliste>
+				</datenfeld>
+			</defaultParameter>
+		</konfigurationsObjekt>
+		
+		<!-- Nicht löschbarer Standardbenutzer -->
+		
+		<konfigurationsObjekt pid="benutzer.administrator" name="Administrator" typ="typ.benutzer">
+			<info>
+				<kurzinfo>Dieser Benutzer hat vollen Zugriff auf den Datenverteiler.</kurzinfo>
+			</info>
+			<defaultParameter attributgruppe="atg.benutzerParameter">
+				<datum name="berechtigungsklasse" wert="berechtigungsklasse.administrator" />
+			</defaultParameter>
+		</konfigurationsObjekt>
+				
+	</objekte>
+</konfigurationsBereich>

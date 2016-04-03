@@ -1,0 +1,952 @@
+<?xml version="1.0" encoding="ISO-8859-1"?>
+<!DOCTYPE konfigurationsBereich PUBLIC "-//K2S//DTD Dokument//DE" "K2S.dtd">
+<konfigurationsBereich pid="kb.tmRechner" name="Teilmodell Rechner" verantwortlich="kv.dambach">
+	<info>
+		<kurzinfo>Bereich mit dem Modell für die Rechner (Start/Stopp, DCF77 usw.)</kurzinfo>
+	</info>
+	<konfigurationsAenderung stand="09.01.2008" version="1" autor="Dambach-Werke GmbH, Th. Drapp" grund="Änderungsdokumentation siehe &apos;ReleaseNotes kv.dambach.doc&apos;"></konfigurationsAenderung>
+	<konfigurationsAenderung stand="21.01.2008" version="2" autor="Dambach-Werke GmbH, Th. Drapp" grund="Änderungsdokumentation siehe &apos;ReleaseNotes kv.dambach.doc&apos;"></konfigurationsAenderung>
+	<konfigurationsAenderung stand="04.02.2008" version="3" autor="Dambach-Werke GmbH, Th. Drapp" grund="Änderungsdokumentation siehe &apos;ReleaseNotes kv.dambach.doc&apos;"></konfigurationsAenderung>
+	<konfigurationsAenderung stand="07.02.2008" version="4" autor="Dambach-Werke GmbH, Th. Drapp" grund="Änderungsdokumentation siehe &apos;ReleaseNotes kv.dambach.doc&apos;"></konfigurationsAenderung>
+	<!--
+	Abhängigkeiten des Bereichs kb.tmRechner
+	Abhängig ab Version      Art der Abhängigkeit      Version des benötigten Bereichs      Benötigter Bereich
+	1                        notwendig                 1                                    kb.metaModellGlobal                
+	1                        notwendig                 1                                    kb.systemModellGlobal              
+	1                        notwendig                 1                                    kb.kv.dambach                      
+	1                        notwendig                 1                                    kb.fachModellGlobal                
+	-->
+	<modell>
+		<typDefinition pid="typ.rechner" name="Rechner" objektNamenPermanent="nein">
+			<info>
+				<kurzinfo>Rechner</kurzinfo>
+			</info>
+			<erweitert pid="typ.konfigurationsObjekt"/>
+			<attributgruppe pid="atg.dcfStatus"/>
+			<attributgruppe pid="atg.prozessInfo"/>
+			<attributgruppe pid="atg.rechnerInformation"/>
+			<attributgruppe pid="atg.startStoppAnfrage"/>
+			<attributgruppe pid="atg.startStoppInfo"/>
+		</typDefinition>
+		<attributgruppenDefinition pid="atg.dcfStatus" name="DcfStatus" parametrierend="nein">
+			<info>
+				<kurzinfo>Informationen zum Zeitserver:AktuellerZeitserver,Zeitserverliste,Zeitkorrektur mit Zeitstempel</kurzinfo>
+			</info>
+			<aspekt pid="asp.zustand" onlineModus="quelleUndSenke">
+			</aspekt>
+			<attribut pid="att.text" anzahl="1" anzahlIst="fest" name="AktuellerZeitServer">
+				<info>
+					<kurzinfo>Name AktuellerZeitserver</kurzinfo>
+				</info>
+			</attribut>
+			<attributliste pid="atl.vorhandeneZeitServer" anzahl="0" anzahlIst="variabel" name="VorhandeneZeitServer">
+				<info>
+					<kurzinfo>Enthält alle Zeitserver</kurzinfo>
+				</info>
+			</attributliste>
+			<attribut pid="att.text" anzahl="1" anzahlIst="fest" name="LetzteZeitKorrektur">
+				<info>
+					<kurzinfo>Info Zeitkorrektur</kurzinfo>
+				</info>
+			</attribut>
+		</attributgruppenDefinition>
+		<attributgruppenDefinition pid="atg.prozessInfo" name="ProzessInfo" parametrierend="nein">
+			<info>
+				<kurzinfo>Informationen zu einem Prozess</kurzinfo>
+			</info>
+			<aspekt pid="asp.zustand" onlineModus="quelleUndSenke">
+			</aspekt>
+			<attributliste pid="atl.prozess" anzahl="0" anzahlIst="variabel" name="Prozesse">
+				<info>
+					<kurzinfo>Enthält alle Prozesse</kurzinfo>
+				</info>
+			</attributliste>
+		</attributgruppenDefinition>
+		<attributgruppenDefinition pid="atg.rechnerInformation" name="RechnerInformation" parametrierend="nein">
+			<info>
+				<kurzinfo>Informationen zu einem Rechner</kurzinfo>
+			</info>
+			<aspekt pid="asp.eigenschaften" konfigurationsModus="datensatzNotwendig">
+			</aspekt>
+			<attribut pid="att.text" anzahl="1" anzahlIst="fest" name="Name">
+				<info>
+					<kurzinfo>Rechnername</kurzinfo>
+				</info>
+			</attribut>
+			<attribut pid="att.text" anzahl="1" anzahlIst="fest" name="TCPIP">
+				<info>
+					<kurzinfo>TCP/IP Adresse des rechners</kurzinfo>
+				</info>
+			</attribut>
+		</attributgruppenDefinition>
+		<attributgruppenDefinition pid="atg.startStoppAnfrage" name="StartStoppAnfrage" parametrierend="nein">
+			<info>
+				<kurzinfo>4 verschiedene Formen von StartStoppAnfragen vom Datenverteiler</kurzinfo>
+			</info>
+			<aspekt pid="asp.anfrage" onlineModus="quelleUndSenke">
+			</aspekt>
+			<attribut pid="att.applikationsReferenz" anzahl="1" anzahlIst="fest" name="absenderId">
+				<info>
+					<kurzinfo>Id des Absenderobjekts</kurzinfo>
+				</info>
+			</attribut>
+			<attribut pid="att.text" anzahl="1" anzahlIst="fest" name="absenderZeichen">
+				<info>
+					<kurzinfo>Kennzeichnung, die von der anfragenden Applikation beliebig vergeben wird.</kurzinfo>
+				</info>
+			</attribut>
+			<attributliste pid="atl.v1" anzahl="1" anzahlIst="variabel" name="V1">
+				<info>
+					<kurzinfo>Übergabe der Start/Stopp Informationen als Attribute</kurzinfo>
+				</info>
+			</attributliste>
+			<attributliste pid="atl.v2" anzahl="1" anzahlIst="variabel" name="V2">
+				<info>
+					<kurzinfo>Übergabe der Start/Stopp Informationen in einer XML-Struktur</kurzinfo>
+				</info>
+			</attributliste>
+			<attributliste pid="atl.v3" anzahl="1" anzahlIst="variabel" name="V3">
+				<info>
+					<kurzinfo>Übergabe der Start/Stopp Informationen in einer XML-Datei</kurzinfo>
+				</info>
+			</attributliste>
+			<attributliste pid="atl.v4" anzahl="1" anzahlIst="variabel" name="V4">
+				<info>
+					<kurzinfo>Übergabe der Start/Stopp Informationen durch Angabe eines Inkarnationsnamen</kurzinfo>
+				</info>
+			</attributliste>
+		</attributgruppenDefinition>
+		<attributgruppenDefinition pid="atg.startStoppAntwort" name="StartStoppAntwort" parametrierend="nein">
+			<info>
+				<kurzinfo>
+							Attributgruppe zur Übertragung von Antwortnachrichten von Start/Stopp auf Anfragen an Start/Stopp.
+				</kurzinfo>
+				<beschreibung>
+							Wird für die Übertragung von entsprechende Antworten auf Anfragen an Start/Stopp benutzt.
+							Die Anfragen werden unter typ.rechner/atg.startStoppAnfrage gestellt.
+				</beschreibung>
+			</info>
+			<aspekt pid="asp.antwort" onlineModus="quelleUndSenke">
+			</aspekt>
+			<attribut pid="att.text" anzahl="1" anzahlIst="fest" name="absenderZeichen">
+				<info>
+					<kurzinfo>Kennzeichnung, die von der anfragenden Applikation beliebig vergeben wird.</kurzinfo>
+				</info>
+			</attribut>
+			<attribut pid="att.text" anzahl="1" anzahlIst="fest" name="id">
+				<info>
+					<kurzinfo>Id des Prozesses bzw. des StartStopp Blocks auf die sich die Antwort bezieht</kurzinfo>
+					<beschreibung>
+								Eindeutige Id zur Zuordnung der Antwort zu dem entsprechenden Prozess bzw. StartStopp Block
+					</beschreibung>
+				</info>
+			</attribut>
+			<attribut pid="att.startStoppIdArt" anzahl="1" anzahlIst="fest" name="art">
+				<info>
+					<kurzinfo>Art der Id</kurzinfo>
+					<beschreibung>
+								Kennung ob es sich bei der Id um die ID eines Prozesses oder eines StartStopp Blocks
+								handelt.
+					</beschreibung>
+				</info>
+			</attribut>
+			<attribut pid="att.startStoppZustand" anzahl="1" anzahlIst="fest" name="zustand">
+				<info>
+					<kurzinfo>
+                Zustand des Prozesses bzw. des StartStopp Blocks
+					</kurzinfo>
+					<beschreibung>
+					      Zustand des Prozesses bzw. des StartStopp Blocks
+					</beschreibung>
+				</info>
+			</attribut>
+			<attribut pid="att.startStoppFehler" anzahl="1" anzahlIst="fest" name="fehler">
+				<info>
+					<kurzinfo>
+                Fehler in der StartStoppAnforderung
+					</kurzinfo>
+					<beschreibung>
+					      Fehler in der StartStoppAnforderung
+					</beschreibung>
+				</info>
+			</attribut>
+		</attributgruppenDefinition>
+		<attributgruppenDefinition pid="atg.startStoppInfo" name="StartStoppInfo" parametrierend="nein">
+			<info>
+				<kurzinfo>Informationen zu einem StartStopp-Block</kurzinfo>
+			</info>
+			<aspekt pid="asp.zustand" onlineModus="quelleUndSenke">
+			</aspekt>
+			<attributliste pid="atl.startStoppBloecke" anzahl="0" anzahlIst="variabel" name="StartStoppBloecke">
+				<info>
+					<kurzinfo>Enthält Informationen zu einem StartStopp-Block</kurzinfo>
+				</info>
+			</attributliste>
+		</attributgruppenDefinition>
+		<attributDefinition pid="att.aktion" name="Aktion">
+			<info>
+				<kurzinfo>Startoptionen</kurzinfo>
+			</info>
+			<ganzzahl bits="8">
+				<zustand name="starten" wert="0">
+					<info>
+						<kurzinfo>Start</kurzinfo>
+					</info>
+				</zustand>
+				<zustand name="stoppen" wert="1">
+					<info>
+						<kurzinfo>Stopp</kurzinfo>
+					</info>
+				</zustand>
+				<zustand name="neustart" wert="2">
+					<info>
+						<kurzinfo>Neustart</kurzinfo>
+					</info>
+				</zustand>
+				<zustand name="löschen" wert="3">
+					<info>
+						<kurzinfo>Löschen</kurzinfo>
+					</info>
+				</zustand>
+			</ganzzahl>
+		</attributDefinition>
+		<attributDefinition pid="att.aktionID" name="AktionID">
+			<info>
+				<kurzinfo>Startoptionen</kurzinfo>
+			</info>
+			<ganzzahl bits="8">
+				<zustand name="neustart" wert="0">
+					<info>
+						<kurzinfo>Erst stoppen, dann starten</kurzinfo>
+					</info>
+				</zustand>
+				<zustand name="stoppen" wert="1">
+					<info>
+						<kurzinfo>Stopp</kurzinfo>
+					</info>
+				</zustand>
+			</ganzzahl>
+		</attributDefinition>
+		<attributDefinition pid="att.optionFehlerAusgabe" name="OptionFehlerAusgabe">
+			<info>
+				<kurzinfo>Standardfehlerausgabe</kurzinfo>
+			</info>
+			<ganzzahl bits="8">
+				<zustand name="ignorieren" wert="0">
+					<info>
+						<kurzinfo>Standard </kurzinfo>
+						<beschreibung>Konsolenausgabe</beschreibung>
+					</info>
+				</zustand>
+				<zustand name="eigene" wert="1">
+					<info>
+						<kurzinfo>Eigene datei verwenden</kurzinfo>
+					</info>
+				</zustand>
+				<zustand name="gemeinsame" wert="2">
+					<info>
+						<kurzinfo>Gemeinsame Datei verwenden</kurzinfo>
+					</info>
+				</zustand>
+			</ganzzahl>
+		</attributDefinition>
+		<attributDefinition pid="att.optionStandardAusgabe" name="OptionStandardAusgabe">
+			<info>
+				<kurzinfo>Standardausgabe</kurzinfo>
+			</info>
+			<ganzzahl bits="8">
+				<zustand name="ignorieren" wert="0">
+					<info>
+						<kurzinfo>Standard </kurzinfo>
+						<beschreibung>Konsolenausgabe</beschreibung>
+					</info>
+				</zustand>
+				<zustand name="eigene" wert="1">
+					<info>
+						<kurzinfo>Eigene datei verwenden</kurzinfo>
+					</info>
+				</zustand>
+				<zustand name="gemeinsame" wert="2">
+					<info>
+						<kurzinfo>Gemeinsame Datei verwenden</kurzinfo>
+					</info>
+				</zustand>
+			</ganzzahl>
+		</attributDefinition>
+		<attributDefinition pid="att.optionStart" name="OptionStart">
+			<info>
+				<kurzinfo>Startoptionen</kurzinfo>
+			</info>
+			<ganzzahl bits="8">
+				<zustand name="automatisch" wert="0">
+					<info>
+						<kurzinfo>Start Automatisch</kurzinfo>
+					</info>
+				</zustand>
+				<zustand name="manuell" wert="1">
+					<info>
+						<kurzinfo>Start Manuell</kurzinfo>
+					</info>
+				</zustand>
+				<zustand name="intervall" wert="2">
+					<info>
+						<kurzinfo>Start Intervall</kurzinfo>
+						<beschreibung>Anwendung wird in bestimmten Intervallen gestartet</beschreibung>
+					</info>
+				</zustand>
+			</ganzzahl>
+		</attributDefinition>
+		<attributDefinition pid="att.rechnerReferenz" name="RechnerReferenz">
+			<info>
+				<kurzinfo>Attribut zur Referenzierung des Objekttyps: typ.rechner</kurzinfo>
+			</info>
+			<objektReferenz typ="typ.rechner" undefiniert="verboten" referenzierungsart="assoziation"/>
+		</attributDefinition>
+		<attributDefinition pid="att.rechnerReferenzOptional" name="RechnerReferenzOptional">
+			<info>
+				<kurzinfo>Attribut zur Referenzierung des Objekttyps: typ.rechner (Optionale Referenzierung erlaubt).</kurzinfo>
+			</info>
+			<objektReferenz typ="typ.rechner" undefiniert="erlaubt" referenzierungsart="assoziation"/>
+		</attributDefinition>
+		<attributDefinition pid="att.startStoppFehler" name="StartStoppFehler">
+			<info>
+				<kurzinfo>
+							Attributtyp, der die Fehler in der Attributgruppe atg.startStoppAntwort beschreibt
+				</kurzinfo>
+			</info>
+			<ganzzahl bits="8">
+				<zustand name="kein Fehler" wert="0">
+					<info>
+						<kurzinfo>Die Anforderung (atg.startStoppAnfrage) war fehlerfrei</kurzinfo>
+					</info>
+				</zustand>
+				<zustand name="Fehler Aktion" wert="1">
+					<info>
+						<kurzinfo>Aktion nicht bekannt</kurzinfo>
+					</info>
+				</zustand>
+				<zustand name="Fehler StartStopp-Block ID" wert="2">
+					<info>
+						<kurzinfo>kein StartStopp Block mit dieser ID vorhanden</kurzinfo>
+					</info>
+				</zustand>
+				<zustand name="Fehler Prozess ID" wert="3">
+					<info>
+						<kurzinfo>kein Prozess mit dieser ID vorhanden</kurzinfo>
+					</info>
+				</zustand>
+				<zustand name="Dateifehler" wert="4">
+					<info>
+						<kurzinfo>übergebene StartStopp Datei nicht gefunden</kurzinfo>
+					</info>
+				</zustand>
+				<zustand name="Fehler XML-Struktur" wert="5">
+					<info>
+						<kurzinfo>XML Struktur entspricht nit der DTD</kurzinfo>
+					</info>
+				</zustand>
+				<zustand name="Fehler Prozess Name" wert="6">
+					<info>
+						<kurzinfo>kein Prozess mit diesem Namen vorhanden</kurzinfo>
+					</info>
+				</zustand>
+				<zustand name="Fehler Aktion-PID-Name" wert="7">
+					<info>
+						<kurzinfo>Fehler in der Kombination Aktion - PID - Name</kurzinfo>
+					</info>
+				</zustand>
+			</ganzzahl>
+		</attributDefinition>
+		<attributDefinition pid="att.startStoppIdArt" name="Art">
+			<info>
+				<kurzinfo>
+							Attributtyp, der die Bedeutung der Id in der Attributgruppe atg.startStoppAntwort beschreibt
+				</kurzinfo>
+			</info>
+			<ganzzahl bits="8">
+				<zustand name="prozess" wert="0">
+					<info>
+						<kurzinfo>Die Id beschreibt einen Prozess</kurzinfo>
+					</info>
+				</zustand>
+				<zustand name="startStoppBlock" wert="1">
+					<info>
+						<kurzinfo>Die Id beschreibt einen StartStopp Block</kurzinfo>
+					</info>
+				</zustand>
+			</ganzzahl>
+		</attributDefinition>
+		<attributDefinition pid="att.startStoppZustand" name="StartStoppZustand">
+			<info>
+				<kurzinfo>Zustand einer Inkarnation oder eines StartStopp Blocks</kurzinfo>
+				<beschreibung>Der Attributtyp wird verwendet, um Zustände einzelner Inkarnationen der
+			                StartStopp Applikation zu beschreiben. Einzelne Zustände werden auch
+			                verwendet, um den Zustand eines StartStopp Blocks zu beschreiben.</beschreibung>
+			</info>
+			<ganzzahl bits="8">
+				<zustand name="angelegt" wert="0">
+					<info>
+						<kurzinfo>Inkarnation/StartStopp Block  wurde angelegt</kurzinfo>
+					</info>
+				</zustand>
+				<zustand name="warte Startbedingung" wert="1">
+					<info>
+						<kurzinfo>Inkarnation wartet auf Erfüllung der Startbedingung</kurzinfo>
+					</info>
+				</zustand>
+				<zustand name="starten" wert="3">
+					<info>
+						<kurzinfo>Inkarnation ist in der Startphase</kurzinfo>
+					</info>
+				</zustand>
+				<zustand name="gestartet" wert="4">
+					<info>
+						<kurzinfo>Inkarnation/StartStopp Block ist gestartet</kurzinfo>
+					</info>
+				</zustand>
+				<zustand name="initialisiert" wert="5">
+					<info>
+						<kurzinfo>Inkarnation ist initialisiert</kurzinfo>
+					</info>
+				</zustand>
+				<zustand name="warte Stoppbedingung" wert="6">
+					<info>
+						<kurzinfo>Inkarnation wartet auf Erfüllung der Stoppbedingung</kurzinfo>
+					</info>
+				</zustand>
+				<zustand name="stoppen" wert="7">
+					<info>
+						<kurzinfo>Inkarnation wird gestoppt</kurzinfo>
+					</info>
+				</zustand>
+				<zustand name="gestoppt" wert="8">
+					<info>
+						<kurzinfo>Inkarnation/StartStopp Block </kurzinfo>
+					</info>
+				</zustand>
+				<zustand name="warte intervall" wert="9">
+					<info>
+						<kurzinfo>Inkarnation wartet auf zyklischen Neustart</kurzinfo>
+					</info>
+				</zustand>
+				<zustand name="gelöscht" wert="10">
+					<info>
+						<kurzinfo>Inkarnation/StartStopp Block gelöscht</kurzinfo>
+					</info>
+				</zustand>
+				<zustand name="Fehler" wert="-1">
+					<info>
+						<kurzinfo>Beim Starten der Inkarnation (des StartStopp Blocks) ist ein Fehler aufgetreten</kurzinfo>
+					</info>
+				</zustand>
+			</ganzzahl>
+		</attributDefinition>
+		<attributDefinition pid="att.startVerhaltenFehlerOption" name="StartVerhaltenFehlerOption">
+			<info>
+				<kurzinfo>Standardfehlerausgabe</kurzinfo>
+			</info>
+			<ganzzahl bits="8">
+				<zustand name="beenden" wert="0">
+					<info>
+						<kurzinfo>beenden </kurzinfo>
+						<beschreibung>Startvorgang abbrechen und alle bereits gestarteten Applikationen beenden</beschreibung>
+					</info>
+				</zustand>
+				<zustand name="Abbruch" wert="1">
+					<info>
+						<kurzinfo>Abbruch</kurzinfo>
+						<beschreibung>Startvorgang abbrechen und alle bereits gestarteten Applikationen laufen lassen</beschreibung>
+					</info>
+				</zustand>
+				<zustand name="ignorieren" wert="2">
+					<info>
+						<kurzinfo>ignorieren (Standard)</kurzinfo>
+						<beschreibung>Problem ignorieren und nächste Applikation starten</beschreibung>
+					</info>
+				</zustand>
+			</ganzzahl>
+		</attributDefinition>
+		<attributDefinition pid="att.stoppVerhaltenFehlerOption" name="StoppVerhaltenFehlerOption">
+			<info>
+				<kurzinfo>Standardfehlerausgabe</kurzinfo>
+			</info>
+			<ganzzahl bits="8">
+				<zustand name="Abbruch" wert="1">
+					<info>
+						<kurzinfo>Abbruch</kurzinfo>
+						<beschreibung>Gesamter Stoppvorgang abbrechen</beschreibung>
+					</info>
+				</zustand>
+				<zustand name="Stopp" wert="0">
+					<info>
+						<kurzinfo>Stopp (Standard) </kurzinfo>
+						<beschreibung>Stopp der Anwendung erzwingen</beschreibung>
+					</info>
+				</zustand>
+				<zustand name="ignorieren" wert="2">
+					<info>
+						<kurzinfo>ignorieren</kurzinfo>
+						<beschreibung>Problem ignorieren und nächste Applikation stoppen</beschreibung>
+					</info>
+				</zustand>
+			</ganzzahl>
+		</attributDefinition>
+		<attributDefinition pid="att.warteArt" name="WarteArt">
+			<info>
+				<kurzinfo>Standardfehlerausgabe</kurzinfo>
+			</info>
+			<ganzzahl bits="8">
+				<zustand name="Beginn" wert="0">
+					<info>
+						<kurzinfo>Standard </kurzinfo>
+						<beschreibung>Warten auf den Startbeginn</beschreibung>
+					</info>
+				</zustand>
+				<zustand name="Ende" wert="1">
+					<info>
+						<kurzinfo>Warten auf das Startende</kurzinfo>
+					</info>
+				</zustand>
+			</ganzzahl>
+		</attributDefinition>
+		<attributlistenDefinition pid="atl.aufrufParameter" name="AufrufParameter">
+			<info>
+				<kurzinfo>Sammelt alle Aufrufparameter für einen Anwendungsstart</kurzinfo>
+			</info>
+			<attribut pid="att.text" anzahl="1" anzahlIst="fest" name="AufrufparameterWert">
+				<info>
+					<kurzinfo>Aufrufparameter</kurzinfo>
+				</info>
+			</attribut>
+		</attributlistenDefinition>
+		<attributlistenDefinition pid="atl.fehlerAusgabe" name="FehlerAusgabe">
+			<info>
+				<kurzinfo>Definiert die Standardfehlerausgabe</kurzinfo>
+			</info>
+			<attribut pid="att.optionFehlerAusgabe" anzahl="1" anzahlIst="fest" name="OptionFehlerAusgabe">
+				<info>
+					<kurzinfo>Verwendungsoption</kurzinfo>
+				</info>
+			</attribut>
+			<attribut pid="att.text" anzahl="1" anzahlIst="fest" name="Datei">
+				<info>
+					<kurzinfo>Datei</kurzinfo>
+				</info>
+			</attribut>
+		</attributlistenDefinition>
+		<attributlistenDefinition pid="atl.inkarnationen" name="Inkarnationen">
+			<info>
+				<kurzinfo>Informationen einer Inkarnation</kurzinfo>
+			</info>
+			<attribut pid="att.text" anzahl="1" anzahlIst="fest" name="ProzessID">
+				<info>
+					<kurzinfo>Id der Inkarnation</kurzinfo>
+				</info>
+			</attribut>
+		</attributlistenDefinition>
+		<attributlistenDefinition pid="atl.makros" name="Makros">
+			<info>
+				<kurzinfo>Sammelt alle Makroreferenzierungen für einen Anwendungsstart</kurzinfo>
+			</info>
+			<attribut pid="att.text" anzahl="1" anzahlIst="fest" name="MakroWert">
+				<info>
+					<kurzinfo>Makroreferenzierung auf ein im globalen Teil Definierten Makro</kurzinfo>
+				</info>
+			</attribut>
+		</attributlistenDefinition>
+		<attributlistenDefinition pid="atl.prozess" name="Prozesse">
+			<info>
+				<kurzinfo>Enthält alle Prozesse</kurzinfo>
+			</info>
+			<attribut pid="att.text" anzahl="1" anzahlIst="fest" name="ProzessID">
+				<info>
+					<kurzinfo>Id des Prozesses</kurzinfo>
+				</info>
+			</attribut>
+			<attribut pid="att.text" anzahl="1" anzahlIst="fest" name="Name">
+				<info>
+					<kurzinfo>Name der Anwendung oder einer Anwendungsgruppe.
+                    Wichtig für den Start des Kernsystems: 
+                    Alle Anwendungen die für das Kernsystem gebraucht werden, 
+                    müssen mit diesem Namen versehen werden.
+                    Diese Gruppe wird dann als erstes gestartet.</kurzinfo>
+				</info>
+			</attribut>
+			<attribut pid="att.text" anzahl="1" anzahlIst="fest" name="AusfuehrbareDatei">
+				<info>
+					<kurzinfo>Pfad und Dateiname der auszuführenden Datei</kurzinfo>
+				</info>
+			</attribut>
+			<attributliste pid="atl.makros" anzahl="0" anzahlIst="variabel" name="Makros">
+				<info>
+					<kurzinfo>Beliebige Anzahl von Makroreferenzierungen auf Makros im globalen Teil</kurzinfo>
+				</info>
+			</attributliste>
+			<attributliste pid="atl.aufrufParameter" anzahl="0" anzahlIst="variabel" name="AufrufParameter">
+				<info>
+					<kurzinfo>Beliebige Anzahl von Aufrufparametern für diese Anwendung</kurzinfo>
+				</info>
+			</attributliste>
+			<attributliste pid="atl.startArt" anzahl="1" anzahlIst="fest" name="StartArt">
+				<info>
+					<kurzinfo>Info zu Art des Startens(AUTOMATISCH;INTERVALL;MANUELL), Feritgmeldung (ja/nain), Neustart(ja/nein)</kurzinfo>
+				</info>
+			</attributliste>
+			<attributliste pid="atl.startBedingung" anzahl="0" anzahlIst="variabel" name="StartBedingung">
+				<info>
+					<kurzinfo>Hier wird mitgetilt unter welchen Bedingungen die Applikation starten darf.</kurzinfo>
+				</info>
+			</attributliste>
+			<attributliste pid="atl.stoppBedingung" anzahl="0" anzahlIst="variabel" name="StoppBedingung">
+				<info>
+					<kurzinfo>Hier wird mitgetilt unter welchen Bedingungen die Applikation starten darf.</kurzinfo>
+				</info>
+			</attributliste>
+			<attributliste pid="atl.standardAusgabe" anzahl="1" anzahlIst="fest" name="StandardAusgabe">
+				<info>
+					<kurzinfo>Einstellung der Standardausgabe</kurzinfo>
+				</info>
+			</attributliste>
+			<attributliste pid="atl.fehlerAusgabe" anzahl="1" anzahlIst="fest" name="FehlerAusgabe">
+				<info>
+					<kurzinfo>Einstellung der StandardFehlerausgabe</kurzinfo>
+				</info>
+			</attributliste>
+			<attributliste pid="atl.startVerhaltenFehler" anzahl="1" anzahlIst="fest" name="StartVerhaltenFehler">
+				<info>
+					<kurzinfo>Einstellung des Verhaltens bei Fehler während des Startvorgangs</kurzinfo>
+				</info>
+			</attributliste>
+			<attributliste pid="atl.stoppVerhaltenFehler" anzahl="1" anzahlIst="fest" name="StoppVerhaltenFehler">
+				<info>
+					<kurzinfo>Einstellung des Verhaltens bei Fehler während des Stoppvorgangs</kurzinfo>
+				</info>
+			</attributliste>
+			<attribut pid="att.zahl" anzahl="1" anzahlIst="fest" name="SimulationsVariante">
+				<info>
+					<kurzinfo>Nummer der Simulation einer Anwendung. "0" ist die Normale Anwendung. </kurzinfo>
+				</info>
+			</attribut>
+			<attribut pid="att.startStoppZustand" anzahl="1" anzahlIst="fest" name="Zustand">
+				<info>
+					<kurzinfo>Zustand der Applikation </kurzinfo>
+				</info>
+			</attribut>
+			<attribut pid="att.text" anzahl="1" anzahlIst="fest" name="StartZeitpunkt">
+				<info>
+					<kurzinfo>Startzeitpunkt der Anwendung </kurzinfo>
+				</info>
+			</attribut>
+			<attribut pid="att.text" anzahl="1" anzahlIst="fest" name="StoppZeitpunkt">
+				<info>
+					<kurzinfo>Stoppzeitpunkt der Anwendung </kurzinfo>
+				</info>
+			</attribut>
+			<attribut pid="att.text" anzahl="1" anzahlIst="fest" name="InitialisierungsZeitpunkt">
+				<info>
+					<kurzinfo>Initialisierungszeitpunkt der Anwendung </kurzinfo>
+				</info>
+			</attribut>
+			<attribut pid="att.text" anzahl="1" anzahlIst="fest" name="NächsterStartZeitpunkt">
+				<info>
+					<kurzinfo>nächster Startzeitpunkt der Anwendung (nur bei Startart Intervall)</kurzinfo>
+				</info>
+			</attribut>
+		</attributlistenDefinition>
+		<attributlistenDefinition pid="atl.standardAusgabe" name="StandardAusgabe">
+			<info>
+				<kurzinfo>Definiert die Standardausgabe</kurzinfo>
+			</info>
+			<attribut pid="att.optionStandardAusgabe" anzahl="1" anzahlIst="fest" name="OptionStandardAusgabe">
+				<info>
+					<kurzinfo>Verwendungsoption</kurzinfo>
+				</info>
+			</attribut>
+			<attribut pid="att.text" anzahl="1" anzahlIst="fest" name="Datei">
+				<info>
+					<kurzinfo>Datei</kurzinfo>
+				</info>
+			</attribut>
+		</attributlistenDefinition>
+		<attributlistenDefinition pid="atl.startArt" name="StartArt">
+			<info>
+				<kurzinfo>Sammelt alle Aufrufparameter für einen Anwendungsstart</kurzinfo>
+			</info>
+			<attribut pid="att.optionStart" anzahl="1" anzahlIst="fest" name="OptionStart">
+				<info>
+					<kurzinfo>Option der Startart</kurzinfo>
+					<beschreibung>Optionen(AUTOMATISCH;INTERVALL;MANUELL)</beschreibung>
+				</info>
+			</attribut>
+			<attribut pid="att.jaNein" anzahl="1" anzahlIst="fest" name="NeuStart">
+				<info>
+					<kurzinfo>Mitteilung ob nach Rechnerabsturz die Anwendung automatisch neu gestartet werden soll oder nicht.</kurzinfo>
+				</info>
+			</attribut>
+			<attribut pid="att.intervallCron" anzahl="1" anzahlIst="fest" name="Intervall">
+				<info>
+					<kurzinfo>Zeitdauer bei der Option Intervall</kurzinfo>
+				</info>
+			</attribut>
+		</attributlistenDefinition>
+		<attributlistenDefinition pid="atl.startBedingung" name="StartBedingung">
+			<info>
+				<kurzinfo>Sammelt alle Startbedingungen zu einer Anwendung</kurzinfo>
+			</info>
+			<attribut pid="att.text" anzahl="1" anzahlIst="fest" name="Vorgaenger">
+				<info>
+					<kurzinfo>Anwendung die zuerst gestartet sein muss.</kurzinfo>
+				</info>
+			</attribut>
+			<attribut pid="att.warteArt" anzahl="1" anzahlIst="fest" name="WarteArt">
+				<info>
+					<kurzinfo>beginn(Standard):Warten auf den Startanfang.
+                    ende: Warten auf das Startende (Fertigmeldung) der angegebenen Anwendung
+          </kurzinfo>
+				</info>
+			</attribut>
+			<attribut pid="att.text" anzahl="1" anzahlIst="fest" name="Rechner">
+				<info>
+					<kurzinfo>Rechner Adresse auf dem die Anwendung läuft bzw. laufen soll</kurzinfo>
+				</info>
+			</attribut>
+			<attribut pid="att.zeitDauer" anzahl="1" anzahlIst="fest" name="WarteZeit">
+				<info>
+					<kurzinfo>Zeitdauer die noch gewartet werden muss bis der Start der Anwendung erfolgen soll.</kurzinfo>
+				</info>
+			</attribut>
+		</attributlistenDefinition>
+		<attributlistenDefinition pid="atl.startStoppBloecke" name="StartStoppBloecke">
+			<info>
+				<kurzinfo>Enthält Informationen zu einem StartStopp Block</kurzinfo>
+			</info>
+			<attribut pid="att.text" anzahl="1" anzahlIst="fest" name="StartStoppID">
+				<info>
+					<kurzinfo>Id des StartStopp-Blocks</kurzinfo>
+				</info>
+			</attribut>
+			<attributliste pid="atl.inkarnationen" anzahl="0" anzahlIst="variabel" name="Inkarnationen">
+				<info>
+					<kurzinfo>Liste der Inkarnationen die zu diesem StartStopp Block gehören</kurzinfo>
+				</info>
+			</attributliste>
+			<attribut pid="att.startStoppZustand" anzahl="1" anzahlIst="fest" name="Zustand">
+				<info>
+					<kurzinfo>Zustand des StartStopp Blocks </kurzinfo>
+				</info>
+			</attribut>
+			<attribut pid="att.text" anzahl="1" anzahlIst="fest" name="StartZeitpunkt">
+				<info>
+					<kurzinfo>Startzeitpunkt der StartStopp Blocks </kurzinfo>
+				</info>
+			</attribut>
+		</attributlistenDefinition>
+		<attributlistenDefinition pid="atl.startVerhaltenFehler" name="StartVerhaltenFehler">
+			<info>
+				<kurzinfo>Definiert das Verhalten bei Fehlern während des Startens</kurzinfo>
+			</info>
+			<attribut pid="att.startVerhaltenFehlerOption" anzahl="1" anzahlIst="fest" name="StartVerhaltenFehlerOption">
+				<info>
+					<kurzinfo>Verwendungsoption</kurzinfo>
+				</info>
+			</attribut>
+			<attribut pid="att.zahl" anzahl="1" anzahlIst="fest" name="Wiederholrate">
+				<info>
+					<kurzinfo>Datei</kurzinfo>
+				</info>
+			</attribut>
+		</attributlistenDefinition>
+		<attributlistenDefinition pid="atl.stoppBedingung" name="StoppBedingung">
+			<info>
+				<kurzinfo>Sammelt alle Stoppbedingungen zu einer Anwendung</kurzinfo>
+			</info>
+			<attribut pid="att.text" anzahl="1" anzahlIst="fest" name="Nachfolger">
+				<info>
+					<kurzinfo>Anwendung die zuvor gestoppt sein muss.</kurzinfo>
+				</info>
+			</attribut>
+			<attribut pid="att.text" anzahl="1" anzahlIst="fest" name="Rechner">
+				<info>
+					<kurzinfo>Rechner Adresse auf dem die zustoppende Anwendung läuft</kurzinfo>
+				</info>
+			</attribut>
+			<attribut pid="att.zeitDauer" anzahl="1" anzahlIst="fest" name="WarteZeit">
+				<info>
+					<kurzinfo>Zeitdauer die noch gewartet werden muss bis der Stopp der Anwendung erfolgen soll.</kurzinfo>
+				</info>
+			</attribut>
+		</attributlistenDefinition>
+		<attributlistenDefinition pid="atl.stoppVerhaltenFehler" name="StoppVerhaltenFehler">
+			<info>
+				<kurzinfo>Definiert das Verhalten bei Fehlern während des Stoppens</kurzinfo>
+			</info>
+			<attribut pid="att.stoppVerhaltenFehlerOption" anzahl="1" anzahlIst="fest" name="StoppVerhaltenFehlerOption">
+				<info>
+					<kurzinfo>Verwendungsoption</kurzinfo>
+				</info>
+			</attribut>
+			<attribut pid="att.zahl" anzahl="1" anzahlIst="fest" name="Wiederholrate">
+				<info>
+					<kurzinfo>Datei</kurzinfo>
+				</info>
+			</attribut>
+		</attributlistenDefinition>
+		<attributlistenDefinition pid="atl.v1" name="V1">
+			<info>
+				<kurzinfo>Übergabe der Start/Stopp Informationen als Attribute</kurzinfo>
+			</info>
+			<attribut pid="att.aktion" anzahl="1" anzahlIst="fest" name="Aktion">
+				<info>
+					<kurzinfo>Option der Aktion</kurzinfo>
+					<beschreibung>Optionen(starten,stoppen,neustart)</beschreibung>
+				</info>
+			</attribut>
+			<attribut pid="att.text" anzahl="1" anzahlIst="fest" name="ProzessID">
+				<info>
+					<kurzinfo>eindeutige StartStopp Id der Applikation</kurzinfo>
+				</info>
+			</attribut>
+			<attribut pid="att.text" anzahl="1" anzahlIst="fest" name="Name">
+				<info>
+					<kurzinfo>Name der Anwendung</kurzinfo>
+				</info>
+			</attribut>
+			<attribut pid="att.text" anzahl="1" anzahlIst="fest" name="AusfuehrbareDatei">
+				<info>
+					<kurzinfo>Pfad und Dateiname der auszuführenden Datei</kurzinfo>
+				</info>
+			</attribut>
+			<attributliste pid="atl.makros" anzahl="0" anzahlIst="variabel" name="Makros">
+				<info>
+					<kurzinfo>Beliebige Anzahl von Makroreferenzierungen auf Makros im globalen Teil</kurzinfo>
+				</info>
+			</attributliste>
+			<attributliste pid="atl.aufrufParameter" anzahl="0" anzahlIst="variabel" name="AufrufParameter">
+				<info>
+					<kurzinfo>Beliebige Anzahl von Aufrufparametern für diese Anwendung</kurzinfo>
+				</info>
+			</attributliste>
+			<attributliste pid="atl.startArt" anzahl="1" anzahlIst="fest" name="StartArt">
+				<info>
+					<kurzinfo>Info zu Art des Startens(AUTOMATISCH;INTERVALL;MANUELL), Feritgmeldung (ja/nain), Neustart(ja/nein)</kurzinfo>
+				</info>
+			</attributliste>
+			<attributliste pid="atl.startBedingung" anzahl="0" anzahlIst="variabel" name="StartBedingung">
+				<info>
+					<kurzinfo>Hier wird mitgetilt unter welchen Bedingungen die Applikation starten darf.</kurzinfo>
+				</info>
+			</attributliste>
+			<attributliste pid="atl.stoppBedingung" anzahl="0" anzahlIst="variabel" name="StoppBedingung">
+				<info>
+					<kurzinfo>Hier wird mitgetilt unter welchen Bedingungen die Applikation starten darf.</kurzinfo>
+				</info>
+			</attributliste>
+			<attributliste pid="atl.standardAusgabe" anzahl="1" anzahlIst="fest" name="StandardAusgabe">
+				<info>
+					<kurzinfo>Einstellung der Standardausgabe</kurzinfo>
+				</info>
+			</attributliste>
+			<attributliste pid="atl.fehlerAusgabe" anzahl="1" anzahlIst="fest" name="FehlerAusgabe">
+				<info>
+					<kurzinfo>Einstellung der StandardFehlerausgabe</kurzinfo>
+				</info>
+			</attributliste>
+			<attributliste pid="atl.startVerhaltenFehler" anzahl="1" anzahlIst="fest" name="StartVerhaltenFehler">
+				<info>
+					<kurzinfo>Einstellung des Verhaltens bei Fehler während des Startvorgangs</kurzinfo>
+				</info>
+			</attributliste>
+			<attributliste pid="atl.stoppVerhaltenFehler" anzahl="1" anzahlIst="fest" name="StoppVerhaltenFehler">
+				<info>
+					<kurzinfo>Einstellung des Verhaltens bei Fehler während des Stoppvorgangs</kurzinfo>
+				</info>
+			</attributliste>
+		</attributlistenDefinition>
+		<attributlistenDefinition pid="atl.v2" name="V2">
+			<info>
+				<kurzinfo>Übergabe der Start/Stopp Informationen als XML-Stuktur</kurzinfo>
+			</info>
+			<attribut pid="att.aktion" anzahl="1" anzahlIst="fest" name="Aktion">
+				<info>
+					<kurzinfo>Option der Aktion</kurzinfo>
+					<beschreibung>Optionen(starten,stoppen,neustart)</beschreibung>
+				</info>
+			</attribut>
+			<attribut pid="att.text" anzahl="1" anzahlIst="fest" name="StartStoppID">
+				<info>
+					<kurzinfo>eindeutige StartStopp ID des StartStopp Blocks</kurzinfo>
+				</info>
+			</attribut>
+			<attribut pid="att.zahl" anzahl="1" anzahlIst="fest" name="SimulationsVariante">
+				<info>
+					<kurzinfo>Nummer der Simulation einer Anwendung. "0" ist die Normale Anwendung. </kurzinfo>
+				</info>
+			</attribut>
+			<attribut pid="att.text" anzahl="1" anzahlIst="fest" name="xml">
+				<info>
+					<kurzinfo>Eine XML-Struktur wird als großes Dateifeld übergeben </kurzinfo>
+				</info>
+			</attribut>
+		</attributlistenDefinition>
+		<attributlistenDefinition pid="atl.v3" name="V3">
+			<info>
+				<kurzinfo>Übergabe der Start/Stopp Informationen als XML-Datei-Pfad</kurzinfo>
+			</info>
+			<attribut pid="att.aktion" anzahl="1" anzahlIst="fest" name="Aktion">
+				<info>
+					<kurzinfo>Option der Aktion</kurzinfo>
+					<beschreibung>Optionen(starten,stoppen,neustart)</beschreibung>
+				</info>
+			</attribut>
+			<attribut pid="att.text" anzahl="1" anzahlIst="fest" name="StartStoppID">
+				<info>
+					<kurzinfo>eindeutige StartStopp ID des StartStopp Blocks</kurzinfo>
+				</info>
+			</attribut>
+			<attribut pid="att.zahl" anzahl="1" anzahlIst="fest" name="SimulationsVariante">
+				<info>
+					<kurzinfo>Nummer der Simulation einer Anwendung. "0" ist die Normale Anwendung. </kurzinfo>
+				</info>
+			</attribut>
+			<attribut pid="att.text" anzahl="1" anzahlIst="fest" name="xmlDatei">
+				<info>
+					<kurzinfo>Ein Pfad zu einer XML-Datei( Mit Rechner) wird übergeben </kurzinfo>
+				</info>
+			</attribut>
+		</attributlistenDefinition>
+		<attributlistenDefinition pid="atl.v4" name="V4">
+			<info>
+				<kurzinfo>Übergabe der Start/Stopp Informationen durch Angabe eines Inkarnationsnamen</kurzinfo>
+			</info>
+			<attribut pid="att.text" anzahl="1" anzahlIst="fest" name="ProzessID">
+				<info>
+					<kurzinfo>eindeutige StartStopp Id der Applikation</kurzinfo>
+				</info>
+			</attribut>
+			<attribut pid="att.aktion" anzahl="1" anzahlIst="fest" name="Aktion">
+				<info>
+					<kurzinfo>Option der Aktion</kurzinfo>
+					<beschreibung>Optionen(starten,stoppen,neustart)</beschreibung>
+				</info>
+			</attribut>
+			<attribut pid="att.text" anzahl="1" anzahlIst="fest" name="Name">
+				<info>
+					<kurzinfo>Applikationsname </kurzinfo>
+				</info>
+			</attribut>
+		</attributlistenDefinition>
+		<attributlistenDefinition pid="atl.vorhandeneZeitServer" name="VorhandeneZeitServer">
+			<info>
+				<kurzinfo>Vorhandene Zeitserver</kurzinfo>
+			</info>
+			<attribut pid="att.text" anzahl="1" anzahlIst="fest" name="VorhandenerZeitServer">
+				<info>
+					<kurzinfo>Vorhandener Zeitserver</kurzinfo>
+					<beschreibung>viel</beschreibung>
+				</info>
+			</attribut>
+		</attributlistenDefinition>
+	</modell>
+	<objekte>
+	</objekte>
+</konfigurationsBereich>

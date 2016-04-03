@@ -1,0 +1,670 @@
+<?xml version="1.0" encoding="ISO-8859-1"?>
+<!DOCTYPE konfigurationsBereich PUBLIC "-//K2S//DTD Dokument//DE" "K2S.dtd">
+<konfigurationsBereich pid="kb.tmGanglinienGlobal" name="Teilmodell Ganglinien Global" verantwortlich="kv.inovat">
+	<info>
+		<kurzinfo>Teilmodell mit Datenmodellierung zu den Ganglinien.</kurzinfo>
+		<beschreibung>
+			<sektion>
+				<titel>Ganglinien</titel>
+				<absatz>
+					Die folgende Abbildung skizziert die Zusammenhänge für das automatische Lernen von Ganglinien
+					und für die Ganglinienprognose.
+				</absatz>
+				<abbildung pid="abb.ganglinienSystem" src="abbildungen/systemereignisganglinien-tmGanglinieSystem.jpg">
+					<titel>Übersicht Ganglinien</titel>
+				</abbildung>
+				<absatz>
+					Das Automatische Lernen von Ganglinien erzeugt auf Basis gemessener Verkehrswerte
+					historische Ganglinien durch Verschmelzung. Dabei werden aktuell anliegende Ereignisse
+					berücksichtigt.
+				</absatz>
+				<absatz>
+					Die aktuellen Ganglinien werden von der Parametrierung persistent gehalten. Darüber hinaus können
+					die Ganglinien im Archivsystem archiviert werden.
+				</absatz>
+				<absatz>
+					Die erzeugten Ganglinien sind die Grundlage der Ganglinienprognose.
+					Der Lernvorgang wird zyklisch in einem parametrierbaren Intervall (z.B. täglich)
+					durchgeführt. Um dem Anwender die Möglichkeit zu geben, nachträglich die Daten
+					im Ereigniskalender zu vervollständigen, werden nur Analysewerte betrachtet,
+					die ein parametrierbares Mindestalter haben (z.B. eine Woche).
+				</absatz>
+				<absatz>
+					Die folgende Abbildung skizziert die Attributgruppen, die bei der Modellierung von Ganglinien
+					und Prognoseganglinien zum Einsatz kommen.
+				</absatz>
+				<abbildung pid="abb.ganglinien" src="abbildungen/systemereignisganglinien-atgGanglinien.jpg">
+					<titel>Übersicht Attributgruppen Ganglinien</titel>
+				</abbildung>
+			</sektion>
+		</beschreibung>
+	</info>
+	<konfigurationsAenderung stand="19.03.2007" version="5" autor="inovat, Dipl.-Ing. H. C. Kniß (HCK)" grund="A:Überarbeitung des Datenkatalogs für Veröffentlichung Kernsoftware. Änderungsdokumentation siehe &apos;inovat: Datenkatalog DaV-Release Notes&apos;."></konfigurationsAenderung>
+	<konfigurationsAenderung stand="20.03.2007" version="5" autor="inovat, Dipl.-Ing. H. C. Kniß (HCK)" grund="B:Überarbeitung des Datenkatalogs für Veröffentlichung Kernsoftware. Änderungsdokumentation siehe &apos;inovat: Datenkatalog DaV-Release Notes&apos;."></konfigurationsAenderung>
+	<konfigurationsAenderung stand="31.05.2007" version="6" autor="inovat, Dipl.-Ing. H. C. Kniß (HCK)" grund="Änderungsdokumentation siehe &apos;ReleaseNotes kv.inovt.doc&apos;"></konfigurationsAenderung>
+	<konfigurationsAenderung stand="10.06.2007" version="7" autor="inovat, Dipl.-Ing. H. C. Kniß (HCK)" grund="Änderungsdokumentation siehe &apos;ReleaseNotes kv.inovt.doc&apos;"></konfigurationsAenderung>
+	<konfigurationsAenderung stand="19.07.2007" version="8" autor="inovat, Dipl.-Ing. H. C. Kniß (HCK)" grund="Änderungsdokumentation siehe &apos;ReleaseNotes kv.inovt.doc&apos;"></konfigurationsAenderung>
+	<konfigurationsAenderung stand="20.02.2008" version="9" autor="inovat, Dipl.-Ing. H. C. Kniß (HCK)" grund="Änderungsdokumentation siehe &apos;ReleaseNotes kv.inovt.doc&apos;"></konfigurationsAenderung>
+	<konfigurationsAenderung stand="25.03.2008" version="10" autor="inovat, Dipl.-Ing. H. C. Kniß (HCK)" grund="Änderungsdokumentation siehe &apos;ReleaseNotes kv.inovt.doc&apos;"></konfigurationsAenderung>
+	<konfigurationsAenderung stand="14.07.2008" version="10" autor="inovat, Dipl.-Ing. H. C. Kniß (HCK)" grund="Änderungsdokumentation siehe &apos;ReleaseNotes kv.inovt.doc&apos;"></konfigurationsAenderung>
+	<konfigurationsAenderung stand="12.08.2008" version="10" autor="inovat, Dipl.-Ing. H. C. Kniß (HCK)" grund="Änderungsdokumentation siehe &apos;ReleaseNotes kv.inovt.doc&apos;"></konfigurationsAenderung>
+	<konfigurationsAenderung stand="01.08.2010" version="11" autor="BitCtrl, Thierfelder, inovat, Dipl.-Ing. H. C. Kniß (HCK)" grund="Änderungsdokumentation siehe &apos;ReleaseNotes kv.inovt.doc&apos;, Modell und Objekte fuer den GanglinienSpeicher ergänzt."></konfigurationsAenderung>
+	<!--
+	Abhängigkeiten des Bereichs kb.tmGanglinienGlobal
+	Abhängig ab Version      Art der Abhängigkeit      Version des benötigten Bereichs      Benötigter Bereich
+	8                        notwendig                 1                                    kb.kv.inovat                       
+	8                        notwendig                 2                                    kb.tmVerkehrGlobal                 
+	8                        notwendig                 1                                    kb.systemModellGlobal              
+	8                        notwendig                 4                                    kb.fachModellGlobal                
+	8                        notwendig                 1                                    kb.metaModellGlobal                
+	8                        notwendig                 5                                    kb.tmEreignisKalenderGlobal        
+	9                        notwendig                 3                                    kb.tmVewBetriebGlobal              
+	-->
+		<modell>
+		<typDefinition pid="typ.applikationGanglinienPrognose" name="ApplikationGanglinienPrognose" objektNamenPermanent="nein">
+			<info>
+				<kurzinfo>Applikationsobjekt für die Ganglinienverarbeitung (Prognose und Automatisches Lernen).</kurzinfo>
+			</info>
+			<erweitert pid="typ.konfigurationsObjekt"/>
+			<attributgruppe pid="atg.ganglinienModellAutomatischesLernen"/>
+			<attributgruppe pid="atg.prognoseGanglinienAnfrage"/>
+			<defaultParameter attributgruppe="atg.ganglinienModellAutomatischesLernen" typ="typ.applikationGanglinienPrognose">
+				<datenliste name="Urlasser">
+					<datum name="BenutzerReferenz" wert="undefiniert"/>
+					<datum name="Ursache" wert=""/>
+					<datum name="Veranlasser" wert=""/>
+				</datenliste>
+				<datum name="AlgAktualisierungsintervall" wert="0 3 * * *"/>
+				<datum name="AlgDatenMindestalter" wert="7 Tag(e)"/>
+				<datum name="AlgMaxVergleichsAbstand" wert="25 %"/>
+			</defaultParameter>
+		</typDefinition>
+		<typDefinition pid="typ.ganglinienSpeicher" name="GanglinienSpeicher" objektNamenPermanent="nein">
+			<info>
+				<kurzinfo>Applikationsobjekt fuer die Ganglinienspeicherung.</kurzinfo>
+			</info>
+			<erweitert pid="typ.konfigurationsObjekt"/>
+			<attributgruppe pid="atg.ganglinienSpeicherAnfrage"/>
+			<attributgruppe pid="atg.ganglinienSpeicherAntwort"/>
+		</typDefinition>
+		<attributgruppenDefinition pid="atg.ganglinie" name="Ganglinie" parametrierend="ja">
+			<info>
+				<kurzinfo>Attributgruppe zur Definition von Ganglinien</kurzinfo>
+			</info>
+			<attributliste pid="atl.urlasser" anzahl="1" anzahlIst="fest" name="Urlasser">
+			</attributliste>
+			<attributliste pid="atl.ganglinie" anzahl="0" anzahlIst="variabel" name="Ganglinie">
+				<info>
+					<kurzinfo>Definition einer Ganglinie</kurzinfo>
+				</info>
+			</attributliste>
+		</attributgruppenDefinition>
+		<attributgruppenDefinition pid="atg.ganglinienModellAutomatischesLernen" name="GanglinienModellAutomatischesLernen" parametrierend="ja">
+			<info>
+				<kurzinfo>Globale Modellparameter für das automatische Lernen von Ganglinien.</kurzinfo>
+			</info>
+			<attributliste pid="atl.urlasser" anzahl="1" anzahlIst="fest" name="Urlasser">
+			</attributliste>
+			<attribut pid="att.intervallCron" anzahl="1" anzahlIst="fest" name="AlgAktualisierungsintervall">
+				<info>
+					<kurzinfo>
+						Gibt an, in welchen Zeitabständen der Lernvorgang gestartet werden soll.
+					</kurzinfo>
+				</info>
+			</attribut>
+			<attribut pid="att.intervallTage" anzahl="1" anzahlIst="fest" name="AlgDatenMindestalter">
+				<info>
+					<kurzinfo>
+						Mindestalter der Analysewerte, die im automatischen Lernen verarbeitet werden.
+					</kurzinfo>
+				</info>
+			</attribut>
+			<attribut pid="att.abstandsMass" anzahl="1" anzahlIst="fest" name="AlgMaxVergleichsAbstand">
+				<info>
+					<kurzinfo>
+						Wenn dieses Abstandsmaß beim zyklischen Archivieren und Vergleichen von Ganglinien
+						überschritten wird, wird eine Meldung erzeugt.
+					</kurzinfo>
+				</info>
+			</attribut>
+		</attributgruppenDefinition>
+		<attributgruppenDefinition pid="atg.ganglinienModellPrognose" name="GanglinienModellPrognose" parametrierend="ja">
+			<info>
+				<kurzinfo>Parameter zur Ganglinienprognose je Prognoseobjekt</kurzinfo>
+			</info>
+			<attributliste pid="atl.urlasser" anzahl="1" anzahlIst="fest" name="Urlasser">
+			</attributliste>
+			<attribut pid="att.ganglinienAuswahlMethode" anzahl="1" anzahlIst="fest" name="GLAuswahlMethode">
+				<info>
+					<kurzinfo>
+						Gibt an, welche Methode am Prognoseobjekt i zur Auswahl von Ganglinien eingesetzt werden soll,
+						wenn das Pattern-Matching nicht benutzt werden kann.
+					</kurzinfo>
+				</info>
+			</attribut>
+			<attribut pid="att.anzahlSekunden1Bis" anzahl="1" anzahlIst="fest" name="GLPatternMatchingHorizont">
+				<info>
+					<kurzinfo>
+						Zeitspanne ab dem aktuellen Zeitpunkt in dem das Pattern-Matching Verfahrens zur Ganglinienauswahl
+						am Prognoseobjekt i eingesetzt wird
+					</kurzinfo>
+				</info>
+			</attribut>
+			<attribut pid="att.anzahlSekunden1Bis" anzahl="1" anzahlIst="fest" name="GLMatchingIntervall">
+				<info>
+					<kurzinfo>
+						Beschreibt den Zeitbereich vor dem aktuellen Zeitpunkt auf dem die Abstandsberechnung im
+						Pattern-Matching Verfahren am Prognoseobjekt i ausgeführt wird.
+					</kurzinfo>
+				</info>
+			</attribut>
+			<attribut pid="att.anzahlSekunden1Bis" anzahl="1" anzahlIst="fest" name="GLPatterMatchingOffset">
+				<info>
+					<kurzinfo>
+						Ereignisse werden zusätzlich mit der angegebenen zeitlichen Verschiebung (nach vorne und hinten)
+						im Pattern-Matching Verfahren am Prognoseobjekt i berücksichtigt.
+					</kurzinfo>
+				</info>
+			</attribut>
+			<attribut pid="att.prozent" anzahl="1" anzahlIst="fest" name="GLMaximalerMatchingFehler">
+				<info>
+					<kurzinfo>
+						Maximal zulässiger Fehler einer kombinierten Ganglinie im Vergleich zur aktuellen
+						Analyseganglinie im Pattern-Matching Verfahren für Prognoseobjekt i
+					</kurzinfo>
+				</info>
+			</attribut>
+		</attributgruppenDefinition>
+		<attributgruppenDefinition pid="atg.ganglinienSpeicherAnfrage" name="GanglinienSpeicherAnfrage" parametrierend="nein">
+			<info>
+				<kurzinfo>Attributgruppe zur Spezifikation von Anfragen an den Ganglininespeicher.</kurzinfo>
+			</info>
+			<aspekt pid="asp.anfrage" onlineModus="quelleUndSenke">
+			</aspekt>
+			<attribut pid="att.applikationsReferenz" anzahl="1" anzahlIst="fest" name="absenderId">
+				<info>
+					<kurzinfo>Objekt-ID der anfragenden Applikation.</kurzinfo>
+					<beschreibung>
+						<absatz>
+							Die Objekt-ID wird aus der Anfrage in die Antwort kopiert. Jeder angemeldete Client muss diese auswerten, damit er nur Antworten auf seine eigenen Anfragen auswertet.
+						</absatz>
+					</beschreibung>
+				</info>
+			</attribut>
+			<attribut pid="att.text" anzahl="1" anzahlIst="fest" name="AbsenderZeichen">
+				<info>
+					<kurzinfo>Kennzeichnung, die von der anfragenden Applikation beliebig vergeben wird.</kurzinfo>
+					<beschreibung>
+						Der angegebene Wert wird in die Antwort zu dieser Anfrage kopiert. Die Bedeutung des Attributs wird von der anfragenden Applikation beliebig festgelegt und kann zum Beispiel dazu benutzt werden, um eine empfangene Antwort der ursprünglichen Anfrage zuzuordnen.
+					</beschreibung>
+				</info>
+			</attribut>
+			<attributliste pid="atl.ganglinienSpeicherAnfrage" anzahl="1" anzahlIst="fest" name="Anfrage">
+				<info>
+					<kurzinfo>Enthält die eigentlichen Anfrageinformationen (MQ, Ereignistyp, KommandoTyp).</kurzinfo>
+				</info>
+			</attributliste>
+		</attributgruppenDefinition>
+		<attributgruppenDefinition pid="atg.ganglinienSpeicherAntwort" name="GanglinienSpeicherAntwort" parametrierend="nein">
+			<info>
+				<kurzinfo>Attributgruppe mit den Antworten des Ganglininespeichers auf Anfragen.</kurzinfo>
+			</info>
+			<aspekt pid="asp.antwort" onlineModus="quelleUndSenke">
+			</aspekt>
+			<attribut pid="att.applikationsReferenz" anzahl="1" anzahlIst="fest" name="absenderId">
+				<info>
+					<kurzinfo>Objekt-ID der anfragenden Applikation.</kurzinfo>
+					<beschreibung>
+						<absatz>
+							Die Objekt-ID wird aus der Anfrage in die Antwort kopiert. Jeder angemeldete Client muss diese auswerten, damit er nur Antworten auf seine eigenen Anfragen auswertet.
+						</absatz>
+					</beschreibung>
+				</info>
+			</attribut>
+			<attribut pid="att.text" anzahl="1" anzahlIst="fest" name="AbsenderZeichen">
+				<info>
+					<kurzinfo>Kennzeichnung, die von der anfragenden Applikation beliebig vergeben wird.</kurzinfo>
+					<beschreibung>
+						Der angegebene Wert wird in die Antwort aus der Anfrage kopiert. Die Bedeutung des Attributs wird von der anfragenden Applikation beliebig festgelegt und kann zum Beispiel dazu benutzt werden, um eine empfangene Antwort der ursprünglichen Anfrage zuzuordnen.
+					</beschreibung>
+				</info>
+			</attribut>
+			<attributliste pid="atl.ganglinienSpeicherAntwort" anzahl="1" anzahlIst="fest" name="Antwort">
+			</attributliste>
+		</attributgruppenDefinition>
+		<attributgruppenDefinition pid="atg.prognoseGanglinienAnfrage" name="PrognoseGanglinienAnfrage" parametrierend="nein">
+			<info>
+				<kurzinfo>Attributgruppe zur Spezifikation von Anfragen an die Ganglinineprognose</kurzinfo>
+			</info>
+			<aspekt pid="asp.anfrage" onlineModus="quelleUndSenke">
+			</aspekt>
+			<attribut pid="att.applikationsReferenz" anzahl="1" anzahlIst="fest" name="absenderId">
+				<info>
+					<kurzinfo>Objekt-ID der anfragenden Applikation.</kurzinfo>
+					<beschreibung>
+						<absatz>
+							Die Antworten der Ganglinienprognose werden mit dieser Objekt-ID über den Datenverteiler versendet.
+						</absatz>
+					</beschreibung>
+				</info>
+			</attribut>
+			<attribut pid="att.text" anzahl="1" anzahlIst="fest" name="AbsenderZeichen">
+				<info>
+					<kurzinfo>Kennzeichnung, die von der anfragenden Applikation beliebig vergeben wird.</kurzinfo>
+					<beschreibung>
+						Der angegebene Wert wird von der Ganglinienprognose in die Antwort zu dieser Anfrage kopiert.
+						Die Bedeutung des Attributs wird von der anfragenden Applikation beliebig festgelegt und
+						kann zum Beispiel dazu benutzt werden, um eine empfangene Antwort der ursprünglichen Anfrage
+						zuzuordnen.
+					</beschreibung>
+				</info>
+			</attribut>
+			<attributliste pid="atl.prognoseGanglinienAnfrage" anzahl="0" anzahlIst="variabel" name="PrognoseGanglinienAnfrage">
+			</attributliste>
+		</attributgruppenDefinition>
+		<attributgruppenDefinition pid="atg.prognoseGanglinienAntwort" name="PrognoseGanglinienAntwort" parametrierend="nein">
+			<info>
+				<kurzinfo>Attributgruppe zum Versand von Antworten der Ganglinienprognose</kurzinfo>
+			</info>
+			<aspekt pid="asp.antwort" onlineModus="quelleUndSenke">
+			</aspekt>
+			<attribut pid="att.text" anzahl="1" anzahlIst="fest" name="AbsenderZeichen">
+				<info>
+					<kurzinfo>Kennzeichnung, die von der anfragenden Applikation beliebig vergeben wird.</kurzinfo>
+					<beschreibung>
+						Der angegebene Wert wird von der Ganglinienprognose in die Antwort zu dieser Anfrage kopiert.
+						Die Bedeutung des Attributs wird von der anfragenden Applikation beliebig festgelegt und
+						kann zum Beispiel dazu benutzt werden, um eine empfangene Antwort der ursprünglichen Anfrage
+						zuzuordnen.
+					</beschreibung>
+				</info>
+			</attribut>
+			<attributliste pid="atl.prognoseGanglinie" anzahl="0" anzahlIst="variabel" name="PrognoseGanglinie">
+				<info>
+					<kurzinfo>Aufgrund der Anfrage erstellten Prognoseganglinien</kurzinfo>
+				</info>
+			</attributliste>
+		</attributgruppenDefinition>
+		<attributDefinition pid="att.abstandsMass" name="AbstandsMass">
+			<info>
+				<kurzinfo>Abstandsmaß in Prozent</kurzinfo>
+			</info>
+			<ganzzahl bits="8">
+				<bereich skalierung="1" minimum="0" maximum="100" einheit="%">
+				</bereich>
+			</ganzzahl>
+		</attributDefinition>
+		<attributDefinition pid="att.anzahlSekunden0Bis" name="AnzahlSekunden1Bis">
+			<info>
+				<kurzinfo>Anzahl Sekunden [0,]</kurzinfo>
+			</info>
+			<ganzzahl bits="64">
+				<bereich skalierung="1" minimum="0" maximum="9223372036854775807" einheit="Sekunden">
+				</bereich>
+			</ganzzahl>
+		</attributDefinition>
+		<attributDefinition pid="att.anzahlSekunden1Bis" name="AnzahlSekunden1Bis">
+			<info>
+				<kurzinfo>Anzahl Sekunden [1,]</kurzinfo>
+			</info>
+			<ganzzahl bits="64">
+				<bereich skalierung="1" minimum="1" maximum="9223372036854775807" einheit="Sekunden">
+				</bereich>
+			</ganzzahl>
+		</attributDefinition>
+		<attributDefinition pid="att.applikationGanglinienPrognoseReferenz" name="ApplikationGanglinienPrognoseReferenz">
+			<info>
+				<kurzinfo>Attribut zur Referenzierung des Objekttyps: typ.applikationGanglinienPrognose.</kurzinfo>
+			</info>
+			<objektReferenz typ="typ.applikationGanglinienPrognose" undefiniert="verboten" referenzierungsart="assoziation"/>
+		</attributDefinition>
+		<attributDefinition pid="att.applikationGanglinienPrognoseReferenzOptional" name="ApplikationGanglinienPrognoseReferenzOptional">
+			<info>
+				<kurzinfo>Attribut zur Referenzierung des Objekttyps: typ.applikationGanglinienPrognose (Optionale Referenzierung erlaubt).</kurzinfo>
+			</info>
+			<objektReferenz typ="typ.applikationGanglinienPrognose" undefiniert="erlaubt" referenzierungsart="assoziation"/>
+		</attributDefinition>
+		<attributDefinition pid="att.ganglinienAuswahlMethode" name="GanglinienAuswahlmethode">
+			<info>
+				<kurzinfo>
+					Gibt an, welche Methode am Prognoseobjekt i zur Auswahl von Ganglinien eingesetzt werden soll,
+					wenn das Pattern-Matching nicht benutzt werden kann.
+				</kurzinfo>
+			</info>
+			<ganzzahl bits="8">
+				<zustand name="Referenzganglinie" wert="1">
+					<info>
+						<kurzinfo>Auswahl der Referenzganglinie</kurzinfo>
+					</info>
+				</zustand>
+				<zustand name="WahrscheinlichsteGanglinie" wert="2">
+					<info>
+						<kurzinfo>Auswahl der wahrscheinlichsten Ganglinie</kurzinfo>
+					</info>
+				</zustand>
+			</ganzzahl>
+		</attributDefinition>
+		<attributDefinition pid="att.ganglinienSpeicherKommandoAnfrage" name="KommandoAnfrage">
+			<info>
+				<kurzinfo>Kommando (Typ) der Anfrage: Lesen, Schreiben oder Löschen.</kurzinfo>
+			</info>
+			<ganzzahl bits="8">
+				<zustand name="LesenSchreiben" wert="0">
+					<info>
+						<kurzinfo>Kommando zum Lesen und Schreiben nichtleerer Ganglinien.</kurzinfo>
+					</info>
+				</zustand>
+				<zustand name="Loeschen" wert="1">
+					<info>
+						<kurzinfo>Kommando zum Löschen von Ganglinien.</kurzinfo>
+					</info>
+				</zustand>
+			</ganzzahl>
+		</attributDefinition>
+		<attributDefinition pid="att.ganglinienTyp" name="GanglinienTyp">
+			<info>
+				<kurzinfo>Typ der Ganglinie (absolut oder relativ)</kurzinfo>
+				<beschreibung>
+					<absatz>
+						Eine Ganglinien kann prinzipiell einen von zwei Typen darstellen: absolut oder
+						relativ. Eine relative Ganglinie stellt dabei die Änderung gegenüber einer
+						absoluten Ganglinie dar.
+					</absatz>
+					<absatz>
+						Die Änderung einer relativen Ganglinie kann entweder als eine Menge (additiv)
+						oder in Prozent (multiplikativ) angegeben werden. Die Zustände "additiv" und
+						"multiplikativ" werden jeweils als "relativ" interpretiert.
+					</absatz>
+				</beschreibung>
+			</info>
+			<ganzzahl bits="8">
+				<zustand name="absolut" wert="0">
+				</zustand>
+				<zustand name="additiv" wert="1">
+				</zustand>
+				<zustand name="multiplikativ" wert="2">
+				</zustand>
+			</ganzzahl>
+		</attributDefinition>
+		<attributDefinition pid="att.ganglinienVerfahren" name="GanglinienVerfahren">
+			<info>
+				<kurzinfo>Mathematisches Verfahren zur Approximation bzw. Interpolation</kurzinfo>
+				<beschreibung>
+					<absatz>
+						Bei absoluten Ganglinien wird mit diesem Attribut das mathematische Verfahren
+						festgelegt, mit dem der Funktionswert einer Ganglinie an einem beliebigen
+						Zwischenpunkt berechnet werden kann.
+					</absatz>
+				</beschreibung>
+			</info>
+			<ganzzahl bits="8">
+				<zustand name="unbestimmt" wert="0">
+				</zustand>
+				<zustand name="b-spline Approximation beliebiger Ordnung" wert="1">
+				</zustand>
+				<zustand name="cubic-spline Interpolation" wert="2">
+				</zustand>
+				<zustand name="Polyline-Verfahren (lineare Interpolation)" wert="3">
+				</zustand>
+			</ganzzahl>
+		</attributDefinition>
+		<attributDefinition pid="att.ganzzahl1Bis" name="Ganzzahl1Bis">
+			<info>
+				<kurzinfo>Ganze Zahl ab 1</kurzinfo>
+			</info>
+			<ganzzahl bits="64">
+				<bereich skalierung="1" minimum="1" maximum="9223372036854775807">
+				</bereich>
+			</ganzzahl>
+		</attributDefinition>
+		<attributDefinition pid="att.intervallTage" name="IntervallTage">
+			<info>
+				<kurzinfo>Anzahl Tage</kurzinfo>
+			</info>
+			<ganzzahl bits="64">
+				<bereich skalierung="1" minimum="1" maximum="9223372036854775807" einheit="Tag(e)">
+				</bereich>
+			</ganzzahl>
+		</attributDefinition>
+		<attributDefinition pid="att.stützStellenWert" name="StützStellenWert">
+			<info>
+				<kurzinfo>Wert einer Stützstelle (absolute oder relative Angabe).</kurzinfo>
+			</info>
+			<ganzzahl bits="32">
+				<bereich skalierung="0,001" minimum="-2147483648" maximum="2147483647">
+				</bereich>
+			</ganzzahl>
+			<default wert="0"/>
+		</attributDefinition>
+		<attributDefinition pid="att.wichtungsFaktor" name="WichtungsFaktor">
+			<info>
+				<kurzinfo>Maximaler Wichtungsfaktor</kurzinfo>
+			</info>
+			<ganzzahl bits="16">
+				<bereich skalierung="1" minimum="1" maximum="1000">
+				</bereich>
+			</ganzzahl>
+		</attributDefinition>
+		<attributlistenDefinition pid="atl.ganglinie">
+			<info>
+				<kurzinfo>Definition einer Ganglinie</kurzinfo>
+			</info>
+			<attribut pid="att.ereignisTypReferenz" anzahl="1" anzahlIst="fest" name="EreignisTyp">
+			</attribut>
+			<attribut pid="att.jaNein" anzahl="1" anzahlIst="fest" name="Referenzganglinie">
+				<info>
+					<kurzinfo>Die Ganglinie ist für das entsprechende Ereignis als Referenzganglinie ausgezeichnet.</kurzinfo>
+				</info>
+			</attribut>
+			<attribut pid="att.zahlPositiv" anzahl="1" anzahlIst="fest" name="AnzahlVerschmelzungen">
+				<info>
+					<kurzinfo>Anzahl der Verschmelzungen, aus denen die Ganglinie hervorgeht.</kurzinfo>
+				</info>
+			</attribut>
+			<attribut pid="att.zeitPunkt" anzahl="1" anzahlIst="fest" name="LetzteVerschmelzung">
+				<info>
+					<kurzinfo>Zeitpunkt der letzten Verschmelzung.</kurzinfo>
+				</info>
+			</attribut>
+			<attribut pid="att.ganglinienTyp" anzahl="1" anzahlIst="fest" name="GanglinienTyp">
+				<info>
+					<kurzinfo>Typ der Ganglinie (absolut oder relativ).</kurzinfo>
+				</info>
+			</attribut>
+			<attribut pid="att.ganglinienVerfahren" anzahl="1" anzahlIst="fest" name="GanglinienVerfahren">
+			</attribut>
+			<attribut pid="att.zahlPositiv" anzahl="1" anzahlIst="fest" name="Ordnung">
+				<info>
+					<kurzinfo>Ordnung der b-spline Approximation (nur in Verbindung mit der b-spline Approximation).</kurzinfo>
+				</info>
+				<default wert="5"/>
+			</attribut>
+			<attributliste pid="atl.stützstelle" anzahl="0" anzahlIst="variabel" name="Stützstelle">
+				<info>
+					<kurzinfo>Definition einer Stützstelle</kurzinfo>
+				</info>
+			</attributliste>
+		</attributlistenDefinition>
+		<attributlistenDefinition pid="atl.ganglinienSpeicherAnfrage">
+			<info>
+				<kurzinfo>Anfrage nach Ganglinien.</kurzinfo>
+			</info>
+			<attribut pid="att.messQuerschnittAllgemeinReferenz" anzahl="1" anzahlIst="fest" name="Messquerschnitt">
+				<info>
+					<kurzinfo>Assoziierter Messquerschnitt für die Anfrage.</kurzinfo>
+				</info>
+			</attribut>
+			<attribut pid="att.ereignisTypReferenz" anzahl="1" anzahlIst="variabel" name="EreignisTyp">
+				<info>
+					<kurzinfo>Ereignistyp, der bei der berücksichtigt werden soll. Wenn hier eine leere Liste uebergeben wird, so sind alle Ereignistypen gemeint.</kurzinfo>
+				</info>
+			</attribut>
+			<attribut pid="att.ganglinienSpeicherKommandoAnfrage" anzahl="1" anzahlIst="fest" name="KommandoAnfrage">
+				<info>
+					<kurzinfo>Kommando (Typ) der Anfrage: Lesen, Schreiben oder Löschen.</kurzinfo>
+				</info>
+			</attribut>
+			<attributliste pid="atl.ganglinie" anzahl="0" anzahlIst="variabel" name="ZuSpeicherndeGanglinien">
+				<info>
+					<kurzinfo>Wenn diese Liste leer ist, gilt das Kommando als Anfrage (Lesen) nach den Ganglinien des uebergebenen MQ bzw. Ereignistypen. Enthält die Liste Elemente, so werden die enthaltenen Ganglinien komplett am uebergebenen MQ gespeichert (Kommondo Schreiben). Der uebergebene Ereignistyp spielt dann keine Rolle. In beiden Fällen ist das Attribut KommandoAnfrage auf LesenSchreiben zu setzen.</kurzinfo>
+				</info>
+			</attributliste>
+		</attributlistenDefinition>
+		<attributlistenDefinition pid="atl.ganglinienSpeicherAntwort">
+			<info>
+				<kurzinfo>Anfrageergebnis nach Ganglinie.</kurzinfo>
+			</info>
+			<attribut pid="att.messQuerschnittAllgemeinReferenz" anzahl="1" anzahlIst="fest" name="Messquerschnitt">
+				<info>
+					<kurzinfo>
+						Assoziierter Messquerschnitt.
+					</kurzinfo>
+				</info>
+			</attribut>
+			<attribut pid="att.text" anzahl="1" anzahlIst="variabel" name="Fehlermeldung">
+				<info>
+					<kurzinfo>Eine Fehlermeldung. Wenn alles ok ist, bleibt die Liste leer</kurzinfo>
+				</info>
+			</attribut>
+			<attributliste pid="atl.ganglinie" anzahl="0" anzahlIst="variabel" name="GespeicherteGanglinien">
+				<info>
+					<kurzinfo>Ergebnisganglinien (nur fuer Leseanfragen).</kurzinfo>
+				</info>
+			</attributliste>
+		</attributlistenDefinition>
+		<attributlistenDefinition pid="atl.prognoseGanglinie">
+			<info>
+				<kurzinfo>Beschreibung der Prognoseganglinie</kurzinfo>
+			</info>
+			<attribut pid="att.messQuerschnittAllgemeinReferenz" anzahl="1" anzahlIst="fest" name="Messquerschnitt">
+				<info>
+					<kurzinfo>Messquerschnitt, zu dem die Prognoseganglinie erstellt wurde.</kurzinfo>
+				</info>
+			</attribut>
+			<attribut pid="att.ganglinienVerfahren" anzahl="1" anzahlIst="fest" name="GanglinienVerfahren">
+				<info>
+					<kurzinfo>
+						An dieser Stelle sind nur die Zustände "unbestimmt", "b-spline Approximation beliebiger Ordnung",
+						"cubic-spline Interpolation" und "Polyline-Verfahren (lineare Interpolation)" sinnvoll.
+					</kurzinfo>
+				</info>
+			</attribut>
+			<attribut pid="att.zahlPositiv" anzahl="1" anzahlIst="fest" name="Ordnung">
+				<info>
+					<kurzinfo>Ordnung der b-spline Approximation (nur in Verbindung mit der b-spline Approximation).</kurzinfo>
+				</info>
+				<default wert="5"/>
+			</attribut>
+			<attribut pid="att.zeitPunkt" anzahl="1" anzahlIst="fest" name="ZeitpunktPrognoseBeginn">
+				<info>
+					<kurzinfo>Startzeitpunkt der gewüschten Ganglinienprognose</kurzinfo>
+				</info>
+			</attribut>
+			<attribut pid="att.zeitPunkt" anzahl="1" anzahlIst="fest" name="ZeitpunktPrognoseEnde">
+				<info>
+					<kurzinfo>Endzeitpunkt der gewüschten Ganglinienprognose</kurzinfo>
+				</info>
+			</attribut>
+			<attributliste pid="atl.stützstelle" anzahl="0" anzahlIst="variabel" name="Stützstelle">
+				<info>
+					<kurzinfo>Definition einer Stützstelle</kurzinfo>
+				</info>
+			</attributliste>
+		</attributlistenDefinition>
+		<attributlistenDefinition pid="atl.prognoseGanglinienAnfrage">
+			<info>
+				<kurzinfo>Spezifikation einer angefragten Prognoseganglinie</kurzinfo>
+			</info>
+			<attribut pid="att.messQuerschnittAllgemeinReferenz" anzahl="1" anzahlIst="fest" name="Messquerschnitt">
+				<info>
+					<kurzinfo>Messquerschnitt, zu dem die Prognoseganglinie erstellt werden soll.</kurzinfo>
+				</info>
+			</attribut>
+			<attribut pid="att.zeitPunkt" anzahl="1" anzahlIst="fest" name="ZeitpunktPrognoseBeginn">
+				<info>
+					<kurzinfo>Startzeitpunkt der gewüschten Ganglinienprognose</kurzinfo>
+				</info>
+			</attribut>
+			<attribut pid="att.zeitPunkt" anzahl="1" anzahlIst="fest" name="ZeitpunktPrognoseEnde">
+				<info>
+					<kurzinfo>Endzeitpunkt der gewüschten Ganglinienprognose</kurzinfo>
+				</info>
+			</attribut>
+			<attribut pid="att.jaNein" anzahl="1" anzahlIst="fest" name="NurLangfristigeAuswahl">
+				<info>
+					<kurzinfo>Nur Auswahlverfahren der langfristigen Prognose benutzen</kurzinfo>
+				</info>
+			</attribut>
+			<attribut pid="att.ereignisTypReferenz" anzahl="1" anzahlIst="variabel" name="EreignisTyp">
+				<info>
+					<kurzinfo>Diese Ereignistypen werden bei der Auswahl in der Ganglinienprognose ignoriert</kurzinfo>
+				</info>
+			</attribut>
+			<attribut pid="att.jaNein" anzahl="1" anzahlIst="fest" name="ZyklischePrognose">
+				<info>
+					<kurzinfo>Ja: zyklische Prognose, Nein: einmalige Prognose</kurzinfo>
+				</info>
+			</attribut>
+			<attribut pid="att.anzahlSekunden1Bis" anzahl="1" anzahlIst="fest" name="Überprüfungsintervall">
+				<info>
+					<kurzinfo>Spätestens nach Ablauf dieses Intervalls wird eine zyklische Prognose neu überprüft</kurzinfo>
+				</info>
+			</attribut>
+			<attribut pid="att.prozent" anzahl="1" anzahlIst="fest" name="Aktualisierungsschwelle">
+				<info>
+					<kurzinfo>Nur wenn der Abstand einer berechneten zur alten prognostizierten Ganglinie diese Schwelle überschreitet, wird die neue Prognoseganglinie publiziert</kurzinfo>
+				</info>
+			</attribut>
+			<attribut pid="att.anzahlSekunden1Bis" anzahl="1" anzahlIst="fest" name="Aktualisierungsintervall">
+				<info>
+					<kurzinfo>Auch ohne Überschreiten der Aktuallisierungschwelle wird nach diesem Intervall eine neue Prognoseganglinie publiziert</kurzinfo>
+				</info>
+			</attribut>
+		</attributlistenDefinition>
+		<attributlistenDefinition pid="atl.stützstelle">
+			<info>
+				<kurzinfo>Definition einer Stützstelle</kurzinfo>
+				<beschreibung>
+					<absatz>
+						Die Stützstellen sind für die Verkehrsstärken und Geschwindigkeiten zusammengefasst.
+					</absatz>
+					<absatz>
+						Die Stützstellenwerte zur Verkehrsstärke und zur Geschwindigkeit können die Zustände "nicht ermittelbar", "fehlerhaft" und "nicht ermittelbar/fehlerhaft" aufweisen. Die undefinierte Stützstelle liegt IRGENDWO im undefinierten Bereich. Der undefinierte Bereich wird dabei von zwei definierten Stützstellen begrenzt.
+					</absatz>
+				</beschreibung>
+			</info>
+			<attribut pid="att.zeitDauer" anzahl="1" anzahlIst="fest" name="Zeit">
+				<info>
+					<kurzinfo>Relative Zeitdauer</kurzinfo>
+				</info>
+			</attribut>
+			<attribut pid="att.stützStellenWert" anzahl="1" anzahlIst="fest" name="QLkw">
+				<info>
+					<kurzinfo>Lkw pro Stunde [Lkw/h] oder relative Angabe [%]</kurzinfo>
+				</info>
+			</attribut>
+			<attribut pid="att.stützStellenWert" anzahl="1" anzahlIst="fest" name="QKfz">
+				<info>
+					<kurzinfo>Kfz pro Stunde [Kfz/h] oder relative Angabe [%]</kurzinfo>
+				</info>
+			</attribut>
+			<attribut pid="att.stützStellenWert" anzahl="1" anzahlIst="fest" name="VPkw">
+				<info>
+					<kurzinfo>Geschwindigkeit Pkw [km/h] oder relative Angabe [%]</kurzinfo>
+				</info>
+			</attribut>
+			<attribut pid="att.stützStellenWert" anzahl="1" anzahlIst="fest" name="VLkw">
+				<info>
+					<kurzinfo>Geschwindigkeit Lkw [km/h] oder relative Angabe [%]</kurzinfo>
+				</info>
+			</attribut>
+		</attributlistenDefinition>
+	</modell>
+	<objekte>
+		<konfigurationsObjekt pid="server.ganglinienSpeicher" name="GanglinienSpeicher" typ="typ.ganglinienSpeicher">
+			<info>
+				<kurzinfo>Standardobjekt, über das Anfragen und Antworten an den Ganglinienspeicher erfolgten.</kurzinfo>
+			</info>
+		</konfigurationsObjekt>
+	</objekte>
+</konfigurationsBereich>

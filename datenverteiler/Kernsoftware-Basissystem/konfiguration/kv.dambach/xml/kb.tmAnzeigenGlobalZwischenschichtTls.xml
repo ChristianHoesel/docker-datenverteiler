@@ -1,0 +1,369 @@
+<?xml version="1.0" encoding="ISO-8859-1"?>
+<!DOCTYPE konfigurationsBereich PUBLIC "-//K2S//DTD Dokument//DE" "K2S.dtd">
+<konfigurationsBereich pid="kb.tmAnzeigenGlobalZwischenschichtTls" name="Teilmodell AnzeigenGlobalZwischenschichtTls" verantwortlich="kv.dambach">
+	<info>
+		<kurzinfo>Teilmodell mit Datenmodellierung der Zwischenschicht TLS (Umsetzung von und zu Aussenanlagen TLS) für die Anzeigequerschnitte.</kurzinfo>
+	</info>
+	<konfigurationsAenderung stand="12.06.2007" version="1" autor="inovat, Dipl.-Ing. H. C. Kniß (HCK)" grund="Änderungsdokumentation siehe &apos;ReleaseNotes kv.dambach.doc&apos;"></konfigurationsAenderung>
+	<konfigurationsAenderung stand="13.06.2007" version="2" autor="inovat, Dipl.-Ing. H. C. Kniß (HCK)" grund="Änderungsdokumentation siehe &apos;ReleaseNotes kv.dambach.doc&apos;"></konfigurationsAenderung>
+	<konfigurationsAenderung stand="14.06.2007" version="3" autor="Dambach-Werke GmbH, Th. Drapp" grund="Änderungsdokumentation siehe &apos;ReleaseNotes kv.dambach.doc&apos;"></konfigurationsAenderung>
+	<konfigurationsAenderung stand="14.06.2007" version="4" autor="Dambach-Werke GmbH, Th. Drapp" grund="Änderungsdokumentation siehe &apos;ReleaseNotes kv.dambach.doc&apos;"></konfigurationsAenderung>
+	<konfigurationsAenderung stand="19.06.2007" version="5" autor="Dambach-Werke GmbH, Th. Drapp" grund="Änderungsdokumentation siehe &apos;ReleaseNotes kv.dambach.doc&apos;"></konfigurationsAenderung>
+	<!--
+	Abhängigkeiten des Bereichs kb.tmAnzeigenGlobalZwischenschichtTls
+	Abhängig ab Version      Art der Abhängigkeit      Version des benötigten Bereichs      Benötigter Bereich
+	5                        notwendig                 3                                    kb.metaModellGlobal                
+	5                        notwendig                 1                                    kb.tmKExTlsGlobal                  
+	5                        notwendig                 1                                    kb.systemModellGlobal              
+	5                        notwendig                 1                                    kb.kv.dambach                      
+	5                        notwendig                 1                                    kb.fachModellGlobal                
+	5                        notwendig                 1                                    kb.tmAnzeigenGlobalZwischenschicht 
+	-->
+	<modell>
+		<typDefinition pid="typ.anzeigeAktorTls" name="AnzeigeAktorTls" objektNamenPermanent="nein">
+			<info>
+				<kurzinfo>Aktor einer Anzeige für TLS-Kommunikation (KExTls).</kurzinfo>
+			</info>
+			<erweitert pid="typ.anzeigeAktor"/>
+			<attributgruppe pid="atg.anzeigeAktorTls"/>
+		</typDefinition>
+		<typDefinition pid="typ.anzeigeQuerschnittAktorTls" name="AnzeigeQuerschnittAktorTls" objektNamenPermanent="nein">
+			<info>
+				<kurzinfo>Aktor eines Anzeigequerschnitts für TLS-Kommunikation (KExTls).</kurzinfo>
+			</info>
+			<erweitert pid="typ.anzeigeQuerschnittAktor"/>
+			<attributgruppe pid="atg.anzeigeQuerschnittAktorTls"/>
+		</typDefinition>
+		<typDefinition pid="typ.anzeigeQuerschnittTypUmsetzungTls" name="AnzeigeQuerschnittTypUmsetzungTls" objektNamenPermanent="nein">
+			<info>
+				<kurzinfo>Umsetzung für Anzeigequerschnitttyp für TLS-Kommunikation (KExTls).</kurzinfo>
+			</info>
+			<erweitert pid="typ.anzeigeQuerschnittTypUmsetzung"/>
+			<attributgruppe pid="atg.anzeigeQuerschnittTypUmsetzungTls"/>
+		</typDefinition>
+		<typDefinition pid="typ.anzeigeTypUmsetzungTls" name="AnzeigeTypUmsetzungTls" objektNamenPermanent="nein">
+			<info>
+				<kurzinfo>Umsetzung für Anzeigetyp für TLS-Kommunikation (KExTls).</kurzinfo>
+			</info>
+			<erweitert pid="typ.anzeigeTypUmsetzung"/>
+			<attributgruppe pid="atg.anzeigeTypUmsetzungTls"/>
+		</typDefinition>
+		<typDefinition pid="typ.dirigentAktorTls" name="DirigentAktorTls" objektNamenPermanent="nein">
+			<info>
+				<kurzinfo>Aktor eines Dirigenten für TLS-Kommunikation (KExTls).</kurzinfo>
+			</info>
+			<erweitert pid="typ.dirigentAktor"/>
+			<attributgruppe pid="atg.dirigentAktorTls"/>
+		</typDefinition>
+		<typDefinition pid="typ.dirigentUmsetzungTls" name="DirigentUmsetzungTls" objektNamenPermanent="nein">
+			<info>
+				<kurzinfo>Umsetzung für Dirigent für TLS-Kommunikation (KExTls).</kurzinfo>
+			</info>
+			<erweitert pid="typ.dirigentUmsetzung"/>
+			<attributgruppe pid="atg.dirigentUmsetzungTls"/>
+		</typDefinition>
+		<typDefinition pid="typ.fontUmsetzungTls" name="FontUmsetzungTls" objektNamenPermanent="nein">
+			<info>
+				<kurzinfo>Umsetzung für Font für TLS-Kommunikation (KExTls).</kurzinfo>
+			</info>
+			<erweitert pid="typ.fontUmsetzung"/>
+			<attributgruppe pid="atg.fontUmsetzungTls"/>
+		</typDefinition>
+		<typDefinition pid="typ.textAusrichtungUmsetzungTls" name="TextAusrichtungUmsetzungTls" objektNamenPermanent="nein">
+			<info>
+				<kurzinfo>Umsetzung für Text-Ausrichtung für TLS-Kommunikation (KExTls).</kurzinfo>
+			</info>
+			<erweitert pid="typ.textAusrichtungUmsetzung"/>
+			<attributgruppe pid="atg.textAusrichtungUmsetzungTls"/>
+		</typDefinition>
+		<typDefinition pid="typ.wvzInhaltUmsetzungTls" name="WvzInhaltUmsetzungTls" objektNamenPermanent="nein">
+			<info>
+				<kurzinfo>Umsetzung für WvzInhalt für TLS-Kommunikation (KExTls).</kurzinfo>
+			</info>
+			<erweitert pid="typ.wvzInhaltUmsetzung"/>
+			<attributgruppe pid="atg.wvzInhaltUmsetzungTls"/>
+		</typDefinition>
+		<typDefinition pid="typ.zeichenUmsetzungTls" name="ZeichenUmsetzungTls" objektNamenPermanent="nein">
+			<info>
+				<kurzinfo>Umsetzung für Zeichen für TLS-Kommunikation (KExTls).</kurzinfo>
+			</info>
+			<erweitert pid="typ.zeichenUmsetzung"/>
+			<attributgruppe pid="atg.zeichenUmsetzungTls"/>
+		</typDefinition>
+		<attributgruppenDefinition pid="atg.anzeigeAktorTls" name="AnzeigeAktorTls" parametrierend="nein">
+			<info>
+				<kurzinfo>Konfigurierende Eigenschaften der Objekte des Typs.</kurzinfo>
+			</info>
+			<aspekt pid="asp.eigenschaften" konfigurationsModus="datensatzNotwendig">
+			</aspekt>
+			<attribut pid="att.konfigurationsObjektReferenz" anzahl="0" anzahlIst="variabel" name="ZugehörigeDEs">
+				<info>
+					<kurzinfo>Referenz auf die DEs der Anzeige.</kurzinfo>
+				</info>
+			</attribut>
+		</attributgruppenDefinition>
+		<attributgruppenDefinition pid="atg.anzeigeQuerschnittAktorTls" name="AnzeigeQuerschnittAktorTls" parametrierend="nein">
+			<info>
+				<kurzinfo>Konfigurierende Eigenschaften der Objekte des Typs.</kurzinfo>
+			</info>
+			<aspekt pid="asp.eigenschaften" konfigurationsModus="datensatzNotwendig">
+			</aspekt>
+			<attribut pid="att.konfigurationsObjektReferenz" anzahl="1" anzahlIst="fest" name="ZugehörigeDE">
+				<info>
+					<kurzinfo>Referenz auf die Cluster-DE des AQ.</kurzinfo>
+				</info>
+			</attribut>
+		</attributgruppenDefinition>
+		<attributgruppenDefinition pid="atg.anzeigeQuerschnittTypUmsetzungTls" name="AnzeigeQuerschnittTypUmsetzungTls" parametrierend="nein">
+			<info>
+				<kurzinfo>Konfigurierende Eigenschaften der Objekte des Typs.</kurzinfo>
+			</info>
+			<aspekt pid="asp.eigenschaften" konfigurationsModus="datensatzNotwendig">
+			</aspekt>
+			<attributliste pid="atl.anzeigenGlobalUmsetzung" anzahl="0" anzahlIst="variabel" name="UmsetzungHelligkeit">
+			</attributliste>
+			<attributliste pid="atl.anzeigenGlobalUmsetzung" anzahl="0" anzahlIst="variabel" name="UmsetzungBetriebsart">
+			</attributliste>
+			<attributliste pid="atl.anzeigenGlobalUmsetzung" anzahl="0" anzahlIst="variabel" name="UmsetzungPassivierung">
+			</attributliste>
+			<attributliste pid="atl.anzeigenGlobalUmsetzung" anzahl="0" anzahlIst="variabel" name="UmsetzungSchaltung">
+			</attributliste>
+		</attributgruppenDefinition>
+		<attributgruppenDefinition pid="atg.anzeigeTypUmsetzungTls" name="AnzeigeTypUmsetzungTls" parametrierend="nein">
+			<info>
+				<kurzinfo>Konfigurierende Eigenschaften der Objekte des Typs.</kurzinfo>
+			</info>
+			<aspekt pid="asp.eigenschaften" konfigurationsModus="datensatzOptional">
+			</aspekt>
+			<attributliste pid="atl.anzeigenGlobalUmsetzung" anzahl="0" anzahlIst="variabel" name="UmsetzungGesamt">
+			</attributliste>
+		</attributgruppenDefinition>
+		<attributgruppenDefinition pid="atg.dirigentAktorTls" name="DirigentAktorTls" parametrierend="nein">
+			<info>
+				<kurzinfo>Konfigurierende Eigenschaften der Objekte des Typs für TLS-Kommunikation (KExTls).</kurzinfo>
+			</info>
+			<aspekt pid="asp.eigenschaften" konfigurationsModus="datensatzNotwendig">
+			</aspekt>
+			<attribut pid="att.konfigurationsObjektReferenz" anzahl="1" anzahlIst="fest" name="ZugehörigeDE">
+				<info>
+					<kurzinfo>Referenz auf die Cluster-DE des Dirigenten.</kurzinfo>
+				</info>
+			</attribut>
+		</attributgruppenDefinition>
+		<attributgruppenDefinition pid="atg.dirigentUmsetzungTls" name="AnzeigeTypUmsetzungTls" parametrierend="nein">
+			<info>
+				<kurzinfo>Konfigurierende Eigenschaften der Objekte des Typs.</kurzinfo>
+			</info>
+			<aspekt pid="asp.eigenschaften" konfigurationsModus="datensatzNotwendig">
+			</aspekt>
+			<attributliste pid="atl.anzeigenGlobalUmsetzung" anzahl="0" anzahlIst="variabel" name="UmsetzungSchaltung">
+			</attributliste>
+		</attributgruppenDefinition>
+		<attributgruppenDefinition pid="atg.fontUmsetzungTls" name="FontUmsetzungTls" parametrierend="nein">
+			<info>
+				<kurzinfo>Konfigurierende Eigenschaften der Objekte des Typs.</kurzinfo>
+			</info>
+			<aspekt pid="asp.eigenschaften" konfigurationsModus="datensatzNotwendig">
+			</aspekt>
+			<attributliste pid="atl.anzeigenGlobalUmsetzung" anzahl="0" anzahlIst="variabel" name="UmsetzungFont">
+			</attributliste>
+		</attributgruppenDefinition>
+		<attributgruppenDefinition pid="atg.textAusrichtungUmsetzungTls" name="TextAusrichtungUmsetzungTls" parametrierend="nein">
+			<info>
+				<kurzinfo>Konfigurierende Eigenschaften der Objekte des Typs.</kurzinfo>
+			</info>
+			<aspekt pid="asp.eigenschaften" konfigurationsModus="datensatzOptional">
+			</aspekt>
+			<attributliste pid="atl.anzeigenGlobalUmsetzung" anzahl="0" anzahlIst="variabel" name="UmsetzungTextAusrichtung">
+			</attributliste>
+		</attributgruppenDefinition>
+		<attributgruppenDefinition pid="atg.wvzInhaltUmsetzungTls" name="WvzInhaltUmsetzungTls" parametrierend="nein">
+			<info>
+				<kurzinfo>Konfigurierende Eigenschaften der Objekte des Typs.</kurzinfo>
+			</info>
+			<aspekt pid="asp.eigenschaften" konfigurationsModus="datensatzNotwendig">
+			</aspekt>
+			<attribut pid="att.tlsWzgWvzCode" anzahl="1" anzahlIst="fest" name="Code">
+				<info>
+					<kurzinfo>WVZ-Code gemäß TLS.</kurzinfo>
+				</info>
+			</attribut>
+		</attributgruppenDefinition>
+		<attributgruppenDefinition pid="atg.zeichenUmsetzungTls" name="ZeichenUmsetzungTls" parametrierend="nein">
+			<info>
+				<kurzinfo>Konfigurierende Eigenschaften der Objekte des Typs.</kurzinfo>
+			</info>
+			<aspekt pid="asp.eigenschaften" konfigurationsModus="datensatzNotwendig">
+			</aspekt>
+			<attribut pid="att.zeichencode" anzahl="1" anzahlIst="fest" name="Zeichencode">
+				<info>
+					<kurzinfo>Zeichen-Code für Darstellung auf WTA.</kurzinfo>
+				</info>
+			</attribut>
+		</attributgruppenDefinition>
+		<attributDefinition pid="att.anzeigeAktorTlsReferenz" name="AnzeigeAktorTlsReferenz">
+			<info>
+				<kurzinfo>Attribut zur Referenzierung des Objekttyps: typ.anzeigeAktorTls.</kurzinfo>
+			</info>
+			<objektReferenz typ="typ.anzeigeAktorTls" undefiniert="verboten" referenzierungsart="assoziation"/>
+		</attributDefinition>
+		<attributDefinition pid="att.anzeigeAktorTlsReferenzOptional" name="AnzeigeAktorTlsReferenzOptional">
+			<info>
+				<kurzinfo>Attribut zur Referenzierung des Objekttyps: typ.anzeigeAktorTls (Optionale Referenzierung erlaubt).</kurzinfo>
+			</info>
+			<objektReferenz typ="typ.anzeigeAktorTls" undefiniert="erlaubt" referenzierungsart="assoziation"/>
+		</attributDefinition>
+		<attributDefinition pid="att.anzeigeQuerschnittAktorTlsReferenz" name="AnzeigeQuerschnittAktorTlsReferenz">
+			<info>
+				<kurzinfo>Attribut zur Referenzierung des Objekttyps: typ.anzeigeQuerschnittAktorTls.</kurzinfo>
+			</info>
+			<objektReferenz typ="typ.anzeigeQuerschnittAktorTls" undefiniert="verboten" referenzierungsart="assoziation"/>
+		</attributDefinition>
+		<attributDefinition pid="att.anzeigeQuerschnittAktorTlsReferenzOptional" name="AnzeigeQuerschnittAktorTlsReferenzOptional">
+			<info>
+				<kurzinfo>Attribut zur Referenzierung des Objekttyps: typ.anzeigeQuerschnittAktorTls (Optionale Referenzierung erlaubt).</kurzinfo>
+			</info>
+			<objektReferenz typ="typ.anzeigeQuerschnittAktorTls" undefiniert="erlaubt" referenzierungsart="assoziation"/>
+		</attributDefinition>
+		<attributDefinition pid="att.anzeigeQuerschnittTypUmsetzungTlsReferenz" name="AnzeigeQuerschnittTypUmsetzungTlsReferenz">
+			<info>
+				<kurzinfo>Attribut zur Referenzierung des Objekttyps: typ.anzeigeQuerschnittTypUmsetzungTls.</kurzinfo>
+			</info>
+			<objektReferenz typ="typ.anzeigeQuerschnittTypUmsetzungTls" undefiniert="verboten" referenzierungsart="assoziation"/>
+		</attributDefinition>
+		<attributDefinition pid="att.anzeigeQuerschnittTypUmsetzungTlsReferenzOptional" name="AnzeigeQuerschnittTypUmsetzungTlsReferenzOptional">
+			<info>
+				<kurzinfo>Attribut zur Referenzierung des Objekttyps: typ.anzeigeQuerschnittTypUmsetzungTls (Optionale Referenzierung erlaubt).</kurzinfo>
+			</info>
+			<objektReferenz typ="typ.anzeigeQuerschnittTypUmsetzungTls" undefiniert="erlaubt" referenzierungsart="assoziation"/>
+		</attributDefinition>
+		<attributDefinition pid="att.anzeigeTypUmsetzungTlsReferenz" name="AnzeigeTypUmsetzungTlsReferenz">
+			<info>
+				<kurzinfo>Attribut zur Referenzierung des Objekttyps: typ.anzeigeTypUmsetzungTls.</kurzinfo>
+			</info>
+			<objektReferenz typ="typ.anzeigeTypUmsetzungTls" undefiniert="verboten" referenzierungsart="assoziation"/>
+		</attributDefinition>
+		<attributDefinition pid="att.anzeigeTypUmsetzungTlsReferenzOptional" name="AnzeigeTypUmsetzungTlsReferenzOptional">
+			<info>
+				<kurzinfo>Attribut zur Referenzierung des Objekttyps: typ.anzeigeTypUmsetzungTls (Optionale Referenzierung erlaubt).</kurzinfo>
+			</info>
+			<objektReferenz typ="typ.anzeigeTypUmsetzungTls" undefiniert="erlaubt" referenzierungsart="assoziation"/>
+		</attributDefinition>
+		<attributDefinition pid="att.dirigentAktorTlsReferenz" name="DirigentAktorTlsReferenz">
+			<info>
+				<kurzinfo>Attribut zur Referenzierung des Objekttyps: typ.dirigentAktorTls.</kurzinfo>
+			</info>
+			<objektReferenz typ="typ.dirigentAktorTls" undefiniert="verboten" referenzierungsart="assoziation"/>
+		</attributDefinition>
+		<attributDefinition pid="att.dirigentAktorTlsReferenzOptional" name="DirigentAktorTlsReferenzOptional">
+			<info>
+				<kurzinfo>Attribut zur Referenzierung des Objekttyps: typ.dirigentAktorTls (Optionale Referenzierung erlaubt).</kurzinfo>
+			</info>
+			<objektReferenz typ="typ.dirigentAktorTls" undefiniert="erlaubt" referenzierungsart="assoziation"/>
+		</attributDefinition>
+		<attributDefinition pid="att.dirigentUmsetzungTlsReferenz" name="DirigentUmsetzungTlsReferenz">
+			<info>
+				<kurzinfo>Attribut zur Referenzierung des Objekttyps: typ.dirigentUmsetzungTls.</kurzinfo>
+			</info>
+			<objektReferenz typ="typ.dirigentUmsetzungTls" undefiniert="verboten" referenzierungsart="assoziation"/>
+		</attributDefinition>
+		<attributDefinition pid="att.dirigentUmsetzungTlsReferenzOptional" name="DirigentUmsetzungTlsReferenzOptional">
+			<info>
+				<kurzinfo>Attribut zur Referenzierung des Objekttyps: typ.dirigentUmsetzungTls (Optionale Referenzierung erlaubt).</kurzinfo>
+			</info>
+			<objektReferenz typ="typ.dirigentUmsetzungTls" undefiniert="erlaubt" referenzierungsart="assoziation"/>
+		</attributDefinition>
+		<attributDefinition pid="att.fontUmsetzungTlsReferenz" name="FontUmsetzungTlsReferenz">
+			<info>
+				<kurzinfo>Attribut zur Referenzierung des Objekttyps: typ.fontUmsetzungTls.</kurzinfo>
+			</info>
+			<objektReferenz typ="typ.fontUmsetzungTls" undefiniert="verboten" referenzierungsart="assoziation"/>
+		</attributDefinition>
+		<attributDefinition pid="att.fontUmsetzungTlsReferenzOptional" name="FontUmsetzungTlsReferenzOptional">
+			<info>
+				<kurzinfo>Attribut zur Referenzierung des Objekttyps: typ.fontUmsetzungTls (Optionale Referenzierung erlaubt).</kurzinfo>
+			</info>
+			<objektReferenz typ="typ.fontUmsetzungTls" undefiniert="erlaubt" referenzierungsart="assoziation"/>
+		</attributDefinition>
+		<attributDefinition pid="att.textAusrichtungUmsetzungTlsReferenz" name="TextAusrichtungUmsetzungTlsReferenz">
+			<info>
+				<kurzinfo>Attribut zur Referenzierung des Objekttyps: typ.textAusrichtungUmsetzungTls.</kurzinfo>
+			</info>
+			<objektReferenz typ="typ.textAusrichtungUmsetzungTls" undefiniert="verboten" referenzierungsart="assoziation"/>
+		</attributDefinition>
+		<attributDefinition pid="att.textAusrichtungUmsetzungTlsReferenzOptional" name="TextAusrichtungUmsetzungTlsReferenzOptional">
+			<info>
+				<kurzinfo>Attribut zur Referenzierung des Objekttyps: typ.textAusrichtungUmsetzungTls (Optionale Referenzierung erlaubt).</kurzinfo>
+			</info>
+			<objektReferenz typ="typ.textAusrichtungUmsetzungTls" undefiniert="erlaubt" referenzierungsart="assoziation"/>
+		</attributDefinition>
+		<attributDefinition pid="att.wvzInhaltUmsetzungTlsReferenz" name="WvzInhaltUmsetzungTlsReferenz">
+			<info>
+				<kurzinfo>Attribut zur Referenzierung des Objekttyps: typ.wvzInhaltUmsetzungTls.</kurzinfo>
+			</info>
+			<objektReferenz typ="typ.wvzInhaltUmsetzungTls" undefiniert="verboten" referenzierungsart="assoziation"/>
+		</attributDefinition>
+		<attributDefinition pid="att.wvzInhaltUmsetzungTlsReferenzOptional" name="WvzInhaltUmsetzungTlsReferenzOptional">
+			<info>
+				<kurzinfo>Attribut zur Referenzierung des Objekttyps: typ.wvzInhaltUmsetzungTls (Optionale Referenzierung erlaubt).</kurzinfo>
+			</info>
+			<objektReferenz typ="typ.wvzInhaltUmsetzungTls" undefiniert="erlaubt" referenzierungsart="assoziation"/>
+		</attributDefinition>
+		<attributDefinition pid="att.zeichencode" name="Zeichencode">
+			<info>
+				<kurzinfo>Zeichencode.</kurzinfo>
+			</info>
+			<ganzzahl bits="16">
+				<bereich skalierung="1" minimum="0" maximum="255">
+					<info>
+						<kurzinfo>Gültiger Bereich.</kurzinfo>
+					</info>
+				</bereich>
+			</ganzzahl>
+		</attributDefinition>
+		<attributDefinition pid="att.zeichenUmsetzungTlsReferenz" name="ZeichenUmsetzungTlsReferenz">
+			<info>
+				<kurzinfo>Attribut zur Referenzierung des Objekttyps: typ.zeichenUmsetzungTls.</kurzinfo>
+			</info>
+			<objektReferenz typ="typ.zeichenUmsetzungTls" undefiniert="verboten" referenzierungsart="assoziation"/>
+		</attributDefinition>
+		<attributDefinition pid="att.zeichenUmsetzungTlsReferenzOptional" name="ZeichenUmsetzungTlsReferenzOptional">
+			<info>
+				<kurzinfo>Attribut zur Referenzierung des Objekttyps: typ.zeichenUmsetzungTls (Optionale Referenzierung erlaubt).</kurzinfo>
+			</info>
+			<objektReferenz typ="typ.zeichenUmsetzungTls" undefiniert="erlaubt" referenzierungsart="assoziation"/>
+		</attributDefinition>
+		<attributlistenDefinition pid="atl.anzeigenGlobalUmsetzung" name="AnzeigenGlobalUmsetzung">
+			<info>
+				<kurzinfo>Eigenschaften der Objekte des Typs.</kurzinfo>
+			</info>
+			<attribut pid="att.konfigurationsObjektReferenzOptional" anzahl="1" anzahlIst="fest" name="UmsetzungsObjekt">
+				<info>
+					<kurzinfo>Referenz auf beliebiges Objekt für Umsetzung (Information in spezieller ATG).</kurzinfo>
+				</info>
+			</attribut>
+			<attribut pid="att.zahl" anzahl="0" anzahlIst="variabel" name="Template">
+				<info>
+					<kurzinfo>Template mit Vorgabe des Telegrammaufbaus unter Verwendung von speziellen Zahlenwerten für Variablen (&gt; 255). Muss vermutlich ausserhalb der Datenliste definiert werden, damit die DTD das mehrfache Auftreten auch zulässt -&gt; ggf Rücksprache mit Herrn Schmitz!!!</kurzinfo>
+				</info>
+			</attribut>
+			<attribut pid="att.text" anzahl="1" anzahlIst="fest" name="UmsetzungsModul">
+				<info>
+					<kurzinfo>Das für die Umsetzung des Protokolls (Lesen und Schreiben) verwendete Modul an diesem Knoten. Wird kein Modul angegeben, wird jeweils das Standardumsetzungmodul für diesen Objekttyp verwendet. Text ist der Klassennamen des UmsetzungsModuls.</kurzinfo>
+				</info>
+			</attribut>
+			<attribut pid="att.text" anzahl="1" anzahlIst="fest" name="AttributGruppe">
+				<info>
+					<kurzinfo>Für die Umsetzung zu verwendende AttributGruppe, wenn gesetzt, ansonsten default AttributGruppe verwenden.</kurzinfo>
+				</info>
+			</attribut>
+			<attribut pid="att.text" anzahl="0" anzahlIst="variabel" name="VerwendeteAttributGruppenAspekte">
+				<info>
+					<kurzinfo>Für die Umsetzung verwendete AttributGruppen-Aspekt-Kombinationen (Attributgruppen werden auch für das Versenden verwendet).</kurzinfo>
+				</info>
+			</attribut>
+		</attributlistenDefinition>
+	</modell>
+	<objekte>
+	</objekte>
+</konfigurationsBereich>

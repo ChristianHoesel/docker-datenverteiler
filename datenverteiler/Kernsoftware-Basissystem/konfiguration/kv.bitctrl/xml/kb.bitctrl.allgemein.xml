@@ -1,0 +1,47 @@
+<?xml version="1.0" encoding="ISO-8859-1"?>
+<!DOCTYPE konfigurationsBereich SYSTEM "K2S.dtd">
+<konfigurationsBereich pid="kb.bitctrl.allgemein" name="BitCtrl Betriebsmeldungsverwaltung" verantwortlich="kv.bitctrl">
+
+	<info>
+		<kurzinfo>Definitionen für BitCtrl-Betriebsmeldungsverwaltung</kurzinfo>
+	</info>
+
+	<modell>
+
+		<attributDefinition pid="att.positiveZahl32Bit" name="Positive Zahl mit 32 Bit">
+			<info>
+				<kurzinfo>Minimal geforderte Anzahl.</kurzinfo>
+			</info>
+			<ganzzahl bits="32">
+				<bereich minimum="0" />
+			</ganzzahl>
+		</attributDefinition>
+
+		<attributDefinition pid="att.anzahlTage" name="Anzahl Tage">
+			<info>
+				<kurzinfo>Minimal geforderte Anzahl.</kurzinfo>
+			</info>
+			<ganzzahl bits="32">
+				<bereich minimum="0" einheit="Tag(e)" />
+			</ganzzahl>
+		</attributDefinition>
+
+		<attributlistenDefinition pid="atl.bcDataItem" name="Allgemeiner Dateneintrag">
+			<info>
+				<kurzinfo>Allgemeiner Parameter aus einer Name-Wert-Kombination.</kurzinfo>
+			</info>
+			<attribut pid="att.text" name="Name">
+				<info>
+					<kurzinfo>Bezeichner</kurzinfo>
+				</info>
+			</attribut>
+			<attribut pid="att.text" name="Value">
+				<info>
+					<kurzinfo>Wert als String</kurzinfo>
+				</info>
+			</attribut>
+		</attributlistenDefinition>
+
+	</modell>
+
+</konfigurationsBereich>

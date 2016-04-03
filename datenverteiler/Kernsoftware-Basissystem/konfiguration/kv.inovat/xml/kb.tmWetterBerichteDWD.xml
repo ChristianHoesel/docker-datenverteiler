@@ -1,0 +1,132 @@
+<?xml version="1.0" encoding="ISO-8859-1"?>
+<!DOCTYPE konfigurationsBereich PUBLIC "-//K2S//DTD Dokument//DE" "K2S.dtd">
+<konfigurationsBereich pid="kb.tmWetterBerichteDWD" name="Wetterberichte des DWD" verantwortlich="kv.inovat">
+	<info>
+		<kurzinfo>Teilmodell mit Datenmodellierung für die Verwaltung der Wetterberichte des DWD.</kurzinfo>
+	</info>
+	<konfigurationsAenderung stand="24.11.2012" version="1" autor="inovat, Dipl.-Ing. H. C. Kniß (HCK)" grund="Neuerstellung"></konfigurationsAenderung>
+	<konfigurationsAenderung stand="27.11.2012" version="2" autor="inovat, Dipl.-Ing. H. C. Kniß (HCK)" grund="Objekte entfernt. KB enthält nur noch das Modell."></konfigurationsAenderung>
+	<konfigurationsAenderung stand="29.11.2012" version="3" autor="inovat, Dipl.-Ing. H. C. Kniß (HCK)" grund="ATG für Wetterberichte als Parameter definiert."></konfigurationsAenderung>
+	<konfigurationsAenderung stand="29.11.2012" version="4" autor="inovat, Dipl.-Ing. H. C. Kniß (HCK)" grund="ASP asp.zustand bei ATG für Wetterberichte entfernt."></konfigurationsAenderung>
+	<konfigurationsAenderung stand="04.12.2012" version="5" autor="inovat, Dipl.-Ing. H. C. Kniß (HCK)" grund="Für den typ.wetterBerichtDWD den persistenzModus=persistent gesetzt."></konfigurationsAenderung>
+	<!--
+	Abhängigkeiten des Bereichs kb.tmWetterBerichteDWD
+	Abhängig ab Version      Art der Abhängigkeit      Version des benötigten Bereichs      Benötigter Bereich
+	1                        notwendig                 1                                    kb.kv.inovat                       
+	1                        notwendig                 1                                    kb.systemModellGlobal              
+	1                        notwendig                 1                                    kb.fachModellGlobal                
+	1                        notwendig                 1                                    kb.metaModellGlobal                
+	3                        notwendig                 4                                    kb.fachModellGlobal                
+	3                        notwendig                 3                                    kb.tmVewBetriebGlobal              
+	-->
+		<modell>
+		<typDefinition pid="typ.vewWetterBerichteDWD" name="VerwaltungWetterBerichteDWD" objektNamenPermanent="nein">
+			<info>
+				<kurzinfo>Systemobjekt für die Verwaltung aller Wetterberichte des DWD.</kurzinfo>
+			</info>
+			<erweitert pid="typ.konfigurationsObjekt"/>
+			<menge pid="menge.wetterBerichteDWD" name="MengeWetterBerichteDWD" erforderlich="ja">
+			</menge>
+		</typDefinition>
+		<typDefinition pid="typ.wetterBerichtDWD" name="WetterBerichtDWD" objektNamenPermanent="nein" persistenzModus="persistent">
+			<info>
+				<kurzinfo>Dynamische Objekte, welche einen Wetterbericht des DWD reräsentiert.</kurzinfo>
+			</info>
+			<erweitert pid="typ.dynamischesObjekt"/>
+			<attributgruppe pid="atg.wetterBerichtDWD"/>
+			<defaultParameter attributgruppe="atg.wetterBerichtDWD" typ="typ.wetterBerichtDWD">
+				<datenliste name="Urlasser">
+					<datum name="BenutzerReferenz" wert="undefiniert"/>
+					<datum name="Ursache" wert=""/>
+					<datum name="Veranlasser" wert=""/>
+				</datenliste>
+				<datum name="DateiName" wert=""/>
+				<datum name="WetterBerichtArt" wert=""/>
+				<datum name="DienstStelle" wert=""/>
+				<datum name="WarnSchlüssel" wert=""/>
+				<datum name="WarnEreignis" wert=""/>
+				<datum name="Region" wert=""/>
+				<datum name="BundesLand" wert=""/>
+				<datum name="HöhenStufe" wert=""/>
+				<datum name="AusgabeTag" wert=""/>
+				<datum name="AusgabeZeit" wert=""/>
+				<datum name="AusgabeDatum" wert="27.11.2012 00:00:00,000 Uhr"/>
+				<datum name="Meldung" wert=""/>
+			</defaultParameter>
+		</typDefinition>
+		<attributgruppenDefinition pid="atg.wetterBerichtDWD" name="WetterBerichtDWD" parametrierend="ja">
+			<info>
+				<kurzinfo>Informationen eines Wetterberichtes vom DWD</kurzinfo>
+			</info>
+			<attributliste pid="atl.urlasser" anzahl="1" anzahlIst="fest" name="Urlasser">
+			</attributliste>
+			<attribut pid="att.text" anzahl="1" anzahlIst="fest" name="DateiName">
+				<info>
+					<kurzinfo>Dateiname des Wetterberichts wie vom DWD vergeben.</kurzinfo>
+				</info>
+			</attribut>
+			<attribut pid="att.text" anzahl="1" anzahlIst="fest" name="WetterBerichtArt">
+				<info>
+					<kurzinfo>Art des Wetterberichts.</kurzinfo>
+				</info>
+			</attribut>
+			<attribut pid="att.text" anzahl="1" anzahlIst="fest" name="DienstStelle">
+				<info>
+					<kurzinfo>Ausgebende Dienstelle des Wetterberichts.</kurzinfo>
+				</info>
+			</attribut>
+			<attribut pid="att.text" anzahl="1" anzahlIst="fest" name="WarnSchlüssel">
+				<info>
+					<kurzinfo>Warnschlüssel des Wetterberichts.</kurzinfo>
+				</info>
+			</attribut>
+			<attribut pid="att.text" anzahl="1" anzahlIst="fest" name="WarnEreignis">
+				<info>
+					<kurzinfo>Vom Warnschlüssel abgeleitetes Warnereignis.</kurzinfo>
+				</info>
+			</attribut>
+			<attribut pid="att.text" anzahl="1" anzahlIst="fest" name="Region">
+				<info>
+					<kurzinfo>Kreis, Region oder Seegebiet, für das der Wetterbericht gilt.</kurzinfo>
+				</info>
+			</attribut>
+			<attribut pid="att.text" anzahl="1" anzahlIst="fest" name="BundesLand">
+				<info>
+					<kurzinfo>Aus der Region abgeleitetes Bundesland, für das der Wetterbericht gilt.</kurzinfo>
+				</info>
+			</attribut>
+			<attribut pid="att.text" anzahl="1" anzahlIst="fest" name="HöhenStufe">
+				<info>
+					<kurzinfo>Höhenstufe oder Kennung des Binnensees, für den der Wetterbericht gilt.</kurzinfo>
+				</info>
+			</attribut>
+			<attribut pid="att.text" anzahl="1" anzahlIst="fest" name="AusgabeTag">
+				<info>
+					<kurzinfo>Ausgabetag gemäß DWD.</kurzinfo>
+				</info>
+			</attribut>
+			<attribut pid="att.text" anzahl="1" anzahlIst="fest" name="AusgabeZeit">
+				<info>
+					<kurzinfo>Ausgabezeit in UTC in hh:mm gemäß DWD.</kurzinfo>
+				</info>
+			</attribut>
+			<attribut pid="att.zeitPunkt" anzahl="1" anzahlIst="fest" name="AusgabeDatum">
+				<info>
+					<kurzinfo>Ausgabedatum und Zeit ermittelt aus Bereitstellungsdatum der Datei durch den DWD.</kurzinfo>
+				</info>
+			</attribut>
+			<attribut pid="att.text" anzahl="1" anzahlIst="fest" name="Meldung">
+				<info>
+					<kurzinfo>Die eigentliche Meldung (der Wetterbericht).</kurzinfo>
+				</info>
+			</attribut>
+		</attributgruppenDefinition>
+		<mengenDefinition pid="menge.wetterBerichteDWD" elemente="typ.wetterBerichtDWD" aenderbar="ja" mindestens="0" hoechstens="0" referenzierungsart="assoziation">
+			<info>
+				<kurzinfo>Menge mit den aktuell gültigen Wetterberichten des DWD.</kurzinfo>
+			</info>
+		</mengenDefinition>
+	</modell>
+	<objekte>
+	</objekte>
+</konfigurationsBereich>

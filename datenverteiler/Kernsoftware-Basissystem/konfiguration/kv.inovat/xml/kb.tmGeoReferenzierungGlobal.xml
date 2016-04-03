@@ -1,0 +1,355 @@
+<?xml version="1.0" encoding="ISO-8859-1"?>
+<!DOCTYPE konfigurationsBereich PUBLIC "-//K2S//DTD Dokument//DE" "K2S.dtd">
+<konfigurationsBereich pid="kb.tmGeoReferenzierungGlobal" name="TeilmodellGeoReferenzierungGlobal" verantwortlich="kv.inovat">
+	<info>
+		<kurzinfo>Teilmodell mit Datenmodellierung für die geografische Referenzierung von Objekten.</kurzinfo>
+		<beschreibung>
+			<absatz>Dieses Teilmodell stellt die notwendigen Datenstrukturen zur Verfügung, mittels derer eine geografische Referenz auf Objekte ermöglicht wird. Alle geografisch referenzierbaren Objekttypen erweitern dazu den ObjektTyp typ.geoReferenzObjekt, womit die notwendigen Informationen bei jedem Objekt verfügbar sind.</absatz>
+			<absatz>Die folgende Abbildung skizziert die Zusammenhänge und Attributgruppen der verschiedenen Objekttypen imTeilmodell GeoReferenzierung.</absatz>
+			<abbildung src="abbildungen/TeilmodellGeoReferenzierungGlobal.jpg">
+				<titel>Übersicht Teilmodell Geografische Referenzierung von Objekten (global)</titel>
+			</abbildung>
+		</beschreibung>
+	</info>
+	<konfigurationsAenderung stand="19.03.2007" version="2" autor="inovat, Dipl.-Ing. H. C. Kniß (HCK)" grund="A:Überarbeitung des Datenkatalogs für Veröffentlichung Kernsoftware. Änderungsdokumentation siehe &apos;inovat: Datenkatalog DaV-Release Notes&apos;."></konfigurationsAenderung>
+	<konfigurationsAenderung stand="20.03.2007" version="2" autor="inovat, Dipl.-Ing. H. C. Kniß (HCK)" grund="B:Überarbeitung des Datenkatalogs für Veröffentlichung Kernsoftware. Änderungsdokumentation siehe &apos;inovat: Datenkatalog DaV-Release Notes&apos;."></konfigurationsAenderung>
+	<konfigurationsAenderung stand="20.02.2008" version="2" autor="inovat, Dipl.-Ing. H. C. Kniß (HCK)" grund="B:Überarbeitung des Datenkatalogs für Veröffentlichung Kernsoftware. Änderungsdokumentation siehe &apos;inovat: Datenkatalog DaV-Release Notes&apos;."></konfigurationsAenderung>
+	<!--
+	Abhängigkeiten des Bereichs kb.tmGeoReferenzierungGlobal
+	Abhängig ab Version      Art der Abhängigkeit      Version des benötigten Bereichs      Benötigter Bereich
+	2                        notwendig                 1                                    kb.kv.inovat                       
+	2                        notwendig                 1                                    kb.fachModellGlobal                
+	2                        notwendig                 1                                    kb.metaModellGlobal                
+	-->
+		<modell>
+		<typDefinition pid="typ.bestehtAusLinienObjekten" name="BestehtAusLinienObjekten" objektNamenPermanent="nein">
+			<info>
+				<kurzinfo>Typ referenziert andere Objekte vom typ.linie über eine sortierte Liste von Referenzen. Über Index und Länge des referenzierten Linienobjekts lassen sich dessen Koordinate ermitteln. Aus dem Index ergibt sich zudem die Topologie der Teilstücke.</kurzinfo>
+			</info>
+			<erweitert pid="typ.linie"/>
+			<attributgruppe pid="atg.bestehtAusLinienObjekten"/>
+		</typDefinition>
+		<typDefinition pid="typ.fläche" name="Fläche" objektNamenPermanent="nein">
+			<info>
+				<kurzinfo>Flächenobjekt.</kurzinfo>
+			</info>
+			<erweitert pid="typ.geoReferenzObjekt"/>
+		</typDefinition>
+		<typDefinition pid="typ.flächeXY" name="FlächeXY" objektNamenPermanent="nein">
+			<info>
+				<kurzinfo>Flächenobjekt mit Liste von x-,y-Koordinaten.</kurzinfo>
+			</info>
+			<erweitert pid="typ.fläche"/>
+			<attributgruppe pid="atg.flächenKoordinaten"/>
+		</typDefinition>
+		<typDefinition pid="typ.geoReferenzObjekt" name="GeoReferenzObjekt" objektNamenPermanent="nein">
+			<info>
+				<kurzinfo>Basisobjekttyp, der von allen Objettypen erweitert wird, die geografische Referenzinformationen benötigen.</kurzinfo>
+			</info>
+			<erweitert pid="typ.konfigurationsObjekt"/>
+		</typDefinition>
+		<typDefinition pid="typ.komplex" name="Komplex" objektNamenPermanent="nein">
+			<info>
+				<kurzinfo>Komplexes Objekt aus Punkten, Linien, Flächen und anderen Komplex-Objekten.</kurzinfo>
+			</info>
+			<erweitert pid="typ.geoReferenzObjekt"/>
+		</typDefinition>
+		<typDefinition pid="typ.komplexXY" name="KomplexXY" objektNamenPermanent="nein">
+			<info>
+				<kurzinfo>Komplex-Objekt mit Referenzen auf Punkt-, Linien-, Flächen- und anderen Komplex-Objekten, über die indirekt die Koordinaten ermittelt werden können.</kurzinfo>
+			</info>
+			<erweitert pid="typ.komplex"/>
+			<attributgruppe pid="atg.komplexKoordinaten"/>
+		</typDefinition>
+		<typDefinition pid="typ.linie" name="Linie" objektNamenPermanent="nein">
+			<info>
+				<kurzinfo>Linienobjekt.Ein Linienobjekt hat immer eine Länge.</kurzinfo>
+			</info>
+			<erweitert pid="typ.geoReferenzObjekt"/>
+			<attributgruppe pid="atg.linie"/>
+		</typDefinition>
+		<typDefinition pid="typ.linieXY" name="LinieXY" objektNamenPermanent="nein">
+			<info>
+				<kurzinfo>Linienobjek mit Liste von x-,y-Koordinaten.</kurzinfo>
+			</info>
+			<erweitert pid="typ.linie"/>
+			<attributgruppe pid="atg.linienKoordinaten"/>
+		</typDefinition>
+		<typDefinition pid="typ.punkt" name="Punkt" objektNamenPermanent="nein">
+			<info>
+				<kurzinfo>Punktobjekt.</kurzinfo>
+			</info>
+			<erweitert pid="typ.geoReferenzObjekt"/>
+		</typDefinition>
+		<typDefinition pid="typ.punktLiegtAufLinienObjekt" name="PunktLiegtAufLinienObjekt" objektNamenPermanent="nein">
+			<info>
+				<kurzinfo>Typ verweist auf ein Linienobjekt mit Offsetangabe vom Begin der Linie. Darüber läßt sich dessen Koordinate ermitteln. Liegen mehrer Objekte auf einem Linienobjekt, läßt sich über die Offsets die Topologie ermitteln.</kurzinfo>
+			</info>
+			<erweitert pid="typ.punkt"/>
+			<attributgruppe pid="atg.punktLiegtAufLinienObjekt"/>
+		</typDefinition>
+		<typDefinition pid="typ.punktXY" name="PunktXY" objektNamenPermanent="nein">
+			<info>
+				<kurzinfo>Punktobjekt mit x-,y-Koordinaten.</kurzinfo>
+			</info>
+			<erweitert pid="typ.punkt"/>
+			<attributgruppe pid="atg.punktKoordinaten"/>
+		</typDefinition>
+		<attributgruppenDefinition pid="atg.bestehtAusLinienObjekten" name="BestehtAusLinienObjekten" parametrierend="nein">
+			<info>
+				<kurzinfo>Referenzen auf Linienobjekte, die zusammen dieses Linienobjekt bilden. Der Offset einer Teillinie ergibt sich aus dem Index der Referenz und der Länge der referenzierten (Teil)Linie.</kurzinfo>
+			</info>
+			<aspekt pid="asp.eigenschaften" konfigurationsModus="datensatzOptional">
+			</aspekt>
+			<attribut pid="att.linieReferenz" anzahl="0" anzahlIst="variabel" name="LinienReferenz">
+			</attribut>
+		</attributgruppenDefinition>
+		<attributgruppenDefinition pid="atg.flächenKoordinaten" name="FlächenKoordinaten" parametrierend="nein">
+			<info>
+				<kurzinfo>Koordinaten einer Fläche in Grad entsprechend WGS84.</kurzinfo>
+			</info>
+			<aspekt pid="asp.eigenschaften" konfigurationsModus="datensatzOptional">
+			</aspekt>
+			<attribut pid="att.wgs84Länge" anzahl="0" anzahlIst="variabel" name="x">
+			</attribut>
+			<attribut pid="att.wgs84Breite" anzahl="0" anzahlIst="variabel" name="y">
+			</attribut>
+		</attributgruppenDefinition>
+		<attributgruppenDefinition pid="atg.komplexKoordinaten" name="KomplexKoordinaten" parametrierend="nein">
+			<info>
+				<kurzinfo>Koordinaten einer Fläche in Grad entsprechend WGS84.</kurzinfo>
+			</info>
+			<aspekt pid="asp.eigenschaften" konfigurationsModus="datensatzOptional">
+			</aspekt>
+			<attribut pid="att.punktReferenz" anzahl="0" anzahlIst="variabel" name="PunktReferenz">
+			</attribut>
+			<attribut pid="att.linieReferenz" anzahl="0" anzahlIst="variabel" name="LinienReferenz">
+			</attribut>
+			<attribut pid="att.flächeReferenz" anzahl="0" anzahlIst="variabel" name="FlächenReferenz">
+			</attribut>
+			<attribut pid="att.komplexReferenz" anzahl="0" anzahlIst="variabel" name="KomplexReferenz">
+			</attribut>
+		</attributgruppenDefinition>
+		<attributgruppenDefinition pid="atg.linie" name="Linie" parametrierend="nein">
+			<info>
+				<kurzinfo>Konfigurierende Eigenschaften der Objekte des Typs.</kurzinfo>
+			</info>
+			<aspekt pid="asp.eigenschaften" konfigurationsModus="datensatzOptional">
+			</aspekt>
+			<attribut pid="att.länge" anzahl="1" anzahlIst="fest" name="Länge">
+			</attribut>
+		</attributgruppenDefinition>
+		<attributgruppenDefinition pid="atg.linienKoordinaten" name="LinienKoordinaten" parametrierend="nein">
+			<info>
+				<kurzinfo>Koordinaten einer Linie in Grad entsprechend WGS84.</kurzinfo>
+			</info>
+			<aspekt pid="asp.eigenschaften" konfigurationsModus="datensatzOptional">
+			</aspekt>
+			<attribut pid="att.wgs84Länge" anzahl="0" anzahlIst="variabel" name="x">
+			</attribut>
+			<attribut pid="att.wgs84Breite" anzahl="0" anzahlIst="variabel" name="y">
+			</attribut>
+		</attributgruppenDefinition>
+		<attributgruppenDefinition pid="atg.punktKoordinaten" name="PunktKoordinaten" parametrierend="nein">
+			<info>
+				<kurzinfo>Koordinaten eines Punktes in Grad entsprechend WGS84.</kurzinfo>
+			</info>
+			<aspekt pid="asp.eigenschaften" konfigurationsModus="datensatzOptional">
+			</aspekt>
+			<attribut pid="att.wgs84Länge" anzahl="1" anzahlIst="fest" name="x">
+			</attribut>
+			<attribut pid="att.wgs84Breite" anzahl="1" anzahlIst="fest" name="y">
+			</attribut>
+		</attributgruppenDefinition>
+		<attributgruppenDefinition pid="atg.punktLiegtAufLinienObjekt" name="PunktLiegtAufLinienObjekt" parametrierend="nein">
+			<info>
+				<kurzinfo>Referenz auf ein Linienobjekt mit Offsetangabe vom Begin der Linie. Darüber läßt sich dessen Koordinate ermitteln. Liegen mehrer Objekte auf einem Linienobjekt, läßt sich über die Offsets die Topologie ermitteln.
+				</kurzinfo>
+			</info>
+			<aspekt pid="asp.eigenschaften" konfigurationsModus="datensatzOptional">
+			</aspekt>
+			<attribut pid="att.linieReferenz" anzahl="1" anzahlIst="fest" name="LinienReferenz">
+			</attribut>
+			<attribut pid="att.länge" anzahl="1" anzahlIst="fest" name="Offset">
+			</attribut>
+		</attributgruppenDefinition>
+		<attributDefinition pid="att.bestehtAusLinienObjektenReferenz" name="BestehtAusLinienObjektenReferenz">
+			<info>
+				<kurzinfo>Attribut zur Referenzierung des Objekttyps: typ.bestehtAusLinienObjekten.</kurzinfo>
+			</info>
+			<objektReferenz typ="typ.bestehtAusLinienObjekten" undefiniert="verboten" referenzierungsart="assoziation"/>
+		</attributDefinition>
+		<attributDefinition pid="att.bestehtAusLinienObjektenReferenzOptional" name="BestehtAusLinienObjektenReferenzOptional">
+			<info>
+				<kurzinfo>Attribut zur Referenzierung des Objekttyps: typ.bestehtAusLinienObjekten (Optionale Referenzierung erlaubt).</kurzinfo>
+			</info>
+			<objektReferenz typ="typ.bestehtAusLinienObjekten" undefiniert="erlaubt" referenzierungsart="assoziation"/>
+		</attributDefinition>
+		<attributDefinition pid="att.flächeReferenz" name="FlächeReferenz">
+			<info>
+				<kurzinfo>Attribut zur Referenzierung des Objekttyps: typ.fläche.</kurzinfo>
+			</info>
+			<objektReferenz typ="typ.fläche" undefiniert="verboten" referenzierungsart="assoziation"/>
+		</attributDefinition>
+		<attributDefinition pid="att.flächeReferenzOptional" name="FlächeReferenzOptional">
+			<info>
+				<kurzinfo>Attribut zur Referenzierung des Objekttyps: typ.fläche (Optionale Referenzierung erlaubt).</kurzinfo>
+			</info>
+			<objektReferenz typ="typ.fläche" undefiniert="erlaubt" referenzierungsart="assoziation"/>
+		</attributDefinition>
+		<attributDefinition pid="att.flächeXYReferenz" name="FlächeXYReferenz">
+			<info>
+				<kurzinfo>Attribut zur Referenzierung des Objekttyps: typ.flächeXY.</kurzinfo>
+			</info>
+			<objektReferenz typ="typ.flächeXY" undefiniert="verboten" referenzierungsart="assoziation"/>
+		</attributDefinition>
+		<attributDefinition pid="att.flächeXYReferenzOptional" name="FlächeXYReferenzOptional">
+			<info>
+				<kurzinfo>Attribut zur Referenzierung des Objekttyps: typ.flächeXY (Optionale Referenzierung erlaubt).</kurzinfo>
+			</info>
+			<objektReferenz typ="typ.flächeXY" undefiniert="erlaubt" referenzierungsart="assoziation"/>
+		</attributDefinition>
+		<attributDefinition pid="att.geoReferenzObjektReferenz" name="GeoReferenzObjektReferenz">
+			<info>
+				<kurzinfo>Attribut zur Referenzierung des Objekttyps: typ.geoReferenzObjekt.</kurzinfo>
+			</info>
+			<objektReferenz typ="typ.geoReferenzObjekt" undefiniert="verboten" referenzierungsart="assoziation"/>
+		</attributDefinition>
+		<attributDefinition pid="att.geoReferenzObjektReferenzOptional" name="GeoReferenzObjektReferenzOptional">
+			<info>
+				<kurzinfo>Attribut zur Referenzierung des Objekttyps: typ.geoReferenzObjekt (Optionale Referenzierung erlaubt).</kurzinfo>
+			</info>
+			<objektReferenz typ="typ.geoReferenzObjekt" undefiniert="erlaubt" referenzierungsart="assoziation"/>
+		</attributDefinition>
+		<attributDefinition pid="att.komplexReferenz" name="KomplexReferenz">
+			<info>
+				<kurzinfo>Attribut zur Referenzierung des Objekttyps: typ.komplex.</kurzinfo>
+			</info>
+			<objektReferenz typ="typ.komplex" undefiniert="verboten" referenzierungsart="assoziation"/>
+		</attributDefinition>
+		<attributDefinition pid="att.komplexReferenzOptional" name="KomplexReferenzOptional">
+			<info>
+				<kurzinfo>Attribut zur Referenzierung des Objekttyps: typ.komplex (Optionale Referenzierung erlaubt).</kurzinfo>
+			</info>
+			<objektReferenz typ="typ.komplex" undefiniert="erlaubt" referenzierungsart="assoziation"/>
+		</attributDefinition>
+		<attributDefinition pid="att.komplexXYReferenz" name="KomplexXYReferenz">
+			<info>
+				<kurzinfo>Attribut zur Referenzierung des Objekttyps: typ.komplexXY.</kurzinfo>
+			</info>
+			<objektReferenz typ="typ.komplexXY" undefiniert="verboten" referenzierungsart="assoziation"/>
+		</attributDefinition>
+		<attributDefinition pid="att.komplexXYReferenzOptional" name="KomplexXYReferenzOptional">
+			<info>
+				<kurzinfo>Attribut zur Referenzierung des Objekttyps: typ.komplexXY (Optionale Referenzierung erlaubt).</kurzinfo>
+			</info>
+			<objektReferenz typ="typ.komplexXY" undefiniert="erlaubt" referenzierungsart="assoziation"/>
+		</attributDefinition>
+		<attributDefinition pid="att.länge" name="Länge">
+			<info>
+				<kurzinfo>Länge eines Linienobjekts.</kurzinfo>
+			</info>
+			<ganzzahl bits="64">
+				<bereich skalierung="0,01" minimum="0" maximum="9223372036854775807" einheit="m">
+				</bereich>
+				<zustand name="undefiniert" wert="-1">
+					<info>
+						<kurzinfo>Es ist keine Länge definiert.</kurzinfo>
+					</info>
+				</zustand>
+			</ganzzahl>
+		</attributDefinition>
+		<attributDefinition pid="att.linieReferenz" name="LinieReferenz">
+			<info>
+				<kurzinfo>Attribut zur Referenzierung des Objekttyps: typ.linie.</kurzinfo>
+			</info>
+			<objektReferenz typ="typ.linie" undefiniert="verboten" referenzierungsart="assoziation"/>
+		</attributDefinition>
+		<attributDefinition pid="att.linieReferenzOptional" name="LinieReferenzOptional">
+			<info>
+				<kurzinfo>Attribut zur Referenzierung des Objekttyps: typ.linie (Optionale Referenzierung erlaubt).</kurzinfo>
+			</info>
+			<objektReferenz typ="typ.linie" undefiniert="erlaubt" referenzierungsart="assoziation"/>
+		</attributDefinition>
+		<attributDefinition pid="att.linieXYReferenz" name="LinieXYReferenz">
+			<info>
+				<kurzinfo>Attribut zur Referenzierung des Objekttyps: typ.linieXY.</kurzinfo>
+			</info>
+			<objektReferenz typ="typ.linieXY" undefiniert="verboten" referenzierungsart="assoziation"/>
+		</attributDefinition>
+		<attributDefinition pid="att.linieXYReferenzOptional" name="LinieXYReferenzOptional">
+			<info>
+				<kurzinfo>Attribut zur Referenzierung des Objekttyps: typ.linieXY (Optionale Referenzierung erlaubt).</kurzinfo>
+			</info>
+			<objektReferenz typ="typ.linieXY" undefiniert="erlaubt" referenzierungsart="assoziation"/>
+		</attributDefinition>
+		<attributDefinition pid="att.punktLiegtAufLinienObjektReferenz" name="PunktLiegtAufLinienObjektReferenz">
+			<info>
+				<kurzinfo>Attribut zur Referenzierung des Objekttyps: typ.punktLiegtAufLinienObjekt.</kurzinfo>
+			</info>
+			<objektReferenz typ="typ.punktLiegtAufLinienObjekt" undefiniert="verboten" referenzierungsart="assoziation"/>
+		</attributDefinition>
+		<attributDefinition pid="att.punktLiegtAufLinienObjektReferenzOptional" name="PunktLiegtAufLinienObjektReferenzOptional">
+			<info>
+				<kurzinfo>Attribut zur Referenzierung des Objekttyps: typ.punktLiegtAufLinienObjekt (Optionale Referenzierung erlaubt).</kurzinfo>
+			</info>
+			<objektReferenz typ="typ.punktLiegtAufLinienObjekt" undefiniert="erlaubt" referenzierungsart="assoziation"/>
+		</attributDefinition>
+		<attributDefinition pid="att.punktReferenz" name="PunktReferenz">
+			<info>
+				<kurzinfo>Attribut zur Referenzierung des Objekttyps: typ.punkt.</kurzinfo>
+			</info>
+			<objektReferenz typ="typ.punkt" undefiniert="verboten" referenzierungsart="assoziation"/>
+		</attributDefinition>
+		<attributDefinition pid="att.punktReferenzOptional" name="PunktReferenzOptional">
+			<info>
+				<kurzinfo>Attribut zur Referenzierung des Objekttyps: typ.punkt (Optionale Referenzierung erlaubt).</kurzinfo>
+			</info>
+			<objektReferenz typ="typ.punkt" undefiniert="erlaubt" referenzierungsart="assoziation"/>
+		</attributDefinition>
+		<attributDefinition pid="att.punktXYReferenz" name="PunktXYReferenz">
+			<info>
+				<kurzinfo>Attribut zur Referenzierung des Objekttyps: typ.punktXY.</kurzinfo>
+			</info>
+			<objektReferenz typ="typ.punktXY" undefiniert="verboten" referenzierungsart="assoziation"/>
+		</attributDefinition>
+		<attributDefinition pid="att.punktXYReferenzOptional" name="PunktXYReferenzOptional">
+			<info>
+				<kurzinfo>Attribut zur Referenzierung des Objekttyps: typ.punktXY (Optionale Referenzierung erlaubt).</kurzinfo>
+			</info>
+			<objektReferenz typ="typ.punktXY" undefiniert="erlaubt" referenzierungsart="assoziation"/>
+		</attributDefinition>
+		<attributDefinition pid="att.wgs84Breite" name="Wgs84Breite">
+			<info>
+				<kurzinfo>Breitenangabe gemäß WGS84</kurzinfo>
+				<beschreibung>Für die Koordinatenangabe ist festgelegt: Für einen Punkt sind die WGS 84 Länge und Breite des (approximativen) Mittelpunktes des Ortes anzugeben (M), und zwar in Dezimalgraden mit einer Auflösung von 1 Mikro-grad, mit einem Pluszeichen (+) für östliche Länge und nördliche Breite und mit einem Minuszeichen (-) für westliche Länge und südliche Breite. Längengrade werden dreistellig (falls erforderlich mit führenden Nullen), Breitengrade zweistellig (falls erforderlich mit führenden Nullen) angegeben. Beispiel +004354551 +50839402 bedeutet 4°. 354551 O 50°. 839402 N</beschreibung>
+			</info>
+			<ganzzahl bits="32">
+				<bereich skalierung="0,000001" minimum="-90000000" maximum="90000000" einheit="Grad">
+				</bereich>
+				<zustand name="undefiniert" wert="-200000000">
+					<info>
+						<kurzinfo>Es sind keine Koordinaten definiert.</kurzinfo>
+					</info>
+				</zustand>
+			</ganzzahl>
+		</attributDefinition>
+		<attributDefinition pid="att.wgs84Länge" name="Wgs84Länge">
+			<info>
+				<kurzinfo>Längenangabe gemäß WGS84</kurzinfo>
+				<beschreibung>Für die Koordinatenangabe ist festgelegt: Für einen Punkt sind die WGS 84 Länge und Breite des (approximativen) Mittelpunktes des Ortes anzugeben (M), und zwar in Dezimalgraden mit einer Auflösung von 1 Mikro-grad, mit einem Pluszeichen (+) für östliche Länge und nördliche Breite und mit einem Minuszeichen (-) für westliche Länge und südliche Breite. Längengrade werden dreistellig (falls erforderlich mit führenden Nullen), Breitengrade zweistellig (falls erforderlich mit führenden Nullen) angegeben. Beispiel +004354551 +50839402 bedeutet 4°. 354551 O 50°. 839402 N</beschreibung>
+			</info>
+			<ganzzahl bits="32">
+				<bereich skalierung="0,000001" minimum="-180000000" maximum="180000000" einheit="Grad">
+				</bereich>
+				<zustand name="undefiniert" wert="-200000000">
+					<info>
+						<kurzinfo>Es sind keine Koordinaten definiert.</kurzinfo>
+					</info>
+				</zustand>
+			</ganzzahl>
+		</attributDefinition>
+	</modell>
+	<objekte>
+	</objekte>
+</konfigurationsBereich>

@@ -1,0 +1,5 @@
+Version 2.1.0
+=============
+
+Die Quelle beim Abruf von Daten enthält potentiell Informationen, ob Daten verfügbar sind, 
+falls beim Abruf der Parameterinformationen der Datenabruf unterdrückt wurde. 

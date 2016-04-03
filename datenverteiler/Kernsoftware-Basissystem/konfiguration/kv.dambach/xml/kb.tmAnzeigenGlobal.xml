@@ -1,0 +1,1315 @@
+<?xml version="1.0" encoding="ISO-8859-1"?>
+<!DOCTYPE konfigurationsBereich PUBLIC "-//K2S//DTD Dokument//DE" "K2S.dtd">
+<konfigurationsBereich pid="kb.tmAnzeigenGlobal" name="TeilmodellAnzeigenGlobal" verantwortlich="kv.dambach">
+	<info>
+		<kurzinfo>Teilmodell mit Datenmodellierung für die Anzeigequerschnitte.</kurzinfo>
+	</info>
+	<konfigurationsAenderung stand="12.06.2007" version="1" autor="inovat, Dipl.-Ing. H. C. Kniß (HCK)" grund="Änderungsdokumentation siehe &apos;ReleaseNotes kv.dambach.doc&apos;"></konfigurationsAenderung>
+	<konfigurationsAenderung stand="13.06.2007" version="2" autor="inovat, Dipl.-Ing. H. C. Kniß (HCK)" grund="Zwischenversion erzwungen durch Übernahme kv.systemModellGlobal"></konfigurationsAenderung>
+	<konfigurationsAenderung stand="13.06.2007" version="3" autor="inovat, Dipl.-Ing. H. C. Kniß (HCK)" grund="Änderungsdokumentation siehe &apos;ReleaseNotes kv.dambach.doc&apos;"></konfigurationsAenderung>
+	<konfigurationsAenderung stand="13.06.2007" version="3" autor="inovat, Dipl.-Ing. H. C. Kniß (HCK)" grund="Änderungsdokumentation siehe &apos;ReleaseNotes kv.dambach.doc&apos;"></konfigurationsAenderung>
+	<konfigurationsAenderung stand="14.06.2007" version="4" autor="inovat, Dipl.-Ing. H. C. Kniß (HCK)" grund="Änderungsdokumentation siehe &apos;ReleaseNotes kv.dambach.doc&apos;"></konfigurationsAenderung>
+	<konfigurationsAenderung stand="14.06.2007" version="5" autor="inovat, Dipl.-Ing. H. C. Kniß (HCK)" grund="Änderungsdokumentation siehe &apos;ReleaseNotes kv.dambach.doc&apos;"></konfigurationsAenderung>
+	<konfigurationsAenderung stand="15.06.2007" version="6" autor="Dambach-Werke GmbH, Th. Drapp" grund="Attribut Wechseltext in atg.wvzInhalt in optional geändert"></konfigurationsAenderung>
+	<konfigurationsAenderung stand="19.06.2007" version="7" autor="Dambach-Werke GmbH, Th. Drapp" grund="Änderungsdokumentation siehe &apos;ReleaseNotes kv.dambach.doc&apos;"></konfigurationsAenderung>
+	<konfigurationsAenderung stand="04.07.2007" version="8" autor="Dambach-Werke GmbH, Th. Drapp" grund="Änderungsdokumentation siehe &apos;ReleaseNotes kv.dambach.doc&apos;"></konfigurationsAenderung>
+	<konfigurationsAenderung stand="03.08.2007" version="9" autor="Dambach-Werke GmbH, Th. Drapp" grund="Änderungsdokumentation siehe &apos;ReleaseNotes kv.dambach.doc&apos;"></konfigurationsAenderung>
+	<konfigurationsAenderung stand="11.09.2007" version="10" autor="Dambach-Werke GmbH, Th. Drapp" grund="Änderungsdokumentation siehe &apos;ReleaseNotes kv.dambach.doc&apos;"></konfigurationsAenderung>
+	<konfigurationsAenderung stand="14.06.2011" version="11" autor="Swarco Traffic Systems GmbH, Th. Drapp" grund="Änderungsdokumentation siehe &apos;ReleaseNotes kv.dambach.doc&apos;"></konfigurationsAenderung>
+	<konfigurationsAenderung stand="14.06.2011" version="12" autor="Swarco Traffic Systems GmbH, Th. Drapp" grund="Änderungsdokumentation siehe &apos;ReleaseNotes kv.dambach.doc&apos;"></konfigurationsAenderung>
+	<konfigurationsAenderung stand="15.06.2011" version="13" autor="Swarco Traffic Systems GmbH, Th. Drapp" grund="Änderungsdokumentation siehe &apos;ReleaseNotes kv.dambach.doc&apos;"></konfigurationsAenderung>
+	<konfigurationsAenderung stand="17.06.2011" version="14" autor="Swarco Traffic Systems GmbH, Th. Drapp" grund="Änderungsdokumentation siehe &apos;ReleaseNotes kv.dambach.doc&apos;"></konfigurationsAenderung>
+	<konfigurationsAenderung stand="17.06.2011" version="15" autor="Swarco Traffic Systems GmbH, Th. Drapp" grund="Änderungsdokumentation siehe &apos;ReleaseNotes kv.dambach.doc&apos;"></konfigurationsAenderung>
+	<konfigurationsAenderung stand="13.01.2012" version="16" autor="Swarco Traffic Systems GmbH, Th. Drapp" grund="Änderungsdokumentation siehe &apos;ReleaseNotes kv.dambach.doc&apos;"></konfigurationsAenderung>
+	<!--
+	Abhängigkeiten des Bereichs kb.tmAnzeigenGlobal
+	Abhängig ab Version      Art der Abhängigkeit      Version des benötigten Bereichs      Benötigter Bereich
+	10                       notwendig                 1                                    kb.metaModellGlobal                
+	10                       notwendig                 1                                    kb.systemModellGlobal              
+	10                       notwendig                 2                                    kb.tmGeraeteEinbauOrte             
+	10                       notwendig                 1                                    kb.tmVerkehrGlobal                 
+	10                       notwendig                 1                                    kb.kv.dambach                      
+	10                       notwendig                 4                                    kb.fachModellGlobal                
+	10                       notwendig                 1                                    kb.tmGeoReferenzierungGlobal       
+	-->
+	<modell>
+		<typDefinition pid="typ.anzeige" name="Anzeige" objektNamenPermanent="nein">
+			<info>
+				<kurzinfo>Anzeige.</kurzinfo>
+			</info>
+			<erweitert pid="typ.konfigurationsObjekt"/>
+			<attributgruppe pid="atg.anzeige"/>
+			<attributgruppe pid="atg.anzeigeAutarkIst"/>
+			<attributgruppe pid="atg.anzeigeAutarkSoll"/>
+			<attributgruppe pid="atg.anzeigeBedeutungCopyPaste"/>
+			<attributgruppe pid="atg.anzeigeEigenschaftIst"/>
+			<attributgruppe pid="atg.anzeigeEigenschaftSoll"/>
+			<menge pid="menge.fahrStreifen" name="FahrStreifen" erforderlich="nein">
+				<info>
+					<kurzinfo>Menge der Fahrstreifen, die einen Messquerschnitt bilden.</kurzinfo>
+				</info>
+			</menge>
+		</typDefinition>
+		<typDefinition pid="typ.anzeigeQuerschnitt" name="AnzeigeQuerschnitt" objektNamenPermanent="nein">
+			<info>
+				<kurzinfo>Anzeigequerschnitt.</kurzinfo>
+			</info>
+			<erweitert pid="typ.konfigurationsObjekt"/>
+			<erweitert pid="typ.punktLiegtAufLinienObjekt"/>
+			<erweitert pid="typ.punktXY"/>
+			<attributgruppe pid="atg.anzeigeQuerschnitt"/>
+			<attributgruppe pid="atg.anzeigeQuerschnittEigenschaftIst"/>
+			<attributgruppe pid="atg.anzeigeQuerschnittEigenschaftSoll"/>
+			<attributgruppe pid="atg.anzeigeQuerschnittNba"/>
+			<attributgruppe pid="atg.anzeigeQuerschnittSchaltbarkeitNba"/>
+			<attributgruppe pid="atg.nichtAnzeigeAutarkIst"/>
+			<attributgruppe pid="atg.nichtAnzeigeAutarkSoll"/>
+			<menge pid="menge.anzeigen" name="Anzeigen" erforderlich="ja">
+				<info>
+					<kurzinfo>Menge der Anzeigen, die einen Anzeigequerschnitt bilden.</kurzinfo>
+				</info>
+			</menge>
+		</typDefinition>
+		<typDefinition pid="typ.anzeigeQuerschnittTyp" name="AnzeigeQuerschnittTyp" objektNamenPermanent="nein">
+			<info>
+				<kurzinfo>Anzeigequerschnitttyp.</kurzinfo>
+			</info>
+			<erweitert pid="typ.konfigurationsObjekt"/>
+			<attributgruppe pid="atg.anzeigeQuerschnittTyp"/>
+			<menge pid="menge.wvzInhalt" name="WvzInhalt" erforderlich="nein">
+				<info>
+					<kurzinfo>Menge der WvzInhalte, die am AnzeigeQuerschnitt schaltbar sind.</kurzinfo>
+				</info>
+			</menge>
+		</typDefinition>
+		<typDefinition pid="typ.anzeigeTyp" name="AnzeigeTyp" objektNamenPermanent="nein">
+			<info>
+				<kurzinfo>Anzeigetyp.</kurzinfo>
+			</info>
+			<erweitert pid="typ.konfigurationsObjekt"/>
+			<attributgruppe pid="atg.anzeigeTyp"/>
+			<attributgruppe pid="atg.anzeigeTypTextAusrichtung"/>
+			<menge pid="menge.wvzInhalt" name="WvzInhalt" erforderlich="ja">
+				<info>
+					<kurzinfo>Menge der WvzInhalte, die ein AnzeigeTyp darstellen kann.</kurzinfo>
+				</info>
+			</menge>
+		</typDefinition>
+		<typDefinition pid="typ.definitionStellCode" name="DefinitionStellCode" objektNamenPermanent="nein" persistenzModus="transient">
+			<info>
+				<kurzinfo>Objekt für die Speicherung von Programmdefinitionen TLS für AnzeigenGlobal.</kurzinfo>
+			</info>
+			<erweitert pid="typ.dynamischesObjekt"/>
+		</typDefinition>
+		<typDefinition pid="typ.dirigent" name="Dirigent" objektNamenPermanent="nein">
+			<info>
+				<kurzinfo>Dirigent.</kurzinfo>
+			</info>
+			<erweitert pid="typ.konfigurationsObjekt"/>
+			<erweitert pid="typ.punktLiegtAufLinienObjekt"/>
+			<erweitert pid="typ.punktXY"/>
+			<attributgruppe pid="atg.dirigent"/>
+			<attributgruppe pid="atg.dirigentEigenschaftIst"/>
+			<attributgruppe pid="atg.dirigentEigenschaftSoll"/>
+			<attributgruppe pid="atg.nichtAnzeigeAutarkIst"/>
+			<attributgruppe pid="atg.nichtAnzeigeAutarkSoll"/>
+			<menge pid="menge.anzeigeQuerschnitte" name="AnzeigeQuerschnitte" erforderlich="ja">
+				<info>
+					<kurzinfo>Menge der AnzeigeQuerschnitte, die einen Dirigenten bilden.</kurzinfo>
+				</info>
+			</menge>
+			<menge pid="menge.wvzInhalt" name="WvzInhalt" erforderlich="ja">
+				<info>
+					<kurzinfo>Menge der WvzInhalte, die am Dirigent schaltbar sind.</kurzinfo>
+				</info>
+			</menge>
+		</typDefinition>
+		<typDefinition pid="typ.font" name="Font" objektNamenPermanent="nein">
+			<info>
+				<kurzinfo>Font.</kurzinfo>
+			</info>
+			<erweitert pid="typ.konfigurationsObjekt"/>
+			<attributgruppe pid="atg.font"/>
+			<menge pid="menge.ligaturen" name="Ligaturen" erforderlich="ja">
+				<info>
+					<kurzinfo>Menge der Ligaturen, die ein Font enthält.</kurzinfo>
+				</info>
+			</menge>
+			<menge pid="menge.zeichen" name="Zeichen" erforderlich="ja">
+				<info>
+					<kurzinfo>Menge der Zeichen, die ein Font enthält.</kurzinfo>
+				</info>
+			</menge>
+		</typDefinition>
+		<typDefinition pid="typ.ligaturen" name="Ligaturen" objektNamenPermanent="nein">
+			<info>
+				<kurzinfo>Spezielle Zeichen eines Fonts.</kurzinfo>
+			</info>
+			<erweitert pid="typ.konfigurationsObjekt"/>
+			<attributgruppe pid="atg.ligaturen"/>
+		</typDefinition>
+		<typDefinition pid="typ.wechseltext" name="Wechseltext" objektNamenPermanent="nein">
+			<info>
+				<kurzinfo>Wechseltext für WvzInhalt oder Freitext.</kurzinfo>
+			</info>
+			<erweitert pid="typ.konfigurationsObjekt"/>
+			<attributgruppe pid="atg.wechseltext"/>
+		</typDefinition>
+		<typDefinition pid="typ.wvzInhalt" name="WvzInhalt" objektNamenPermanent="nein">
+			<info>
+				<kurzinfo>WvzInhalte für den AnzeigeTyp.</kurzinfo>
+			</info>
+			<erweitert pid="typ.konfigurationsObjekt"/>
+			<attributgruppe pid="atg.wvzInhalt"/>
+		</typDefinition>
+		<typDefinition pid="typ.wzgInhaltGrafik" name="WzgInhaltGrafik" objektNamenPermanent="nein">
+			<info>
+				<kurzinfo>Grafiken für den WvzInhalt.</kurzinfo>
+			</info>
+			<erweitert pid="typ.konfigurationsObjekt"/>
+			<attributgruppe pid="atg.wzgInhaltGrafik"/>
+		</typDefinition>
+		<typDefinition pid="typ.zeichen" name="Zeichen" objektNamenPermanent="nein">
+			<info>
+				<kurzinfo>Zeichen eines Fonts.</kurzinfo>
+			</info>
+			<erweitert pid="typ.konfigurationsObjekt"/>
+			<attributgruppe pid="atg.zeichen"/>
+		</typDefinition>
+		<attributgruppenDefinition pid="atg.anzeige" name="Anzeige" parametrierend="nein">
+			<info>
+				<kurzinfo>Konfigurierende Eigenschaften der Objekte des Typs.</kurzinfo>
+			</info>
+			<aspekt pid="asp.eigenschaften" konfigurationsModus="datensatzNotwendig">
+			</aspekt>
+			<attribut pid="att.anzeigeTypReferenz" anzahl="1" anzahlIst="fest" name="AnzeigeTyp">
+				<info>
+					<kurzinfo>Typ der Anzeige.</kurzinfo>
+				</info>
+			</attribut>
+			<attribut pid="att.einbauOrtReferenzOptional" anzahl="1" anzahlIst="fest" name="RealisiertDurch">
+				<info>
+					<kurzinfo>Referenz in das physikalische Geraetemodell auf den konkreten Einbauort, an dem das Geraet eingebaust ist / sein sollte, das die tatsächliche Anzeige durchführt. Da dieses Gerät ausgebaut und durch ein anderes ersetzt werden kann, ohne dass sich die verkehrstechnische Bedeutung ändert, wird auf den (dauerhafteren) Einbauort für das Gerät referenziert.</kurzinfo>
+				</info>
+			</attribut>
+		</attributgruppenDefinition>
+		<attributgruppenDefinition pid="atg.anzeigeAutarkIst" name="AnzeigeAutarkIst" parametrierend="nein">
+			<info>
+				<kurzinfo>Rückmeldungsseitiger Autark Anzeige-Inhalt einer Anzeige.</kurzinfo>
+			</info>
+			<aspekt pid="asp.aqZustand" onlineModus="quelleUndSenke">
+			</aspekt>
+			<attributliste pid="atl.anzeigeEigenschaftAutark" anzahl="1" anzahlIst="fest" name="Autark">
+				<info>
+					<kurzinfo>Autarkinformationen für Anzeigen.</kurzinfo>
+				</info>
+			</attributliste>
+			<attribut pid="att.jaNein" anzahl="1" anzahlIst="fest" name="Kommunikationsausfall">
+				<info>
+					<kurzinfo>Kommunikationsausfall zu Anzeige.</kurzinfo>
+				</info>
+			</attribut>
+		</attributgruppenDefinition>
+		<attributgruppenDefinition pid="atg.anzeigeAutarkSoll" name="AnzeigeAutarkSoll" parametrierend="nein">
+			<info>
+				<kurzinfo>Befehlsseitiger Autark Anzeige-Inhalt einer Anzeige.</kurzinfo>
+			</info>
+			<aspekt pid="asp.aqSoll" onlineModus="quelleUndSenke">
+			</aspekt>
+			<aspekt pid="asp.aqVorgabe" onlineModus="quelleUndSenke">
+			</aspekt>
+			<attributliste pid="atl.anzeigeEigenschaftAutark" anzahl="1" anzahlIst="fest" name="Autark">
+				<info>
+					<kurzinfo>Autarkinformationen für Anzeigen.</kurzinfo>
+				</info>
+			</attributliste>
+		</attributgruppenDefinition>
+		<attributgruppenDefinition pid="atg.anzeigeBedeutungCopyPaste" name="AnzeigeBedeutungCopyPaste" parametrierend="nein">
+			<info>
+				<kurzinfo>Bedeutung der Anzeige für Copy und Paste.</kurzinfo>
+				<beschreibung>
+					  Die angegebene Bezeichnung wird für die Copy-Paste-Funktionalität verwendet.
+					  D. h. bei Copy wird der Inhalt der Anzeige unter der BedeutungCopyPaste zwischengespeichert,
+            beim Paste werden die zwischengespeicherten Inhalte über die BedeutungCopyPaste den Anzeigen, die die gespeicherten Inhalte erhalten sollen, zugeordnet.
+            Durch sinnvolle Versorgung kann damit eine sinnvolle Zuordnung der verkehrlichen Bedeutungen erfolgen.
+					</beschreibung>
+			</info>
+			<aspekt pid="asp.eigenschaften" konfigurationsModus="datensatzOptional">
+			</aspekt>
+			<attribut pid="att.text" anzahl="1" anzahlIst="fest" name="BedeutungCopyPaste">
+				<info>
+					<kurzinfo>Bedeutung der Anzeige für Copy und Paste.</kurzinfo>
+				</info>
+			</attribut>
+		</attributgruppenDefinition>
+		<attributgruppenDefinition pid="atg.anzeigeEigenschaftIst" name="AnzeigeEigenschaftIst" parametrierend="nein">
+			<info>
+				<kurzinfo>Ist Eigenschaften der Objekte des Typs.</kurzinfo>
+			</info>
+			<aspekt pid="asp.aqZustand" onlineModus="quelleUndSenke">
+			</aspekt>
+			<attributliste pid="atl.anzeigeEigenschaft" anzahl="1" anzahlIst="fest" name="Eigenschaft">
+				<info>
+					<kurzinfo>Gemeinsame Eigenschaften für Soll und Ist.</kurzinfo>
+				</info>
+			</attributliste>
+			<attribut pid="att.anzeigeFehlerZustand" anzahl="1" anzahlIst="fest" name="Status">
+				<info>
+					<kurzinfo>Aktueller Status der Anzeige. OK, gestört, teilgestört, usw..</kurzinfo>
+				</info>
+			</attribut>
+			<attribut pid="att.wvzInhaltReferenz" anzahl="0" anzahlIst="variabel" name="GestörteInhalte">
+				<info>
+					<kurzinfo>Liste mit Referenzen auf gestörte WvzInhalte.</kurzinfo>
+				</info>
+			</attribut>
+			<attribut pid="att.textPosition" anzahl="0" anzahlIst="variabel" name="GestörteTextpositionen">
+				<info>
+					<kurzinfo>Aktueller Status der Anzeige. OK, gestört, teilgestört, usw..</kurzinfo>
+				</info>
+			</attribut>
+			<attribut pid="att.konfigurationsObjektReferenz" anzahl="0" anzahlIst="variabel" name="AktFehlerMeldungen">
+				<info>
+					<kurzinfo>Referenz auf beliebige Objekte vom Typ Fehlermeldung.</kurzinfo>
+				</info>
+			</attribut>
+		</attributgruppenDefinition>
+		<attributgruppenDefinition pid="atg.anzeigeEigenschaftSoll" name="AnzeigeEigenschaftSoll" parametrierend="nein">
+			<info>
+				<kurzinfo>Soll Eigenschaften der Objekte des Typs.</kurzinfo>
+			</info>
+			<aspekt pid="asp.aqVorgabe" onlineModus="quelleUndSenke">
+			</aspekt>
+			<attributliste pid="atl.anzeigeEigenschaft" anzahl="1" anzahlIst="fest" name="Eigenschaft">
+				<info>
+					<kurzinfo>Gemeinsame Eigenschaften für Soll und Ist.</kurzinfo>
+				</info>
+			</attributliste>
+			<attribut pid="att.zeitPunkt" anzahl="1" anzahlIst="fest" name="SollZeitpunkt">
+				<info>
+					<kurzinfo>Absoluter Zeitpunkt an dem die Anzeige geschaltet werden soll. Dieser Zeitpunkt geht dem Zeitpunkt für den gesamten Anzeigequerschnitt vor, wenn gesetzt.</kurzinfo>
+				</info>
+			</attribut>
+		</attributgruppenDefinition>
+		<attributgruppenDefinition pid="atg.anzeigeQuerschnitt" name="AnzeigeQuerschnitt" parametrierend="nein">
+			<info>
+				<kurzinfo>Konfigurierende Eigenschaften der Objekte des Typs.</kurzinfo>
+			</info>
+			<aspekt pid="asp.eigenschaften" konfigurationsModus="datensatzOptional">
+			</aspekt>
+			<attribut pid="att.anzeigeQuerschnittTypReferenz" anzahl="1" anzahlIst="fest" name="AnzeigeQuerschnittTyp">
+				<info>
+					<kurzinfo>Typ des Anzeigequerschnitts.</kurzinfo>
+				</info>
+			</attribut>
+			<attribut pid="att.hochbauSchrankSchachtReferenzOptional" anzahl="0" anzahlIst="variabel" name="ZuHochbauSchrankSchacht">
+				<info>
+					<kurzinfo>Liste von Referenzen auf die HochbauSchrankSchacht-Objekte, durch die der Anzeigequerschnitt realisiert wird..</kurzinfo>
+				</info>
+			</attribut>
+		</attributgruppenDefinition>
+		<attributgruppenDefinition pid="atg.anzeigeQuerschnittEigenschaftIst" name="AnzeigeQuerschnittEigenschaftIst" parametrierend="nein">
+			<info>
+				<kurzinfo>Ist Eigenschaften der Objekte des Typs.</kurzinfo>
+			</info>
+			<aspekt pid="asp.aqZustand" onlineModus="quelleUndSenke">
+			</aspekt>
+			<attributliste pid="atl.anzeigeQuerschnittEigenschaft" anzahl="1" anzahlIst="fest" name="Eigenschaft">
+				<info>
+					<kurzinfo>Gemeinsame Eigenschaften für Soll und Ist.</kurzinfo>
+				</info>
+			</attributliste>
+			<attribut pid="att.anzeigeReferenz" anzahl="0" anzahlIst="variabel" name="Anzeigen">
+				<info>
+					<kurzinfo>Anzeigen, die innerhalb des Anzeigequerschnitt aktuell rückgemeldet werden.</kurzinfo>
+					<beschreibung>
+						Beschreibung des jeweiligen Status des AQ, wobei der jeweils schwerwiegendste Status einzutragen
+						ist, wenn mehrere Zustände gleichzeitig zulässig sind. (Ansonsten müsste diese Vsariable mehrfach zugelassen werden)
+					</beschreibung>
+				</info>
+			</attribut>
+			<attribut pid="att.anzeigeQuerschnittFehlerZustand" anzahl="1" anzahlIst="fest" name="Status">
+				<info>
+					<kurzinfo>Aktueller Status des Anzeigequerschnitt. OK, gestört, teilgestört, usw.. Redundanz zu AnzeigeQuerschnittFehlerzustand klären</kurzinfo>
+				</info>
+			</attribut>
+			<attribut pid="att.konfigurationsObjektReferenz" anzahl="0" anzahlIst="variabel" name="AktFehlerMeldungen">
+				<info>
+					<kurzinfo>Referenz auf beliebige Objekte vom Typ Fehlermeldung. Attributtyp bei Vorhandensein endgültiger Fehlerobjekte genauer spezifiieren.</kurzinfo>
+				</info>
+			</attribut>
+			<attribut pid="att.jaNeinNichtErmittelbar" anzahl="1" anzahlIst="fest" name="FehlerAufgetreten">
+				<info>
+					<kurzinfo>Information, ob bei der Bearbeitung ein Fehler aufgetreten ist (siehe TLS).</kurzinfo>
+				</info>
+				<default wert="nicht ermittelbar"/>
+			</attribut>
+			<attribut pid="att.jaNeinNichtErmittelbar" anzahl="1" anzahlIst="fest" name="ProgrammAbgeschlossen">
+				<info>
+					<kurzinfo>Information, ob die Programmbearbeitung abgeschlossen ist (siehe TLS).</kurzinfo>
+				</info>
+				<default wert="nicht ermittelbar"/>
+			</attribut>
+		</attributgruppenDefinition>
+		<attributgruppenDefinition pid="atg.anzeigeQuerschnittEigenschaftSoll" name="AnzeigeQuerschnittEigenschaftSoll" parametrierend="nein">
+			<info>
+				<kurzinfo>Soll Eigenschaften der Objekte des Typs.</kurzinfo>
+			</info>
+			<aspekt pid="asp.aqVorgabe" onlineModus="quelleUndSenke">
+			</aspekt>
+			<attributliste pid="atl.anzeigeQuerschnittEigenschaft" anzahl="1" anzahlIst="fest" name="Eigenschaft">
+				<info>
+					<kurzinfo>Gemeinsame Eigenschaften für Soll und Ist.</kurzinfo>
+				</info>
+			</attributliste>
+			<attribut pid="att.zeitPunkt" anzahl="1" anzahlIst="fest" name="SollZeitpunkt">
+				<info>
+					<kurzinfo>Absoluter Zeitpunkt an dem die Anzeige geschaltet werden soll. Dieser Zeitpunkt geht dem Zeitpunkt für den gesamten Anzeigequerschnitt vor, wenn gesetzt.</kurzinfo>
+				</info>
+			</attribut>
+			<attribut pid="att.anzeigeReferenz" anzahl="0" anzahlIst="variabel" name="Anzeigen">
+				<info>
+					<kurzinfo>Anzeigen, die innerhalb des Anzeigequerschnitt beeinflußt werden sollen.</kurzinfo>
+				</info>
+			</attribut>
+		</attributgruppenDefinition>
+		<attributgruppenDefinition pid="atg.anzeigeQuerschnittNba" name="AnzeigeQuerschnittNba" parametrierend="nein">
+			<info>
+				<kurzinfo>Erweiterte konfigurierende Eigenschaften der Objekte des Typs für die NBA.</kurzinfo>
+			</info>
+			<aspekt pid="asp.eigenschaften" konfigurationsModus="datensatzOptional">
+			</aspekt>
+			<attribut pid="att.jaNein" anzahl="1" anzahlIst="fest" name="VorgelagerterEntscheiderVorhanden">
+				<info>
+					<kurzinfo>Information über das Vorhandensein eines vorgelagerten Entscheiders.</kurzinfo>
+					<beschreibung>
+					  Im Systemaufbau von NBA Köln-Koblenz sind Unterzentralen (vorgelagerte Entscheider) zwischen der Steuerung NBA
+					  und den Schildern (dWiSta) vorhanden. Diese Unterzentralen können die Schaltungen durch die Steuerung NBA
+					  verhindern (Schalter). Dieses Attribut gibt an, ob eine Unterzentrale dieser Art für den AnzeigeQuerschnitt vorhanden
+					  ist oder nicht. Ist ein vorgelagerter Entscheider vorhanden, so wird die Schalterstellung mit der Attributgruppe
+					  "atg.anzeigeQuerschnittSchaltbarkeitNba" verteilt.
+					</beschreibung>
+				</info>
+			</attribut>
+		</attributgruppenDefinition>
+		<attributgruppenDefinition pid="atg.anzeigeQuerschnittSchaltbarkeitNba" name="AnzeigeQuerschnittSchaltbarkeitNba" parametrierend="nein">
+			<info>
+				<kurzinfo>Information über die Schaltbarkeit des AnzeigeQuerschnitt durch die NBA.</kurzinfo>
+			</info>
+			<aspekt pid="asp.aqZustand" onlineModus="quelleUndSenke">
+			</aspekt>
+			<attribut pid="att.jaNeinNichtErmittelbar" anzahl="1" anzahlIst="fest" name="DurchNbaSchaltbar">
+				<info>
+					<kurzinfo>AnzeigeQuerschnitt durch NBA schaltbar, Information von vorgelagertem Entscheider.</kurzinfo>
+					<beschreibung>
+					  Im Systemaufbau von NBA Köln-Koblenz sind Unterzentralen (vorgelagerte Entscheider) zwischen der Steuerung NBA
+					  und den Schildern (dWiSta) vorhanden. Diese Unterzentralen können die Schaltungen durch die Steuerung NBA
+					  verhindern (Schalter). Die Unterzentralen melden diese Schalterstellung per TLS-Telgramm. Die Informationen
+					  aus dem TLS-Telegramm werden in diesem Attribut der Steuerung NBA mitgeteilt.
+					</beschreibung>
+				</info>
+			</attribut>
+		</attributgruppenDefinition>
+		<attributgruppenDefinition pid="atg.anzeigeQuerschnittTyp" name="AnzeigeQuerschnittTyp" parametrierend="nein">
+			<info>
+				<kurzinfo>Konfigurierende Eigenschaften der Objekte des Typs.</kurzinfo>
+			</info>
+			<aspekt pid="asp.eigenschaften" konfigurationsModus="datensatzOptional">
+			</aspekt>
+			<attribut pid="att.aqBetriebsZustände" anzahl="0" anzahlIst="variabel" name="MöglicheBetriebsZustände">
+				<info>
+					<kurzinfo>Mögliche Betriebszustände des AnzeigeQuerschnittTyps.</kurzinfo>
+				</info>
+			</attribut>
+		</attributgruppenDefinition>
+		<attributgruppenDefinition pid="atg.anzeigeTyp" name="AnzeigeTyp" parametrierend="nein">
+			<info>
+				<kurzinfo>Konfigurierende Eigenschaften der Objekte des Typs.</kurzinfo>
+			</info>
+			<aspekt pid="asp.eigenschaften" konfigurationsModus="datensatzNotwendig">
+			</aspekt>
+			<attribut pid="att.jaNein" anzahl="1" anzahlIst="fest" name="KannFreieGrafik">
+			</attribut>
+			<attribut pid="att.grafikPixel" anzahl="1" anzahlIst="fest" name="AuflösungX">
+				<info>
+					<kurzinfo>Auflösung X-Richtung in Pixel.</kurzinfo>
+				</info>
+			</attribut>
+			<attribut pid="att.grafikPixel" anzahl="1" anzahlIst="fest" name="AuflösungY">
+				<info>
+					<kurzinfo>Auflösung Y-Richtung in Pixel.</kurzinfo>
+				</info>
+			</attribut>
+			<attribut pid="att.farbdarstellung" anzahl="1" anzahlIst="fest" name="Farbdarstellung">
+				<info>
+					<kurzinfo>Farbdarstellung 0 = sw, 1 = grau (256), 2 = farbe (256), 3 = farbe (16 Bit), 4 = farbe (24 Bit).</kurzinfo>
+				</info>
+			</attribut>
+			<attribut pid="att.jaNein" anzahl="1" anzahlIst="fest" name="KannFreiText">
+			</attribut>
+			<attribut pid="att.timeout" anzahl="1" anzahlIst="fest" name="TimeoutSchaltBildWechsel">
+				<info>
+					<kurzinfo>Zeit in Sekunden, nach der normalerweise die Schaltrückmeldung vorliegen sollte.</kurzinfo>
+				</info>
+			</attribut>
+			<attribut pid="att.fontReferenz" anzahl="0" anzahlIst="variabel" name="Font">
+				<info>
+					<kurzinfo>Vorhandene Fonts.</kurzinfo>
+				</info>
+			</attribut>
+		</attributgruppenDefinition>
+		<attributgruppenDefinition pid="atg.anzeigeTypTextAusrichtung" name="AnzeigeTypTextAusrichtung" parametrierend="nein">
+			<info>
+				<kurzinfo>Konfigurierende Eigenschaften der Objekte des Typs.</kurzinfo>
+			</info>
+			<aspekt pid="asp.eigenschaften" konfigurationsModus="datensatzOptional">
+			</aspekt>
+			<attribut pid="att.textAusrichtung" anzahl="0" anzahlIst="variabel" name="TextAusrichtung">
+			</attribut>
+		</attributgruppenDefinition>
+		<attributgruppenDefinition pid="atg.dirigent" name="Dirigent" parametrierend="nein">
+			<info>
+				<kurzinfo>Konfigurierende Eigenschaften der Objekte des Typs.</kurzinfo>
+			</info>
+			<aspekt pid="asp.eigenschaften" konfigurationsModus="datensatzOptional">
+			</aspekt>
+			<attribut pid="att.hochbauSchrankSchachtReferenzOptional" anzahl="0" anzahlIst="variabel" name="ZuHochbauSchrankSchacht">
+				<info>
+					<kurzinfo>Liste von Referenzen auf die HochbauSchrankSchacht-Objekte, durch die der Dirigent realisiert wird..</kurzinfo>
+				</info>
+			</attribut>
+		</attributgruppenDefinition>
+		<attributgruppenDefinition pid="atg.dirigentEigenschaftIst" name="DirigentEigenschaftIst" parametrierend="nein">
+			<info>
+				<kurzinfo>Ist Eigenschaften der Objekte des Typs.</kurzinfo>
+			</info>
+			<aspekt pid="asp.aqZustand" onlineModus="quelleUndSenke">
+			</aspekt>
+			<attributliste pid="atl.dirigentEigenschaft" anzahl="1" anzahlIst="fest" name="Eigenschaft">
+				<info>
+					<kurzinfo>Gemeinsame Eigenschaften für Soll und Ist.</kurzinfo>
+				</info>
+			</attributliste>
+			<attribut pid="att.dirigentFehlerZustand" anzahl="1" anzahlIst="fest" name="Status">
+				<info>
+					<kurzinfo>Aktueller Status des Dirigenten. OK, gestört, teilgestört, usw..</kurzinfo>
+				</info>
+			</attribut>
+			<attribut pid="att.jaNeinNichtErmittelbar" anzahl="1" anzahlIst="fest" name="FehlerAufgetreten">
+				<info>
+					<kurzinfo>Information, ob bei der Bearbeitung ein Fehler aufgetreten ist (siehe TLS).</kurzinfo>
+				</info>
+				<default wert="nicht ermittelbar"/>
+			</attribut>
+			<attribut pid="att.jaNeinNichtErmittelbar" anzahl="1" anzahlIst="fest" name="ProgrammAbgeschlossen">
+				<info>
+					<kurzinfo>Information, ob die Programmbearbeitung abgeschlossen ist (siehe TLS).</kurzinfo>
+				</info>
+				<default wert="nicht ermittelbar"/>
+			</attribut>
+		</attributgruppenDefinition>
+		<attributgruppenDefinition pid="atg.dirigentEigenschaftSoll" name="DirigentEigenschaftSoll" parametrierend="nein">
+			<info>
+				<kurzinfo>Soll Eigenschaften der Objekte des Typs.</kurzinfo>
+			</info>
+			<aspekt pid="asp.aqVorgabe" onlineModus="quelleUndSenke">
+			</aspekt>
+			<attributliste pid="atl.dirigentEigenschaft" anzahl="1" anzahlIst="fest" name="Eigenschaft">
+				<info>
+					<kurzinfo>Gemeinsame Eigenschaften für Soll und Ist.</kurzinfo>
+				</info>
+			</attributliste>
+			<attribut pid="att.zeitPunkt" anzahl="1" anzahlIst="fest" name="SollZeitpunkt">
+				<info>
+					<kurzinfo>Absoluter Zeitpunkt an dem der Dirigent geschaltet werden soll.</kurzinfo>
+				</info>
+			</attribut>
+			<attribut pid="att.anzeigeQuerschnittReferenz" anzahl="0" anzahlIst="variabel" name="AnzeigeQuerschnitte">
+				<info>
+					<kurzinfo>AnzeigeQuerschnitte, die innerhalb des Dirigenten beeinflußt werden sollen.</kurzinfo>
+				</info>
+			</attribut>
+		</attributgruppenDefinition>
+		<attributgruppenDefinition pid="atg.font" name="Font" parametrierend="nein">
+			<info>
+				<kurzinfo>Konfigurierende Eigenschaften der Objekte des Typs.</kurzinfo>
+			</info>
+			<aspekt pid="asp.eigenschaften" konfigurationsModus="datensatzOptional">
+			</aspekt>
+			<attribut pid="att.text" anzahl="1" anzahlIst="fest" name="Font">
+				<info>
+					<kurzinfo>Name des Fonts.</kurzinfo>
+				</info>
+			</attribut>
+			<attribut pid="att.schrifthöhePixel" anzahl="1" anzahlIst="fest" name="SchrifthöhePixel">
+				<info>
+					<kurzinfo>Schrifthöhe des Font in Pixel.</kurzinfo>
+				</info>
+			</attribut>
+			<attribut pid="att.schrifthöheMillimeter" anzahl="1" anzahlIst="fest" name="SchrifthöheMillimeter">
+				<info>
+					<kurzinfo>Schrifthöhe des Font in Millimeter.</kurzinfo>
+				</info>
+			</attribut>
+			<attribut pid="att.zeichenAbstandBreite" anzahl="1" anzahlIst="fest" name="ZeichenAbstandStandard">
+				<info>
+					<kurzinfo>Normaler Zeichenabstand des Fonts in Anteilen der Schrifthöhe. In der Regel eine positive Zahl</kurzinfo>
+				</info>
+			</attribut>
+		</attributgruppenDefinition>
+		<attributgruppenDefinition pid="atg.ligaturen" name="Ligaturen" parametrierend="nein">
+			<info>
+				<kurzinfo>Konfigurierende Eigenschaften der Objekte des Typs.</kurzinfo>
+			</info>
+			<aspekt pid="asp.eigenschaften" konfigurationsModus="datensatzNotwendig">
+			</aspekt>
+			<attribut pid="att.zeichenAbstandBreite" anzahl="1" anzahlIst="variabel" name="Zeichenabstand">
+				<info>
+					<kurzinfo>Zeichenabstand zwischen den Zeichen in Anteilen der Schrifthöhe.</kurzinfo>
+					<beschreibung>Die erste Variable gibt den Abstand zwischen Zeichen 1 und 2, die zweite Variable den Abstand zwischen Zeichen 2 und 3 etc. an. Der Abstand in einer Ligatur ist definitionsgemäss in der Regel negativ.</beschreibung>
+				</info>
+			</attribut>
+			<attribut pid="att.zeichenReferenz" anzahl="2" anzahlIst="variabel" name="Zeichen">
+				<info>
+					<kurzinfo>Geordnete Liste mit den Referenzen auf die in der Ligatur enthaltenen Zeichen.</kurzinfo>
+				</info>
+			</attribut>
+		</attributgruppenDefinition>
+		<attributgruppenDefinition pid="atg.nichtAnzeigeAutarkIst" name="NichtAnzeigeAutarkIst" parametrierend="nein">
+			<info>
+				<kurzinfo>Rückmeldungsseitiger Autark Anzeige-Inhalt eines AnzeigeQuerschnitt oder Dirigenten.</kurzinfo>
+			</info>
+			<aspekt pid="asp.aqZustand" onlineModus="quelleUndSenke">
+			</aspekt>
+			<attribut pid="att.wvzInhaltReferenzOptional" anzahl="1" anzahlIst="fest" name="AnzeigeInhalt">
+				<info>
+					<kurzinfo>Referenz auf WVZInhalt.</kurzinfo>
+				</info>
+			</attribut>
+			<attribut pid="att.jaNein" anzahl="1" anzahlIst="fest" name="Kommunikationsausfall">
+				<info>
+					<kurzinfo>Kommunikationsausfall zu AnzeigeQuerschnitt oder Dirigent.</kurzinfo>
+				</info>
+			</attribut>
+		</attributgruppenDefinition>
+		<attributgruppenDefinition pid="atg.nichtAnzeigeAutarkSoll" name="NichtAnzeigeAutarkSoll" parametrierend="nein">
+			<info>
+				<kurzinfo>Befehlsseitiger Autark Anzeige-Inhalt eines AnzeigeQuerschnitt oder Dirigenten.</kurzinfo>
+			</info>
+			<aspekt pid="asp.aqSoll" onlineModus="quelleUndSenke">
+			</aspekt>
+			<aspekt pid="asp.aqVorgabe" onlineModus="quelleUndSenke">
+			</aspekt>
+			<attribut pid="att.wvzInhaltReferenzOptional" anzahl="1" anzahlIst="fest" name="AnzeigeInhalt">
+				<info>
+					<kurzinfo>Referenz auf WVZInhalt.</kurzinfo>
+				</info>
+			</attribut>
+		</attributgruppenDefinition>
+		<attributgruppenDefinition pid="atg.wechseltext" name="Wechseltext" parametrierend="nein">
+			<info>
+				<kurzinfo>Konfigurierende Eigenschaften der Objekte des Typs.</kurzinfo>
+			</info>
+			<aspekt pid="asp.eigenschaften" konfigurationsModus="datensatzNotwendig">
+			</aspekt>
+			<attribut pid="att.fontReferenz" anzahl="1" anzahlIst="fest" name="Font">
+				<info>
+					<kurzinfo>Typ des Fonts.</kurzinfo>
+				</info>
+			</attribut>
+			<attribut pid="att.textAusrichtung" anzahl="1" anzahlIst="fest" name="TextAusrichtung">
+				<info>
+					<kurzinfo>Text-Ausrichtung in der Anzeige.</kurzinfo>
+				</info>
+			</attribut>
+			<attribut pid="att.zeichenReferenz" anzahl="0" anzahlIst="variabel" name="Textdefinition">
+				<info>
+					<kurzinfo>Geordnete Liste mit den Referenzen auf die im Wechseltext enthaltenen Zeichen. .</kurzinfo>
+				</info>
+			</attribut>
+		</attributgruppenDefinition>
+		<attributgruppenDefinition pid="atg.wvzInhalt" name="WvzInhalt" parametrierend="nein">
+			<info>
+				<kurzinfo>Konfigurierende Eigenschaften der Objekte des Typs.</kurzinfo>
+			</info>
+			<aspekt pid="asp.eigenschaften" konfigurationsModus="datensatzNotwendig">
+			</aspekt>
+			<attribut pid="att.text" anzahl="1" anzahlIst="fest" name="Bildinhalt">
+				<info>
+					<kurzinfo>BildInhalt des Wvz.</kurzinfo>
+					<beschreibung>
+						<absatz>
+							Der Bildinhalt legt den semantischen Inhalt dieses WVZ-Inhalts durch einen String fest.
+							Da der String immer Eindeutig sein sollte, damit das jeweilge Steuermodell damit umgehen kann
+							sollte er mit dem für die Zeichendefinition Verantwwortlichen (konfigurationsverantwortlicher oder vergleichbar) beginnen,
+							und die jeweilige Einzelbedeutung mit einem "." abgetrennt werden. ,
+						</absatz>
+						<absatz>
+							Sofern ein Zeichen mit gleicher semantischer Bedeutung z.B. in seiner grafischen Darstellung
+							für unterschiedliche Anzeigetypen unterschiedlich modelliert werden muss - z.B. unterschieddliche Grafiken,
+							oder unterschiedliche Wechseltexte für schmale und breite Wechseltextzeichen
+							(nicht aber wegen unterschiedlicher Umsetzung in Steuerprotokole, diese kann immer AQ-spezifisch modelliert werden) -
+							so erhalten zwei Datensätze wvzInhalt die gleiche Bildbeschreibung, und können so von Steueralgorithmus
+							gleichbedeutend verwendet werden.
+						</absatz>
+					</beschreibung>
+				</info>
+			</attribut>
+			<attribut pid="att.wechseltextReferenzOptional" anzahl="1" anzahlIst="fest" name="Wechseltext">
+				<info>
+					<kurzinfo>Benutzter Wechseltext.</kurzinfo>
+				</info>
+			</attribut>
+			<attribut pid="att.jaNein" anzahl="1" anzahlIst="fest" name="IstGrafik">
+			</attribut>
+			<attribut pid="att.wzgInhaltGrafikReferenz" anzahl="0" anzahlIst="variabel" name="GrafikDarstellungen">
+				<info>
+					<kurzinfo>Grafiken für die Darstellung der Grafik.</kurzinfo>
+				</info>
+			</attribut>
+		</attributgruppenDefinition>
+		<attributgruppenDefinition pid="atg.wzgInhaltGrafik" name="WzgInhaltGrafik" parametrierend="nein">
+			<info>
+				<kurzinfo>Konfigurierende Eigenschaften der Objekte des Typs.</kurzinfo>
+			</info>
+			<aspekt pid="asp.eigenschaften" konfigurationsModus="datensatzNotwendig">
+			</aspekt>
+			<attribut pid="att.grafikPixel" anzahl="1" anzahlIst="fest" name="PositionX">
+				<info>
+					<kurzinfo>X-Position der Grafik.</kurzinfo>
+				</info>
+			</attribut>
+			<attribut pid="att.grafikPixel" anzahl="1" anzahlIst="fest" name="PositionY">
+				<info>
+					<kurzinfo>Y-Position der Grafik.</kurzinfo>
+				</info>
+			</attribut>
+			<attribut pid="att.grafikSkalierung" anzahl="1" anzahlIst="fest" name="Skalierung">
+				<info>
+					<kurzinfo>Skalierung der Grafik.</kurzinfo>
+				</info>
+			</attribut>
+			<attribut pid="att.jaNein" anzahl="1" anzahlIst="fest" name="Blinken">
+			</attribut>
+			<attribut pid="att.timeout" anzahl="1" anzahlIst="fest" name="Blinktakt">
+				<info>
+					<kurzinfo>Blinktakt der Grafik.</kurzinfo>
+					<beschreibung>
+						Zeit für einen komletten Zyklus von Beginn der sichtbaren Anzeige der Grafik
+						bis zur erneuten sichtbaren Anzeige der Grafik. Es ist von einem Tastverhältnis
+						von 0,5 auszugehen, dieses kann jedoch bei der tatsächlichen Realisierung vor Ort variieren
+					</beschreibung>
+				</info>
+			</attribut>
+			<attribut pid="att.url" anzahl="1" anzahlIst="fest" name="URL">
+				<info>
+					<kurzinfo>URL der Grafik.</kurzinfo>
+				</info>
+			</attribut>
+		</attributgruppenDefinition>
+		<attributgruppenDefinition pid="atg.zeichen" name="Zeichen" parametrierend="nein">
+			<info>
+				<kurzinfo>Konfigurierende Eigenschaften der Objekte des Typs.</kurzinfo>
+			</info>
+			<aspekt pid="asp.eigenschaften" konfigurationsModus="datensatzNotwendig">
+			</aspekt>
+			<attribut pid="att.text" anzahl="1" anzahlIst="fest" name="Zeichenname">
+				<info>
+					<kurzinfo>Name des Zeichens.</kurzinfo>
+				</info>
+			</attribut>
+			<attribut pid="att.zeichenAbstandBreite" anzahl="1" anzahlIst="fest" name="Zeichenbreite">
+				<info>
+					<kurzinfo>Zeichenbreite des Zeichens in Anteilen der Schrifthöhe. In der Regel eine positive Zahl</kurzinfo>
+				</info>
+			</attribut>
+		</attributgruppenDefinition>
+		<aspektDefinition pid="asp.aqSoll" name="AQSoll">
+			<info>
+				<kurzinfo>Zustand durch Parametrierung.</kurzinfo>
+			</info>
+		</aspektDefinition>
+		<aspektDefinition pid="asp.aqVorgabe" name="AQVorgabe">
+			<info>
+				<kurzinfo>Vorgabe durch Steuerung.</kurzinfo>
+			</info>
+		</aspektDefinition>
+		<aspektDefinition pid="asp.aqZustand" name="AQZustand">
+			<info>
+				<kurzinfo>Zustand durch Rückmeldung von Extern.</kurzinfo>
+			</info>
+		</aspektDefinition>
+		<attributDefinition pid="att.anzeigeFehlerZustand" name="AnzeigeFehlerZustand">
+			<info>
+				<kurzinfo>Attribut für mögliche Fehlerzustände einer einzelnen Anzeigeeinheit.</kurzinfo>
+				<beschreibung>
+					<absatz>Semantisch von Steueralgorithmen und Benutzeroberflächen auswertbarer Fehlerzustand des einzelnen WZG (der einzelnen Anzeige).
+						Weitere Zustände sind im Rahmen der Fortschreibung des Datenmodells zu ergänzen. Für lokal notwendige Erweiterungen sollten abgeleitete Variablen verwendet werden.
+					</absatz>
+					<absatz>Dieser Status beinhaltet nicht die speziell beschriebenen und für die Algorithmik mit besonderen Bedeutungen behafteten Teilstörungen wie nicht darstellbare Zeichen
+						oder nicht darstellbare Textpositionen, diese werden summarisch in "teilstörung" erfasst.
+					</absatz>
+				</beschreibung>
+			</info>
+			<ganzzahl bits="8">
+				<zustand name="Undefiniert" wert="-1">
+				</zustand>
+				<zustand name="OK" wert="0">
+				</zustand>
+				<zustand name="Gestört" wert="1">
+				</zustand>
+				<zustand name="Teilstörung" wert="2">
+				</zustand>
+				<zustand name="Stromausfall" wert="3">
+				</zustand>
+				<zustand name="Kommunikationsausfall" wert="4">
+				</zustand>
+				<zustand name="Türkontakt" wert="5">
+				</zustand>
+			</ganzzahl>
+		</attributDefinition>
+		<attributDefinition pid="att.anzeigeQuerschnittFehlerZustand" name="AnzeigeQuerschnittFehlerZustand">
+			<info>
+				<kurzinfo>Attribut für mögliche Fehlerzustände eines AQ.</kurzinfo>
+				<beschreibung>Semantisch von Steueralgorithmen und Benutzeroberflächen auswertbarer Fehlerzustand des AQ als ganzes. Weitere Zustände sind im Rahmen der Fortschreibung des Datenmodells zu ergänzen. Für lokal notwendige Erweiterungen sollten abgeleitete Variablen verwendet werden.</beschreibung>
+			</info>
+			<ganzzahl bits="8">
+				<zustand name="Undefiniert" wert="-1">
+				</zustand>
+				<zustand name="OK" wert="0">
+				</zustand>
+				<zustand name="Gestört" wert="1">
+				</zustand>
+				<zustand name="Teilstörung" wert="2">
+				</zustand>
+				<zustand name="Stromausfall" wert="3">
+				</zustand>
+				<zustand name="Kommunikationsausfall" wert="4">
+				</zustand>
+				<zustand name="Türkontakt" wert="5">
+				</zustand>
+			</ganzzahl>
+		</attributDefinition>
+		<attributDefinition pid="att.anzeigeQuerschnittReferenz" name="AnzeigeQuerschnittReferenz">
+			<info>
+				<kurzinfo>Attribut zur Referenzierung des Objekttyps: typ.anzeigeQuerschnitt.</kurzinfo>
+			</info>
+			<objektReferenz typ="typ.anzeigeQuerschnitt" undefiniert="verboten" referenzierungsart="assoziation"/>
+		</attributDefinition>
+		<attributDefinition pid="att.anzeigeQuerschnittReferenzOptional" name="AnzeigeQuerschnittReferenzOptional">
+			<info>
+				<kurzinfo>Attribut zur Referenzierung des Objekttyps: typ.anzeigeQuerschnitt (Optionale Referenzierung erlaubt).</kurzinfo>
+			</info>
+			<objektReferenz typ="typ.anzeigeQuerschnitt" undefiniert="erlaubt" referenzierungsart="assoziation"/>
+		</attributDefinition>
+		<attributDefinition pid="att.anzeigeQuerschnittTypReferenz" name="AnzeigeQuerschnittTypReferenz">
+			<info>
+				<kurzinfo>Attribut zur Referenzierung des Objekttyps: typ.anzeigeQuerschnittTyp.</kurzinfo>
+			</info>
+			<objektReferenz typ="typ.anzeigeQuerschnittTyp" undefiniert="verboten" referenzierungsart="assoziation"/>
+		</attributDefinition>
+		<attributDefinition pid="att.anzeigeQuerschnittTypReferenzOptional" name="AnzeigeQuerschnittTypReferenzOptional">
+			<info>
+				<kurzinfo>Attribut zur Referenzierung des Objekttyps: typ.anzeigeQuerschnittTyp (Optionale Referenzierung erlaubt).</kurzinfo>
+			</info>
+			<objektReferenz typ="typ.anzeigeQuerschnittTyp" undefiniert="erlaubt" referenzierungsart="assoziation"/>
+		</attributDefinition>
+		<attributDefinition pid="att.anzeigeReferenz" name="AnzeigeReferenz">
+			<info>
+				<kurzinfo>Attribut zur Referenzierung des Objekttyps: typ.anzeige.</kurzinfo>
+			</info>
+			<objektReferenz typ="typ.anzeige" undefiniert="verboten" referenzierungsart="assoziation"/>
+		</attributDefinition>
+		<attributDefinition pid="att.anzeigeReferenzOptional" name="AnzeigeReferenzOptional">
+			<info>
+				<kurzinfo>Attribut zur Referenzierung des Objekttyps: typ.anzeige (Optionale Referenzierung erlaubt).</kurzinfo>
+			</info>
+			<objektReferenz typ="typ.anzeige" undefiniert="erlaubt" referenzierungsart="assoziation"/>
+		</attributDefinition>
+		<attributDefinition pid="att.anzeigeTypReferenz" name="AnzeigeTypReferenz">
+			<info>
+				<kurzinfo>Attribut zur Referenzierung des Objekttyps: typ.anzeigeTyp.</kurzinfo>
+			</info>
+			<objektReferenz typ="typ.anzeigeTyp" undefiniert="verboten" referenzierungsart="assoziation"/>
+		</attributDefinition>
+		<attributDefinition pid="att.anzeigeTypReferenzOptional" name="AnzeigeTypReferenzOptional">
+			<info>
+				<kurzinfo>Attribut zur Referenzierung des Objekttyps: typ.anzeigeTyp (Optionale Referenzierung erlaubt).</kurzinfo>
+			</info>
+			<objektReferenz typ="typ.anzeigeTyp" undefiniert="erlaubt" referenzierungsart="assoziation"/>
+		</attributDefinition>
+		<attributDefinition pid="att.aqBetriebsZustände" name="AqBetriebsZustände">
+			<info>
+				<kurzinfo>Attribut für mögliche Betriebszustände AQ.</kurzinfo>
+			</info>
+			<ganzzahl bits="8">
+				<zustand name="Undefiniert" wert="-1">
+					<info>
+						<kurzinfo>Betriebsart kann nicht ermittelt werden</kurzinfo>
+					</info>
+				</zustand>
+				<zustand name="AQNormalbetrieb" wert="0">
+					<info>
+						<kurzinfo>Normalbetrieb im Sinne der der Definition der TLS</kurzinfo>
+					</info>
+				</zustand>
+				<zustand name="AQBlindbetrieb" wert="1">
+					<info>
+						<kurzinfo>Blindbetrieb im Sinne der Definition der TLS</kurzinfo>
+					</info>
+				</zustand>
+				<zustand name="AQVorortbetrieb" wert="2">
+					<info>
+						<kurzinfo>Vorortbetrieb im Sinne der Definition der TLS</kurzinfo>
+					</info>
+				</zustand>
+				<zustand name="AQAutarkbetrieb" wert="3">
+					<info>
+						<kurzinfo>Autarkbetrieb im Sinne der Definition der TLS</kurzinfo>
+					</info>
+				</zustand>
+				<zustand name="AQTestbetrieb" wert="4">
+					<info>
+						<kurzinfo>Testbetrieb im Sinne der Definition der TLS</kurzinfo>
+					</info>
+				</zustand>
+				<zustand name="AQNotbetrieb" wert="5">
+					<info>
+						<kurzinfo>Notbetrieb im Sinne der Definition der TLS</kurzinfo>
+					</info>
+				</zustand>
+				<zustand name="AQExterneSteuerung" wert="6">
+					<info>
+						<kurzinfo>Externe Steuerung: Steuerung der Anzeige wurde von einem Dritten System vorgenommen. (Beispiel KRI2c, TunnelEAK)</kurzinfo>
+					</info>
+				</zustand>
+				<zustand name="AQTunnelbetrieb" wert="7">
+					<info>
+						<kurzinfo>Tunnelbetrieb: Steuerung wurde von einem Tunnel vorgenommen, und diesem System mitgeteilt. Beispiel: "read only" Verbindung zu einem Tunnelbetriebsrechner, Anbindung an einen Tunnel, der die Schaltungen dieser Anlage gegenüber seinen eigenen Schaltanforderungen einer Priorisierung unterzieht und die resultierende Schaltung in einer Rückmeldung als Tunnelbetrieb oder Normalbetrieb je nach Schaltungsursache zurückmeldet.</kurzinfo>
+					</info>
+				</zustand>
+			</ganzzahl>
+		</attributDefinition>
+		<attributDefinition pid="att.definitionStellCodeReferenz" name="DefinitionStellCodeReferenz">
+			<info>
+				<kurzinfo>Attribut zur Referenzierung des Objekttyps: typ.definitionStellCode.</kurzinfo>
+			</info>
+			<objektReferenz typ="typ.definitionStellCode" undefiniert="verboten" referenzierungsart="assoziation"/>
+		</attributDefinition>
+		<attributDefinition pid="att.definitionStellCodeReferenzOptional" name="DefinitionStellCodeReferenzOptional">
+			<info>
+				<kurzinfo>Attribut zur Referenzierung des Objekttyps: typ.definitionStellCode (Optionale Referenzierung erlaubt).</kurzinfo>
+			</info>
+			<objektReferenz typ="typ.definitionStellCode" undefiniert="erlaubt" referenzierungsart="assoziation"/>
+		</attributDefinition>
+		<attributDefinition pid="att.dirigentFehlerZustand" name="DirigentFehlerZustand">
+			<info>
+				<kurzinfo>Attribut für mögliche Fehlerzustände eines Dirigenten.</kurzinfo>
+				<beschreibung>Semantisch von Steueralgorithmen und Benutzeroberflächen auswertbarer Fehlerzustand des Dirigenten. Weitere Zustände sind im Rahmen der Fortschreibung des Datenmodells zu ergänzen. Für lokal notwendige Erweiterungen sollten abgeleitete Variablen verwendet werden.</beschreibung>
+			</info>
+			<ganzzahl bits="8">
+				<zustand name="Undefiniert" wert="-1">
+				</zustand>
+				<zustand name="OK" wert="0">
+				</zustand>
+				<zustand name="Gestört" wert="1">
+				</zustand>
+				<zustand name="Teilstörung" wert="2">
+				</zustand>
+				<zustand name="Stromausfall" wert="3">
+				</zustand>
+				<zustand name="Kommunikationsausfall" wert="4">
+				</zustand>
+				<zustand name="Türkontakt" wert="5">
+				</zustand>
+			</ganzzahl>
+		</attributDefinition>
+		<attributDefinition pid="att.dirigentReferenz" name="DirigentReferenz">
+			<info>
+				<kurzinfo>Attribut zur Referenzierung des Objekttyps: typ.dirigent.</kurzinfo>
+			</info>
+			<objektReferenz typ="typ.dirigent" undefiniert="verboten" referenzierungsart="assoziation"/>
+		</attributDefinition>
+		<attributDefinition pid="att.dirigentReferenzOptional" name="DirigentReferenzOptional">
+			<info>
+				<kurzinfo>Attribut zur Referenzierung des Objekttyps: typ.dirigent (Optionale Referenzierung erlaubt).</kurzinfo>
+			</info>
+			<objektReferenz typ="typ.dirigent" undefiniert="erlaubt" referenzierungsart="assoziation"/>
+		</attributDefinition>
+		<attributDefinition pid="att.farbdarstellung" name="Farbdarstellung">
+			<info>
+				<kurzinfo>Attribut für mögliche Darstellungsmodi einer Grafikanzeige.</kurzinfo>
+			</info>
+			<ganzzahl bits="8">
+				<zustand name="Undefiniert" wert="-1">
+				</zustand>
+				<zustand name="SchwarzWeiss" wert="0">
+				</zustand>
+				<zustand name="Grauwert8Bit" wert="1">
+				</zustand>
+				<zustand name="Grauwert16Bit" wert="2">
+				</zustand>
+				<zustand name="Farbe8Bit" wert="3">
+				</zustand>
+				<zustand name="Farbe16Bit" wert="4">
+				</zustand>
+				<zustand name="Farbe24Bit" wert="5">
+				</zustand>
+			</ganzzahl>
+		</attributDefinition>
+		<attributDefinition pid="att.fontReferenz" name="FontReferenz">
+			<info>
+				<kurzinfo>Attribut zur Referenzierung des Objekttyps: typ.font.</kurzinfo>
+			</info>
+			<objektReferenz typ="typ.font" undefiniert="verboten" referenzierungsart="assoziation"/>
+		</attributDefinition>
+		<attributDefinition pid="att.fontReferenzOptional" name="FontReferenzOptional">
+			<info>
+				<kurzinfo>Attribut zur Referenzierung des Objekttyps: typ.font (Optionale Referenzierung erlaubt).</kurzinfo>
+			</info>
+			<objektReferenz typ="typ.font" undefiniert="erlaubt" referenzierungsart="assoziation"/>
+		</attributDefinition>
+		<attributDefinition pid="att.grafikPixel" name="GrafikPixel">
+			<info>
+				<kurzinfo>Attribut für Grafikeinheit (Pixel).</kurzinfo>
+			</info>
+			<ganzzahl bits="32">
+				<bereich skalierung="1" minimum="0" maximum="65535" einheit="Pixel">
+				</bereich>
+			</ganzzahl>
+		</attributDefinition>
+		<attributDefinition pid="att.grafikSkalierung" name="GrafikSkalierung">
+			<info>
+				<kurzinfo>Attribut für Grafikskalierung.</kurzinfo>
+			</info>
+			<ganzzahl bits="32">
+				<bereich skalierung="0,001" minimum="0" maximum="100000" einheit="%">
+				</bereich>
+			</ganzzahl>
+		</attributDefinition>
+		<attributDefinition pid="att.jaNeinNichtErmittelbar" name="JaNeinNichtErmittelbar">
+			<info>
+				<kurzinfo>Beantwortung einer Frage, die sich implizit durch den Namen des Attributs stellt, mit "Ja" (Wert 2), "Nein" (Wert 1) oder "nicht ermittelbar" (Wert 0).</kurzinfo>
+			</info>
+			<ganzzahl bits="8">
+				<zustand name="Ja" wert="2">
+				</zustand>
+				<zustand name="Nein" wert="1">
+				</zustand>
+				<zustand name="nicht ermittelbar" wert="0">
+				</zustand>
+			</ganzzahl>
+		</attributDefinition>
+		<attributDefinition pid="att.ligaturenReferenz" name="LigaturenReferenz">
+			<info>
+				<kurzinfo>Attribut zur Referenzierung des Objekttyps: typ.ligaturen.</kurzinfo>
+			</info>
+			<objektReferenz typ="typ.ligaturen" undefiniert="verboten" referenzierungsart="assoziation"/>
+		</attributDefinition>
+		<attributDefinition pid="att.ligaturenReferenzOptional" name="LigaturenReferenzOptional">
+			<info>
+				<kurzinfo>Attribut zur Referenzierung des Objekttyps: typ.ligaturen (Optionale Referenzierung erlaubt).</kurzinfo>
+			</info>
+			<objektReferenz typ="typ.ligaturen" undefiniert="erlaubt" referenzierungsart="assoziation"/>
+		</attributDefinition>
+		<attributDefinition pid="att.schrifthöheMillimeter" name="Schrifthöhe in Millimeter">
+			<info>
+				<kurzinfo>Attributtyp zur Definition von Schrifthöhen in Millimeter.</kurzinfo>
+			</info>
+			<ganzzahl bits="32">
+				<bereich skalierung="1" minimum="0" maximum="2147483640" einheit="mm">
+				</bereich>
+				<zustand name="Undefiniert" wert="-1">
+				</zustand>
+			</ganzzahl>
+		</attributDefinition>
+		<attributDefinition pid="att.schrifthöhePixel" name="Schrifthöhe in Pixel">
+			<info>
+				<kurzinfo>Attributtyp zur Definition von Schrifthöhen in Pixel.</kurzinfo>
+			</info>
+			<ganzzahl bits="32">
+				<bereich skalierung="1" minimum="0" maximum="2147483640" einheit="Pixel">
+				</bereich>
+				<zustand name="Undefiniert" wert="-1">
+				</zustand>
+			</ganzzahl>
+		</attributDefinition>
+		<attributDefinition pid="att.textAusrichtung" name="TextAusrichtung">
+			<info>
+				<kurzinfo>Attribut für mögliche Text-Ausrichtungen der Wechseltexte.</kurzinfo>
+			</info>
+			<ganzzahl bits="8">
+				<zustand name="Undefiniert" wert="-1">
+				</zustand>
+				<zustand name="Linksbündig" wert="0">
+				</zustand>
+				<zustand name="Zentriert" wert="1">
+				</zustand>
+				<zustand name="Rechtsbündig" wert="2">
+				</zustand>
+				<zustand name="Blocksatz" wert="3">
+				</zustand>
+			</ganzzahl>
+		</attributDefinition>
+		<attributDefinition pid="att.textPosition" name="TextPosition">
+			<info>
+				<kurzinfo>Attribut die Referenzierung von Textpositionen.</kurzinfo>
+			</info>
+			<ganzzahl bits="32">
+				<bereich skalierung="1" minimum="0" maximum="65535">
+				</bereich>
+			</ganzzahl>
+		</attributDefinition>
+		<attributDefinition pid="att.timeout" name="Timeout">
+			<info>
+				<kurzinfo>Attributtyp zur Definition von Timeouts in der Auflösung ms.</kurzinfo>
+			</info>
+			<ganzzahl bits="32">
+				<bereich skalierung="0,001" minimum="0" maximum="2147483640" einheit="s">
+				</bereich>
+				<zustand name="Undefiniert" wert="-1">
+				</zustand>
+			</ganzzahl>
+		</attributDefinition>
+		<attributDefinition pid="att.wechseltextReferenz" name="WechseltextReferenz">
+			<info>
+				<kurzinfo>Attribut zur Referenzierung des Objekttyps: typ.wechseltext.</kurzinfo>
+			</info>
+			<objektReferenz typ="typ.wechseltext" undefiniert="verboten" referenzierungsart="assoziation"/>
+		</attributDefinition>
+		<attributDefinition pid="att.wechseltextReferenzOptional" name="WechseltextReferenzOptional">
+			<info>
+				<kurzinfo>Attribut zur Referenzierung des Objekttyps: typ.wechseltext (Optionale Referenzierung erlaubt).</kurzinfo>
+			</info>
+			<objektReferenz typ="typ.wechseltext" undefiniert="erlaubt" referenzierungsart="assoziation"/>
+		</attributDefinition>
+		<attributDefinition pid="att.wvzInhaltReferenz" name="WvzInhaltReferenz">
+			<info>
+				<kurzinfo>Attribut zur Referenzierung des Objekttyps: typ.wvzInhalt.</kurzinfo>
+			</info>
+			<objektReferenz typ="typ.wvzInhalt" undefiniert="verboten" referenzierungsart="assoziation"/>
+		</attributDefinition>
+		<attributDefinition pid="att.wvzInhaltReferenzOptional" name="WvzInhaltReferenzOptional">
+			<info>
+				<kurzinfo>Attribut zur Referenzierung des Objekttyps: typ.wvzInhalt (Optionale Referenzierung erlaubt).</kurzinfo>
+			</info>
+			<objektReferenz typ="typ.wvzInhalt" undefiniert="erlaubt" referenzierungsart="assoziation"/>
+		</attributDefinition>
+		<attributDefinition pid="att.wzgInhaltGrafikReferenz" name="WzgInhaltGrafikReferenz">
+			<info>
+				<kurzinfo>Attribut zur Referenzierung des Objekttyps: typ.wzgInhaltGrafik.</kurzinfo>
+			</info>
+			<objektReferenz typ="typ.wzgInhaltGrafik" undefiniert="verboten" referenzierungsart="assoziation"/>
+		</attributDefinition>
+		<attributDefinition pid="att.wzgInhaltGrafikReferenzOptional" name="WzgInhaltGrafikReferenzOptional">
+			<info>
+				<kurzinfo>Attribut zur Referenzierung des Objekttyps: typ.wzgInhaltGrafik (Optionale Referenzierung erlaubt).</kurzinfo>
+			</info>
+			<objektReferenz typ="typ.wzgInhaltGrafik" undefiniert="erlaubt" referenzierungsart="assoziation"/>
+		</attributDefinition>
+		<attributDefinition pid="att.zeichenAbstandBreite" name="ZeichenAbstandBreite">
+			<info>
+				<kurzinfo>Attributtyp zur Definition von Zeichenbreiten und Zeichenabständen relativ zur Zeichenhöhe.</kurzinfo>
+				<beschreibung>
+					<absatz>Der Wert "1" bedeutet, dass der Abstand bzw. die Zeichenbreite so groß
+						ist wie die gesamte Höhe des Fonts in seiner aktuellen Darstellung.
+						D.h. vom Anfang der Oberlänge bis zum Ende der Unterlänge (?).
+					</absatz>
+					<absatz>Negative Werte bei Abständen treten insbesondere bei Ligaturen auf.</absatz>
+				</beschreibung>
+			</info>
+			<ganzzahl bits="32">
+				<bereich skalierung="0,00001" minimum="-2147483640" maximum="2147483640">
+				</bereich>
+				<zustand name="Undefiniert" wert="2147483641">
+				</zustand>
+			</ganzzahl>
+		</attributDefinition>
+		<attributDefinition pid="att.zeichenReferenz" name="ZeichenReferenz">
+			<info>
+				<kurzinfo>Attribut zur Referenzierung des Objekttyps: typ.zeichen.</kurzinfo>
+			</info>
+			<objektReferenz typ="typ.zeichen" undefiniert="verboten" referenzierungsart="assoziation"/>
+		</attributDefinition>
+		<attributDefinition pid="att.zeichenReferenzOptional" name="ZeichenReferenzOptional">
+			<info>
+				<kurzinfo>Attribut zur Referenzierung des Objekttyps: typ.zeichen (Optionale Referenzierung erlaubt).</kurzinfo>
+			</info>
+			<objektReferenz typ="typ.zeichen" undefiniert="erlaubt" referenzierungsart="assoziation"/>
+		</attributDefinition>
+		<attributlistenDefinition pid="atl.anzeigeEigenschaft" name="AnzeigeEigenschaft">
+			<info>
+				<kurzinfo>Eigenschaften der Objekte des Typs.</kurzinfo>
+			</info>
+			<attribut pid="att.wvzInhaltReferenzOptional" anzahl="1" anzahlIst="fest" name="AnzeigeInhalt">
+				<info>
+					<kurzinfo>Referenz auf WVZInhalt.</kurzinfo>
+				</info>
+			</attribut>
+			<attribut pid="att.jaNein" anzahl="1" anzahlIst="fest" name="Blinken">
+			</attribut>
+			<attribut pid="att.timeout" anzahl="1" anzahlIst="fest" name="Blinktakt">
+				<info>
+					<kurzinfo>Blinktakt des Inhalts.</kurzinfo>
+					<beschreibung>
+						Zeit für einen kompletten Zyklus von Beginn der sichtbaren Anzeige der Anzeige
+						bis zur erneuten sichtbaren Anzeige der Anzeige. Es ist von einem Tastverhältnis
+						von 0,5 auszugehen, dieses kann jedoch bei der tatsächlichen Realisierung vor Ort variieren
+					</beschreibung>
+				</info>
+			</attribut>
+			<attribut pid="att.jaNein" anzahl="1" anzahlIst="fest" name="Passiviert">
+				<info>
+					<kurzinfo>Die Anzeige soll passiviert werden, d.h. keine Schaltbefehle annehmen.</kurzinfo>
+				</info>
+			</attribut>
+			<attribut pid="att.wzgInhaltGrafikReferenz" anzahl="0" anzahlIst="variabel" name="GrafikDarstellungen">
+				<info>
+					<kurzinfo>Grafiken für die Darstellung der Grafik, wenn verwendet.</kurzinfo>
+				</info>
+			</attribut>
+			<attribut pid="att.wechseltextReferenzOptional" anzahl="1" anzahlIst="fest" name="Wechseltext">
+				<info>
+					<kurzinfo>Benutzter Wechseltext, wenn verwendet.</kurzinfo>
+				</info>
+			</attribut>
+			<attributliste pid="atl.dynWechseltext" anzahl="1" anzahlIst="fest" name="DynamischerWechseltext">
+				<info>
+					<kurzinfo>Wechseltext bestehend aus Font und Referenzen auf die einzelnen Zeichen.</kurzinfo>
+				</info>
+			</attributliste>
+		</attributlistenDefinition>
+		<attributlistenDefinition pid="atl.anzeigeEigenschaftAutark" name="AnzeigeEigenschaftAutark">
+			<info>
+				<kurzinfo>Autarkinformationen für Anzeigen.</kurzinfo>
+			</info>
+			<attribut pid="att.wvzInhaltReferenzOptional" anzahl="1" anzahlIst="fest" name="AnzeigeInhalt">
+				<info>
+					<kurzinfo>Referenz auf WVZInhalt.</kurzinfo>
+				</info>
+			</attribut>
+			<attribut pid="att.jaNein" anzahl="1" anzahlIst="fest" name="Blinken">
+			</attribut>
+			<attribut pid="att.timeout" anzahl="1" anzahlIst="fest" name="Blinktakt">
+				<info>
+					<kurzinfo>Blinktakt des Inhalts.</kurzinfo>
+					<beschreibung>
+						Zeit für einen kompletten Zyklus von Beginn der sichtbaren Anzeige der Anzeige
+						bis zur erneuten sichtbaren Anzeige der Anzeige. Es ist von einem Tastverhältnis
+						von 0,5 auszugehen, dieses kann jedoch bei der tatsächlichen Realisierung vor Ort variieren
+					</beschreibung>
+				</info>
+			</attribut>
+			<attribut pid="att.wzgInhaltGrafikReferenz" anzahl="0" anzahlIst="variabel" name="GrafikDarstellungen">
+				<info>
+					<kurzinfo>Grafiken für die Darstellung der Grafik, wenn verwendet.</kurzinfo>
+				</info>
+			</attribut>
+			<attribut pid="att.wechseltextReferenzOptional" anzahl="1" anzahlIst="fest" name="Wechseltext">
+				<info>
+					<kurzinfo>Benutzter Wechseltext, wenn verwendet.</kurzinfo>
+				</info>
+			</attribut>
+			<attributliste pid="atl.dynWechseltext" anzahl="1" anzahlIst="fest" name="DynamischerWechseltext">
+				<info>
+					<kurzinfo>Wechseltext bestehend aus Font und Referenzen auf die einzelnen Zeichen.</kurzinfo>
+				</info>
+			</attributliste>
+		</attributlistenDefinition>
+		<attributlistenDefinition pid="atl.anzeigeQuerschnittEigenschaft" name="AnzeigeQuerschnittEigenschaft">
+			<info>
+				<kurzinfo>Eigenschaften der Objekte des Typs.</kurzinfo>
+			</info>
+			<attribut pid="att.prozent" anzahl="1" anzahlIst="fest" name="Helligkeit">
+				<info>
+					<kurzinfo>Helligkeit des Anzeigequerschnitts.</kurzinfo>
+					<beschreibung>
+						Bei der befehlsseitigen Verwendung bedeutet 'nicht ermittelbar' - lokale Helligkeitssteuerung mit spontaner Meldung
+            und 'fehlerhaft' bzw. 'nicht ermittelbar/fehlerhaft' - keine Beeinflussung.
+						Ein Prozentwert (0% bis 100%) bedeutet manuelle Helligkeitssteuerung.
+					</beschreibung>
+				</info>
+			</attribut>
+			<attribut pid="att.aqBetriebsZustände" anzahl="1" anzahlIst="fest" name="Betriebszustand">
+				<info>
+					<kurzinfo>Betriebszustand des Anzeigequerschnitts ähnlich TLS.</kurzinfo>
+					<beschreibung>
+						Bei der befehlsseitigen Verwendung wird nur 'AQNormalbetrieb' und 'AQBlindbetrieb' ausgewertet, alle anderen Zustände bedeuten keine Beeinflussung.
+					</beschreibung>
+				</info>
+			</attribut>
+			<attribut pid="att.jaNein" anzahl="1" anzahlIst="fest" name="Passiviert">
+				<info>
+					<kurzinfo>Der Anzeigequerschnitt soll passiviert werden, d.h. keine Schaltbefehle annehmen.</kurzinfo>
+				</info>
+			</attribut>
+			<attribut pid="att.wvzInhaltReferenzOptional" anzahl="1" anzahlIst="fest" name="AnzeigeInhalt">
+				<info>
+					<kurzinfo>Referenz auf WVZInhalt für die Schaltung des Anzeigequerschnitt mit Programm- bzw. Komponentenschaltung.</kurzinfo>
+				</info>
+			</attribut>
+		</attributlistenDefinition>
+		<attributlistenDefinition pid="atl.dirigentEigenschaft" name="DirigentEigenschaft">
+			<info>
+				<kurzinfo>Eigenschaften der Objekte des Typs.</kurzinfo>
+			</info>
+			<attribut pid="att.wvzInhaltReferenzOptional" anzahl="1" anzahlIst="fest" name="AnzeigeInhalt">
+				<info>
+					<kurzinfo>Referenz auf WVZInhalt.</kurzinfo>
+				</info>
+			</attribut>
+			<attribut pid="att.jaNein" anzahl="1" anzahlIst="fest" name="Passiviert">
+				<info>
+					<kurzinfo>Der Dirigent soll passiviert werden, d.h. keine Schaltbefehle annehmen.</kurzinfo>
+				</info>
+			</attribut>
+		</attributlistenDefinition>
+		<attributlistenDefinition pid="atl.dynWechseltext" name="DynamischerWechseltext">
+			<info>
+				<kurzinfo>Wechseltext bestehend aus Font und Referenzen auf die einzelnen Zeichen.</kurzinfo>
+			</info>
+			<attribut pid="att.fontReferenzOptional" anzahl="1" anzahlIst="fest" name="Font">
+				<info>
+					<kurzinfo>Typ des Fonts.</kurzinfo>
+				</info>
+			</attribut>
+			<attribut pid="att.textAusrichtung" anzahl="1" anzahlIst="fest" name="TextAusrichtung">
+				<info>
+					<kurzinfo>Text-Ausrichtung in der Anzeige.</kurzinfo>
+				</info>
+			</attribut>
+			<attribut pid="att.zeichenReferenz" anzahl="0" anzahlIst="variabel" name="Textdefinition">
+				<info>
+					<kurzinfo>Geordnete Liste mit den Referenzen auf die im Wechseltext enthaltenen Zeichen. .</kurzinfo>
+				</info>
+			</attribut>
+		</attributlistenDefinition>
+		<mengenDefinition pid="menge.anzeigen" elemente="typ.anzeige" aenderbar="nein" mindestens="1" hoechstens="0" referenzierungsart="assoziation">
+			<info>
+				<kurzinfo>Menge der Anzeigen, die einen Anzeigequerschnitt bilden.</kurzinfo>
+			</info>
+		</mengenDefinition>
+		<mengenDefinition pid="menge.anzeigeQuerschnitte" elemente="typ.anzeigeQuerschnitt" aenderbar="nein" mindestens="1" hoechstens="0" referenzierungsart="assoziation">
+			<info>
+				<kurzinfo>Menge der AnzeigeQuerschnitte, die einen Dirigenten bilden.</kurzinfo>
+			</info>
+		</mengenDefinition>
+		<mengenDefinition pid="menge.ligaturen" elemente="typ.ligaturen" aenderbar="nein" mindestens="0" hoechstens="0" referenzierungsart="assoziation">
+			<info>
+				<kurzinfo>Menge der Ligaturen, die ein Font enthält.</kurzinfo>
+			</info>
+		</mengenDefinition>
+		<mengenDefinition pid="menge.wvzInhalt" elemente="typ.wvzInhalt" aenderbar="nein" mindestens="0" hoechstens="0" referenzierungsart="assoziation">
+			<info>
+				<kurzinfo>Menge der WvzInhalte, die ein AnzeigeTyp darstellen kann.</kurzinfo>
+			</info>
+		</mengenDefinition>
+		<mengenDefinition pid="menge.zeichen" elemente="typ.zeichen" aenderbar="nein" mindestens="0" hoechstens="0" referenzierungsart="assoziation">
+			<info>
+				<kurzinfo>Menge der Zeichen, die ein Font enthält.</kurzinfo>
+			</info>
+		</mengenDefinition>
+	</modell>
+	<objekte>
+	</objekte>
+</konfigurationsBereich>

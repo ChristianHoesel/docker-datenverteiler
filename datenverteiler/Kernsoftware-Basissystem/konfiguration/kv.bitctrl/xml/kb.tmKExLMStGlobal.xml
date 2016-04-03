@@ -1,0 +1,4013 @@
+<?xml version="1.0" encoding="ISO-8859-1"?>
+<!DOCTYPE konfigurationsBereich PUBLIC "-//K2S//DTD Dokument//DE" "K2S.dtd">
+<konfigurationsBereich pid="kb.tmKExLMStGlobal" name="TeilmodellKExLMStGlobal" verantwortlich="kv.bitctrl">
+	<info>
+		<kurzinfo>Teilmodell mit Datenmodellierung zum Datenaustausch mit der Landesmeldestelle (LMS).</kurzinfo>
+		<beschreibung>
+			<absatz>Weiterhin erhält die VRZ von der LMS alle dort vorliegenden autorisierten Verkehrswarndienstmeldungen, die auch an Management- und Servicepartner zur Verbreitung (an die Verkehrsteilnehmer) weitergeleitet werden. Dazu wickelt diese Funktionseinheit die komplette Kommunikation mit der Landesmeldestelle ab.</absatz>
+			<absatz>Der Austausch erfolgt in Form von XML-Dateien, die mittels FTP über TCP/IP übertragen werden. Es werden in beiden Richtungen Meldungen nach TIC Info Specification ausgetauscht, wobei mehrere Meldungen in einer Datei zusammengefasst werden können. </absatz>
+			<absatz>Die Funktion übernimmt die von der Landesmeldestelle verschickten Dateien und publiziert sie nach Konvertierung in das systeminterne Datenformat. Alle in der Landesmeldestelle auflaufenden Meldungen (auch die von der VRZ verschickten) werden übertragen.</absatz>
+			<absatz>Ein Verbindungsausfall wird von der LMS nicht erkannt. Die Meldungen haben nur eine begrenzte Gültigkeitsdauer und müssen bei Bedarf wiederholt werden. Dazu wird der Versand der noch anstehenden Meldungen an die LMS vor Ablauf der Gültigkeit wiederholt.</absatz>
+			<absatz>Hierbei ist zu beachten, dass die Meldungsnummer von der Erstmeldung einer Störung bis zur Löschung erhalten bleibt, also vom Inhalt mehr einer Vorgangsnummer entspricht.</absatz>
+			<absatz>Steht die Verbindung zur LMS nicht zur Verfügung, werden die zu versendenden Meldungen solange zwischengespeichert, bis die RDS/TMC-Meldung ungültig wird oder die Verbindung zur LMS wieder funktionsfähig ist und die RDS/TMC-Meldung verschickt werden kann.</absatz>
+			<absatz>Die folgende Abbildung skizziert die Zusammenhänge und Attributgruppen der verschiedenen Objekttypen im Teilmodell KExLMStGlobal.</absatz>
+			<abbildung src="abbildungen/TeilmodellKExLMStGlobal.jpg">
+				<titel>Übersicht Teilmodell Landesmeldestelle (global)</titel>
+			</abbildung>
+		</beschreibung>
+	</info>
+	<konfigurationsAenderung stand="14.01.2008" version="1" autor="BitCtrl, Dipl.-Ing. S. Gieseler" grund="Anpassung att.rdsLocationKategorie, neuer Zustand &apos;nicht benutzt&apos; wert=0"></konfigurationsAenderung>
+	<konfigurationsAenderung stand="28.01.2008" version="1" autor="BitCtrl, Dipl.-Ing. S. Gieseler" grund="Anpassung att.rdsNachrichtenSprache, neuer Zustand &apos;undefiniert&apos; wert=0"></konfigurationsAenderung>
+	<konfigurationsAenderung stand="30.05.2008" version="1" autor="Dambach, Stefan Sans" grund="Modellierung der Paramter von atg.rdsModell, und Defaultwerte dieser Parameter für typ.landesMeldeStelle"></konfigurationsAenderung>
+	<konfigurationsAenderung stand="16.06.2008" version="2" autor="Dambach, Stefan Sans, Th. Drapp" grund="Anpassungen durchgeführt"></konfigurationsAenderung>
+	<konfigurationsAenderung stand="17.06.2008" version="3" autor="Dambach, Stefan Sans, Th. Drapp" grund="Anpassungen durchgeführt"></konfigurationsAenderung>
+	<konfigurationsAenderung stand="29.09.2008" version="4" autor="BitCtrl, Dipl.-Ing. S. Gieseler" grund="Anpassungen Dambach übernommen"></konfigurationsAenderung>
+	<konfigurationsAenderung stand="01.10.2008" version="4" autor="Dambach-Werke, Th. Drapp" grund="Anpassungen Ausdehnung LSI"></konfigurationsAenderung>
+	<konfigurationsAenderung stand="02.10.2008" version="5" autor="BitCtrl, Dipl.-Ing. S. Gieseler" grund="Anpassungen Dambach übernommen"></konfigurationsAenderung>
+	<konfigurationsAenderung stand="12.02.2010" version="10" autor="BitCtrl, Dipl.-Ing. S. Gieseler" grund="Ereigniskategorien 32-39 ergaenzt"></konfigurationsAenderung>
+	<konfigurationsAenderung stand="17.02.2010" version="11" autor="BitCtrl, Dipl.-Ing. S. Gieseler" grund="neu importiert mit geändertem kb.tmKExLMStTMCCodes"></konfigurationsAenderung>
+	<konfigurationsAenderung stand="19.02.2010" version="12" autor="BitCtrl, Dipl.-Ing. S. Gieseler" grund="neu importiert mit geändertem kb.tmKExLMStTMCCodes"></konfigurationsAenderung>
+	<konfigurationsAenderung stand="18.05.2010" version="13" autor="BitCtrl, Dipl.-Ing. S. Gieseler" grund="Quantitaeten ueberarbeitet, unzulaessige Zeichen entfernt und deutsche Uebersetzungen, Quantitaet Q00 zur internen Verwendung RDS-Meldungeditor eingebaut"></konfigurationsAenderung>
+	<konfigurationsAenderung stand="02.08.2010" version="14" autor="BitCtrl, Dipl.-Ing. S. Gieseler" grund="Quantitaet QLO eingebaut"></konfigurationsAenderung>
+	<konfigurationsAenderung stand="01.04.2011" version="15" autor="BitCtrl, Dipl.-Ing. S. Gieseler" grund="Standardparameter vervollständigt"></konfigurationsAenderung>
+	<!--
+	Abhängigkeiten des Bereichs kb.tmKExLMStGlobal
+	Abhängig ab Version      Art der Abhängigkeit      Version des benötigten Bereichs      Benötigter Bereich
+	1                        notwendig                 1                                    kb.tmKExLMStTMCCodes               
+	1                        notwendig                 1                                    kb.metaModellGlobal                
+	1                        notwendig                 3                                    kb.tmVewBetriebGlobal              
+	1                        notwendig                 1                                    kb.systemModellGlobal              
+	1                        notwendig                 1                                    kb.kv.bitctrl                      
+	1                        notwendig                 6                                    kb.tmVerkehrGlobal                 
+	1                        notwendig                 7                                    kb.fachModellGlobal                
+	1                        notwendig                 4                                    kb.tmTmcGlobal                     
+	1                        notwendig                 1                                    kb.tmGeoReferenzierungGlobal       
+	-->
+	<modell>
+		<typDefinition pid="typ.landesMeldeStelle" name="LandesMeldeStelle" objektNamenPermanent="nein">
+			<info>
+				<kurzinfo>Kommunikationspartner Landesmeldestelle.</kurzinfo>
+			</info>
+			<erweitert pid="typ.konfigurationsObjekt"/>
+			<attributgruppe pid="atg.landesMeldeStelle"/>
+			<attributgruppe pid="atg.rdsKommunikationsParameter"/>
+			<attributgruppe pid="atg.rdsMeldungsVerwaltung"/>
+			<attributgruppe pid="atg.rdsModell"/>
+			<menge pid="menge.rdsMeldungen" name="RDSMeldungen" erforderlich="ja">
+				<info>
+					<kurzinfo>Aktuelle RDS-Meldungen.</kurzinfo>
+				</info>
+			</menge>
+			<defaultParameter attributgruppe="atg.rdsModell" typ="typ.landesMeldeStelle">
+				<datenfeld name="RDSSIVerfahren">
+					<datum name="0" wert="asp.störfallVerfahrenStandard"/>
+					<datum name="1" wert="asp.störfallVerfahrenRDS"/>
+					<datum name="2" wert="asp.störfallVerfahrenFuzzy"/>
+				</datenfeld>
+				<datum name="RDSBerücksichtigeStauverlaufsanalyse" wert="Nein"/>
+				<datum name="RDSPlausibStauverlaufsanalyse" wert="Nein"/>
+				<datum name="RDSLSIAusdehnung" wert="0"/>
+				<datum name="RDSDMax" wert="1500 m"/>
+				<datum name="RDSDStoerfallAnfang" wert="500 m"/>
+				<datum name="RDSDStoerfallEnde" wert="500 m"/>
+				<datum name="RDSMindestLaenge" wert="1000 m"/>
+				<datum name="RDSDMaxEinzelStoerfall" wert="2000 m"/>
+				<datum name="RDSNichtAddieren" wert="Nein"/>
+				<datum name="RDSBaustelleSuchbereichVor" wert="500 m"/>
+				<datum name="RDSBaustelleSuchbereichNach" wert="500 m"/>
+				<datum name="RDSMaxOhneDaten" wert="0 Minute(n)"/>
+				<datenfeld name="RDSVerzögerungsmatrix">
+					<datenliste name="-">
+						<datum name="SituationVon" wert="Stau"/>
+						<datum name="SituationNach" wert="zähfließender Verkehr"/>
+						<datum name="Verzögerungswert" wert="120 Sekunde(n)"/>
+					</datenliste>
+					<datenliste name="-">
+						<datum name="SituationVon" wert="Stau"/>
+						<datum name="SituationNach" wert="dichter Verkehr"/>
+						<datum name="Verzögerungswert" wert="120 Sekunde(n)"/>
+					</datenliste>
+					<datenliste name="-">
+						<datum name="SituationVon" wert="Stau"/>
+						<datum name="SituationNach" wert="lebhafter Verkehr"/>
+						<datum name="Verzögerungswert" wert="180 Sekunde(n)"/>
+					</datenliste>
+					<datenliste name="-">
+						<datum name="SituationVon" wert="Stau"/>
+						<datum name="SituationNach" wert="freier Verkehr"/>
+						<datum name="Verzögerungswert" wert="180 Sekunde(n)"/>
+					</datenliste>
+					<datenliste name="-">
+						<datum name="SituationVon" wert="Stau"/>
+						<datum name="SituationNach" wert="keine Aussage"/>
+						<datum name="Verzögerungswert" wert="180 Sekunde(n)"/>
+					</datenliste>
+					<datenliste name="-">
+						<datum name="SituationVon" wert="zähfließender Verkehr"/>
+						<datum name="SituationNach" wert="Stau"/>
+						<datum name="Verzögerungswert" wert="60 Sekunde(n)"/>
+					</datenliste>
+					<datenliste name="-">
+						<datum name="SituationVon" wert="zähfließender Verkehr"/>
+						<datum name="SituationNach" wert="dichter Verkehr"/>
+						<datum name="Verzögerungswert" wert="120 Sekunde(n)"/>
+					</datenliste>
+					<datenliste name="-">
+						<datum name="SituationVon" wert="zähfließender Verkehr"/>
+						<datum name="SituationNach" wert="lebhafter Verkehr"/>
+						<datum name="Verzögerungswert" wert="180 Sekunde(n)"/>
+					</datenliste>
+					<datenliste name="-">
+						<datum name="SituationVon" wert="zähfließender Verkehr"/>
+						<datum name="SituationNach" wert="freier Verkehr"/>
+						<datum name="Verzögerungswert" wert="180 Sekunde(n)"/>
+					</datenliste>
+					<datenliste name="-">
+						<datum name="SituationVon" wert="zähfließender Verkehr"/>
+						<datum name="SituationNach" wert="keine Aussage"/>
+						<datum name="Verzögerungswert" wert="180 Sekunde(n)"/>
+					</datenliste>
+					<datenliste name="-">
+						<datum name="SituationVon" wert="dichter Verkehr"/>
+						<datum name="SituationNach" wert="Stau"/>
+						<datum name="Verzögerungswert" wert="60 Sekunde(n)"/>
+					</datenliste>
+					<datenliste name="-">
+						<datum name="SituationVon" wert="dichter Verkehr"/>
+						<datum name="SituationNach" wert="zähfließender Verkehr"/>
+						<datum name="Verzögerungswert" wert="60 Sekunde(n)"/>
+					</datenliste>
+					<datenliste name="-">
+						<datum name="SituationVon" wert="dichter Verkehr"/>
+						<datum name="SituationNach" wert="lebhafter Verkehr"/>
+						<datum name="Verzögerungswert" wert="120 Sekunde(n)"/>
+					</datenliste>
+					<datenliste name="-">
+						<datum name="SituationVon" wert="dichter Verkehr"/>
+						<datum name="SituationNach" wert="freier Verkehr"/>
+						<datum name="Verzögerungswert" wert="180 Sekunde(n)"/>
+					</datenliste>
+					<datenliste name="-">
+						<datum name="SituationVon" wert="dichter Verkehr"/>
+						<datum name="SituationNach" wert="keine Aussage"/>
+						<datum name="Verzögerungswert" wert="180 Sekunde(n)"/>
+					</datenliste>
+					<datenliste name="-">
+						<datum name="SituationVon" wert="lebhafter Verkehr"/>
+						<datum name="SituationNach" wert="Stau"/>
+						<datum name="Verzögerungswert" wert="60 Sekunde(n)"/>
+					</datenliste>
+					<datenliste name="-">
+						<datum name="SituationVon" wert="lebhafter Verkehr"/>
+						<datum name="SituationNach" wert="zähfließender Verkehr"/>
+						<datum name="Verzögerungswert" wert="60 Sekunde(n)"/>
+					</datenliste>
+					<datenliste name="-">
+						<datum name="SituationVon" wert="lebhafter Verkehr"/>
+						<datum name="SituationNach" wert="dichter Verkehr"/>
+						<datum name="Verzögerungswert" wert="60 Sekunde(n)"/>
+					</datenliste>
+					<datenliste name="-">
+						<datum name="SituationVon" wert="lebhafter Verkehr"/>
+						<datum name="SituationNach" wert="freier Verkehr"/>
+						<datum name="Verzögerungswert" wert="120 Sekunde(n)"/>
+					</datenliste>
+					<datenliste name="-">
+						<datum name="SituationVon" wert="lebhafter Verkehr"/>
+						<datum name="SituationNach" wert="keine Aussage"/>
+						<datum name="Verzögerungswert" wert="180 Sekunde(n)"/>
+					</datenliste>
+					<datenliste name="-">
+						<datum name="SituationVon" wert="freier Verkehr"/>
+						<datum name="SituationNach" wert="Stau"/>
+						<datum name="Verzögerungswert" wert="60 Sekunde(n)"/>
+					</datenliste>
+					<datenliste name="-">
+						<datum name="SituationVon" wert="freier Verkehr"/>
+						<datum name="SituationNach" wert="zähfließender Verkehr"/>
+						<datum name="Verzögerungswert" wert="60 Sekunde(n)"/>
+					</datenliste>
+					<datenliste name="-">
+						<datum name="SituationVon" wert="freier Verkehr"/>
+						<datum name="SituationNach" wert="dichter Verkehr"/>
+						<datum name="Verzögerungswert" wert="60 Sekunde(n)"/>
+					</datenliste>
+					<datenliste name="-">
+						<datum name="SituationVon" wert="freier Verkehr"/>
+						<datum name="SituationNach" wert="lebhafter Verkehr"/>
+						<datum name="Verzögerungswert" wert="60 Sekunde(n)"/>
+					</datenliste>
+					<datenliste name="-">
+						<datum name="SituationVon" wert="freier Verkehr"/>
+						<datum name="SituationNach" wert="keine Aussage"/>
+						<datum name="Verzögerungswert" wert="180 Sekunde(n)"/>
+					</datenliste>
+					<datenliste name="-">
+						<datum name="SituationVon" wert="keine Aussage"/>
+						<datum name="SituationNach" wert="Stau"/>
+						<datum name="Verzögerungswert" wert="60 Sekunde(n)"/>
+					</datenliste>
+					<datenliste name="-">
+						<datum name="SituationVon" wert="keine Aussage"/>
+						<datum name="SituationNach" wert="zähfließender Verkehr"/>
+						<datum name="Verzögerungswert" wert="60 Sekunde(n)"/>
+					</datenliste>
+					<datenliste name="-">
+						<datum name="SituationVon" wert="keine Aussage"/>
+						<datum name="SituationNach" wert="dichter Verkehr"/>
+						<datum name="Verzögerungswert" wert="60 Sekunde(n)"/>
+					</datenliste>
+					<datenliste name="-">
+						<datum name="SituationVon" wert="keine Aussage"/>
+						<datum name="SituationNach" wert="lebhafter Verkehr"/>
+						<datum name="Verzögerungswert" wert="60 Sekunde(n)"/>
+					</datenliste>
+					<datenliste name="-">
+						<datum name="SituationVon" wert="keine Aussage"/>
+						<datum name="SituationNach" wert="freier Verkehr"/>
+						<datum name="Verzögerungswert" wert="60 Sekunde(n)"/>
+					</datenliste>
+				</datenfeld>
+				<datenliste name="RDSPrioritätenmatrix">
+					<datenliste name="Stau">
+						<datum name="Güte1bis10" wert="0"/>
+						<datum name="Güte11bis20" wert="0"/>
+						<datum name="Güte21bis30" wert="0"/>
+						<datum name="Güte31bis40" wert="76"/>
+						<datum name="Güte41bis50" wert="81"/>
+						<datum name="Güte51bis60" wert="86"/>
+						<datum name="Güte61bis70" wert="91"/>
+						<datum name="Güte71bis80" wert="98"/>
+						<datum name="Güte81bis90" wert="99"/>
+						<datum name="Güte91bis100" wert="100"/>
+					</datenliste>
+					<datenliste name="stockenderVerkehr">
+						<datum name="Güte1bis10" wert="0"/>
+						<datum name="Güte11bis20" wert="0"/>
+						<datum name="Güte21bis30" wert="0"/>
+						<datum name="Güte31bis40" wert="0"/>
+						<datum name="Güte41bis50" wert="0"/>
+						<datum name="Güte51bis60" wert="0"/>
+						<datum name="Güte61bis70" wert="0"/>
+						<datum name="Güte71bis80" wert="0"/>
+						<datum name="Güte81bis90" wert="0"/>
+						<datum name="Güte91bis100" wert="0"/>
+					</datenliste>
+					<datenliste name="zähfließenderVerkehr">
+						<datum name="Güte1bis10" wert="0"/>
+						<datum name="Güte11bis20" wert="0"/>
+						<datum name="Güte21bis30" wert="0"/>
+						<datum name="Güte31bis40" wert="72"/>
+						<datum name="Güte41bis50" wert="77"/>
+						<datum name="Güte51bis60" wert="82"/>
+						<datum name="Güte61bis70" wert="87"/>
+						<datum name="Güte71bis80" wert="92"/>
+						<datum name="Güte81bis90" wert="96"/>
+						<datum name="Güte91bis100" wert="97"/>
+					</datenliste>
+					<datenliste name="dichterVerkehr">
+						<datum name="Güte1bis10" wert="0"/>
+						<datum name="Güte11bis20" wert="0"/>
+						<datum name="Güte21bis30" wert="0"/>
+						<datum name="Güte31bis40" wert="69"/>
+						<datum name="Güte41bis50" wert="73"/>
+						<datum name="Güte51bis60" wert="78"/>
+						<datum name="Güte61bis70" wert="83"/>
+						<datum name="Güte71bis80" wert="88"/>
+						<datum name="Güte81bis90" wert="93"/>
+						<datum name="Güte91bis100" wert="95"/>
+					</datenliste>
+					<datenliste name="lebhafterVerkehr">
+						<datum name="Güte1bis10" wert="0"/>
+						<datum name="Güte11bis20" wert="0"/>
+						<datum name="Güte21bis30" wert="0"/>
+						<datum name="Güte31bis40" wert="67"/>
+						<datum name="Güte41bis50" wert="70"/>
+						<datum name="Güte51bis60" wert="74"/>
+						<datum name="Güte61bis70" wert="79"/>
+						<datum name="Güte71bis80" wert="84"/>
+						<datum name="Güte81bis90" wert="89"/>
+						<datum name="Güte91bis100" wert="94"/>
+					</datenliste>
+					<datenliste name="freierVerkehr">
+						<datum name="Güte1bis10" wert="0"/>
+						<datum name="Güte11bis20" wert="0"/>
+						<datum name="Güte21bis30" wert="0"/>
+						<datum name="Güte31bis40" wert="66"/>
+						<datum name="Güte41bis50" wert="68"/>
+						<datum name="Güte51bis60" wert="71"/>
+						<datum name="Güte61bis70" wert="75"/>
+						<datum name="Güte71bis80" wert="80"/>
+						<datum name="Güte81bis90" wert="85"/>
+						<datum name="Güte91bis100" wert="90"/>
+					</datenliste>
+					<datenliste name="keineAussage">
+						<datum name="Güte1bis10" wert="0"/>
+						<datum name="Güte11bis20" wert="0"/>
+						<datum name="Güte21bis30" wert="0"/>
+						<datum name="Güte31bis40" wert="0"/>
+						<datum name="Güte41bis50" wert="0"/>
+						<datum name="Güte51bis60" wert="0"/>
+						<datum name="Güte61bis70" wert="0"/>
+						<datum name="Güte71bis80" wert="0"/>
+						<datum name="Güte81bis90" wert="0"/>
+						<datum name="Güte91bis100" wert="0"/>
+					</datenliste>
+				</datenliste>
+				<datenfeld name="RDSAbbildungsmatrix">
+					<datenliste name="-">
+						<datum name="StörfallSituation" wert="Stau"/>
+						<datum name="RDSEreignisBeschreibung" wert="Stau"/>
+						<datenfeld name="RDSEreignisCode">
+							<datum name="0" wert="(L) Stau"/>
+							<datum name="1" wert="1 km Stau"/>
+							<datum name="2" wert="2 km Stau"/>
+							<datum name="3" wert="4 km Stau"/>
+							<datum name="4" wert="6 km Stau"/>
+							<datum name="5" wert="10 km Stau"/>
+							<datum name="6" wert="3 km Stau"/>
+							<datum name="7" wert="Baustelle, (L) Stau"/>
+							<datum name="8" wert="Baustelle, 1 km Stau"/>
+							<datum name="9" wert="Baustelle, 2 km Stau"/>
+							<datum name="10" wert="Baustelle, 4 km Stau"/>
+							<datum name="11" wert="Baustelle, 6 km Stau"/>
+							<datum name="12" wert="Baustelle, 10 km Stau"/>
+							<datum name="13" wert="Baustelle, 3 km Stau"/>
+						</datenfeld>
+					</datenliste>
+					<datenliste name="-">
+						<datum name="StörfallSituation" wert="zähfließender Verkehr"/>
+						<datum name="RDSEreignisBeschreibung" wert="stockender Verkehr"/>
+						<datenfeld name="RDSEreignisCode">
+							<datum name="0" wert="(L) stockender Verkehr"/>
+							<datum name="1" wert="1 km stockender Verkehr"/>
+							<datum name="2" wert="2 km stockender Verkehr"/>
+							<datum name="3" wert="4 km stockender Verkehr"/>
+							<datum name="4" wert="6 km stockender Verkehr"/>
+							<datum name="5" wert="10 km stockender Verkehr"/>
+							<datum name="6" wert="3 km stockender Verkehr"/>
+							<datum name="7" wert="Baustelle, (L) stockender Verkehr"/>
+							<datum name="8" wert="Baustelle, 1 km stockender Verkehr"/>
+							<datum name="9" wert="Baustelle, 2 km stockender Verkehr"/>
+							<datum name="10" wert="Baustelle, 4 km stockender Verkehr"/>
+							<datum name="11" wert="Baustelle, 6 km stockender Verkehr"/>
+							<datum name="12" wert="Baustelle, 10 km stockender Verkehr"/>
+							<datum name="13" wert="Baustelle, 3 km stockender Verkehr"/>
+						</datenfeld>
+					</datenliste>
+				</datenfeld>
+				<datum name="RDSBerücksichtigeBaustellen" wert="Nein"/>
+
+				<!-- Dambach 20081001 Start -->
+				<datenfeld name="RDSAusdehnungProLSI">
+				</datenfeld>
+				<!-- Dambach 20081001 Ende -->
+
+				<datenliste name="Urlasser">
+					<datum name="BenutzerReferenz" wert="undefiniert"/>
+					<datum name="Ursache" wert=""/>
+					<datum name="Veranlasser" wert=""/>
+				</datenliste>
+			</defaultParameter>
+			<defaultParameter attributgruppe="atg.rdsMeldungsVerwaltung" typ="typ.landesMeldeStelle">
+				<datenliste name="Urlasser">
+					<datum name="BenutzerReferenz" wert="undefiniert"/>
+					<datum name="Ursache" wert=""/>
+					<datum name="Veranlasser" wert=""/>
+				</datenliste>
+				<datum name="RDSMeldungsRückhaltung" wert="120 Sekunde(n)"/>
+				<datum name="RDSMeldungsAktion" wert="LMS"/>
+			</defaultParameter>
+			<defaultParameter attributgruppe="atg.rdsKommunikationsParameter">
+				<datenliste name="Urlasser">
+					<datum name="BenutzerReferenz" wert="undefiniert"/>
+					<datum name="Ursache" wert=""/>
+					<datum name="Veranlasser" wert=""/>
+				</datenliste>
+				<datum name="LMSHostRechner" wert=""/>
+				<datum name="LMSHostNutzer" wert=""/>
+				<datum name="LMSHostPasswort" wert=""/>
+				<datum name="EigeneID" wert="VRZ3"/>
+				<datum name="Ausgangsverzeichnis" wert=""/>
+				<datum name="Eingangsverzeichnis" wert=""/>
+				<datum name="SendeWiederholung" wert="20 Minuten"/>
+				<datum name="TestIntervallKommunikation" wert="5 Minuten"/>
+				<datum name="LaufendeNummer" wert="0"/>
+      		</defaultParameter>
+		</typDefinition>
+		<typDefinition pid="typ.rdsLandesKennung" name="rdsLandesKennung" objektNamenPermanent="nein">
+			<info>
+				<kurzinfo>Objekttyp zur Definition von RDS-Landeskennungen nach TIC-Info-Specification, Tabelle 'Country code'</kurzinfo>
+			</info>
+			<erweitert pid="typ.konfigurationsObjekt"/>
+			<attributgruppe pid="atg.rdsLandesKennung"/>
+		</typDefinition>
+		<typDefinition pid="typ.rdsMeldung" name="RdsMeldung" objektNamenPermanent="nein" persistenzModus="persistent">
+			<info>
+				<kurzinfo>Diese dynamischen Objekte werden erzeugt, wenn eine neue RDS-Meldung durch die Landesmeldestelle empfangen, durch einen Benutzer angelegt oder automatisch erzeugt wird.</kurzinfo>
+			</info>
+			<erweitert pid="typ.dynamischesObjekt"/>
+			<attributgruppe pid="atg.rdsMeldung"/>
+			<attributgruppe pid="atg.rdsMeldungBearbeitet"/>
+			<attributgruppe pid="atg.rdsMeldungGeneriert"/>
+			<attributgruppe pid="atg.rdsMeldungSenden"/>
+
+			<defaultParameter attributgruppe="atg.rdsMeldung">
+				<datenliste name="Urlasser">
+					<datum name="BenutzerReferenz" wert="undefiniert"/>
+					<datum name="Ursache" wert=""/>
+					<datum name="Veranlasser" wert=""/>
+				</datenliste>
+			</defaultParameter>
+			<defaultParameter attributgruppe="atg.rdsMeldungBearbeitet">
+				<datenliste name="Urlasser">
+					<datum name="BenutzerReferenz" wert="undefiniert"/>
+					<datum name="Ursache" wert=""/>
+					<datum name="Veranlasser" wert=""/>
+				</datenliste>
+			</defaultParameter>
+			<defaultParameter attributgruppe="atg.rdsMeldungGeneriert">
+				<datenliste name="Urlasser">
+					<datum name="BenutzerReferenz" wert="undefiniert"/>
+					<datum name="Ursache" wert=""/>
+					<datum name="Veranlasser" wert=""/>
+				</datenliste>
+			</defaultParameter>
+			<defaultParameter attributgruppe="atg.rdsMeldungSenden">
+				<datenliste name="Urlasser">
+					<datum name="BenutzerReferenz" wert="undefiniert"/>
+					<datum name="Ursache" wert=""/>
+					<datum name="Veranlasser" wert=""/>
+				</datenliste>
+			</defaultParameter>
+		</typDefinition>
+		<typDefinition pid="typ.rdsQuantität" name="rdsQuantität" objektNamenPermanent="nein">
+			<info>
+				<kurzinfo>Objekttyp zur Definition von RDS-Quantitätsangaben nach TIC-Info-Specification, Tabelle 'Event qualifier'</kurzinfo>
+			</info>
+			<erweitert pid="typ.konfigurationsObjekt"/>
+			<attributgruppe pid="atg.rdsQuantität"/>
+		</typDefinition>
+		<attributgruppenDefinition pid="atg.landesMeldeStelle" name="LandesMeldeStelle" parametrierend="nein">
+			<info>
+				<kurzinfo>Konfigurierende Eigenschaften der Objekte des Typs.</kurzinfo>
+			</info>
+			<aspekt pid="asp.eigenschaften" konfigurationsModus="datensatzOptional">
+			</aspekt>
+			<attribut pid="att.netzReferenz" anzahl="1" anzahlIst="fest" name="RDSNetz">
+				<info>
+					<kurzinfo>Referenz auf das Netz-Objekt, welches die notwendigen Informationen für die RDS-Berechnung enthält.</kurzinfo>
+				</info>
+			</attribut>
+		</attributgruppenDefinition>
+		<attributgruppenDefinition pid="atg.rdsKommunikationsParameter" name="RDSKommunikationsParameter" parametrierend="ja">
+			<info>
+				<kurzinfo>Kommunikationsparameter zur Kommunikation mit der Landesmeldestelle.</kurzinfo>
+			</info>
+			<attributliste pid="atl.urlasser" anzahl="1" anzahlIst="fest" name="Urlasser">
+			</attributliste>
+			<attribut pid="att.text" anzahl="1" anzahlIst="fest" name="LMSHostRechner">
+				<info>
+					<kurzinfo>Hostname oder IP-Adresse des Rechners der LMS.</kurzinfo>
+				</info>
+			</attribut>
+			<attribut pid="att.text" anzahl="1" anzahlIst="fest" name="LMSHostNutzer">
+				<info>
+					<kurzinfo>Benutzername am Rechners der LMS.</kurzinfo>
+				</info>
+			</attribut>
+			<attribut pid="att.text" anzahl="1" anzahlIst="fest" name="LMSHostPasswort">
+				<info>
+					<kurzinfo>Passwort am Rechners der LMS.</kurzinfo>
+				</info>
+			</attribut>
+			<attribut pid="att.text" anzahl="1" anzahlIst="fest" name="EigeneID">
+				<info>
+					<kurzinfo>Eigene ID für die zu versendenden Meldungen.</kurzinfo>
+					<beschreibung>Vorgabe für das Element 'IDOrganisation' in der XML-Datei bei zu versendenden Meldungen.</beschreibung>
+				</info>
+			</attribut>
+			<attribut pid="att.text" anzahl="1" anzahlIst="fest" name="Ausgangsverzeichnis">
+				<info>
+					<kurzinfo>Pfad des Ausgangsverzeichnisses.</kurzinfo>
+					<beschreibung>
+						<absatz>Pfadname auf dem LMS-Rechner, in dem die zu versendenden Meldungen abgelegt werden sollen.</absatz>
+						<absatz> Wenn der Wert nicht gesetzt ist, werden die Dateien ohne Verzeichniswechsel transferiert, d.h. in das Verzeichnis, in dem der FTP-Client nach der Anmeldung steht.</absatz>
+						</beschreibung>
+				</info>
+			</attribut>
+			<attribut pid="att.text" anzahl="1" anzahlIst="fest" name="Eingangsverzeichnis">
+				<info>
+					<kurzinfo>Pfad des Eingangsverzeichnisses.</kurzinfo>
+					<beschreibung>
+						<absatz>Pfadname auf dem lokalen Rechner, in dem die Meldungen der LMS erwartet werden.</absatz>
+						</beschreibung>
+				</info>
+			</attribut>
+			<attribut pid="att.zeitDauer" anzahl="1" anzahlIst="fest" name="SendeWiederholung">
+				<info>
+					<kurzinfo>Intervall Wiederholung der Sendung.</kurzinfo>
+					<beschreibung>Intervall für die automatische Wiederholung der Übertragung gültiger ausgehender Meldungen bis zum Ende der Gültigkeitsdauer.</beschreibung>
+				</info>
+			</attribut>
+			<attribut pid="att.zeitDauer" anzahl="1" anzahlIst="fest" name="TestIntervallKommunikation">
+				<info>
+					<kurzinfo>Zeitintervall zur Überprüfung der Kommunikation.</kurzinfo>
+					<beschreibung>Die Kommunikation zwischen LMS und VRZ wird mit diesem Zyklus überwacht. Der Wert gilt für die Überwachung beider Richtungen.</beschreibung>
+				</info>
+			</attribut>
+			<attribut pid="att.zahlPositiv" anzahl="1" anzahlIst="fest" name="LaufendeNummer">
+				<info>
+					<kurzinfo>Laufende Nummer der Meldung.</kurzinfo>
+					<beschreibung>Laufende Nummer der letzten an die LMS versendeten RDS-Meldung. 
+					Die Nummer wird von der SWE 2.1 LMS unmittelbar vor dem Versand gefüllt.</beschreibung>
+				</info>
+			</attribut>
+			<attribut pid="att.tmcLocationCodeReferenz" anzahl="0" anzahlIst="variabel" name="AkzeptierteLocationCodes">
+				<info>
+					<kurzinfo>Akzeptierte Location Codes</kurzinfo>
+					<beschreibung>
+						<absatz>Liste von Location Codes, für die RDS-Meldungen entgegengenommen werden.</absatz>
+						<absatz>Wenn die Liste leer ist, werden alle Location Codes akzeptiert.</absatz>
+					</beschreibung>
+				</info>
+			</attribut>
+			<attribut pid="att.tmcLocationCodeReferenz" anzahl="0" anzahlIst="variabel" name="IgnorierteLocationCodes">
+				<info>
+					<kurzinfo>Ignorierte Location Codes.</kurzinfo>
+					<beschreibung>
+						<absatz>Liste von Location Codes, für die RDS-Meldungen ignoriert werden.</absatz>
+						<absatz>Wenn die Liste leer ist, werden alle Location Codes akzeptiert.</absatz>
+					</beschreibung>
+				</info>
+			</attribut>
+		</attributgruppenDefinition>
+		<attributgruppenDefinition pid="atg.rdsLandesKennung" parametrierend="nein">
+			<info>
+				<kurzinfo>Zuordnung Landeskennung-Landesname.</kurzinfo>
+			</info>
+			<aspekt pid="asp.eigenschaften" konfigurationsModus="datensatzNotwendig">
+			</aspekt>
+			<attribut pid="att.text" anzahl="1" anzahlIst="fest" name="Landescode">
+			</attribut>
+			<attribut pid="att.text" anzahl="1" anzahlIst="fest" name="Land">
+			</attribut>
+		</attributgruppenDefinition>
+		<attributgruppenDefinition pid="atg.rdsMeldung" name="RDSMeldung" parametrierend="ja">
+			<info>
+				<kurzinfo>RDS-Meldung im systeminternen Format.</kurzinfo>
+			</info>
+			<aspekt pid="asp.rdsBearbeitet" onlineModus="quelleUndSenke">
+				<info>
+					<kurzinfo>Zu bearbeitende Meldung.</kurzinfo>
+				</info>
+			</aspekt>
+			<aspekt pid="asp.rdsEmpfangen" onlineModus="quelleUndSenke">
+				<info>
+					<kurzinfo>Empfangene Meldung.</kurzinfo>
+				</info>
+			</aspekt>
+			<aspekt pid="asp.rdsGeneriert" onlineModus="quelleUndSenke">
+				<info>
+					<kurzinfo>Generierte Meldung.</kurzinfo>
+				</info>
+			</aspekt>
+			<aspekt pid="asp.rdsSenden" onlineModus="quelleUndSenke">
+				<info>
+					<kurzinfo>Zu sendende Meldung.</kurzinfo>
+				</info>
+			</aspekt>
+			<aspekt pid="asp.rdsVersendet" onlineModus="quelleUndSenke">
+				<info>
+					<kurzinfo>Bereits gesendete Meldung.</kurzinfo>
+				</info>
+			</aspekt>
+			<attributliste pid="atl.urlasser" anzahl="1" anzahlIst="fest" name="Urlasser">
+			</attributliste>
+			<attribut pid="att.text" anzahl="1" anzahlIst="fest" name="InfoGUID">
+				<info>
+					<kurzinfo>Identifikator der Information.</kurzinfo>
+					<beschreibung>TIC Info XML Element: InfoGUID, Globaler eindeutiger Identifikator der Information.</beschreibung>
+				</info>
+				<default wert=""/>
+			</attribut>
+			<attributliste pid="atl.rdsId" anzahl="1" anzahlIst="fest" name="ID">
+				<info>
+					<kurzinfo>Identifikation der Information.</kurzinfo>
+					<beschreibung>TIC Info XML Element: ID, eindeutige Identifikation der Information.</beschreibung>
+				</info>
+			</attributliste>
+			<attributliste pid="atl.rdsVersion" anzahl="1" anzahlIst="fest" name="Version">
+				<info>
+					<kurzinfo>Daten einer Version der RDS-Meldung.</kurzinfo>
+					<beschreibung>TIC Info XML Element: Version, Daten einer Version der RDS-Meldung.</beschreibung>
+				</info>
+			</attributliste>
+		</attributgruppenDefinition>
+		<attributgruppenDefinition pid="atg.rdsMeldungBearbeitet" name="RDSMeldungBearbeitet" parametrierend="ja">
+			<info>
+				<kurzinfo>RDS-Meldungs-Daten, die unter dem Aspekt Bearbeitet publiziert wurden, werden hier persistiert.</kurzinfo>
+			</info>
+			<attributliste pid="atl.urlasser" anzahl="1" anzahlIst="fest" name="Urlasser">
+			</attributliste>
+			<attribut pid="att.text" anzahl="1" anzahlIst="fest" name="InfoGUID">
+				<info>
+					<kurzinfo>Identifikator der Information.</kurzinfo>
+					<beschreibung>TIC Info XML Element: InfoGUID, Globaler eindeutiger Identifikator der Information.</beschreibung>
+				</info>
+				<default wert=""/>
+			</attribut>
+			<attributliste pid="atl.rdsId" anzahl="1" anzahlIst="fest" name="ID">
+				<info>
+					<kurzinfo>Identifikation der Information.</kurzinfo>
+					<beschreibung>TIC Info XML Element: ID, eindeutige Identifikation der Information.</beschreibung>
+				</info>
+			</attributliste>
+			<attributliste pid="atl.rdsVersion" anzahl="1" anzahlIst="fest" name="Version">
+				<info>
+					<kurzinfo>Daten einer Version der RDS-Meldung.</kurzinfo>
+					<beschreibung>TIC Info XML Element: Version, Daten einer Version der RDS-Meldung.</beschreibung>
+				</info>
+			</attributliste>
+		</attributgruppenDefinition>
+		<attributgruppenDefinition pid="atg.rdsMeldungGeneriert" name="RDSMeldungGeneriert" parametrierend="ja">
+			<info>
+				<kurzinfo>RDS-Meldungs-Daten, die unter dem Aspekt Generiert publiziert wurden, werden hier persistiert.</kurzinfo>
+			</info>
+			<attributliste pid="atl.urlasser" anzahl="1" anzahlIst="fest" name="Urlasser">
+			</attributliste>
+			<attribut pid="att.text" anzahl="1" anzahlIst="fest" name="InfoGUID">
+				<info>
+					<kurzinfo>Identifikator der Information.</kurzinfo>
+					<beschreibung>TIC Info XML Element: InfoGUID, Globaler eindeutiger Identifikator der Information.</beschreibung>
+				</info>
+				<default wert=""/>
+			</attribut>
+			<attributliste pid="atl.rdsId" anzahl="1" anzahlIst="fest" name="ID">
+				<info>
+					<kurzinfo>Identifikation der Information.</kurzinfo>
+					<beschreibung>TIC Info XML Element: ID, eindeutige Identifikation der Information.</beschreibung>
+				</info>
+			</attributliste>
+			<attributliste pid="atl.rdsVersion" anzahl="1" anzahlIst="fest" name="Version">
+				<info>
+					<kurzinfo>Daten einer Version der RDS-Meldung.</kurzinfo>
+					<beschreibung>TIC Info XML Element: Version, Daten einer Version der RDS-Meldung.</beschreibung>
+				</info>
+			</attributliste>
+		</attributgruppenDefinition>
+		<attributgruppenDefinition pid="atg.rdsMeldungSenden" name="RDSMeldungSenden" parametrierend="ja">
+			<info>
+				<kurzinfo>RDS-Meldungs-Daten, die unter dem Aspekt Senden publiziert wurden, werden hier persistiert.</kurzinfo>
+			</info>
+			<attributliste pid="atl.urlasser" anzahl="1" anzahlIst="fest" name="Urlasser">
+			</attributliste>
+			<attribut pid="att.text" anzahl="1" anzahlIst="fest" name="InfoGUID">
+				<info>
+					<kurzinfo>Identifikator der Information.</kurzinfo>
+					<beschreibung>TIC Info XML Element: InfoGUID, Globaler eindeutiger Identifikator der Information.</beschreibung>
+				</info>
+				<default wert=""/>
+			</attribut>
+			<attributliste pid="atl.rdsId" anzahl="1" anzahlIst="fest" name="ID">
+				<info>
+					<kurzinfo>Identifikation der Information.</kurzinfo>
+					<beschreibung>TIC Info XML Element: ID, eindeutige Identifikation der Information.</beschreibung>
+				</info>
+			</attributliste>
+			<attributliste pid="atl.rdsVersion" anzahl="1" anzahlIst="fest" name="Version">
+				<info>
+					<kurzinfo>Daten einer Version der RDS-Meldung.</kurzinfo>
+					<beschreibung>TIC Info XML Element: Version, Daten einer Version der RDS-Meldung.</beschreibung>
+				</info>
+			</attributliste>
+		</attributgruppenDefinition>
+		<attributgruppenDefinition pid="atg.rdsMeldungsVerwaltung" name="RDSMeldungsVerwaltung" parametrierend="ja">
+			<info>
+				<kurzinfo>Parameter für die RDS-Meldungsverwaltung.</kurzinfo>
+			</info>
+			<attributliste pid="atl.urlasser" anzahl="1" anzahlIst="fest" name="Urlasser">
+			</attributliste>
+			<attribut pid="att.zeitDauerSekunden" anzahl="1" anzahlIst="fest" name="RDSMeldungsRückhaltung">
+				<info>
+					<kurzinfo>Zeitspanne, in der der Benutzer auf eine automatisch erzeugte Meldung reagieren kann, bevor eine parametrierbare Aktion (z. B. Übertragung an die LMS) durchgeführt wird.</kurzinfo>
+				</info>
+			</attribut>
+			<attribut pid="att.rdsMeldungsAktion" anzahl="1" anzahlIst="fest" name="RDSMeldungsAktion">
+				<info>
+					<kurzinfo>Aktion, die nach dem Rückhaltezeitraum durchgeführt werden soll.</kurzinfo>
+				</info>
+			</attribut>
+		</attributgruppenDefinition>
+		<attributgruppenDefinition pid="atg.rdsModell" name="RDSModell" parametrierend="ja">
+			<info>
+				<kurzinfo>Modellparameter für die RDS-Meldungserstellung.</kurzinfo>
+				<beschreibung>
+					<absatz>RDSSIVerfahren = Liste: Liste der Verfahren, deren Störfallindikatoren berücksichtigt werden sollen.</absatz>
+					<absatz>RDSBerücksichtigeStauverlaufsanalyse = Wert: Gibt an, ob die Stauobjekte aus der Stauverlaufsanalyse als Störfallindikatoren mit der Güte Wert interpretiert werden sollen.</absatz>
+					<absatz>RDSPlausibStauverlaufsanalyse: Gibt an, ob eine Plausibilisierung der Störfallindikatoren mit den Ergebnissen der Stauverlaufsanalyse erfolgen soll.</absatz>
+					<absatz>RDSLSIAusdehnung = Wert: Angenommene Ausdehnung einer Störung, die durch einen lokalen Störfallindikator detektiert wurde. Der Parameter wird in Länge pro Minute des Erfassungszyklus angegeben. Beispielsweise führt ein Parameterwert von 60 Meter pro Minute bei einer Zykluszeit der Erfassung von 5 Minuten zu einer angenommenen Ausdehnung von 300 Meter.</absatz>
+					<absatz>RDSVerzögerungsmatrix: Gibt die Mindestzeitspanne für Verkehrssituationsänderungen an.</absatz>
+					<absatz>RDSPrioritätenmatrix: Gibt die Prioritäten der Störfallsituationen in Abhängigkeit der ermittelten Güte an.</absatz>
+					<absatz>RDSAbbildungsmatrix: Gibt die Abbildung der Störfallsituationen auf RDS-Ereignisse an.</absatz>
+					<absatz>RDSDMax = Wert: Maximaler Abstand zwischen zwei Störfallgrenzen in Meter, die zu einer Zusammenfassung als ein Störfall führen kann. Wenn der Wert größer ist, werden die Störfälle als voneinander unabhängig angesehen.</absatz>
+					<absatz>RDSDStoerfallAnfang = Wert: Maximaler Abstand einer Störfallgrenze (z.B. Stauwurzel) in Meter zum nächsten Knoten, der dazu führt, dass der	Störfall bis zum Ende des Straßensegmentes erweitert wird.</absatz>
+					<absatz>RDSDStoerfallEnde = Wert: Maximaler Abstand einer Störfallgrenze (z.B. Stauende) in Meter zum nächsten Knoten, der dazu führt, dass der Störfall bis zum Anfang des Straßensegmentes erweitert wird.</absatz>
+					<absatz>RDSMindestLaenge = Wert: Mindestlänge in Meter eines Ereignisses, die zu einer Meldung führen kann.</absatz>
+					<absatz>RDSDMaxEinzelStoerfall = Wert: Maximale Längenangabe für eine Störfallsituation, die durch einen einzelnen lokalen Störfallindikator ermittelt wurde.</absatz>
+					<absatz>RDSNichtAddieren: Unterbindet die Addition der Längenangaben von zwei oder mehreren Störfallindikatoren innerhalb eines RDS-Abschnitts,	die nicht zu einem Ereignis zusammengefasst werden konnten.</absatz>
+					<absatz>RDSBaustelleSuchbereichVor = Wert: Erweiterung des Suchbereichs für Baustellen als Erklärungskomponente stromaufwärts. Die Erweiterung wird durch Autobahnkreuze oder Dreiecke beschränkt; d.h. eventuelle Baustellen hinter einem Autobahnkreuz oder Dreieck werden nicht als Erklärungskomponente bei der Meldungserstellung berücksichtigt.</absatz>
+					<absatz>RDSBaustelleSuchbereichNach = Wert: Erweiterung des Suchbereichs für Baustellen als Erklärungskomponente stromabwärts. Die Erweiterung wird durch Autobahnkreuze oder Dreiecke beschränkt; d.h. eventuelle Baustellen hinter einem Autobahnkreuz oder Dreieck werden nicht als Erklärungskomponente bei der Meldungserstellung berücksichtigt.</absatz>
+					<absatz>RDSMaxOhneDaten = Wert: Zeitspanne in Minuten, in der neue Daten vorliegen müssen, damit die Meldung aufrecht erhalten bleibt.</absatz>
+					
+					
+					
+					<absatz>RDSBerücksichtigeBaustellen = Wert: Gibt an, ob als Erklärungskomponente bestehende Baustellen berücksichtigt werden sollen.</absatz>
+					
+					<!-- Dambach 20081001 Start -->
+					<absatz>RDSAusdehnungProLSI = Wert: Für (lokale) Störfallindikatoren können hier für ihre angenommenen Ausdehnung individuelle Werte angegeben werden.</absatz>
+					<!-- Dambach 20081001 Ende -->
+					
+				</beschreibung>
+			</info>
+			<attribut pid="att.aspektReferenz" anzahl="0" anzahlIst="variabel" name="RDSSIVerfahren">
+				<info>
+					<kurzinfo>Liste der Verfahren - implementiert als Aspekte -, deren Störfallindikatoren berücksichtigt werden sollen.</kurzinfo>
+				</info>
+			</attribut>
+			<attribut pid="att.jaNein" anzahl="1" anzahlIst="fest" name="RDSBerücksichtigeStauverlaufsanalyse">
+				<info>
+					<kurzinfo>Gibt an, ob die Stauobjekte aus der Stauverlaufsanalyse als Störfallindikatoren mit der Güte Wert interpretiert werden sollen.</kurzinfo>
+				</info>
+				<default wert="Nein"/>
+			</attribut>
+			<attribut pid="att.jaNein" anzahl="1" anzahlIst="fest" name="RDSPlausibStauverlaufsanalyse">
+				<info>
+					<kurzinfo>Gibt an, ob eine Plausibilisierung der Störfallindikatoren mit den Ergebnissen der Stauverlaufsanalyse erfolgen soll.</kurzinfo>
+				</info>
+				<default wert="Nein"/>
+			</attribut>
+			<attribut pid="att.zahl" anzahl="1" anzahlIst="fest" name="RDSLSIAusdehnung">
+				<info>
+					<kurzinfo>Angenommene Ausdehnung einer Störung, die durch einen lokalen Störfallindikator detektiert wurde. Der Parameter wird in Länge pro Minute des Erfassungszyklus angegeben. Beispielsweise führt ein Parameterwert von 60 Meter pro Minute bei einer Zykluszeit der Erfassung von 5 Minuten zu einer angenommenen Ausdehnung von 300 Meter.</kurzinfo>
+				</info>
+			</attribut>
+			<attribut pid="att.längeInMetern" anzahl="1" anzahlIst="fest" name="RDSDMax">
+				<info>
+					<kurzinfo>Maximaler Abstand zwischen zwei Störfallgrenzen in Meter, die zu einer Zusammenfassung als ein Störfall führen kann. Wenn der Wert größer ist, werden die Störfälle als voneinander unabhängig angesehen.</kurzinfo>
+				</info>
+			</attribut>
+			<attribut pid="att.längeInMetern" anzahl="1" anzahlIst="fest" name="RDSDStoerfallAnfang">
+				<info>
+					<kurzinfo>Maximaler Abstand einer Störfallgrenze (z.B. Stauwurzel) in Meter zum nächsten Knoten, der dazu führt, dass der	Störfall bis zum Ende des Straßensegmentes erweitert wird.</kurzinfo>
+				</info>
+			</attribut>
+			<attribut pid="att.längeInMetern" anzahl="1" anzahlIst="fest" name="RDSDStoerfallEnde">
+				<info>
+					<kurzinfo>Maximaler Abstand einer Störfallgrenze (z.B. Stauende) in Meter zum nächsten Knoten, der dazu führt, dass der Störfall bis zum Anfang des Straßensegmentes erweitert wird.</kurzinfo>
+				</info>
+			</attribut>
+			<attribut pid="att.längeInMetern" anzahl="1" anzahlIst="fest" name="RDSMindestLaenge">
+				<info>
+					<kurzinfo>Mindestlänge in Meter eines Ereignisses, die zu einer Meldung führen kann.</kurzinfo>
+				</info>
+			</attribut>
+			<attribut pid="att.längeInMetern" anzahl="1" anzahlIst="fest" name="RDSDMaxEinzelStoerfall">
+				<info>
+					<kurzinfo>Maximale Längenangabe für eine Störfallsituation, die durch einen einzelnen lokalen Störfallindikator ermittelt wurde.</kurzinfo>
+				</info>
+			</attribut>
+			<attribut pid="att.jaNein" anzahl="1" anzahlIst="fest" name="RDSNichtAddieren">
+				<info>
+					<kurzinfo>Unterbindet die Addition der Längenangaben von zwei oder mehreren Störfallindikatoren innerhalb eines RDS-Abschnitts,	die nicht zu einem Ereignis zusammengefasst werden konnten.</kurzinfo>
+				</info>
+				<default wert="Nein"/>
+			</attribut>
+			<attribut pid="att.längeInMetern" anzahl="1" anzahlIst="fest" name="RDSBaustelleSuchbereichVor">
+				<info>
+					<kurzinfo>Erweiterung des Suchbereichs für Baustellen als Erklärungskomponente stromaufwärts. Die Erweiterung wird durch Autobahnkreuze oder Dreiecke beschränkt; d.h. eventuelle Baustellen hinter einem Autobahnkreuz oder Dreieck werden nicht als Erklärungskomponente bei der Meldungserstellung berücksichtigt.</kurzinfo>
+				</info>
+			</attribut>
+			<attribut pid="att.längeInMetern" anzahl="1" anzahlIst="fest" name="RDSBaustelleSuchbereichNach">
+				<info>
+					<kurzinfo>Erweiterung des Suchbereichs für Baustellen als Erklärungskomponente stromabwärts. Die Erweiterung wird durch Autobahnkreuze oder Dreiecke beschränkt; d.h. eventuelle Baustellen hinter einem Autobahnkreuz oder Dreieck werden nicht als Erklärungskomponente bei der Meldungserstellung berücksichtigt.</kurzinfo>
+				</info>
+			</attribut>
+			<attribut pid="att.zeitDauerMinuten" anzahl="1" anzahlIst="fest" name="RDSMaxOhneDaten">
+				<info>
+					<kurzinfo>Zeitspanne in Minuten, in der neue Daten vorliegen müssen, damit die Meldung aufrecht erhalten bleibt.</kurzinfo>
+				</info>
+			</attribut>
+			<attributliste pid="atl.rdsVerzögerungsmatrix" anzahl="0" anzahlIst="variabel" name="RDSVerzögerungsmatrix">
+				<info>
+					<kurzinfo>Gibt die Mindestzeitspanne für Verkehrssituationsänderungen an.</kurzinfo>
+				</info>
+			</attributliste>
+			<attributliste pid="atl.rdsPrioritätenmatrix" anzahl="1" anzahlIst="fest" name="RDSPrioritätenmatrix">
+				<info>
+					<kurzinfo>Gibt die Prioritäten der Störfallsituationen in Abhängigkeit der ermittelten Güte an.</kurzinfo>
+				</info>
+			</attributliste>
+			<attributliste pid="atl.rdsAbbildungsmatrix" anzahl="0" anzahlIst="variabel" name="RDSAbbildungsmatrix">
+				<info>
+					<kurzinfo>Gibt die Abbildung der Störfallsituationen auf RDS-Ereignisse an.</kurzinfo>
+				</info>
+			</attributliste>
+			<attribut pid="att.jaNein" anzahl="1" anzahlIst="fest" name="RDSBerücksichtigeBaustellen">
+				<info>
+					<kurzinfo>Gibt an, ob als Erklärungskomponente bestehende Baustellen berücksichtigt werden sollen.</kurzinfo>
+				</info>
+				<default wert="Nein"/>
+			</attribut>
+			<!-- Dambach 20081001 Start -->
+			<attributliste pid="atl.rdsAusdehnungProLSI" anzahl="0" anzahlIst="variabel" name="RDSAusdehnungProLSI">
+				<info>
+					<kurzinfo>Für (lokale) Störfallindikatoren können hier für ihre angenommenen Ausdehnung individuelle Werte angegeben werden.</kurzinfo>
+				</info>
+			</attributliste>
+			<!-- Dambach 20081001 Ende -->
+			<attributliste pid="atl.urlasser" anzahl="1" anzahlIst="fest" name="Urlasser">
+			</attributliste>
+		</attributgruppenDefinition>
+		<attributgruppenDefinition pid="atg.rdsQuantität" parametrierend="nein">
+			<info>
+				<kurzinfo>RDS-Quantitäts-Element.</kurzinfo>
+			</info>
+			<aspekt pid="asp.eigenschaften" konfigurationsModus="datensatzNotwendig">
+			</aspekt>
+			<attribut pid="att.text" anzahl="1" anzahlIst="fest" name="Kennung">
+			</attribut>
+			<attribut pid="att.text" anzahl="1" anzahlIst="fest" name="Beschreibung">
+			</attribut>
+			<attribut pid="att.text" anzahl="1" anzahlIst="fest" name="Einheit">
+			</attribut>
+		</attributgruppenDefinition>
+		<aspektDefinition pid="asp.rdsBearbeitet" name="RDSBearbeitet">
+			<info>
+				<kurzinfo>Zu bearbeitende Meldung.</kurzinfo>
+			</info>
+		</aspektDefinition>
+		<aspektDefinition pid="asp.rdsEmpfangen" name="RDSEmpfangen">
+			<info>
+				<kurzinfo>Empfangene Meldung.</kurzinfo>
+			</info>
+		</aspektDefinition>
+		<aspektDefinition pid="asp.rdsGeneriert" name="RDSGeneriert">
+			<info>
+				<kurzinfo>Generierte Meldung.</kurzinfo>
+			</info>
+		</aspektDefinition>
+		<aspektDefinition pid="asp.rdsSenden" name="RDSSenden">
+			<info>
+				<kurzinfo>Zu sendende Meldung.</kurzinfo>
+			</info>
+		</aspektDefinition>
+		<aspektDefinition pid="asp.rdsVersendet" name="RDSVersendet">
+			<info>
+				<kurzinfo>Bereits gesendete Meldung.</kurzinfo>
+			</info>
+		</aspektDefinition>
+		<attributDefinition pid="att.rdsAuthorisierungsErgebnis">
+			<info>
+				<kurzinfo>Ergebnis der Authorisierung.</kurzinfo>
+			</info>
+			<ganzzahl bits="8">
+				<zustand name="(Noch) nicht authorisiert" wert="0">
+				</zustand>
+				<zustand name="authorisiert" wert="1">
+				</zustand>
+				<zustand name="zurückgewiesen" wert="2">
+				</zustand>
+				<zustand name="zurückgewiesen und Zurückweisung folgender" wert="3">
+				</zustand>
+			</ganzzahl>
+		</attributDefinition>
+		<attributDefinition pid="att.rdsEntfernungMeter" name="rdsEntfernungMeter">
+			<info>
+				<kurzinfo>Entfernung in m.</kurzinfo>
+			</info>
+			<ganzzahl bits="64">
+				<bereich skalierung="1" minimum="0" maximum="4294967295">
+				</bereich>
+			</ganzzahl>
+		</attributDefinition>
+		<attributDefinition pid="att.rdsEreignisBeschreibung" name="rdsEreignisBeschreibung">
+			<info>
+				<kurzinfo>Zulässige generelle Beschreibungen für RDS-Ereignisse</kurzinfo>
+			</info>
+			<ganzzahl bits="8">
+				<zustand name="keine Aussage" wert="1">
+					<info>
+						<kurzinfo>Beschreibung RDS-Ereignis Keine Aussage.</kurzinfo>
+					</info>
+				</zustand>
+				<zustand name="dichter Verkehr" wert="2">
+					<info>
+						<kurzinfo>Beschreibung RDS-Ereignis Dichter Verkehr.</kurzinfo>
+					</info>
+				</zustand>
+				<zustand name="stockender Verkehr" wert="3">
+					<info>
+						<kurzinfo>Beschreibung RDS-Ereignis Stockender Verkehr.</kurzinfo>
+					</info>
+				</zustand>
+				<zustand name="Stau" wert="4">
+					<info>
+						<kurzinfo>Beschreibung RDS-Ereignis Stau.</kurzinfo>
+					</info>
+				</zustand>
+			</ganzzahl>
+		</attributDefinition>
+		<attributDefinition pid="att.rdsEreignisDauer">
+			<info>
+				<kurzinfo>Typ der Dauer des Ereignises</kurzinfo>
+			</info>
+			<ganzzahl bits="8">
+				<zustand name="Unbekannt" wert="0">
+				</zustand>
+				<zustand name="Dynamisch" wert="1">
+				</zustand>
+				<zustand name="Länger" wert="2">
+				</zustand>
+			</ganzzahl>
+		</attributDefinition>
+		<attributDefinition pid="att.rdsEreignisKategorie">
+			<info>
+				<kurzinfo>Ereignis-Kategorie</kurzinfo>
+				<beschreibung>
+						<absatz>TIC Info XML Element: EventDataCategory, numerischer Wert der Ereignis-Kategorie</absatz>
+					 	<absatz>1 - 31: Ereignis-Kategorie entsprechend DIN EN ISO 14819-2 (Event List Section bzw. Spalte 'C')</absatz>
+						<absatz>32- 39: Vorhersage-Kategorie entsprechend DIN EN ISO 14819-2 (Event List Section bzw. Spalte 'C')</absatz>
+						<absatz>40 - 49: nicht benutzt</absatz>
+						<absatz>50: spezielle Kategorie, kennzeichnet dieses Ereignis als eine Empfehlung (GEWI)</absatz>
+					</beschreibung>
+			</info>
+			<ganzzahl bits="8">
+				<zustand name="Verkehrslage" wert="1">
+				</zustand>
+				<zustand name="erwartete Verkehrslage" wert="2">
+				</zustand>
+				<zustand name="Unfälle" wert="3">
+				</zustand>
+				<zustand name="Vorfälle" wert="4">
+				</zustand>
+				<zustand name="Straßen- und Fahrbahnsperrungen" wert="5">
+				</zustand>
+				<zustand name="Fahrbahnbeschränkungen" wert="6">
+				</zustand>
+				<zustand name="Beschränkungen der Ausfahrt" wert="7">
+				</zustand>
+				<zustand name="Beschränkungen der Einfahrt" wert="8">
+				</zustand>
+				<zustand name="Verkehrsbeschränkungen" wert="9">
+				</zustand>
+				<zustand name="Informationen für Fahrgemeinschaften" wert="10">
+				</zustand>
+				<zustand name="Bauarbeiten" wert="11">
+				</zustand>
+				<zustand name="Behinderungen auf der Fahrbahn" wert="12">
+				</zustand>
+				<zustand name="Gefährliche Situationen" wert="13">
+				</zustand>
+				<zustand name="Straßenzustand" wert="14">
+				</zustand>
+				<zustand name="Temperaturen" wert="15">
+				</zustand>
+				<zustand name="Niederschlag und Sichtbehinderungen" wert="16">
+				</zustand>
+				<zustand name="Wind und Luftqualität" wert="17">
+				</zustand>
+				<zustand name="Veranstaltungen" wert="18">
+				</zustand>
+				<zustand name="Sicherheitsvorfälle" wert="19">
+				</zustand>
+				<zustand name="Zeitverluste" wert="20">
+				</zustand>
+				<zustand name="Ausfälle" wert="21">
+				</zustand>
+				<zustand name="Reiseinformation" wert="22">
+				</zustand>
+				<zustand name="Gefährliche Fahrzeuge" wert="23">
+				</zustand>
+				<zustand name="Außergewöhnliche Ladungen und Fahrzeuge" wert="24">
+				</zustand>
+				<zustand name="Störungen an Lichtsignalanlagen und sonstigen Straßenausrüstungen" wert="25">
+				</zustand>
+				<zustand name="Beschränkungen der Fahrzeugmaße und -gewichte" wert="26">
+				</zustand>
+				<zustand name="Parkregelungen" wert="27">
+				</zustand>
+				<zustand name="Parken" wert="28">
+				</zustand>
+				<zustand name="Information" wert="29">
+				</zustand>
+				<zustand name="Service-Meldung" wert="30">
+				</zustand>
+				<zustand name="spezielle Meldung" wert="31">
+				</zustand>
+				<zustand name="Vorhersage Verkehrslage" wert="32">
+				</zustand>
+				<zustand name="Vorhersage Wetter" wert="33">
+				</zustand>
+				<zustand name="Vorhersage Straßenzustand" wert="34">
+				</zustand>
+				<zustand name="Vorhersage Luftqualität" wert="35">
+				</zustand>
+				<zustand name="Vorhersage Wind" wert="36">
+				</zustand>
+				<zustand name="Vorhersage Temperaturen" wert="37">
+				</zustand>
+				<zustand name="Vorhersage Zeitverluste" wert="38">
+				</zustand>
+				<zustand name="Vorhersage Ausfälle" wert="39">
+				</zustand>
+				<zustand name="Empfehlung" wert="50">
+				</zustand>
+			</ganzzahl>
+		</attributDefinition>
+		<attributDefinition pid="att.rdsEreignisKodierung">
+			<info>
+				<kurzinfo>Tabelle, nach der das Ereignis zu interpretieren ist.</kurzinfo>
+			</info>
+			<ganzzahl bits="8">
+				<zustand name="prEN ISO 14819-2 (Alert-C)" wert="0">
+				</zustand>
+				<zustand name="Data Dictionary 3.1A (Datex)" wert="1">
+				</zustand>
+			</ganzzahl>
+		</attributDefinition>
+		<attributDefinition pid="att.rdsEreignisTyp">
+			<info>
+				<kurzinfo>Art des Verkehrsereignisses.</kurzinfo>
+			</info>
+			<ganzzahl bits="8">
+				<zustand name="Störung" wert="0">
+				</zustand>
+				<zustand name="Bauarbeiten" wert="1">
+				</zustand>
+				<zustand name="Strassenzustand" wert="8">
+				</zustand>
+				<zustand name="Wetter" wert="9">
+				</zustand>
+			</ganzzahl>
+		</attributDefinition>
+		<attributDefinition pid="att.rdsErinnerungsTyp">
+			<info>
+				<kurzinfo>Definition der Benutzung von 'ErinnerungsZeit' und 'ErinnerungsZeitOffset'.</kurzinfo>
+			</info>
+			<ganzzahl bits="8">
+				<zustand name="Keine Erinnerung. ErinnerungsZeit wird ignoriert." wert="0">
+				</zustand>
+				<zustand name="ErinnerungsZeitOffset enthält den Offset seit AktivierungsZeit. ErinnerungsZeit = AktivierungsZeit + ErinnerungsZeitOffset." wert="1">
+				</zustand>
+				<zustand name="ErinnerungsZeitOffset enthält den Offset bis AblaufZeit. ErinnerungsZeit = AblaufZeit - ErinnerungsZeitOffset." wert="2">
+				</zustand>
+				<zustand name="ErinnerungsZeit enthält den absoluten Zeitpunkt. ErinnerungsZeitOffset wird ignoriert." wert="3">
+				</zustand>
+			</ganzzahl>
+		</attributDefinition>
+		<attributDefinition pid="att.rdsGeographischeRelevanz">
+			<info>
+				<kurzinfo>Geografische GeographischeRelevanz der Meldung</kurzinfo>
+			</info>
+			<ganzzahl bits="8">
+				<zustand name="Lokal" wert="0">
+				</zustand>
+				<zustand name="Regional" wert="1">
+				</zustand>
+				<zustand name="Überregional" wert="2">
+				</zustand>
+				<zustand name="National" wert="3">
+				</zustand>
+				<zustand name="Ausland" wert="4">
+				</zustand>
+				<zustand name="Lokal und angrenzendes Ausland" wert="5">
+				</zustand>
+				<zustand name="Regional und angrenzendes Ausland" wert="6">
+				</zustand>
+				<zustand name="Überregional und angrenzendes Ausland" wert="7">
+				</zustand>
+				<zustand name="Land und angrenzendes Ausland" wert="8">
+				</zustand>
+			</ganzzahl>
+		</attributDefinition>
+		<attributDefinition pid="att.rdsLandesKennung">
+			<info>
+				<kurzinfo>Landes-Kennung der Meldung als Referenz auf ein Objekt vom Typ: <verweis pid="typ.rdsLandesKennung"></verweis>.</kurzinfo>
+			</info>
+			<objektReferenz typ="typ.rdsLandesKennung" undefiniert="verboten" referenzierungsart="assoziation"/>
+		</attributDefinition>
+		<attributDefinition pid="att.rdsLocationFormat">
+			<info>
+				<kurzinfo> Format des referenzierten Location-Systems. Wert "Unformatiert" bezeichnet freie Textnachricht, die Koordinaten als Attribute besitzen kann.</kurzinfo>
+			</info>
+			<ganzzahl bits="8">
+				<zustand name="TMC Location" wert="0">
+				</zustand>
+				<zustand name="TIC Location" wert="1">
+				</zustand>
+				<zustand name="Unformatiert" wert="2">
+				</zustand>
+			</ganzzahl>
+			<default wert="TMC Location"/>
+		</attributDefinition>
+		<attributDefinition pid="att.rdsLocationKategorie">
+			<info>
+				<kurzinfo>Kategorie der Location</kurzinfo>
+			</info>
+			<ganzzahl bits="8">
+				<zustand name="nicht benutzt" wert="0">
+				</zustand>
+				<zustand name="Gebiet" wert="1">
+				</zustand>
+				<zustand name="bedeutender Punkt" wert="2">
+				</zustand>
+				<zustand name="Linie" wert="3">
+				</zustand>
+				<zustand name="Segment" wert="4">
+				</zustand>
+			</ganzzahl>
+		</attributDefinition>
+		<attributDefinition pid="att.rdsLocationMethode">
+			<info>
+				<kurzinfo>bezeichnet die Kodierungsmethode der Location</kurzinfo>
+			</info>
+			<ganzzahl bits="8">
+				<zustand name="erste Feldposition ist primäre Location und letzte Feldposition ist sekundäre Location" wert="0">
+				</zustand>
+				<zustand name="Primäre Location und Extent sind gültig" wert="1">
+				</zustand>
+				<zustand name="Primäre Location und Sekundäre Location sind gültig" wert="2">
+				</zustand>
+				<zustand name="Primäre Location, Extent und primäre Entfernung sind gültig" wert="3">
+				</zustand>
+				<zustand name="Primäre Location, sekundäre Location, primäre Entfernung und sekundäre Entfernung sind gültig." wert="4">
+				</zustand>
+				<zustand name="Strassennummer, Ausfahrtnummer und Nachrichtentext für Nachrichtenklasse = 40 der primären und sekundären Location sind gültig." wert="5">
+				</zustand>
+				<zustand name="Strassennummer, LocationKilometrierung der primären und sekundären Location sind gültig." wert="6">
+				</zustand>
+			</ganzzahl>
+		</attributDefinition>
+		<attributDefinition pid="att.rdsLocationRichtungTextID">
+			<info>
+				<kurzinfo>Text zur Beschreibung der Richtung einer Strasse oder eines Segmentes.</kurzinfo>
+			</info>
+			<ganzzahl bits="8">
+				<zustand name="unbekannt" wert="0">
+				</zustand>
+				<zustand name="stadteinwärts" wert="1">
+				</zustand>
+				<zustand name="stadtauswärts" wert="2">
+				</zustand>
+				<zustand name="Nord" wert="3">
+				</zustand>
+				<zustand name="Süd" wert="4">
+				</zustand>
+				<zustand name="Ost" wert="5">
+				</zustand>
+				<zustand name="West" wert="6">
+				</zustand>
+				<zustand name="Nordost" wert="7">
+				</zustand>
+				<zustand name="Nordwest" wert="8">
+				</zustand>
+				<zustand name="Südost" wert="9">
+				</zustand>
+				<zustand name="Südwest" wert="10">
+				</zustand>
+			</ganzzahl>
+		</attributDefinition>
+		<attributDefinition pid="att.rdsLocationTabelle" name="LocationTabelle">
+			<info>
+				<kurzinfo>Location Tabelle.</kurzinfo>
+				<beschreibung>
+					<absatz>Die Elemente 'LocationTableCountryCode' und  'LocationTableNumber' der TIC-Spezifikation werden wie folgt  auf die Tabelle nach prEN ISO 14819-3 Annex B abgebildet:</absatz>
+						<absatz>Der Wert dieses Aufzählungstyps ist eine sechsstellige Zahl der Form CCCTTT mit CCC gleich Landeskennung (Country) aus  TIC-Info-Element 'LocationTableCountryCode', und TTT gleich Tabelle (Table) aus TIC-Info-Element 'LocationTableNumber  jeweils mit führenden Nullen.</absatz>
+						<absatz>Entsprechend prEN ISO 14819-3 Annex B sind mehrere Tabellen pro Landeskennung möglich.</absatz>
+						<absatz>Beispiel für die LCL der BASt:</absatz>
+						<absatz>LocationTableCountryCode = 13  -&gt; CCC=013</absatz>
+						<absatz>LocationTableNumber = 01 -&gt; TTT = 001</absatz>
+						<absatz>Wert: 013001</absatz>
+					</beschreibung>
+			</info>
+			<ganzzahl bits="16">
+				<zustand name="undefiniert" wert="0">
+				</zustand>
+				<zustand name="Deutschland(1), Tabelle 01" wert="1001">
+				</zustand>
+				<zustand name="Deutschland(1), Tabelle 02" wert="1002">
+				</zustand>
+				<zustand name="Deutschland(1), Tabelle 03" wert="1003">
+				</zustand>
+				<zustand name="Deutschland(1), Tabelle 04" wert="1004">
+				</zustand>
+				<zustand name="Deutschland(1), Tabelle 05" wert="1005">
+				</zustand>
+				<zustand name="Deutschland(1), Tabelle 06" wert="1006">
+				</zustand>
+				<zustand name="Deutschland(1), Tabelle 07" wert="1007">
+				</zustand>
+				<zustand name="Deutschland(1), Tabelle 08" wert="1008">
+				</zustand>
+				<zustand name="Griechenland, Tabelle 17" wert="1017">
+				</zustand>
+				<zustand name="Griechenland, Tabelle 18" wert="1018">
+				</zustand>
+				<zustand name="Griechenland, Tabelle 19" wert="1019">
+				</zustand>
+				<zustand name="Griechenland, Tabelle 20" wert="1020">
+				</zustand>
+				<zustand name="Griechenland, Tabelle 21" wert="1021">
+				</zustand>
+				<zustand name="Griechenland, Tabelle 22" wert="1022">
+				</zustand>
+				<zustand name="Griechenland, Tabelle 23" wert="1023">
+				</zustand>
+				<zustand name="Griechenland, Tabelle 24" wert="1024">
+				</zustand>
+				<zustand name="Marokko, Tabelle 33" wert="1033">
+				</zustand>
+				<zustand name="Marokko, Tabelle 34" wert="1034">
+				</zustand>
+				<zustand name="Marokko, Tabelle 35" wert="1035">
+				</zustand>
+				<zustand name="Marokko, Tabelle 36" wert="1036">
+				</zustand>
+				<zustand name="Moldavien, Tabelle 51" wert="1051">
+				</zustand>
+				<zustand name="Moldavien, Tabelle 52" wert="1052">
+				</zustand>
+				<zustand name="Montenegro, Tabelle 59" wert="1059">
+				</zustand>
+				<zustand name="Montenegro, Tabelle 60" wert="1060">
+				</zustand>
+				<zustand name="Algerien, Tabelle 01" wert="2001">
+				</zustand>
+				<zustand name="Algerien, Tabelle 02" wert="2002">
+				</zustand>
+				<zustand name="Algerien, Tabelle 03" wert="2003">
+				</zustand>
+				<zustand name="Algerien, Tabelle 04" wert="2004">
+				</zustand>
+				<zustand name="Zypern, Tabelle 17" wert="2017">
+				</zustand>
+				<zustand name="Zypern, Tabelle 18" wert="2018">
+				</zustand>
+				<zustand name="Tschechische Republik, Tabelle 25" wert="2025">
+				</zustand>
+				<zustand name="Tschechische Republik, Tabelle 26" wert="2026">
+				</zustand>
+				<zustand name="Tschechische Republik, Tabelle 27" wert="2027">
+				</zustand>
+				<zustand name="Tschechische Republik, Tabelle 28" wert="2028">
+				</zustand>
+				<zustand name="Irland, Tabelle 41" wert="2041">
+				</zustand>
+				<zustand name="Irland, Tabelle 42" wert="2042">
+				</zustand>
+				<zustand name="Irland, Tabelle 43" wert="2043">
+				</zustand>
+				<zustand name="Irland, Tabelle 44" wert="2044">
+				</zustand>
+				<zustand name="Irland, Tabelle 45" wert="2045">
+				</zustand>
+				<zustand name="Irland, Tabelle 46" wert="2046">
+				</zustand>
+				<zustand name="Irland, Tabelle 47" wert="2047">
+				</zustand>
+				<zustand name="Irland, Tabelle 48" wert="2048">
+				</zustand>
+				<zustand name="Estland, Tabelle 59" wert="2059">
+				</zustand>
+				<zustand name="Estland, Tabelle 60" wert="2060">
+				</zustand>
+				<zustand name="Andorra, Tabelle 01" wert="3001">
+				</zustand>
+				<zustand name="Andorra, Tabelle 02" wert="3002">
+				</zustand>
+				<zustand name="Polen, Tabelle 05" wert="3005">
+				</zustand>
+				<zustand name="Polen, Tabelle 06" wert="3006">
+				</zustand>
+				<zustand name="Polen, Tabelle 07" wert="3007">
+				</zustand>
+				<zustand name="Polen, Tabelle 08" wert="3008">
+				</zustand>
+				<zustand name="San Marino, Tabelle 21" wert="3021">
+				</zustand>
+				<zustand name="San Marino, Tabelle 22" wert="3022">
+				</zustand>
+				<zustand name="Türkei, Tabelle 33" wert="3033">
+				</zustand>
+				<zustand name="Türkei, Tabelle 34" wert="3034">
+				</zustand>
+				<zustand name="Türkei, Tabelle 35" wert="3035">
+				</zustand>
+				<zustand name="Türkei, Tabelle 36" wert="3036">
+				</zustand>
+				<zustand name="Türkei, Tabelle 37" wert="3037">
+				</zustand>
+				<zustand name="Türkei, Tabelle 38" wert="3038">
+				</zustand>
+				<zustand name="Türkei, Tabelle 39" wert="3039">
+				</zustand>
+				<zustand name="Türkei, Tabelle 40" wert="3040">
+				</zustand>
+				<zustand name="Mazedonien, Tabelle 01" wert="4001">
+				</zustand>
+				<zustand name="Mazedonien, Tabelle 02" wert="4002">
+				</zustand>
+				<zustand name="Schweiz, Tabelle 09" wert="4009">
+				</zustand>
+				<zustand name="Schweiz, Tabelle 10" wert="4010">
+				</zustand>
+				<zustand name="Schweiz, Tabelle 11" wert="4011">
+				</zustand>
+				<zustand name="Schweiz, Tabelle 12" wert="4012">
+				</zustand>
+				<zustand name="Schweiz, Tabelle 13" wert="4013">
+				</zustand>
+				<zustand name="Schweiz, Tabelle 14" wert="4014">
+				</zustand>
+				<zustand name="Schweiz, Tabelle 15" wert="4015">
+				</zustand>
+				<zustand name="Schweiz, Tabelle 16" wert="4016">
+				</zustand>
+				<zustand name="Vatikan, Tabelle 25" wert="4025">
+				</zustand>
+				<zustand name="Vatikan, Tabelle 26" wert="4026">
+				</zustand>
+				<zustand name="Israel, Tabelle 33" wert="4033">
+				</zustand>
+				<zustand name="Israel, Tabelle 34" wert="4034">
+				</zustand>
+				<zustand name="Israel, Tabelle 35" wert="4035">
+				</zustand>
+				<zustand name="Israel, Tabelle 36" wert="4036">
+				</zustand>
+				<zustand name="Italien, Tabelle 01" wert="5001">
+				</zustand>
+				<zustand name="Italien, Tabelle 02" wert="5002">
+				</zustand>
+				<zustand name="Italien, Tabelle 03" wert="5003">
+				</zustand>
+				<zustand name="Italien, Tabelle 04" wert="5004">
+				</zustand>
+				<zustand name="Italien, Tabelle 05" wert="5005">
+				</zustand>
+				<zustand name="Italien, Tabelle 06" wert="5006">
+				</zustand>
+				<zustand name="Italien, Tabelle 07" wert="5007">
+				</zustand>
+				<zustand name="Italien, Tabelle 08" wert="5008">
+				</zustand>
+				<zustand name="Italien, Tabelle 09" wert="5009">
+				</zustand>
+				<zustand name="Italien, Tabelle 10" wert="5010">
+				</zustand>
+				<zustand name="Italien, Tabelle 11" wert="5011">
+				</zustand>
+				<zustand name="Italien, Tabelle 12" wert="5012">
+				</zustand>
+				<zustand name="Italien, Tabelle 13" wert="5013">
+				</zustand>
+				<zustand name="Italien, Tabelle 14" wert="5014">
+				</zustand>
+				<zustand name="Italien, Tabelle 15" wert="5015">
+				</zustand>
+				<zustand name="Italien, Tabelle 16" wert="5016">
+				</zustand>
+				<zustand name="Jordanien, Tabelle 33" wert="5033">
+				</zustand>
+				<zustand name="Jordanien, Tabelle 34" wert="5034">
+				</zustand>
+				<zustand name="Jordanien, Tabelle 35" wert="5035">
+				</zustand>
+				<zustand name="Jordanien, Tabelle 36" wert="5036">
+				</zustand>
+				<zustand name="Slowakei, Tabelle 51" wert="5051">
+				</zustand>
+				<zustand name="Slowakei, Tabelle 52" wert="5052">
+				</zustand>
+				<zustand name="Slowakei, Tabelle 53" wert="5053">
+				</zustand>
+				<zustand name="Slowakei, Tabelle 54" wert="5054">
+				</zustand>
+				<zustand name="Belgien, Tabelle 01" wert="6001">
+				</zustand>
+				<zustand name="Belgien, Tabelle 02" wert="6002">
+				</zustand>
+				<zustand name="Belgien, Tabelle 03" wert="6003">
+				</zustand>
+				<zustand name="Belgien, Tabelle 04" wert="6004">
+				</zustand>
+				<zustand name="Belgien, Tabelle 05" wert="6005">
+				</zustand>
+				<zustand name="Belgien, Tabelle 06" wert="6006">
+				</zustand>
+				<zustand name="Belgien, Tabelle 07" wert="6007">
+				</zustand>
+				<zustand name="Belgien, Tabelle 08" wert="6008">
+				</zustand>
+				<zustand name="Finnland, Tabelle 17" wert="6017">
+				</zustand>
+				<zustand name="Finnland, Tabelle 18" wert="6018">
+				</zustand>
+				<zustand name="Finnland, Tabelle 19" wert="6019">
+				</zustand>
+				<zustand name="Finnland, Tabelle 20" wert="6020">
+				</zustand>
+				<zustand name="Finnland, Tabelle 21" wert="6021">
+				</zustand>
+				<zustand name="Finnland, Tabelle 22" wert="6022">
+				</zustand>
+				<zustand name="Finnland, Tabelle 23" wert="6023">
+				</zustand>
+				<zustand name="Finnland, Tabelle 24" wert="6024">
+				</zustand>
+				<zustand name="Ukraine, Tabelle 33" wert="6033">
+				</zustand>
+				<zustand name="Ukraine, Tabelle 34" wert="6034">
+				</zustand>
+				<zustand name="Ukraine, Tabelle 35" wert="6035">
+				</zustand>
+				<zustand name="Ukraine, Tabelle 36" wert="6036">
+				</zustand>
+				<zustand name="Ukraine, Tabelle 37" wert="6037">
+				</zustand>
+				<zustand name="Ukraine, Tabelle 38" wert="6038">
+				</zustand>
+				<zustand name="Ukraine, Tabelle 39" wert="6039">
+				</zustand>
+				<zustand name="Ukraine, Tabelle 40" wert="6040">
+				</zustand>
+				<zustand name="Syrien, Tabelle 53" wert="6053">
+				</zustand>
+				<zustand name="Syrien, Tabelle 54" wert="6054">
+				</zustand>
+				<zustand name="Syrien, Tabelle 55" wert="6055">
+				</zustand>
+				<zustand name="Syrien, Tabelle 56" wert="6056">
+				</zustand>
+				<zustand name="Luxemburg, Tabelle 01" wert="7001">
+				</zustand>
+				<zustand name="Luxemburg, Tabelle 02" wert="7002">
+				</zustand>
+				<zustand name="Luxemburg, Tabelle 03" wert="7003">
+				</zustand>
+				<zustand name="Luxemburg, Tabelle 04" wert="7004">
+				</zustand>
+				<zustand name="Russland, Tabelle 21" wert="7021">
+				</zustand>
+				<zustand name="Russland, Tabelle 22" wert="7022">
+				</zustand>
+				<zustand name="Russland, Tabelle 23" wert="7023">
+				</zustand>
+				<zustand name="Russland, Tabelle 24" wert="7024">
+				</zustand>
+				<zustand name="Russland, Tabelle 25" wert="7025">
+				</zustand>
+				<zustand name="Russland, Tabelle 26" wert="7026">
+				</zustand>
+				<zustand name="Russland, Tabelle 27" wert="7027">
+				</zustand>
+				<zustand name="Russland, Tabelle 28" wert="7028">
+				</zustand>
+				<zustand name="Tunesien, Tabelle 53" wert="7053">
+				</zustand>
+				<zustand name="Tunesien, Tabelle 54" wert="7054">
+				</zustand>
+				<zustand name="Tunesien, Tabelle 55" wert="7055">
+				</zustand>
+				<zustand name="Tunesien, Tabelle 56" wert="7056">
+				</zustand>
+				<zustand name="Bulgarien, Tabelle 01" wert="8001">
+				</zustand>
+				<zustand name="Bulgarien, Tabelle 02" wert="8002">
+				</zustand>
+				<zustand name="Bulgarien, Tabelle 03" wert="8003">
+				</zustand>
+				<zustand name="Bulgarien, Tabelle 04" wert="8004">
+				</zustand>
+				<zustand name="Niederlande, Tabelle 17" wert="8017">
+				</zustand>
+				<zustand name="Niederlande, Tabelle 18" wert="8018">
+				</zustand>
+				<zustand name="Niederlande, Tabelle 19" wert="8019">
+				</zustand>
+				<zustand name="Niederlande, Tabelle 20" wert="8020">
+				</zustand>
+				<zustand name="Niederlande, Tabelle 21" wert="8021">
+				</zustand>
+				<zustand name="Niederlande, Tabelle 22" wert="8022">
+				</zustand>
+				<zustand name="Niederlande, Tabelle 23" wert="8023">
+				</zustand>
+				<zustand name="Niederlande, Tabelle 24" wert="8024">
+				</zustand>
+				<zustand name="Portugal, Tabelle 41" wert="8041">
+				</zustand>
+				<zustand name="Portugal, Tabelle 42" wert="8042">
+				</zustand>
+				<zustand name="Portugal, Tabelle 43" wert="8043">
+				</zustand>
+				<zustand name="Portugal, Tabelle 44" wert="8044">
+				</zustand>
+				<zustand name="Portugal, Tabelle 45" wert="8045">
+				</zustand>
+				<zustand name="Portugal, Tabelle 46" wert="8046">
+				</zustand>
+				<zustand name="Portugal, Tabelle 47" wert="8047">
+				</zustand>
+				<zustand name="Portugal, Tabelle 48" wert="8048">
+				</zustand>
+				<zustand name="Albanien, Tabelle 01" wert="9001">
+				</zustand>
+				<zustand name="Albanien, Tabelle 02" wert="9002">
+				</zustand>
+				<zustand name="Dänemark, Tabelle 09" wert="9009">
+				</zustand>
+				<zustand name="Dänemark, Tabelle 10" wert="9010">
+				</zustand>
+				<zustand name="Dänemark, Tabelle 11" wert="9011">
+				</zustand>
+				<zustand name="Dänemark, Tabelle 12" wert="9012">
+				</zustand>
+				<zustand name="Dänemark, Tabelle 13" wert="9013">
+				</zustand>
+				<zustand name="Dänemark, Tabelle 14" wert="9014">
+				</zustand>
+				<zustand name="Dänemark, Tabelle 15" wert="9015">
+				</zustand>
+				<zustand name="Dänemark, Tabelle 16" wert="9016">
+				</zustand>
+				<zustand name="Slovenien, Tabelle 33" wert="9033">
+				</zustand>
+				<zustand name="Slovenien, Tabelle 34" wert="9034">
+				</zustand>
+				<zustand name="Slovenien, Tabelle 35" wert="9035">
+				</zustand>
+				<zustand name="Slovenien, Tabelle 36" wert="9036">
+				</zustand>
+				<zustand name="Lettland, Tabelle 51" wert="9051">
+				</zustand>
+				<zustand name="Lettland, Tabelle 52" wert="9052">
+				</zustand>
+				<zustand name="Liechtenstein, Tabelle 59" wert="9059">
+				</zustand>
+				<zustand name="Liechtenstein, Tabelle 60" wert="9060">
+				</zustand>
+				<zustand name="Österreich, Tabelle 01" wert="10001">
+				</zustand>
+				<zustand name="Österreich, Tabelle 02" wert="10002">
+				</zustand>
+				<zustand name="Österreich, Tabelle 03" wert="10003">
+				</zustand>
+				<zustand name="Österreich, Tabelle 04" wert="10004">
+				</zustand>
+				<zustand name="Österreich, Tabelle 05" wert="10005">
+				</zustand>
+				<zustand name="Österreich, Tabelle 06" wert="10006">
+				</zustand>
+				<zustand name="Österreich, Tabelle 07" wert="10007">
+				</zustand>
+				<zustand name="Österreich, Tabelle 08" wert="10008">
+				</zustand>
+				<zustand name="Island, Tabelle 21" wert="10021">
+				</zustand>
+				<zustand name="Island, Tabelle 22" wert="10022">
+				</zustand>
+				<zustand name="Island, Tabelle 23" wert="10023">
+				</zustand>
+				<zustand name="Island, Tabelle 24" wert="10024">
+				</zustand>
+				<zustand name="Gibraltar, Tabelle 33" wert="10033">
+				</zustand>
+				<zustand name="Gibraltar, Tabelle 34" wert="10034">
+				</zustand>
+				<zustand name="Libanon, Tabelle 53" wert="10053">
+				</zustand>
+				<zustand name="Libanon, Tabelle 54" wert="10054">
+				</zustand>
+				<zustand name="Libanon, Tabelle 55" wert="10055">
+				</zustand>
+				<zustand name="Libanon, Tabelle 56" wert="10056">
+				</zustand>
+				<zustand name="Ungarn, Tabelle 01" wert="11001">
+				</zustand>
+				<zustand name="Ungarn, Tabelle 02" wert="11002">
+				</zustand>
+				<zustand name="Ungarn, Tabelle 03" wert="11003">
+				</zustand>
+				<zustand name="Ungarn, Tabelle 04" wert="11004">
+				</zustand>
+				<zustand name="Irak, Tabelle 17" wert="11017">
+				</zustand>
+				<zustand name="Irak, Tabelle 18" wert="11018">
+				</zustand>
+				<zustand name="Irak, Tabelle 19" wert="11019">
+				</zustand>
+				<zustand name="Irak, Tabelle 20" wert="11020">
+				</zustand>
+				<zustand name="Monaco, Tabelle 33" wert="11033">
+				</zustand>
+				<zustand name="Monaco, Tabelle 34" wert="11034">
+				</zustand>
+				<zustand name="Vereinigtes Königreich, Tabelle 05" wert="12005">
+				</zustand>
+				<zustand name="Vereinigtes Königreich, Tabelle 06" wert="12006">
+				</zustand>
+				<zustand name="Vereinigtes Königreich, Tabelle 07" wert="12007">
+				</zustand>
+				<zustand name="Vereinigtes Königreich, Tabelle 08" wert="12008">
+				</zustand>
+				<zustand name="Vereinigtes Königreich, Tabelle 09" wert="12009">
+				</zustand>
+				<zustand name="Vereinigtes Königreich, Tabelle 10" wert="12010">
+				</zustand>
+				<zustand name="Vereinigtes Königreich, Tabelle 11" wert="12011">
+				</zustand>
+				<zustand name="Vereinigtes Königreich, Tabelle 12" wert="12012">
+				</zustand>
+				<zustand name="Vereinigtes Königreich, Tabelle 13" wert="12013">
+				</zustand>
+				<zustand name="Vereinigtes Königreich, Tabelle 14" wert="12014">
+				</zustand>
+				<zustand name="Vereinigtes Königreich, Tabelle 15" wert="12015">
+				</zustand>
+				<zustand name="Vereinigtes Königreich, Tabelle 16" wert="12016">
+				</zustand>
+				<zustand name="Vereinigtes Königreich, Tabelle 17" wert="12017">
+				</zustand>
+				<zustand name="Vereinigtes Königreich, Tabelle 18" wert="12018">
+				</zustand>
+				<zustand name="Vereinigtes Königreich, Tabelle 19" wert="12019">
+				</zustand>
+				<zustand name="Vereinigtes Königreich, Tabelle 20" wert="12020">
+				</zustand>
+				<zustand name="Kroatien, Tabelle 33" wert="12033">
+				</zustand>
+				<zustand name="Kroatien, Tabelle 34" wert="12034">
+				</zustand>
+				<zustand name="Litauen, Tabelle 43" wert="12043">
+				</zustand>
+				<zustand name="Litauen, Tabelle 44" wert="12044">
+				</zustand>
+				<zustand name="Malta, Tabelle 59" wert="12059">
+				</zustand>
+				<zustand name="Malta, Tabelle 60" wert="12060">
+				</zustand>
+				<zustand name="Deutschland(13), Tabelle 01, entspricht LCL der BASt" wert="13001">
+				</zustand>
+				<zustand name="Deutschland(13), Tabelle 02" wert="13002">
+				</zustand>
+				<zustand name="Deutschland(13), Tabelle 03" wert="13003">
+				</zustand>
+				<zustand name="Deutschland(13), Tabelle 04" wert="13004">
+				</zustand>
+				<zustand name="Deutschland(13), Tabelle 05" wert="13005">
+				</zustand>
+				<zustand name="Deutschland(13), Tabelle 06" wert="13006">
+				</zustand>
+				<zustand name="Deutschland(13), Tabelle 07" wert="13007">
+				</zustand>
+				<zustand name="Deutschland(13), Tabelle 08" wert="13008">
+				</zustand>
+				<zustand name="Libyen, Tabelle 33" wert="13033">
+				</zustand>
+				<zustand name="Libyen, Tabelle 34" wert="13034">
+				</zustand>
+				<zustand name="Libyen, Tabelle 35" wert="13035">
+				</zustand>
+				<zustand name="Libyen, Tabelle 36" wert="13036">
+				</zustand>
+				<zustand name="Serbien, Tabelle 51" wert="13051">
+				</zustand>
+				<zustand name="Serbien, Tabelle 52" wert="13052">
+				</zustand>
+				<zustand name="Rumänien, Tabelle 01" wert="14001">
+				</zustand>
+				<zustand name="Rumänien, Tabelle 02" wert="14002">
+				</zustand>
+				<zustand name="Rumänien, Tabelle 03" wert="14003">
+				</zustand>
+				<zustand name="Rumänien, Tabelle 04" wert="14004">
+				</zustand>
+				<zustand name="Spanien, Tabelle 17" wert="14017">
+				</zustand>
+				<zustand name="Spanien, Tabelle 18" wert="14018">
+				</zustand>
+				<zustand name="Spanien, Tabelle 19" wert="14019">
+				</zustand>
+				<zustand name="Spanien, Tabelle 20" wert="14020">
+				</zustand>
+				<zustand name="Spanien, Tabelle 21" wert="14021">
+				</zustand>
+				<zustand name="Spanien, Tabelle 22" wert="14022">
+				</zustand>
+				<zustand name="Spanien, Tabelle 23" wert="14023">
+				</zustand>
+				<zustand name="Spanien, Tabelle 24" wert="14024">
+				</zustand>
+				<zustand name="Schweden, Tabelle 33" wert="14033">
+				</zustand>
+				<zustand name="Schweden, Tabelle 34" wert="14034">
+				</zustand>
+				<zustand name="Schweden, Tabelle 35" wert="14035">
+				</zustand>
+				<zustand name="Schweden, Tabelle 36" wert="14036">
+				</zustand>
+				<zustand name="Schweden, Tabelle 37" wert="14037">
+				</zustand>
+				<zustand name="Schweden, Tabelle 38" wert="14038">
+				</zustand>
+				<zustand name="Schweden, Tabelle 39" wert="14039">
+				</zustand>
+				<zustand name="Schweden, Tabelle 40" wert="14040">
+				</zustand>
+				<zustand name="Belorussland, Tabelle 01" wert="15001">
+				</zustand>
+				<zustand name="Belorussland, Tabelle 02" wert="15002">
+				</zustand>
+				<zustand name="Belorussland, Tabelle 03" wert="15003">
+				</zustand>
+				<zustand name="Belorussland, Tabelle 04" wert="15004">
+				</zustand>
+				<zustand name="Ägypten, Tabelle 09" wert="15009">
+				</zustand>
+				<zustand name="Ägypten, Tabelle 10" wert="15010">
+				</zustand>
+				<zustand name="Ägypten, Tabelle 11" wert="15011">
+				</zustand>
+				<zustand name="Ägypten, Tabelle 12" wert="15012">
+				</zustand>
+				<zustand name="Frankreich, Tabelle 17" wert="15017">
+				</zustand>
+				<zustand name="Frankreich, Tabelle 18" wert="15018">
+				</zustand>
+				<zustand name="Frankreich, Tabelle 19" wert="15019">
+				</zustand>
+				<zustand name="Frankreich, Tabelle 20" wert="15020">
+				</zustand>
+				<zustand name="Frankreich, Tabelle 21" wert="15021">
+				</zustand>
+				<zustand name="Frankreich, Tabelle 22" wert="15022">
+				</zustand>
+				<zustand name="Frankreich, Tabelle 23" wert="15023">
+				</zustand>
+				<zustand name="Frankreich, Tabelle 24" wert="15024">
+				</zustand>
+				<zustand name="Frankreich, Tabelle 25" wert="15025">
+				</zustand>
+				<zustand name="Frankreich, Tabelle 26" wert="15026">
+				</zustand>
+				<zustand name="Frankreich, Tabelle 27" wert="15027">
+				</zustand>
+				<zustand name="Frankreich, Tabelle 28" wert="15028">
+				</zustand>
+				<zustand name="Frankreich, Tabelle 29" wert="15029">
+				</zustand>
+				<zustand name="Frankreich, Tabelle 30" wert="15030">
+				</zustand>
+				<zustand name="Frankreich, Tabelle 31" wert="15031">
+				</zustand>
+				<zustand name="Frankreich, Tabelle 32" wert="15032">
+				</zustand>
+				<zustand name="Bosnien-Herzegowina, Tabelle 43" wert="15043">
+				</zustand>
+				<zustand name="Bosnien-Herzegowina, Tabelle 44" wert="15044">
+				</zustand>
+				<zustand name="Norwegen, Tabelle 49" wert="15049">
+				</zustand>
+				<zustand name="Norwegen, Tabelle 50" wert="15050">
+				</zustand>
+				<zustand name="Norwegen, Tabelle 51" wert="15051">
+				</zustand>
+				<zustand name="Norwegen, Tabelle 52" wert="15052">
+				</zustand>
+				<zustand name="Norwegen, Tabelle 53" wert="15053">
+				</zustand>
+				<zustand name="Norwegen, Tabelle 54" wert="15054">
+				</zustand>
+				<zustand name="Norwegen, Tabelle 55" wert="15055">
+				</zustand>
+				<zustand name="Norwegen, Tabelle 56" wert="15056">
+				</zustand>
+			</ganzzahl>
+		</attributDefinition>
+		<attributDefinition pid="att.rdsLocationTabelleTyp">
+			<info>
+				<kurzinfo>Typ der Locationtabelle.</kurzinfo>
+			</info>
+			<ganzzahl bits="8">
+				<zustand name="TMC Location Tabelle" wert="0">
+				</zustand>
+				<zustand name="Geographische Datenbasis" wert="1">
+				</zustand>
+			</ganzzahl>
+		</attributDefinition>
+		<attributDefinition pid="att.rdsMeldungsAktion" name="RDSMeldungsAktion">
+			<info>
+				<kurzinfo>Aktion, die mit einer Meldung durchgeführt wird</kurzinfo>
+			</info>
+			<ganzzahl bits="8">
+				<zustand name="0" wert="0">
+					<info>
+						<kurzinfo>Es wird keine Aktion durchgeführt.</kurzinfo>
+					</info>
+				</zustand>
+				<zustand name="LMS" wert="1">
+					<info>
+						<kurzinfo>Die Meldung wird an die LMS übertragen.</kurzinfo>
+					</info>
+				</zustand>
+			</ganzzahl>
+		</attributDefinition>
+		<attributDefinition pid="att.rdsNachrichtenKlasse">
+			<info>
+				<kurzinfo>Klassifikation des Nachrichtentextes.</kurzinfo>
+			</info>
+			<ganzzahl bits="8">
+				<zustand name="Straßennummer" wert="0">
+				</zustand>
+				<zustand name="Segment" wert="1">
+				</zustand>
+				<zustand name="Inhalt" wert="2">
+				</zustand>
+				<zustand name="freier Text" wert="3">
+				</zustand>
+				<zustand name="Ergänzung" wert="4">
+				</zustand>
+				<zustand name="Segment von" wert="20">
+				</zustand>
+				<zustand name="Segment nach" wert="21">
+				</zustand>
+				<zustand name="Bundesland" wert="22">
+				</zustand>
+				<zustand name="Stadt" wert="23">
+				</zustand>
+				<zustand name="Name" wert="40">
+				</zustand>
+				<zustand name="Straßenname" wert="41">
+				</zustand>
+				<zustand name="2. Name" wert="42">
+				</zustand>
+				<zustand name="Gebietsname" wert="43">
+				</zustand>
+				<zustand name="linearer erster Name" wert="44">
+				</zustand>
+				<zustand name="linearer zweiter Name" wert="45">
+				</zustand>
+				<zustand name="Kreis" wert="46">
+				</zustand>
+				<zustand name="PLZ" wert="47">
+				</zustand>
+				<zustand name="Hausnummer" wert="48">
+				</zustand>
+			</ganzzahl>
+		</attributDefinition>
+		<attributDefinition pid="att.rdsNachrichtenSprache">
+			<info>
+				<kurzinfo>Sprachkennung der Nachrichtentexte entsprechend TIC Info Specification: Anhang 'Language Identifier'.</kurzinfo>
+			</info>
+			<ganzzahl bits="16">
+				<zustand name="undefiniert" wert="0">
+				</zustand>
+				<zustand name="baskisch" wert="1069">
+				</zustand>
+				<zustand name="belorussisch" wert="1059">
+				</zustand>
+				<zustand name="bulgarisch" wert="1026">
+				</zustand>
+				<zustand name="katalanisch" wert="1027">
+				</zustand>
+				<zustand name="kroatisch" wert="1050">
+				</zustand>
+				<zustand name="tschechisch" wert="1029">
+				</zustand>
+				<zustand name="dänisch" wert="1030">
+				</zustand>
+				<zustand name="niederländisch (Niederlande)" wert="1043">
+				</zustand>
+				<zustand name="niederländisch (Belgien)" wert="2067">
+				</zustand>
+				<zustand name="englisch (United States)" wert="1033">
+				</zustand>
+				<zustand name="englisch (United Kingdom)" wert="2057">
+				</zustand>
+				<zustand name="englisch (Irland)" wert="6153">
+				</zustand>
+				<zustand name="englisch (Europa)" wert="9225">
+				</zustand>
+				<zustand name="estnisch" wert="1061">
+				</zustand>
+				<zustand name="finnisch" wert="1035">
+				</zustand>
+				<zustand name="französisch (Standard)" wert="1036">
+				</zustand>
+				<zustand name="französisch (Belgien)" wert="2060">
+				</zustand>
+				<zustand name="französisch (Schweiz)" wert="4108">
+				</zustand>
+				<zustand name="französisch (Luxemburg)" wert="5132">
+				</zustand>
+				<zustand name="französisch (Monaco)" wert="6156">
+				</zustand>
+				<zustand name="deutsch (Standard)" wert="1031">
+				</zustand>
+				<zustand name="deutsch (Schweiz)" wert="2055">
+				</zustand>
+				<zustand name="deutsch (Österreich)" wert="3079">
+				</zustand>
+				<zustand name="deutsch (Luxemburg)" wert="4103">
+				</zustand>
+				<zustand name="deutsch (Liechtenstein)" wert="5127">
+				</zustand>
+				<zustand name="griechisch" wert="1032">
+				</zustand>
+				<zustand name="ungarisch" wert="1038">
+				</zustand>
+				<zustand name="italienisch (Standard)" wert="1040">
+				</zustand>
+				<zustand name="italienisch (Schweiz)" wert="2064">
+				</zustand>
+				<zustand name="norwegisch (Bokmal)" wert="1044">
+				</zustand>
+				<zustand name="norwegisch (Nynorsk)" wert="2068">
+				</zustand>
+				<zustand name="polnisch" wert="1045">
+				</zustand>
+				<zustand name="portugisisch (Brasilien)" wert="1046">
+				</zustand>
+				<zustand name="portugisisch (Standard)" wert="2070">
+				</zustand>
+				<zustand name="rumänisch" wert="1048">
+				</zustand>
+				<zustand name="russisch" wert="1049">
+				</zustand>
+				<zustand name="serbisch (russisch)" wert="3098">
+				</zustand>
+				<zustand name="serbisch (latein)" wert="2074">
+				</zustand>
+				<zustand name="slowakisch" wert="1051">
+				</zustand>
+				<zustand name="slowenisch" wert="1060">
+				</zustand>
+				<zustand name="spanisch (traditionell)" wert="1034">
+				</zustand>
+				<zustand name="spanisch (modern)" wert="3082">
+				</zustand>
+				<zustand name="schwedisch" wert="1053">
+				</zustand>
+				<zustand name="schwedisch (Finnland)" wert="2077">
+				</zustand>
+				<zustand name="türkisch" wert="1055">
+				</zustand>
+				<zustand name="ukrainisch" wert="1058">
+				</zustand>
+			</ganzzahl>
+			<default wert="deutsch (Standard)"/>
+		</attributDefinition>
+		<attributDefinition pid="att.rdsPriorität">
+			<info>
+				<kurzinfo>Priorität der Version.</kurzinfo>
+			</info>
+			<ganzzahl bits="8">
+				<zustand name="Normal" wert="0">
+				</zustand>
+				<zustand name="Eilig" wert="1">
+				</zustand>
+				<zustand name="Sehr eilig" wert="2">
+				</zustand>
+				<zustand name="Höchste Gefahr" wert="3">
+				</zustand>
+			</ganzzahl>
+		</attributDefinition>
+		<attributDefinition pid="att.rdsQuantitätsKennung">
+			<info>
+				<kurzinfo>Quantitäts-Kennung als Referenz auf ein Objekt vom Typ: <verweis pid="typ.rdsQuantität"></verweis>.</kurzinfo>
+				<beschreibung>gebildet aus TIC Info XML Element: EventDataQuantitiesQualifier.</beschreibung>
+			</info>
+			<objektReferenz typ="typ.rdsQuantität" undefiniert="verboten" referenzierungsart="assoziation"/>
+		</attributDefinition>
+		<attributDefinition pid="att.rdsQuelle">
+			<info>
+				<kurzinfo>Quelle, die diese Meldung erzeugt hat.</kurzinfo>
+			</info>
+			<ganzzahl bits="8">
+				<zustand name="manuell" wert="0">
+				</zustand>
+				<zustand name="automatisch" wert="1">
+				</zustand>
+			</ganzzahl>
+			<default wert="manuell"/>
+		</attributDefinition>
+		<attributDefinition pid="att.rdsStatus">
+			<info>
+				<kurzinfo>Status der Version.</kurzinfo>
+			</info>
+			<ganzzahl bits="8">
+				<zustand name="Unbekannt" wert="0">
+				</zustand>
+				<zustand name="Modifikation" wert="2">
+				</zustand>
+				<zustand name="Aufhebung" wert="4">
+				</zustand>
+				<zustand name="Löschung" wert="5">
+				</zustand>
+				<zustand name="Erweiterung" wert="6">
+				</zustand>
+			</ganzzahl>
+		</attributDefinition>
+		<attributDefinition pid="att.rdsTMCRichtung">
+			<info>
+				<kurzinfo>TMC-Richtung</kurzinfo>
+			</info>
+			<ganzzahl bits="8">
+				<zustand name="Positiv" wert="0">
+				</zustand>
+				<zustand name="Negativ" wert="1">
+				</zustand>
+			</ganzzahl>
+		</attributDefinition>
+		<attributDefinition pid="att.rdsWichtung" name="Wichtung">
+			<info>
+				<kurzinfo>Wichtungswert der RDS-Meldung (0-100).</kurzinfo>
+			</info>
+			<ganzzahl bits="8">
+				<bereich skalierung="1" minimum="0" maximum="100">
+				</bereich>
+			</ganzzahl>
+		</attributDefinition>
+		<attributDefinition pid="att.rdsZustand">
+			<info>
+				<kurzinfo>(Bearbeitungs-) Zustand der Version.</kurzinfo>
+			</info>
+			<ganzzahl bits="8">
+				<zustand name="nicht quittiert" wert="0">
+				</zustand>
+				<zustand name="quittiert" wert="1">
+				</zustand>
+				<zustand name="editiert" wert="2">
+				</zustand>
+				<zustand name="verworfen" wert="3">
+				</zustand>
+			</ganzzahl>
+			<default wert="nicht quittiert"/>
+		</attributDefinition>
+		<attributDefinition pid="att.störfallGütePriorität" name="StörfallGütePriorität">
+			<info>
+				<kurzinfo>Priorität eines Störfalls in Bezug auf Güte (0-100).</kurzinfo>
+			</info>
+			<ganzzahl bits="8">
+				<bereich skalierung="1" minimum="0" maximum="100">
+				</bereich>
+			</ganzzahl>
+		</attributDefinition>
+		<attributDefinition pid="att.zahl0Bis65535" name="Zahl0Bis65535">
+			<info>
+				<kurzinfo>Positive Zahl 16-Bit.</kurzinfo>
+			</info>
+			<ganzzahl bits="32">
+				<bereich skalierung="1" minimum="0" maximum="65535">
+				</bereich>
+			</ganzzahl>
+		</attributDefinition>
+		<attributlistenDefinition pid="atl.gütePrioritätenListe">
+			<info>
+				<kurzinfo>Liste von Prioritäten in Abhängigkeit der Güte</kurzinfo>
+			</info>
+			<attribut pid="att.störfallGütePriorität" anzahl="1" anzahlIst="fest" name="Güte1bis10">
+				<info>
+					<kurzinfo>Störfall-Priorität für den Bereich bis (einschließlich) Güte-Wert 10.</kurzinfo>
+				</info>
+				<default wert="0"/>
+			</attribut>
+			<attribut pid="att.störfallGütePriorität" anzahl="1" anzahlIst="fest" name="Güte11bis20">
+				<info>
+					<kurzinfo>Störfall-Priorität für den Bereich bis (einschließlich) Güte-Wert 20.</kurzinfo>
+				</info>
+				<default wert="0"/>
+			</attribut>
+			<attribut pid="att.störfallGütePriorität" anzahl="1" anzahlIst="fest" name="Güte21bis30">
+				<info>
+					<kurzinfo>Störfall-Priorität für den Bereich bis (einschließlich) Güte-Wert 30.</kurzinfo>
+				</info>
+				<default wert="0"/>
+			</attribut>
+			<attribut pid="att.störfallGütePriorität" anzahl="1" anzahlIst="fest" name="Güte31bis40">
+				<info>
+					<kurzinfo>Störfall-Priorität für den Bereich bis (einschließlich) Güte-Wert 40.</kurzinfo>
+				</info>
+				<default wert="0"/>
+			</attribut>
+			<attribut pid="att.störfallGütePriorität" anzahl="1" anzahlIst="fest" name="Güte41bis50">
+				<info>
+					<kurzinfo>Störfall-Priorität für den Bereich bis (einschließlich) Güte-Wert 50.</kurzinfo>
+				</info>
+				<default wert="0"/>
+			</attribut>
+			<attribut pid="att.störfallGütePriorität" anzahl="1" anzahlIst="fest" name="Güte51bis60">
+				<info>
+					<kurzinfo>Störfall-Priorität für den Bereich bis (einschließlich) Güte-Wert 60.</kurzinfo>
+				</info>
+				<default wert="0"/>
+			</attribut>
+			<attribut pid="att.störfallGütePriorität" anzahl="1" anzahlIst="fest" name="Güte61bis70">
+				<info>
+					<kurzinfo>Störfall-Priorität für den Bereich bis (einschließlich) Güte-Wert 70.</kurzinfo>
+				</info>
+				<default wert="0"/>
+			</attribut>
+			<attribut pid="att.störfallGütePriorität" anzahl="1" anzahlIst="fest" name="Güte71bis80">
+				<info>
+					<kurzinfo>Störfall-Priorität für den Bereich bis (einschließlich) Güte-Wert 80.</kurzinfo>
+				</info>
+				<default wert="0"/>
+			</attribut>
+			<attribut pid="att.störfallGütePriorität" anzahl="1" anzahlIst="fest" name="Güte81bis90">
+				<info>
+					<kurzinfo>Störfall-Priorität für den Bereich bis (einschließlich) Güte-Wert 90.</kurzinfo>
+				</info>
+				<default wert="0"/>
+			</attribut>
+			<attribut pid="att.störfallGütePriorität" anzahl="1" anzahlIst="fest" name="Güte91bis100">
+				<info>
+					<kurzinfo>Störfall-Priorität für den Bereich bis (einschließlich) Güte-Wert 100.</kurzinfo>
+				</info>
+				<default wert="0"/>
+			</attribut>
+		</attributlistenDefinition>
+		<attributlistenDefinition pid="atl.rdsAbbildungsmatrix">
+			<info>
+				<kurzinfo>Abbildung einer Störfallsituation auf ein RDS-Ereignis</kurzinfo>
+			</info>
+			<attribut pid="att.störfallSituation" anzahl="1" anzahlIst="fest" name="StörfallSituation">
+				<info>
+					<kurzinfo>Abzubildende Störfallsituation</kurzinfo>
+				</info>
+			</attribut>
+			<attribut pid="att.rdsEreignisBeschreibung" anzahl="1" anzahlIst="fest" name="RDSEreignisBeschreibung">
+				<info>
+					<kurzinfo>Generelle Beschreibung des RDS-Ereignisses, auf das abgebildet wird</kurzinfo>
+				</info>
+			</attribut>
+			<attribut pid="att.rdsEreignisCode" anzahl="0" anzahlIst="variabel" name="RDSEreignisCode">
+				<info>
+					<kurzinfo>Menge der Codes der abgebildeten konkreten RDS-Ereignisse</kurzinfo>
+				</info>
+			</attribut>
+		</attributlistenDefinition>
+		<attributlistenDefinition pid="atl.rdsÄnderungsInfo">
+			<info>
+				<kurzinfo>Informationen zu Änderungen an Meldungen.</kurzinfo>
+			</info>
+			<attribut pid="att.text" anzahl="1" anzahlIst="fest" name="Veranlasser">
+				<info>
+					<kurzinfo>Name des Veranlassers der Modifikation.</kurzinfo>
+					<beschreibung>TIC Info XML Element: ModifierUserName, Name des Nutzers, der die Meldung geändert hat oder "system", wenn der TIC Server die Änderung vorgenommen hat.</beschreibung>
+				</info>
+				<default wert=""/>
+			</attribut>
+			<attribut pid="att.zeitPunkt" anzahl="1" anzahlIst="fest" name="ModifikationsZeitpunkt">
+				<info>
+					<kurzinfo>Modifikationszeitpunkt.</kurzinfo>
+					<beschreibung>TIC Info XML Element: ModifierTime, Exakter Zeitpunkt, an dem die Meldung geändert wurde.</beschreibung>
+				</info>
+				<default wert="01.01.1971 00:00:00,000 Uhr"/>
+			</attribut>
+			<attribut pid="att.text" anzahl="1" anzahlIst="fest" name="ModifikationsKommentar">
+				<info>
+					<kurzinfo>Kommentar des Veranlassers der Änderung.</kurzinfo>
+					<beschreibung>TIC Info XML Element: ModifierComment, Kommentar des Veranlassers zur Änderung.</beschreibung>
+				</info>
+				<default wert=""/>
+			</attribut>
+		</attributlistenDefinition>
+		<attributlistenDefinition pid="atl.rdsAttribute">
+			<info>
+				<kurzinfo>Zusätzliche Verkehrsmerkmale einer Meldung.</kurzinfo>
+			</info>
+			<attribut pid="att.rdsGeographischeRelevanz" anzahl="1" anzahlIst="fest" name="GeographischeRelevanz">
+				<info>
+					<kurzinfo>Geographische Relevanz der Meldung</kurzinfo>
+					<beschreibung>TIC Info XML Element: AttributAreaOfInterest, Geographische Relevanz der Meldung.</beschreibung>
+				</info>
+				<default wert="National"/>
+			</attribut>
+			<attribut pid="att.jaNein" anzahl="1" anzahlIst="fest" name="Vorhersage">
+				<info>
+					<kurzinfo>Die Information ist eine Vorhersage (ja) oder aktuelle Meldung (nein).</kurzinfo>
+					<beschreibung>TIC Info XML Element: AttributeForecast, gibt an, ob die Information eine Vorhersage oder eine aktuelle Meldung ist .</beschreibung>
+				</info>
+				<default wert="Nein"/>
+			</attribut>
+		</attributlistenDefinition>
+		<attributlistenDefinition pid="atl.rdsEreignis">
+			<info>
+				<kurzinfo>Ereignis-Informationen.</kurzinfo>
+			</info>
+			<attributliste pid="atl.rdsEreignisDaten" anzahl="0" anzahlIst="variabel" name="EreignisDaten">
+				<info>
+					<kurzinfo>Ereignis-Daten.</kurzinfo>
+					<beschreibung>TIC Info XML Element: EventData, enthält die Daten zum Ereignis.</beschreibung>
+				</info>
+			</attributliste>
+			<attribut pid="att.jaNein" anzahl="1" anzahlIst="fest" name="EreignisInBeidenRichtungen">
+				<info>
+					<kurzinfo>Die Information ist bi-direktional (ja) oder nicht (nein)</kurzinfo>
+					<beschreibung>TIC Info XML Element: EventBiDirectionFlag.</beschreibung>
+				</info>
+				<default wert="Nein"/>
+			</attribut>
+			<attribut pid="att.rdsEreignisKodierung" anzahl="1" anzahlIst="fest" name="EreignisKodierung">
+				<info>
+					<kurzinfo>Tabelle, nach der das Ereignis zu interpretieren ist.</kurzinfo>
+					<beschreibung>TIC Info XML Element: EventType.</beschreibung>
+				</info>
+				<default wert="prEN ISO 14819-2 (Alert-C)"/>
+			</attribut>
+			<attribut pid="att.zahl0Bis65535" anzahl="1" anzahlIst="fest" name="EreignisTabelleNummer">
+				<info>
+					<kurzinfo>Nummer der Ereignistabelle</kurzinfo>
+					<beschreibung>
+						<absatz>TIC Info XML Element: EventTableNumber, Nummer der benutzten Ereignistabelle (0: unbekannt, 1-65535: definiert durch GEWI).</absatz>
+						<absatz>Nummer = 1 entspricht Ereignistabelle nach DIN EN ISO 14819-2</absatz>
+					</beschreibung>
+				</info>
+				<default wert="1"/>
+			</attribut>
+			<attribut pid="att.text" anzahl="1" anzahlIst="fest" name="EreignisTabelleVersion">
+				<info>
+					<kurzinfo>Version der Ereignistabelle</kurzinfo>
+					<beschreibung>TIC Info XML Element: EventTableVersion, textuelle Angabe der Version der Ereignistabelle.</beschreibung>
+				</info>
+				<default wert=""/>
+			</attribut>
+			<attribut pid="att.rdsEreignisTyp" anzahl="0" anzahlIst="variabel" name="EreignisTyp">
+				<info>
+					<kurzinfo>Art des Verkehrsereignisses</kurzinfo>
+					<beschreibung>TIC Info XML Element: EventTrafficTypes, pro Ereignis muss mindestens ein Typ gesetzt sein.</beschreibung>
+				</info>
+			</attribut>
+		</attributlistenDefinition>
+		<attributlistenDefinition pid="atl.rdsEreignisDaten">
+			<info>
+				<kurzinfo>Ereignis-Daten.</kurzinfo>
+			</info>
+			<attribut pid="att.rdsEreignisKategorie" anzahl="1" anzahlIst="fest" name="EreignisKategorie">
+				<info>
+					<kurzinfo>numerischer Wert der Ereignis-Kategorie</kurzinfo>
+					<beschreibung>
+						<absatz>TIC Info XML Element: EventDataCategory, numerischer Wert der Ereignis-Kategorie</absatz>
+					 	<absatz>1 - 39: Ereignis-Kategorie entsprechend DIN EN ISO 14819-2 (Event List Section, Spalte 'C'), Attribut <verweis pid="att.rdsEreignisCode"></verweis> ist gültig.</absatz>
+						<absatz>40 - 49: nicht benutzt</absatz>
+						<absatz>50: spezielle Kategorie, kennzeichnet dieses Ereignis als eine Empfehlung entsprechend DIN EN ISO 14819-2 (Tabelle 'SUPPLEMENTARY INFORMATION LIST', Spalte 'Code'), Attribut <verweis pid="att.rdsEmpfehlungsCode"></verweis> ist gültig</absatz>
+					</beschreibung>
+				</info>
+			</attribut>
+			<attribut pid="att.rdsEreignisCode" anzahl="1" anzahlIst="fest" name="EreignisCode">
+				<info>
+					<kurzinfo>Ereignis-Code</kurzinfo>
+					<beschreibung>
+						<absatz>TIC Info XML Element: EventDataCode, Codenummer des Ereignisses entsprechend DIN EN ISO 14819-2.</absatz>
+						<absatz>Das Attribut ist gültig bei 'att.rdsEreignisKategorie=1-39'.</absatz>
+					</beschreibung>
+				</info>
+			</attribut>
+			<attribut pid="att.rdsEmpfehlungsCode" anzahl="1" anzahlIst="fest" name="EmpfehlungsCode">
+				<info>
+					<kurzinfo>Empfehlungs-Code</kurzinfo>
+					<beschreibung>
+						<absatz>TIC Info XML Element: EventDataCode, Codenummer der Empfehlung entsprechend DIN EN ISO 14819-2.</absatz>
+						<absatz>Das Attribut ist gültig bei 'att.rdsEreignisKategorie=50'.</absatz>
+					</beschreibung>
+				</info>
+			</attribut>
+			<attribut pid="att.rdsVorhersageCode" anzahl="1" anzahlIst="fest" name="VorhersageCode">
+				<info>
+					<kurzinfo>Vorhersage-Code</kurzinfo>
+					<beschreibung>
+						<absatz>TIC Info XML Element: EventDataCode, Codenummer der Vorhersage entsprechend DIN EN ISO 14819-2.</absatz>
+						<absatz>Das Attribut ist bei 'att.rdsAttribute.Vorhersage=ja'.</absatz>
+					</beschreibung>
+				</info>
+			</attribut>
+			<attribut pid="att.rdsEreignisDauer" anzahl="1" anzahlIst="fest" name="EreignisDauer">
+				<info>
+					<kurzinfo>Dauer des Ereignisses</kurzinfo>
+					<beschreibung>TIC Info XML Element: EventDataDurationType.</beschreibung>
+				</info>
+			</attribut>
+			<attributliste pid="atl.rdsEreignisQuantität" anzahl="0" anzahlIst="variabel" name="EreignisQuantität">
+				<info>
+					<kurzinfo>Quantitätsangaben zum Ereignis</kurzinfo>
+					<beschreibung>TIC Info XML Element: EventDataQuantities.</beschreibung>
+				</info>
+			</attributliste>
+		</attributlistenDefinition>
+		<attributlistenDefinition pid="atl.rdsEreignisQuantität">
+			<info>
+				<kurzinfo>Quantitätsagaben zum Ereignis.</kurzinfo>
+			</info>
+			<attribut pid="att.rdsQuantitätsKennung" anzahl="1" anzahlIst="fest" name="QuantitätsKennung">
+				<info>
+					<kurzinfo>Quantitäts-Kennung.</kurzinfo>
+					<beschreibung>gebildet aus TIC Info XML Element: EventDataQuantitiesQualifier.</beschreibung>
+				</info>
+			</attribut>
+			<attribut pid="att.text" anzahl="1" anzahlIst="fest" name="QuantitätsWert">
+				<info>
+					<kurzinfo>Inhalt des zusätzlichen Wertes.</kurzinfo>
+					<beschreibung>TIC Info XML Element: EventDataQuantitiesContent</beschreibung>
+				</info>
+			</attribut>
+			<attribut pid="att.text" anzahl="1" anzahlIst="fest" name="QuantitätsEinheit">
+				<info>
+					<kurzinfo>Einheit des zusätzlichen Wertes.</kurzinfo>
+					<beschreibung>TIC Info XML Element: EventDataQuantitiesUnitQualifier</beschreibung>
+				</info>
+			</attribut>
+		</attributlistenDefinition>
+		<attributlistenDefinition pid="atl.rdsId">
+			<info>
+				<kurzinfo>Eindeutige Identifikation der Information.</kurzinfo>
+			</info>
+			<attribut pid="att.text" anzahl="1" anzahlIst="fest" name="IDOrganisation">
+				<info>
+					<kurzinfo>Name der Organisation, welche die Meldung publiziert hat.</kurzinfo>
+					<beschreibung>TIC Info XML Element: IDOrganisation, Name der publizierenden Organisation.</beschreibung>
+				</info>
+				<default wert=""/>
+			</attribut>
+			<attribut pid="att.text" anzahl="1" anzahlIst="fest" name="IDNummer">
+				<info>
+					<kurzinfo>Laufende Nummer der Meldung.</kurzinfo>
+					<beschreibung>TIC Info XML Element: IDNumber, Fortlaufende Nummer der Meldung innerhalb der publizierenden Organisation.
+					Die Nummer wird von der SWE 2.1 LMS unmittelbar vor dem Versand gefüllt.</beschreibung>
+				</info>
+				<default wert=""/>
+			</attribut>
+		</attributlistenDefinition>
+		<attributlistenDefinition pid="atl.rdsLocation">
+			<info>
+				<kurzinfo>Daten einer Location.</kurzinfo>
+			</info>
+			<attribut pid="att.tmcLocationCode" anzahl="1" anzahlIst="fest" name="LocationCode">
+				<info>
+					<kurzinfo>Location-Code.</kurzinfo>
+					<beschreibung>TIC Info XML Element: LocationLocCode, Location-Code. 
+					Empfangen werden kann '4294967295' als ein spezieller Code für Locations mit LocationFormat = TIC Location.
+					Das bedeutet, dass die Location nur über die geographischen Koordinaten verortet ist.
+					Der Wert dieses Attributes wird in diesem Fall auf '0' gesetzt.</beschreibung>
+				</info>
+			</attribut>
+			<attribut pid="att.text" anzahl="1" anzahlIst="fest" name="StrassenNummer">
+				<info>
+					<kurzinfo>Strassen-Nummer.</kurzinfo>
+					<beschreibung>TIC Info XML Element: LocationLocRoadNumber, Strassen-Nummer.</beschreibung>
+				</info>
+			</attribut>
+			<attribut pid="att.text" anzahl="1" anzahlIst="fest" name="AusfahrtNummer">
+				<info>
+					<kurzinfo>Ausfahrt-Nummer.</kurzinfo>
+					<beschreibung>TIC Info XML Element: LocationLocExitNumber, Ausfahrt-Nummer.</beschreibung>
+				</info>
+			</attribut>
+			<attribut pid="att.tmcOrtsTyp" anzahl="1" anzahlIst="fest" name="TmcOrtsTyp">
+				<info>
+					<kurzinfo>Ortstyp und OrtSubtyp des Ortes entsprechend der Festlegungen der LCL.</kurzinfo>
+					<beschreibung>
+						<absatz>Die Location Sub Types der TIC-Spezifikation werden wie folgt auf den <verweis pid="att.tmcOrtsTyp"></verweis>abgebildet:</absatz>
+						<absatz>Der Wert des Aufzahlungstyps att.tmcOrtsTyp ist eine sechsstellige Zahl der Form TNNSSS mit T gleich Typ (1=Punkt, 2=Linie, 3=Gebiet), NN gleich Orttypnummer und SSS gleich Untertypnummer entsprechend LCL, jeweils mit führenden Nullen.</absatz>
+						<absatz>Der TMC-Typ 'Punkt', 'Linie' oder 'Gebiet' ergibt sich aus dem XML Element LocationLocType mit folgender Kodierung:</absatz>
+						<liste zeichen="punkt">
+							<listenPunkt>LocationLocType 0: 'Gebiet'</listenPunkt>
+							<listenPunkt>LocationLocType 1: 'Linie'</listenPunkt>
+							<listenPunkt>LocationLocType 2: 'Punkt'</listenPunkt>
+						</liste>
+						<absatz>Die Orttypnummer ergibt sich aus dem XML Element LocationLocSubType mit folgender Kodierung:</absatz>
+						<liste zeichen="punkt">
+							<listenPunkt>LocationLocSubType div 100</listenPunkt>
+						</liste>
+						<absatz>Die Untertypnummer ergibt sich aus dem XML Element LocationLocSubType mit folgender Kodierung:</absatz>
+						<liste zeichen="punkt">
+							<listenPunkt>LocationLocSubType mod 100</listenPunkt>
+						</liste>
+						<absatz>Beispiel:</absatz>
+						<absatz>LocationLocType = 0  -&gt; Typ=3</absatz>
+						<absatz>LocationLocSubType = 607 -&gt; Orttypnummer=6, Untertypnummer=7</absatz>
+						<absatz>Wert von att.tmcOrtsTyp: 306007</absatz>
+					</beschreibung>
+				</info>
+			</attribut>
+			<attributliste pid="atl.rdsLocationKoordinaten" anzahl="1" anzahlIst="fest" name="Koordinaten">
+				<info>
+					<kurzinfo>Die Koordinaten der Location.</kurzinfo>
+					<beschreibung>TIC Info XML Element: LocationLocCoordinates.</beschreibung>
+				</info>
+			</attributliste>
+			<attribut pid="att.text" anzahl="1" anzahlIst="fest" name="LocationKilometrierung">
+				<info>
+					<kurzinfo>Kilometrierungsangabe.</kurzinfo>
+					<beschreibung>TIC Info XML Element: LocationLocMilestone, Werte im Format "123" oder "123.45" werden erwartet.</beschreibung>
+				</info>
+				<default wert="0"/>
+			</attribut>
+			<attribut pid="att.tmcLocationCode" anzahl="1" anzahlIst="fest" name="LocationCodeLinienReferenz">
+				<info>
+					<kurzinfo>Linien-Location.</kurzinfo>
+					<beschreibung>TIC Info XML Element: LocationLocLinearReference, Location Code der zugehörigen Linien-Location.</beschreibung>
+				</info>
+				<default wert="0"/>
+			</attribut>
+			<attribut pid="att.tmcLocationCode" anzahl="1" anzahlIst="fest" name="LocationCodeGebietsReferenz">
+				<info>
+					<kurzinfo>Gebiets-Location.</kurzinfo>
+					<beschreibung>TIC Info XML Element: LocationLocAreaReference, Location Code der zugehörigen Gebiets-Location.</beschreibung>
+				</info>
+				<default wert="0"/>
+			</attribut>
+			<attribut pid="att.tmcLocationCode" anzahl="1" anzahlIst="fest" name="LocationNextNegativ">
+				<info>
+					<kurzinfo>Nächste Location in negativer Richtung.</kurzinfo>
+					<beschreibung>TIC Info XML Element: LocationLocNegativeOffset, Location-Code der nächsten Location in negativer Richtung.</beschreibung>
+				</info>
+				<default wert="0"/>
+			</attribut>
+			<attribut pid="att.tmcLocationCode" anzahl="1" anzahlIst="fest" name="LocationNextPositiv">
+				<info>
+					<kurzinfo>Nächste Location in positiver Richtung.</kurzinfo>
+					<beschreibung>TIC Info XML Element: LocationLocPositiveOffset, Location-Code der nächsten Location in positiver Richtung.</beschreibung>
+				</info>
+				<default wert="0"/>
+			</attribut>
+			<attributliste pid="atl.rdsNachrichten" anzahl="1" anzahlIst="fest" name="LocationNachricht">
+				<info>
+					<kurzinfo>Nachrichtentexte.</kurzinfo>
+					<beschreibung>TIC Info XML Element: LocationLocMessage, enthält Nachrichtentexte für die NachrichtenKlassen 40 â€“ 59.</beschreibung>
+				</info>
+			</attributliste>
+		</attributlistenDefinition>
+		<attributlistenDefinition pid="atl.rdsLocationDaten">
+			<info>
+				<kurzinfo>Informationen zu den Locationen.</kurzinfo>
+			</info>
+			<attributliste pid="atl.rdsLocation" anzahl="0" anzahlIst="variabel" name="RDSLocation">
+				<info>
+					<kurzinfo>Liste der Locationen.</kurzinfo>
+					<beschreibung>
+						<absatz>Das erste Element des Feldes ist die primäre Location. Das letzte Element des Feldes ist die sekundäre Location. </absatz>
+						<absatz>Alle weiteren liegen entsprechend ihrer Platzierung an der Straße dazwischen.</absatz>
+					</beschreibung>
+				</info>
+			</attributliste>
+			<attribut pid="att.rdsLocationFormat" anzahl="1" anzahlIst="fest" name="RDSLocationFormat">
+				<info>
+					<kurzinfo>Location-Format.</kurzinfo>
+					<beschreibung>TIC Info XML Element: LocationFormat, Format des referenzierten Location-Systems.</beschreibung>
+				</info>
+				<default wert="TMC Location"/>
+			</attribut>
+			<attribut pid="att.zahl0Bis65535" anzahl="1" anzahlIst="fest" name="LocationExtent">
+				<info>
+					<kurzinfo>Ausdehnung der primären Location</kurzinfo>
+					<beschreibung>TIC Info XML Element: LocationExtent, Ausdehnung der primären Location, entspricht der Schrittweite innerhalb der LCL ausgehend von der primären Location.</beschreibung>
+				</info>
+				<default wert="0"/>
+			</attribut>
+			<attribut pid="att.rdsLocationMethode" anzahl="1" anzahlIst="fest" name="LocationMethode">
+				<info>
+					<kurzinfo>Location-Kodierung</kurzinfo>
+					<beschreibung>TIC Info XML Element: LocationMethod, die Kodierungsmethode der Location.</beschreibung>
+				</info>
+				<default wert="erste Feldposition ist primäre Location und letzte Feldposition ist sekundäre Location"/>
+			</attribut>
+			<attribut pid="att.rdsTMCRichtung" anzahl="1" anzahlIst="fest" name="TMCRichtung">
+				<info>
+					<kurzinfo>TMC-Richtung</kurzinfo>
+					<beschreibung>TIC Info XML Element: LocationDirection, bezeichnet die TMC-Richtung der Location.</beschreibung>
+				</info>
+				<default wert="Positiv"/>
+			</attribut>
+			<attribut pid="att.rdsEntfernungMeter" anzahl="1" anzahlIst="fest" name="LocationPrimärEntfernung">
+				<info>
+					<kurzinfo>Entfernung zur primären Location in m</kurzinfo>
+					<beschreibung>TIC Info XML Element: LocationPrimaryDistance.</beschreibung>
+				</info>
+				<default wert="0"/>
+			</attribut>
+			<attribut pid="att.rdsEntfernungMeter" anzahl="1" anzahlIst="fest" name="LocationSekundärEntfernung">
+				<info>
+					<kurzinfo>Entfernung zur sekundären Location in m</kurzinfo>
+					<beschreibung>TIC Info XML Element: LocationSecondaryDistance.</beschreibung>
+				</info>
+				<default wert="0"/>
+			</attribut>
+			<attribut pid="att.tmcLocationCode" anzahl="1" anzahlIst="fest" name="LocationVorLocation">
+				<info>
+					<kurzinfo>Locationcode Vorgänger der sekundären Location</kurzinfo>
+					<beschreibung>TIC Info XML Element: LocationPreLocation.</beschreibung>
+				</info>
+				<default wert="0"/>
+			</attribut>
+			<attribut pid="att.tmcLocationCode" anzahl="1" anzahlIst="fest" name="LocationNachLocation">
+				<info>
+					<kurzinfo>Locationcode Nachfolger der primären Location</kurzinfo>
+					<beschreibung>TIC Info XML Element: LocationPostLocation.</beschreibung>
+				</info>
+				<default wert="0"/>
+			</attribut>
+			<attribut pid="att.rdsLocationKategorie" anzahl="1" anzahlIst="fest" name="LocationKategorie">
+				<info>
+					<kurzinfo>Kategorie der Location</kurzinfo>
+					<beschreibung>TIC Info XML Element: LocationPreLocation, Kategorie der Location (nur bei LocationFormat = TIC Location).</beschreibung>
+				</info>
+				<default wert="Segment"/>
+			</attribut>
+			<attribut pid="att.rdsLocationRichtungTextID" anzahl="1" anzahlIst="fest" name="LocationRichtungTextID">
+				<info>
+					<kurzinfo>Text zur Beschreibung der Richtung einer Strasse oder eines Segmentes.</kurzinfo>
+					<beschreibung>TIC Info XML Element: LocationDirectionTextID, Zuordnung einer ID zu einem Richtungstext.</beschreibung>
+				</info>
+				<default wert="unbekannt"/>
+			</attribut>
+		</attributlistenDefinition>
+		<attributlistenDefinition pid="atl.rdsLocationKoordinaten">
+			<info>
+				<kurzinfo>Die Koordinaten der Location.</kurzinfo>
+				<beschreibung>Koordinaten im WGS 84 Format in Grad mit 10 mikroGrad Auflösung (1/100000)</beschreibung>
+			</info>
+			<attribut pid="att.wgs84Länge" anzahl="1" anzahlIst="fest" name="RDSLocationKoordinateX">
+				<info>
+					<kurzinfo>Länge.</kurzinfo>
+					<beschreibung>TIC Info XML Element: LocationLocCoordinatesX.</beschreibung>
+				</info>
+			</attribut>
+			<attribut pid="att.wgs84Breite" anzahl="1" anzahlIst="fest" name="RDSLocationKoordinateY">
+				<info>
+					<kurzinfo>Breite.</kurzinfo>
+					<beschreibung>TIC Info XML Element: LocationLocCoordinatesY.</beschreibung>
+				</info>
+			</attribut>
+		</attributlistenDefinition>
+		<attributlistenDefinition pid="atl.rdsLocationTabelleInfo">
+			<info>
+				<kurzinfo>Informationen zur benutzten Location-Tabelle.</kurzinfo>
+			</info>
+			<attribut pid="att.rdsLocationTabelle" anzahl="1" anzahlIst="fest" name="LocationTabelle">
+				<info>
+					<kurzinfo>RDS Location-Tabelle.</kurzinfo>
+					<beschreibung>spezifiziert die zugrundeliegende Location-Tabelle.</beschreibung>
+				</info>
+				<default wert="undefiniert"/>
+			</attribut>
+			<attribut pid="att.text" anzahl="1" anzahlIst="fest" name="LocationTabelleVersion">
+				<info>
+					<kurzinfo>Version der Location-Tabelle.</kurzinfo>
+					<beschreibung>TIC Info XML Element: LocationTableVersion.</beschreibung>
+				</info>
+				<default wert=""/>
+			</attribut>
+			<attribut pid="att.rdsLocationTabelleTyp" anzahl="1" anzahlIst="fest" name="LocationTabelleTyp">
+				<info>
+					<kurzinfo>Typ der Location-Tabelle.</kurzinfo>
+					<beschreibung>TIC Info XML Element: LocationTableType.</beschreibung>
+				</info>
+				<default wert="TMC Location Tabelle"/>
+			</attribut>
+			<attribut pid="att.text" anzahl="1" anzahlIst="fest" name="LocationTabelleName">
+				<info>
+					<kurzinfo>Name der Locationtabelle.</kurzinfo>
+					<beschreibung>TIC Info XML Element: LocationTableName.</beschreibung>
+				</info>
+				<default wert=""/>
+			</attribut>
+		</attributlistenDefinition>
+		<attributlistenDefinition pid="atl.rdsNachrichten">
+			<info>
+				<kurzinfo>RDS-Nachrichten.</kurzinfo>
+			</info>
+			<attributliste pid="atl.rdsNachrichtenDaten" anzahl="0" anzahlIst="variabel" name="NachrichtenDaten">
+			</attributliste>
+			<attribut pid="att.rdsNachrichtenSprache" anzahl="1" anzahlIst="fest" name="NachrichtenSprache">
+				<info>
+					<kurzinfo>Sprachkennung der Nachrichtentexte.</kurzinfo>
+					<beschreibung>TIC Info XML Element: MessageLangID,  spezifiziert die Sprache der Nachrichten entsprechend TIC Info Specification: Anhang 'Language Identifier'</beschreibung>
+				</info>
+				<default wert="deutsch (Standard)"/>
+			</attribut>
+		</attributlistenDefinition>
+		<attributlistenDefinition pid="atl.rdsNachrichtenDaten">
+			<info>
+				<kurzinfo>Nachrichtendaten.</kurzinfo>
+			</info>
+			<attribut pid="att.rdsNachrichtenKlasse" anzahl="1" anzahlIst="fest" name="NachrichtenKlasse">
+				<info>
+					<kurzinfo>Klassifikation des Textes.</kurzinfo>
+					<beschreibung>TIC Info XML Element: MessageDataClass, klassifiziert den Text.</beschreibung>
+				</info>
+			</attribut>
+			<attribut pid="att.text" anzahl="1" anzahlIst="fest" name="NachrichtenText">
+				<info>
+					<kurzinfo>Text der Nachricht.</kurzinfo>
+					<beschreibung>TIC Info XML Element: MessageDataText, Text.</beschreibung>
+				</info>
+			</attribut>
+		</attributlistenDefinition>
+		<attributlistenDefinition pid="atl.rdsPrioritätenmatrix">
+			<info>
+				<kurzinfo>Liste von Prioritäten in Abhängigkeit der Güte pro Verkehrssituation</kurzinfo>
+			</info>
+			<attributliste pid="atl.gütePrioritätenListe" anzahl="1" anzahlIst="fest" name="Stau">
+				<info>
+					<kurzinfo>Gibt die Prioritäten der Störfallsituation 7 (Stau) in Abhängigkeit der ermittelten Güte an.</kurzinfo>
+				</info>
+			</attributliste>
+			<attributliste pid="atl.gütePrioritätenListe" anzahl="1" anzahlIst="fest" name="stockenderVerkehr">
+				<info>
+					<kurzinfo>Gibt die Prioritäten der Störfallsituation 6 (Stockender Verkehr) in Abhängigkeit der ermittelten Güte an.</kurzinfo>
+					<beschreibung>Dieser Verkehrszustand wird derzeit nicht verwendet. Er ist für eine mögliche spätere Verwendung vorgesehen.</beschreibung>
+				</info>
+			</attributliste>
+			<attributliste pid="atl.gütePrioritätenListe" anzahl="1" anzahlIst="fest" name="zähfließenderVerkehr">
+				<info>
+					<kurzinfo>Gibt die Prioritäten der Störfallsituation 5 (Zähfließender Verkehr) in Abhängigkeit der ermittelten Güte an.</kurzinfo>
+				</info>
+			</attributliste>
+			<attributliste pid="atl.gütePrioritätenListe" anzahl="1" anzahlIst="fest" name="dichterVerkehr">
+				<info>
+					<kurzinfo>Gibt die Prioritäten der Störfallsituation 4 (Dichter Verkehr) in Abhängigkeit der ermittelten Güte an.</kurzinfo>
+				</info>
+			</attributliste>
+			<attributliste pid="atl.gütePrioritätenListe" anzahl="1" anzahlIst="fest" name="lebhafterVerkehr">
+				<info>
+					<kurzinfo>Gibt die Prioritäten der Störfallsituation 3 (Lebhafter Verkehr) in Abhängigkeit der ermittelten Güte an.</kurzinfo>
+				</info>
+			</attributliste>
+			<attributliste pid="atl.gütePrioritätenListe" anzahl="1" anzahlIst="fest" name="freierVerkehr">
+				<info>
+					<kurzinfo>Gibt die Prioritäten der Störfallsituation 2 (Freier Verkehr) in Abhängigkeit der ermittelten Güte an.</kurzinfo>
+				</info>
+			</attributliste>
+			<attributliste pid="atl.gütePrioritätenListe" anzahl="1" anzahlIst="fest" name="keineAussage">
+				<info>
+					<kurzinfo>Gibt die Prioritäten der Störfallsituation 1 (Keine Aussage) in Abhängigkeit der ermittelten Güte an.</kurzinfo>
+				</info>
+			</attributliste>
+		</attributlistenDefinition>
+		<attributlistenDefinition pid="atl.rdsText">
+			<info>
+				<kurzinfo>freier Text.</kurzinfo>
+			</info>
+			<attribut pid="att.text" anzahl="1" anzahlIst="fest" name="Text">
+				<info>
+					<kurzinfo>freier Text.</kurzinfo>
+					<beschreibung>TIC Info XML Element: FreeTextText'</beschreibung>
+				</info>
+				<default wert=""/>
+			</attribut>
+			<attribut pid="att.rdsNachrichtenSprache" anzahl="1" anzahlIst="fest" name="TextSprache">
+				<info>
+					<kurzinfo>Sprachkennung der Nachrichtentexte.</kurzinfo>
+					<beschreibung>TIC Info XML Element: FreeTextLangID,  spezifiziert die Sprache des Textes entsprechend TIC Info Specification: Anhang 'Language Identifier'</beschreibung>
+				</info>
+				<default wert="deutsch (Standard)"/>
+			</attribut>
+		</attributlistenDefinition>
+		<attributlistenDefinition pid="atl.rdsVerkehr">
+			<info>
+				<kurzinfo>Verkehrsinformationen der Version.</kurzinfo>
+			</info>
+			<attribut pid="att.zahl0Bis65535" anzahl="1" anzahlIst="fest" name="RDSFormat">
+				<info>
+					<kurzinfo>Format der Verkehrsinformationen (für zukünftige Erweiterungen).</kurzinfo>
+					<beschreibung>TIC Info XML Element: Format, kennzeichnet das Format der Verkehrsinformationen (reserviert für zukünftige Erweiterungen).</beschreibung>
+				</info>
+				<default wert="0"/>
+			</attribut>
+			<attributliste pid="atl.rdsNachrichten" anzahl="1" anzahlIst="fest" name="Nachrichten">
+				<info>
+					<kurzinfo>Die Nachrichtentexte.</kurzinfo>
+					<beschreibung>TIC Info XML Element: Message, enthält alle textuellen Nachrichten zur Meldung.</beschreibung>
+				</info>
+			</attributliste>
+			<attributliste pid="atl.rdsText" anzahl="1" anzahlIst="fest" name="FreierText">
+				<info>
+					<kurzinfo>freier Text.</kurzinfo>
+					<beschreibung>TIC Info XML Element: FreeText.</beschreibung>
+				</info>
+			</attributliste>
+			<attributliste pid="atl.rdsLocationTabelleInfo" anzahl="1" anzahlIst="fest" name="LocationTabelleInfo">
+				<info>
+					<kurzinfo>Informationen zur Location-Tabelle.</kurzinfo>
+					<beschreibung>TIC Info XML Element: LocationTable, enhält alle Informationen zur benutzten Location-Tabelle.</beschreibung>
+				</info>
+			</attributliste>
+			<attributliste pid="atl.rdsLocationDaten" anzahl="1" anzahlIst="fest" name="LocationDaten">
+				<info>
+					<kurzinfo>Location Informationen.</kurzinfo>
+					<beschreibung>TIC Info XML Element: Location, enthält alle Informationen zur den Locationen.</beschreibung>
+				</info>
+			</attributliste>
+			<attributliste pid="atl.rdsEreignis" anzahl="1" anzahlIst="fest" name="Ereignis">
+				<info>
+					<kurzinfo>Ereignisdaten.</kurzinfo>
+					<beschreibung>TIC Info XML Element: Event, enthält alle Daten zu den Ereignissen.</beschreibung>
+				</info>
+			</attributliste>
+			<attributliste pid="atl.rdsAttribute" anzahl="1" anzahlIst="fest" name="ZusatzAttribute">
+				<info>
+					<kurzinfo>zusätzliche Merkmale.</kurzinfo>
+					<beschreibung>TIC Info XML Element: Attribute, zusätzliche Merkmale der Meldung.</beschreibung>
+				</info>
+			</attributliste>
+			<attribut pid="att.text" anzahl="1" anzahlIst="fest" name="AlertCCode">
+				<info>
+					<kurzinfo>ALERT-C Kodierung.</kurzinfo>
+					<beschreibung>TIC Info XML Element: Code, enthält die zugehörige ALERT-C Kodierung der Meldung.</beschreibung>
+				</info>
+				<default wert=""/>
+			</attribut>
+		</attributlistenDefinition>
+		<attributlistenDefinition pid="atl.rdsVersion">
+			<info>
+				<kurzinfo>Daten einer Version der RDS-Meldung.</kurzinfo>
+			</info>
+			<attribut pid="att.text" anzahl="1" anzahlIst="fest" name="VersionGUID">
+				<info>
+					<kurzinfo>Identifikator der Version.</kurzinfo>
+					<beschreibung>TIC Info XML Element: VersionGUID, globaler eindeutiger Identifikator der Version.</beschreibung>
+				</info>
+				<default wert=""/>
+			</attribut>
+			<attributliste pid="atl.rdsVerwaltung" anzahl="1" anzahlIst="fest" name="VerwaltungsInformationen">
+				<info>
+					<kurzinfo>Verwaltungsinformationen der Version.</kurzinfo>
+					<beschreibung>TIC Info XML Element: Management, enthält alle Verwaltungsinformationen zur Version.</beschreibung>
+				</info>
+			</attributliste>
+			<attributliste pid="atl.rdsVerkehr" anzahl="1" anzahlIst="fest" name="VerkehrsInformationen">
+				<info>
+					<kurzinfo>Verkehrsinformationen der Version.</kurzinfo>
+					<beschreibung>TIC Info XML Element: Traffic, enthält alle Verkehrsinformationen zur Version.</beschreibung>
+				</info>
+			</attributliste>
+		</attributlistenDefinition>
+		<attributlistenDefinition pid="atl.rdsVerwaltung">
+			<info>
+				<kurzinfo>Verwaltungsinformationen der Version.</kurzinfo>
+			</info>
+			<attribut pid="att.text" anzahl="1" anzahlIst="fest" name="AuthorisierendeOrganisationsEinheit">
+				<info>
+					<kurzinfo>Organisationseinheit der authorisierenden Institution.</kurzinfo>
+					<beschreibung>TIC Info XML Element: AuthorizerOrganisationUnit, Organisationseinheit der authorisierenden Institution.</beschreibung>
+				</info>
+				<default wert=""/>
+			</attribut>
+			<attribut pid="att.text" anzahl="1" anzahlIst="fest" name="AuthorisierenderNutzer">
+				<info>
+					<kurzinfo>Authorisierender Nutzer.</kurzinfo>
+					<beschreibung>TIC Info XML Element: AuthorizerUserName, Name des Nutzers der authorisierenden Institution.</beschreibung>
+				</info>
+				<default wert=""/>
+			</attribut>
+			<attribut pid="att.zeitPunkt" anzahl="1" anzahlIst="fest" name="AuthorisierungsZeit">
+				<info>
+					<kurzinfo>Zeitpunkt der Authorisierung.</kurzinfo>
+					<beschreibung>TIC Info XML Element: AuthorizerTime, Exakter Zeitpunkt der Authorisierung dieser Version.</beschreibung>
+				</info>
+				<default wert="01.01.1971 00:00:00,000 Uhr"/>
+			</attribut>
+			<attribut pid="att.text" anzahl="1" anzahlIst="fest" name="AuthorisierungsKommentar">
+				<info>
+					<kurzinfo>Kommentar zur Authorisierung.</kurzinfo>
+					<beschreibung>TIC Info XML Element: AuthorizerUserName, enhält den Grund der Zurückweisung oder einen Kommentar zur Authorisierung.</beschreibung>
+				</info>
+				<default wert=""/>
+			</attribut>
+			<attribut pid="att.rdsAuthorisierungsErgebnis" anzahl="1" anzahlIst="fest" name="AuthorisierungsErgebnis">
+				<info>
+					<kurzinfo>Ergebnis der Authorisierung.</kurzinfo>
+					<beschreibung>TIC Info XML Element: AuthorizerResult, Ergebniscode der Authorisierung.</beschreibung>
+				</info>
+				<default wert="(Noch) nicht authorisiert"/>
+			</attribut>
+			<attribut pid="att.zahl0Bis65535" anzahl="1" anzahlIst="fest" name="VersionsNummer">
+				<info>
+					<kurzinfo>Versionsnummer.</kurzinfo>
+					<beschreibung>TIC Info XML Element: Versionnummer der Version.</beschreibung>
+				</info>
+				<default wert="0"/>
+			</attribut>
+			<attribut pid="att.zeitPunkt" anzahl="1" anzahlIst="fest" name="AktualisierungsZeit">
+				<info>
+					<kurzinfo>Zeitpunkt der Aktualisierung der Version.</kurzinfo>
+					<beschreibung>TIC Info XML Element: UpdateTime, Exakter Zeitpunkt der Aktualisierung der Version.</beschreibung>
+				</info>
+				<default wert="01.01.1971 00:00:00,000 Uhr"/>
+			</attribut>
+			<attribut pid="att.zeitPunkt" anzahl="1" anzahlIst="fest" name="AktivierungsZeit">
+				<info>
+					<kurzinfo>Zeitpunkt des Beginns der Gültigkeit der Version.</kurzinfo>
+					<beschreibung>TIC Info XML Element: ActivateTime, Exakter Zeitpunkt zu dem die Version gültig wurde.</beschreibung>
+				</info>
+				<default wert="01.01.1971 00:00:00,000 Uhr"/>
+			</attribut>
+			<attribut pid="att.zeitPunkt" anzahl="1" anzahlIst="fest" name="AblaufZeit">
+				<info>
+					<kurzinfo>Zeitpunkt des Endes der Gültigkeit der Version.</kurzinfo>
+					<beschreibung>TIC Info XML Element: ExpiryTime, Exakter Zeitpunkt zu dem die Gültigkeit der Version endet.</beschreibung>
+				</info>
+				<default wert="01.01.1971 00:00:00,000 Uhr"/>
+			</attribut>
+			<attribut pid="att.zeitPunkt" anzahl="1" anzahlIst="fest" name="ErinnerungsZeit">
+				<info>
+					<kurzinfo>Zeitpunkt zum Erinnern des Benutzers.</kurzinfo>
+					<beschreibung>TIC Info XML Element: ReminderTime.</beschreibung>
+				</info>
+				<default wert="01.01.1971 00:00:00,000 Uhr"/>
+			</attribut>
+			<attribut pid="att.zeitDauer" anzahl="1" anzahlIst="fest" name="ErinnerungsZeitOffset">
+				<info>
+					<kurzinfo>Zeitbereich zur Berechnung der Erinnerungszeit.</kurzinfo>
+					<beschreibung>TIC Info XML Element: ReminderTimeOffset.</beschreibung>
+				</info>
+				<default wert="0 Sekunden"/>
+			</attribut>
+			<attribut pid="att.rdsErinnerungsTyp" anzahl="1" anzahlIst="fest" name="ErinnerungsTyp">
+				<info>
+					<kurzinfo>Definition der Benutzung von 'ErinnerungsZeit' und 'ErinnerungsZeitOffset'.</kurzinfo>
+					<beschreibung>TIC Info XML Element: ReminderTimeType, definiert die Bildung der 'ErinnerungsZeit' aus 'ErinnerungsZeit' und 'ErinnerungsZeitOffset'.</beschreibung>
+				</info>
+				<default wert="ErinnerungsZeitOffset enthält den Offset seit AktivierungsZeit. ErinnerungsZeit = AktivierungsZeit + ErinnerungsZeitOffset."/>
+			</attribut>
+			<attribut pid="att.zeitPunkt" anzahl="1" anzahlIst="fest" name="ErzeugungsZeit">
+				<info>
+					<kurzinfo>Zeitpunkt, an dem die erste Version gültig wurde.</kurzinfo>
+					<beschreibung>TIC Info XML Element: CreateTime, Exakter Zeitpunkt, an dem die erste Version dieser Meldung gültig wurde.</beschreibung>
+				</info>
+				<default wert="01.01.1971 00:00:00,000 Uhr"/>				
+			</attribut>
+			<attributliste pid="atl.rdsÄnderungsInfo" anzahl="1" anzahlIst="fest" name="ÄnderungsInformationen">
+				<info>
+					<kurzinfo>Informationen zu Änderungen</kurzinfo>
+					<beschreibung>TIC Info XML Element: Modifier, alle Informationen zu Änderungen an Meldungen.</beschreibung>
+				</info>
+			</attributliste>
+			<attribut pid="att.rdsStatus" anzahl="1" anzahlIst="fest" name="Status">
+				<info>
+					<kurzinfo>Status der Version.</kurzinfo>
+					<beschreibung>TIC Info XML Element: Status.</beschreibung>
+				</info>
+				<default wert="Unbekannt"/>
+			</attribut>
+			<attribut pid="att.rdsWichtung" anzahl="1" anzahlIst="fest" name="Wichtung">
+				<info>
+					<kurzinfo>Wichtung.</kurzinfo>
+					<beschreibung>TIC Info XML Element: Importance, interne Wichtung der Meldung in der LMS.  0: niedrigster Wert, 100: höchster Wert</beschreibung>
+				</info>
+				<default wert="0"/>
+			</attribut>
+			<attribut pid="att.rdsPriorität" anzahl="1" anzahlIst="fest" name="Priorität">
+				<info>
+					<kurzinfo>Priorität der Version.</kurzinfo>
+					<beschreibung>TIC Info XML Element: Priority, kennzeichnet die Priorität der Version.</beschreibung>
+				</info>
+				<default wert="Normal"/>
+			</attribut>
+			<attribut pid="att.rdsLandesKennung" anzahl="1" anzahlIst="fest" name="LandesKennung">
+				<info>
+					<kurzinfo>Landeskennung der Meldung.</kurzinfo>
+				</info>
+				<default wert="rdsLandesKennung.DE"/>
+			</attribut>
+			<attribut pid="att.rdsZustand" anzahl="1" anzahlIst="fest" name="Zustand">
+				<info>
+					<kurzinfo>(Bearbeitungs-) Zustand der Version.</kurzinfo>
+				</info>
+				<default wert="nicht quittiert"/>
+			</attribut>
+			<attribut pid="att.rdsQuelle" anzahl="1" anzahlIst="fest" name="Quelle">
+				<info>
+					<kurzinfo>Quelle, die diese Meldung erzeugt hat.</kurzinfo>
+				</info>
+				<default wert="manuell"/>
+			</attribut>
+		</attributlistenDefinition>
+		<attributlistenDefinition pid="atl.rdsVerzögerungsmatrix">
+			<info>
+				<kurzinfo>Verzögerungswert für den Übergang von einer Verkehrssituation auf eine andere Verkehrssituation</kurzinfo>
+			</info>
+			<attribut pid="att.störfallSituation" anzahl="1" anzahlIst="fest" name="SituationVon">
+				<info>
+					<kurzinfo>Ausgangs-Störfallsituation</kurzinfo>
+				</info>
+			</attribut>
+			<attribut pid="att.störfallSituation" anzahl="1" anzahlIst="fest" name="SituationNach">
+				<info>
+					<kurzinfo>Neue Störfallsituation</kurzinfo>
+				</info>
+			</attribut>
+			<attribut pid="att.zeitDauerSekunden" anzahl="1" anzahlIst="fest" name="Verzögerungswert">
+				<info>
+					<kurzinfo>Verzögerungswert in Sekunden</kurzinfo>
+				</info>
+			</attribut>
+		</attributlistenDefinition>
+		
+		<!-- Dambach 20081001 Start -->
+		<attributlistenDefinition pid="atl.rdsAusdehnungProLSI">
+			<info>
+				<kurzinfo>Für (lokale) Störfallindikatoren können hier für ihre angenommenen Ausdehnung individuelle Werte angegeben werden</kurzinfo>
+			</info>
+			<attribut pid="att.objektReferenz" anzahl="1" anzahlIst="fest" name="LSI">
+				<info>
+					<kurzinfo>Referenz auf Objekt, dessen Ausdehnung individuell parametriert wird, wenn es als lokaler Stötfallindikator benutzt wird</kurzinfo>
+				</info>
+			</attribut>
+			<attribut pid="att.streckeMeter" anzahl="1" anzahlIst="fest" name="AusdehnungVor">
+				<info>
+					<kurzinfo>Angenommene Ausdehnung vor einer Störung, die durch den weiter oben referenzierten (lokalen) Störfallindikator detektiert wurde.</kurzinfo>
+				</info>
+			</attribut>
+			<attribut pid="att.streckeMeter" anzahl="1" anzahlIst="fest" name="AusdehnungNach">
+				<info>
+					<kurzinfo>Angenommene Ausdehnung nach einer Störung, die durch den weiter oben referenzierten (lokalen) Störfallindikator detektiert wurde.</kurzinfo>
+				</info>
+			</attribut>
+		</attributlistenDefinition>
+		<!-- Dambach 20081001 Ende -->
+		
+		<mengenDefinition pid="menge.rdsMeldungen" elemente="typ.rdsMeldung" aenderbar="ja" mindestens="0" hoechstens="0" referenzierungsart="assoziation">
+			<info>
+				<kurzinfo>Enthält die aktuellen RDS-Meldungen.</kurzinfo>
+			</info>
+		</mengenDefinition>
+	</modell>
+	<objekte>
+		<konfigurationsObjekt pid="rdsLandesKennung.AE" typ="typ.rdsLandesKennung">
+			<datensatz attributgruppe="atg.rdsLandesKennung" aspekt="asp.eigenschaften">
+				<datum name="Landescode" wert="AE"/>
+				<datum name="Land" wert="Vereinigte Arabische Emirate"/>
+			</datensatz>
+		</konfigurationsObjekt>
+		<konfigurationsObjekt pid="rdsLandesKennung.AT" typ="typ.rdsLandesKennung">
+			<datensatz attributgruppe="atg.rdsLandesKennung" aspekt="asp.eigenschaften">
+				<datum name="Landescode" wert="AT"/>
+				<datum name="Land" wert="Österreich"/>
+			</datensatz>
+		</konfigurationsObjekt>
+		<konfigurationsObjekt pid="rdsLandesKennung.BA" typ="typ.rdsLandesKennung">
+			<datensatz attributgruppe="atg.rdsLandesKennung" aspekt="asp.eigenschaften">
+				<datum name="Landescode" wert="BA"/>
+				<datum name="Land" wert="Bosnien-Herzegowina"/>
+			</datensatz>
+		</konfigurationsObjekt>
+		<konfigurationsObjekt pid="rdsLandesKennung.BE" typ="typ.rdsLandesKennung">
+			<datensatz attributgruppe="atg.rdsLandesKennung" aspekt="asp.eigenschaften">
+				<datum name="Landescode" wert="BE"/>
+				<datum name="Land" wert="Belgien"/>
+			</datensatz>
+		</konfigurationsObjekt>
+		<konfigurationsObjekt pid="rdsLandesKennung.BG" typ="typ.rdsLandesKennung">
+			<datensatz attributgruppe="atg.rdsLandesKennung" aspekt="asp.eigenschaften">
+				<datum name="Landescode" wert="BG"/>
+				<datum name="Land" wert="Bulgarien"/>
+			</datensatz>
+		</konfigurationsObjekt>
+		<konfigurationsObjekt pid="rdsLandesKennung.BY" typ="typ.rdsLandesKennung">
+			<datensatz attributgruppe="atg.rdsLandesKennung" aspekt="asp.eigenschaften">
+				<datum name="Landescode" wert="BY"/>
+				<datum name="Land" wert="Belorussland"/>
+			</datensatz>
+		</konfigurationsObjekt>
+		<konfigurationsObjekt pid="rdsLandesKennung.CA" typ="typ.rdsLandesKennung">
+			<datensatz attributgruppe="atg.rdsLandesKennung" aspekt="asp.eigenschaften">
+				<datum name="Landescode" wert="CA"/>
+				<datum name="Land" wert="Kanada"/>
+			</datensatz>
+		</konfigurationsObjekt>
+		<konfigurationsObjekt pid="rdsLandesKennung.CH" typ="typ.rdsLandesKennung">
+			<datensatz attributgruppe="atg.rdsLandesKennung" aspekt="asp.eigenschaften">
+				<datum name="Landescode" wert="CH"/>
+				<datum name="Land" wert="Schweiz"/>
+			</datensatz>
+		</konfigurationsObjekt>
+		<konfigurationsObjekt pid="rdsLandesKennung.CY" typ="typ.rdsLandesKennung">
+			<datensatz attributgruppe="atg.rdsLandesKennung" aspekt="asp.eigenschaften">
+				<datum name="Landescode" wert="CY"/>
+				<datum name="Land" wert="Zypern"/>
+			</datensatz>
+		</konfigurationsObjekt>
+		<konfigurationsObjekt pid="rdsLandesKennung.CZ" typ="typ.rdsLandesKennung">
+			<datensatz attributgruppe="atg.rdsLandesKennung" aspekt="asp.eigenschaften">
+				<datum name="Landescode" wert="CZ"/>
+				<datum name="Land" wert="Tschechische Republik"/>
+			</datensatz>
+		</konfigurationsObjekt>
+		<konfigurationsObjekt pid="rdsLandesKennung.DE" typ="typ.rdsLandesKennung">
+			<datensatz attributgruppe="atg.rdsLandesKennung" aspekt="asp.eigenschaften">
+				<datum name="Landescode" wert="DE"/>
+				<datum name="Land" wert="Deutschland"/>
+			</datensatz>
+		</konfigurationsObjekt>
+		<konfigurationsObjekt pid="rdsLandesKennung.DK" typ="typ.rdsLandesKennung">
+			<datensatz attributgruppe="atg.rdsLandesKennung" aspekt="asp.eigenschaften">
+				<datum name="Landescode" wert="DK"/>
+				<datum name="Land" wert="Dänemark"/>
+			</datensatz>
+		</konfigurationsObjekt>
+		<konfigurationsObjekt pid="rdsLandesKennung.ES" typ="typ.rdsLandesKennung">
+			<datensatz attributgruppe="atg.rdsLandesKennung" aspekt="asp.eigenschaften">
+				<datum name="Landescode" wert="ES"/>
+				<datum name="Land" wert="Spanien"/>
+			</datensatz>
+		</konfigurationsObjekt>
+		<konfigurationsObjekt pid="rdsLandesKennung.FI" typ="typ.rdsLandesKennung">
+			<datensatz attributgruppe="atg.rdsLandesKennung" aspekt="asp.eigenschaften">
+				<datum name="Landescode" wert="FI"/>
+				<datum name="Land" wert="Finnland"/>
+			</datensatz>
+		</konfigurationsObjekt>
+		<konfigurationsObjekt pid="rdsLandesKennung.FR" typ="typ.rdsLandesKennung">
+			<datensatz attributgruppe="atg.rdsLandesKennung" aspekt="asp.eigenschaften">
+				<datum name="Landescode" wert="FR"/>
+				<datum name="Land" wert="Frankreich"/>
+			</datensatz>
+		</konfigurationsObjekt>
+		<konfigurationsObjekt pid="rdsLandesKennung.FX" typ="typ.rdsLandesKennung">
+			<datensatz attributgruppe="atg.rdsLandesKennung" aspekt="asp.eigenschaften">
+				<datum name="Landescode" wert="FX"/>
+				<datum name="Land" wert="Frankreich, Hauptstadt"/>
+			</datensatz>
+		</konfigurationsObjekt>
+		<konfigurationsObjekt pid="rdsLandesKennung.GB" typ="typ.rdsLandesKennung">
+			<datensatz attributgruppe="atg.rdsLandesKennung" aspekt="asp.eigenschaften">
+				<datum name="Landescode" wert="GB"/>
+				<datum name="Land" wert="Vereinigtes Königreich"/>
+			</datensatz>
+		</konfigurationsObjekt>
+		<konfigurationsObjekt pid="rdsLandesKennung.GE" typ="typ.rdsLandesKennung">
+			<datensatz attributgruppe="atg.rdsLandesKennung" aspekt="asp.eigenschaften">
+				<datum name="Landescode" wert="GE"/>
+				<datum name="Land" wert="Georgien"/>
+			</datensatz>
+		</konfigurationsObjekt>
+		<konfigurationsObjekt pid="rdsLandesKennung.GR" typ="typ.rdsLandesKennung">
+			<datensatz attributgruppe="atg.rdsLandesKennung" aspekt="asp.eigenschaften">
+				<datum name="Landescode" wert="GR"/>
+				<datum name="Land" wert="Griechenland"/>
+			</datensatz>
+		</konfigurationsObjekt>
+		<konfigurationsObjekt pid="rdsLandesKennung.HR" typ="typ.rdsLandesKennung">
+			<datensatz attributgruppe="atg.rdsLandesKennung" aspekt="asp.eigenschaften">
+				<datum name="Landescode" wert="HR"/>
+				<datum name="Land" wert="Kroatien"/>
+			</datensatz>
+		</konfigurationsObjekt>
+		<konfigurationsObjekt pid="rdsLandesKennung.HU" typ="typ.rdsLandesKennung">
+			<datensatz attributgruppe="atg.rdsLandesKennung" aspekt="asp.eigenschaften">
+				<datum name="Landescode" wert="HU"/>
+				<datum name="Land" wert="Ungarn"/>
+			</datensatz>
+		</konfigurationsObjekt>
+		<konfigurationsObjekt pid="rdsLandesKennung.IE" typ="typ.rdsLandesKennung">
+			<datensatz attributgruppe="atg.rdsLandesKennung" aspekt="asp.eigenschaften">
+				<datum name="Landescode" wert="IE"/>
+				<datum name="Land" wert="Irland"/>
+			</datensatz>
+		</konfigurationsObjekt>
+		<konfigurationsObjekt pid="rdsLandesKennung.IL" typ="typ.rdsLandesKennung">
+			<datensatz attributgruppe="atg.rdsLandesKennung" aspekt="asp.eigenschaften">
+				<datum name="Landescode" wert="IL"/>
+				<datum name="Land" wert="Israel"/>
+			</datensatz>
+		</konfigurationsObjekt>
+		<konfigurationsObjekt pid="rdsLandesKennung.IT" typ="typ.rdsLandesKennung">
+			<datensatz attributgruppe="atg.rdsLandesKennung" aspekt="asp.eigenschaften">
+				<datum name="Landescode" wert="IT"/>
+				<datum name="Land" wert="Italien"/>
+			</datensatz>
+		</konfigurationsObjekt>
+		<konfigurationsObjekt pid="rdsLandesKennung.KG" typ="typ.rdsLandesKennung">
+			<datensatz attributgruppe="atg.rdsLandesKennung" aspekt="asp.eigenschaften">
+				<datum name="Landescode" wert="KG"/>
+				<datum name="Land" wert="Kirgisien"/>
+			</datensatz>
+		</konfigurationsObjekt>
+		<konfigurationsObjekt pid="rdsLandesKennung.KZ" typ="typ.rdsLandesKennung">
+			<datensatz attributgruppe="atg.rdsLandesKennung" aspekt="asp.eigenschaften">
+				<datum name="Landescode" wert="KZ"/>
+				<datum name="Land" wert="Kasachstan"/>
+			</datensatz>
+		</konfigurationsObjekt>
+		<konfigurationsObjekt pid="rdsLandesKennung.LI" typ="typ.rdsLandesKennung">
+			<datensatz attributgruppe="atg.rdsLandesKennung" aspekt="asp.eigenschaften">
+				<datum name="Landescode" wert="LI"/>
+				<datum name="Land" wert="Liechtenstein"/>
+			</datensatz>
+		</konfigurationsObjekt>
+		<konfigurationsObjekt pid="rdsLandesKennung.LU" typ="typ.rdsLandesKennung">
+			<datensatz attributgruppe="atg.rdsLandesKennung" aspekt="asp.eigenschaften">
+				<datum name="Landescode" wert="LU"/>
+				<datum name="Land" wert="Luxemburg"/>
+			</datensatz>
+		</konfigurationsObjekt>
+		<konfigurationsObjekt pid="rdsLandesKennung.LV" typ="typ.rdsLandesKennung">
+			<datensatz attributgruppe="atg.rdsLandesKennung" aspekt="asp.eigenschaften">
+				<datum name="Landescode" wert="LV"/>
+				<datum name="Land" wert="Lettland"/>
+			</datensatz>
+		</konfigurationsObjekt>
+		<konfigurationsObjekt pid="rdsLandesKennung.MC" typ="typ.rdsLandesKennung">
+			<datensatz attributgruppe="atg.rdsLandesKennung" aspekt="asp.eigenschaften">
+				<datum name="Landescode" wert="MC"/>
+				<datum name="Land" wert="Monaco"/>
+			</datensatz>
+		</konfigurationsObjekt>
+		<konfigurationsObjekt pid="rdsLandesKennung.MD" typ="typ.rdsLandesKennung">
+			<datensatz attributgruppe="atg.rdsLandesKennung" aspekt="asp.eigenschaften">
+				<datum name="Landescode" wert="MD"/>
+				<datum name="Land" wert="Moldavien"/>
+			</datensatz>
+		</konfigurationsObjekt>
+		<konfigurationsObjekt pid="rdsLandesKennung.MK" typ="typ.rdsLandesKennung">
+			<datensatz attributgruppe="atg.rdsLandesKennung" aspekt="asp.eigenschaften">
+				<datum name="Landescode" wert="MK"/>
+				<datum name="Land" wert="Mazedonien"/>
+			</datensatz>
+		</konfigurationsObjekt>
+		<konfigurationsObjekt pid="rdsLandesKennung.NL" typ="typ.rdsLandesKennung">
+			<datensatz attributgruppe="atg.rdsLandesKennung" aspekt="asp.eigenschaften">
+				<datum name="Landescode" wert="NL"/>
+				<datum name="Land" wert="Niederlande"/>
+			</datensatz>
+		</konfigurationsObjekt>
+		<konfigurationsObjekt pid="rdsLandesKennung.NO" typ="typ.rdsLandesKennung">
+			<datensatz attributgruppe="atg.rdsLandesKennung" aspekt="asp.eigenschaften">
+				<datum name="Landescode" wert="NO"/>
+				<datum name="Land" wert="Norwegen"/>
+			</datensatz>
+		</konfigurationsObjekt>
+		<konfigurationsObjekt pid="rdsLandesKennung.PL" typ="typ.rdsLandesKennung">
+			<datensatz attributgruppe="atg.rdsLandesKennung" aspekt="asp.eigenschaften">
+				<datum name="Landescode" wert="PL"/>
+				<datum name="Land" wert="Polen"/>
+			</datensatz>
+		</konfigurationsObjekt>
+		<konfigurationsObjekt pid="rdsLandesKennung.PT" typ="typ.rdsLandesKennung">
+			<datensatz attributgruppe="atg.rdsLandesKennung" aspekt="asp.eigenschaften">
+				<datum name="Landescode" wert="PT"/>
+				<datum name="Land" wert="Portugal"/>
+			</datensatz>
+		</konfigurationsObjekt>
+		<konfigurationsObjekt pid="rdsLandesKennung.RO" typ="typ.rdsLandesKennung">
+			<datensatz attributgruppe="atg.rdsLandesKennung" aspekt="asp.eigenschaften">
+				<datum name="Landescode" wert="RO"/>
+				<datum name="Land" wert="Rumänien"/>
+			</datensatz>
+		</konfigurationsObjekt>
+		<konfigurationsObjekt pid="rdsLandesKennung.RU" typ="typ.rdsLandesKennung">
+			<datensatz attributgruppe="atg.rdsLandesKennung" aspekt="asp.eigenschaften">
+				<datum name="Landescode" wert="RU"/>
+				<datum name="Land" wert="Russland"/>
+			</datensatz>
+		</konfigurationsObjekt>
+		<konfigurationsObjekt pid="rdsLandesKennung.SE" typ="typ.rdsLandesKennung">
+			<datensatz attributgruppe="atg.rdsLandesKennung" aspekt="asp.eigenschaften">
+				<datum name="Landescode" wert="SE"/>
+				<datum name="Land" wert="Schweden"/>
+			</datensatz>
+		</konfigurationsObjekt>
+		<konfigurationsObjekt pid="rdsLandesKennung.SI" typ="typ.rdsLandesKennung">
+			<datensatz attributgruppe="atg.rdsLandesKennung" aspekt="asp.eigenschaften">
+				<datum name="Landescode" wert="SI"/>
+				<datum name="Land" wert="Slowenien"/>
+			</datensatz>
+		</konfigurationsObjekt>
+		<konfigurationsObjekt pid="rdsLandesKennung.SK" typ="typ.rdsLandesKennung">
+			<datensatz attributgruppe="atg.rdsLandesKennung" aspekt="asp.eigenschaften">
+				<datum name="Landescode" wert="SK"/>
+				<datum name="Land" wert="Slowakische Republik)"/>
+			</datensatz>
+		</konfigurationsObjekt>
+		<konfigurationsObjekt pid="rdsLandesKennung.SM" typ="typ.rdsLandesKennung">
+			<datensatz attributgruppe="atg.rdsLandesKennung" aspekt="asp.eigenschaften">
+				<datum name="Landescode" wert="SM"/>
+				<datum name="Land" wert="Serbien und Montenegro"/>
+			</datensatz>
+		</konfigurationsObjekt>
+		<konfigurationsObjekt pid="rdsLandesKennung.TR" typ="typ.rdsLandesKennung">
+			<datensatz attributgruppe="atg.rdsLandesKennung" aspekt="asp.eigenschaften">
+				<datum name="Landescode" wert="TR"/>
+				<datum name="Land" wert="Türkei"/>
+			</datensatz>
+		</konfigurationsObjekt>
+		<konfigurationsObjekt pid="rdsLandesKennung.UA" typ="typ.rdsLandesKennung">
+			<datensatz attributgruppe="atg.rdsLandesKennung" aspekt="asp.eigenschaften">
+				<datum name="Landescode" wert="UA"/>
+				<datum name="Land" wert="Ukraine"/>
+			</datensatz>
+		</konfigurationsObjekt>
+		<konfigurationsObjekt pid="rdsLandesKennung.US" typ="typ.rdsLandesKennung">
+			<datensatz attributgruppe="atg.rdsLandesKennung" aspekt="asp.eigenschaften">
+				<datum name="Landescode" wert="US"/>
+				<datum name="Land" wert="Vereinigte Staaten"/>
+			</datensatz>
+		</konfigurationsObjekt>
+		<konfigurationsObjekt pid="rdsLandesKennung.UZ" typ="typ.rdsLandesKennung">
+			<datensatz attributgruppe="atg.rdsLandesKennung" aspekt="asp.eigenschaften">
+				<datum name="Landescode" wert="UZ"/>
+				<datum name="Land" wert="Usbekistan"/>
+			</datensatz>
+		</konfigurationsObjekt>
+		<konfigurationsObjekt pid="rdsLandesKennung.VA" typ="typ.rdsLandesKennung">
+			<datensatz attributgruppe="atg.rdsLandesKennung" aspekt="asp.eigenschaften">
+				<datum name="Landescode" wert="VA"/>
+				<datum name="Land" wert="Vatikanstadt"/>
+			</datensatz>
+		</konfigurationsObjekt>
+		<konfigurationsObjekt pid="rdsQuantität.ACU" typ="typ.rdsQuantität">
+			<datensatz attributgruppe="atg.rdsQuantität" aspekt="asp.eigenschaften">
+				<datum name="Kennung" wert="ACU"/>
+				<datum name="Beschreibung" wert="Genauigkeit"/>
+				<datum name="Einheit" wert="%"/>
+			</datensatz>
+		</konfigurationsObjekt>
+		<konfigurationsObjekt pid="rdsQuantität.ALG" typ="typ.rdsQuantität">
+			<datensatz attributgruppe="atg.rdsQuantität" aspekt="asp.eigenschaften">
+				<datum name="Kennung" wert="ALG"/>
+				<datum name="Beschreibung" wert="über vorgegebener Höhe"/>
+				<datum name="Einheit" wert="m"/>
+			</datensatz>
+		</konfigurationsObjekt>
+		<konfigurationsObjekt pid="rdsQuantität.AMH" typ="typ.rdsQuantität">
+			<datensatz attributgruppe="atg.rdsQuantität" aspekt="asp.eigenschaften">
+				<datum name="Kennung" wert="AMH"/>
+				<datum name="Beschreibung" wert="AM Frequenz"/>
+				<datum name="Einheit" wert="kHz"/>
+			</datensatz>
+		</konfigurationsObjekt>
+		<konfigurationsObjekt pid="rdsQuantität.APR" typ="typ.rdsQuantität">
+			<datensatz attributgruppe="atg.rdsQuantität" aspekt="asp.eigenschaften">
+				<datum name="Kennung" wert="APR"/>
+				<datum name="Beschreibung" wert="atmosphärischer Druck auf Meeresspiegel"/>
+				<datum name="Einheit" wert="hPa (mbar)"/>
+			</datensatz>
+		</konfigurationsObjekt>
+		<konfigurationsObjekt pid="rdsQuantität.ATE" typ="typ.rdsQuantität">
+			<datensatz attributgruppe="atg.rdsQuantität" aspekt="asp.eigenschaften">
+				<datum name="Kennung" wert="ATE"/>
+				<datum name="Beschreibung" wert="Lufttemperatur"/>
+				<datum name="Einheit" wert="°C"/>
+			</datensatz>
+		</konfigurationsObjekt>
+		<konfigurationsObjekt pid="rdsQuantität.AVV" typ="typ.rdsQuantität">
+			<datensatz attributgruppe="atg.rdsQuantität" aspekt="asp.eigenschaften">
+				<datum name="Kennung" wert="AVV"/>
+				<datum name="Beschreibung" wert="Durchschnittsgeschwindigkeit"/>
+				<datum name="Einheit" wert="km/h"/>
+			</datensatz>
+		</konfigurationsObjekt>
+		<konfigurationsObjekt pid="rdsQuantität.BSA" typ="typ.rdsQuantität">
+			<datensatz attributgruppe="atg.rdsQuantität" aspekt="asp.eigenschaften">
+				<datum name="Kennung" wert="BSA"/>
+				<datum name="Beschreibung" wert="unter vorgegebener Höhe"/>
+				<datum name="Einheit" wert="m"/>
+			</datensatz>
+		</konfigurationsObjekt>
+		<konfigurationsObjekt pid="rdsQuantität.CAV" typ="typ.rdsQuantität">
+			<datensatz attributgruppe="atg.rdsQuantität" aspekt="asp.eigenschaften">
+				<datum name="Kennung" wert="CAV"/>
+				<datum name="Beschreibung" wert="Anzahl Wohnwagen"/>
+				<datum name="Einheit" wert=""/>
+			</datensatz>
+		</konfigurationsObjekt>
+		<konfigurationsObjekt pid="rdsQuantität.CH4" typ="typ.rdsQuantität">
+			<datensatz attributgruppe="atg.rdsQuantität" aspekt="asp.eigenschaften">
+				<datum name="Kennung" wert="CH4"/>
+				<datum name="Beschreibung" wert="Methan Konzentration"/>
+				<datum name="Einheit" wert="PPM"/>
+			</datensatz>
+		</konfigurationsObjekt>
+		<konfigurationsObjekt pid="rdsQuantität.CMC" typ="typ.rdsQuantität">
+			<datensatz attributgruppe="atg.rdsQuantität" aspekt="asp.eigenschaften">
+				<datum name="Kennung" wert="CMC"/>
+				<datum name="Beschreibung" wert="Kohlenmonoxid Konzentration"/>
+				<datum name="Einheit" wert="PPM"/>
+			</datensatz>
+		</konfigurationsObjekt>
+		<konfigurationsObjekt pid="rdsQuantität.CTV" typ="typ.rdsQuantität">
+			<datensatz attributgruppe="atg.rdsQuantität" aspekt="asp.eigenschaften">
+				<datum name="Kennung" wert="CTV"/>
+				<datum name="Beschreibung" wert="Konzentration numerischer Wert"/>
+				<datum name="Einheit" wert="Fz/km"/>
+			</datensatz>
+		</konfigurationsObjekt>
+		<konfigurationsObjekt pid="rdsQuantität.CYR" typ="typ.rdsQuantität">
+			<datensatz attributgruppe="atg.rdsQuantität" aspekt="asp.eigenschaften">
+				<datum name="Kennung" wert="CYR"/>
+				<datum name="Beschreibung" wert="verbleibende Kapazität"/>
+				<datum name="Einheit" wert="%"/>
+			</datensatz>
+		</konfigurationsObjekt>
+		<konfigurationsObjekt pid="rdsQuantität.DEA" typ="typ.rdsQuantität">
+			<datensatz attributgruppe="atg.rdsQuantität" aspekt="asp.eigenschaften">
+				<datum name="Kennung" wert="DEA"/>
+				<datum name="Beschreibung" wert="Anzahl Tote"/>
+				<datum name="Einheit" wert=""/>
+			</datensatz>
+		</konfigurationsObjekt>
+		<konfigurationsObjekt pid="rdsQuantität.DIR" typ="typ.rdsQuantität">
+			<datensatz attributgruppe="atg.rdsQuantität" aspekt="asp.eigenschaften">
+				<datum name="Kennung" wert="DIR"/>
+				<datum name="Beschreibung" wert="Ausbreitungsrichtung"/>
+				<datum name="Einheit" wert="Grad"/>
+			</datensatz>
+		</konfigurationsObjekt>
+		<konfigurationsObjekt pid="rdsQuantität.DPH" typ="typ.rdsQuantität">
+			<datensatz attributgruppe="atg.rdsQuantität" aspekt="asp.eigenschaften">
+				<datum name="Kennung" wert="DPH"/>
+				<datum name="Beschreibung" wert="Tiefe"/>
+				<datum name="Einheit" wert="mm"/>
+			</datensatz>
+		</konfigurationsObjekt>
+		<konfigurationsObjekt pid="rdsQuantität.DPL" typ="typ.rdsQuantität">
+			<datensatz attributgruppe="atg.rdsQuantität" aspekt="asp.eigenschaften">
+				<datum name="Kennung" wert="DPL"/>
+				<datum name="Beschreibung" wert="Entfernung von der primären Location"/>
+				<datum name="Einheit" wert="m"/>
+			</datensatz>
+		</konfigurationsObjekt>
+		<konfigurationsObjekt pid="rdsQuantität.DSL" typ="typ.rdsQuantität">
+			<datensatz attributgruppe="atg.rdsQuantität" aspekt="asp.eigenschaften">
+				<datum name="Kennung" wert="DSL"/>
+				<datum name="Beschreibung" wert="Entfernung von der sekundären Location"/>
+				<datum name="Einheit" wert="m"/>
+			</datensatz>
+		</konfigurationsObjekt>
+		<konfigurationsObjekt pid="rdsQuantität.FLV" typ="typ.rdsQuantität">
+			<datensatz attributgruppe="atg.rdsQuantität" aspekt="asp.eigenschaften">
+				<datum name="Kennung" wert="FLV"/>
+				<datum name="Beschreibung" wert="PkwE Fluss Zahlenwert"/>
+				<datum name="Einheit" wert="PkwE/h"/>
+			</datensatz>
+		</konfigurationsObjekt>
+		<konfigurationsObjekt pid="rdsQuantität.FMH" typ="typ.rdsQuantität">
+			<datensatz attributgruppe="atg.rdsQuantität" aspekt="asp.eigenschaften">
+				<datum name="Kennung" wert="FMH"/>
+				<datum name="Beschreibung" wert="FM Frequenz"/>
+				<datum name="Einheit" wert="MHz"/>
+			</datensatz>
+		</konfigurationsObjekt>
+		<konfigurationsObjekt pid="rdsQuantität.GVW" typ="typ.rdsQuantität">
+			<datensatz attributgruppe="atg.rdsQuantität" aspekt="asp.eigenschaften">
+				<datum name="Kennung" wert="GVW"/>
+				<datum name="Beschreibung" wert="zulässiges Gesamtgewicht"/>
+				<datum name="Einheit" wert="t"/>
+			</datensatz>
+		</konfigurationsObjekt>
+		<konfigurationsObjekt pid="rdsQuantität.HEI" typ="typ.rdsQuantität">
+			<datensatz attributgruppe="atg.rdsQuantität" aspekt="asp.eigenschaften">
+				<datum name="Kennung" wert="HEI"/>
+				<datum name="Beschreibung" wert="Fahrzeughöhe"/>
+				<datum name="Einheit" wert="m"/>
+			</datensatz>
+		</konfigurationsObjekt>
+		<konfigurationsObjekt pid="rdsQuantität.HUM" typ="typ.rdsQuantität">
+			<datensatz attributgruppe="atg.rdsQuantität" aspekt="asp.eigenschaften">
+				<datum name="Kennung" wert="HUM"/>
+				<datum name="Beschreibung" wert="relative Luftfeuchtigkeit"/>
+				<datum name="Einheit" wert="%"/>
+			</datensatz>
+		</konfigurationsObjekt>
+		<konfigurationsObjekt pid="rdsQuantität.INJ" typ="typ.rdsQuantität">
+			<datensatz attributgruppe="atg.rdsQuantität" aspekt="asp.eigenschaften">
+				<datum name="Kennung" wert="INJ"/>
+				<datum name="Beschreibung" wert="Anzahl Verletzte"/>
+				<datum name="Einheit" wert=""/>
+			</datensatz>
+		</konfigurationsObjekt>
+		<konfigurationsObjekt pid="rdsQuantität.IVS" typ="typ.rdsQuantität">
+			<datensatz attributgruppe="atg.rdsQuantität" aspekt="asp.eigenschaften">
+				<datum name="Kennung" wert="IVS"/>
+				<datum name="Beschreibung" wert="Fahrzeuggeschwindigkeit"/>
+				<datum name="Einheit" wert="km/h"/>
+			</datensatz>
+		</konfigurationsObjekt>
+		<konfigurationsObjekt pid="rdsQuantität.JNM" typ="typ.rdsQuantität">
+			<datensatz attributgruppe="atg.rdsQuantität" aspekt="asp.eigenschaften">
+				<datum name="Kennung" wert="JNM"/>
+				<datum name="Beschreibung" wert="journey number"/>
+				<datum name="Einheit" wert=""/>
+			</datensatz>
+		</konfigurationsObjekt>
+		<konfigurationsObjekt pid="rdsQuantität.LEN" typ="typ.rdsQuantität">
+			<datensatz attributgruppe="atg.rdsQuantität" aspekt="asp.eigenschaften">
+				<datum name="Kennung" wert="LEN"/>
+				<datum name="Beschreibung" wert="betroffene Länge"/>
+				<datum name="Einheit" wert="km"/>
+			</datensatz>
+		</konfigurationsObjekt>
+		<konfigurationsObjekt pid="rdsQuantität.MAW" typ="typ.rdsQuantität">
+			<datensatz attributgruppe="atg.rdsQuantität" aspekt="asp.eigenschaften">
+				<datum name="Kennung" wert="MAW"/>
+				<datum name="Beschreibung" wert="maximale zulässige Achslast"/>
+				<datum name="Einheit" wert="t"/>
+			</datensatz>
+		</konfigurationsObjekt>
+		<konfigurationsObjekt pid="rdsQuantität.MIT" typ="typ.rdsQuantität">
+			<datensatz attributgruppe="atg.rdsQuantität" aspekt="asp.eigenschaften">
+				<datum name="Kennung" wert="MIT"/>
+				<datum name="Beschreibung" wert="Minimale Temperatur"/>
+				<datum name="Einheit" wert="°C"/>
+			</datensatz>
+		</konfigurationsObjekt>
+		<konfigurationsObjekt pid="rdsQuantität.MLE" typ="typ.rdsQuantität">
+			<datensatz attributgruppe="atg.rdsQuantität" aspekt="asp.eigenschaften">
+				<datum name="Kennung" wert="MLE"/>
+				<datum name="Beschreibung" wert="Länge der Messtrecke"/>
+				<datum name="Einheit" wert="km"/>
+			</datensatz>
+		</konfigurationsObjekt>
+		<konfigurationsObjekt pid="rdsQuantität.MTE" typ="typ.rdsQuantität">
+			<datensatz attributgruppe="atg.rdsQuantität" aspekt="asp.eigenschaften">
+				<datum name="Kennung" wert="MTE"/>
+				<datum name="Beschreibung" wert="maximale Temperatur"/>
+				<datum name="Einheit" wert="°C"/>
+			</datensatz>
+		</konfigurationsObjekt>
+		<konfigurationsObjekt pid="rdsQuantität.MWS" typ="typ.rdsQuantität">
+			<datensatz attributgruppe="atg.rdsQuantität" aspekt="asp.eigenschaften">
+				<datum name="Kennung" wert="MWS"/>
+				<datum name="Beschreibung" wert="maximale Windgeschwindigkeit"/>
+				<datum name="Einheit" wert="km/h"/>
+			</datensatz>
+		</konfigurationsObjekt>
+		<konfigurationsObjekt pid="rdsQuantität.N2C" typ="typ.rdsQuantität">
+			<datensatz attributgruppe="atg.rdsQuantität" aspekt="asp.eigenschaften">
+				<datum name="Kennung" wert="N2C"/>
+				<datum name="Beschreibung" wert="NO2 Konzentration"/>
+				<datum name="Einheit" wert="PPM"/>
+			</datensatz>
+		</konfigurationsObjekt>
+		<konfigurationsObjekt pid="rdsQuantität.NAC" typ="typ.rdsQuantität">
+			<datensatz attributgruppe="atg.rdsQuantität" aspekt="asp.eigenschaften">
+				<datum name="Kennung" wert="NAC"/>
+				<datum name="Beschreibung" wert="Anzahl der Unfälle"/>
+				<datum name="Einheit" wert=""/>
+			</datensatz>
+		</konfigurationsObjekt>
+		<konfigurationsObjekt pid="rdsQuantität.NBP" typ="typ.rdsQuantität">
+			<datensatz attributgruppe="atg.rdsQuantität" aspekt="asp.eigenschaften">
+				<datum name="Kennung" wert="NBP"/>
+				<datum name="Beschreibung" wert="Anzahl defekter Rohrleitungen"/>
+				<datum name="Einheit" wert=""/>
+			</datensatz>
+		</konfigurationsObjekt>
+		<konfigurationsObjekt pid="rdsQuantität.NBR" typ="typ.rdsQuantität">
+			<datensatz attributgruppe="atg.rdsQuantität" aspekt="asp.eigenschaften">
+				<datum name="Kennung" wert="NBR"/>
+				<datum name="Beschreibung" wert="Anzahl von Brücken"/>
+				<datum name="Einheit" wert=""/>
+			</datensatz>
+		</konfigurationsObjekt>
+		<konfigurationsObjekt pid="rdsQuantität.NBU" typ="typ.rdsQuantität">
+			<datensatz attributgruppe="atg.rdsQuantität" aspekt="asp.eigenschaften">
+				<datum name="Kennung" wert="NBU"/>
+				<datum name="Beschreibung" wert="Anzahl Busse"/>
+				<datum name="Einheit" wert=""/>
+			</datensatz>
+		</konfigurationsObjekt>
+		<konfigurationsObjekt pid="rdsQuantität.NBV" typ="typ.rdsQuantität">
+			<datensatz attributgruppe="atg.rdsQuantität" aspekt="asp.eigenschaften">
+				<datum name="Kennung" wert="NBV"/>
+				<datum name="Beschreibung" wert="Anzahl defekter Fahrzeuge"/>
+				<datum name="Einheit" wert=""/>
+			</datensatz>
+		</konfigurationsObjekt>
+		<konfigurationsObjekt pid="rdsQuantität.NCH" typ="typ.rdsQuantität">
+			<datensatz attributgruppe="atg.rdsQuantität" aspekt="asp.eigenschaften">
+				<datum name="Kennung" wert="NCH"/>
+				<datum name="Beschreibung" wert="Kanal Nummer"/>
+				<datum name="Einheit" wert=""/>
+			</datensatz>
+		</konfigurationsObjekt>
+		<konfigurationsObjekt pid="rdsQuantität.NCY" typ="typ.rdsQuantität">
+			<datensatz attributgruppe="atg.rdsQuantität" aspekt="asp.eigenschaften">
+				<datum name="Kennung" wert="NCY"/>
+				<datum name="Beschreibung" wert="Anzahl Kolonnen"/>
+				<datum name="Einheit" wert=""/>
+			</datensatz>
+		</konfigurationsObjekt>
+		<konfigurationsObjekt pid="rdsQuantität.NFT" typ="typ.rdsQuantität">
+			<datensatz attributgruppe="atg.rdsQuantität" aspekt="asp.eigenschaften">
+				<datum name="Kennung" wert="NFT"/>
+				<datum name="Beschreibung" wert="Anzahl umgestürzter Bäume"/>
+				<datum name="Einheit" wert=""/>
+			</datensatz>
+		</konfigurationsObjekt>
+		<konfigurationsObjekt pid="rdsQuantität.NHL" typ="typ.rdsQuantität">
+			<datensatz attributgruppe="atg.rdsQuantität" aspekt="asp.eigenschaften">
+				<datum name="Kennung" wert="NHL"/>
+				<datum name="Beschreibung" wert="Anzahl Schwertransporte"/>
+				<datum name="Einheit" wert=""/>
+			</datensatz>
+		</konfigurationsObjekt>
+		<konfigurationsObjekt pid="rdsQuantität.NHV" typ="typ.rdsQuantität">
+			<datensatz attributgruppe="atg.rdsQuantität" aspekt="asp.eigenschaften">
+				<datum name="Kennung" wert="NHV"/>
+				<datum name="Beschreibung" wert="Anzahl schwere Fahrzeuge"/>
+				<datum name="Einheit" wert=""/>
+			</datensatz>
+		</konfigurationsObjekt>
+		<konfigurationsObjekt pid="rdsQuantität.NIC" typ="typ.rdsQuantität">
+			<datensatz attributgruppe="atg.rdsQuantität" aspekt="asp.eigenschaften">
+				<datum name="Kennung" wert="NIC"/>
+				<datum name="Beschreibung" wert="Anzahl Ereignisse"/>
+				<datum name="Einheit" wert=""/>
+			</datensatz>
+		</konfigurationsObjekt>
+		<konfigurationsObjekt pid="rdsQuantität.NLD" typ="typ.rdsQuantität">
+			<datensatz attributgruppe="atg.rdsQuantität" aspekt="asp.eigenschaften">
+				<datum name="Kennung" wert="NLD"/>
+				<datum name="Beschreibung" wert="Anzahl Ladungen"/>
+				<datum name="Einheit" wert=""/>
+			</datensatz>
+		</konfigurationsObjekt>
+		<konfigurationsObjekt pid="rdsQuantität.NLN" typ="typ.rdsQuantität">
+			<datensatz attributgruppe="atg.rdsQuantität" aspekt="asp.eigenschaften">
+				<datum name="Kennung" wert="NLN"/>
+				<datum name="Beschreibung" wert="Anzahl Fahrstreifen"/>
+				<datum name="Einheit" wert=""/>
+			</datensatz>
+		</konfigurationsObjekt>
+		<konfigurationsObjekt pid="rdsQuantität.NLQ" typ="typ.rdsQuantität">
+			<datensatz attributgruppe="atg.rdsQuantität" aspekt="asp.eigenschaften">
+				<datum name="Kennung" wert="NLQ"/>
+				<datum name="Beschreibung" wert="Anzahl Staus"/>
+				<datum name="Einheit" wert=""/>
+			</datensatz>
+		</konfigurationsObjekt>
+		<konfigurationsObjekt pid="rdsQuantität.NMC" typ="typ.rdsQuantität">
+			<datensatz attributgruppe="atg.rdsQuantität" aspekt="asp.eigenschaften">
+				<datum name="Kennung" wert="NMC"/>
+				<datum name="Beschreibung" wert="Kohlenwasserstoffe Konzentration"/>
+				<datum name="Einheit" wert="PPM"/>
+			</datensatz>
+		</konfigurationsObjekt>
+		<konfigurationsObjekt pid="rdsQuantität.NOB" typ="typ.rdsQuantität">
+			<datensatz attributgruppe="atg.rdsQuantität" aspekt="asp.eigenschaften">
+				<datum name="Kennung" wert="NOB"/>
+				<datum name="Beschreibung" wert="Anzahl Hindernisse"/>
+				<datum name="Einheit" wert=""/>
+			</datensatz>
+		</konfigurationsObjekt>
+		<konfigurationsObjekt pid="rdsQuantität.NOC" typ="typ.rdsQuantität">
+			<datensatz attributgruppe="atg.rdsQuantität" aspekt="asp.eigenschaften">
+				<datum name="Kennung" wert="NOC"/>
+				<datum name="Beschreibung" wert="NO Konzentration"/>
+				<datum name="Einheit" wert="PPM"/>
+			</datensatz>
+		</konfigurationsObjekt>
+		<konfigurationsObjekt pid="rdsQuantität.NOJ" typ="typ.rdsQuantität">
+			<datensatz attributgruppe="atg.rdsQuantität" aspekt="asp.eigenschaften">
+				<datum name="Kennung" wert="NOJ"/>
+				<datum name="Beschreibung" wert="Anzahl Objekte"/>
+				<datum name="Einheit" wert=""/>
+			</datensatz>
+		</konfigurationsObjekt>
+		<konfigurationsObjekt pid="rdsQuantität.NPS" typ="typ.rdsQuantität">
+			<datensatz attributgruppe="atg.rdsQuantität" aspekt="asp.eigenschaften">
+				<datum name="Kennung" wert="NPS"/>
+				<datum name="Beschreibung" wert="Anzahl freier Parkplätze"/>
+				<datum name="Einheit" wert=""/>
+			</datensatz>
+		</konfigurationsObjekt>
+		<konfigurationsObjekt pid="rdsQuantität.NRC" typ="typ.rdsQuantität">
+			<datensatz attributgruppe="atg.rdsQuantität" aspekt="asp.eigenschaften">
+				<datum name="Kennung" wert="NRC"/>
+				<datum name="Beschreibung" wert="Anzahl Zufahrtsregelungen"/>
+				<datum name="Einheit" wert=""/>
+			</datensatz>
+		</konfigurationsObjekt>
+		<konfigurationsObjekt pid="rdsQuantität.NRD" typ="typ.rdsQuantität">
+			<datensatz attributgruppe="atg.rdsQuantität" aspekt="asp.eigenschaften">
+				<datum name="Kennung" wert="NRD"/>
+				<datum name="Beschreibung" wert="Anzahl Fahrer"/>
+				<datum name="Einheit" wert=""/>
+			</datensatz>
+		</konfigurationsObjekt>
+		<konfigurationsObjekt pid="rdsQuantität.NSH" typ="typ.rdsQuantität">
+			<datensatz attributgruppe="atg.rdsQuantität" aspekt="asp.eigenschaften">
+				<datum name="Kennung" wert="NSH"/>
+				<datum name="Beschreibung" wert="Anzahl verlorener Ladungen"/>
+				<datum name="Einheit" wert=""/>
+			</datensatz>
+		</konfigurationsObjekt>
+		<konfigurationsObjekt pid="rdsQuantität.NSL" typ="typ.rdsQuantität">
+			<datensatz attributgruppe="atg.rdsQuantität" aspekt="asp.eigenschaften">
+				<datum name="Kennung" wert="NSL"/>
+				<datum name="Beschreibung" wert="Anzahl Servicefahrbahnen"/>
+				<datum name="Einheit" wert=""/>
+			</datensatz>
+		</konfigurationsObjekt>
+		<konfigurationsObjekt pid="rdsQuantität.NSW" typ="typ.rdsQuantität">
+			<datensatz attributgruppe="atg.rdsQuantität" aspekt="asp.eigenschaften">
+				<datum name="Kennung" wert="NSW"/>
+				<datum name="Beschreibung" wert="Anzahl Abwasserkanäle"/>
+				<datum name="Einheit" wert=""/>
+			</datensatz>
+		</konfigurationsObjekt>
+		<konfigurationsObjekt pid="rdsQuantität.NTL" typ="typ.rdsQuantität">
+			<datensatz attributgruppe="atg.rdsQuantität" aspekt="asp.eigenschaften">
+				<datum name="Kennung" wert="NTL"/>
+				<datum name="Beschreibung" wert="Menge zeitweiliger Ampelanlagen"/>
+				<datum name="Einheit" wert=""/>
+			</datensatz>
+		</konfigurationsObjekt>
+		<konfigurationsObjekt pid="rdsQuantität.NVE" typ="typ.rdsQuantität">
+			<datensatz attributgruppe="atg.rdsQuantität" aspekt="asp.eigenschaften">
+				<datum name="Kennung" wert="NVE"/>
+				<datum name="Beschreibung" wert="Anzahl Fahrzeuge"/>
+				<datum name="Einheit" wert=""/>
+			</datensatz>
+		</konfigurationsObjekt>
+		<konfigurationsObjekt pid="rdsQuantität.NVF" typ="typ.rdsQuantität">
+			<datensatz attributgruppe="atg.rdsQuantität" aspekt="asp.eigenschaften">
+				<datum name="Kennung" wert="NVF"/>
+				<datum name="Beschreibung" wert="Anzahl brennender Fahrzeuge"/>
+				<datum name="Einheit" wert=""/>
+			</datensatz>
+		</konfigurationsObjekt>
+		<konfigurationsObjekt pid="rdsQuantität.NWV" typ="typ.rdsQuantität">
+			<datensatz attributgruppe="atg.rdsQuantität" aspekt="asp.eigenschaften">
+				<datum name="Kennung" wert="NWV"/>
+				<datum name="Beschreibung" wert="Anzahl wartender Fahrzeuge"/>
+				<datum name="Einheit" wert=""/>
+			</datensatz>
+		</konfigurationsObjekt>
+		<konfigurationsObjekt pid="rdsQuantität.O3C" typ="typ.rdsQuantität">
+			<datensatz attributgruppe="atg.rdsQuantität" aspekt="asp.eigenschaften">
+				<datum name="Kennung" wert="O3C"/>
+				<datum name="Beschreibung" wert="Ozon Konzentration"/>
+				<datum name="Einheit" wert="PPM"/>
+			</datensatz>
+		</konfigurationsObjekt>
+		<konfigurationsObjekt pid="rdsQuantität.OCP" typ="typ.rdsQuantität">
+			<datensatz attributgruppe="atg.rdsQuantität" aspekt="asp.eigenschaften">
+				<datum name="Kennung" wert="OCP"/>
+				<datum name="Beschreibung" wert="minimale Fahrzeugbelegung"/>
+				<datum name="Einheit" wert=""/>
+			</datensatz>
+		</konfigurationsObjekt>
+		<konfigurationsObjekt pid="rdsQuantität.OCV" typ="typ.rdsQuantität">
+			<datensatz attributgruppe="atg.rdsQuantität" aspekt="asp.eigenschaften">
+				<datum name="Kennung" wert="OCV"/>
+				<datum name="Beschreibung" wert="Belegung"/>
+				<datum name="Einheit" wert="%"/>
+			</datensatz>
+		</konfigurationsObjekt>
+		<konfigurationsObjekt pid="rdsQuantität.ONL" typ="typ.rdsQuantität">
+			<datensatz attributgruppe="atg.rdsQuantität" aspekt="asp.eigenschaften">
+				<datum name="Kennung" wert="ONL"/>
+				<datum name="Beschreibung" wert="originale Anzahl Fahrstreifen"/>
+				<datum name="Einheit" wert=""/>
+			</datensatz>
+		</konfigurationsObjekt>
+		<konfigurationsObjekt pid="rdsQuantität.PDD" typ="typ.rdsQuantität">
+			<datensatz attributgruppe="atg.rdsQuantität" aspekt="asp.eigenschaften">
+				<datum name="Kennung" wert="PDD"/>
+				<datum name="Beschreibung" wert="Niederschlagshöhe"/>
+				<datum name="Einheit" wert="mm"/>
+			</datensatz>
+		</konfigurationsObjekt>
+		<konfigurationsObjekt pid="rdsQuantität.PIN" typ="typ.rdsQuantität">
+			<datensatz attributgruppe="atg.rdsQuantität" aspekt="asp.eigenschaften">
+				<datum name="Kennung" wert="PIN"/>
+				<datum name="Beschreibung" wert="Niederschlagsintensität"/>
+				<datum name="Einheit" wert="mm/h"/>
+			</datensatz>
+		</konfigurationsObjekt>
+		<konfigurationsObjekt pid="rdsQuantität.POC" typ="typ.rdsQuantität">
+			<datensatz attributgruppe="atg.rdsQuantität" aspekt="asp.eigenschaften">
+				<datum name="Kennung" wert="POC"/>
+				<datum name="Beschreibung" wert="Parkplatzbelegung"/>
+				<datum name="Einheit" wert="%"/>
+			</datensatz>
+		</konfigurationsObjekt>
+		<konfigurationsObjekt pid="rdsQuantität.PPP" typ="typ.rdsQuantität">
+			<datensatz attributgruppe="atg.rdsQuantität" aspekt="asp.eigenschaften">
+				<datum name="Kennung" wert="PPP"/>
+				<datum name="Beschreibung" wert="Feinstaub-Konzentration"/>
+				<datum name="Einheit" wert="PPM"/>
+			</datensatz>
+		</konfigurationsObjekt>
+		<konfigurationsObjekt pid="rdsQuantität.PRB" typ="typ.rdsQuantität">
+			<datensatz attributgruppe="atg.rdsQuantität" aspekt="asp.eigenschaften">
+				<datum name="Kennung" wert="PRB"/>
+				<datum name="Beschreibung" wert="Wahrscheinlichkeit"/>
+				<datum name="Einheit" wert="%"/>
+			</datensatz>
+		</konfigurationsObjekt>
+
+		<konfigurationsObjekt pid="rdsQuantität.QLO" typ="typ.rdsQuantität">
+			<info>
+				<kurzinfo>"QLO" ist der Quantifizierer für eine Location.</kurzinfo>
+				<beschreibung>
+					<absatz>Auskunft GEWI:</absatz>
+					<absatz>"QLO" ist der Quantifizierer für eine Location.</absatz>
+					<absatz>D.h. Ist "EQL" = "QLO", dann enthält "EQC" einen Location
+						code der die Richtung für das Ereignis spezifiziert.</absatz>
+					<absatz>Im Beispiel "AS Stuttgart-Degerloch Gefahr durch Ölspur in
+						Richtung Stuttgart-Möhringen/Hotel SI" enthält "EQC" den
+						Locationcode von "Stuttgart-Möhringen/Hotel SI".</absatz>
+					<absatz>"QLO" ist vergleichbar mit Label 11 in RDSTMC.</absatz>
+				</beschreibung>
+			</info>
+			<datensatz attributgruppe="atg.rdsQuantität" aspekt="asp.eigenschaften">
+				<datum name="Kennung" wert="QLO" />
+				<datum name="Beschreibung" wert="in Richtung" />
+				<datum name="Einheit" wert="" />
+			</datensatz>
+		</konfigurationsObjekt>
+		
+		<konfigurationsObjekt pid="rdsQuantität.Q00" typ="typ.rdsQuantität">
+		<!-- nur fuer interne Verwendung  in RDS-Meldungseditor, wird als 'Q01' zur LMS versendet -->
+			<datensatz attributgruppe="atg.rdsQuantität" aspekt="asp.eigenschaften">
+				<datum name="Kennung" wert="Q00"/>
+				<datum name="Beschreibung" wert="Anzahl"/>
+				<datum name="Einheit" wert=""/>
+			</datensatz>
+		</konfigurationsObjekt>
+		
+		<konfigurationsObjekt pid="rdsQuantität.Q01" typ="typ.rdsQuantität">
+			<datensatz attributgruppe="atg.rdsQuantität" aspekt="asp.eigenschaften">
+				<datum name="Kennung" wert="Q01"/>
+				<datum name="Beschreibung" wert="Anzahl"/>
+				<datum name="Einheit" wert=""/>
+			</datensatz>
+		</konfigurationsObjekt>
+		<konfigurationsObjekt pid="rdsQuantität.Q05" typ="typ.rdsQuantität">
+			<datensatz attributgruppe="atg.rdsQuantität" aspekt="asp.eigenschaften">
+				<datum name="Kennung" wert="Q05"/>
+				<datum name="Beschreibung" wert="Verzögerung"/>
+				<datum name="Einheit" wert="min/h"/>
+			</datensatz>
+		</konfigurationsObjekt>
+		<konfigurationsObjekt pid="rdsQuantität.Q07" typ="typ.rdsQuantität">
+			<datensatz attributgruppe="atg.rdsQuantität" aspekt="asp.eigenschaften">
+				<datum name="Kennung" wert="Q07"/>
+				<datum name="Beschreibung" wert="Zeit"/>
+				<datum name="Einheit" wert=""/>
+			</datensatz>
+		</konfigurationsObjekt>
+		<konfigurationsObjekt pid="rdsQuantität.Q09" typ="typ.rdsQuantität">
+			<datensatz attributgruppe="atg.rdsQuantität" aspekt="asp.eigenschaften">
+				<datum name="Kennung" wert="Q09"/>
+				<datum name="Beschreibung" wert="Begrenzung"/>
+				<datum name="Einheit" wert="m"/>
+			</datensatz>
+		</konfigurationsObjekt>
+		<konfigurationsObjekt pid="rdsQuantität.Q13" typ="typ.rdsQuantität">
+			<datensatz attributgruppe="atg.rdsQuantität" aspekt="asp.eigenschaften">
+				<datum name="Kennung" wert="Q13"/>
+				<datum name="Beschreibung" wert="Ordnungszahl"/>
+				<datum name="Einheit" wert=""/>
+			</datensatz>
+		</konfigurationsObjekt>
+		<konfigurationsObjekt pid="rdsQuantität.QUE" typ="typ.rdsQuantität">
+			<datensatz attributgruppe="atg.rdsQuantität" aspekt="asp.eigenschaften">
+				<datum name="Kennung" wert="QUE"/>
+				<datum name="Beschreibung" wert="Staulänge"/>
+				<datum name="Einheit" wert="km"/>
+			</datensatz>
+		</konfigurationsObjekt>
+		<konfigurationsObjekt pid="rdsQuantität.RTE" typ="typ.rdsQuantität">
+			<datensatz attributgruppe="atg.rdsQuantität" aspekt="asp.eigenschaften">
+				<datum name="Kennung" wert="RTE"/>
+				<datum name="Beschreibung" wert="Oberflächentemperatur der Fahrbahn"/>
+				<datum name="Einheit" wert="°C"/>
+			</datensatz>
+		</konfigurationsObjekt>
+		<konfigurationsObjekt pid="rdsQuantität.S2C" typ="typ.rdsQuantität">
+			<datensatz attributgruppe="atg.rdsQuantität" aspekt="asp.eigenschaften">
+				<datum name="Kennung" wert="S2C"/>
+				<datum name="Beschreibung" wert="SO2 Konzentration"/>
+				<datum name="Einheit" wert="PPM"/>
+			</datensatz>
+		</konfigurationsObjekt>
+		<konfigurationsObjekt pid="rdsQuantität.SBL" typ="typ.rdsQuantität">
+			<datensatz attributgruppe="atg.rdsQuantität" aspekt="asp.eigenschaften">
+				<datum name="Kennung" wert="SBL"/>
+				<datum name="Beschreibung" wert="Anzahl Sandstrahlarbeiten"/>
+				<datum name="Einheit" wert=""/>
+			</datensatz>
+		</konfigurationsObjekt>
+		<konfigurationsObjekt pid="rdsQuantität.SCR" typ="typ.rdsQuantität">
+			<datensatz attributgruppe="atg.rdsQuantität" aspekt="asp.eigenschaften">
+				<datum name="Kennung" wert="SCR"/>
+				<datum name="Beschreibung" wert="Anzahl Baustellen"/>
+				<datum name="Einheit" wert=""/>
+			</datensatz>
+		</konfigurationsObjekt>
+		<konfigurationsObjekt pid="rdsQuantität.SEQ" typ="typ.rdsQuantität">
+			<datensatz attributgruppe="atg.rdsQuantität" aspekt="asp.eigenschaften">
+				<datum name="Kennung" wert="SEQ"/>
+				<datum name="Beschreibung" wert="fortlaufende Ausfahrtsnummer"/>
+				<datum name="Einheit" wert=""/>
+			</datensatz>
+		</konfigurationsObjekt>
+		<konfigurationsObjekt pid="rdsQuantität.SMM" typ="typ.rdsQuantität">
+			<datensatz attributgruppe="atg.rdsQuantität" aspekt="asp.eigenschaften">
+				<datum name="Kennung" wert="SMM"/>
+				<datum name="Beschreibung" wert="Menge langsam fahrender Fahrzeuge"/>
+				<datum name="Einheit" wert=""/>
+			</datensatz>
+		</konfigurationsObjekt>
+		<konfigurationsObjekt pid="rdsQuantität.SMW" typ="typ.rdsQuantität">
+			<datensatz attributgruppe="atg.rdsQuantität" aspekt="asp.eigenschaften">
+				<datum name="Kennung" wert="SMW"/>
+				<datum name="Beschreibung" wert="Anzahl Wartungsarbeiten"/>
+				<datum name="Einheit" wert=""/>
+			</datensatz>
+		</konfigurationsObjekt>
+		<konfigurationsObjekt pid="rdsQuantität.SPA" typ="typ.rdsQuantität">
+			<datensatz attributgruppe="atg.rdsQuantität" aspekt="asp.eigenschaften">
+				<datum name="Kennung" wert="SPA"/>
+				<datum name="Beschreibung" wert="vorgegebene Geschwindigkeitsbegrenzung"/>
+				<datum name="Einheit" wert="km/h"/>
+			</datensatz>
+		</konfigurationsObjekt>
+		<konfigurationsObjekt pid="rdsQuantität.SPM" typ="typ.rdsQuantität">
+			<datensatz attributgruppe="atg.rdsQuantität" aspekt="asp.eigenschaften">
+				<datum name="Kennung" wert="SPM"/>
+				<datum name="Beschreibung" wert="Geschwindigkeitsbeschränkung"/>
+				<datum name="Einheit" wert="km/h"/>
+			</datensatz>
+		</konfigurationsObjekt>
+		<konfigurationsObjekt pid="rdsQuantität.SPR" typ="typ.rdsQuantität">
+			<datensatz attributgruppe="atg.rdsQuantität" aspekt="asp.eigenschaften">
+				<datum name="Kennung" wert="SPR"/>
+				<datum name="Beschreibung" wert="Grad der Geschwindigkeitsreduzierung"/>
+				<datum name="Einheit" wert="%"/>
+			</datensatz>
+		</konfigurationsObjekt>
+		<konfigurationsObjekt pid="rdsQuantität.SPV" typ="typ.rdsQuantität">
+			<datensatz attributgruppe="atg.rdsQuantität" aspekt="asp.eigenschaften">
+				<datum name="Kennung" wert="SPV"/>
+				<datum name="Beschreibung" wert="Geschwindigkeitsreduzierung"/>
+				<datum name="Einheit" wert="km/h"/>
+			</datensatz>
+		</konfigurationsObjekt>
+		<konfigurationsObjekt pid="rdsQuantität.SRM" typ="typ.rdsQuantität">
+			<datensatz attributgruppe="atg.rdsQuantität" aspekt="asp.eigenschaften">
+				<datum name="Kennung" wert="SRM"/>
+				<datum name="Beschreibung" wert="Anzahl Markierungsarbeiten"/>
+				<datum name="Einheit" wert=""/>
+			</datensatz>
+		</konfigurationsObjekt>
+		<konfigurationsObjekt pid="rdsQuantität.SRN" typ="typ.rdsQuantität">
+			<datensatz attributgruppe="atg.rdsQuantität" aspekt="asp.eigenschaften">
+				<datum name="Kennung" wert="SRN"/>
+				<datum name="Beschreibung" wert="Sonneneinstrahlung Netz"/>
+				<datum name="Einheit" wert="Watt/m²"/>
+			</datensatz>
+		</konfigurationsObjekt>
+		<konfigurationsObjekt pid="rdsQuantität.SRR" typ="typ.rdsQuantität">
+			<datensatz attributgruppe="atg.rdsQuantität" aspekt="asp.eigenschaften">
+				<datum name="Kennung" wert="SRR"/>
+				<datum name="Beschreibung" wert="Abschnitte mit Fahrbahnerneuerung"/>
+				<datum name="Einheit" wert=""/>
+			</datensatz>
+		</konfigurationsObjekt>
+		<konfigurationsObjekt pid="rdsQuantität.SRW" typ="typ.rdsQuantität">
+			<datensatz attributgruppe="atg.rdsQuantität" aspekt="asp.eigenschaften">
+				<datum name="Kennung" wert="SRW"/>
+				<datum name="Beschreibung" wert="Anzahl Straßenbaustellen"/>
+				<datum name="Einheit" wert=""/>
+			</datensatz>
+		</konfigurationsObjekt>
+		<konfigurationsObjekt pid="rdsQuantität.STL" typ="typ.rdsQuantität">
+			<datensatz attributgruppe="atg.rdsQuantität" aspekt="asp.eigenschaften">
+				<datum name="Kennung" wert="STL"/>
+				<datum name="Beschreibung" wert="Menge von Ampelanlagen"/>
+				<datum name="Einheit" wert=""/>
+			</datensatz>
+		</konfigurationsObjekt>
+		<konfigurationsObjekt pid="rdsQuantität.STR" typ="typ.rdsQuantität">
+			<datensatz attributgruppe="atg.rdsQuantität" aspekt="asp.eigenschaften">
+				<datum name="Kennung" wert="STR"/>
+				<datum name="Beschreibung" wert="totale Sonneneinstrahlung"/>
+				<datum name="Einheit" wert="Watt/m²"/>
+			</datensatz>
+		</konfigurationsObjekt>
+		<konfigurationsObjekt pid="rdsQuantität.TAI" typ="typ.rdsQuantität">
+			<datensatz attributgruppe="atg.rdsQuantität" aspekt="asp.eigenschaften">
+				<datum name="Kennung" wert="TAI"/>
+				<datum name="Beschreibung" wert="Anzahl Anhänger"/>
+				<datum name="Einheit" wert=""/>
+			</datensatz>
+		</konfigurationsObjekt>
+		<konfigurationsObjekt pid="rdsQuantität.TES" typ="typ.rdsQuantität">
+			<datensatz attributgruppe="atg.rdsQuantität" aspekt="asp.eigenschaften">
+				<datum name="Kennung" wert="TES"/>
+				<datum name="Beschreibung" wert="Testnachricht Nummer"/>
+				<datum name="Einheit" wert=""/>
+			</datensatz>
+		</konfigurationsObjekt>
+		<konfigurationsObjekt pid="rdsQuantität.THC" typ="typ.rdsQuantität">
+			<datensatz attributgruppe="atg.rdsQuantität" aspekt="asp.eigenschaften">
+				<datum name="Kennung" wert="THC"/>
+				<datum name="Beschreibung" wert="Kohlenwasserstoff-Konzentration total"/>
+				<datum name="Einheit" wert="PPM"/>
+			</datensatz>
+		</konfigurationsObjekt>
+		<konfigurationsObjekt pid="rdsQuantität.TTI" typ="typ.rdsQuantität">
+			<datensatz attributgruppe="atg.rdsQuantität" aspekt="asp.eigenschaften">
+				<datum name="Kennung" wert="TTI"/>
+				<datum name="Beschreibung" wert="Erhöhung der Reisezeit"/>
+				<datum name="Einheit" wert="%"/>
+			</datensatz>
+		</konfigurationsObjekt>
+		<konfigurationsObjekt pid="rdsQuantität.VCF" typ="typ.rdsQuantität">
+			<datensatz attributgruppe="atg.rdsQuantität" aspekt="asp.eigenschaften">
+				<datum name="Kennung" wert="VCF"/>
+				<datum name="Beschreibung" wert="Anzahl einer Fahrzeugklasse im Verkehr"/>
+				<datum name="Einheit" wert="%"/>
+			</datensatz>
+		</konfigurationsObjekt>
+		<konfigurationsObjekt pid="rdsQuantität.VDG" typ="typ.rdsQuantität">
+			<datensatz attributgruppe="atg.rdsQuantität" aspekt="asp.eigenschaften">
+				<datum name="Kennung" wert="VDG"/>
+				<datum name="Beschreibung" wert="Menge gefährlicher Güter"/>
+				<datum name="Einheit" wert="m³"/>
+			</datensatz>
+		</konfigurationsObjekt>
+		<konfigurationsObjekt pid="rdsQuantität.VFV" typ="typ.rdsQuantität">
+			<datensatz attributgruppe="atg.rdsQuantität" aspekt="asp.eigenschaften">
+				<datum name="Kennung" wert="VFV"/>
+				<datum name="Beschreibung" wert="Verkehrsfluss"/>
+				<datum name="Einheit" wert="Fz/Tag"/>
+			</datensatz>
+		</konfigurationsObjekt>
+		<konfigurationsObjekt pid="rdsQuantität.VIS" typ="typ.rdsQuantität">
+			<datensatz attributgruppe="atg.rdsQuantität" aspekt="asp.eigenschaften">
+				<datum name="Kennung" wert="VIS"/>
+				<datum name="Beschreibung" wert="Sichtweite"/>
+				<datum name="Einheit" wert="m"/>
+			</datensatz>
+		</konfigurationsObjekt>
+		<konfigurationsObjekt pid="rdsQuantität.VLN" typ="typ.rdsQuantität">
+			<datensatz attributgruppe="atg.rdsQuantität" aspekt="asp.eigenschaften">
+				<datum name="Kennung" wert="VLN"/>
+				<datum name="Beschreibung" wert="Fahrzeuglänge"/>
+				<datum name="Einheit" wert="m"/>
+			</datensatz>
+		</konfigurationsObjekt>
+		<konfigurationsObjekt pid="rdsQuantität.WDB" typ="typ.rdsQuantität">
+			<datensatz attributgruppe="atg.rdsQuantität" aspekt="asp.eigenschaften">
+				<datum name="Kennung" wert="WDB"/>
+				<datum name="Beschreibung" wert="Windrichtung (Peilung)"/>
+				<datum name="Einheit" wert="Grad"/>
+			</datensatz>
+		</konfigurationsObjekt>
+		<konfigurationsObjekt pid="rdsQuantität.WDG" typ="typ.rdsQuantität">
+			<datensatz attributgruppe="atg.rdsQuantität" aspekt="asp.eigenschaften">
+				<datum name="Kennung" wert="WDG"/>
+				<datum name="Beschreibung" wert="Gewicht gefährlicher Güter"/>
+				<datum name="Einheit" wert="t"/>
+			</datensatz>
+		</konfigurationsObjekt>
+		<konfigurationsObjekt pid="rdsQuantität.WDS" typ="typ.rdsQuantität">
+			<datensatz attributgruppe="atg.rdsQuantität" aspekt="asp.eigenschaften">
+				<datum name="Kennung" wert="WDS"/>
+				<datum name="Beschreibung" wert="durchschnittliche Windgeschwindigkeit"/>
+				<datum name="Einheit" wert="km/h"/>
+			</datensatz>
+		</konfigurationsObjekt>
+		<konfigurationsObjekt pid="rdsQuantität.WEI" typ="typ.rdsQuantität">
+			<datensatz attributgruppe="atg.rdsQuantität" aspekt="asp.eigenschaften">
+				<datum name="Kennung" wert="WEI"/>
+				<datum name="Beschreibung" wert="Fahrzeuggewicht"/>
+				<datum name="Einheit" wert="t"/>
+			</datensatz>
+		</konfigurationsObjekt>
+		<konfigurationsObjekt pid="rdsQuantität.WID" typ="typ.rdsQuantität">
+			<datensatz attributgruppe="atg.rdsQuantität" aspekt="asp.eigenschaften">
+				<datum name="Kennung" wert="WID"/>
+				<datum name="Beschreibung" wert="Fahrzeugbreite"/>
+				<datum name="Einheit" wert="m"/>
+			</datensatz>
+		</konfigurationsObjekt>
+		<konfigurationsObjekt pid="rdsQuantität.WMH" typ="typ.rdsQuantität">
+			<datensatz attributgruppe="atg.rdsQuantität" aspekt="asp.eigenschaften">
+				<datum name="Kennung" wert="WMH"/>
+				<datum name="Beschreibung" wert="Höhe der Windmessung"/>
+				<datum name="Einheit" wert="m"/>
+			</datensatz>
+		</konfigurationsObjekt>
+	</objekte>
+</konfigurationsBereich>

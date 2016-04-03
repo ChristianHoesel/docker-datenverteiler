@@ -1,0 +1,19 @@
+Manifest-Version: 1.0
+Ant-Version: Apache Ant 1.8.2
+Created-By: Kappich Systemberatung
+Bundle-ManifestVersion: 2
+Bundle-Name: de.kappich.samples.operatingMessage
+Bundle-SymbolicName: de.kappich.samples.operatingMessage
+Bundle-Version: 3.6.2.v12133-20140320-1240
+Bundle-Vendor: Kappich Systemberatung
+Bundle-ActivationPolicy: lazy
+Bundle-RequiredExecutionEnvironment: JavaSE-1.6
+Bundle-ClassPath: de.kappich.samples.operatingMessage.jar
+Export-Package: de.kappich.samples.operatingMessage, de.kappich.sample
+ s.operatingMessage.main
+Require-Bundle: de.bsvrz.dav.daf, de.bsvrz.sys.funclib.dataSerializer,
+  de.bsvrz.sys.funclib.communicationStreams, de.bsvrz.sys.funclib.debu
+ g, de.bsvrz.sys.funclib.commandLineArgs, de.bsvrz.sys.funclib.applica
+ tion, de.bsvrz.sys.funclib.operatingMessage
+Eclipse-BuddyPolicy: dependent
+
