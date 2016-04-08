@@ -12,6 +12,5 @@ RUN apt-get update && \
     apt-get clean
 COPY Kernsoftware-Basissystem Kernsoftware-Basissystem
 #ENTRYPOINT ["bash","Kernsoftware-Basissystem/skripte-bash/KernsoftwareSystem.sh"]
-CMD ["bash","Kernsoftware-Basissystem/skripte-bash/KernsoftwareSystem.sh","&"]
 EXPOSE 8083
-
+CMD ["bash","Kernsoftware-Basissystem/skripte-bash/KernsoftwareSystem.sh"]

@@ -52,6 +52,5 @@ $java \
  de.kappich.vew.bmvew.main.SimpleMessageManager \
  ${dav1} \
  -debugLevelStdErrText=NONE \
- -debugLevelFileText=CONFIG \
- &
+ -debugLevelFileText=CONFIG
 

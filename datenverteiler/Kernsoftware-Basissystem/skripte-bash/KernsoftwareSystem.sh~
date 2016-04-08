@@ -6,7 +6,7 @@ cd `dirname $0`
 . einstellungen.sh
 
 # Datenverteiler im Hintergrund starten
-$java \
+nohup $java \
  -cp ../distributionspakete/de.bsvrz.dav.dav/de.bsvrz.dav.dav-runtime.jar \
  -Xmx200m \
  de.bsvrz.dav.dav.main.Transmitter \
@@ -22,7 +22,7 @@ $java \
 sleep 2
 
 # Konfiguration im Hintergrund starten
-$java \
+nohup $java \
  -cp ../distributionspakete/de.bsvrz.puk.config/de.bsvrz.puk.config-runtime.jar \
  -Xmx300m \
  de.bsvrz.puk.config.main.ConfigurationApp \
@@ -36,7 +36,7 @@ $java \
  &
 
 # Parametrierung im Hintergrund starten
-$java -Xmx1500m -jar ../distributionspakete/de.bsvrz.puk.param/de.bsvrz.puk.param-runtime.jar $dav1 \
+nohup $java -Xmx1500m -jar ../distributionspakete/de.bsvrz.puk.param/de.bsvrz.puk.param-runtime.jar $dav1 \
 	-persistenzModul=de.bsvrz.puk.param.param.DerbyPersistenz \
 	-persistenz=../parameter \
 	-parametrierung= \
@@ -46,10 +46,8 @@ $java -Xmx1500m -jar ../distributionspakete/de.bsvrz.puk.param/de.bsvrz.puk.para
 	-debugLevelFileText=CONFIG \
 	-debugSetLoggerAndLevel=:CONFIG & 
 
-. Parametrierung.sh
-
 # Betriebsmeldungsverwaltung im Hintergrund starten
-$java \
+nohup $java \
  -cp ../distributionspakete/de.kappich.vew.bmvew/de.kappich.vew.bmvew-runtime.jar \
  de.kappich.vew.bmvew.main.SimpleMessageManager \
  ${dav1} \
