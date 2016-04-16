@@ -2,28 +2,27 @@
 
 <project name="de.bsvrz.pat.onlprot" default="zip" basedir=".">
 
-    <description>
+    <description><![CDATA[
         Ant-Build-Datei für das Distributionspaket de.bsvrz.pat.onlprot
 
-        Copyright 2007 Kappich Systemberatung, http://www.kappich.de
-        Copyright 2013 Kappich Systemberatung, http://www.kappich.de
-
-        This file is part of de.bsvrz.pat.onlprot.
-
-		de.bsvrz.pat.onlprot is free software; you can redistribute it and/or modify
+        Copyright 2015 Kappich Systemberatung, http://www.kappich.de
+        		
+		This file is part of de.bsvrz.pat.onlprot.
+		
+		de.bsvrz.pat.onlprot is free software: you can redistribute it and/or modify
 		it under the terms of the GNU General Public License as published by
-		the Free Software Foundation; either version 2 of the License, or
+		the Free Software Foundation, either version 3 of the License, or
 		(at your option) any later version.
-
+		
 		de.bsvrz.pat.onlprot is distributed in the hope that it will be useful,
 		but WITHOUT ANY WARRANTY; without even the implied warranty of
 		MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
 		GNU General Public License for more details.
-
+		
 		You should have received a copy of the GNU General Public License
-		along with de.bsvrz.pat.onlprot; if not, write to the Free Software
-		Foundation, Inc., 51 Franklin St, Fifth Floor, Boston, MA  02110-1301  USA
-    </description>
+		along with de.bsvrz.pat.onlprot.  If not, see <http://www.gnu.org/licenses/>.
+        
+    ]]></description>
 
     <tstamp>
         <format property="compile.time" pattern="dd.MM.yyyy HH:mm:ss" />
@@ -33,13 +32,13 @@
         <format property="build.datetime" pattern="yyyyMMdd-HHmm" />
     </tstamp>
 
-    <property name="release" value="Kernsoftware 3.6.4" />
+    <property name="release" value="Kernsoftware 3.7.2" />
 
-    <property name="version" value="3.6.4" />
+    <property name="version" value="3.7.2" />
 
     <property name="license.name" value="GPL" />
 
-    <property name="revision" value="13360" />
+    <property name="revision" value="5407469eb6a8f3af49ffb668c356e346264b7b9d" />
 
     <property name="depends.on.compiled.packages" value="de.bsvrz.dav.daf, de.bsvrz.sys.funclib.dataSerializer, de.bsvrz.sys.funclib.communicationStreams, de.bsvrz.sys.funclib.configObjectAcquisition, de.bsvrz.sys.funclib.debug, de.bsvrz.sys.funclib.commandLineArgs" />
 
@@ -49,7 +48,7 @@
 
     <property name="javadoc.sourcepath" value="../de.bsvrz.dav.daf/de.bsvrz.dav.daf-src:../de.bsvrz.sys.funclib.commandLineArgs/de.bsvrz.sys.funclib.commandLineArgs-src:../de.bsvrz.sys.funclib.communicationStreams/de.bsvrz.sys.funclib.communicationStreams-src:../de.bsvrz.sys.funclib.configObjectAcquisition/de.bsvrz.sys.funclib.configObjectAcquisition-src:../de.bsvrz.sys.funclib.dataSerializer/de.bsvrz.sys.funclib.dataSerializer-src:../de.bsvrz.sys.funclib.debug/de.bsvrz.sys.funclib.debug-src" />
 
-    <property name="compile.jvm" value="1.6" />
+    <property name="compile.jvm" value="1.8" />
 
     <property name="jar.manifest.classpath" value="de.bsvrz.pat.onlprot.jar ../de.bsvrz.dav.daf/de.bsvrz.dav.daf-runtime.jar ../de.bsvrz.sys.funclib.commandLineArgs/de.bsvrz.sys.funclib.commandLineArgs-runtime.jar ../de.bsvrz.sys.funclib.communicationStreams/de.bsvrz.sys.funclib.communicationStreams-runtime.jar ../de.bsvrz.sys.funclib.configObjectAcquisition/de.bsvrz.sys.funclib.configObjectAcquisition-runtime.jar ../de.bsvrz.sys.funclib.dataSerializer/de.bsvrz.sys.funclib.dataSerializer-runtime.jar ../de.bsvrz.sys.funclib.debug/de.bsvrz.sys.funclib.debug-runtime.jar " />
 
@@ -129,7 +128,7 @@
                classpath="${compile.classpath}"
                destdir="tmp/classes"
                fork="true"
-               encoding="ISO-8859-1"
+               encoding="UTF-8"
                debug="true"
                debuglevel="lines,source"
                target="${compile.jvm}"
@@ -180,7 +179,9 @@
                  version="false"
                  source="${compile.jvm}"
                  access="protected"
-                 encoding="ISO-8859-1"
+                 encoding="UTF-8"
+                 docencoding="UTF-8"
+                 charset="UTF-8"
                  classpath="${compile.classpath}"
                  includenosourcepackages="true"
                  packagenames="-.*,de.bsvrz.pat.onlprot.*">
@@ -195,7 +196,7 @@
 			<link href="../../de.bsvrz.sys.funclib.debug/de.bsvrz.sys.funclib.debug-doc-api/" />
             <link offline="true" packagelistloc="../j2se/${compile.jvm}/docs/api" href="http://download.oracle.com/javase/${compile.jvm}/docs/api/" />
         </javadoc>
-        <zip destfile="${ant.project.name}-doc-api.zip" basedir="." includes="${ant.project.name}-doc-api/" encoding="ISO-8859-1" />
+        <zip destfile="${ant.project.name}-doc-api.zip" basedir="." includes="${ant.project.name}-doc-api/" encoding="UTF-8" />
     </target>
 
     <target name="docdesignzip" description="Erzeugt die interne Dokumentation mit JavaDoc">
@@ -206,9 +207,11 @@
                  sourcepath="${ant.project.name}-src:${javadoc.sourcepath}"
                  author="true"
                  version="false"
-                 source="1.5"
+                 source="${compile.jvm}"
                  access="private"
-                 encoding="ISO-8859-1"
+                 encoding="UTF-8"
+                 docencoding="UTF-8"
+                 charset="UTF-8"
                  classpath="${compile.classpath}"
                  includenosourcepackages="true"
                  packagenames="-.*,de.bsvrz.pat.onlprot.*">
@@ -223,11 +226,11 @@
 			<link href="../../de.bsvrz.sys.funclib.debug/de.bsvrz.sys.funclib.debug-doc-api/" />
             <link offline="true" packagelistloc="../j2se/${compile.jvm}/docs/api" href="http://download.oracle.com/javase/${compile.jvm}/docs/api/" />
         </javadoc>
-        <zip destfile="${ant.project.name}-doc-design.zip" basedir="." includes="${ant.project.name}-doc-design/" encoding="ISO-8859-1" />
+        <zip destfile="${ant.project.name}-doc-design.zip" basedir="." includes="${ant.project.name}-doc-design/" encoding="UTF-8" />
     </target>
 
     <target name="srczip" description="Erzeugt eine Zip-Datei mit den Quelldateien">
-        <zip destfile="${ant.project.name}-src.zip" encoding="ISO-8859-1">
+        <zip destfile="${ant.project.name}-src.zip" encoding="UTF-8">
             <zipfileset dir="." includes="${ant.project.name}-src/" />
             <zipfileset dir="." includes="${ant.project.name}-lizenz.txt" prefix="${ant.project.name}-src" />
         </zip>
@@ -236,7 +239,7 @@
     <target name="zip"
             depends="clean, info, runtime-info, jar, docapizip, docdesignzip, srczip"
             description="Zip-Datei mit allen Distributionsdateien erzeugen">
-        <zip destfile="${ant.project.name}.zip" basedir=".." encoding="ISO-8859-1">
+        <zip destfile="${ant.project.name}.zip" basedir=".." encoding="UTF-8">
             <include name="${ant.project.name}/build.xml" />
             <include name="${ant.project.name}/${ant.project.name}-src.zip" />
             <include name="${ant.project.name}/${ant.project.name}.jar" />

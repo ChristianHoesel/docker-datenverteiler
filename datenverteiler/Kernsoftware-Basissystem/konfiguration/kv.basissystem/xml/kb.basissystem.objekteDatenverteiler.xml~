@@ -1,0 +1,27 @@
+<?xml version="1.0" encoding="ISO-8859-1"?>
+<!DOCTYPE konfigurationsBereich PUBLIC "-//K2S//DTD Dokument//DE" "K2S.dtd">
+<konfigurationsBereich pid="kb.basissystem.objekteDatenverteiler" name="Bereich Objekte Datenverteiler" verantwortlich="kv.basissystem">
+
+	<info>
+		<kurzinfo>Bereich mit dem Datenverteiler des Basissystems.</kurzinfo>
+	</info>
+
+	<konfigurationsAenderung autor="Falko Schumann (BitCtrl)" stand="25.03.2009" version="1" grund="Erstellung" />
+
+	<modell>
+	</modell>
+
+	<objekte>
+
+		<konfigurationsObjekt pid="dav.basissystem" name="Datenverteiler - Basissystem" typ="typ.datenverteiler">
+			<datensatz attributgruppe="atg.datenverteilerEigenschaften" aspekt="asp.eigenschaften">
+				<datum name="adresse" wert="localhost" />
+				<datum name="subAdresse" wert="8082" />
+			</datensatz>
+			<objektMenge name="Applikationen">
+			</objektMenge>
+		</konfigurationsObjekt>
+
+	</objekte>
+
+</konfigurationsBereich>

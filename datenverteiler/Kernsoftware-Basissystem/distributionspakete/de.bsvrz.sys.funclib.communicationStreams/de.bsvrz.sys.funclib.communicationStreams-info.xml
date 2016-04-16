@@ -1,12 +1,12 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <package name="de.bsvrz.sys.funclib.communicationStreams">
   <license name="LGPL" />
-  <release name="Kernsoftware 3.6.4" />
-  <version number="3.6.4-201504101502" />
-  <revision number="13360" />
-  <compile time="10.04.2015 15:05:40" />
+  <release name="Kernsoftware 3.7.2" />
+  <version number="3.7.2-201601281650" />
+  <revision number="5407469eb6a8f3af49ffb668c356e346264b7b9d" />
+  <compile time="28.01.2016 16:53:17" />
   <depends-on-compiled packages="de.bsvrz.dav.daf" />
   <depends-on-source packages="" />
   <depends-on-lib jars="" />
-  <jvm version="1.6" />
+  <jvm version="1.8" />
 </package>

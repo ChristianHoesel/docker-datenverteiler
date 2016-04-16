@@ -1,0 +1,40 @@
+
+-------16.04.2016 19:44:04,071:+0200(TID:......) ---------------------- STATUS
+Ausgabedatei angelegt.
+
+#000000 16.04.2016 19:44:04,070:+0200 (TID:000001) ---------------------- 
+INFO   : ParamApp
+Aktuelle Debugeinstellungen
+----------------------------------------------
+Registrierte DebugLogger: 
+  Name: DEFAULT-DEBUG  Level: ALL
+  Name: global  Level: null
+  Name: ParamApp  Level: CONFIG
+  Name:   Level: INFO
+
+
+#000001 16.04.2016 19:44:04,071:+0200 (TID:000001) ---------------------- 
+INFO   : ParamApp
+Aufrufargumente von ParamApp: ArgumentList[-datenverteiler=localhost:8083, -benutzer=Tester, -authentifizierung=../properties/passwd, -debugFilePath=.., -persistenzModul=de.bsvrz.puk.param.param.DerbyPersistenz, -persistenz=../parameter, -parametrierung=, -cacheGroesse=200000, -oldDefault=nein, -debugLevelStdErrText=INFO, -debugLevelFileText=CONFIG, -debugSetLoggerAndLevel=:CONFIG]
+
+#000002 16.04.2016 19:44:04,176:+0200 (TID:000001) ---------------------- 
+INFO   : ParamApp.de.bsvrz.dav.daf.main.ClientDavConnection
+Datenverteiler-Applikationsfunktionen 'de.bsvrz.dav.daf', Release: Kernsoftware 3.7.2, Version: 5407469eb6a8f3af49ffb668c356e346264b7b9d, Stand: 28.01.2016 16:52:26
+
+#000003 16.04.2016 19:44:04,293:+0200 (TID:000001) ###################### 
+FEHLER : ParamApp.de.bsvrz.dav.daf.communication.tcpCommunication.TCP_IP_Communication
+Fehler beim Verbindungsaufbau: Verbindung zum Rechner localhost auf TCP-Port 8083 nicht möglich
+
+#000004 16.04.2016 19:44:04,300:+0200 (TID:000001) ###################### 
+FEHLER : ParamApp.de.bsvrz.puk.param.param.ParamApp
+Fehler:
+      de.bsvrz.dav.daf.main.ConnectionException: Fehler beim Verbindungsaufbau: Verbindung zum Rechner localhost auf TCP-Port 8083 nicht möglich
+	at de.bsvrz.dav.daf.communication.tcpCommunication.TCP_IP_Communication.connect(TCP_IP_Communication.java:84)
+	at de.bsvrz.dav.daf.communication.lowLevel.LowLevelCommunication.connect(LowLevelCommunication.java:294)
+	at de.bsvrz.dav.daf.communication.protocol.ClientHighLevelCommunication.<init>(ClientHighLevelCommunication.java:171)
+	at de.bsvrz.dav.daf.main.ClientDavConnection.connect(ClientDavConnection.java:400)
+	at de.bsvrz.puk.param.param.ParamApp.main(ParamApp.java:183)
+
+
+-------16.04.2016 19:44:04,307:+0200(TID:......) ---------------------- STATUS
+Ausgabedatei korrekt abgeschlossenen.

@@ -1,0 +1,43 @@
+
+-------16.04.2016 19:44:03,845:+0200(TID:......) ---------------------- STATUS
+Ausgabedatei angelegt.
+
+#000000 16.04.2016 19:44:03,844:+0200 (TID:000001) ---------------------- 
+INFO   : SimpleMessageManager
+Aktuelle Debugeinstellungen
+----------------------------------------------
+Registrierte DebugLogger: 
+  Name: SimpleMessageManager  Level: ALL
+  Name: DEFAULT-DEBUG  Level: ALL
+  Name: global  Level: null
+  Name:   Level: INFO
+
+
+#000001 16.04.2016 19:44:03,845:+0200 (TID:000001) ---------------------- 
+INFO   : SimpleMessageManager
+Aufrufargumente von SimpleMessageManager: ArgumentList[-datenverteiler=localhost:8083, -benutzer=Tester, -authentifizierung=../properties/passwd, -debugFilePath=.., -debugLevelStdErrText=NONE, -debugLevelFileText=CONFIG]
+
+#000002 16.04.2016 19:44:04,010:+0200 (TID:000001) ---------------------- 
+INFO   : SimpleMessageManager.de.bsvrz.dav.daf.main.ClientDavConnection
+Datenverteiler-Applikationsfunktionen 'de.bsvrz.dav.daf', Release: Kernsoftware 3.7.2, Version: 5407469eb6a8f3af49ffb668c356e346264b7b9d, Stand: 28.01.2016 16:52:26
+
+#000005 16.04.2016 19:44:04,193:+0200 (TID:000001) ###################### 
+FEHLER : SimpleMessageManager.de.bsvrz.dav.daf.communication.tcpCommunication.TCP_IP_Communication
+Fehler beim Verbindungsaufbau: Verbindung zum Rechner localhost auf TCP-Port 8083 nicht möglich
+
+#000006 16.04.2016 19:44:04,193:+0200 (TID:000001) ###################### 
+FEHLER : SimpleMessageManager.de.bsvrz.sys.funclib.application.StandardApplicationRunner
+Fehler:
+      de.bsvrz.dav.daf.main.ConnectionException: Fehler beim Verbindungsaufbau: Verbindung zum Rechner localhost auf TCP-Port 8083 nicht möglich
+	at de.bsvrz.dav.daf.communication.tcpCommunication.TCP_IP_Communication.connect(TCP_IP_Communication.java:84)
+	at de.bsvrz.dav.daf.communication.lowLevel.LowLevelCommunication.connect(LowLevelCommunication.java:294)
+	at de.bsvrz.dav.daf.communication.protocol.ClientHighLevelCommunication.<init>(ClientHighLevelCommunication.java:171)
+	at de.bsvrz.dav.daf.main.ClientDavConnection.connect(ClientDavConnection.java:400)
+	at de.bsvrz.sys.funclib.application.StandardApplicationRunner.establishConnection(StandardApplicationRunner.java:182)
+	at de.bsvrz.sys.funclib.application.StandardApplicationRunner.run(StandardApplicationRunner.java:83)
+	at de.bsvrz.sys.funclib.application.StandardApplicationRunner.run(StandardApplicationRunner.java:57)
+	at de.kappich.vew.bmvew.main.SimpleMessageManager.main(SimpleMessageManager.java:72)
+
+
+-------16.04.2016 19:44:04,199:+0200(TID:......) ---------------------- STATUS
+Ausgabedatei korrekt abgeschlossenen.

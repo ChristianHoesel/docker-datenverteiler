@@ -1,0 +1,747 @@
+
+-------09.04.2016 10:47:31,164:+0200(TID:......) ---------------------- STATUS
+Ausgabedatei angelegt.
+
+#000000 09.04.2016 10:47:31,163:+0200 (TID:000001) ---------------------- 
+INFO   : ConfigurationApp
+Aktuelle Debugeinstellungen
+----------------------------------------------
+Registrierte DebugLogger: 
+  Name: DEFAULT-DEBUG  Level: ALL
+  Name: ConfigurationApp  Level: ALL
+  Name: global  Level: null
+  Name:   Level: INFO
+
+
+#000001 09.04.2016 10:47:31,164:+0200 (TID:000001) ---------------------- 
+INFO   : ConfigurationApp
+Aufrufargumente von ConfigurationApp: ArgumentList[-import=kb.default.basissystem,kb.basissystem.objekteBenutzer,kb.basissystem.objekteDatenverteiler, -verzeichnis=../xml, -verwaltung=../config/verwaltungsdaten.xml, -debugFilePath=.., -debugLevelStdErrText=INFO, -debugLevelFileText=CONFIG]
+
+#000003 09.04.2016 10:47:31,228:+0200 (TID:000001) ...................... 
+KONFIG : ConfigurationApp.de.bsvrz.puk.config.main.managementfile.ManagementFile
+Datei wird eingelesen: /home/christian/docker-datenverteiler/datenverteiler/Kernsoftware-Basissystem/konfiguration/kv.basissystem/config/verwaltungsdaten.xml
+
+#000005 09.04.2016 10:47:31,308:+0200 (TID:000001) ...................... 
+KONFIG : ConfigurationApp.de.bsvrz.puk.config.main.managementfile.ManagementFile
+Verzeichnisbasis für die Konfigurationsbereiche: file:/home/christian/docker-datenverteiler/datenverteiler/Kernsoftware-Basissystem/konfiguration/kv.basissystem/config/
+
+#000006 09.04.2016 10:47:31,322:+0200 (TID:000001) ...................... 
+KONFIG : ConfigurationApp.de.bsvrz.puk.config.main.managementfile.ManagementFile
+Verwaltungsdaten der Konfiguration wurden vollständig eingelesen.
+
+#000008 09.04.2016 10:47:31,331:+0200 (TID:000001) ---------------------- 
+INFO   : ConfigurationApp.de.bsvrz.puk.config.configFile.fileaccess.ConfigAreaFile
+Laden der Konfigurationsdatei: /home/christian/docker-datenverteiler/datenverteiler/Kernsoftware-Basissystem/konfiguration/kv.basissystem/config/kb.kv.basissystem.config
+
+#000009 09.04.2016 10:47:31,335:+0200 (TID:000001) ...................... 
+KONFIG : ConfigurationApp.de.bsvrz.puk.config.configFile.fileaccess.ConfigFileHeaderInfo
+Kennung 1 (nicht maßgeblich): aktive Version: 1 nächste aktive Version: 2 
+Kennung 2: 
+Kennung 3: relative Position ungültig dynamisch Block 0
+Kennung 4: relative Position Id-Index: 0
+Kennung 5: relative Position HashCodePid-Index: 0
+Kennung 6: relative Position Mischobjektmenge: 0
+Kennung 7: Pid des Konfigurationsbereichs: kb.kv.basissystem
+Kennung 9: Version unter der die Objekte erstellt wurden 1
+Kennung 10: Serialisiererversion 3
+
+
+#000010 09.04.2016 10:47:31,369:+0200 (TID:000001) ---------------------- 
+INFO   : ConfigurationApp.de.bsvrz.puk.config.configFile.fileaccess.ConfigAreaFile
+Laden der Konfigurationsdatei: /home/christian/docker-datenverteiler/datenverteiler/Kernsoftware-Basissystem/konfiguration/kv.basissystem/config/kb.default.basissystem.config
+
+#000011 09.04.2016 10:47:31,370:+0200 (TID:000001) ...................... 
+KONFIG : ConfigurationApp.de.bsvrz.puk.config.configFile.fileaccess.ConfigFileHeaderInfo
+Kennung 1 (nicht maßgeblich): aktive Version: 1 nächste aktive Version: 2 
+Kennung 2: 
+Kennung 3: relative Position ungültig dynamisch Block 0
+Kennung 4: relative Position Id-Index: 0
+Kennung 5: relative Position HashCodePid-Index: 0
+Kennung 6: relative Position Mischobjektmenge: 0
+Kennung 7: Pid des Konfigurationsbereichs: kb.default.basissystem
+Kennung 9: Version unter der die Objekte erstellt wurden 1
+Kennung 10: Serialisiererversion 3
+
+
+#000012 09.04.2016 10:47:31,383:+0200 (TID:000001) ---------------------- 
+INFO   : ConfigurationApp.de.bsvrz.puk.config.configFile.fileaccess.ConfigAreaFile
+Laden der Konfigurationsdatei: /home/christian/docker-datenverteiler/datenverteiler/Kernsoftware-Basissystem/konfiguration/kv.basissystem/config/kb.basissystem.objekteBenutzer.config
+
+#000013 09.04.2016 10:47:31,385:+0200 (TID:000001) ...................... 
+KONFIG : ConfigurationApp.de.bsvrz.puk.config.configFile.fileaccess.ConfigFileHeaderInfo
+Kennung 1 (nicht maßgeblich): aktive Version: 1 nächste aktive Version: 2 
+Kennung 2: 
+Kennung 3: relative Position ungültig dynamisch Block 0
+Kennung 4: relative Position Id-Index: 0
+Kennung 5: relative Position HashCodePid-Index: 0
+Kennung 6: relative Position Mischobjektmenge: 0
+Kennung 7: Pid des Konfigurationsbereichs: kb.basissystem.objekteBenutzer
+Kennung 9: Version unter der die Objekte erstellt wurden 1
+Kennung 10: Serialisiererversion 3
+
+
+#000014 09.04.2016 10:47:31,386:+0200 (TID:000001) ---------------------- 
+INFO   : ConfigurationApp.de.bsvrz.puk.config.configFile.fileaccess.ConfigAreaFile
+Laden der Konfigurationsdatei: /home/christian/docker-datenverteiler/datenverteiler/Kernsoftware-Basissystem/konfiguration/kv.basissystem/config/kb.basissystem.objekteDatenverteiler.config
+
+#000015 09.04.2016 10:47:31,387:+0200 (TID:000001) ...................... 
+KONFIG : ConfigurationApp.de.bsvrz.puk.config.configFile.fileaccess.ConfigFileHeaderInfo
+Kennung 1 (nicht maßgeblich): aktive Version: 1 nächste aktive Version: 2 
+Kennung 2: 
+Kennung 3: relative Position ungültig dynamisch Block 0
+Kennung 4: relative Position Id-Index: 0
+Kennung 5: relative Position HashCodePid-Index: 0
+Kennung 6: relative Position Mischobjektmenge: 0
+Kennung 7: Pid des Konfigurationsbereichs: kb.basissystem.objekteDatenverteiler
+Kennung 9: Version unter der die Objekte erstellt wurden 1
+Kennung 10: Serialisiererversion 3
+
+
+#000016 09.04.2016 10:47:31,388:+0200 (TID:000001) ---------------------- 
+INFO   : ConfigurationApp.de.bsvrz.puk.config.configFile.fileaccess.ConfigAreaFile
+Laden der Konfigurationsdatei: /home/christian/docker-datenverteiler/datenverteiler/Kernsoftware-Basissystem/konfiguration/kv.bea/config/kb.kv.bea.config
+
+#000017 09.04.2016 10:47:31,389:+0200 (TID:000001) ...................... 
+KONFIG : ConfigurationApp.de.bsvrz.puk.config.configFile.fileaccess.ConfigFileHeaderInfo
+Kennung 1 (nicht maßgeblich): aktive Version: 0 nächste aktive Version: 1 
+Kennung 2: 
+Kennung 3: relative Position ungültig dynamisch Block 0
+Kennung 4: relative Position Id-Index: 0
+Kennung 5: relative Position HashCodePid-Index: 0
+Kennung 6: relative Position Mischobjektmenge: 0
+Kennung 7: Pid des Konfigurationsbereichs: kb.kv.bea
+Kennung 9: Version unter der die Objekte erstellt wurden 1
+Kennung 10: Serialisiererversion 3
+
+
+#000018 09.04.2016 10:47:31,390:+0200 (TID:000001) ---------------------- 
+INFO   : ConfigurationApp.de.bsvrz.puk.config.configFile.fileaccess.ConfigAreaFile
+Laden der Konfigurationsdatei: /home/christian/docker-datenverteiler/datenverteiler/Kernsoftware-Basissystem/konfiguration/kv.bea/config/kb.tmVewProtokolleGlobal.config
+
+#000019 09.04.2016 10:47:31,401:+0200 (TID:000001) ...................... 
+KONFIG : ConfigurationApp.de.bsvrz.puk.config.configFile.fileaccess.ConfigFileHeaderInfo
+Kennung 1 (nicht maßgeblich): aktive Version: 4 nächste aktive Version: 5 
+Kennung 2: 
+	Version: 2 Zeitstempel: 1173362650906 relative Position: -1
+	Version: 3 Zeitstempel: 1294362239933 relative Position: 0
+	Version: 4 Zeitstempel: 1299778810140 relative Position: 6066
+Kennung 3: relative Position ungültig dynamisch Block 9129
+Kennung 4: relative Position Id-Index: 9129
+Kennung 5: relative Position HashCodePid-Index: 10361
+Kennung 6: relative Position Mischobjektmenge: 11285
+Kennung 7: Pid des Konfigurationsbereichs: kb.tmVewProtokolleGlobal
+Kennung 9: Version unter der die Objekte erstellt wurden 1
+Kennung 10: Serialisiererversion 3
+
+
+#000020 09.04.2016 10:47:31,419:+0200 (TID:000001) ---------------------- 
+INFO   : ConfigurationApp.de.bsvrz.puk.config.configFile.fileaccess.ConfigAreaFile
+Laden der Konfigurationsdatei: /home/christian/docker-datenverteiler/datenverteiler/Kernsoftware-Basissystem/konfiguration/kv.dambach/config/kb.kv.dambach.config
+
+#000021 09.04.2016 10:47:31,420:+0200 (TID:000001) ...................... 
+KONFIG : ConfigurationApp.de.bsvrz.puk.config.configFile.fileaccess.ConfigFileHeaderInfo
+Kennung 1 (nicht maßgeblich): aktive Version: 0 nächste aktive Version: 1 
+Kennung 2: 
+Kennung 3: relative Position ungültig dynamisch Block 0
+Kennung 4: relative Position Id-Index: 0
+Kennung 5: relative Position HashCodePid-Index: 0
+Kennung 6: relative Position Mischobjektmenge: 0
+Kennung 7: Pid des Konfigurationsbereichs: kb.kv.dambach
+Kennung 9: Version unter der die Objekte erstellt wurden 1
+Kennung 10: Serialisiererversion 3
+
+
+#000022 09.04.2016 10:47:31,435:+0200 (TID:000001) ---------------------- 
+INFO   : ConfigurationApp.de.bsvrz.puk.config.configFile.fileaccess.ConfigAreaFile
+Laden der Konfigurationsdatei: /home/christian/docker-datenverteiler/datenverteiler/Kernsoftware-Basissystem/konfiguration/kv.dambach/config/kb.tmRechner.config
+
+#000023 09.04.2016 10:47:31,436:+0200 (TID:000001) ...................... 
+KONFIG : ConfigurationApp.de.bsvrz.puk.config.configFile.fileaccess.ConfigFileHeaderInfo
+Kennung 1 (nicht maßgeblich): aktive Version: 4 nächste aktive Version: 5 
+Kennung 2: 
+	Version: 2 Zeitstempel: 1200912403490 relative Position: 0
+	Version: 3 Zeitstempel: 1202117049617 relative Position: 6592
+	Version: 4 Zeitstempel: 1202397687714 relative Position: 13188
+Kennung 3: relative Position ungültig dynamisch Block 20305
+Kennung 4: relative Position Id-Index: 20305
+Kennung 5: relative Position HashCodePid-Index: 22929
+Kennung 6: relative Position Mischobjektmenge: 24897
+Kennung 7: Pid des Konfigurationsbereichs: kb.tmRechner
+Kennung 9: Version unter der die Objekte erstellt wurden 1
+Kennung 10: Serialisiererversion 3
+
+
+#000024 09.04.2016 10:47:31,473:+0200 (TID:000001) ---------------------- 
+INFO   : ConfigurationApp.de.bsvrz.puk.config.configFile.fileaccess.ConfigAreaFile
+Laden der Konfigurationsdatei: /home/christian/docker-datenverteiler/datenverteiler/Kernsoftware-Basissystem/konfiguration/kv.dambach/config/kb.tmVewEngstellenGlobal.config
+
+#000025 09.04.2016 10:47:31,476:+0200 (TID:000001) ...................... 
+KONFIG : ConfigurationApp.de.bsvrz.puk.config.configFile.fileaccess.ConfigFileHeaderInfo
+Kennung 1 (nicht maßgeblich): aktive Version: 2 nächste aktive Version: 3 
+Kennung 2: 
+	Version: 2 Zeitstempel: 1205313139371 relative Position: 0
+Kennung 3: relative Position ungültig dynamisch Block 3126
+Kennung 4: relative Position Id-Index: 3126
+Kennung 5: relative Position HashCodePid-Index: 3414
+Kennung 6: relative Position Mischobjektmenge: 3630
+Kennung 7: Pid des Konfigurationsbereichs: kb.tmVewEngstellenGlobal
+Kennung 9: Version unter der die Objekte erstellt wurden 1
+Kennung 10: Serialisiererversion 3
+
+
+#000026 09.04.2016 10:47:31,478:+0200 (TID:000001) ---------------------- 
+INFO   : ConfigurationApp.de.bsvrz.puk.config.configFile.fileaccess.ConfigAreaFile
+Laden der Konfigurationsdatei: /home/christian/docker-datenverteiler/datenverteiler/Kernsoftware-Basissystem/konfiguration/kv.inovat/config/kb.kv.inovat.config
+
+#000027 09.04.2016 10:47:31,481:+0200 (TID:000001) ...................... 
+KONFIG : ConfigurationApp.de.bsvrz.puk.config.configFile.fileaccess.ConfigFileHeaderInfo
+Kennung 1 (nicht maßgeblich): aktive Version: 0 nächste aktive Version: 1 
+Kennung 2: 
+Kennung 3: relative Position ungültig dynamisch Block 0
+Kennung 4: relative Position Id-Index: 0
+Kennung 5: relative Position HashCodePid-Index: 0
+Kennung 6: relative Position Mischobjektmenge: 0
+Kennung 7: Pid des Konfigurationsbereichs: kb.kv.inovat
+Kennung 9: Version unter der die Objekte erstellt wurden 1
+Kennung 10: Serialisiererversion 3
+
+
+#000028 09.04.2016 10:47:31,482:+0200 (TID:000001) ---------------------- 
+INFO   : ConfigurationApp.de.bsvrz.puk.config.configFile.fileaccess.ConfigAreaFile
+Laden der Konfigurationsdatei: /home/christian/docker-datenverteiler/datenverteiler/Kernsoftware-Basissystem/konfiguration/kv.inovat/config/kb.tmEreignisKalenderGlobal.config
+
+#000029 09.04.2016 10:47:31,487:+0200 (TID:000001) ...................... 
+KONFIG : ConfigurationApp.de.bsvrz.puk.config.configFile.fileaccess.ConfigFileHeaderInfo
+Kennung 1 (nicht maßgeblich): aktive Version: 10 nächste aktive Version: 11 
+Kennung 2: 
+	Version: 2 Zeitstempel: 1173124455698 relative Position: 0
+	Version: 3 Zeitstempel: 1173369898888 relative Position: 4325
+	Version: 4 Zeitstempel: 1174064687560 relative Position: -1
+	Version: 5 Zeitstempel: 1174426887023 relative Position: 8214
+	Version: 6 Zeitstempel: 1180965341140 relative Position: 16577
+	Version: 7 Zeitstempel: 1181473650640 relative Position: -1
+	Version: 8 Zeitstempel: 1183968429515 relative Position: 20258
+	Version: 9 Zeitstempel: 1200586954078 relative Position: 22238
+	Version: 10 Zeitstempel: 1203507397453 relative Position: 22813
+Kennung 3: relative Position ungültig dynamisch Block 29065
+Kennung 4: relative Position Id-Index: 29065
+Kennung 5: relative Position HashCodePid-Index: 32393
+Kennung 6: relative Position Mischobjektmenge: 34889
+Kennung 7: Pid des Konfigurationsbereichs: kb.tmEreignisKalenderGlobal
+Kennung 9: Version unter der die Objekte erstellt wurden 1
+Kennung 10: Serialisiererversion 3
+
+
+#000030 09.04.2016 10:47:31,493:+0200 (TID:000001) ---------------------- 
+INFO   : ConfigurationApp.de.bsvrz.puk.config.configFile.fileaccess.ConfigAreaFile
+Laden der Konfigurationsdatei: /home/christian/docker-datenverteiler/datenverteiler/Kernsoftware-Basissystem/konfiguration/kv.inovat/config/kb.tmGanglinienGlobal.config
+
+#000031 09.04.2016 10:47:31,495:+0200 (TID:000001) ...................... 
+KONFIG : ConfigurationApp.de.bsvrz.puk.config.configFile.fileaccess.ConfigFileHeaderInfo
+Kennung 1 (nicht maßgeblich): aktive Version: 11 nächste aktive Version: 12 
+Kennung 2: 
+	Version: 2 Zeitstempel: 1173124455698 relative Position: 0
+	Version: 3 Zeitstempel: 1173369898888 relative Position: 3459
+	Version: 4 Zeitstempel: 1174064687560 relative Position: -1
+	Version: 5 Zeitstempel: 1174426887023 relative Position: 5762
+	Version: 6 Zeitstempel: 1180965341140 relative Position: 11394
+	Version: 7 Zeitstempel: 1181473650640 relative Position: 24064
+	Version: 8 Zeitstempel: 1184913650843 relative Position: 35691
+	Version: 9 Zeitstempel: 1203507397453 relative Position: 40825
+	Version: 10 Zeitstempel: 1206440937093 relative Position: 45041
+	Version: 11 Zeitstempel: 1312202274856 relative Position: -1
+Kennung 3: relative Position ungültig dynamisch Block 46679
+Kennung 4: relative Position Id-Index: 46679
+Kennung 5: relative Position HashCodePid-Index: 52119
+Kennung 6: relative Position Mischobjektmenge: 56199
+Kennung 7: Pid des Konfigurationsbereichs: kb.tmGanglinienGlobal
+Kennung 9: Version unter der die Objekte erstellt wurden 1
+Kennung 10: Serialisiererversion 3
+
+
+#000032 09.04.2016 10:47:31,526:+0200 (TID:000001) ---------------------- 
+INFO   : ConfigurationApp.de.bsvrz.puk.config.configFile.fileaccess.ConfigAreaFile
+Laden der Konfigurationsdatei: /home/christian/docker-datenverteiler/datenverteiler/Kernsoftware-Basissystem/konfiguration/kv.inovat/config/kb.tmGeoReferenzierungGlobal.config
+
+#000033 09.04.2016 10:47:31,528:+0200 (TID:000001) ...................... 
+KONFIG : ConfigurationApp.de.bsvrz.puk.config.configFile.fileaccess.ConfigFileHeaderInfo
+Kennung 1 (nicht maßgeblich): aktive Version: 2 nächste aktive Version: 3 
+Kennung 2: 
+	Version: 2 Zeitstempel: 1173369898888 relative Position: 0
+Kennung 3: relative Position ungültig dynamisch Block 2258
+Kennung 4: relative Position Id-Index: 2258
+Kennung 5: relative Position HashCodePid-Index: 2594
+Kennung 6: relative Position Mischobjektmenge: 2846
+Kennung 7: Pid des Konfigurationsbereichs: kb.tmGeoReferenzierungGlobal
+Kennung 9: Version unter der die Objekte erstellt wurden 1
+Kennung 10: Serialisiererversion 3
+
+
+#000034 09.04.2016 10:47:31,547:+0200 (TID:000001) ---------------------- 
+INFO   : ConfigurationApp.de.bsvrz.puk.config.configFile.fileaccess.ConfigAreaFile
+Laden der Konfigurationsdatei: /home/christian/docker-datenverteiler/datenverteiler/Kernsoftware-Basissystem/konfiguration/kv.inovat/config/kb.tmKExTlsGlobal.config
+
+#000035 09.04.2016 10:47:31,554:+0200 (TID:000001) ...................... 
+KONFIG : ConfigurationApp.de.bsvrz.puk.config.configFile.fileaccess.ConfigFileHeaderInfo
+Kennung 1 (nicht maßgeblich): aktive Version: 19 nächste aktive Version: 20 
+Kennung 2: 
+	Version: 2 Zeitstempel: 1173124455698 relative Position: 0
+	Version: 3 Zeitstempel: 1174064687560 relative Position: -1
+	Version: 4 Zeitstempel: 1182842899734 relative Position: -1
+	Version: 5 Zeitstempel: 1203507397453 relative Position: 2883
+	Version: 6 Zeitstempel: 1251449735234 relative Position: -1
+	Version: 7 Zeitstempel: 1256727036031 relative Position: 66987
+	Version: 8 Zeitstempel: 1257334512203 relative Position: 78943
+	Version: 9 Zeitstempel: 1267608889401 relative Position: 82526
+	Version: 10 Zeitstempel: 1273840622931 relative Position: 84621
+	Version: 11 Zeitstempel: 1283953489304 relative Position: 86737
+	Version: 12 Zeitstempel: 1284031704803 relative Position: -1
+	Version: 13 Zeitstempel: 1285332215720 relative Position: 88670
+	Version: 14 Zeitstempel: 1289231053973 relative Position: 94635
+	Version: 15 Zeitstempel: 1292326899581 relative Position: -1
+	Version: 16 Zeitstempel: 1305197789922 relative Position: 109252
+	Version: 17 Zeitstempel: 1319194897183 relative Position: 110566
+	Version: 18 Zeitstempel: 1380187953169 relative Position: -1
+	Version: 19 Zeitstempel: 1380263082923 relative Position: 113390
+Kennung 3: relative Position ungültig dynamisch Block 120774
+Kennung 4: relative Position Id-Index: 120774
+Kennung 5: relative Position HashCodePid-Index: 132982
+Kennung 6: relative Position Mischobjektmenge: 142138
+Kennung 7: Pid des Konfigurationsbereichs: kb.tmKExTlsGlobal
+Kennung 9: Version unter der die Objekte erstellt wurden 1
+Kennung 10: Serialisiererversion 3
+
+
+#000036 09.04.2016 10:47:31,700:+0200 (TID:000001) ---------------------- 
+INFO   : ConfigurationApp.de.bsvrz.puk.config.configFile.fileaccess.ConfigAreaFile
+Laden der Konfigurationsdatei: /home/christian/docker-datenverteiler/datenverteiler/Kernsoftware-Basissystem/konfiguration/kv.inovat/config/kb.tmSystemKalenderGlobal.config
+
+#000037 09.04.2016 10:47:31,701:+0200 (TID:000001) ...................... 
+KONFIG : ConfigurationApp.de.bsvrz.puk.config.configFile.fileaccess.ConfigFileHeaderInfo
+Kennung 1 (nicht maßgeblich): aktive Version: 7 nächste aktive Version: 8 
+Kennung 2: 
+	Version: 2 Zeitstempel: 1173369898888 relative Position: -1
+	Version: 3 Zeitstempel: 1174064687560 relative Position: -1
+	Version: 4 Zeitstempel: 1174426887023 relative Position: 0
+	Version: 5 Zeitstempel: 1180965341140 relative Position: -1
+	Version: 6 Zeitstempel: 1203507397453 relative Position: 914
+	Version: 7 Zeitstempel: 1307699908129 relative Position: -1
+Kennung 3: relative Position ungültig dynamisch Block 1843
+Kennung 4: relative Position Id-Index: 1843
+Kennung 5: relative Position HashCodePid-Index: 2051
+Kennung 6: relative Position Mischobjektmenge: 2207
+Kennung 7: Pid des Konfigurationsbereichs: kb.tmSystemKalenderGlobal
+Kennung 9: Version unter der die Objekte erstellt wurden 1
+Kennung 10: Serialisiererversion 3
+
+
+#000038 09.04.2016 10:47:31,703:+0200 (TID:000001) ---------------------- 
+INFO   : ConfigurationApp.de.bsvrz.puk.config.configFile.fileaccess.ConfigAreaFile
+Laden der Konfigurationsdatei: /home/christian/docker-datenverteiler/datenverteiler/Kernsoftware-Basissystem/konfiguration/kv.inovat/config/kb.tmTmcGlobal.config
+
+#000039 09.04.2016 10:47:31,703:+0200 (TID:000001) ...................... 
+KONFIG : ConfigurationApp.de.bsvrz.puk.config.configFile.fileaccess.ConfigFileHeaderInfo
+Kennung 1 (nicht maßgeblich): aktive Version: 4 nächste aktive Version: 5 
+Kennung 2: 
+	Version: 2 Zeitstempel: 1173369898888 relative Position: 0
+	Version: 3 Zeitstempel: 1174426887033 relative Position: 2284
+	Version: 4 Zeitstempel: 1182849087703 relative Position: 4267
+Kennung 3: relative Position ungültig dynamisch Block 28729
+Kennung 4: relative Position Id-Index: 28729
+Kennung 5: relative Position HashCodePid-Index: 31705
+Kennung 6: relative Position Mischobjektmenge: 33937
+Kennung 7: Pid des Konfigurationsbereichs: kb.tmTmcGlobal
+Kennung 9: Version unter der die Objekte erstellt wurden 1
+Kennung 10: Serialisiererversion 3
+
+
+#000040 09.04.2016 10:47:31,710:+0200 (TID:000001) ---------------------- 
+INFO   : ConfigurationApp.de.bsvrz.puk.config.configFile.fileaccess.ConfigAreaFile
+Laden der Konfigurationsdatei: /home/christian/docker-datenverteiler/datenverteiler/Kernsoftware-Basissystem/konfiguration/kv.inovat/config/kb.tmVerkehrGlobal.config
+
+#000041 09.04.2016 10:47:31,713:+0200 (TID:000001) ...................... 
+KONFIG : ConfigurationApp.de.bsvrz.puk.config.configFile.fileaccess.ConfigFileHeaderInfo
+Kennung 1 (nicht maßgeblich): aktive Version: 58 nächste aktive Version: 59 
+Kennung 2: 
+	Version: 2 Zeitstempel: 1173124455698 relative Position: 0
+	Version: 3 Zeitstempel: 1174064687560 relative Position: 10497
+	Version: 4 Zeitstempel: 1174237103434 relative Position: 26628
+	Version: 5 Zeitstempel: 1174285156161 relative Position: 68197
+	Version: 6 Zeitstempel: 1174373932477 relative Position: 69028
+	Version: 7 Zeitstempel: 1174374950141 relative Position: -1
+	Version: 8 Zeitstempel: 1174380345509 relative Position: -1
+	Version: 9 Zeitstempel: 1174388469270 relative Position: 71678
+	Version: 10 Zeitstempel: 1174426887033 relative Position: 72526
+	Version: 11 Zeitstempel: 1178100812062 relative Position: 80366
+	Version: 12 Zeitstempel: 1180965341140 relative Position: 91973
+	Version: 13 Zeitstempel: 1181473650640 relative Position: 103916
+	Version: 14 Zeitstempel: 1181807684703 relative Position: 107782
+	Version: 15 Zeitstempel: 1183968429515 relative Position: 108541
+	Version: 16 Zeitstempel: 1184913650843 relative Position: -1
+	Version: 17 Zeitstempel: 1191007859046 relative Position: 111768
+	Version: 18 Zeitstempel: 1191426374015 relative Position: 115842
+	Version: 19 Zeitstempel: 1195824337718 relative Position: -1
+	Version: 20 Zeitstempel: 1196604693640 relative Position: 117437
+	Version: 21 Zeitstempel: 1198063988468 relative Position: 119815
+	Version: 22 Zeitstempel: 1198147361046 relative Position: -1
+	Version: 23 Zeitstempel: 1200586954078 relative Position: 120517
+	Version: 24 Zeitstempel: 1203507397453 relative Position: 121059
+	Version: 25 Zeitstempel: 1203525741296 relative Position: 197173
+	Version: 26 Zeitstempel: 1208768195296 relative Position: 198816
+	Version: 27 Zeitstempel: 1209712292218 relative Position: -1
+	Version: 28 Zeitstempel: 1209713495781 relative Position: -1
+	Version: 29 Zeitstempel: 1210315617062 relative Position: 201411
+	Version: 30 Zeitstempel: 1214233962796 relative Position: 203478
+	Version: 31 Zeitstempel: 1219413077968 relative Position: -1
+	Version: 32 Zeitstempel: 1228907735609 relative Position: -1
+	Version: 33 Zeitstempel: 1246361852421 relative Position: 204595
+	Version: 34 Zeitstempel: 1251452505796 relative Position: 208160
+	Version: 35 Zeitstempel: 1255598636937 relative Position: -1
+	Version: 36 Zeitstempel: 1255599435359 relative Position: -1
+	Version: 37 Zeitstempel: 1256727036031 relative Position: -1
+	Version: 38 Zeitstempel: 1267450708314 relative Position: -1
+	Version: 39 Zeitstempel: 1267608889403 relative Position: 233672
+	Version: 40 Zeitstempel: 1276513280320 relative Position: -1
+	Version: 41 Zeitstempel: 1284550613785 relative Position: -1
+	Version: 42 Zeitstempel: 1285332215722 relative Position: -1
+	Version: 43 Zeitstempel: 1289231053974 relative Position: -1
+	Version: 44 Zeitstempel: 1291204075895 relative Position: 234751
+	Version: 45 Zeitstempel: 1291300594602 relative Position: 235756
+	Version: 46 Zeitstempel: 1292323426947 relative Position: -1
+	Version: 47 Zeitstempel: 1295362369002 relative Position: -1
+	Version: 48 Zeitstempel: 1319195339574 relative Position: 237253
+	Version: 49 Zeitstempel: 1346771372152 relative Position: 239680
+	Version: 50 Zeitstempel: 1353329024326 relative Position: -1
+	Version: 51 Zeitstempel: 1355831817990 relative Position: -1
+	Version: 52 Zeitstempel: 1356276859413 relative Position: 240236
+	Version: 53 Zeitstempel: 1358258999004 relative Position: 247476
+	Version: 54 Zeitstempel: 1359124907450 relative Position: 257769
+	Version: 55 Zeitstempel: 1360340352988 relative Position: 259493
+	Version: 56 Zeitstempel: 1372154595771 relative Position: -1
+	Version: 57 Zeitstempel: 1394453655827 relative Position: -1
+	Version: 58 Zeitstempel: 1404986935901 relative Position: -1
+Kennung 3: relative Position ungültig dynamisch Block 263901
+Kennung 4: relative Position Id-Index: 263901
+Kennung 5: relative Position HashCodePid-Index: 297469
+Kennung 6: relative Position Mischobjektmenge: 322645
+Kennung 7: Pid des Konfigurationsbereichs: kb.tmVerkehrGlobal
+Kennung 9: Version unter der die Objekte erstellt wurden 1
+Kennung 10: Serialisiererversion 3
+
+
+#000042 09.04.2016 10:47:31,855:+0200 (TID:000001) ---------------------- 
+INFO   : ConfigurationApp.de.bsvrz.puk.config.configFile.fileaccess.ConfigAreaFile
+Laden der Konfigurationsdatei: /home/christian/docker-datenverteiler/datenverteiler/Kernsoftware-Basissystem/konfiguration/kv.kappich/config/kb.kv.kappich.config
+
+#000043 09.04.2016 10:47:31,857:+0200 (TID:000001) ...................... 
+KONFIG : ConfigurationApp.de.bsvrz.puk.config.configFile.fileaccess.ConfigFileHeaderInfo
+Kennung 1 (nicht maßgeblich): aktive Version: 0 nächste aktive Version: 1 
+Kennung 2: 
+Kennung 3: relative Position ungültig dynamisch Block 0
+Kennung 4: relative Position Id-Index: 0
+Kennung 5: relative Position HashCodePid-Index: 0
+Kennung 6: relative Position Mischobjektmenge: 0
+Kennung 7: Pid des Konfigurationsbereichs: kb.kv.kappich
+Kennung 9: Version unter der die Objekte erstellt wurden 1
+Kennung 10: Serialisiererversion 3
+
+
+#000044 09.04.2016 10:47:31,858:+0200 (TID:000001) ---------------------- 
+INFO   : ConfigurationApp.de.bsvrz.puk.config.configFile.fileaccess.ConfigAreaFile
+Laden der Konfigurationsdatei: /home/christian/docker-datenverteiler/datenverteiler/Kernsoftware-Basissystem/konfiguration/kv.kappich/config/kb.fachModellGlobal.config
+
+#000045 09.04.2016 10:47:31,859:+0200 (TID:000001) ...................... 
+KONFIG : ConfigurationApp.de.bsvrz.puk.config.configFile.fileaccess.ConfigFileHeaderInfo
+Kennung 1 (nicht maßgeblich): aktive Version: 7 nächste aktive Version: 8 
+Kennung 2: 
+	Version: 2 Zeitstempel: 1173124455698 relative Position: 0
+	Version: 3 Zeitstempel: 1173521045600 relative Position: -1
+	Version: 4 Zeitstempel: 1173881793593 relative Position: -1
+	Version: 5 Zeitstempel: 1174121462416 relative Position: 1262
+	Version: 6 Zeitstempel: 1174237103434 relative Position: 2155
+	Version: 7 Zeitstempel: 1174379472113 relative Position: -1
+Kennung 3: relative Position ungültig dynamisch Block 3565
+Kennung 4: relative Position Id-Index: 3565
+Kennung 5: relative Position HashCodePid-Index: 3997
+Kennung 6: relative Position Mischobjektmenge: 4321
+Kennung 7: Pid des Konfigurationsbereichs: kb.fachModellGlobal
+Kennung 9: Version unter der die Objekte erstellt wurden 1
+Kennung 10: Serialisiererversion 3
+
+
+#000046 09.04.2016 10:47:31,865:+0200 (TID:000001) ---------------------- 
+INFO   : ConfigurationApp.de.bsvrz.puk.config.configFile.fileaccess.ConfigAreaFile
+Laden der Konfigurationsdatei: /home/christian/docker-datenverteiler/datenverteiler/Kernsoftware-Basissystem/konfiguration/kv.kappich/config/kb.metaModellGlobal.config
+
+#000047 09.04.2016 10:47:31,867:+0200 (TID:000001) ...................... 
+KONFIG : ConfigurationApp.de.bsvrz.puk.config.configFile.fileaccess.ConfigFileHeaderInfo
+Kennung 1 (nicht maßgeblich): aktive Version: 15 nächste aktive Version: 16 
+Kennung 2: 
+	Version: 2 Zeitstempel: 1173883793479 relative Position: -1
+	Version: 3 Zeitstempel: 1173884862817 relative Position: -1
+	Version: 4 Zeitstempel: 1173947584116 relative Position: -1
+	Version: 5 Zeitstempel: 1179274487983 relative Position: -1
+	Version: 6 Zeitstempel: 1179774654377 relative Position: 0
+	Version: 7 Zeitstempel: 1182947799191 relative Position: -1
+	Version: 8 Zeitstempel: 1184569066994 relative Position: -1
+	Version: 9 Zeitstempel: 1185522065865 relative Position: 1845
+	Version: 10 Zeitstempel: 1197835666012 relative Position: -1
+	Version: 11 Zeitstempel: 1207392476245 relative Position: -1
+	Version: 12 Zeitstempel: 1210871575288 relative Position: -1
+	Version: 13 Zeitstempel: 1294358393562 relative Position: -1
+	Version: 14 Zeitstempel: 1296113807842 relative Position: -1
+	Version: 15 Zeitstempel: 1306877349841 relative Position: -1
+Kennung 3: relative Position ungültig dynamisch Block 3556
+Kennung 4: relative Position Id-Index: 3556
+Kennung 5: relative Position HashCodePid-Index: 3892
+Kennung 6: relative Position Mischobjektmenge: 4144
+Kennung 7: Pid des Konfigurationsbereichs: kb.metaModellGlobal
+Kennung 9: Version unter der die Objekte erstellt wurden 1
+Kennung 10: Serialisiererversion 3
+
+
+#000048 09.04.2016 10:47:31,908:+0200 (TID:000001) ---------------------- 
+INFO   : ConfigurationApp.de.bsvrz.puk.config.configFile.fileaccess.ConfigAreaFile
+Laden der Konfigurationsdatei: /home/christian/docker-datenverteiler/datenverteiler/Kernsoftware-Basissystem/konfiguration/kv.kappich/config/kb.systemModellAoe.config
+
+#000049 09.04.2016 10:47:31,923:+0200 (TID:000001) ...................... 
+KONFIG : ConfigurationApp.de.bsvrz.puk.config.configFile.fileaccess.ConfigFileHeaderInfo
+Kennung 1 (nicht maßgeblich): aktive Version: 6 nächste aktive Version: 7 
+Kennung 2: 
+	Version: 2 Zeitstempel: 1181588307485 relative Position: -1
+	Version: 3 Zeitstempel: 1209306852455 relative Position: -1
+	Version: 4 Zeitstempel: 1216229501265 relative Position: -1
+	Version: 5 Zeitstempel: 1252655763544 relative Position: -1
+	Version: 6 Zeitstempel: 1306877349841 relative Position: -1
+Kennung 3: relative Position ungültig dynamisch Block 0
+Kennung 4: relative Position Id-Index: 0
+Kennung 5: relative Position HashCodePid-Index: 0
+Kennung 6: relative Position Mischobjektmenge: 0
+Kennung 7: Pid des Konfigurationsbereichs: kb.systemModellAoe
+Kennung 9: Version unter der die Objekte erstellt wurden 1
+Kennung 10: Serialisiererversion 3
+
+
+#000050 09.04.2016 10:47:31,931:+0200 (TID:000001) ---------------------- 
+INFO   : ConfigurationApp.de.bsvrz.puk.config.configFile.fileaccess.ConfigAreaFile
+Laden der Konfigurationsdatei: /home/christian/docker-datenverteiler/datenverteiler/Kernsoftware-Basissystem/konfiguration/kv.kappich/config/kb.systemModellGlobal.config
+
+#000051 09.04.2016 10:47:31,934:+0200 (TID:000001) ...................... 
+KONFIG : ConfigurationApp.de.bsvrz.puk.config.configFile.fileaccess.ConfigFileHeaderInfo
+Kennung 1 (nicht maßgeblich): aktive Version: 32 nächste aktive Version: 33 
+Kennung 2: 
+	Version: 2 Zeitstempel: 1173883793479 relative Position: 0
+	Version: 3 Zeitstempel: 1174121462416 relative Position: -1
+	Version: 4 Zeitstempel: 1174397544119 relative Position: -1
+	Version: 5 Zeitstempel: 1179270154021 relative Position: -1
+	Version: 6 Zeitstempel: 1180036347635 relative Position: -1
+	Version: 7 Zeitstempel: 1180087809510 relative Position: 11081
+	Version: 8 Zeitstempel: 1180435254448 relative Position: 12978
+	Version: 9 Zeitstempel: 1180652754016 relative Position: 14452
+	Version: 10 Zeitstempel: 1181587641330 relative Position: -1
+	Version: 11 Zeitstempel: 1182765000570 relative Position: -1
+	Version: 12 Zeitstempel: 1182947799189 relative Position: 16018
+	Version: 13 Zeitstempel: 1184903653161 relative Position: -1
+	Version: 14 Zeitstempel: 1192117632543 relative Position: -1
+	Version: 15 Zeitstempel: 1195269892379 relative Position: 20661
+	Version: 16 Zeitstempel: 1202134042929 relative Position: 37681
+	Version: 17 Zeitstempel: 1207392476244 relative Position: 45668
+	Version: 18 Zeitstempel: 1209306852453 relative Position: -1
+	Version: 19 Zeitstempel: 1210871575287 relative Position: 53817
+	Version: 20 Zeitstempel: 1228224307006 relative Position: 62761
+	Version: 21 Zeitstempel: 1228516779162 relative Position: -1
+	Version: 22 Zeitstempel: 1252655763543 relative Position: -1
+	Version: 23 Zeitstempel: 1285250261195 relative Position: -1
+	Version: 24 Zeitstempel: 1294358393560 relative Position: 65667
+	Version: 25 Zeitstempel: 1294362150478 relative Position: -1
+	Version: 26 Zeitstempel: 1296113807841 relative Position: -1
+	Version: 27 Zeitstempel: 1306876800232 relative Position: 71897
+	Version: 28 Zeitstempel: 1320055314797 relative Position: -1
+	Version: 29 Zeitstempel: 1320403924880 relative Position: 72701
+	Version: 30 Zeitstempel: 1346869535115 relative Position: 75015
+	Version: 31 Zeitstempel: 1349336569176 relative Position: 79834
+	Version: 32 Zeitstempel: 1372228146556 relative Position: 81404
+Kennung 3: relative Position ungültig dynamisch Block 89916
+Kennung 4: relative Position Id-Index: 89916
+Kennung 5: relative Position HashCodePid-Index: 97852
+Kennung 6: relative Position Mischobjektmenge: 103804
+Kennung 7: Pid des Konfigurationsbereichs: kb.systemModellGlobal
+Kennung 9: Version unter der die Objekte erstellt wurden 1
+Kennung 10: Serialisiererversion 3
+
+
+#000052 09.04.2016 10:47:31,988:+0200 (TID:000001) ---------------------- 
+INFO   : ConfigurationApp.de.bsvrz.puk.config.configFile.fileaccess.ConfigAreaFile
+Laden der Konfigurationsdatei: /home/christian/docker-datenverteiler/datenverteiler/Kernsoftware-Basissystem/konfiguration/kv.kappich/config/kb.tmBuVGlobal.config
+
+#000053 09.04.2016 10:47:31,989:+0200 (TID:000001) ...................... 
+KONFIG : ConfigurationApp.de.bsvrz.puk.config.configFile.fileaccess.ConfigFileHeaderInfo
+Kennung 1 (nicht maßgeblich): aktive Version: 5 nächste aktive Version: 6 
+Kennung 2: 
+	Version: 2 Zeitstempel: 1173524106822 relative Position: -1
+	Version: 3 Zeitstempel: 1174121462426 relative Position: -1
+	Version: 4 Zeitstempel: 1195269892383 relative Position: 0
+	Version: 5 Zeitstempel: 1216229501265 relative Position: -1
+Kennung 3: relative Position ungültig dynamisch Block 819
+Kennung 4: relative Position Id-Index: 819
+Kennung 5: relative Position HashCodePid-Index: 947
+Kennung 6: relative Position Mischobjektmenge: 1043
+Kennung 7: Pid des Konfigurationsbereichs: kb.tmBuVGlobal
+Kennung 9: Version unter der die Objekte erstellt wurden 1
+Kennung 10: Serialisiererversion 3
+
+
+#000054 09.04.2016 10:47:32,000:+0200 (TID:000001) ---------------------- 
+INFO   : ConfigurationApp.de.bsvrz.puk.config.configFile.fileaccess.ConfigAreaFile
+Laden der Konfigurationsdatei: /home/christian/docker-datenverteiler/datenverteiler/Kernsoftware-Basissystem/konfiguration/kv.kappich/config/kb.tmIlseTls.config
+
+#000055 09.04.2016 10:47:32,001:+0200 (TID:000001) ...................... 
+KONFIG : ConfigurationApp.de.bsvrz.puk.config.configFile.fileaccess.ConfigFileHeaderInfo
+Kennung 1 (nicht maßgeblich): aktive Version: 4 nächste aktive Version: 5 
+Kennung 2: 
+	Version: 2 Zeitstempel: 1173522285583 relative Position: -1
+	Version: 3 Zeitstempel: 1174121462426 relative Position: -1
+	Version: 4 Zeitstempel: 1195269892380 relative Position: 0
+Kennung 3: relative Position ungültig dynamisch Block 4126
+Kennung 4: relative Position Id-Index: 4126
+Kennung 5: relative Position HashCodePid-Index: 4510
+Kennung 6: relative Position Mischobjektmenge: 4798
+Kennung 7: Pid des Konfigurationsbereichs: kb.tmIlseTls
+Kennung 9: Version unter der die Objekte erstellt wurden 1
+Kennung 10: Serialisiererversion 3
+
+
+#000056 09.04.2016 10:47:32,003:+0200 (TID:000001) ---------------------- 
+INFO   : ConfigurationApp.de.bsvrz.puk.config.configFile.fileaccess.ConfigAreaFile
+Laden der Konfigurationsdatei: /home/christian/docker-datenverteiler/datenverteiler/Kernsoftware-Basissystem/konfiguration/kv.kappich/config/kb.tmVewBetriebGlobal.config
+
+#000057 09.04.2016 10:47:32,004:+0200 (TID:000001) ...................... 
+KONFIG : ConfigurationApp.de.bsvrz.puk.config.configFile.fileaccess.ConfigFileHeaderInfo
+Kennung 1 (nicht maßgeblich): aktive Version: 6 nächste aktive Version: 7 
+Kennung 2: 
+	Version: 2 Zeitstempel: 1173524106832 relative Position: -1
+	Version: 3 Zeitstempel: 1195269892379 relative Position: 0
+	Version: 4 Zeitstempel: 1209306672189 relative Position: -1
+	Version: 5 Zeitstempel: 1211801060474 relative Position: 3725
+	Version: 6 Zeitstempel: 1375351407873 relative Position: 5488
+Kennung 3: relative Position ungültig dynamisch Block 8720
+Kennung 4: relative Position Id-Index: 8720
+Kennung 5: relative Position HashCodePid-Index: 9760
+Kennung 6: relative Position Mischobjektmenge: 10540
+Kennung 7: Pid des Konfigurationsbereichs: kb.tmVewBetriebGlobal
+Kennung 9: Version unter der die Objekte erstellt wurden 1
+Kennung 10: Serialisiererversion 3
+
+
+#000058 09.04.2016 10:47:32,021:+0200 (TID:000001) ---------------------- 
+INFO   : ConfigurationApp.de.bsvrz.puk.config.configFile.fileaccess.ConfigAreaFile
+Laden der Konfigurationsdatei: /home/christian/docker-datenverteiler/datenverteiler/Kernsoftware-Basissystem/konfiguration/kv.kappich/config/kb.tmVewSimulationGlobal.config
+
+#000059 09.04.2016 10:47:32,027:+0200 (TID:000001) ...................... 
+KONFIG : ConfigurationApp.de.bsvrz.puk.config.configFile.fileaccess.ConfigFileHeaderInfo
+Kennung 1 (nicht maßgeblich): aktive Version: 7 nächste aktive Version: 8 
+Kennung 2: 
+	Version: 2 Zeitstempel: 1173882794843 relative Position: -1
+	Version: 3 Zeitstempel: 1174121462426 relative Position: -1
+	Version: 4 Zeitstempel: 1181117952390 relative Position: 0
+	Version: 5 Zeitstempel: 1195269892384 relative Position: 2892
+	Version: 6 Zeitstempel: 1209306672191 relative Position: 6254
+	Version: 7 Zeitstempel: 1220628976817 relative Position: 7446
+Kennung 3: relative Position ungültig dynamisch Block 9839
+Kennung 4: relative Position Id-Index: 9839
+Kennung 5: relative Position HashCodePid-Index: 11039
+Kennung 6: relative Position Mischobjektmenge: 11939
+Kennung 7: Pid des Konfigurationsbereichs: kb.tmVewSimulationGlobal
+Kennung 9: Version unter der die Objekte erstellt wurden 1
+Kennung 10: Serialisiererversion 3
+
+
+#000088 09.04.2016 10:47:32,223:+0200 (TID:000001) ====================== 
+WARNUNG: ConfigurationApp.de.bsvrz.puk.config.configFile.datamodel.AreaDependencyChecker
+Für den Bereich kb.kv.basissystem wurden mögliche Abhängigkeiten noch nicht erfasst. 
+Für den Bereich kb.kv.bea wurden mögliche Abhängigkeiten noch nicht erfasst. 
+
+
+#000094 09.04.2016 10:47:32,276:+0200 (TID:000001) ---------------------- 
+INFO   : ConfigurationApp.de.bsvrz.puk.config.configFile.datamodel.ConfigDataModel
+Das Datenmodell wurde geladen. Dauer in Sekunden: 1
+
+#000095 09.04.2016 10:47:32,314:+0200 (TID:000001) ---------------------- 
+INFO   : ConfigurationApp.de.bsvrz.puk.config.main.importexport.ConfigurationImport
+Import folgender Konfigurationsbereiche wird gestartet:
+kb.default.basissystem kb.basissystem.objekteBenutzer kb.basissystem.objekteDatenverteiler 
+
+#003339 09.04.2016 10:47:32,544:+0200 (TID:000001) ...................... 
+KONFIG : ConfigurationApp.de.bsvrz.puk.config.main.importexport.ConfigurationImport
+Im Konfigurationsbereich kb.default.basissystem gibt es 1 aktuelle Objekte, 0 freigegebene Objekte und 0 in Bearbeitung befindliche Objekte.
+
+#003346 09.04.2016 10:47:32,559:+0200 (TID:000001) ...................... 
+KONFIG : ConfigurationApp.de.bsvrz.puk.config.main.importexport.ConfigurationImport
+Im Konfigurationsbereich kb.basissystem.objekteBenutzer gibt es 2 aktuelle Objekte, 0 freigegebene Objekte und 0 in Bearbeitung befindliche Objekte.
+
+#003354 09.04.2016 10:47:32,579:+0200 (TID:000001) ...................... 
+KONFIG : ConfigurationApp.de.bsvrz.puk.config.main.importexport.ConfigurationImport
+Im Konfigurationsbereich kb.basissystem.objekteDatenverteiler gibt es 3 aktuelle Objekte, 0 freigegebene Objekte und 0 in Bearbeitung befindliche Objekte.
+
+#003355 09.04.2016 10:47:32,579:+0200 (TID:000001) ---------------------- 
+INFO   : ConfigurationApp.de.bsvrz.puk.config.main.importexport.ConfigurationImport
+Anzahl der Definitionen und SystemObjekte, die zu importieren sind: 3
+
+#003356 09.04.2016 10:47:32,580:+0200 (TID:000001) ...................... 
+KONFIG : ConfigurationApp.de.bsvrz.puk.config.main.importexport.ConfigurationImport
+Alle Modelldaten der zu importierenden Konfigurationsbereiche werden erstellt.
+
+#003357 09.04.2016 10:47:32,580:+0200 (TID:000001) ...................... 
+KONFIG : ConfigurationApp.de.bsvrz.puk.config.main.importexport.ConfigurationImport
+Alle Objekte der zu importierenden Konfigurationsbereiche werden erstellt.
+
+#003376 09.04.2016 10:47:32,588:+0200 (TID:000001) ====================== 
+WARNUNG: ConfigurationApp.de.bsvrz.puk.config.configFile.datamodel.MutableSetConfigDataStorage
+Element mit Id '1575978394602964118' kann nicht der Menge 'Applikationen' hinzugefügt werden, da es kein System-Objekt hierzu gibt.
+
+#003378 09.04.2016 10:47:32,590:+0200 (TID:000001) ====================== 
+WARNUNG: ConfigurationApp.de.bsvrz.puk.config.configFile.datamodel.MutableSetConfigDataStorage
+Element mit Id '1575978394602964119' kann nicht der Menge 'Applikationen' hinzugefügt werden, da es kein System-Objekt hierzu gibt.
+
+#003380 09.04.2016 10:47:32,619:+0200 (TID:000001) ====================== 
+WARNUNG: ConfigurationApp.de.bsvrz.puk.config.configFile.datamodel.MutableSetConfigDataStorage
+Element mit Id '1575978394602964120' kann nicht der Menge 'Applikationen' hinzugefügt werden, da es kein System-Objekt hierzu gibt.
+
+#003383 09.04.2016 10:47:32,627:+0200 (TID:000001) ...................... 
+KONFIG : ConfigurationApp.de.bsvrz.puk.config.main.importexport.ConfigurationImport
+Bestehende Objekte wurden durch neue Objekte ersetzt - Referenzen müssen aufgelöst werden. Durchlauf: 1
+
+#003387 09.04.2016 10:47:32,628:+0200 (TID:000001) ...................... 
+KONFIG : ConfigurationApp.de.bsvrz.puk.config.main.importexport.ConfigurationImport
+Alle Modelldaten der zu importierenden Konfigurationsbereiche werden erstellt.
+
+#003388 09.04.2016 10:47:32,631:+0200 (TID:000001) ...................... 
+KONFIG : ConfigurationApp.de.bsvrz.puk.config.main.importexport.ConfigurationImport
+Alle Objekte der zu importierenden Konfigurationsbereiche werden erstellt.
+
+#003397 09.04.2016 10:47:32,633:+0200 (TID:000001) ...................... 
+KONFIG : ConfigurationApp.de.bsvrz.puk.config.main.importexport.ConfigurationImport
+Alle Modelldaten der zu importierenden Konfigurationsbereiche werden vervollständigt.
+
+#003398 09.04.2016 10:47:32,633:+0200 (TID:000001) ...................... 
+KONFIG : ConfigurationApp.de.bsvrz.puk.config.main.importexport.ConfigurationImport
+Default-Werte werden vervollständigt.
+
+#003399 09.04.2016 10:47:32,633:+0200 (TID:000001) ...................... 
+KONFIG : ConfigurationApp.de.bsvrz.puk.config.main.importexport.ConfigurationImport
+Alle Objekte der zu importierenden Konfigurationsbereiche werden vervollständigt.
+
+#003405 09.04.2016 10:47:32,634:+0200 (TID:000001) ...................... 
+KONFIG : ConfigurationApp.de.bsvrz.puk.config.main.importexport.ConfigurationImport
+Aufräumen bestehender Objekte nach dem Import.
+
+#003407 09.04.2016 10:47:32,634:+0200 (TID:000001) ---------------------- 
+INFO   : ConfigurationApp.de.bsvrz.puk.config.main.importexport.ConfigurationImport
+Anzahl der aktuellen Objekte, die gültig bleiben: 6
+
+#003411 09.04.2016 10:47:32,638:+0200 (TID:000001) ---------------------- 
+INFO   : ConfigurationApp.de.bsvrz.puk.config.main.importexport.ConfigurationImport
+Der Import wurde durchgeführt. Dauer in Sekunden: 0
+
+-------09.04.2016 10:47:32,807:+0200(TID:......) ---------------------- STATUS
+Ausgabedatei korrekt abgeschlossenen.

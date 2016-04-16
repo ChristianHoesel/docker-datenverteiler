@@ -17,7 +17,8 @@
 	</konfigurationsbereich>
 	<konfigurationsbereich pid="kb.basissystem.objekteDatenverteiler" verzeichnis="kv.basissystem/config">
 		<version nr="1" zeitpunkt="25.03.2009 10:03:42,406"/>
-	</konfigurationsbereich>
+	<version nr="2" zeitpunkt="16.04.2016 19:44:04,106"/>
+</konfigurationsbereich>
 
 	<!-- kb.bea -->
 
@@ -29,7 +30,8 @@
 		<version nr="2" zeitpunkt="21.03.2007 03:47:28,013"/>
 		<version nr="3" zeitpunkt="23.03.2011 10:17:51,191"/>
 		<version nr="4" zeitpunkt="04.05.2011 09:50:59,029"/>
-	</konfigurationsbereich>
+	<version nr="5" zeitpunkt="16.04.2016 19:44:04,108"/>
+</konfigurationsbereich>
 
 	<!-- kv.bitctrl -->
 
@@ -201,7 +203,8 @@
 		<version nr="6" zeitpunkt="18.10.2009 16:14:43,893"/>
 		<version nr="9" zeitpunkt="08.03.2010 11:06:35,451"/>
 		<version nr="17" zeitpunkt="05.09.2012 09:51:23,562"/>
-	</konfigurationsbereich>
+	<version nr="19" zeitpunkt="16.04.2016 19:44:04,111"/>
+</konfigurationsbereich>
 	<konfigurationsbereich pid="kb.tmSystemKalenderGlobal" verzeichnis="kv.inovat/config">
 		<version nr="1" zeitpunkt="02.03.2007 00:31:20,621"/>
 		<version nr="4" zeitpunkt="21.03.2007 03:47:28,014"/>
@@ -223,7 +226,8 @@
 		<version nr="19" zeitpunkt="26.05.2008 13:27:25,686"/>
 		<version nr="21" zeitpunkt="02.12.2008 14:54:47,534"/>
 		<version nr="22" zeitpunkt="05.09.2012 09:51:23,562"/>
-	</konfigurationsbereich>
+	<version nr="23" zeitpunkt="16.04.2016 19:44:04,112"/>
+</konfigurationsbereich>
 	<konfigurationsbereich pid="kb.tmVerkehrGlobal" verzeichnis="kv.inovat/config">
 		<version nr="1" zeitpunkt="02.03.2007 00:31:20,623"/>
 		<version nr="10" zeitpunkt="21.03.2007 03:47:28,015"/>
@@ -240,7 +244,8 @@
 		<version nr="50" zeitpunkt="19.11.2012 14:57:51,797"/>
 		<version nr="55" zeitpunkt="01.07.2013 15:27:41,762"/>
 		<version nr="56" zeitpunkt="07.10.2013 16:27:09,418"/>
-	</konfigurationsbereich>
+	<version nr="58" zeitpunkt="16.04.2016 19:44:04,112"/>
+</konfigurationsbereich>
 	<konfigurationsbereich pid="kb.tmBAStBandExportImport" verzeichnis="kv.inovat/config">
 		<version nr="3" zeitpunkt="05.09.2012 09:51:23,562"/>
 		<version nr="4" zeitpunkt="05.09.2012 09:57:48,197"/>
@@ -263,7 +268,8 @@
 	<konfigurationsbereich pid="kb.tmKExTlsFG9Pro" verzeichnis="kv.inovat/config">
 		<version nr="6" zeitpunkt="05.09.2012 10:49:06,319"/>
 		<version nr="8" zeitpunkt="07.10.2013 16:27:09,419"/>
-	</konfigurationsbereich>
+	<version nr="10" zeitpunkt="16.04.2016 19:44:04,113"/>
+</konfigurationsbereich>
 	<konfigurationsbereich pid="kb.tmKExTlsZeitSync" verzeichnis="kv.inovat/config">
 		<version nr="1" zeitpunkt="05.09.2012 10:49:06,319"/>
 	</konfigurationsbereich>
@@ -277,7 +283,8 @@
 		<version nr="1" zeitpunkt="02.03.2007 00:31:20,623"/>
 		<version nr="2" zeitpunkt="13.03.2007 10:10:09,652"/>
 		<version nr="7" zeitpunkt="21.03.2007 03:47:28,015"/>
-	</konfigurationsbereich>
+	<version nr="9" zeitpunkt="16.04.2016 19:44:04,114"/>
+</konfigurationsbereich>
 	<konfigurationsbereich pid="kb.ilse" verzeichnis="kv.kappich/config">
 		<version nr="1" zeitpunkt="02.03.2007 00:31:20,621"/>
 		<version nr="3" zeitpunkt="21.03.2007 03:47:28,013"/>
@@ -299,7 +306,8 @@
 		<version nr="12" zeitpunkt="15.05.2008 19:22:15,334"/>
 		<version nr="13" zeitpunkt="23.03.2011 10:17:51,191"/>
 		<version nr="15" zeitpunkt="05.09.2012 09:51:23,562"/>
-	</konfigurationsbereich>
+	<version nr="16" zeitpunkt="16.04.2016 19:44:04,115"/>
+</konfigurationsbereich>
 	<konfigurationsbereich pid="kb.modellOsi3Umleitung" verzeichnis="kv.kappich/config">
 		<version nr="3" zeitpunkt="05.09.2012 09:51:23,562"/>
 	</konfigurationsbereich>
@@ -332,7 +340,8 @@
 		<version nr="4" zeitpunkt="14.08.2008 12:10:37,264"/>
 		<version nr="5" zeitpunkt="05.02.2010 10:47:51,312"/>
 		<version nr="6" zeitpunkt="05.09.2012 09:51:23,562"/>
-	</konfigurationsbereich>
+	<version nr="7" zeitpunkt="16.04.2016 19:44:04,116"/>
+</konfigurationsbereich>
 	<konfigurationsbereich pid="kb.systemModellGlobal" verzeichnis="kv.kappich/config">
 		<version nr="1" zeitpunkt="02.03.2007 00:31:20,617"/>
 		<version nr="2" zeitpunkt="08.03.2007 16:24:58,749"/>
@@ -360,7 +369,8 @@
 		<version nr="25" zeitpunkt="23.03.2011 10:17:51,191"/>
 		<version nr="29" zeitpunkt="05.09.2012 09:51:23,562"/>
 		<version nr="32" zeitpunkt="09.10.2013 11:04:42,145"/>
-	</konfigurationsbereich>
+	<version nr="36" zeitpunkt="16.04.2016 19:44:04,117"/>
+</konfigurationsbereich>
 	<konfigurationsbereich pid="kb.systemModellKExDaV" verzeichnis="kv.kappich/config">
 		<version nr="1" zeitpunkt="05.09.2012 09:51:23,562"/>
 		<version nr="2" zeitpunkt="09.10.2013 11:04:42,145"/>

@@ -1,0 +1,21 @@
+#!/bin/bash
+
+# In das Verzeichnis des Skripts wechseln, damit relative Pfade funktionieren
+cd `dirname $0`
+
+. einstellungen.sh
+
+java $jvmargs -cp ${basispakete}/de.bsvrz.sys.startstopp/de.bsvrz.sys.startstopp-runtime.jar  de.bsvrz.sys.startstopp.skriptvew.StartStoppApp \
+	-startStoppKonfiguration=../versorgung/startStopp/prod \
+ 	-reset=true \
+ 	-port=2361 \
+ 	-rechner=rp.pls.lkw.A61.rechner.uz \
+ 	-debugFilePath=${betriebsdaten} \
+	-debugLevelStdErrText=NONE \
+	-debugLevelFileText=FINEST \
+	-debugSetLoggerAndLevel=:FINEST & 
+
+#
+# $HeadURL: svn://ntoserver/Datenverteiler/PLS_A61/trunk/UZ-PLS-A61/skripte-bash/StartStoppEchtsystem.sh $
+# $LastChangedRevision: 59759 $
+#
