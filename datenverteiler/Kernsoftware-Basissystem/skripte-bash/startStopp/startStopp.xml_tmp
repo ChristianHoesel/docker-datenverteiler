@@ -2,7 +2,7 @@
 <!DOCTYPE konfiguration PUBLIC "-//startstopp//DTD Dokument//DE" "startStopp.dtd">
 
 <konfiguration>
-  <startStopp Versionsnummer="2" ErstelltAm="09.04.2016 10:43:45" ErstelltDurch="CH" Aenderungsgrund="Langeweile">
+  <startStopp Versionsnummer="3" ErstelltAm="17.04.2016 15:43:05" ErstelltDurch="CH" Aenderungsgrund="Langeweile">
     <global>
       <makrodefinition name="jvmArgs" wert="-showversion -Dfile.encoding=ISO-8859-1 -Xms32m -Xrs" />
       <makrodefinition name="java" wert="java" />
@@ -11,19 +11,19 @@
       <makrodefinition name="benutzer" wert="Tester" />
       <makrodefinition name="passwortdatei" wert="../properties/passwd" />
       <makrodefinition name="authentifizierung" wert="-benutzer=Tester -authentifizierung=../properties/passwd" />
-      <makrodefinition name="dav1Host" wert="Datenverteiler" />
+      <makrodefinition name="dav1Host" wert="localhost" />
       <makrodefinition name="dav1AppPort" wert="8083" />
       <makrodefinition name="dav1DavPort" wert="8080" />
       <makrodefinition name="debugDefaults" wert="-debugFilePath=../debug" />
       <makrodefinition name="dav1einstellungen" wert="-davAppPort=8083 -davDavPort=8080 -debugFilePath=../debug" />
-      <makrodefinition name="dav1" wert="-datenverteiler=Datenverteiler:8083 -benutzer=Tester -authentifizierung=../properties/passwd -debugFilePath=../debug" />
-      <makrodefinition name="dav1OhneAuthentifizierung" wert="-datenverteiler=Datenverteiler:8083 -debugFilePath=../debug" />
+      <makrodefinition name="dav1" wert="-datenverteiler=localhost:8083 -benutzer=Tester -authentifizierung=../properties/passwd -debugFilePath=../debug" />
+      <makrodefinition name="dav1OhneAuthentifizierung" wert="-datenverteiler=localhost:8083 -debugFilePath=../debug" />
       <makrodefinition name="classpath" wert="../distributionspakete/de.bsvrz.sys.funclib.application/de.bsvrz.sys.funclib.application-runtime.jar" />
       <kernsystem inkarnationsname="Datenverteiler" />
       <kernsystem inkarnationsname="Konfiguration" />
       <kernsystem inkarnationsname="Parametrierung" mitInkarnationsname="ja" />
       <kernsystem inkarnationsname="Betriebsmeldungsverwaltung" mitInkarnationsname="ja" />
-      <zugangdav adresse="Datenverteiler" port="8083" username="Tester" passwort="geheim" />
+      <zugangdav adresse="localhost" port="8083" username="Tester" passwort="geheim" />
       <!-- Spezifikation der verschiedenen Logfiles zum Mitschnitt von stdout und stderr. -->
       <protokolldatei name="datenverteiler" nameDatei="../debug/datenverteiler.log" groesse="1" />
       <protokolldatei name="konfiguration" nameDatei="../debug/konfiguration.log" groesse="1" />
@@ -59,7 +59,7 @@
         <aufrufparameter wert="de.bsvrz.puk.config.main.ConfigurationApp" />
         <aufrufparameter wert="-benutzer=configuration" />
         <aufrufparameter wert="-authentifizierung=../properties/passwd" />
-        <aufrufparameter wert="-datenverteiler=Datenverteiler:8083 -debugFilePath=../debug" />
+        <aufrufparameter wert="-datenverteiler=localhost:8083 -debugFilePath=../debug" />
         <aufrufparameter wert="-verwaltung=../konfiguration/verwaltungsdaten.xml" />
         <aufrufparameter wert="-benutzerverwaltung=../konfiguration/benutzerverwaltung.xml" />
         <!-- Undokumentierter DAV-Puffer Sendepuffer:Empfangspuffer:Auslieferungspuffer -->
@@ -82,7 +82,7 @@
         <aufrufparameter wert="-jar ../distributionspakete/de.bsvrz.puk.param/de.bsvrz.puk.param-runtime.jar" />
         <aufrufparameter wert="-benutzer=parameter" />
         <aufrufparameter wert="-authentifizierung=../properties/passwd" />
-        <aufrufparameter wert="-datenverteiler=Datenverteiler:8083 -debugFilePath=../debug" />
+        <aufrufparameter wert="-datenverteiler=localhost:8083 -debugFilePath=../debug" />
         <aufrufparameter wert="-persistenzModul=de.bsvrz.puk.param.param.DerbyPersistenz" />
         <aufrufparameter wert="-persistenz=../parameter" />
         <aufrufparameter wert="-parametrierung=" />

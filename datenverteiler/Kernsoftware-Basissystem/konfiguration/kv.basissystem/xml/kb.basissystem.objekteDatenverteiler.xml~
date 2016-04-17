@@ -21,6 +21,13 @@
 			<objektMenge name="Applikationen">
 			</objektMenge>
 		</konfigurationsObjekt>
+		<konfigurationsObjekt pid="rechner.uz"
+			name="localhost" typ="typ.rechner">
+			<datensatz attributgruppe="atg.rechnerInformation" aspekt="asp.eigenschaften">
+				<datum name="Name" wert="Datenverteiler" />
+				<datum name="TCPIP" wert="localhost" />
+			</datensatz>
+		</konfigurationsObjekt>
 
 	</objekte>
 

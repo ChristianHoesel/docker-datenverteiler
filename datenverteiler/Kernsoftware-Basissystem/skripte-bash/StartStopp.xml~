@@ -49,8 +49,6 @@
 				<aufrufparameter wert="-rechtePruefung=nein" />
 				<aufrufparameter wert="-warteAufParametrierung=nein" />
 				<aufrufparameter wert="%dav1einstellungen%" />
-				<!-- Undokumentierter DAV-Puffer Sendepuffer:Empfangspuffer:Auslieferungspuffer -->
-        		<aufrufparameter wert="-puffer=10485760:10485760:26214400" />
 				<aufrufparameter wert="-debugLevelStdErrText=CONFIG" />
 				<aufrufparameter wert="-debugLevelFileText=CONFIG" />
 				<startart option="automatisch" neustart="nein" intervall="" />

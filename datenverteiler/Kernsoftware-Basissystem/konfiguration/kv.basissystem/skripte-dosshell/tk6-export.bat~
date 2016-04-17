@@ -5,7 +5,7 @@ title Export
 
 rem Um alles zu exportieren, keinen Bereich angeben
 rem set bereiche=
-set bereiche=kb.default.basissystem,kb.basissystem.objekteBenutzer,kb.basissystem.objekteDatenverteiler
+set bereiche=kb.kv.testKonfiguration,kb.default.testKonfiguration
 
 %java% ^
  -cp ..\..\..\distributionspakete\de.bsvrz.puk.config\de.bsvrz.puk.config-runtime.jar ^

@@ -1,8 +1,8 @@
 
--------17.04.2016 16:04:04,791:+0200(TID:......) ---------------------- STATUS
+-------17.04.2016 16:01:51,433:+0200(TID:......) ---------------------- STATUS
 Ausgabedatei angelegt.
 
-#000000 17.04.2016 16:04:04,790:+0200 (TID:000001) ---------------------- 
+#000000 17.04.2016 16:01:51,432:+0200 (TID:000001) ---------------------- 
 INFO   : ConfigurationApp
 Aktuelle Debugeinstellungen
 ----------------------------------------------
@@ -13,31 +13,27 @@ Registrierte DebugLogger:
   Name:   Level: INFO
 
 
-#000001 17.04.2016 16:04:04,792:+0200 (TID:000001) ---------------------- 
+#000001 17.04.2016 16:01:51,434:+0200 (TID:000001) ---------------------- 
 INFO   : ConfigurationApp
-Aufrufargumente von ConfigurationApp: ArgumentList[-freigabeaktivierung, -verwaltung=../config/verwaltungsdaten.xml, -debugFilePath=.., -debugLevelStdErrText=INFO, -debugLevelFileText=CONFIG]
+Aufrufargumente von ConfigurationApp: ArgumentList[-import=kb.default.basissystem,kb.basissystem.objekteBenutzer,kb.basissystem.objekteDatenverteiler, -verzeichnis=../xml, -verwaltung=../config/verwaltungsdaten.xml, -debugFilePath=.., -debugLevelStdErrText=INFO, -debugLevelFileText=CONFIG]
 
-#000002 17.04.2016 16:04:04,793:+0200 (TID:000001) ---------------------- 
-INFO   : ConfigurationApp.de.bsvrz.puk.config.main.ConfigurationApp
-Freigabe zur Aktivierung wird gestartet: ../config/verwaltungsdaten.xml
-
-#000003 17.04.2016 16:04:04,841:+0200 (TID:000001) ...................... 
+#000003 17.04.2016 16:01:51,491:+0200 (TID:000001) ...................... 
 KONFIG : ConfigurationApp.de.bsvrz.puk.config.main.managementfile.ManagementFile
 Datei wird eingelesen: /home/christian/docker-datenverteiler/datenverteiler/Kernsoftware-Basissystem/konfiguration/kv.basissystem/config/verwaltungsdaten.xml
 
-#000005 17.04.2016 16:04:04,870:+0200 (TID:000001) ...................... 
+#000005 17.04.2016 16:01:51,518:+0200 (TID:000001) ...................... 
 KONFIG : ConfigurationApp.de.bsvrz.puk.config.main.managementfile.ManagementFile
 Verzeichnisbasis f¸r die Konfigurationsbereiche: file:/home/christian/docker-datenverteiler/datenverteiler/Kernsoftware-Basissystem/konfiguration/kv.basissystem/config/
 
-#000006 17.04.2016 16:04:04,883:+0200 (TID:000001) ...................... 
+#000006 17.04.2016 16:01:51,531:+0200 (TID:000001) ...................... 
 KONFIG : ConfigurationApp.de.bsvrz.puk.config.main.managementfile.ManagementFile
 Verwaltungsdaten der Konfiguration wurden vollst‰ndig eingelesen.
 
-#000008 17.04.2016 16:04:04,893:+0200 (TID:000001) ---------------------- 
+#000008 17.04.2016 16:01:51,541:+0200 (TID:000001) ---------------------- 
 INFO   : ConfigurationApp.de.bsvrz.puk.config.configFile.fileaccess.ConfigAreaFile
 Laden der Konfigurationsdatei: /home/christian/docker-datenverteiler/datenverteiler/Kernsoftware-Basissystem/konfiguration/kv.basissystem/config/kb.kv.basissystem.config
 
-#000009 17.04.2016 16:04:04,897:+0200 (TID:000001) ...................... 
+#000009 17.04.2016 16:01:51,545:+0200 (TID:000001) ...................... 
 KONFIG : ConfigurationApp.de.bsvrz.puk.config.configFile.fileaccess.ConfigFileHeaderInfo
 Kennung 1 (nicht maﬂgeblich): aktive Version: 1 n‰chste aktive Version: 2 
 Kennung 2: 
@@ -50,11 +46,11 @@ Kennung 9: Version unter der die Objekte erstellt wurden 1
 Kennung 10: Serialisiererversion 3
 
 
-#000010 17.04.2016 16:04:04,924:+0200 (TID:000001) ---------------------- 
+#000010 17.04.2016 16:01:51,565:+0200 (TID:000001) ---------------------- 
 INFO   : ConfigurationApp.de.bsvrz.puk.config.configFile.fileaccess.ConfigAreaFile
 Laden der Konfigurationsdatei: /home/christian/docker-datenverteiler/datenverteiler/Kernsoftware-Basissystem/konfiguration/kv.basissystem/config/kb.default.basissystem.config
 
-#000011 17.04.2016 16:04:04,928:+0200 (TID:000001) ...................... 
+#000011 17.04.2016 16:01:51,566:+0200 (TID:000001) ...................... 
 KONFIG : ConfigurationApp.de.bsvrz.puk.config.configFile.fileaccess.ConfigFileHeaderInfo
 Kennung 1 (nicht maﬂgeblich): aktive Version: 1 n‰chste aktive Version: 2 
 Kennung 2: 
@@ -67,11 +63,11 @@ Kennung 9: Version unter der die Objekte erstellt wurden 1
 Kennung 10: Serialisiererversion 3
 
 
-#000012 17.04.2016 16:04:04,938:+0200 (TID:000001) ---------------------- 
+#000012 17.04.2016 16:01:51,598:+0200 (TID:000001) ---------------------- 
 INFO   : ConfigurationApp.de.bsvrz.puk.config.configFile.fileaccess.ConfigAreaFile
 Laden der Konfigurationsdatei: /home/christian/docker-datenverteiler/datenverteiler/Kernsoftware-Basissystem/konfiguration/kv.basissystem/config/kb.basissystem.objekteBenutzer.config
 
-#000013 17.04.2016 16:04:04,939:+0200 (TID:000001) ...................... 
+#000013 17.04.2016 16:01:51,600:+0200 (TID:000001) ...................... 
 KONFIG : ConfigurationApp.de.bsvrz.puk.config.configFile.fileaccess.ConfigFileHeaderInfo
 Kennung 1 (nicht maﬂgeblich): aktive Version: 1 n‰chste aktive Version: 2 
 Kennung 2: 
@@ -84,11 +80,11 @@ Kennung 9: Version unter der die Objekte erstellt wurden 1
 Kennung 10: Serialisiererversion 3
 
 
-#000014 17.04.2016 16:04:04,940:+0200 (TID:000001) ---------------------- 
+#000014 17.04.2016 16:01:51,607:+0200 (TID:000001) ---------------------- 
 INFO   : ConfigurationApp.de.bsvrz.puk.config.configFile.fileaccess.ConfigAreaFile
 Laden der Konfigurationsdatei: /home/christian/docker-datenverteiler/datenverteiler/Kernsoftware-Basissystem/konfiguration/kv.basissystem/config/kb.basissystem.objekteDatenverteiler.config
 
-#000015 17.04.2016 16:04:04,942:+0200 (TID:000001) ...................... 
+#000015 17.04.2016 16:01:51,610:+0200 (TID:000001) ...................... 
 KONFIG : ConfigurationApp.de.bsvrz.puk.config.configFile.fileaccess.ConfigFileHeaderInfo
 Kennung 1 (nicht maﬂgeblich): aktive Version: 2 n‰chste aktive Version: 3 
 Kennung 2: 
@@ -102,11 +98,11 @@ Kennung 9: Version unter der die Objekte erstellt wurden 1
 Kennung 10: Serialisiererversion 3
 
 
-#000016 17.04.2016 16:04:04,943:+0200 (TID:000001) ---------------------- 
+#000016 17.04.2016 16:01:51,615:+0200 (TID:000001) ---------------------- 
 INFO   : ConfigurationApp.de.bsvrz.puk.config.configFile.fileaccess.ConfigAreaFile
 Laden der Konfigurationsdatei: /home/christian/docker-datenverteiler/datenverteiler/Kernsoftware-Basissystem/konfiguration/kv.bea/config/kb.kv.bea.config
 
-#000017 17.04.2016 16:04:04,944:+0200 (TID:000001) ...................... 
+#000017 17.04.2016 16:01:51,626:+0200 (TID:000001) ...................... 
 KONFIG : ConfigurationApp.de.bsvrz.puk.config.configFile.fileaccess.ConfigFileHeaderInfo
 Kennung 1 (nicht maﬂgeblich): aktive Version: 0 n‰chste aktive Version: 1 
 Kennung 2: 
@@ -119,11 +115,11 @@ Kennung 9: Version unter der die Objekte erstellt wurden 1
 Kennung 10: Serialisiererversion 3
 
 
-#000018 17.04.2016 16:04:04,945:+0200 (TID:000001) ---------------------- 
+#000018 17.04.2016 16:01:51,633:+0200 (TID:000001) ---------------------- 
 INFO   : ConfigurationApp.de.bsvrz.puk.config.configFile.fileaccess.ConfigAreaFile
 Laden der Konfigurationsdatei: /home/christian/docker-datenverteiler/datenverteiler/Kernsoftware-Basissystem/konfiguration/kv.bea/config/kb.tmVewProtokolleGlobal.config
 
-#000019 17.04.2016 16:04:04,946:+0200 (TID:000001) ...................... 
+#000019 17.04.2016 16:01:51,635:+0200 (TID:000001) ...................... 
 KONFIG : ConfigurationApp.de.bsvrz.puk.config.configFile.fileaccess.ConfigFileHeaderInfo
 Kennung 1 (nicht maﬂgeblich): aktive Version: 5 n‰chste aktive Version: 6 
 Kennung 2: 
@@ -140,11 +136,11 @@ Kennung 9: Version unter der die Objekte erstellt wurden 1
 Kennung 10: Serialisiererversion 3
 
 
-#000020 17.04.2016 16:04:04,956:+0200 (TID:000001) ---------------------- 
+#000020 17.04.2016 16:01:51,653:+0200 (TID:000001) ---------------------- 
 INFO   : ConfigurationApp.de.bsvrz.puk.config.configFile.fileaccess.ConfigAreaFile
 Laden der Konfigurationsdatei: /home/christian/docker-datenverteiler/datenverteiler/Kernsoftware-Basissystem/konfiguration/kv.dambach/config/kb.kv.dambach.config
 
-#000021 17.04.2016 16:04:04,957:+0200 (TID:000001) ...................... 
+#000021 17.04.2016 16:01:51,657:+0200 (TID:000001) ...................... 
 KONFIG : ConfigurationApp.de.bsvrz.puk.config.configFile.fileaccess.ConfigFileHeaderInfo
 Kennung 1 (nicht maﬂgeblich): aktive Version: 0 n‰chste aktive Version: 1 
 Kennung 2: 
@@ -157,11 +153,11 @@ Kennung 9: Version unter der die Objekte erstellt wurden 1
 Kennung 10: Serialisiererversion 3
 
 
-#000022 17.04.2016 16:04:04,969:+0200 (TID:000001) ---------------------- 
+#000022 17.04.2016 16:01:51,671:+0200 (TID:000001) ---------------------- 
 INFO   : ConfigurationApp.de.bsvrz.puk.config.configFile.fileaccess.ConfigAreaFile
 Laden der Konfigurationsdatei: /home/christian/docker-datenverteiler/datenverteiler/Kernsoftware-Basissystem/konfiguration/kv.dambach/config/kb.tmRechner.config
 
-#000023 17.04.2016 16:04:04,970:+0200 (TID:000001) ...................... 
+#000023 17.04.2016 16:01:51,672:+0200 (TID:000001) ...................... 
 KONFIG : ConfigurationApp.de.bsvrz.puk.config.configFile.fileaccess.ConfigFileHeaderInfo
 Kennung 1 (nicht maﬂgeblich): aktive Version: 4 n‰chste aktive Version: 5 
 Kennung 2: 
@@ -177,11 +173,11 @@ Kennung 9: Version unter der die Objekte erstellt wurden 1
 Kennung 10: Serialisiererversion 3
 
 
-#000024 17.04.2016 16:04:04,986:+0200 (TID:000001) ---------------------- 
+#000024 17.04.2016 16:01:51,690:+0200 (TID:000001) ---------------------- 
 INFO   : ConfigurationApp.de.bsvrz.puk.config.configFile.fileaccess.ConfigAreaFile
 Laden der Konfigurationsdatei: /home/christian/docker-datenverteiler/datenverteiler/Kernsoftware-Basissystem/konfiguration/kv.dambach/config/kb.tmVewEngstellenGlobal.config
 
-#000025 17.04.2016 16:04:04,988:+0200 (TID:000001) ...................... 
+#000025 17.04.2016 16:01:51,691:+0200 (TID:000001) ...................... 
 KONFIG : ConfigurationApp.de.bsvrz.puk.config.configFile.fileaccess.ConfigFileHeaderInfo
 Kennung 1 (nicht maﬂgeblich): aktive Version: 2 n‰chste aktive Version: 3 
 Kennung 2: 
@@ -195,11 +191,11 @@ Kennung 9: Version unter der die Objekte erstellt wurden 1
 Kennung 10: Serialisiererversion 3
 
 
-#000026 17.04.2016 16:04:04,990:+0200 (TID:000001) ---------------------- 
+#000026 17.04.2016 16:01:51,693:+0200 (TID:000001) ---------------------- 
 INFO   : ConfigurationApp.de.bsvrz.puk.config.configFile.fileaccess.ConfigAreaFile
 Laden der Konfigurationsdatei: /home/christian/docker-datenverteiler/datenverteiler/Kernsoftware-Basissystem/konfiguration/kv.inovat/config/kb.kv.inovat.config
 
-#000027 17.04.2016 16:04:04,995:+0200 (TID:000001) ...................... 
+#000027 17.04.2016 16:01:51,694:+0200 (TID:000001) ...................... 
 KONFIG : ConfigurationApp.de.bsvrz.puk.config.configFile.fileaccess.ConfigFileHeaderInfo
 Kennung 1 (nicht maﬂgeblich): aktive Version: 0 n‰chste aktive Version: 1 
 Kennung 2: 
@@ -212,11 +208,11 @@ Kennung 9: Version unter der die Objekte erstellt wurden 1
 Kennung 10: Serialisiererversion 3
 
 
-#000028 17.04.2016 16:04:05,001:+0200 (TID:000001) ---------------------- 
+#000028 17.04.2016 16:01:51,696:+0200 (TID:000001) ---------------------- 
 INFO   : ConfigurationApp.de.bsvrz.puk.config.configFile.fileaccess.ConfigAreaFile
 Laden der Konfigurationsdatei: /home/christian/docker-datenverteiler/datenverteiler/Kernsoftware-Basissystem/konfiguration/kv.inovat/config/kb.tmEreignisKalenderGlobal.config
 
-#000029 17.04.2016 16:04:05,004:+0200 (TID:000001) ...................... 
+#000029 17.04.2016 16:01:51,697:+0200 (TID:000001) ...................... 
 KONFIG : ConfigurationApp.de.bsvrz.puk.config.configFile.fileaccess.ConfigFileHeaderInfo
 Kennung 1 (nicht maﬂgeblich): aktive Version: 10 n‰chste aktive Version: 11 
 Kennung 2: 
@@ -238,11 +234,11 @@ Kennung 9: Version unter der die Objekte erstellt wurden 1
 Kennung 10: Serialisiererversion 3
 
 
-#000030 17.04.2016 16:04:05,020:+0200 (TID:000001) ---------------------- 
+#000030 17.04.2016 16:01:51,721:+0200 (TID:000001) ---------------------- 
 INFO   : ConfigurationApp.de.bsvrz.puk.config.configFile.fileaccess.ConfigAreaFile
 Laden der Konfigurationsdatei: /home/christian/docker-datenverteiler/datenverteiler/Kernsoftware-Basissystem/konfiguration/kv.inovat/config/kb.tmGanglinienGlobal.config
 
-#000031 17.04.2016 16:04:05,022:+0200 (TID:000001) ...................... 
+#000031 17.04.2016 16:01:51,729:+0200 (TID:000001) ...................... 
 KONFIG : ConfigurationApp.de.bsvrz.puk.config.configFile.fileaccess.ConfigFileHeaderInfo
 Kennung 1 (nicht maﬂgeblich): aktive Version: 11 n‰chste aktive Version: 12 
 Kennung 2: 
@@ -265,11 +261,11 @@ Kennung 9: Version unter der die Objekte erstellt wurden 1
 Kennung 10: Serialisiererversion 3
 
 
-#000032 17.04.2016 16:04:05,033:+0200 (TID:000001) ---------------------- 
+#000032 17.04.2016 16:01:51,739:+0200 (TID:000001) ---------------------- 
 INFO   : ConfigurationApp.de.bsvrz.puk.config.configFile.fileaccess.ConfigAreaFile
 Laden der Konfigurationsdatei: /home/christian/docker-datenverteiler/datenverteiler/Kernsoftware-Basissystem/konfiguration/kv.inovat/config/kb.tmGeoReferenzierungGlobal.config
 
-#000033 17.04.2016 16:04:05,034:+0200 (TID:000001) ...................... 
+#000033 17.04.2016 16:01:51,740:+0200 (TID:000001) ...................... 
 KONFIG : ConfigurationApp.de.bsvrz.puk.config.configFile.fileaccess.ConfigFileHeaderInfo
 Kennung 1 (nicht maﬂgeblich): aktive Version: 2 n‰chste aktive Version: 3 
 Kennung 2: 
@@ -283,11 +279,11 @@ Kennung 9: Version unter der die Objekte erstellt wurden 1
 Kennung 10: Serialisiererversion 3
 
 
-#000034 17.04.2016 16:04:05,041:+0200 (TID:000001) ---------------------- 
+#000034 17.04.2016 16:01:51,744:+0200 (TID:000001) ---------------------- 
 INFO   : ConfigurationApp.de.bsvrz.puk.config.configFile.fileaccess.ConfigAreaFile
 Laden der Konfigurationsdatei: /home/christian/docker-datenverteiler/datenverteiler/Kernsoftware-Basissystem/konfiguration/kv.inovat/config/kb.tmKExTlsGlobal.config
 
-#000035 17.04.2016 16:04:05,050:+0200 (TID:000001) ...................... 
+#000035 17.04.2016 16:01:51,750:+0200 (TID:000001) ...................... 
 KONFIG : ConfigurationApp.de.bsvrz.puk.config.configFile.fileaccess.ConfigFileHeaderInfo
 Kennung 1 (nicht maﬂgeblich): aktive Version: 19 n‰chste aktive Version: 20 
 Kennung 2: 
@@ -318,11 +314,11 @@ Kennung 9: Version unter der die Objekte erstellt wurden 1
 Kennung 10: Serialisiererversion 3
 
 
-#000036 17.04.2016 16:04:05,133:+0200 (TID:000001) ---------------------- 
+#000036 17.04.2016 16:01:51,840:+0200 (TID:000001) ---------------------- 
 INFO   : ConfigurationApp.de.bsvrz.puk.config.configFile.fileaccess.ConfigAreaFile
 Laden der Konfigurationsdatei: /home/christian/docker-datenverteiler/datenverteiler/Kernsoftware-Basissystem/konfiguration/kv.inovat/config/kb.tmSystemKalenderGlobal.config
 
-#000037 17.04.2016 16:04:05,137:+0200 (TID:000001) ...................... 
+#000037 17.04.2016 16:01:51,844:+0200 (TID:000001) ...................... 
 KONFIG : ConfigurationApp.de.bsvrz.puk.config.configFile.fileaccess.ConfigFileHeaderInfo
 Kennung 1 (nicht maﬂgeblich): aktive Version: 7 n‰chste aktive Version: 8 
 Kennung 2: 
@@ -341,11 +337,11 @@ Kennung 9: Version unter der die Objekte erstellt wurden 1
 Kennung 10: Serialisiererversion 3
 
 
-#000038 17.04.2016 16:04:05,142:+0200 (TID:000001) ---------------------- 
+#000038 17.04.2016 16:01:51,846:+0200 (TID:000001) ---------------------- 
 INFO   : ConfigurationApp.de.bsvrz.puk.config.configFile.fileaccess.ConfigAreaFile
 Laden der Konfigurationsdatei: /home/christian/docker-datenverteiler/datenverteiler/Kernsoftware-Basissystem/konfiguration/kv.inovat/config/kb.tmTmcGlobal.config
 
-#000039 17.04.2016 16:04:05,149:+0200 (TID:000001) ...................... 
+#000039 17.04.2016 16:01:51,853:+0200 (TID:000001) ...................... 
 KONFIG : ConfigurationApp.de.bsvrz.puk.config.configFile.fileaccess.ConfigFileHeaderInfo
 Kennung 1 (nicht maﬂgeblich): aktive Version: 4 n‰chste aktive Version: 5 
 Kennung 2: 
@@ -361,11 +357,11 @@ Kennung 9: Version unter der die Objekte erstellt wurden 1
 Kennung 10: Serialisiererversion 3
 
 
-#000040 17.04.2016 16:04:05,162:+0200 (TID:000001) ---------------------- 
+#000040 17.04.2016 16:01:51,873:+0200 (TID:000001) ---------------------- 
 INFO   : ConfigurationApp.de.bsvrz.puk.config.configFile.fileaccess.ConfigAreaFile
 Laden der Konfigurationsdatei: /home/christian/docker-datenverteiler/datenverteiler/Kernsoftware-Basissystem/konfiguration/kv.inovat/config/kb.tmVerkehrGlobal.config
 
-#000041 17.04.2016 16:04:05,168:+0200 (TID:000001) ...................... 
+#000041 17.04.2016 16:01:51,877:+0200 (TID:000001) ...................... 
 KONFIG : ConfigurationApp.de.bsvrz.puk.config.configFile.fileaccess.ConfigFileHeaderInfo
 Kennung 1 (nicht maﬂgeblich): aktive Version: 58 n‰chste aktive Version: 59 
 Kennung 2: 
@@ -435,11 +431,11 @@ Kennung 9: Version unter der die Objekte erstellt wurden 1
 Kennung 10: Serialisiererversion 3
 
 
-#000042 17.04.2016 16:04:05,227:+0200 (TID:000001) ---------------------- 
+#000042 17.04.2016 16:01:51,949:+0200 (TID:000001) ---------------------- 
 INFO   : ConfigurationApp.de.bsvrz.puk.config.configFile.fileaccess.ConfigAreaFile
 Laden der Konfigurationsdatei: /home/christian/docker-datenverteiler/datenverteiler/Kernsoftware-Basissystem/konfiguration/kv.kappich/config/kb.kv.kappich.config
 
-#000043 17.04.2016 16:04:05,229:+0200 (TID:000001) ...................... 
+#000043 17.04.2016 16:01:51,950:+0200 (TID:000001) ...................... 
 KONFIG : ConfigurationApp.de.bsvrz.puk.config.configFile.fileaccess.ConfigFileHeaderInfo
 Kennung 1 (nicht maﬂgeblich): aktive Version: 0 n‰chste aktive Version: 1 
 Kennung 2: 
@@ -452,11 +448,11 @@ Kennung 9: Version unter der die Objekte erstellt wurden 1
 Kennung 10: Serialisiererversion 3
 
 
-#000044 17.04.2016 16:04:05,235:+0200 (TID:000001) ---------------------- 
+#000044 17.04.2016 16:01:51,952:+0200 (TID:000001) ---------------------- 
 INFO   : ConfigurationApp.de.bsvrz.puk.config.configFile.fileaccess.ConfigAreaFile
 Laden der Konfigurationsdatei: /home/christian/docker-datenverteiler/datenverteiler/Kernsoftware-Basissystem/konfiguration/kv.kappich/config/kb.systemModellKExDaV.config
 
-#000045 17.04.2016 16:04:05,237:+0200 (TID:000001) ...................... 
+#000045 17.04.2016 16:01:51,953:+0200 (TID:000001) ...................... 
 KONFIG : ConfigurationApp.de.bsvrz.puk.config.configFile.fileaccess.ConfigFileHeaderInfo
 Kennung 1 (nicht maﬂgeblich): aktive Version: 2 n‰chste aktive Version: 3 
 Kennung 2: 
@@ -470,11 +466,11 @@ Kennung 9: Version unter der die Objekte erstellt wurden 1
 Kennung 10: Serialisiererversion 3
 
 
-#000046 17.04.2016 16:04:05,244:+0200 (TID:000001) ---------------------- 
+#000046 17.04.2016 16:01:51,958:+0200 (TID:000001) ---------------------- 
 INFO   : ConfigurationApp.de.bsvrz.puk.config.configFile.fileaccess.ConfigAreaFile
 Laden der Konfigurationsdatei: /home/christian/docker-datenverteiler/datenverteiler/Kernsoftware-Basissystem/konfiguration/kv.kappich/config/kb.fachModellGlobal.config
 
-#000047 17.04.2016 16:04:05,247:+0200 (TID:000001) ...................... 
+#000047 17.04.2016 16:01:51,961:+0200 (TID:000001) ...................... 
 KONFIG : ConfigurationApp.de.bsvrz.puk.config.configFile.fileaccess.ConfigFileHeaderInfo
 Kennung 1 (nicht maﬂgeblich): aktive Version: 9 n‰chste aktive Version: 10 
 Kennung 2: 
@@ -495,11 +491,11 @@ Kennung 9: Version unter der die Objekte erstellt wurden 1
 Kennung 10: Serialisiererversion 3
 
 
-#000048 17.04.2016 16:04:05,262:+0200 (TID:000001) ---------------------- 
+#000048 17.04.2016 16:01:51,975:+0200 (TID:000001) ---------------------- 
 INFO   : ConfigurationApp.de.bsvrz.puk.config.configFile.fileaccess.ConfigAreaFile
 Laden der Konfigurationsdatei: /home/christian/docker-datenverteiler/datenverteiler/Kernsoftware-Basissystem/konfiguration/kv.kappich/config/kb.metaModellGlobal.config
 
-#000049 17.04.2016 16:04:05,266:+0200 (TID:000001) ...................... 
+#000049 17.04.2016 16:01:51,977:+0200 (TID:000001) ...................... 
 KONFIG : ConfigurationApp.de.bsvrz.puk.config.configFile.fileaccess.ConfigFileHeaderInfo
 Kennung 1 (nicht maﬂgeblich): aktive Version: 16 n‰chste aktive Version: 17 
 Kennung 2: 
@@ -527,11 +523,11 @@ Kennung 9: Version unter der die Objekte erstellt wurden 1
 Kennung 10: Serialisiererversion 3
 
 
-#000050 17.04.2016 16:04:05,289:+0200 (TID:000001) ---------------------- 
+#000050 17.04.2016 16:01:51,989:+0200 (TID:000001) ---------------------- 
 INFO   : ConfigurationApp.de.bsvrz.puk.config.configFile.fileaccess.ConfigAreaFile
 Laden der Konfigurationsdatei: /home/christian/docker-datenverteiler/datenverteiler/Kernsoftware-Basissystem/konfiguration/kv.kappich/config/kb.systemModellAoe.config
 
-#000051 17.04.2016 16:04:05,298:+0200 (TID:000001) ...................... 
+#000051 17.04.2016 16:01:51,990:+0200 (TID:000001) ...................... 
 KONFIG : ConfigurationApp.de.bsvrz.puk.config.configFile.fileaccess.ConfigFileHeaderInfo
 Kennung 1 (nicht maﬂgeblich): aktive Version: 7 n‰chste aktive Version: 8 
 Kennung 2: 
@@ -550,11 +546,11 @@ Kennung 9: Version unter der die Objekte erstellt wurden 1
 Kennung 10: Serialisiererversion 3
 
 
-#000052 17.04.2016 16:04:05,300:+0200 (TID:000001) ---------------------- 
+#000052 17.04.2016 16:01:51,991:+0200 (TID:000001) ---------------------- 
 INFO   : ConfigurationApp.de.bsvrz.puk.config.configFile.fileaccess.ConfigAreaFile
 Laden der Konfigurationsdatei: /home/christian/docker-datenverteiler/datenverteiler/Kernsoftware-Basissystem/konfiguration/kv.kappich/config/kb.systemModellGlobal.config
 
-#000053 17.04.2016 16:04:05,309:+0200 (TID:000001) ...................... 
+#000053 17.04.2016 16:01:51,994:+0200 (TID:000001) ...................... 
 KONFIG : ConfigurationApp.de.bsvrz.puk.config.configFile.fileaccess.ConfigFileHeaderInfo
 Kennung 1 (nicht maﬂgeblich): aktive Version: 36 n‰chste aktive Version: 37 
 Kennung 2: 
@@ -602,11 +598,11 @@ Kennung 9: Version unter der die Objekte erstellt wurden 1
 Kennung 10: Serialisiererversion 3
 
 
-#000054 17.04.2016 16:04:05,366:+0200 (TID:000001) ---------------------- 
+#000054 17.04.2016 16:01:52,025:+0200 (TID:000001) ---------------------- 
 INFO   : ConfigurationApp.de.bsvrz.puk.config.configFile.fileaccess.ConfigAreaFile
 Laden der Konfigurationsdatei: /home/christian/docker-datenverteiler/datenverteiler/Kernsoftware-Basissystem/konfiguration/kv.kappich/config/kb.tmBuVGlobal.config
 
-#000055 17.04.2016 16:04:05,367:+0200 (TID:000001) ...................... 
+#000055 17.04.2016 16:01:52,039:+0200 (TID:000001) ...................... 
 KONFIG : ConfigurationApp.de.bsvrz.puk.config.configFile.fileaccess.ConfigFileHeaderInfo
 Kennung 1 (nicht maﬂgeblich): aktive Version: 5 n‰chste aktive Version: 6 
 Kennung 2: 
@@ -623,11 +619,11 @@ Kennung 9: Version unter der die Objekte erstellt wurden 1
 Kennung 10: Serialisiererversion 3
 
 
-#000056 17.04.2016 16:04:05,370:+0200 (TID:000001) ---------------------- 
+#000056 17.04.2016 16:01:52,041:+0200 (TID:000001) ---------------------- 
 INFO   : ConfigurationApp.de.bsvrz.puk.config.configFile.fileaccess.ConfigAreaFile
 Laden der Konfigurationsdatei: /home/christian/docker-datenverteiler/datenverteiler/Kernsoftware-Basissystem/konfiguration/kv.kappich/config/kb.tmIlseTls.config
 
-#000057 17.04.2016 16:04:05,370:+0200 (TID:000001) ...................... 
+#000057 17.04.2016 16:01:52,042:+0200 (TID:000001) ...................... 
 KONFIG : ConfigurationApp.de.bsvrz.puk.config.configFile.fileaccess.ConfigFileHeaderInfo
 Kennung 1 (nicht maﬂgeblich): aktive Version: 4 n‰chste aktive Version: 5 
 Kennung 2: 
@@ -643,11 +639,11 @@ Kennung 9: Version unter der die Objekte erstellt wurden 1
 Kennung 10: Serialisiererversion 3
 
 
-#000058 17.04.2016 16:04:05,373:+0200 (TID:000001) ---------------------- 
+#000058 17.04.2016 16:01:52,045:+0200 (TID:000001) ---------------------- 
 INFO   : ConfigurationApp.de.bsvrz.puk.config.configFile.fileaccess.ConfigAreaFile
 Laden der Konfigurationsdatei: /home/christian/docker-datenverteiler/datenverteiler/Kernsoftware-Basissystem/konfiguration/kv.kappich/config/kb.tmVewBetriebGlobal.config
 
-#000059 17.04.2016 16:04:05,374:+0200 (TID:000001) ...................... 
+#000059 17.04.2016 16:01:52,046:+0200 (TID:000001) ...................... 
 KONFIG : ConfigurationApp.de.bsvrz.puk.config.configFile.fileaccess.ConfigFileHeaderInfo
 Kennung 1 (nicht maﬂgeblich): aktive Version: 6 n‰chste aktive Version: 7 
 Kennung 2: 
@@ -665,11 +661,11 @@ Kennung 9: Version unter der die Objekte erstellt wurden 1
 Kennung 10: Serialisiererversion 3
 
 
-#000060 17.04.2016 16:04:05,380:+0200 (TID:000001) ---------------------- 
+#000060 17.04.2016 16:01:52,051:+0200 (TID:000001) ---------------------- 
 INFO   : ConfigurationApp.de.bsvrz.puk.config.configFile.fileaccess.ConfigAreaFile
 Laden der Konfigurationsdatei: /home/christian/docker-datenverteiler/datenverteiler/Kernsoftware-Basissystem/konfiguration/kv.kappich/config/kb.tmVewSimulationGlobal.config
 
-#000061 17.04.2016 16:04:05,385:+0200 (TID:000001) ...................... 
+#000061 17.04.2016 16:01:52,053:+0200 (TID:000001) ...................... 
 KONFIG : ConfigurationApp.de.bsvrz.puk.config.configFile.fileaccess.ConfigFileHeaderInfo
 Kennung 1 (nicht maﬂgeblich): aktive Version: 7 n‰chste aktive Version: 8 
 Kennung 2: 
@@ -688,31 +684,84 @@ Kennung 9: Version unter der die Objekte erstellt wurden 1
 Kennung 10: Serialisiererversion 3
 
 
-#000090 17.04.2016 16:04:05,652:+0200 (TID:000001) ====================== 
+#000085 17.04.2016 16:01:52,267:+0200 (TID:000001) ---------------------- 
+INFO   : ConfigurationApp.de.bsvrz.puk.config.configFile.fileaccess.ConfigAreaFile
+Der gespeicherte Aktivierungszeitpunkt (16.04.2016 19:44:04,106) des Bereichs /home/christian/docker-datenverteiler/datenverteiler/Kernsoftware-Basissystem/konfiguration/kv.basissystem/config/kb.basissystem.objekteDatenverteiler.config f¸r die Version 2 stimmt nicht mit dem Aktivierungszeitpunkt in der Verwaltungsdatei (17.04.2016 16:01:51,527) ¸berein.
+
+#000086 17.04.2016 16:01:52,287:+0200 (TID:000001) ---------------------- 
+INFO   : ConfigurationApp.de.bsvrz.puk.config.configFile.fileaccess.ConfigAreaFile
+Die Restrukturierung des Konfigurationsbereichs kb.basissystem.objekteDatenverteiler in der Datei /home/christian/docker-datenverteiler/datenverteiler/Kernsoftware-Basissystem/konfiguration/kv.basissystem/config/kb.basissystem.objekteDatenverteiler.config wurde erfolgreich abgeschlossen
+
+#000108 17.04.2016 16:01:52,440:+0200 (TID:000001) ====================== 
 WARNUNG: ConfigurationApp.de.bsvrz.puk.config.configFile.datamodel.AreaDependencyChecker
 F¸r den Bereich kb.kv.basissystem wurden mˆgliche Abh‰ngigkeiten noch nicht erfasst. 
 F¸r den Bereich kb.kv.bea wurden mˆgliche Abh‰ngigkeiten noch nicht erfasst. 
 
 
-#000096 17.04.2016 16:04:05,691:+0200 (TID:000001) ---------------------- 
+#000111 17.04.2016 16:01:52,462:+0200 (TID:000001) ---------------------- 
 INFO   : ConfigurationApp.de.bsvrz.puk.config.configFile.datamodel.ConfigDataModel
-Das Datenmodell wurde geladen. Dauer in Sekunden: 0
+Das Datenmodell wurde geladen. Dauer in Sekunden: 1
 
-#000097 17.04.2016 16:04:05,694:+0200 (TID:000001) ---------------------- 
-INFO   : ConfigurationApp.de.bsvrz.puk.config.configFile.datamodel.ConfigDataModel
-Konfigurationsbereich kb.kv.basissystem wird in Version 1 zur ‹bernahme und Aktivierung freigegeben
+#000112 17.04.2016 16:01:52,488:+0200 (TID:000001) ---------------------- 
+INFO   : ConfigurationApp.de.bsvrz.puk.config.main.importexport.ConfigurationImport
+Import folgender Konfigurationsbereiche wird gestartet:
+kb.default.basissystem kb.basissystem.objekteBenutzer kb.basissystem.objekteDatenverteiler 
 
-#000100 17.04.2016 16:04:05,697:+0200 (TID:000001) ---------------------- 
-INFO   : ConfigurationApp.de.bsvrz.puk.config.configFile.datamodel.ConfigDataModel
-Konfigurationsbereich kb.default.basissystem wird in Version 1 zur ‹bernahme und Aktivierung freigegeben
+#003002 17.04.2016 16:01:52,685:+0200 (TID:000001) ...................... 
+KONFIG : ConfigurationApp.de.bsvrz.puk.config.main.importexport.ConfigurationImport
+Im Konfigurationsbereich kb.default.basissystem gibt es 1 aktuelle Objekte, 0 freigegebene Objekte und 0 in Bearbeitung befindliche Objekte.
 
-#000101 17.04.2016 16:04:05,699:+0200 (TID:000001) ---------------------- 
-INFO   : ConfigurationApp.de.bsvrz.puk.config.configFile.datamodel.ConfigDataModel
-Konfigurationsbereich kb.basissystem.objekteBenutzer wird in Version 1 zur ‹bernahme und Aktivierung freigegeben
+#003008 17.04.2016 16:01:52,699:+0200 (TID:000001) ...................... 
+KONFIG : ConfigurationApp.de.bsvrz.puk.config.main.importexport.ConfigurationImport
+Im Konfigurationsbereich kb.basissystem.objekteBenutzer gibt es 2 aktuelle Objekte, 0 freigegebene Objekte und 0 in Bearbeitung befindliche Objekte.
 
-#000102 17.04.2016 16:04:05,702:+0200 (TID:000001) ---------------------- 
-INFO   : ConfigurationApp.de.bsvrz.puk.config.configFile.datamodel.ConfigDataModel
-Konfigurationsbereich kb.basissystem.objekteDatenverteiler wird in Version 2 zur ‹bernahme und Aktivierung freigegeben
+#003015 17.04.2016 16:01:52,714:+0200 (TID:000001) ...................... 
+KONFIG : ConfigurationApp.de.bsvrz.puk.config.main.importexport.ConfigurationImport
+Im Konfigurationsbereich kb.basissystem.objekteDatenverteiler gibt es 4 aktuelle Objekte, 0 freigegebene Objekte und 0 in Bearbeitung befindliche Objekte.
 
--------17.04.2016 16:04:05,842:+0200(TID:......) ---------------------- STATUS
+#003016 17.04.2016 16:01:52,714:+0200 (TID:000001) ---------------------- 
+INFO   : ConfigurationApp.de.bsvrz.puk.config.main.importexport.ConfigurationImport
+Anzahl der Definitionen und SystemObjekte, die zu importieren sind: 3
+
+#003017 17.04.2016 16:01:52,714:+0200 (TID:000001) ...................... 
+KONFIG : ConfigurationApp.de.bsvrz.puk.config.main.importexport.ConfigurationImport
+Alle Modelldaten der zu importierenden Konfigurationsbereiche werden erstellt.
+
+#003018 17.04.2016 16:01:52,714:+0200 (TID:000001) ...................... 
+KONFIG : ConfigurationApp.de.bsvrz.puk.config.main.importexport.ConfigurationImport
+Alle Objekte der zu importierenden Konfigurationsbereiche werden erstellt.
+
+#003031 17.04.2016 16:01:52,720:+0200 (TID:000001) ====================== 
+WARNUNG: ConfigurationApp.de.bsvrz.puk.config.configFile.datamodel.MutableSetConfigDataStorage
+Element mit Id '1575978394602964136' kann nicht der Menge 'Applikationen' hinzugef¸gt werden, da es kein System-Objekt hierzu gibt.
+
+#003033 17.04.2016 16:01:52,722:+0200 (TID:000001) ====================== 
+WARNUNG: ConfigurationApp.de.bsvrz.puk.config.configFile.datamodel.MutableSetConfigDataStorage
+Element mit Id '1575978394602964137' kann nicht der Menge 'Applikationen' hinzugef¸gt werden, da es kein System-Objekt hierzu gibt.
+
+#003036 17.04.2016 16:01:52,723:+0200 (TID:000001) ...................... 
+KONFIG : ConfigurationApp.de.bsvrz.puk.config.main.importexport.ConfigurationImport
+Alle Modelldaten der zu importierenden Konfigurationsbereiche werden vervollst‰ndigt.
+
+#003037 17.04.2016 16:01:52,723:+0200 (TID:000001) ...................... 
+KONFIG : ConfigurationApp.de.bsvrz.puk.config.main.importexport.ConfigurationImport
+Default-Werte werden vervollst‰ndigt.
+
+#003038 17.04.2016 16:01:52,723:+0200 (TID:000001) ...................... 
+KONFIG : ConfigurationApp.de.bsvrz.puk.config.main.importexport.ConfigurationImport
+Alle Objekte der zu importierenden Konfigurationsbereiche werden vervollst‰ndigt.
+
+#003043 17.04.2016 16:01:52,724:+0200 (TID:000001) ...................... 
+KONFIG : ConfigurationApp.de.bsvrz.puk.config.main.importexport.ConfigurationImport
+Aufr‰umen bestehender Objekte nach dem Import.
+
+#003045 17.04.2016 16:01:52,724:+0200 (TID:000001) ---------------------- 
+INFO   : ConfigurationApp.de.bsvrz.puk.config.main.importexport.ConfigurationImport
+Anzahl der aktuellen Objekte, die g¸ltig bleiben: 7
+
+#003047 17.04.2016 16:01:52,727:+0200 (TID:000001) ---------------------- 
+INFO   : ConfigurationApp.de.bsvrz.puk.config.main.importexport.ConfigurationImport
+Der Import wurde durchgef¸hrt. Dauer in Sekunden: 0
+
+-------17.04.2016 16:01:52,736:+0200(TID:......) ---------------------- STATUS
 Ausgabedatei korrekt abgeschlossenen.

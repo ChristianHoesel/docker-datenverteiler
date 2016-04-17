@@ -5,17 +5,13 @@ cd `dirname $0`
 
 . einstellungen.sh
 
-java $jvmargs -cp ${basispakete}/de.bsvrz.sys.startstopp/de.bsvrz.sys.startstopp-runtime.jar  de.bsvrz.sys.startstopp.skriptvew.StartStoppApp \
-	-startStoppKonfiguration=../versorgung/startStopp/prod \
+java $jvmargs -cp ../distributionspakete/de.bsvrz.sys.startstopp/de.bsvrz.sys.startstopp-runtime.jar  de.bsvrz.sys.startstopp.skriptvew.StartStoppApp \
+	-startStoppKonfiguration=startStopp \
  	-reset=true \
- 	-port=2361 \
- 	-rechner=rp.pls.lkw.A61.rechner.uz \
- 	-debugFilePath=${betriebsdaten} \
+ 	-port=2323 \
+ 	-rechner=rechner.uz \
+ 	-debugFilePath=../debug \
 	-debugLevelStdErrText=NONE \
-	-debugLevelFileText=FINEST \
-	-debugSetLoggerAndLevel=:FINEST & 
+	-debugLevelFileText=INFO \
+	-debugSetLoggerAndLevel=:INFO & 
 
-#
-# $HeadURL: svn://ntoserver/Datenverteiler/PLS_A61/trunk/UZ-PLS-A61/skripte-bash/StartStoppEchtsystem.sh $
-# $LastChangedRevision: 59759 $
-#

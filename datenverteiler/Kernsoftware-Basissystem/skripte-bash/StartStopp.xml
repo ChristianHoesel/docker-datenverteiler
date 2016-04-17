@@ -13,7 +13,7 @@
 			<makrodefinition name="benutzer" wert="Tester" />
 			<makrodefinition name="passwortdatei" wert="../properties/passwd" />
 			<makrodefinition name="authentifizierung" wert="-benutzer=%benutzer% -authentifizierung=%passwortdatei%" />
-			<makrodefinition name="dav1Host" wert="Datenverteiler" />
+			<makrodefinition name="dav1Host" wert="localhost" />
 			<makrodefinition name="dav1AppPort" wert="8083" />
 			<makrodefinition name="dav1DavPort" wert="8080" />
 			<makrodefinition name="debugDefaults" wert="-debugFilePath=../debug" />

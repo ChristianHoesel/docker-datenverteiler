@@ -9,9 +9,9 @@ java $jvmargs -cp ../distributionspakete/de.bsvrz.sys.startstopp/de.bsvrz.sys.st
 	-startStoppKonfiguration=startStopp \
  	-reset=true \
  	-port=2323 \
- 	-rechner=localhost \
+ 	-rechner=rechner.uz \
  	-debugFilePath=../debug \
 	-debugLevelStdErrText=NONE \
-	-debugLevelFileText=FINEST \
-	-debugSetLoggerAndLevel=:FINEST & 
+	-debugLevelFileText=INFO \
+	-debugSetLoggerAndLevel=:INFO
 

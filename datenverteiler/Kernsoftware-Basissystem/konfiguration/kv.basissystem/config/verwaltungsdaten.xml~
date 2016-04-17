@@ -97,6 +97,9 @@
 	<konfigurationsbereich pid="kb.kv.kappich" verzeichnis="../../kv.kappich/config">
 		<version nr="1" zeitpunkt="02.03.2007 00:31:20,623"/>
 	</konfigurationsbereich>
+	<konfigurationsbereich pid="kb.systemModellKExDaV" verzeichnis="../../kv.kappich/config">
+		<version nr="1" zeitpunkt="02.03.2007 00:31:20,623"/>
+	</konfigurationsbereich>
 	<konfigurationsbereich pid="kb.fachModellGlobal" verzeichnis="../../kv.kappich/config">
 		<version nr="1" zeitpunkt="02.03.2007 00:31:20,623"/>
 		<version nr="2" zeitpunkt="13.03.2007 10:10:09,652"/>
@@ -143,7 +146,7 @@
 		<version nr="18" zeitpunkt="27.04.2008 16:59:01,174"/>
 		<version nr="19" zeitpunkt="15.05.2008 19:22:15,332"/>
 		<version nr="20" zeitpunkt="02.12.2008 15:00:26,404"/>
-		<version nr="21" zeitpunkt="08.12.2008 21:46:49,289"/>
+		<version nr="27" zeitpunkt="08.12.2008 21:46:49,289"/>
 	</konfigurationsbereich>
 	<konfigurationsbereich pid="kb.tmBuVGlobal" verzeichnis="../../kv.kappich/config">
 		<version nr="1" zeitpunkt="02.03.2007 00:31:20,623"/>
